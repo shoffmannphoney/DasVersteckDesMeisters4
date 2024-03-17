@@ -896,7 +896,7 @@ namespace GameCore
                 timeFinishedPost = stopwatch.ElapsedMilliseconds;
 
                 UIS!.SetDelTextSelect(LinkCallback);
-                UIS!.HeadlineOutput(locations!.Find(A!.ActLgoc)!.LocName!);
+                UIS!.HeadlineOutput(locations!.Find(A!.ActLoc)!.LocName!);
 
                 // MW.ResetAllPanels();
                 UIS!.DoUIUpdate();
