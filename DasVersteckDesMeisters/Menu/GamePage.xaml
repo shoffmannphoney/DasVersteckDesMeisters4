@@ -1,0 +1,312 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Phoney_MAUI.Menu.GamePage"
+           xmlns:shell="clr-namespace:Phoney_MAUI"
+             xmlns:local="clr-namespace:Phoney_MAUI"
+             xmlns:game="clr-namespace:Phoney_MAUI.Game.General"
+               xmlns:core="clr-namespace:Phoney_MAUI.Core"
+                   xmlns:genx="clr-namespace:Phoney_MAUI.Game.General"
+            xmlns:menu="clr-namespace:Phoney_MAUI.Menu"
+             xmlns:windows="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.WindowsSpecific;assembly=Microsoft.Maui.Controls"
+               xmlns:controls="clr-namespace:WebViewInterop;assembly=WebViewInterop"
+           Shell.NavBarIsVisible="False"
+             BackgroundColor="Black"
+             Title="Phoney Island"
+             x:Name="CurrentPage"
+             x:DataType="game:GameViewModel">
+
+
+    <ContentPage.Content >
+        <Grid x:Name="PageGrid" ZIndex="100" StyleClass="Grid_BGBG"  >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="0"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid x:Name="ToplineGrid" Grid.Row="0" ZIndex="100" StyleClass="Grid_BGBG" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30"/>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button StyleClass="Button_BGBG_NoBorder" x:Name="MenuButton" Command="{Binding Source={RelativeSource AncestorType={x:Type genx:MainViewModel}}, 
+               Path=SelectGlobalMenuCommand}" CommandParameter="{Binding}" HorizontalOptions="Center" Margin="10,3,0,0" Padding="0" VerticalOptions="Center" HeightRequest="30" WidthRequest="30" Text="{x:Static core:FaSolid.Bars}"  FontFamily="Fa-Solid" FontSize="Title" />
+                <Label StyleClass="Label_Title" Grid.Column="1" x:Name="WindowTitle" Margin="10,0,0,0" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"
+                       VerticalOptions="Center" LineBreakMode="TailTruncation"/>
+                <Label StyleClass="Label_Small" x:Name="LabelEpisode" Grid.Column="2" Margin="0,0,4,0" Text="Episode 1:" VerticalTextAlignment="Center" HorizontalTextAlignment="End"
+                       VerticalOptions="Center"  FontSize="14" />
+                <Border Grid.Column="3" Stroke="LightGray" StrokeThickness="2" Margin="0,10,10,10">
+                    <Grid x:Name="PB1" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.Column="0" StrokeThickness="0" Background="Green" Margin="0,0,0,0"/>
+                        <Border Grid.Column="1" StrokeThickness="0" Background="White" Margin="0,0,0,0"/>
+                    </Grid>
+                </Border>
+                <Label StyleClass="Label_Small" x:Name="LabelGesamt" Grid.Column="4" Margin="0,0,4,0" Text="Gesamt:" VerticalTextAlignment="Center" HorizontalTextAlignment="End"
+                   VerticalOptions="Center"  FontSize="14" />
+                <Border Grid.Column="5" Stroke="LightGray" StrokeThickness="2" Margin="0,10,10,10">
+                    <Grid x:Name="PB2" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="5*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.Column="0" StrokeThickness="0" Background="Green" Margin="0,0,0,0"/>
+                        <Border Grid.Column="1" StrokeThickness="0" Background="White" Margin="0,0,0,0"/>
+                    </Grid>
+                </Border>
+            </Grid>
+            <Grid x:Name="MenuGridTotal" Grid.Row="2" Padding="-300,0, 0, 10" StyleClass="Grid_BGBG" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="300"/>
+                    <ColumnDefinition Width="*"/>
+
+                </Grid.ColumnDefinitions>
+                <Grid  x:Name="MenuGridLeft"></Grid>
+                <Grid x:Name="MenuGridMenuBackground" Grid.Column="1"  StyleClass="Grid_BGBG" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="1"  x:Name="MenuGridMenu" Padding="10,0,10,0" StyleClass="Grid_BGBG" > 
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="1" x:Name="MenuGridMenuVertical" StyleClass="Grid_BGBG">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="10"/>
+                                <RowDefinition Height="0"/>
+                            </Grid.RowDefinitions>
+                            <Grid x:Name="MenuGridMenuInner" Grid.Row="0" StyleClass="Grid_BGBG">
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="10"/>
+                                    <ColumnDefinition Width="5*"/>
+                                    <ColumnDefinition Width="10"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid x:Name="Grid_MC_Left" Grid.Column="0" BackgroundColor="BlueViolet" >
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="10"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Grid x:Name="GridLU" StyleClass="Grid_Normal" >
+
+                                    </Grid>
+                                    <Grid Grid.Row="1" x:Name="GridSplitter_VL" ZIndex="101" StyleClass="Grid_BGBG">
+                                        <Grid.GestureRecognizers>
+
+                                            <TapGestureRecognizer Tapped="OnTappedGridVLeft">
+
+                                            </TapGestureRecognizer>
+                                            <PointerGestureRecognizer PointerEntered="OnEnterGrid" PointerExited="OnExitGrid">
+
+                                            </PointerGestureRecognizer>
+                                        </Grid.GestureRecognizers>
+                                    </Grid>
+                                    <Grid x:Name="GridLD" Grid.Row="2" Margin="0,0,0,0" StyleClass="Grid_Normal"/>
+                                </Grid>
+                                <Grid Grid.Column="1" x:Name="GridSplitter_L" ZIndex="101" StyleClass="Grid_BGBG">
+                                    <Grid.GestureRecognizers>
+
+                                        <TapGestureRecognizer Tapped="OnTappedGridLeft">
+
+                                        </TapGestureRecognizer>
+                                        <PointerGestureRecognizer PointerEntered="OnEnterGridHorizontal" PointerExited="OnExitGrid">
+
+                                        </PointerGestureRecognizer>
+                                    </Grid.GestureRecognizers>
+                                </Grid>
+                                <Grid x:Name="Grid_Output" Grid.Column="2" ZIndex="100" Margin="0,0,-1,0" StyleClass="Grid_BGBG" >
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="0"/>
+                                        <RowDefinition Height="50"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid x:Name="GridWebView" Grid.Row="0" StyleClass="Grid_BGBG" Padding="0" Margin="0,0,0,0" >
+                                        <controls:BridgedWebView x:Name="GameOut" Margin="0,0,-1,0" BackgroundColor="Blue" />
+                                        <!--
+                                        <WebView  x:Name="GameOut" Margin="0,0,-1,0" BackgroundColor="Blue" Source="file:///empty.html" HandlerChanged="WebView_HandlerChanged">
+                                        </WebView>
+                                        -->
+                                    </Grid>
+                                    <Grid x:Name="Grid_Inter" Grid.Row="2" StyleClass="Grid_BGBG">
+                                        <Grid x:Name="Grid_Input" Margin="0,0,0,0" StyleClass="Grid_BGBG">
+                                            <Grid x:Name="Grid_Input_Sub" StyleClass="Grid_Normal" Margin="2,10,5,0">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="30"/>
+                                                    <ColumnDefinition Width="30"/>
+                                                    <ColumnDefinition Width="20"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="100"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Grid Grid.Column="0" >
+                                                    <Button VerticalOptions="Center" StyleClass="Button_Normal_NoBorder" HorizontalOptions="Center" FontFamily="Fa-Solid" Clicked="Clicked_Keyboard" Text="{x:Static core:FaSolid.Keyboard}"/>
+
+                                                </Grid>
+                                                <Grid Grid.Column="1" >
+                                                    <Button x:Name="Mike" VerticalOptions="Center" StyleClass="Button_Normal_NoBorder" Clicked="Clicked_Microphone" HorizontalOptions="Center" FontFamily="Fa-Solid" Text="{x:Static core:FaSolid.Microphone}"/>
+                                                </Grid>
+                                                <Grid Grid.Column="2" StyleClass="Grid_BGInputline" Margin="0,4,0,3">
+                                                    <Label StyleClass="Label_Normal" HorizontalOptions="Center" Margin="0" Padding="0,5,0,0" VerticalOptions="Start" Text=">"/>
+                                                </Grid>
+                                                <Grid Grid.Column="3" StyleClass="Grid_BGInputline" Margin="0,4,0,3" >
+                                                    <Entry x:Name="Inputline" StyleClass="Entry_Normal" Completed="UpdateMessage" Margin="-1,0,0,0" Text=""/>
+                                                </Grid>
+                                                <Button x:Name="SendButton" Grid.Column="4" StyleClass="Button_Normal" Clicked="UpdateMessage"  Text="Send" Margin="10,5,5,5" Padding="0"></Button>
+                                            </Grid>
+                                        </Grid>
+                                        <Grid x:Name="Grid_MC" StyleClass="Grid_BGBG" Margin="2,0,7,0" IsVisible="false" >
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="30"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid x:Name="Grid_MC_Inner" Margin="0,10,0,0" StyleClass="Grid_Normal" >
+
+                                            </Grid>
+                                            <Grid Grid.Column="1" Margin="0,10,0,0" StyleClass="Grid_Normal">
+                                                <Button x:Name="Mike2" VerticalOptions="End" StyleClass="Button_Normal_NoBorder" Clicked="Clicked_Microphone2" HorizontalOptions="Center" FontFamily="Fa-Solid" Text="{x:Static core:FaSolid.Microphone}"/>
+                                            </Grid>
+                                        </Grid>
+                                        <Grid x:Name="Grid_More" StyleClass="Grid_BGBG" Margin="0,0,0,0" IsVisible="false" >
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="30"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Button x:Name="Button_More_Inner" Text="[Mehr]" Margin="6,13,6,3" Clicked="ButtonMoreClicked" BackgroundColor="Red" FontAttributes="Bold" TextColor="White" windows:VisualElement.AccessKey="F"
+>
+
+                                            </Button>
+                                            <Grid Grid.Column="1" Margin="0,10,0,0" StyleClass="Grid_Normal">
+                                                <Button x:Name="Mike3" VerticalOptions="Center" StyleClass="Button_Normal_NoBorder" Clicked="Clicked_Microphone3" HorizontalOptions="Center" FontFamily="Fa-Solid" Text="{x:Static core:FaSolid.Microphone}"/>
+                                            </Grid>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                                <Grid Grid.Column="3" x:Name="GridSplitter_R" ZIndex="101" StyleClass="Grid_BGBG">
+                                    <Grid.GestureRecognizers>
+
+                                        <TapGestureRecognizer Tapped="OnTappedGridRight">
+
+                                        </TapGestureRecognizer>
+                                        <PointerGestureRecognizer PointerEntered="OnEnterGridHorizontal" PointerExited="OnExitGrid">
+
+                                        </PointerGestureRecognizer>
+                                    </Grid.GestureRecognizers>
+                                </Grid>
+                                 <Grid x:Name="Grid_MC_Right" Grid.Column="4" ZIndex="100" BackgroundColor="BlueViolet">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="10"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Grid x:Name="GridRU" StyleClass="Grid_Normal" >
+
+
+                                    </Grid>
+                                    <Grid Grid.Row="1" x:Name="GridSplitter_VR" ZIndex="101" StyleClass="Grid_BGBG">
+                                        <Grid.GestureRecognizers>
+
+                                            <TapGestureRecognizer Tapped="OnTappedGridVRight">
+
+                                            </TapGestureRecognizer>
+                                            <PointerGestureRecognizer PointerEntered="OnEnterGrid" PointerExited="OnExitGrid">
+
+                                            </PointerGestureRecognizer>
+                                        </Grid.GestureRecognizers>
+                                    </Grid>
+                                    <Grid x:Name="GridRD" Grid.Row="2" Margin="0,0,0,0" StyleClass="Grid_Normal"/>
+
+                                </Grid>
+                            </Grid>
+                            <Grid Grid.Row="1" x:Name="GridSplitter_Portrait" ZIndex="101" StyleClass="Grid_BGBG">
+                                <Grid.GestureRecognizers>
+
+                                    <TapGestureRecognizer Tapped="OnTappedGridPortrait">
+
+                                    </TapGestureRecognizer>
+                                    <PointerGestureRecognizer PointerEntered="OnEnterGridVertical" PointerExited="OnExitGrid">
+
+                                    </PointerGestureRecognizer>
+                                </Grid.GestureRecognizers>
+                            </Grid>
+                            <Grid x:Name="OrderItemGrid" Margin="0,0,0,0" Grid.Row="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="10"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="10"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Grid Margin="0,10,0,5" Grid.Column="0" x:Name="GridCol1" StyleClass="Grid_Normal" >
+
+                                         <Grid x:Name="PortraitCol1" Margin="0,0,0,10" VerticalOptions="Start" StyleClass="Grid_Normal">
+                                        </Grid>
+ 
+                                </Grid>
+                                <Grid Grid.Column="1" x:Name="GridSplitter_Col1_Col2" ZIndex="101" StyleClass="Grid_BGBG">
+                                    <Grid.GestureRecognizers>
+
+                                        <TapGestureRecognizer Tapped="OnTappedGridCol12">
+
+                                        </TapGestureRecognizer>
+                                        <PointerGestureRecognizer PointerEntered="OnEnterGridHorizontal" PointerExited="OnExitGrid">
+
+                                        </PointerGestureRecognizer>
+                                    </Grid.GestureRecognizers>
+                                </Grid>
+                                <Grid Margin="0,10,0,5" Grid.Column="2" x:Name="GridCol2" StyleClass="Grid_Normal" >
+
+ 
+                                        <Grid x:Name="PortraitCol2" Margin="0,0,0,10" VerticalOptions="Start" StyleClass="Grid_Normal">
+                                        </Grid>
+ 
+                                </Grid>
+                                <Grid Grid.Column="3" x:Name="GridSplitter_Col2_Col3" ZIndex="101" StyleClass="Grid_BGBG">
+                                    <Grid.GestureRecognizers>
+
+                                        <TapGestureRecognizer Tapped="OnTappedGridCol23">
+
+                                        </TapGestureRecognizer>
+                                        <PointerGestureRecognizer PointerEntered="OnEnterGridHorizontal" PointerExited="OnExitGrid">
+
+                                        </PointerGestureRecognizer>
+                                    </Grid.GestureRecognizers>
+                                </Grid>
+                                <Grid Margin="0,10,0,5" Grid.Column="4" x:Name="GridCol3" StyleClass="Grid_Normal" >
+
+ 
+                                        <Grid x:Name="PortraitCol3" Margin="0,0,0,10" VerticalOptions="Start" StyleClass="Grid_Normal">
+                                        </Grid>
+ 
+                                </Grid>
+
+                            </Grid>
+
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </Grid>
+            <AbsoluteLayout InputTransparent="true" Grid.RowSpan="3"  ZIndex="200" x:Name="AbsoluteLayer">
+                <Label x:Name="DebugLabel" BackgroundColor="Blue" TextColor="White" IsVisible="false" AbsoluteLayout.LayoutBounds="0,0,300,30" />
+                <BoxView x:Name="BlueBox" Color="Blue"
+                AbsoluteLayout.LayoutBounds="50,200,500,250" IsVisible="false"
+               
+           />
+            </AbsoluteLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

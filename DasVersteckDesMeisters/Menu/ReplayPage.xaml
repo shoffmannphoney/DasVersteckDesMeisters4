@@ -1,0 +1,215 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Phoney_MAUI.Menu.ReplayPage"
+               xmlns:local="clr-namespace:Phoney_MAUI"
+             xmlns:core="clr-namespace:Phoney_MAUI.Core"
+              xmlns:model="clr-namespace:Phoney_MAUI.Model"
+                xmlns:genx="clr-namespace:Phoney_MAUI.Game.General"
+               Shell.NavBarIsVisible="False"
+           Title="ReplayPage">
+    <ContentPage.Resources>
+        <!-- 
+        <Color x:Key="xBGBG">#000000</Color -->
+    </ContentPage.Resources>
+    <Grid x:Name="PageGrid" StyleClass="Grid_BGBG">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="1"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" StyleClass="Grid_BGBG">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="54"/>
+                <ColumnDefinition Width="5*"/>
+            </Grid.ColumnDefinitions>
+            <Button StyleClass="Button_BGBG_NoBorder" x:Name="MenuButton" Command="{Binding Source={RelativeSource AncestorType={x:Type genx:MainViewModel}}, 
+               Path=SelectGlobalMenuCommand}" CommandParameter="{Binding}" HorizontalOptions="Center" Margin="10,3,0,0" Padding="0" VerticalOptions="Center" HeightRequest="30" WidthRequest="30" Text="{x:Static core:FaSolid.Bars}"  FontFamily="Fa-Solid" FontSize="Small" />
+            <Label StyleClass="Label_Title" Grid.Column="1" x:Name="WindowTitle" Margin="10,0,0,0" Text="Rehplay" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"
+                   VerticalOptions="Center" />
+        </Grid>
+        <Grid x:Name="MenuGridTotal" Grid.Row="2" Padding="-300,0, 0, 0" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="*"/>
+
+            </Grid.ColumnDefinitions>
+            <Grid  x:Name="MenuGridLeft"></Grid>
+            <Grid Grid.Column="1" x:Name="ReplayGridRowPT" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="100"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="1"  x:Name="MenuGridMenu" Padding="10" StyleClass="Grid_BGBG" >
+                    <Grid x:Name="ReplayGridColumnLS">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="4*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0" StyleClass="Grid_Normal" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="60"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0" >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0" x:Name="ReplayTitle" StyleClass="Label_Normal" HorizontalOptions="Start" Padding="20,0,0,0" VerticalOptions="Center" FontSize="Large"  Text="Rehplay"/>
+                                <Grid Grid.Column="1"  HorizontalOptions="Center" MaximumWidthRequest="400" Margin="0,10,00,0">
+                                    <Grid x:Name="Grid_Search" Grid.Row="1" StyleClass="Grid_BGBG" Padding="0,0,10,0" Margin="0,0,0,0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="40"/>
+                                            <ColumnDefinition Width="40"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="40"/>
+                                            <ColumnDefinition Width="40"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid Grid.Column="0" Margin="5,7,0,7">
+                                            <Button StyleClass="Button_Normal_NoBorder"  FontFamily="Fa-Solid" Clicked="Clicked_Keyboard" Text="{x:Static core:FaSolid.Keyboard}"/>
+
+                                        </Grid>
+                                        <Grid Grid.Column="1" Margin="6,7,3,7">
+                                            <Button x:Name="Mike" StyleClass="Button_Normal_NoBorder" Clicked="Clicked_Microphone" FontFamily="Fa-Solid" Text="{x:Static core:FaSolid.Microphone}"/>
+                                        </Grid>
+                                        <Grid Grid.Column="2" MaximumWidthRequest="300" >
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="1"/>
+                                                <RowDefinition Height="40"/>
+                                            </Grid.RowDefinitions>
+                                            <Label x:Name="SearchInfo" VerticalOptions="Start" Padding="0" Margin="3,0,0,0" HorizontalOptions="Center" StyleClass="Label_Normal"/>
+                                            <Grid Grid.Row="1" VerticalOptions="End" MaximumWidthRequest="300" >
+                                                <Entry x:Name="SearchText" VerticalOptions="End" MaximumWidthRequest="300" Placeholder="Searchtext"  HorizontalTextAlignment="Center" StyleClass="Entry_BGBG">
+                                                </Entry>
+                                            </Grid>
+                                        </Grid>
+                                        <Button x:Name="SearchBackward" Grid.Column="3" Margin="6,7,3,7" StyleClass="Button_Normal_NoBorder" Text="{x:Static core:FaSolid.CaretLeft}" FontFamily="Fa-Solid" Clicked="SearchBackwardHandler" Command="{Binding SearchCommand}">
+
+                                        </Button>
+                                        <Button x:Name="SearchForward" Grid.Column="4" Margin="3,7,6,7" StyleClass="Button_Normal_NoBorder" Text="{x:Static core:FaSolid.CaretRight}" FontFamily="Fa-Solid" Clicked="SearchForwardHandler" Command="{Binding SearchCommand}">
+                                        </Button>
+                                    </Grid>
+  
+                                </Grid>
+                            </Grid>
+                            <Grid Grid.Row="1" MaximumWidthRequest="1000" Padding="0,10,30,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <ScrollView x:Name="ReplayScroll">
+                                    <Grid x:Name="ReplayTable" >
+
+                                    </Grid>
+                                </ScrollView>
+                            </Grid>
+                        </Grid>
+                        <Grid Grid.Column="1" x:Name="ReplayGridLS" StyleClass="Grid_BGBG" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height=" 0"/>
+                            </Grid.RowDefinitions>
+
+                            <Grid Grid.Row="0" StyleClass="Grid_Normal" Margin="10,0,0,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="40"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Label x:Name="ReplayListLabel" StyleClass="Label_Normal" FontSize="Medium" HorizontalOptions="Center" VerticalOptions="Center" Text="XReplay-Listen"/>
+                                <ScrollView Grid.Row="1">
+                                    <Grid x:Name="ReplayLists">
+
+                                    </Grid>
+                                </ScrollView>
+                            </Grid>
+                            <!--
+                            <Grid Grid.Row="1" StyleClass="Grid_Normal" Margin="10,10,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="3*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid>  
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <Label x:Name="SearchInfo" VerticalOptions="Center" HorizontalOptions="Center" FontSize="10" StyleClass="Label_Normal"/>
+                                    <Entry Grid.Row="1" x:Name="SearchText" VerticalOptions="Center" HorizontalTextAlignment="Center" StyleClass="Entry_Normal">
+
+                                    </Entry>
+                                </Grid>
+                                <Grid Grid.Column="1" >
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Button x:Name="SearchBackward" Grid.Row="0" Margin="0,2,10,2" StyleClass="Button_Normal" Text="{x:Static core:FaSolid.CaretLeft}" FontFamily="Fa-Solid" Clicked="SearchBackwardHandler" Command="{Binding SearchCommand}">
+
+                                    </Button>
+                                    <Button x:Name="SearchForward" Grid.Row="1" Margin="0,2,10,2" StyleClass="Button_Normal" Text="{x:Static core:FaSolid.CaretRight}" FontFamily="Fa-Solid" Clicked="SearchForwardHandler" Command="{Binding SearchCommand}">
+                                    </Button>
+                                </Grid>
+                            </Grid>
+                            -->
+                        </Grid>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Row="2" x:Name="ReplayGridPT" StyleClass="Grid_BGBG" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="0"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="0" StyleClass="Grid_Normal" Margin="10,0,0,10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Label x:Name="ReplayListLabelPT" StyleClass="Label_Normal" FontSize="Medium" HorizontalOptions="Center" VerticalOptions="Center" Text="Replay-Listen"/>
+                        <ScrollView Grid.Row="1">
+                            <Grid x:Name="ReplayListsPT">
+
+                            </Grid>
+                        </ScrollView>
+                    </Grid>
+                    <Grid Grid.Column="1" StyleClass="Grid_Normal" Margin="10,0,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="50"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Label x:Name="SearchInfoPT" VerticalOptions="Center" HorizontalOptions="Center" FontSize="12" StyleClass="Label_Normal"/>
+                            <Entry Grid.Row="1" x:Name="SearchTextPT" VerticalOptions="Center" HorizontalTextAlignment="Center" StyleClass="Entry_Normal">
+
+                            </Entry>
+                        </Grid>
+                        <Grid Grid.Column="1" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <Button x:Name="SearchBackwardPT" Grid.Row="0" Margin="0,12,10,12" StyleClass="Button_Normal" Text="{x:Static core:FaSolid.CaretLeft}" FontFamily="Fa-Solid" Clicked="SearchBackwardHandlerPT" Command="{Binding SearchCommand}">
+
+                            </Button>
+                            <Button x:Name="SearchForwardPT"  Grid.Row="1" Margin="0,12,10,12" StyleClass="Button_Normal" Text="{x:Static core:FaSolid.CaretRight}" FontFamily="Fa-Solid" Clicked="SearchForwardHandlerPT" Command="{Binding SearchCommand}">
+                            </Button>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Grid>
+        <AbsoluteLayout InputTransparent="true" Grid.RowSpan="3" x:Name="AbsoluteLayer">
+            <BoxView x:Name="BlueBox" Color="Blue"
+                 AbsoluteLayout.LayoutBounds="50,200,500,250" IsVisible="false"
+                
+            />
+       </AbsoluteLayout>
+    </Grid>
+</ContentPage>

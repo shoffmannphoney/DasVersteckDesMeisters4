@@ -1,0 +1,100 @@
+﻿<?xml version = "1.0" encoding = "UTF-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Phoney_MAUI.Menu.HomePage"
+    xmlns:main="clr-namespace:Phoney_MAUI"
+             xmlns:menu="clr-namespace:Phoney_MAUI.Menu"
+              xmlns:core="clr-namespace:Phoney_MAUI.Core"
+                xmlns:genx="clr-namespace:Phoney_MAUI.Game.General"
+           xmlns:game="clr-namespace:Phoney_MAUI.Game.General"
+              Shell.NavBarIsVisible="false"
+   x:DataType="game:MainViewModel"
+             Title="Phoney Island">
+
+    <Grid x:Name="PageGrid" StyleClass="Grid_BGBG">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="1"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" StyleClass="Grid_BGBG">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button StyleClass="Button_BGBG_NoBorder" IsVisible="false" MinimumWidthRequest="0" MinimumHeightRequest="0" x:Name="MenuButton" Command="{Binding Source={RelativeSource AncestorType={x:Type genx:MainViewModel}}, 
+               Path=SelectGlobalMenuCommand}" CommandParameter="{Binding}" HorizontalOptions="Center" Margin="10,3,0,0" Padding="0" VerticalOptions="Center" HeightRequest="30" WidthRequest="30" Text="{x:Static core:FaSolid.Bars}"  FontFamily="Fa-Solid" FontSize="Small" />
+            <Label StyleClass="Label_Title" Grid.Column="1" x:Name="WindowTitle" Margin="10,5,0,0" Text="Phoney Island - nur die Lüge zählt" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"
+                   VerticalOptions="Center" />
+        </Grid>
+        <Grid x:Name="MenuGridTotal" Grid.Row="2" Padding="-300,0, 0, 0" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="*"/>
+
+            </Grid.ColumnDefinitions>
+            <main:TreeView>
+                
+            </main:TreeView>
+            <Grid  x:Name="MenuGridLeft"></Grid>
+            <Grid Grid.Column="1"  >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="1"  x:Name="MenuGridMenu" Padding="10" StyleClass="Grid_BGBG" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="35"/>
+                    </Grid.RowDefinitions>
+                    <Grid StyleClass="Grid_Normal" Padding="10,10,10,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="330"/>
+                            <ColumnDefinition Width="*"/>
+
+
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0">
+                            <Border Stroke="white" x:Name="vlinks" BackgroundColor="Transparent" VerticalOptions="Center" Margin="0,40,0,0" WidthRequest="224" HeightRequest="569">
+                                <Image x:Name="vlinkspic" Source="vlinks.jpg" WidthRequest="223" HeightRequest="568"/>
+                            </Border>
+                        </Grid>
+                        <Grid Grid.Column="2">
+                            <Border Stroke="white" x:Name="vrechts" BackgroundColor="Transparent" VerticalOptions="Center" Margin="0,40,0,0" WidthRequest="224" HeightRequest="569">
+                                <Image x:Name="vrechtspic" Source="vrechts.jpg" WidthRequest="223" HeightRequest="568"/>
+                            </Border>
+
+                        </Grid>
+                        <Grid Padding="0,40,0,10" Grid.Column="1" StyleClass="Grid_Normal" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <!--
+                            <Button StyleClass="Button_BGBG_Large" Grid.Row="0" HorizontalOptions="Center" Margin="10" WidthRequest="300" x:Name="B_Continue" Text="Spiel fortsetzen" />
+                            -->
+                            <Button StyleClass="Button_BGBG_Large" Grid.Row="0" HorizontalOptions="Center" Margin="10" WidthRequest="300" MaximumHeightRequest="100" MinimumHeightRequest="20" x:Name="B_Game" Text="Neues Spiel starten" />
+                            <Button StyleClass="Button_BGBG_Large" Grid.Row="1" HorizontalOptions="Center" Margin="10" WidthRequest="300" MaximumHeightRequest="100" x:Name="B_Settings" Text="Settings" />
+                            <Button StyleClass="Button_BGBG_Large" Grid.Row="2" HorizontalOptions="Center" Margin="10" WidthRequest="300" MaximumHeightRequest="100" x:Name="B_Replay" Text="Replay" />
+                            <Button StyleClass="Button_BGBG_Large" Grid.Row="3" HorizontalOptions="Center" Margin="10" WidthRequest="300" MaximumHeightRequest="100" x:Name="B_Credits" Text="Credits" />
+                            <Button StyleClass="Button_BGBG_Large" Grid.Row="4" HorizontalOptions="Center" Margin="10" WidthRequest="300" MaximumHeightRequest="100" x:Name="B_End" Text="Spiel beenden" />
+                        </Grid>
+                    </Grid>
+                    <Grid Grid.Row="4" Margin="0,0,0,0" StyleClass="Grid_Normal">
+                        <Label x:Name="Test1" IsVisible="false" StyleClass="Label_Normal"  HorizontalOptions="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" Text="Ausrichtung" FontSize="Small"/>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Grid>
+        <AbsoluteLayout Grid.RowSpan="3" InputTransparent="true" CascadeInputTransparent="false" ZIndex="200" x:Name="AbsoluteLayer">
+            <BoxView x:Name="BlueBox" Color="Blue"
+               AbsoluteLayout.LayoutBounds="50,200,500,250" IsVisible="false"
+              
+          />
+        </AbsoluteLayout>
+    </Grid>
+</ContentPage>

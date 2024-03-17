@@ -1,0 +1,212 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Phoney Island Log</title>
+    <style>
+       body {
+            line-height: 1.5;
+            font-family: [Font], Helvetica, line-height:1;
+            font-size: [Size]px;
+            background-color: [BGBGColor];
+        }
+
+        .sansserif {
+            line-height: 1.5;
+            font-family: [Font], Helvetica, line-height:1;
+            font-size: [Size]px;
+            border-radius: 8px;
+            padding: 10px;
+            background-color: [BGColor];
+            text-indent: 20px;
+            margin-top: 10px;
+            margin-bottom: 0px;
+        }
+
+        .para {
+            text-indent: 20px;
+            margin-top: 2x;
+            margin-bottom: 2px;
+            font-size: [Size]px;
+            background: [BGColor];
+            color: [FGColor];
+            font-family: [Font], Helvetica;
+
+
+      }
+
+        h1 {
+            display: inline;
+            background-color: red;
+            color: #ffffff;
+            font-family: [Font], Helvetica, line-height:1.5;
+            sans-serif;
+            font-size: [Size]px;
+        }
+
+        p {
+            line-height: 1.5;
+            font-family: [Font], Helvetica, line-height:1;
+            font-size: [Size]px;
+        }
+
+        a:link {
+            color: green;
+            text-decoration: none;
+            style ="cursor:pointer";
+        }
+
+        a:hover {
+            color: red;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        a.class1 {
+            color: [Accent1];
+        }
+
+            a.class1:link {
+                text-decoration: none;
+                color: [Accent1];
+            }
+
+            a.class1:visited {
+                text - decoration: none;
+                color: [Accent1];
+            }
+
+            a.class1:hover {
+                text - decoration: underline;
+                color: [Accent1];
+            }
+
+            a.class1:active {
+                text - decoration: none;
+                color: [Accent1];
+            }
+
+        a.class2 {
+            color: [Accent2];
+        }
+
+            a.class2:link {
+                text-decoration: none;
+                color: [Accent2];
+            }
+
+            a.class2:visited {
+                text - decoration: none;
+                color: [Accent2];
+            }
+
+            a.class2:hover {
+                text - decoration: underline;
+                color: [Accent2];
+            }
+
+            a.class2:active {
+                text - decoration: none;
+                color: [Accent2];
+            }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: [BGColorInputline];
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: [BGColor];
+            width: 6px;
+            height: 6px;
+            border: 1px solid [BGColorInputline];
+        }
+
+            ::-webkit-scrollbar-thumb:hover {
+                background: [BGColor];
+            }
+    </style>
+</head>
+    <body id="newbody" style="background-color: [BGBGColor]; margin-left: 2px; text-indent: 200px; margin-bottom: 0px;">
+        <div class="sansserif" style="color: [FGColor]; text-indent: 20px; background-color: [BGColor]; font-family: [Font]; margin-top: 10px; margin-bottom: 0px; ">[Body]</div>
+        <script>
+            FullyLoaded = 0;
+            function DoScroll()
+            {
+                oldYPos = [YPOS];
+                if (oldYPos > 0) {
+                    window.scrollTo({ top: oldYPos });
+                    console.log(oldYPos);
+                    console.log("DoScroll()");
+                }
+            }
+            function callStartScrolling2(yPos) { window.location.href = 'https://runcsharp.StartScrolling2?' + yPos; }
+            function callStartScrolling() { window.location.href = 'https://runcsharp.StartScrolling?' + window.pageYOffset; }
+            function callDoSoftScrolling( yPos )
+            {
+                window.scrollTo({ top: yPos, behavior: 'smooth'});
+            }
+            function SetFullyLoaded()
+            {
+                window.FullyLoaded ++;
+                console.log("Gnu gnu gnu " + window.FullyLoaded ) ;
+                // window.location.href = 'https://runcsharp.LoadedFully?' + document.body.scrollHeight;
+                oldYPos = [YPOS];
+                window.scrollTo({ top: oldYPos });
+            }
+            function showStefansMessage() {
+                window.webViewBridge?.alertStefan(window.innerWidth + " x " + window.innerHeight);
+            }
+            function cbFullyLoaded()
+            {
+              DoScroll();
+              console.log("Gna gne gni");
+                window.webViewBridge?.cbFullyLoaded( "Töte die Kröte mit der Flöte!");
+            }
+            function cbFullyLoadedDOM() {
+                DoScroll();
+                console.log("Gna gne gni DOM");
+                window.webViewBridge?.cbFullyLoaded("Töte die Kröte mit der Flöte!");
+            }
+          function SetFullyLoadedDoc() {
+                window.FullyLoaded++;
+                console.log("Gni gni gni " + window.FullyLoaded);
+                // window.location.href = 'https://runcsharp.LoadedFully?' + document.body.scrollHeight;
+                oldYPos = [YPOS];
+                window.scrollTo({ top: oldYPos });
+            }
+            document.addEventListener("DOMContentLoaded", cbFullyLoadedDOM)
+            // window.addEventListener("load", cbFullyLoaded )
+            /*
+            window.addEventListener("load", function () {
+                 window.location.href = 'https://runcsharp.LoadedFully?0';
+                // Führe hier deinen JavaScript-Code aus, der die Webseite manipulieren oder auf Elemente zugreifen muss
+                console.log("Die Webseite ist komplett geladen und angezeigt!");
+            });
+            */
+            /*
+        // callStartScrolling2(-33);
+/*
+function DoScroll()
+            {
+                oldYPos = [YPOS];
+                window.scrollTo({ top: oldYPos });
+                /*
+                 if (Math.abs(oldYPos - document.body.scrollHeight) < 300) {
+                    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+                }
+                else
+                {
+                    window.scrollTo({ top: document.body.scrollHeight });
+                }
+                window.scrollTo({ top: document.body.scrollHeight });
+            }
+            DoScroll();
+                */
+      </script>
+    </body>
+</html>

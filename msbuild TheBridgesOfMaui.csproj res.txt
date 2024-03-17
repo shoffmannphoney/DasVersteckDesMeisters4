@@ -1,0 +1,10 @@
+msbuild TheBridgesOfMaui.csproj /restore /t:Publish /p:TargetFramework=net8.0-windows10.0.19041.0 /property:Platform=x64 /p:configuration=release /p:GenerateAppxPackageOnBuild=true /p:AppxPackageSigningEnabled=true /p:PackageCertificateThumbprint="3f5f279c13cb65fdfb4b5bb3de4d112024b36481" /p:PackageCertificatePassword="Lian1234“
+
+msbuild TheBridgesOfMaui.csproj /restore /t:Publish /p:TargetFramework=net8.0-windows10.0.19041.0 /property:Platform=x64 /p:configuration=release /p:AppxPackageSigningEnabled=true /p:PackageCertificateThumbprint="3f5f279c13cb65fdfb4b5bb3de4d112024b36481" /p:PackageCertificatePassword="Lian1234“
+
+
+C:\Projects\Testprojekte\TBOOM13\WebViewInterop\obj\x64\Debug\net8.0-windows10.0.19041.0\win-x64\MsixContent
+
+
+
+C:\Projects\Testprojekte\TBOOM13\TheBridgesOfMaui\bin\x64\Debug\net8.0-windows10.0.19041.0\win-x64

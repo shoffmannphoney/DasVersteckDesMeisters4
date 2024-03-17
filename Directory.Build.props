@@ -1,0 +1,5 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <WindowsSdkPackageVersion>10.0.19041.29</WindowsSdkPackageVersion>
+  </PropertyGroup>  
+</Project>

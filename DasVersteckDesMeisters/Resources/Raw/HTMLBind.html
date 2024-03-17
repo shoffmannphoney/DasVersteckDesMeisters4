@@ -1,0 +1,57 @@
+﻿!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script type="text/javascript">
+        alert("Juhu!");
+        (async function () {
+            // <embed user provided code here>
+            await CefSharp.BindObjectAsync("boundAsync", "bound");
+
+            boundAsync.hello('CefSharp').then(function (res) {
+                assert.equal(res, "Hello CefSharp")
+                asyncCallback();
+            });
+        })();
+
+        (async () => {
+            await CefSharp.BindObjectAsync("boundAsync", "bound");
+
+            boundAsync.hello('CefSharp').then(function (res) {
+                assert.equal(res, "Hello CefSharp")
+                asyncCallback();
+            });
+        })();
+
+        CefSharp.BindObjectAsync("boundAsync2").then(function (result) {
+            boundAsync2.hello('CefSharp').then(function (res) {
+                assert.equal(res, "Hello CefSharp")
+                // NOTE the ability to delete a bound object
+                assert.equal(true, CefSharp.DeleteBoundObject("boundAsync2"), "Object was unbound");
+                assert.ok(window.boundAsync2 === undefined, "boundAsync2 is now undefined");
+                asyncCallback();
+            });
+        });
+        async function Test() {
+            // <embed user provided code here>
+            await CefSharp.BindObjectAsync("boundAsync", "bound");
+
+            boundAsync.hello('CefSharp').then(function (res) {
+                assert.equal(res, "Hello CefSharp")
+                asyncCallback();
+            });
+        }
+        Test();
+        function Test2(text) {
+            alert(text);
+        }
+        function myFunction(text) {
+            document.getElementById("demo").style.color = "red";
+            document.getElementById("demo").innerHTML = "Dies WAR ein Link zum draufklicken";
+        }
+        function Seitenende() { }
+    </script>
+</head>
+</html>

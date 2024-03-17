@@ -1,0 +1,326 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Phoney_MAUI.Menu.SettingsPage"
+               xmlns:local="clr-namespace:Phoney_MAUI"
+             xmlns:core="clr-namespace:Phoney_MAUI.Core"
+               xmlns:model="clr-namespace:Phoney_MAUI.Model"
+                xmlns:genx="clr-namespace:Phoney_MAUI.Game.General"
+               Shell.NavBarIsVisible="False"
+           Title="SettingsPage">
+    <ContentPage.Resources>
+        <!-- 
+        <Color x:Key="xBGBG">#000000</Color -->
+    </ContentPage.Resources>
+    <Grid x:Name="PageGrid" StyleClass="Grid_BGBG">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="1"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" StyleClass="Grid_BGBG">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="54"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button StyleClass="Button_BGBG_NoBorder" x:Name="MenuButton" Command="{Binding Source={RelativeSource AncestorType={x:Type genx:MainViewModel}}, 
+               Path=SelectGlobalMenuCommand}" CommandParameter="{Binding}" HorizontalOptions="Center" Margin="10,3,0,0" Padding="0" VerticalOptions="Center" HeightRequest="30" WidthRequest="30" Text="{x:Static core:FaSolid.Bars}"  FontFamily="Fa-Solid" FontSize="Small" />
+            <Label StyleClass="Label_Title" Grid.Column="1" x:Name="WindowTitle" Text="Settings" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"
+                   />
+        </Grid>
+        <Grid x:Name="MenuGridTotal" Grid.Row="2" Padding="-300,0, 0, 0" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="*"/>
+
+            </Grid.ColumnDefinitions>
+            <Grid  x:Name="MenuGridLeft"></Grid>
+            <Grid Grid.Column="1"  >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid ></Grid>
+                <Grid Grid.Row="1"  x:Name="MenuGridMenu" Padding="10" StyleClass="Grid_BGBG" >
+                    <Grid StyleClass="Grid_Normal" Padding="10,10,10,10">
+                        <ScrollView Grid.Row="2" >
+                            <Grid x:Name="MGMInner" StyleClass="Grid_Normal" >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="90"/>
+                                    <RowDefinition Height="120"/>
+                                    <RowDefinition Height="90"/>
+                                    <RowDefinition Height="240"/>
+                                    <RowDefinition Height="90"/>
+                                    <RowDefinition Height="120"/>
+                                    <RowDefinition Height="90"/>
+                                    <RowDefinition Height="120"/>
+                                    <RowDefinition Height="90"/>
+                                    <RowDefinition Height="300"/>
+                                    <RowDefinition Height="90"/>
+                                    <RowDefinition Height="300"/>
+                                    <RowDefinition Height="90"/>
+                                    <RowDefinition Height="300"/>
+                                    <RowDefinition Height="90"/>
+                                    <RowDefinition Height="240"/>
+                                    <RowDefinition Height="90"/>
+                                    <RowDefinition Height="240"/>
+                                    <RowDefinition Height="90"/>
+                                    <RowDefinition Height="240"/>
+                                    <RowDefinition Height="90"/>
+                                    <RowDefinition Height="560"/>
+                                    <RowDefinition Height="90"/>
+                                    <RowDefinition Height="420"/>
+                                    <RowDefinition Height="90"/>
+                                    <RowDefinition Height="360"/>
+                                    <RowDefinition Height="90"/>
+                                    <RowDefinition Height="300"/>
+                                    <RowDefinition Height="90"/>
+                                    <RowDefinition Height="180"/>
+                                    <RowDefinition Height="90"/>
+                                    <RowDefinition Height="180"/>
+                                </Grid.RowDefinitions>
+                                <Label x:Name="LanguageLabel" Grid.Row="0" StyleClass="Label_Normal" HorizontalOptions="Center" VerticalOptions="End" Margin="0,0,0,15" FontSize="Large"  Text="Sprache"/>
+                                <Grid Grid.Row="1" WidthRequest="300">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="60"/>
+                                        <RowDefinition Height="60"/>
+                                    </Grid.RowDefinitions>
+                                    <Button x:Name="LanguageButton_Deutsch" Clicked="OnClickGerman" StyleClass="Button_Settings" CornerRadius="1" Text="Deutsch"/>
+                                    <Button x:Name="LanguageButton_English" Clicked="OnClickEnglish" Grid.Row="1" StyleClass="Button_Settings" CornerRadius="1" Text="Englisch"/>
+                                </Grid>
+                                <Label x:Name="IllustrationLabel" Grid.Row="2" StyleClass="Label_Normal" HorizontalOptions="Center" VerticalOptions="End" Margin="0,0,0,15" FontSize="Large"  Text="Illustration"/>
+                                <Grid Grid.Row="3" WidthRequest="300">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="60"/>
+                                        <RowDefinition Height="60"/>
+                                        <RowDefinition Height="60"/>
+                                        <RowDefinition Height="60"/>
+                                    </Grid.RowDefinitions>
+                                    <Button CornerRadius="1" x:Name="IllustrationButton_Off" Clicked="OnClickIlluOff" StyleClass="Button_Settings" Text="Aus"/>
+                                    <Button CornerRadius="1" x:Name="IllustrationButton_Small" Clicked="OnClickIlluSmall" Grid.Row="1" StyleClass="Button_Settings" Text="Klein"/>
+                                    <Button CornerRadius="1" x:Name="IllustrationButton_Medium" Clicked="OnClickIlluMedium" Grid.Row="2" StyleClass="Button_Settings" Text="Mittel"/>
+                                    <Button CornerRadius="1" x:Name="IllustrationButton_Big" Clicked="OnClickIlluBig" Grid.Row="3" StyleClass="Button_Settings" Text="Groß"/>
+                                </Grid>
+                                <Label x:Name="SimpleMCLabel" Grid.Row="4" StyleClass="Label_Normal" HorizontalOptions="Center" VerticalOptions="End" Margin="0,0,0,15" FontSize="Large"  Text="Simples Multiple Choice"/>
+                                <Grid Grid.Row="5" WidthRequest="300">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="60"/>
+                                        <RowDefinition Height="60"/>
+                                    </Grid.RowDefinitions>
+                                    <Button CornerRadius="1" x:Name="SimpleMCButton_On" Clicked="OnClickSimpleMCOn" StyleClass="Button_Settings" Text="Ein"/>
+                                    <Button CornerRadius="1" x:Name="SimpleMCButton_Off" Clicked="OnClickSimpleMCOff" Grid.Row="1" StyleClass="Button_Settings" Text="Aus"/>
+                                </Grid>
+                                <Label x:Name="TextAttributesLabel" Grid.Row="6" StyleClass="Label_Normal" HorizontalOptions="Center" VerticalOptions="End" Margin="0,0,0,15" FontSize="Large"  Text="Anklickbare Worte hervorheben"/>
+                                <Grid Grid.Row="7" WidthRequest="300">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="60"/>
+                                        <RowDefinition Height="60"/>
+                                    </Grid.RowDefinitions>
+                                    <Button CornerRadius="1" x:Name="TextAttributes_On" Clicked="OnClickTextAttribOn" StyleClass="Button_Settings" Text="Ein"/>
+                                    <Button CornerRadius="1" x:Name="TextAttributes_Off" Clicked="OnClickTextAttribOff" Grid.Row="1" StyleClass="Button_Settings" Text="Aus"/>
+                                </Grid>
+                                <Label x:Name="OrderColumnLabel" Grid.Row="8" StyleClass="Label_Normal" HorizontalOptions="Center" VerticalOptions="End" Margin="0,0,0,15" FontSize="Large"  Text="Befehlsleiste [Querformat]"/>
+                                <Grid Grid.Row="9" WidthRequest="300">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="60"/>
+                                        <RowDefinition Height="60"/>
+                                        <RowDefinition Height="60"/>
+                                        <RowDefinition Height="60"/>
+                                        <RowDefinition Height="60"/>
+                                    </Grid.RowDefinitions>
+                                    <Button CornerRadius="1" x:Name="OrderListPosButton_Off" Clicked="OnClickOrderListPosLS_Off" StyleClass="Button_Settings" Text="Aus"/>
+                                    <Button CornerRadius="1" x:Name="OrderListPosButton_LU" Clicked="OnClickOrderListPosLS_LU" Grid.Row="1" StyleClass="Button_Settings" Text="Links oben"/>
+                                    <Button CornerRadius="1" x:Name="OrderListPosButton_LD" Clicked="OnClickOrderListPosLS_LD" Grid.Row="2" StyleClass="Button_Settings" Text="Links unten"/>
+                                    <Button CornerRadius="1" x:Name="OrderListPosButton_RU" Clicked="OnClickOrderListPosLS_RU" Grid.Row="3" StyleClass="Button_Settings" Text="Rechts oben"/>
+                                    <Button CornerRadius="1" x:Name="OrderListPosButton_RD" Clicked="OnClickOrderListPosLS_RD" Grid.Row="4" StyleClass="Button_Settings" Text="Rechts unten"/>
+                                </Grid>
+                                <Label x:Name="ItemsLocLabel" Grid.Row="10" StyleClass="Label_Normal" HorizontalOptions="Center" VerticalOptions="End" Margin="0,0,0,15" FontSize="Large"  Text="Liste Items vor Ort [Querformat]"/>
+                                <Grid Grid.Row="11" WidthRequest="300">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="60"/>
+                                        <RowDefinition Height="60"/>
+                                        <RowDefinition Height="60"/>
+                                        <RowDefinition Height="60"/>
+                                        <RowDefinition Height="60"/>
+                                    </Grid.RowDefinitions>
+                                    <Button CornerRadius="1" x:Name="ItemsLocListPosButton_Off" Clicked="OnClickItemsLocListPosLS_Off" StyleClass="Button_Settings" Text="Aus"/>
+                                    <Button CornerRadius="1" x:Name="ItemsLocListPosButton_LU" Clicked="OnClickItemsLocListPosLS_LU" Grid.Row="1" StyleClass="Button_Settings" Text="Links oben"/>
+                                    <Button CornerRadius="1" x:Name="ItemsLocListPosButton_LD" Clicked="OnClickItemsLocListPosLS_LD" Grid.Row="2" StyleClass="Button_Settings" Text="Links unten"/>
+                                    <Button CornerRadius="1" x:Name="ItemsLocListPosButton_RU" Clicked="OnClickItemsLocListPosLS_RU" Grid.Row="3" StyleClass="Button_Settings" Text="Rechts oben"/>
+                                    <Button CornerRadius="1" x:Name="ItemsLocListPosButton_RD" Clicked="OnClickItemsLocListPosLS_RD" Grid.Row="4" StyleClass="Button_Settings" Text="Rechts unten"/>
+                                </Grid>
+                                <Label x:Name="ItemsInvLabel" Grid.Row="12" StyleClass="Label_Normal" HorizontalOptions="Center" VerticalOptions="End" Margin="0,0,0,15" FontSize="Large"  Text="Liste Items dabei [Querformat]"/>
+                                <Grid Grid.Row="13" WidthRequest="300">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="60"/>
+                                        <RowDefinition Height="60"/>
+                                        <RowDefinition Height="60"/>
+                                        <RowDefinition Height="60"/>
+                                        <RowDefinition Height="60"/>
+                                    </Grid.RowDefinitions>
+                                    <Button CornerRadius="1" x:Name="ItemsInvListPosButton_Off" Clicked="OnClickItemsInvListPosLS_Off" StyleClass="Button_Settings" Text="Aus"/>
+                                    <Button CornerRadius="1" x:Name="ItemsInvListPosButton_LU" Clicked="OnClickItemsInvListPosLS_LU" Grid.Row="1" StyleClass="Button_Settings" Text="Links oben"/>
+                                    <Button CornerRadius="1" x:Name="ItemsInvListPosButton_LD" Clicked="OnClickItemsInvListPosLS_LD" Grid.Row="2" StyleClass="Button_Settings" Text="Links unten"/>
+                                    <Button CornerRadius="1" x:Name="ItemsInvListPosButton_RU" Clicked="OnClickItemsInvListPosLS_RU" Grid.Row="3" StyleClass="Button_Settings" Text="Rechts oben"/>
+                                    <Button CornerRadius="1" x:Name="ItemsInvListPosButton_RD" Clicked="OnClickItemsInvListPosLS_RD" Grid.Row="4" StyleClass="Button_Settings" Text="Rechts unten"/>
+                                </Grid>
+                                <Label x:Name="OrderColumnLabelPortrait" Grid.Row="14" StyleClass="Label_Normal" HorizontalOptions="Center" VerticalOptions="End" Margin="0,0,0,15" FontSize="Large"  Text="Befehlsleiste [Hochformat]"/>
+                                <Grid Grid.Row="15" WidthRequest="300">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="60"/>
+                                        <RowDefinition Height="60"/>
+                                        <RowDefinition Height="60"/>
+                                        <RowDefinition Height="60"/>
+                                    </Grid.RowDefinitions>
+                                    <Button CornerRadius="1" x:Name="OrderListPosButtonPT_Off" Clicked="OnClickOrderListPosPT_Off" StyleClass="Button_Settings" Text="Aus"/>
+                                    <Button CornerRadius="1" x:Name="OrderListPosButtonPT_1st" Clicked="OnClickOrderListPosPT_1st" Grid.Row="1" StyleClass="Button_Settings" Text="Erste Spalte"/>
+                                    <Button CornerRadius="1" x:Name="OrderListPosButtonPT_2nd" Clicked="OnClickOrderListPosPT_2nd" Grid.Row="2" StyleClass="Button_Settings" Text="Zweite Spalte"/>
+                                    <Button CornerRadius="1" x:Name="OrderListPosButtonPT_3rd" Clicked="OnClickOrderListPosPT_3rd" Grid.Row="3" StyleClass="Button_Settings" Text="Dritte Spalte"/>
+                                </Grid>
+                                <Label x:Name="ItemsLocLabelPortrait" Grid.Row="16" StyleClass="Label_Normal" HorizontalOptions="Center" VerticalOptions="End" Margin="0,0,0,15" FontSize="Large"  Text="Liste Items vor Ort [Hochformat]"/>
+                                <Grid Grid.Row="17" WidthRequest="300">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="60"/>
+                                        <RowDefinition Height="60"/>
+                                        <RowDefinition Height="60"/>
+                                        <RowDefinition Height="60"/>
+                                    </Grid.RowDefinitions>
+                                    <Button CornerRadius="1" x:Name="ItemsLocListPosButtonPT_Off" Clicked="OnClickItemsLocListPosPT_Off" StyleClass="Button_Settings" Text="Aus"/>
+                                    <Button CornerRadius="1" x:Name="ItemsLocListPosButtonPT_1st" Clicked="OnClickItemsLocListPosPT_1st" Grid.Row="1" StyleClass="Button_Settings" Text="Erste Spalte"/>
+                                    <Button CornerRadius="1" x:Name="ItemsLocListPosButtonPT_2nd" Clicked="OnClickItemsLocListPosPT_2nd" Grid.Row="2" StyleClass="Button_Settings" Text="Zweite Spalte"/>
+                                    <Button CornerRadius="1" x:Name="ItemsLocListPosButtonPT_3rd" Clicked="OnClickItemsLocListPosPT_3rd" Grid.Row="3" StyleClass="Button_Settings" Text="Dritte Spalte"/>
+                                </Grid>
+                                <Label x:Name="ItemsInvLabelPortrait" Grid.Row="18" StyleClass="Label_Normal" HorizontalOptions="Center" VerticalOptions="End" Margin="0,0,0,15" FontSize="Large"  Text="Liste Items dabei [Hochformat]"/>
+                                <Grid Grid.Row="19" WidthRequest="300">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="60"/>
+                                        <RowDefinition Height="60"/>
+                                        <RowDefinition Height="60"/>
+                                        <RowDefinition Height="60"/>
+                                    </Grid.RowDefinitions>
+                                    <Button CornerRadius="1" x:Name="ItemsInvListPosButtonPT_Off" Clicked="OnClickItemsInvListPosPT_Off" StyleClass="Button_Settings" Text="Aus"/>
+                                    <Button CornerRadius="1" x:Name="ItemsInvListPosButtonPT_1st" Clicked="OnClickItemsInvListPosPT_1st" Grid.Row="1" StyleClass="Button_Settings" Text="Erste Spalte"/>
+                                    <Button CornerRadius="1" x:Name="ItemsInvListPosButtonPT_2nd" Clicked="OnClickItemsInvListPosPT_2nd" Grid.Row="2" StyleClass="Button_Settings" Text="Zweite Spalte"/>
+                                    <Button CornerRadius="1" x:Name="ItemsInvListPosButtonPT_3rd" Clicked="OnClickItemsInvListPosPT_3rd" Grid.Row="3" StyleClass="Button_Settings" Text="Dritte Spalte"/>
+                                </Grid>
+                                <Label x:Name="ThemesLabel" Grid.Row="20" StyleClass="Label_Normal" HorizontalOptions="Center" VerticalOptions="End" Margin="0,0,0,15" FontSize="Large"  Text="Themes"/>
+                                <Grid x:Name="ThemesElement" Grid.Row="21" WidthRequest="300">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="640"/>
+                                    </Grid.RowDefinitions>
+                                    <CollectionView x:Name="ThemesCV" Grid.Row="0" ItemsSource="{Binding Themes}" SelectionMode="Single" SelectedItem="{Binding SelectedTheme}" SelectionChanged="OnCollectionViewSelectionChanged" Margin="0,0,0,0">
+                                        <CollectionView.ItemTemplate>
+                                            <DataTemplate x:DataType="core:ThemeInfo">
+                                                <Border StrokeThickness="1" BackgroundColor="Black" WidthRequest="300" HeightRequest="70" Stroke="White">
+                                                    <Grid Padding="1" RowDefinitions="Auto" WidthRequest="296" ColumnDefinitions="*" RowSpacing="6" ColumnSpacing="6">
+                                                        <Border StrokeThickness="0" HeightRequest="66" WidthRequest="296" Grid.Column="0" HorizontalOptions="Center" BackgroundColor="{Binding Col_BGBG}">
+                                                            <Border StrokeThickness="0" WidthRequest="276" HeightRequest="46" Margin="10" Padding ="2" HorizontalOptions="Center" BackgroundColor="{Binding Col_BG}">
+                                                                <Label StyleClass="Label_Title" Text="{Binding ViewName}" Padding="2" VerticalOptions="Center" HorizontalOptions="Center" TextColor="{Binding Col_FG}"/>
+                                                            </Border>
+                                                        </Border>
+                                                    </Grid>
+                                                    <Border.GestureRecognizers>
+                                                        <TapGestureRecognizer NumberOfTapsRequired="1"
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type genx:MainViewModel}}, 
+                  Path=SelectThemeCommand}" CommandParameter="{Binding}">
+                                                        </TapGestureRecognizer>
+                                                    </Border.GestureRecognizers>
+                                                </Border>
+                                            </DataTemplate>
+                                        </CollectionView.ItemTemplate>
+                                    </CollectionView>
+
+                                </Grid>
+                                <Label x:Name="FontsLabel" Grid.Row="22" StyleClass="Label_Normal" HorizontalOptions="Center" VerticalOptions="End" Margin="0,0,0,15" FontSize="Large" Text="Fonts"/>
+                                <Grid x:Name="FontsElement" Grid.Row="23" WidthRequest="300">
+                                    <CollectionView x:Name="FontsCV" ItemsSource="{Binding Fonts}" SelectionMode="Single" SelectedItem="{Binding SelectFont}" SelectionChanged="OnCollectionViewSelectionChanged" Margin="0,0,0,0">
+                                        <CollectionView.ItemTemplate>
+                                            <DataTemplate x:DataType="core:FontInfo">
+                                                <Border StrokeThickness="1" StyleClass="Border_Settings" WidthRequest="300" HeightRequest="70" >
+                                                    <Grid Padding="1" WidthRequest="296" ColumnDefinitions="*" VerticalOptions="FillAndExpand" >
+                                                        <Label StyleClass="Label_Title" Text="{Binding ViewName}" FontFamily="{Binding Font}" Padding="2" VerticalOptions="Center" HorizontalOptions="Center" />
+                                                    </Grid>
+                                                    <Border.GestureRecognizers>
+                                                        <TapGestureRecognizer NumberOfTapsRequired="1"
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type genx:MainViewModel}}, 
+                  Path=SelectFontCommand}" CommandParameter="{Binding}">
+                                                        </TapGestureRecognizer>
+                                                    </Border.GestureRecognizers>
+                                                </Border>
+                                            </DataTemplate>
+                                        </CollectionView.ItemTemplate>
+                                    </CollectionView>
+
+                                </Grid>
+                                <Label x:Name="FontSizeLabel" Grid.Row="24" StyleClass="Label_Normal" HorizontalOptions="Center" VerticalOptions="End" Margin="0,0,0,15" FontSize="Large" Text="Fontgröße"/>
+                                <Grid x:Name="FontSizeElement" Grid.Row="25" WidthRequest="300">
+                                    <CollectionView ItemsSource="{Binding FontSizes}" SelectionMode="Single" SelectedItem="{Binding SelectFontSize}" SelectionChanged="OnCollectionViewSelectionChanged" Margin="0,0,0,0">
+                                        <CollectionView.ItemTemplate>
+                                            <DataTemplate x:DataType="core:FontSizeInfo">
+                                                <Border StyleClass="Border_Settings" WidthRequest="300" HeightRequest="70" >
+                                                    <Grid Padding="1" WidthRequest="296" ColumnDefinitions="*" VerticalOptions="FillAndExpand" >
+                                                        <Label StyleClass="Label_Title" Text="{Binding ViewName}" FontSize="{Binding SizeExpand}" Padding="2" VerticalOptions="Center" HorizontalOptions="Center" />
+                                                    </Grid>
+                                                    <Border.GestureRecognizers>
+                                                        <TapGestureRecognizer NumberOfTapsRequired="1"
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type genx:MainViewModel}}, 
+                  Path=SelectFontSizeCommand}" CommandParameter="{Binding}">
+                                                        </TapGestureRecognizer>
+                                                    </Border.GestureRecognizers>
+                                                </Border>
+                                            </DataTemplate>
+                                        </CollectionView.ItemTemplate>
+                                    </CollectionView>
+
+                                </Grid>
+                                <Label x:Name="RowMargin" Grid.Row="26" StyleClass="Label_Normal" HorizontalOptions="Center" VerticalOptions="End" Margin="0,0,0,15" FontSize="Large"  Text="Zeilenhöhe in Listen"/>
+                                <Grid Grid.Row="27" WidthRequest="300">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="60"/>
+                                        <RowDefinition Height="60"/>
+                                        <RowDefinition Height="60"/>
+                                        <RowDefinition Height="60"/>
+                                        <RowDefinition Height="60"/>
+                                    </Grid.RowDefinitions>
+                                    <Button CornerRadius="1" x:Name="RowMargin_VeryLow" Clicked="OnClickRowMargin_VeryLow" StyleClass="Button_Settings" Text="Very Low"/>
+                                    <Button CornerRadius="1" x:Name="RowMargin_Low" Clicked="OnClickRowMargin_Low" Grid.Row="1" StyleClass="Button_Settings" Text="Low"/>
+                                    <Button CornerRadius="1" x:Name="RowMargin_Medium" Clicked="OnClickRowMargin_Medium" Grid.Row="2" StyleClass="Button_Settings" Text="Medium"/>
+                                    <Button CornerRadius="1" x:Name="RowMargin_High" Clicked="OnClickRowMargin_High" Grid.Row="3" StyleClass="Button_Settings" Text="High"/>
+                                    <Button CornerRadius="1" x:Name="RowMargin_VeryHigh" Clicked="OnClickRowMargin_VeryHigh" Grid.Row="4" StyleClass="Button_Settings" Text="Very High"/>
+                                </Grid>
+                                <Label x:Name="STTMode" Grid.Row="28" StyleClass="Label_Normal" HorizontalOptions="Center" VerticalOptions="End" Margin="0,0,0,15" FontSize="Large"  Text="Modus Spracheingabe"/>
+                                <Grid Grid.Row="29" WidthRequest="300">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="60"/>
+                                        <RowDefinition Height="60"/>
+                                        <RowDefinition Height="60"/>
+                                    </Grid.RowDefinitions>
+                                    <Button CornerRadius="1" x:Name="STTMode_Off" Clicked="OnClickSTTMode_Off" StyleClass="Button_Settings" Text="Aus"/>
+                                    <Button CornerRadius="1" x:Name="STTMode_Manuell" Clicked="OnClickSTTMode_Manuell" Grid.Row="1" StyleClass="Button_Settings" Text="Manuell"/>
+                                    <Button CornerRadius="1" x:Name="STTMode_Continuous" Clicked="OnClickSTTMode_Continuous" Grid.Row="2" StyleClass="Button_Settings" Text="Kontinuierlich"/>
+                                </Grid>
+                                <Label x:Name="ParagraphMode" Grid.Row="30" StyleClass="Label_Normal" HorizontalOptions="Center" VerticalOptions="End" Margin="0,0,0,15" FontSize="Large"  Text="xxx Paragraph Mode"/>
+                                <Grid Grid.Row="31" WidthRequest="300">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="60"/>
+                                        <RowDefinition Height="60"/>
+                                        <RowDefinition Height="60"/>
+                                    </Grid.RowDefinitions>
+                                    <Button CornerRadius="1" x:Name="ParagraphMode_Off" Clicked="OnParagraphMode_None" StyleClass="Button_Settings" Text="xxx Aus"/>
+                                    <Button CornerRadius="1" x:Name="ParagraphMode_Last" Clicked="OnParagraphMode_Latest" Grid.Row="1" StyleClass="Button_Settings" Text="xxx Last"/>
+                                    <Button CornerRadius="1" x:Name="ParagraphMode_Full" Clicked="OnParagraphMode_Full" Grid.Row="2" StyleClass="Button_Settings" Text="xxx Alle"/>
+                                </Grid>
+                            </Grid>
+                        </ScrollView>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Grid>
+        <AbsoluteLayout InputTransparent="true" Grid.RowSpan="3"  ZIndex="200" x:Name="AbsoluteLayer">
+            <BoxView x:Name="BlueBox" Color="Blue"
+                AbsoluteLayout.LayoutBounds="50,200,500,250" IsVisible="false"
+               
+           />
+        </AbsoluteLayout>
+    </Grid>
+</ContentPage>

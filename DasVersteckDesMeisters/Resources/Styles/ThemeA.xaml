@@ -1,0 +1,15 @@
+﻿<?xml version = "1.0" encoding = "UTF-8" ?>
+<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Phoney_MAUI.Resources.Styles.ThemeA">
+    <x:String x:Key="Type">Theme</x:String>
+    <Color x:Key="BGBG">#f1faee</Color>
+    <Color x:Key="BG">#bec3bc</Color>
+    <Color x:Key="FG">#0c1523</Color>
+    <Color x:Key="BGMC">#a9afa7</Color>
+    <Color x:Key="FGMC">#1d3557</Color>
+    <Color x:Key="BGInactive">#60645f</Color>
+    <Color x:Key="FGInactive">#0c1523</Color>
+    <Color x:Key="BGInputline">#bec3bc</Color>
+</ResourceDictionary>

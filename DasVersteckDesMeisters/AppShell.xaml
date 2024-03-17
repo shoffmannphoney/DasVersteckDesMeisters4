@@ -1,0 +1,392 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<Shell
+    x:Class="Phoney_MAUI.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:shell="clr-namespace:Phoney_MAUI"
+     xmlns:core="clr-namespace:Phoney_MAUI.Core"
+  xmlns:local="clr-namespace:Phoney_MAUI"
+        xmlns:styles="clr-namespace:Phoney_MAUI.Resources.Styles"
+   xmlns:game="clr-namespace:Phoney_MAUI.Game.General"
+    xmlns:menu="clr-namespace:Phoney_MAUI.Menu"
+    Shell.BackgroundColor="Black"
+    Shell.FlyoutBehavior="Disabled"
+    Shell.TabBarIsVisible="False"
+    Shell.PresentationMode="NotAnimated">
+
+    <Shell.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary>
+                    <Style TargetType="Switch" Class="Switch_Normal">
+                        <Setter Property="ThumbColor" Value="{DynamicResource BG}"/>
+                        <Setter Property="OnColor" Value="{DynamicResource FG}"/>
+                        <Setter Property="BackgroundColor" Value="{DynamicResource BGBG}"/>
+                        <Setter Property="HeightRequest" Value="12"/>
+                        <Setter Property="MinimumHeightRequest" Value="12"/>
+                    </Style>
+                    <Style TargetType="Border" Class="Border_FG">
+                        <Setter Property="Stroke" Value="{DynamicResource FG}"/>
+                        <Setter Property="StrokeThickness" Value="1"/>
+                    </Style>
+                    <Style TargetType="Border" Class="Border_BGBG_FG">
+                        <Setter Property="BackgroundColor" Value="{DynamicResource BGBG}"/>
+                        <Setter Property="Stroke" Value="{DynamicResource FG}"/>
+                        <Setter Property="StrokeThickness" Value="1"/>
+                    </Style>
+                    <Style TargetType="Border" Class="Border_Settings">
+                        <Setter Property="BackgroundColor" Value="{DynamicResource BGBG}"/>
+                        <Setter Property="Stroke" Value="{DynamicResource FG}"/>
+                        <Setter Property="StrokeThickness" Value="1"/>
+                    </Style>
+                    <Style TargetType="Frame" Class="Frame_BGBG_FG">
+                        <Setter Property="BackgroundColor" Value="{DynamicResource BGBG}"/>
+                        <Setter Property="BorderColor" Value="{DynamicResource FG}"/>
+                    </Style>
+                    <Style TargetType="BoxView" Class="Box_BGBG">
+                        <Setter Property="BackgroundColor" Value="{DynamicResource BGBG}"/>
+                    </Style>
+                    <Style TargetType="Grid" Class="Grid_BGBG">
+                        <Setter Property="BackgroundColor" Value="{DynamicResource BGBG}"/>
+                    </Style>
+                    <Style TargetType="Grid" Class="Grid_Normal">
+                        <Setter Property="BackgroundColor" Value="{DynamicResource BG}"/>
+                    </Style>
+                    <Style TargetType="Grid" Class="Grid_Normal_Inactive">
+                        <Setter Property="BackgroundColor" Value="{DynamicResource BGInactive}"/>
+                    </Style>
+                    <Style TargetType="Grid" Class="Grid_BGInputline">
+                        <Setter Property="BackgroundColor" Value="{DynamicResource BGInputline}"/>
+                    </Style>
+                    <Style TargetType="local:TabItem" Class="TabItem_BG">
+                        <Setter Property="BackgroundColor" Value="{DynamicResource BG}"/>
+                    </Style>
+                    <Style TargetType="Label" Class="Label_Small">
+                        <Setter Property="TextColor" Value="{DynamicResource FG}"/>
+                        <Setter Property="FontFamily" Value="{DynamicResource GeneralFont}"/>
+                        <Setter Property="FontSize" Value="{DynamicResource Small}"/>
+                    </Style>
+                    <Style TargetType="Label" Class="Label_Normal">
+                        <Setter Property="TextColor" Value="{DynamicResource FG}"/>
+                        <Setter Property="FontFamily" Value="{DynamicResource GeneralFont}"/>
+                        <Setter Property="FontSize" Value="{DynamicResource Medium}"/>
+                    </Style>
+                    <Style TargetType="Label" Class="Label_Title">
+                        <Setter Property="TextColor" Value="{DynamicResource FG}"/>
+                        <Setter Property="FontFamily" Value="{DynamicResource GeneralFont}"/>
+                        <Setter Property="FontSize" Value="{DynamicResource Title}"/>
+                    </Style>
+                    <Style TargetType="Label" Class="Label_Normal_Inactive">
+                        <Setter Property="TextColor" Value="{DynamicResource FGInactive}"/>
+                        <Setter Property="FontFamily" Value="{DynamicResource GeneralFont}"/>
+                        <Setter Property="FontSize" Value="{DynamicResource Medium}"/>
+                    </Style>
+                    <Style TargetType="Label" Class="Label_Big">
+                        <Setter Property="TextColor" Value="{DynamicResource FG}"/>
+                        <Setter Property="FontFamily" Value="{DynamicResource GeneralFont}"/>
+                        <Setter Property="FontSize" Value="{DynamicResource Title}"/>
+                    </Style>
+                    <Style TargetType="Label" Class="Label_Normal_FA">
+                        <Setter Property="TextColor" Value="{DynamicResource FG}"/>
+                        <Setter Property="FontSize" Value="{DynamicResource Medium}"/>
+                    </Style>
+                    <Style TargetType="Label" Class="Label_BG_FG">
+                        <Setter Property="BackgroundColor" Value="{DynamicResource BG}"/>
+                        <Setter Property="TextColor" Value="{DynamicResource FG}"/>
+                        <Setter Property="FontFamily" Value="{DynamicResource GeneralFont}"/>
+                        <Setter Property="FontSize" Value="{DynamicResource Medium}"/>
+                    </Style>
+                    <Style TargetType="Label" Class="Label_Title">
+                        <Setter Property="TextColor" Value="{DynamicResource FG}"/>
+                        <Setter Property="FontFamily" Value="{DynamicResource GeneralFont}"/>
+                        <Setter Property="FontSize" Value="{DynamicResource Title}"/>
+                    </Style>
+                    <Style TargetType="Label" Class="Label_BGBG_FG">
+                        <Setter Property="BackgroundColor" Value="{DynamicResource BGBG}"/>
+                        <Setter Property="TextColor" Value="{DynamicResource FG}"/>
+                        <Setter Property="FontFamily" Value="{DynamicResource GeneralFont}"/>
+                        <Setter Property="FontSize" Value="{DynamicResource Medium}"/>
+                    </Style>
+                    <Style TargetType="Label" Class="Label_BGBG_FGInactive">
+                        <Setter Property="BackgroundColor" Value="{DynamicResource BGBG}"/>
+                        <Setter Property="TextColor" Value="{DynamicResource FGInactive}"/>
+                        <Setter Property="FontFamily" Value="{DynamicResource GeneralFont}"/>
+                        <Setter Property="FontSize" Value="{DynamicResource Medium}"/>
+                    </Style>
+                    <Style TargetType="local:IDLabel" Class="IDLabel_Small">
+                        <Setter Property="TextColor" Value="{DynamicResource FG}"/>
+                        <Setter Property="FontFamily" Value="{DynamicResource GeneralFont}"/>
+                        <Setter Property="FontSize" Value="{DynamicResource Small}"/>
+                    </Style>
+                    <Style TargetType="local:IDLabel" Class="IDLabel_BG_FG_Small">
+                        <Setter Property="TextColor" Value="{DynamicResource FG}"/>
+                        <Setter Property="FontFamily" Value="{DynamicResource GeneralFont}"/>
+                        <Setter Property="FontSize" Value="{DynamicResource Small}"/>
+                    </Style>
+                    <Style TargetType="local:IDLabel" Class="IDLabel_Normal">
+                        <Setter Property="TextColor" Value="{DynamicResource FG}"/>
+                        <Setter Property="FontFamily" Value="{DynamicResource GeneralFont}"/>
+                        <Setter Property="FontSize" Value="{DynamicResource Medium}"/>
+                    </Style>
+                    <Style TargetType="local:IDLabel" Class="IDLabel_Normal_Inactive">
+                        <Setter Property="TextColor" Value="{DynamicResource FGInactive}"/>
+                        <Setter Property="FontFamily" Value="{DynamicResource GeneralFont}"/>
+                        <Setter Property="FontSize" Value="{DynamicResource Medium}"/>
+                    </Style>
+                    <Style TargetType="local:IDLabel" Class="IDLabel_BG_FG">
+                        <Setter Property="Background" Value="{DynamicResource BG}"/>
+                        <Setter Property="TextColor" Value="{DynamicResource FG}"/>
+                        <Setter Property="FontFamily" Value="{DynamicResource GeneralFont}"/>
+                        <Setter Property="FontSize" Value="{DynamicResource Medium}"/>
+                    </Style>
+                    <Style TargetType="local:IDLabel" Class="IDLabel_Title">
+                        <Setter Property="TextColor" Value="{DynamicResource FG}"/>
+                        <Setter Property="FontFamily" Value="{DynamicResource GeneralFont}"/>
+                        <Setter Property="FontSize" Value="{DynamicResource Title}"/>
+                    </Style>
+                    <Style TargetType="local:IDLabel" Class="IDLabel_BGBG_FG">
+                        <Setter Property="BackgroundColor" Value="{DynamicResource BGBG}"/>
+                        <Setter Property="TextColor" Value="{DynamicResource FG}"/>
+                        <Setter Property="FontFamily" Value="{DynamicResource GeneralFont}"/>
+                        <Setter Property="FontSize" Value="{DynamicResource Medium}"/>
+                    </Style>
+                    <Style TargetType="local:IDLabel" Class="IDLabel_BGBG_FGInactive">
+                        <Setter Property="BackgroundColor" Value="{DynamicResource BGBG}"/>
+                        <Setter Property="TextColor" Value="{DynamicResource FGInactive}"/>
+                        <Setter Property="FontFamily" Value="{DynamicResource GeneralFont}"/>
+                        <Setter Property="FontSize" Value="{DynamicResource Medium}"/>
+                    </Style>
+                    <Style TargetType="Button" Class="Button_Normal">
+                        <Setter Property="BackgroundColor" Value="{DynamicResource BG}"/>
+                        <Setter Property="TextColor" Value="{DynamicResource FG}"/>
+                        <Setter Property="FontFamily" Value="{DynamicResource GeneralFont}"/>
+                    </Style>
+                    <Style TargetType="Button" Class="Button_Normal_Inactive">
+                        <Setter Property="BackgroundColor" Value="{DynamicResource BG}"/>   
+                        <Setter Property="TextColor" Value="{DynamicResource FGInactive}"/>
+                        <Setter Property="FontFamily" Value="{DynamicResource GeneralFont}"/>
+                        <Setter Property="CornerRadius" Value="0"/>
+                    </Style>
+                    <Style TargetType="Button" Class="Button_Normal_NoBorder">
+                        <Setter Property="BackgroundColor" Value="{DynamicResource BG}"/>
+                        <Setter Property="TextColor" Value="{DynamicResource FG}"/>
+                        <Setter Property="FontFamily" Value="{DynamicResource GeneralFont}"/>
+                        <Setter Property="BorderWidth" Value="0"/>
+                        <Setter Property="CornerRadius" Value="0"/>
+                    </Style>
+                    <Style TargetType="Button" Class="Button_Settings">
+                        <Setter Property="BackgroundColor" Value="{DynamicResource BGBG}"/>
+                        <Setter Property="TextColor" Value="{DynamicResource FG}"/>
+                        <Setter Property="FontFamily" Value="{DynamicResource GeneralFont}"/>
+                        <Setter Property="FontSize" Value="{DynamicResource Title}"/>
+                    </Style>
+                    <Style TargetType="local:PIMenuFlyoutItem" Class="MFI_Normal">
+                        <Setter Property="BackgroundColor" Value="{DynamicResource BG}"/> 
+                        <Setter Property="TextColor" Value="{DynamicResource FG}"/>
+                        <Setter Property="FontFamily" Value="{DynamicResource GeneralFont}"/>
+                    </Style>
+
+                    
+                    
+                    <Style TargetType="Button" Class="Button_Label_Normal">
+                        <Setter Property="TextColor" Value="{DynamicResource FG}"/>
+                        <Setter Property="FontFamily" Value="{DynamicResource GeneralFont}"/>
+                        <Setter Property="FontSize" Value="{DynamicResource Medium}"/>
+                        <Setter Property="BorderWidth" Value="0"/>
+                        <Setter Property="BackgroundColor" Value="Transparent"/>
+                        <Setter Property="HorizontalOptions" Value="Start"/>
+                        <Setter Property="Padding" Value="0"/>
+                        <Setter Property="Margin" Value="0"/>
+                        <Setter Property="CornerRadius" Value="0"/>
+                    </Style>
+                    <Style TargetType="Button" Class="Button_BGBG_NoBorder">
+                        <Setter Property="BackgroundColor" Value="{DynamicResource BGBG}"/>
+                        <Setter Property="TextColor" Value="{DynamicResource FG}"/>
+                        <Setter Property="BorderWidth" Value="0"/>
+                        <Setter Property="CornerRadius" Value="0"/>
+                    </Style>
+                    <Style TargetType="Button" Class="Button_BGBG_Normal_NoBorder">
+                        <Setter Property="BackgroundColor" Value="{DynamicResource BGBG}"/>
+                        <Setter Property="TextColor" Value="{DynamicResource FG}"/>
+                        <Setter Property="BorderWidth" Value="0"/>
+                        <Setter Property="HorizontalOptions" Value="Start"/>
+                        <Setter Property="Padding" Value="0"/>
+                        <Setter Property="Margin" Value="0"/>
+                        <Setter Property="FontSize" Value="{DynamicResource Medium}"/>
+                        <Setter Property="CornerRadius" Value="0"/>
+                    </Style>
+                    <Style TargetType="Button" Class="Button_NoBackground_NoBorder">
+                        <Setter Property="BackgroundColor" Value="Transparent"/>
+                        <Setter Property="TextColor" Value="{DynamicResource FG}"/>
+                        <Setter Property="FontSize" Value="{DynamicResource Medium}"/>
+                        <Setter Property="BorderWidth" Value="0"/>
+                        <Setter Property="CornerRadius" Value="0"/>
+                    </Style>
+                    <Style TargetType="Button" Class="Button_Normal_Large">
+                        <Setter Property="BackgroundColor" Value="{DynamicResource BG}"/>
+                        <Setter Property="TextColor" Value="{DynamicResource FG}"/>
+                        <Setter Property="FontFamily" Value="{DynamicResource GeneralFont}"/>
+                        <Setter Property="FontSize" Value="20"/>
+                        <Setter Property="CornerRadius" Value="0"/>
+                    </Style>
+                    <Style TargetType="local:IDButton" Class="IDButton_NoBackground_NoBorder">
+                        <Setter Property="BackgroundColor" Value="Transparent"/>
+                        <Setter Property="TextColor" Value="{DynamicResource FG}"/>
+                        <Setter Property="FontSize" Value="{DynamicResource Medium}"/>
+                        <Setter Property="BorderWidth" Value="0"/>
+                        <Setter Property="CornerRadius" Value="0"/>
+                    </Style>
+                    <Style TargetType="local:IDButton" Class="IDButton_Invers">
+                        <Setter Property="BackgroundColor" Value="{DynamicResource BGBG}"/>
+                        <Setter Property="TextColor" Value="{DynamicResource FG}"/>
+                        <Setter Property="FontSize" Value="{DynamicResource Medium}"/>
+                        <Setter Property="BorderWidth" Value="0"/>
+                        <Setter Property="CornerRadius" Value="0"/>
+                    </Style>
+                    <Style TargetType="local:IDButton" Class="IDButton">
+                        <Setter Property="BackgroundColor" Value="{DynamicResource BG}"/>
+                        <Setter Property="TextColor" Value="{DynamicResource FG}"/>
+                        <Setter Property="FontSize" Value="{DynamicResource Medium}"/>
+                        <Setter Property="BorderWidth" Value="0"/>
+                        <Setter Property="CornerRadius" Value="0"/>
+                    </Style>
+                    <Style TargetType="local:IDButton" Class="IDButton_Invers_Edge">
+                        <Setter Property="BackgroundColor" Value="{DynamicResource BGBG}"/>
+                        <Setter Property="TextColor" Value="{DynamicResource FG}"/>
+                        <Setter Property="FontSize" Value="{DynamicResource Medium}"/>
+                        <Setter Property="BorderWidth" Value="0"/>
+                        <Setter Property="CornerRadius" Value="1"/>
+                    </Style>
+                    <Style TargetType="local:IDButton" Class="IDButton_Edge">
+                        <Setter Property="BackgroundColor" Value="{DynamicResource BG}"/>
+                        <Setter Property="TextColor" Value="{DynamicResource FG}"/>
+                        <Setter Property="FontSize" Value="{DynamicResource Medium}"/>
+                        <Setter Property="BorderWidth" Value="0"/>
+                        <Setter Property="CornerRadius" Value="1"/>
+                    </Style>
+                    <Style TargetType="local:IDButton" Class="IDButton_Normal_Inactive">
+                        <Setter Property="BackgroundColor" Value="{DynamicResource BG}"/>
+                        <Setter Property="TextColor" Value="{DynamicResource FGInactive}"/>
+                        <Setter Property="FontFamily" Value="{DynamicResource GeneralFont}"/>
+                        <Setter Property="CornerRadius" Value="0"/>
+                    </Style>
+                    <Style TargetType="local:IDButton" Class="IDButton_BGBG_Inactive">
+                        <Setter Property="BackgroundColor" Value="{DynamicResource BGBG}"/>
+                        <Setter Property="TextColor" Value="{DynamicResource FGInactive}"/>
+                        <Setter Property="FontFamily" Value="{DynamicResource GeneralFont}"/>
+                        <Setter Property="CornerRadius" Value="0"/>
+                    </Style>
+                    <Style TargetType="local:IDButton" Class="IDButton_Inactive">
+                        <Setter Property="BackgroundColor" Value="{DynamicResource BGInactive}"/>
+                        <Setter Property="TextColor" Value="{DynamicResource FGInactive}"/>
+                        <Setter Property="FontSize" Value="{DynamicResource Medium}"/>
+                        <Setter Property="BorderWidth" Value="0"/>
+                        <Setter Property="CornerRadius" Value="0"/>
+                    </Style>
+                    <Style TargetType="local:ObjButton" Class="ObjButton_NoBackground_NoBorder">
+                        <Setter Property="BackgroundColor" Value="Transparent"/>
+                        <Setter Property="TextColor" Value="{DynamicResource FG}"/>
+                        <Setter Property="FontSize" Value="{DynamicResource Medium}"/>
+                        <Setter Property="BorderWidth" Value="0"/>
+                        <Setter Property="CornerRadius" Value="0"/>
+                    </Style>
+                    <Style TargetType="local:ObjButton" Class="ObjButton_Invers">
+                        <Setter Property="BackgroundColor" Value="{DynamicResource BGBG}"/>
+                        <Setter Property="TextColor" Value="{DynamicResource FG}"/>
+                        <Setter Property="FontSize" Value="{Binding Maedium}"/>
+                        <Setter Property="BorderWidth" Value="0"/>
+                        <Setter Property="CornerRadius" Value="0"/>
+                    </Style>
+                    <Style TargetType="Entry" Class="Entry_Normal">
+                        <Setter Property="BackgroundColor" Value="{DynamicResource BGInputline}"/>
+                        <Setter Property="TextColor" Value="{DynamicResource FG}"/>
+                        <Setter Property="FontFamily" Value="{DynamicResource GeneralFont}"/>
+                    </Style>
+                    <Style TargetType="Entry" Class="Entry_BGBG">
+                        <Setter Property="BackgroundColor" Value="{DynamicResource BGBG}"/>
+                        <Setter Property="TextColor" Value="{DynamicResource FG}"/>
+                        <Setter Property="FontFamily" Value="{DynamicResource GeneralFont}"/>
+                    </Style>
+                    <Style TargetType="Button" Class="Button_BGBG">
+                        <Setter Property="BackgroundColor" Value="{DynamicResource BGBG}"/>
+                        <Setter Property="TextColor" Value="{DynamicResource FG}"/>
+                        <Setter Property="BorderColor" Value="{DynamicResource FG}"/>
+                        <Setter Property="FontFamily" Value="{DynamicResource GeneralFont}"/>
+                    </Style>
+                    <Style TargetType="Button" Class="Button_BGBG_Large">
+                        <Setter Property="BackgroundColor" Value="{DynamicResource BGBG}"/>
+                        <Setter Property="TextColor" Value="{DynamicResource FG}"/>
+                        <Setter Property="BorderColor" Value="{DynamicResource FG}"/>
+                        <Setter Property="FontFamily" Value="{DynamicResource GeneralFont}"/>
+                        <Setter Property="FontSize" Value="20"/>
+                    </Style>
+                    <Style TargetType="ScrollView" Class="ScrollView_BGBG">
+                        <Setter Property="BackgroundColor" Value="{DynamicResource BGBG}"/>
+                    </Style>
+                </ResourceDictionary>
+                <styles:ThemeC/>
+                <styles:FontVerdana/>
+                <styles:FontSizeMedium/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Shell.Resources>
+
+    <Shell.FlyoutHeaderTemplate>
+        <DataTemplate>
+            <VerticalStackLayout Padding="30" BackgroundColor="DarkGrey">
+                <Label FontSize="Large" TextColor="{Binding FG}" FontAttributes="Bold" HorizontalOptions="Center">
+                    Phoney Island
+                </Label>
+
+            </VerticalStackLayout>
+        </DataTemplate>
+ 
+    </Shell.FlyoutHeaderTemplate>
+
+    <ShellContent Title="Home" ContentTemplate="{DataTemplate menu:HomePage}" Route="HomePage" />
+    <ShellContent Title="Spiel" ContentTemplate="{DataTemplate menu:GamePage}" Route="GamePage" />
+    <ShellContent Title="Settings" ContentTemplate="{DataTemplate menu:SettingsPage}" Route="SettingsPage" />
+    <ShellContent Title="Replay" ContentTemplate="{DataTemplate menu:ReplayPage}" Route="ReplayPage" />
+    <ShellContent Title="Credits" ContentTemplate="{DataTemplate menu:CreditsPage}" Route="CreditsPage" />
+    <ShellContent Title="Ende" ContentTemplate="{DataTemplate menu:EndPage}" Route="EndPage" />
+
+    <!--
+    <Shell.TitleView>
+        <Grid >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="0.7*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="0.7*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Margin="10,0,0,0" Text="Welcome to Phoney Island" TextColor="White" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"
+                   VerticalOptions="Center"  FontSize="Small" />
+            <Label Grid.Column="1" Margin="0,0,0,0" Text="Episode 1:" TextColor="White" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"
+                   VerticalOptions="Center"  FontSize="Small" />
+            <Border Grid.Column="2" Stroke="LightGray" StrokeThickness="2" Margin="0,10,10,10">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Grid.Column="0" StrokeThickness="0" Background="Green" Margin="0,0,0,0"/>
+                    <Border Grid.Column="2" StrokeThickness="0" Background="White" Margin="0,0,0,0"/>
+                </Grid>
+            </Border>
+            <Label Grid.Column="3" Margin="0,0,0,0" Text="Gesamt:" TextColor="White" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"
+                   VerticalOptions="Center"  FontSize="Small" />
+            <Border Grid.Column="4" Stroke="LightGray" StrokeThickness="2" Margin="0,10,10,10">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="5*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Grid.Column="0" StrokeThickness="0" Background="Green" Margin="0,0,0,0"/>
+                    <Border Grid.Column="2" StrokeThickness="0" Background="White" Margin="0,0,0,0"/>
+                </Grid>
+            </Border>
+        </Grid>
+    </Shell.TitleView>
+-->
+</Shell>
