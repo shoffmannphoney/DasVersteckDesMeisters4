@@ -863,7 +863,7 @@ namespace GameCore
                 // locations.VT = VerbTenses;
                 // locations.Verbs = Verbs;
                 // locations.CB = CB;
-                A.StartLoc = A.ActLoc = 1; // CA!.LX_01_Hausflur;
+                A.StartLoc = A.ActLoc = CA.L01_Dark_Forest; // CA!.LX_01_Hausflur;
                 // Persons.Items = Items;
 
                 foreach (var ele in locations!.List.Values)
@@ -5223,7 +5223,7 @@ namespace GameCore
             LI = new List<LatestInput>();
 
             A = new AdvData();
-            A.StartLoc = 1; // CA!.LX_01_Hausflur;
+            A.StartLoc = CA.L01_Dark_Forest; // CA!.LX_01_Hausflur;
             A.Tense = CB!.Tense_Past;
             CA!.Person_Self = CA!.Person_I;
             A!.ActLoc = A.StartLoc;
@@ -12756,6 +12756,7 @@ namespace GameCore
 
         public int PL_Undo;
 
+        public int L01_Dark_Forest { get; set; }
 
         public Item? I00_Nullbehaelter{ get; set; }
 
@@ -12774,6 +12775,8 @@ namespace GameCore
 
         public CoAdv()
         {
+            L01_Dark_Forest = SerialNumberGenerator.Instance.NextSerial;
+
 
             PL_Use = SerialNumberGenerator.Instance.NextSerial;
             PL_Use_W = SerialNumberGenerator.Instance.NextSerial;
