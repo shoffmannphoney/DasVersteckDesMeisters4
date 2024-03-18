@@ -5204,6 +5204,54 @@ namespace GameCore
 
         void InitPersons()
         {
+            CA!.Person_Knights_Armor = Persons!.Add(Person.PersonLoca(new List<Noun> { CA!.Noun_Ritterruestung! }, new List<Adj> { CA!.Adj_stattlich! }, Co.SEX_FEMALE, CB!.LocType_Loc, CA!.L06_Long_Floor, "Adv_Person_Knights_Armor", Co.SZ_medium, true, null, Nouns, Adjs));
+            Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Talkable));
+            Persons!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_GiveTarget));
+            Persons!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_QuestionTarget));
+            Persons!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_UsableWith));
+            Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Listenable));
+
+            CA!.Person_Owl = Persons!.Add(Person.PersonLoca(new List<Noun> { CA!.Noun_Eule! }, new List<Adj> { CA!.Adj_ausgestopft! }, Co.SEX_FEMALE, CB!.LocType_Loc, CA!.L05_Atrium, "Adv_Person_Owl", Co.SZ_medium, true, null, Nouns, Adjs));
+            Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Talkable));
+            Persons!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_GiveTarget));
+            Persons!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_QuestionTarget));
+            Persons!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_UsableWith));
+            Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Listenable));
+
+            CA!.Person_Librarian = Persons!.Add(Person.PersonLoca(new List<Noun> { CA!.Noun_Skelett! }, new List<Adj> { CA!.Adj_vergilbt! }, Co.SEX_NEUTER, CB!.LocType_Loc, CA!.L09_Library, "Adv_Person_Librarian", Co.SZ_medium, true, null, Nouns, Adjs));
+            Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Talkable));
+            Persons!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_GiveTarget));
+            Persons!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_QuestionTarget));
+            Persons!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_UsableWith));
+            Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Listenable));
+
+            CA!.Person_Fish = Persons!.Add(Person.PersonLoca(new List<Noun> { CA!.Noun_Fish! }, new List<Adj> { CA!.Adj_ausgestopft! }, Co.SEX_MALE, CB!.LocType_On_Item, CA!.I11_Left_Shelf, "Adv_Person_Fish", Co.SZ_medium, true, null, Nouns, Adjs));
+            Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Talkable));
+            Persons!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_GiveTarget));
+            Persons!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_QuestionTarget));
+            Persons!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_UsableWith));
+            Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Listenable));
+
+            CA!.Person_Parrot = Persons!.Add(Person.PersonLoca(new List<Noun> { CA!.Noun_Papagei! }, new List<Adj> { CA!.Adj_ausgestopft! }, Co.SEX_MALE, CB!.LocType_On_Item, CA!.I11_Left_Shelf, "Adv_Person_Parrot", Co.SZ_medium, true, null, Nouns, Adjs));
+            Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Talkable));
+            Persons!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_GiveTarget));
+            Persons!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_QuestionTarget));
+            Persons!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_UsableWith));
+            Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Listenable));
+
+            CA!.Person_Snake = Persons!.Add(Person.PersonLoca(new List<Noun> { CA!.Noun_Schlange! }, new List<Adj> { CA!.Adj_ausgestopft! }, Co.SEX_FEMALE, CB!.LocType_On_Item, CA!.I11_Right_Shelf, "Adv_Person_Snake", Co.SZ_medium, true, null, Nouns, Adjs));
+            Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Talkable));
+            Persons!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_GiveTarget));
+            Persons!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_QuestionTarget));
+            Persons!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_UsableWith));
+            Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Listenable));
+
+            CA!.Person_Magpie = Persons!.Add(Person.PersonLoca(new List<Noun> { CA!.Noun_Elster! }, new List<Adj> { CA!.Adj_ausgestopft! }, Co.SEX_FEMALE, CB!.LocType_On_Item, CA!.I11_Bird_Stand, "Adv_Person_Magpie", Co.SZ_medium, true, null, Nouns, Adjs));
+            Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Talkable));
+            Persons!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_GiveTarget));
+            Persons!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_QuestionTarget));
+            Persons!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_UsableWith));
+            Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Listenable));
         }
 
         // List<IUIServices.ZipObject> zo2 = UIS.LoadFromZip("initdata");
@@ -5315,12 +5363,11 @@ namespace GameCore
                 CA!.Person_Self = CA!.Person_I = CA!.Person_Self = Persons!.Add(Person.PersonLoca(new List<Noun> { CA!.Noun_Ich! }, null, Co.SEX_MALE, CB!.LocType_Loc, A!.ActLoc, "Adv_InitializeGame_Person_Self_4426", Co.SZ_medium, true, null, Nouns, Adjs));
                 CA!.Person_Self.IsRegular = false;
                 Persons!.Last()!.SynNames!.Add(CA!.Noun_Du!);
-                CA!.Person_Helfie = Persons!.Add(Person.PersonLoca(new List<Noun> { CA!.Noun_Helfie!, CA!.Noun_Helfer! }, null, Co.SEX_MALE, CB!.LocType_In_Item, 0, "Adv_InitializeGame_Person_Helfie_4427", Co.SZ_medium, true, null, Nouns, Adjs));
-                CA!.Person_Helfie.IsRegular = false;
                 CA!.Person_You = Persons!.Add(Person.PersonLoca(null, null, Co.SEX_MALE, CB!.LocType_Loc, -1, "Adv_InitializeGame_Person_You_4428", Co.SZ_medium, true, null, Nouns, Adjs));
                 CA!.Person_You.IsRegular = false;
                 CA!.Person_3rdperson = Persons!.Add(Person.PersonLoca(null, null, Co.SEX_MALE, CB!.LocType_Loc, -1, "Adv_InitializeGame_Person_3rdperson_4429", Co.SZ_medium, true, null, Nouns, Adjs));
                 CA!.Person_3rdperson.IsRegular = false;
+
 
 
                 CA!.I00_Nullbehaelter = Items!.Add(Item.ItemLoca(new List<Noun> { CA!.Noun_Nullbehaelter! }, new List<Adj> { CA!.Adj_fragwuerdig! }, Co.SEX_MALE, CB!.LocType_Person, CA!.Person_Self.ID, "Adv_InitializeGame_Person_Self_4430", Co.SZ_medium, false, true, Nouns, Adjs));
@@ -5343,8 +5390,6 @@ namespace GameCore
                 Items!.Last()!.StorageIn = 10000;
                 Items!.Last()!.IsClosed = true;
                 Items!.Last()!.IsRegular = false;
-
-
 
 
                 if (GameTestMode == false)
@@ -11982,172 +12027,14 @@ namespace GameCore
 
         public Person? Person_3rdperson;
 
-        public Person? Person_Helfie;
+        public Person? Person_Knights_Armor;
+        public Person? Person_Owl;
+        public Person? Person_Librarian;
+        public Person? Person_Fish;
+        public Person? Person_Parrot;
+        public Person? Person_Snake;
+        public Person? Person_Magpie;
 
-        public Person? Person_Dolly;
-
-        public Person? Person_Stealthy_Steven;
-
-        public Person? Person_Phoney;
-
-        public Person? Person_Zauberspiegel;
-
-        public Person? Person_Ghoul;
-
-        public Person? Person_Ghoul_Thronsaal;
-
-        public Person? Person_Ghoul_unconscious;
-
-        public Person? Person_Scaramango;
-
-        public Person? Person_Brueckenwache;
-
-        public Person? Person_Fette_Wache;
-
-        public Person? Person_Fette_Wache_Turm;
-
-        public Person? Person_Middlefinger;
-
-        public Person? Person_Kuechenchefin;
-
-        public Person? Person_Proviantmeister;
-
-        public Person? Person_Kuechenjunge;
-
-        public Person? Person_Priester;
-
-        public Person? Person_Postbeamter;
-
-        public Person? Person_Emil;
-
-        public Person? Person_Haendler;
-
-        public Person? Person_Ludmilla;
-
-        public Person? Person_Mogul;
-
-        public Person? Person_Kneipenwirtin;
-
-        public Person? Person_Prepper;
-
-        public Person? Person_Farmerin;
-
-        public Person? Person_PrayinErin;
-
-        public Person? Person_Stadtraetin;
-
-        public Person? Person_Zombiehorde_01;
-
-        public Person? Person_Zombiehorde_02;
-
-        public Person? Person_Zombiehorde_03;
-
-        public Person? Person_Zombiehorde_04;
-
-        public Person? Person_Zombiehorde_05;
-
-        public Person? Person_Zombiehorde_06;
-
-        public Person? Person_Landvermesser;
-
-        public Person? Person_Eremitin;
-
-        public Person? Person_Maler;
-
-
-        public Person? Person_Stadtraetin_PV1;
-
-
-        public Person? Person_Dolly_PV1;
-
-        public Person? Person_Stealthy_Steven_PV1;
-
-        public Person? Person_Phoney_PV1;
-
-        public Person? Person_Ghoul_PV1;
-
-        public Person? Person_Ghoul_Kerker_PV1;
-
-        public Person? Person_Ghoul_PV1_unconscious;
-
-        public Person? Person_Scaramango_PV1;
-
-        public Person? Person_Brueckenwache_PV1;
-
-        public Person? Person_Fette_Wache_PV1;
-
-        public Person? Person_Fette_Wache_Turm_PV1;
-
-        public Person? Person_Middlefinger_PV1;
-
-        public Person? Person_Kuechenchefin_PV1;
-
-        public Person? Person_Proviantmeister_PV1;
-
-        public Person? Person_Kuechenjunge_PV1;
-
-        public Person? Person_Priester_PV1;
-
-        public Person? Person_Tristan;
-
-        public Person? Person_Tristan_PV1;
-
-        public Person? Person_Tristan_PV1_tot;
-
-        public Person? Person_Ferdinand;
-
-        public Person? Person_Ferdinand_PV1;
-
-        public Person? Person_Kneipenwirtin_PV1;
-
-        public Person? Person_Haendler_PV1;
-
-        public Person? Person_Prepper_PV1;
-
-        public Person? Person_PrayinErin_PV1;
-
-        public Person? Person_Eremitin_PV1;
-
-        public Person? Person_Hoellenkreatur_PV1;
-
-        public Person? Person_Farmerin_PV1;
-
-        public Person? Person_Leo;
-
-        public Person? Person_Polizist;
-
-        public Person? Person_Polizist_PV1;
-
-        public Person? Person_Bildhauer_PV1;
-
-        public Person? Person_Hippie_PV1;
-
-        public Person? Person_Partypeople_PV1;
-
-        public Person? Person_Archaeologe;
-
-        public Person? Person_Ahab;
-
-        public Person? Person_Papagei_PV1;
-
-        public Person? Person_Ludmilla_PV1;
-
-        public Person? Person_Emil_PV1;
-
-        public Person? Person_Mogul_PV1;
-
-        public Person? Person_Postbeamter_PV1;
-
-        public Person? Person_Lagerverwalter;
-
-        public Person? Person_Lagerverwalter_PV1;
-
-
-        public Person? Person_Norma;
-
-        public Person? Person_Norma_PV1;
-
-        public Person? Person_Psycho_PV1;
 
 
         public int PL_Use;
@@ -12757,13 +12644,139 @@ namespace GameCore
         public int PL_Undo;
 
         public int L01_Dark_Forest { get; set; }
-
+        public int L02_In_Front_Of_A_Hut { get; set; }
+        public int L03_In_The_Parlor { get; set; }
+        public int L04_Shabby_Little_Chamber { get; set; }
+        public int L05_Atrium { get; set; }
+        public int L06_Long_Floor { get; set; }
+        public int L07_Lower_Floor { get; set; }
+        public int L08_Laundry_Room { get; set; }
+        public int L09_Library { get; set; }
+        public int L10_Laboratory { get; set; }
+        public int L11_Storage_Room { get; set; }
+        public int L12_Sleeping_Room { get; set; }
+        public int L13_Kitchen { get; set; }
+        public int L14_Bathroom { get; set; }
+        public int L15_Nowhere { get; set; }
         public Item? I00_Nullbehaelter{ get; set; }
 
         public Item? I00_Nullbehaelter2{ get; set; }
 
         public Item? I00_Nullbehaelter3{ get; set; }
 
+        public Item? I00_Pouch { get; set; }
+        public Item? I00_Magic_Powder { get; set; }
+        public Item? I00_Magic_Candel { get; set; }
+        public Item? I00_Claw { get; set; }
+        public Item? I00_Sugar_Pliers { get; set; }
+        public Item? I00_Key { get; set; }
+        public Item? I00_Roll_Plaster { get; set; }
+        public Item? I00_Unstable_Pliers_With_Claw { get; set; }
+        public Item? I00_Stable_Pliers_With_Claw { get; set; }
+        public Item? I00_Polishing_Rag { get; set; }
+        public Item? I00_Magnifier { get; set; }
+        public Item? I00_Squeaky_Duck { get; set; }
+        public Item? I00_Paper_Sheets { get; set; }
+        public Item? I00_Book_Master { get; set; }
+        public Item? I00_Cheese { get; set; }
+        public Item? I00_Polished_Stone { get; set; }
+        public Item? I00_Lightless_Stone { get; set; }
+        public Item? I00_Moonstone { get; set; }
+        public Item? I00_Plastic_Bag { get; set; }
+        public Item? I00_Wonder_Wart_Sponge { get; set; }
+        public Item? I00_Slag { get; set; }
+        public Item? I00_Plunger { get; set; }
+        public Item? I00_Supermagic_Powder { get; set; }
+
+        public Item? I01_Forest { get; set; }
+        public Item? I01_Trees { get; set; }
+        public Item? I01_Mist { get; set; }
+        public Item? I01_Forest_Grass { get; set; }
+
+        public Item? I02_Doormat { get; set; }
+        public Item? I02_Shed { get; set; }
+        public Item? I02_Forest { get; set; }
+        public Item? I02_Trees { get; set; }
+        public Item? I02_Mist { get; set; }
+
+        public Item? I03_Pentagram { get; set; }
+        public Item? I03_Runes { get; set; }
+        public Item? I03_Door { get; set; }
+
+        public Item? I04_Shelf { get; set; }
+        public Item? I04_Cupboard { get; set; }
+        public Item? I04_Wall { get; set; }
+        public Item? I04_Flap { get; set; }
+        public Item? I04_Opening { get; set; }
+
+        public Item? I05_Pedestal { get; set; }
+        public Item? I05_Sign { get; set; }
+        public Item? I05_Sill { get; set; }
+        public Item? I05_Library_Door { get; set; }
+
+        public Item? I06_Door { get; set; }
+        public Item? I06_Seal { get; set; }
+        public Item? I06_Sign { get; set; }
+
+        public Item? I07_Door { get; set; }
+
+        public Item? I08_Clothes_Line { get; set; }
+        public Item? I08_Underpants { get; set; }
+        public Item? I08_Well { get; set; }
+        public Item? I08_Wooden_Cover { get; set; }
+        public Item? I08_Water { get; set; }
+        public Item? I08_Coin { get; set; }
+        public Item? I08_Washing_Machine { get; set; }
+        public Item? I08_Clothes { get; set; }
+        public Item? I08_Machine_For_Hanging_Up_Laundry { get; set; }
+        public Item? I08_Laundry_Basket { get; set; }
+
+
+        public Item? I09_Red_Shelf { get; set; }
+        public Item? I09_Green_Shelf { get; set; }
+        public Item? I09_Librarians_Desk { get; set; }
+        public Item? I09_Angry_Book { get; set; }
+        public Item? I09_Crazy_Book { get; set; }
+        public Item? I09_Demonic_Book { get; set; }
+        public Item? I09_Satanic_Book { get; set; }
+        public Item? I09_Weird_Book { get; set; }
+        public Item? I09_Sign { get; set; }
+        public Item? I09_Carton { get; set; }
+        public Item? I09_Books_Master { get; set; }
+
+        public Item? I10_Labor_Table { get; set; }
+        public Item? I10_Cages { get; set; }
+        public Item? I10_First_Aid_Kit { get; set; }
+        public Item? I10_Drawer { get; set; }
+        public Item? I10_Bracket { get; set; }
+        public Item? I10_Metall_Tray { get; set; }
+        public Item? I10_Darkness_Machine { get; set; }
+        public Item? I10_Hatch { get; set; }
+        public Item? I10_Opening { get; set; }
+        public Item? I10_Switch { get; set; }
+        public Item? I10_Giant_Mortar { get; set; }
+
+        public Item? I11_Left_Shelf { get; set; }
+        public Item? I11_Right_Shelf { get; set; }
+        public Item? I11_Bird_Stand { get; set; }
+
+        public Item? I12_Matress { get; set; }
+
+
+        public Item? I13_Drawer { get; set; }
+        public Item? I13_Cupboard { get; set; }
+        public Item? I13_Fridge { get; set; }
+        public Item? I13_Freezer { get; set; }
+
+
+        public Item? I14_Mirror { get; set; }
+        public Item? I14_Writing { get; set; }
+        public Item? I14_Tiles { get; set; }
+        public Item? I14_Special_Tile { get; set; }
+        public Item? I14_Opening { get; set; }
+        public Item? I14_Bathtub { get; set; }
+        public Item? I14_Toilet { get; set; }
+        public Item? I14_Flushing { get; set; }
 
         public int iStatus_Lantern;
 
@@ -12776,6 +12789,20 @@ namespace GameCore
         public CoAdv()
         {
             L01_Dark_Forest = SerialNumberGenerator.Instance.NextSerial;
+            L02_In_Front_Of_A_Hut = SerialNumberGenerator.Instance.NextSerial;
+            L03_In_The_Parlor = SerialNumberGenerator.Instance.NextSerial;
+            L04_Shabby_Little_Chamber = SerialNumberGenerator.Instance.NextSerial;
+            L05_Atrium = SerialNumberGenerator.Instance.NextSerial;
+            L06_Long_Floor = SerialNumberGenerator.Instance.NextSerial;
+            L07_Lower_Floor = SerialNumberGenerator.Instance.NextSerial;
+            L08_Laundry_Room = SerialNumberGenerator.Instance.NextSerial;
+            L09_Library = SerialNumberGenerator.Instance.NextSerial;
+            L10_Laboratory = SerialNumberGenerator.Instance.NextSerial;
+            L11_Storage_Room = SerialNumberGenerator.Instance.NextSerial;
+            L12_Sleeping_Room = SerialNumberGenerator.Instance.NextSerial;
+            L13_Kitchen = SerialNumberGenerator.Instance.NextSerial;
+            L14_Bathroom = SerialNumberGenerator.Instance.NextSerial;
+            L15_Nowhere = SerialNumberGenerator.Instance.NextSerial;
 
 
             PL_Use = SerialNumberGenerator.Instance.NextSerial;
