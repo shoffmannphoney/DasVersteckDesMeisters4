@@ -4290,6 +4290,13 @@ namespace GameCore
 
             // Hier Erfolgsoperationen auflisten und Success auf true setzen
 
+            if( item1 == CA!.I04_Cupboard && CA.I04_Flap.locationID == CA.I00_Nullbehaelter.ID )
+            {
+                AdvGame.StoryOutput(loca.Push_L04_Cupboard);
+                Items.TransferItem(CA.I04_Flap.ID, CB.LocType_Loc, CA.L04_Shabby_Little_Chamber);
+                handled = true;
+            }
+
             if (!handled)
             {
                 AdvGame!.StoryOutput(  Helper.Insert(loca.Order_Push_I2_35_Buecherhaufen_1698, item1!.ID, item1!.ID ));

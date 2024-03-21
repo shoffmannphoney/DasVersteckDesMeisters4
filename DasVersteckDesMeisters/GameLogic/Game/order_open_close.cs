@@ -59,6 +59,12 @@ public partial class Order: AbstractOrder
         // Post
         if (success)
         {
+            if (item == CA!.I04_Flap)
+            {
+                AdvGame.StoryOutput(loca.Open_L04_Flap);
+                Items.TransferItem(CA.I04_Opening.ID, CB.LocType_Loc, CA.L04_Shabby_Little_Chamber);
+
+            }
         }
 
         if (handled)
@@ -84,6 +90,17 @@ public partial class Order: AbstractOrder
             of.Success = true;
             of.Handled = true;
             of.Action = true;
+        }
+
+        // Post
+        if (handled)
+        {
+            if (item == CA!.I04_Flap)
+            {
+                AdvGame.StoryOutput(loca.Close_L04_Flap);
+                Items.TransferItem(CA.I04_Opening.ID, CB.LocType_In_Item, CA.I00_Nullbehaelter.ID);
+
+            }
         }
 
         if ((handled) && (item.GetStatus(CA!.iStatus_Counter_Door) > 0))
