@@ -921,9 +921,13 @@ namespace GameCore
 
                     if (ZeroLoad == false)
                     {
-                        StoryOutput(loca.Adv_Adv_2232);
-                        StoryOutput(String.Format(loca.Adv_Adv_2233, GD!.Version.GetVersion(), GD!.Version.GetVersionDate()));
+                        StoryOutput(loca.Adv_Intro0 );
                     }
+                    StoryOutput(String.Format(loca.Adv_Intro1, GD!.Version.GetVersion(), GD!.Version.GetVersionDate()));
+
+                    StoryOutput(loca.Adv_Intro2);
+                    StoryOutput(loca.Adv_Intro3);
+                    StoryOutput(loca.Adv_Intro4);
                     /*
                     StoryOutput( loca.Adv_Adv_2234);
 
@@ -936,7 +940,7 @@ namespace GameCore
 
                     // A!.ActLoc = CA.L0_03_Thronsaal;
 
-    
+
                     SetScoreOutput();
                 }
                 /* OLD
@@ -1165,6 +1169,24 @@ namespace GameCore
 
             }
 
+            // Neue Adj
+            CA!.Adj_ausgestopft = Adjs!.Add(Adj.AdjLoca("Adj_ausgestopft"));
+            CA!.Adj_beschrieben = Adjs!.Add(Adj.AdjLoca("Adj_beschrieben"));
+            CA!.Adj_besonders = Adjs!.Add(Adj.AdjLoca("Adj_besonders"));
+            CA!.Adj_gekuehlt = Adjs!.Add(Adj.AdjLoca("Adj_gekuehlt"));
+            CA!.Adj_hasserfuellt = Adjs!.Add(Adj.AdjLoca("Adj_hasserfuellt"));
+            CA!.Adj_instabil = Adjs!.Add(Adj.AdjLoca("Adj_instabil"));
+            CA!.Adj_lichtlos = Adjs!.Add(Adj.AdjLoca("Adj_lichtlos"));
+            CA!.Adj_magisch = Adjs!.Add(Adj.AdjLoca("Adj_magisch"));
+            CA!.Adj_mueffelnd = Adjs!.Add(Adj.AdjLoca("Adj_mueffelnd"));
+            CA!.Adj_neblig = Adjs!.Add(Adj.AdjLoca("Adj_neblig"));
+            CA!.Adj_peinlich = Adjs!.Add(Adj.AdjLoca("Adj_peinlich"));
+            CA!.Adj_schimmernd = Adjs!.Add(Adj.AdjLoca("Adj_schimmernd"));
+            CA!.Adj_sinister = Adjs!.Add(Adj.AdjLoca("Adj_sinister"));
+            CA!.Adj_stattlich = Adjs!.Add(Adj.AdjLoca("Adj_stattlich"));
+            CA!.Adj_verrueckt = Adjs!.Add(Adj.AdjLoca("Adj_verrueckt"));
+            CA!.Adj_vertrocknet = Adjs!.Add(Adj.AdjLoca("Adj_vertrocknet"));
+
             CA!.Adj_stark = Adjs!.Add(Adj.AdjLoca("Adv_InitializeGame_Person_I_2641"));
             CA!.Adj_reissfest = Adjs!.Add(Adj.AdjLoca("Adv_InitializeGame_Person_I_2642"));
             CA!.Adj_gruen = Adjs!.Add(Adj.AdjLoca("Adv_InitializeGame_Person_I_2643"));
@@ -1240,7 +1262,7 @@ namespace GameCore
             CA!.Adj_druckfrisch = Adjs!.Add(Adj.AdjLoca("Adv_InitializeGame_Person_I_2712"));
             CA!.Adj_schwer = Adjs!.Add(Adj.AdjLoca("Adv_InitializeGame_Person_I_2713"));
             CA!.Adj_uneben = Adjs!.Add(Adj.AdjLoca("Adv_InitializeGame_Person_I_2714"));
-            CA!.Adj_finster = Adjs!.Add(Adj.AdjLoca("Adv_InitializeGame_Person_I_2715"));
+            // CA!.Adj_finster = Adjs!.Add(Adj.AdjLoca("Adv_InitializeGame_Person_I_2715"));
             CA!.Adj_stolz = Adjs!.Add(Adj.AdjLoca("Adv_InitializeGame_Person_I_2716"));
             CA!.Adj_spitz = Adjs!.Add(Adj.AdjLoca("Adv_InitializeGame_Person_I_2717"));
             CA!.Adj_gescheckt = Adjs!.Add(Adj.AdjLoca("Adv_InitializeGame_Person_I_2718"));
@@ -1838,6 +1860,25 @@ namespace GameCore
 
             Adjs!.SetupAdjBuffer(900);
 
+            // Neue Adj
+            CA!.Adj_ausgestopft = Adjs!.Add(Adj.AdjLocaLoca(loca.Adj_ausgestopft, "Adj_ausgestopft"));
+            CA!.Adj_beschrieben = Adjs!.Add(Adj.AdjLocaLoca(loca.Adj_beschrieben, "Adj_beschrieben"));
+            CA!.Adj_besonders = Adjs!.Add(Adj.AdjLocaLoca(loca.Adj_besonders, "Adj_besonders"));
+            CA!.Adj_gekuehlt = Adjs!.Add(Adj.AdjLocaLoca(loca.Adj_gekuehlt, "Adj_gekuehlt"));
+            CA!.Adj_hasserfuellt = Adjs!.Add(Adj.AdjLocaLoca(loca.Adj_hasserfuellt, "Adj_hasserfuellt"));
+            CA!.Adj_instabil = Adjs!.Add(Adj.AdjLocaLoca(loca.Adj_instabil, "Adj_instabil"));
+            CA!.Adj_lichtlos = Adjs!.Add(Adj.AdjLocaLoca(loca.Adj_lichtlos, "Adj_lichtlos"));
+            CA!.Adj_magisch = Adjs!.Add(Adj.AdjLocaLoca(loca.Adj_magisch, "Adj_magisch"));
+            CA!.Adj_mueffelnd = Adjs!.Add(Adj.AdjLocaLoca(loca.Adj_mueffelnd, "Adj_mueffelnd"));
+            CA!.Adj_neblig = Adjs!.Add(Adj.AdjLocaLoca(loca.Adj_neblig, "Adj_neblig"));
+            CA!.Adj_peinlich = Adjs!.Add(Adj.AdjLocaLoca(loca.Adj_peinlich, "Adj_peinlich"));
+            CA!.Adj_schimmernd = Adjs!.Add(Adj.AdjLocaLoca(loca.Adj_schimmernd, "Adj_schimmernd"));
+            CA!.Adj_sinister = Adjs!.Add(Adj.AdjLocaLoca(loca.Adj_sinister, "Adj_sinister"));
+            CA!.Adj_stattlich = Adjs!.Add(Adj.AdjLocaLoca(loca.Adj_stattlich, "Adj_stattlich"));
+            CA!.Adj_verrueckt = Adjs!.Add(Adj.AdjLocaLoca(loca.Adj_verrueckt, "Adj_verrueckt"));
+            CA!.Adj_vertrocknet = Adjs!.Add(Adj.AdjLocaLoca(loca.Adj_vertrocknet, "Adj_vertrocknet"));
+
+
             CA!.Adj_stark = Adjs!.Add(Adj.AdjLocaLoca( loca.Adv_InitializeGame_Person_I_2641, "Adv_InitializeGame_Person_I_2641"));
             CA!.Adj_reissfest = Adjs!.Add(Adj.AdjLocaLoca( loca.Adv_InitializeGame_Person_I_2642, "Adv_InitializeGame_Person_I_2642"));
             CA!.Adj_gruen = Adjs!.Add(Adj.AdjLocaLoca( loca.Adv_InitializeGame_Person_I_2643, "Adv_InitializeGame_Person_I_2643"));
@@ -1913,7 +1954,7 @@ namespace GameCore
             CA!.Adj_druckfrisch = Adjs!.Add(Adj.AdjLocaLoca( loca.Adv_InitializeGame_Person_I_2712, "Adv_InitializeGame_Person_I_2712"));
             CA!.Adj_schwer = Adjs!.Add(Adj.AdjLocaLoca( loca.Adv_InitializeGame_Person_I_2713, "Adv_InitializeGame_Person_I_2713"));
             CA!.Adj_uneben = Adjs!.Add(Adj.AdjLocaLoca( loca.Adv_InitializeGame_Person_I_2714, "Adv_InitializeGame_Person_I_2714"));
-            CA!.Adj_finster = Adjs!.Add(Adj.AdjLocaLoca( loca.Adv_InitializeGame_Person_I_2715, "Adv_InitializeGame_Person_I_2715"));
+            // CA!.Adj_finster = Adjs!.Add(Adj.AdjLocaLoca( loca.Adv_InitializeGame_Person_I_2715, "Adv_InitializeGame_Person_I_2715"));
             CA!.Adj_stolz = Adjs!.Add(Adj.AdjLocaLoca( loca.Adv_InitializeGame_Person_I_2716, "Adv_InitializeGame_Person_I_2716"));
             CA!.Adj_spitz = Adjs!.Add(Adj.AdjLocaLoca( loca.Adv_InitializeGame_Person_I_2717, "Adv_InitializeGame_Person_I_2717"));
             CA!.Adj_gescheckt = Adjs!.Add(Adj.AdjLocaLoca( loca.Adv_InitializeGame_Person_I_2718, "Adv_InitializeGame_Person_I_2718"));
@@ -2510,6 +2551,57 @@ namespace GameCore
 
             }
 
+            // Neue Nouns
+            CA!.Noun_Ritterruestung = Nouns!.Add(Noun.NounLoca("Noun_Ritterruestung"));
+            CA!.Noun_Eule = Nouns!.Add(Noun.NounLoca("Noun_Eule"));
+            CA!.Noun_Skelett = Nouns!.Add(Noun.NounLoca("Noun_Skelett"));
+            CA!.Noun_Fish = Nouns!.Add(Noun.NounLoca("Noun_Fish"));
+            CA!.Noun_Schlange = Nouns!.Add(Noun.NounLoca("Noun_Schlange"));
+            CA!.Noun_Elster = Nouns!.Add(Noun.NounLoca("Noun_Elster"));
+            CA!.Noun_Beutelchen = Nouns!.Add(Noun.NounLoca("Noun_Beutelchen"));
+            CA!.Noun_Pulver = Nouns!.Add(Noun.NounLoca("Noun_Pulver"));
+            CA!.Noun_Kerzenhalter = Nouns!.Add(Noun.NounLoca("Noun_Kerzenhalter"));
+            CA!.Noun_Klaue = Nouns!.Add(Noun.NounLoca("Noun_Klaue"));
+            CA!.Noun_Zuckerzange = Nouns!.Add(Noun.NounLoca("Noun_Zuckerzange"));
+            CA!.Noun_Rollpflaster = Nouns!.Add(Noun.NounLoca("Noun_Rollpfaster"));
+            CA!.Noun_Klauenzange = Nouns!.Add(Noun.NounLoca("Noun_Klauenzange"));
+
+            CA!.Noun_Lupe = Nouns!.Add(Noun.NounLoca("Noun_Lupe"));
+            CA!.Noun_Quietscheentchen = Nouns!.Add(Noun.NounLoca("Noun_Quietscheentchen"));
+            CA!.Noun_Kaese = Nouns!.Add(Noun.NounLoca("Noun_Kaese"));
+            CA!.Noun_Mondstein = Nouns!.Add(Noun.NounLoca("Noun_Mondstein"));
+            CA!.Noun_Plastikbeutel = Nouns!.Add(Noun.NounLoca("Noun_Plastikbeutel"));
+            CA!.Noun_Wunderwarzenschwamm = Nouns!.Add(Noun.NounLoca("Noun_Wunderwarzenschwamm"));
+            CA!.Noun_Schlacke = Nouns!.Add(Noun.NounLoca("Noun_Schlacke"));
+            CA!.Noun_Muenze = Nouns!.Add(Noun.NounLoca("Noun_Muenze"));
+            CA!.Noun_Nebel = Nouns!.Add(Noun.NounLoca("Noun_Nebel"));
+            CA!.Noun_Pentagramm = Nouns!.Add(Noun.NounLoca("Noun_Pentagramm"));
+            CA!.Noun_Fussmatte = Nouns!.Add(Noun.NounLoca("Noun_Pentagramm"));
+            CA!.Noun_Oeffnung = Nouns!.Add(Noun.NounLoca("Noun_Pentagramm"));
+            CA!.Noun_Siegel = Nouns!.Add(Noun.NounLoca("Noun_Pentagramm"));
+            CA!.Noun_Waescheleine = Nouns!.Add(Noun.NounLoca("Noun_Pentagramm"));
+            CA!.Noun_Unterhose = Nouns!.Add(Noun.NounLoca("Noun_Pentagramm"));
+            CA!.Noun_Holzabdeckung = Nouns!.Add(Noun.NounLoca("Noun_Pentagramm"));
+            CA!.Noun_Waschmaschine = Nouns!.Add(Noun.NounLoca("Noun_Pentagramm"));
+            CA!.Noun_Waescheaufhaengmaschine = Nouns!.Add(Noun.NounLoca("Noun_Pentagramm"));
+            CA!.Noun_Waeschekorb = Nouns!.Add(Noun.NounLoca("Noun_Pentagramm"));
+            CA!.Noun_Karton = Nouns!.Add(Noun.NounLoca("Noun_Pentagramm"));
+            CA!.Noun_Labortisch = Nouns!.Add(Noun.NounLoca("Noun_Pentagramm"));
+            CA!.Noun_Kaefige = Nouns!.Add(Noun.NounLoca("Noun_Pentagramm"));
+            CA!.Noun_Erstehilfekasten = Nouns!.Add(Noun.NounLoca("Noun_Pentagramm"));
+            CA!.Noun_Metallschale = Nouns!.Add(Noun.NounLoca("Noun_Pentagramm"));
+            CA!.Noun_Halterung = Nouns!.Add(Noun.NounLoca("Noun_Pentagramm"));
+            CA!.Noun_Dunkelheitsmaschine = Nouns!.Add(Noun.NounLoca("Noun_Pentagramm"));
+            CA!.Noun_Holzabdeckung = Nouns!.Add(Noun.NounLoca("Noun_Pentagramm"));
+            CA!.Noun_Vogelstaender = Nouns!.Add(Noun.NounLoca("Noun_Pentagramm"));
+            CA!.Noun_Matratze = Nouns!.Add(Noun.NounLoca("Noun_Pentagramm"));
+            CA!.Noun_Kuehlschrank = Nouns!.Add(Noun.NounLoca("Noun_Pentagramm"));
+            CA!.Noun_Gefrierfach = Nouns!.Add(Noun.NounLoca("Noun_Pentagramm"));
+            CA!.Noun_Kachel = Nouns!.Add(Noun.NounLoca("Noun_Pentagramm"));
+            CA!.Noun_Badewanne = Nouns!.Add(Noun.NounLoca("Noun_Pentagramm"));
+            CA!.Noun_Spuelung = Nouns!.Add(Noun.NounLoca("Noun_Pentagramm"));
+
+
             CA!.Noun_Seil = Nouns!.Add(Noun.NounLoca("Adv_InitializeGame_Person_I_3263"));
             CA!.Noun_Revolver = Nouns!.Add(Noun.NounLoca("Adv_InitializeGame_Person_I_3264"));
             Nouns.AddLoca(CA!.Noun_Revolver!.ID, "Adv_InitializeGame_Person_I_3265");
@@ -2537,6 +2629,7 @@ namespace GameCore
             CA!.Noun_Dome = Nouns.Add(Noun.NounLoca("Adv_InitializeGame_Dome"));
 
             
+
 
             CA!.Noun_Pocket = Nouns.Add(Noun.NounLoca("Noun_Pocket"));
             CA!.Noun_Dealer = Nouns.Add(Noun.NounLoca("Noun_Dealer"));
@@ -3868,6 +3961,55 @@ namespace GameCore
             */
 
             string s = loca.Adv_InitializeGame_Person_I_3263;
+
+            // Neue Nouns
+            CA!.Noun_Ritterruestung = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Ritterruestung, "Noun_Ritterruestung"));
+            CA!.Noun_Eule = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Eule, "Noun_Eule"));
+            CA!.Noun_Skelett = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Skelett, "Noun_Skelett"));
+            CA!.Noun_Fish = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Fish, "Noun_Fish"));
+            CA!.Noun_Schlange = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Schlange, "Noun_Schlange"));
+            CA!.Noun_Elster = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Elster, "Noun_Elster"));
+            CA!.Noun_Beutelchen = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Beutelchen, "Noun_Beutelchen"));
+            CA!.Noun_Pulver = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Pulver, "Noun_Pulver"));
+            CA!.Noun_Kerzenhalter = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Kerzenhalter, "Noun_Kerzenhalter"));
+            CA!.Noun_Klaue = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Klaue, "Noun_Klaue"));
+            CA!.Noun_Zuckerzange = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Zuckerzange, "Noun_Zuckerzange"));
+            CA!.Noun_Rollpflaster = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Rollpflaster, "Noun_Rollpflaster"));
+            CA!.Noun_Klauenzange = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Klauenzange, "Noun_Klauenzange"));
+
+            CA!.Noun_Lupe = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Lupe, "Noun_Lupe"));
+            CA!.Noun_Quietscheentchen = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Quietscheentchen, "Noun_Quietscheentchen"));
+            CA!.Noun_Kaese = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Kaese, "Noun_Kaese"));
+            CA!.Noun_Mondstein = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Mondstein, "Noun_Mondstein"));
+            CA!.Noun_Plastikbeutel = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Plastikbeutel, "Noun_Plastikbeutel"));
+            CA!.Noun_Wunderwarzenschwamm = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Wunderwarzenschwamm, "Noun_Wunderwarzenschwamm"));
+            CA!.Noun_Schlacke = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Schlacke, "Noun_Schlacke"));
+            CA!.Noun_Muenze = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Muenze, "Noun_Muenze"));
+            CA!.Noun_Nebel = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Nebel, "Noun_Nebel"));
+            CA!.Noun_Pentagramm = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Pentagramm, "Noun_Pentagramm"));
+            CA!.Noun_Fussmatte = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Fussmatte, "Noun_Fussmatte"));
+            CA!.Noun_Oeffnung = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Oeffnung, "Noun_Oeffnung"));
+            CA!.Noun_Siegel = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Siegel, "Noun_Siegel"));
+            CA!.Noun_Waescheleine = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Waescheleine, "Noun_Waescheleine"));
+            CA!.Noun_Unterhose = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Unterhose, "Noun_Unterhose"));
+            CA!.Noun_Holzabdeckung = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Holzabdeckung, "Noun_Holzabdeckung"));
+            CA!.Noun_Waschmaschine = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Waschmaschine, "Noun_Waschmaschine"));
+            CA!.Noun_Waescheaufhaengmaschine = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Waescheaufhaengmaschine, "Noun_Waescheaufhaengmaschine"));
+            CA!.Noun_Waeschekorb = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Waeschekorb, "Noun_Waeschekorb"));
+            CA!.Noun_Karton = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Karton, "Noun_Karton"));
+            CA!.Noun_Labortisch = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Labortisch, "Noun_Labortisch"));
+            CA!.Noun_Kaefige = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Kaefige, "Noun_Kaefige"));
+            CA!.Noun_Erstehilfekasten = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Erstehilfekasten, "Noun_Erstehilfekasten"));
+            CA!.Noun_Metallschale = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Metallschale, "Noun_Metallschale"));
+            CA!.Noun_Halterung = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Halterung, "Noun_Halterung"));
+            CA!.Noun_Dunkelheitsmaschine = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Dunkelheitsmaschine, "Noun_Dunkelheitsmaschine"));
+            CA!.Noun_Vogelstaender = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Vogelstaender, "Noun_Vogelstaender"));
+            CA!.Noun_Matratze = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Matratze, "Noun_Matratze"));
+            CA!.Noun_Kuehlschrank = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Kuehlschrank, "Noun_Kuehlschrank"));
+            CA!.Noun_Gefrierfach = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Gefrierfach, "Noun_Gefrierfach"));
+            CA!.Noun_Kachel = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Kachel, "Noun_Kachel"));
+            CA!.Noun_Badewanne = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Badewanne, "Noun_Badewanne"));
+            CA!.Noun_Spuelung = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Spuelung, "Noun_Spuelung"));
 
             CA!.Noun_Seil = Nouns!.Add(Noun.NounLocaLoca(loca.Adv_InitializeGame_Person_I_3263, "Adv_InitializeGame_Person_I_3263"));
             CA!.Noun_Revolver = Nouns!.Add(Noun.NounLocaLoca(loca.Adv_InitializeGame_Person_I_3264, "Adv_InitializeGame_Person_I_3264"));
@@ -5225,28 +5367,28 @@ namespace GameCore
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_UsableWith));
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Listenable));
 
-            CA!.Person_Fish = Persons!.Add(Person.PersonLoca(new List<Noun> { CA!.Noun_Fish! }, new List<Adj> { CA!.Adj_ausgestopft! }, Co.SEX_MALE, CB!.LocType_On_Item, CA!.I11_Left_Shelf, "Adv_Person_Fish", Co.SZ_medium, true, null, Nouns, Adjs));
+            CA!.Person_Fish = Persons!.Add(Person.PersonLoca(new List<Noun> { CA!.Noun_Fish! }, new List<Adj> { CA!.Adj_ausgestopft! }, Co.SEX_MALE, CB!.LocType_On_Item, CA!.I11_Left_Shelf.ID, "Adv_Person_Fish", Co.SZ_medium, true, null, Nouns, Adjs));
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Talkable));
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_GiveTarget));
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_QuestionTarget));
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_UsableWith));
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Listenable));
 
-            CA!.Person_Parrot = Persons!.Add(Person.PersonLoca(new List<Noun> { CA!.Noun_Papagei! }, new List<Adj> { CA!.Adj_ausgestopft! }, Co.SEX_MALE, CB!.LocType_On_Item, CA!.I11_Left_Shelf, "Adv_Person_Parrot", Co.SZ_medium, true, null, Nouns, Adjs));
+            CA!.Person_Parrot = Persons!.Add(Person.PersonLoca(new List<Noun> { CA!.Noun_Papagei! }, new List<Adj> { CA!.Adj_ausgestopft! }, Co.SEX_MALE, CB!.LocType_On_Item, CA!.I11_Left_Shelf.ID, "Adv_Person_Parrot", Co.SZ_medium, true, null, Nouns, Adjs));
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Talkable));
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_GiveTarget));
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_QuestionTarget));
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_UsableWith));
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Listenable));
 
-            CA!.Person_Snake = Persons!.Add(Person.PersonLoca(new List<Noun> { CA!.Noun_Schlange! }, new List<Adj> { CA!.Adj_ausgestopft! }, Co.SEX_FEMALE, CB!.LocType_On_Item, CA!.I11_Right_Shelf, "Adv_Person_Snake", Co.SZ_medium, true, null, Nouns, Adjs));
+            CA!.Person_Snake = Persons!.Add(Person.PersonLoca(new List<Noun> { CA!.Noun_Schlange! }, new List<Adj> { CA!.Adj_ausgestopft! }, Co.SEX_FEMALE, CB!.LocType_On_Item, CA!.I11_Right_Shelf.ID, "Adv_Person_Snake", Co.SZ_medium, true, null, Nouns, Adjs));
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Talkable));
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_GiveTarget));
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_QuestionTarget));
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_UsableWith));
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Listenable));
 
-            CA!.Person_Magpie = Persons!.Add(Person.PersonLoca(new List<Noun> { CA!.Noun_Elster! }, new List<Adj> { CA!.Adj_ausgestopft! }, Co.SEX_FEMALE, CB!.LocType_On_Item, CA!.I11_Bird_Stand, "Adv_Person_Magpie", Co.SZ_medium, true, null, Nouns, Adjs));
+            CA!.Person_Magpie = Persons!.Add(Person.PersonLoca(new List<Noun> { CA!.Noun_Elster! }, new List<Adj> { CA!.Adj_ausgestopft! }, Co.SEX_FEMALE, CB!.LocType_On_Item, CA!.I11_Bird_Stand.ID, "Adv_Person_Magpie", Co.SZ_medium, true, null, Nouns, Adjs));
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Talkable));
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_GiveTarget));
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_QuestionTarget));
@@ -5401,6 +5543,7 @@ namespace GameCore
                 Items!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Cleanable));
                 Items!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_UsableWith));
 
+                InitItems();
                 InitPersons();
             }
             else
@@ -5448,11 +5591,6 @@ namespace GameCore
                 A!.ActPerson = CA!.Person_I!.ID;
             }
 
-            if (LoadedInitData == null)
-            {
-
-                InitItems();
-            }
             /*
             else
             {
@@ -5524,6 +5662,9 @@ namespace GameCore
 
         void InitStatus()
         {
+            CA!.Status_Tuer_Bibliothek = Stats!.Add(new Status());
+            CA!.Status_Tuer_Schlafkammer = Stats!.Add(new Status());
+            CA!.Status_Tuer_Labor = Stats!.Add(new Status());
 
         }
 
@@ -7999,6 +8140,7 @@ namespace GameCore
         public void CounterDoorInit(Item? item, int ItemID)
         {
             item!.SetStatus(CA!.iStatus_Counter_Door, ItemID);
+            item!.SetStatus(CA!.iStatus_Locked, 0);
         }
 
         public void CounterDoorOpen(Item? item)
@@ -8333,6 +8475,25 @@ namespace GameCore
 
 
         // Neu Verb
+
+        // Neue Adjs
+        public Adj? Adj_ausgestopft;
+        public Adj? Adj_beschrieben;
+        public Adj? Adj_besonders;
+        public Adj? Adj_gekuehlt;
+        public Adj? Adj_hasserfuellt;
+        public Adj? Adj_instabil;
+        public Adj? Adj_lichtlos;
+        public Adj? Adj_magisch;
+        public Adj? Adj_mueffelnd;
+        public Adj? Adj_neblig;
+        public Adj? Adj_peinlich;
+        public Adj? Adj_schimmernd;
+        public Adj? Adj_sinister;
+        public Adj? Adj_stattlich;
+        public Adj? Adj_verrueckt;
+        public Adj? Adj_vertrocknet;
+
 
         public Adj? Adj_magic;
 
@@ -12015,7 +12176,58 @@ namespace GameCore
         public Noun? Noun_China;
         public Noun? Noun_Waste;
 
-        // Neu Nouns
+        public Noun? Noun_Ritterruestung;
+        public Noun? Noun_Eule;
+        public Noun? Noun_Skelett;
+        public Noun? Noun_Fish;
+        public Noun? Noun_Schlange;
+        public Noun? Noun_Elster;
+        public Noun? Noun_Beutelchen;
+        public Noun? Noun_Pulver;
+        public Noun? Noun_Kerzenhalter;
+        public Noun? Noun_Klaue;
+        public Noun? Noun_Zuckerzange;
+        public Noun? Noun_Rollpflaster;
+        public Noun? Noun_Klauenzange;
+
+        // Neue Nouns
+
+        public Noun? Noun_Lupe;
+        public Noun? Noun_Quietscheentchen;
+        public Noun? Noun_Kaese;
+        public Noun? Noun_Mondstein;
+        public Noun? Noun_Plastikbeutel;
+        public Noun? Noun_Wunderwarzenschwamm;
+        public Noun? Noun_Schlacke;
+        public Noun? Noun_Muenze;
+        public Noun? Noun_Nebel;
+        public Noun? Noun_Fussmatter;
+        public Noun? Noun_Pentagramm;
+
+        public Noun? Noun_Fussmatte;
+        public Noun? Noun_Oeffnung;
+        public Noun? Noun_Siegel;
+        public Noun? Noun_Waescheleine;
+        public Noun? Noun_Unterhose;
+        public Noun? Noun_Holzabdeckung;
+        public Noun? Noun_Waschmaschine;
+        public Noun? Noun_Waescheaufhaengmaschine;
+        public Noun? Noun_Waeschekorb;
+        public Noun? Noun_Karton;
+        public Noun? Noun_Labortisch;
+        public Noun? Noun_Kaefige;
+        public Noun? Noun_Erstehilfekasten;
+        public Noun? Noun_Metallschale;
+        public Noun? Noun_Halterung;
+        public Noun? Noun_Dunkelheitsmaschine;
+        public Noun? Noun_Vogelstaender;
+        public Noun? Noun_Matratze;
+        public Noun? Noun_Kuehlschrank;
+        public Noun? Noun_Gefrierfach;
+        public Noun? Noun_Kachel;
+        public Noun? Noun_Badewanne;
+        public Noun? Noun_Spuelung;
+
 
         public Person? Person_Everyone;
 
@@ -12666,7 +12878,8 @@ namespace GameCore
 
         public Item? I00_Pouch { get; set; }
         public Item? I00_Magic_Powder { get; set; }
-        public Item? I00_Magic_Candel { get; set; }
+        public Item? I00_Supermagic_Powder { get; set; }
+        public Item? I00_Magic_Candle { get; set; }
         public Item? I00_Claw { get; set; }
         public Item? I00_Sugar_Pliers { get; set; }
         public Item? I00_Key { get; set; }
@@ -12686,7 +12899,6 @@ namespace GameCore
         public Item? I00_Wonder_Wart_Sponge { get; set; }
         public Item? I00_Slag { get; set; }
         public Item? I00_Plunger { get; set; }
-        public Item? I00_Supermagic_Powder { get; set; }
 
         public Item? I01_Forest { get; set; }
         public Item? I01_Trees { get; set; }
@@ -12698,38 +12910,49 @@ namespace GameCore
         public Item? I02_Forest { get; set; }
         public Item? I02_Trees { get; set; }
         public Item? I02_Mist { get; set; }
+        public Item? I02_Door{ get; set; }
 
         public Item? I03_Pentagram { get; set; }
         public Item? I03_Runes { get; set; }
         public Item? I03_Door { get; set; }
+        public Item? I03_Door_Outside { get; set; }
 
         public Item? I04_Shelf { get; set; }
         public Item? I04_Cupboard { get; set; }
         public Item? I04_Wall { get; set; }
         public Item? I04_Flap { get; set; }
         public Item? I04_Opening { get; set; }
+        public Item? I04_Door { get; set; }
 
         public Item? I05_Pedestal { get; set; }
         public Item? I05_Sign { get; set; }
         public Item? I05_Sill { get; set; }
         public Item? I05_Library_Door { get; set; }
+        public Item? I05_Door { get; set; }
 
         public Item? I06_Door { get; set; }
         public Item? I06_Seal { get; set; }
         public Item? I06_Sign { get; set; }
+        public Item? I06_Door_Blue { get; set; }
+        public Item? I06_Door_Red { get; set; }
+        public Item? I06_Door_Wide { get; set; }
+        public Item? I06_Door_White { get; set; }
 
         public Item? I07_Door { get; set; }
+        public Item? I07_Door_Blue { get; set; }
+        public Item? I07_Door_Green { get; set; }
 
         public Item? I08_Clothes_Line { get; set; }
         public Item? I08_Underpants { get; set; }
         public Item? I08_Well { get; set; }
         public Item? I08_Wooden_Cover { get; set; }
         public Item? I08_Water { get; set; }
-        public Item? I08_Coin { get; set; }
+        public Item? I00_Coin { get; set; }
         public Item? I08_Washing_Machine { get; set; }
         public Item? I08_Clothes { get; set; }
         public Item? I08_Machine_For_Hanging_Up_Laundry { get; set; }
         public Item? I08_Laundry_Basket { get; set; }
+        public Item? I08_Door_Green { get; set; }
 
 
         public Item? I09_Red_Shelf { get; set; }
@@ -12743,6 +12966,7 @@ namespace GameCore
         public Item? I09_Sign { get; set; }
         public Item? I09_Carton { get; set; }
         public Item? I09_Books_Master { get; set; }
+        public Item? I09_Library_Door { get; set; }
 
         public Item? I10_Labor_Table { get; set; }
         public Item? I10_Cages { get; set; }
@@ -12755,19 +12979,22 @@ namespace GameCore
         public Item? I10_Opening { get; set; }
         public Item? I10_Switch { get; set; }
         public Item? I10_Giant_Mortar { get; set; }
+        public Item? I10_Labor_Door { get; set; }
 
         public Item? I11_Left_Shelf { get; set; }
         public Item? I11_Right_Shelf { get; set; }
         public Item? I11_Bird_Stand { get; set; }
+        public Item? I11_Door_Blue { get; set; }
 
         public Item? I12_Matress { get; set; }
+        public Item? I12_Door{ get; set; }
 
 
         public Item? I13_Drawer { get; set; }
         public Item? I13_Cupboard { get; set; }
         public Item? I13_Fridge { get; set; }
         public Item? I13_Freezer { get; set; }
-
+        public Item? I13_Door_White { get; set; }
 
         public Item? I14_Mirror { get; set; }
         public Item? I14_Writing { get; set; }
@@ -12777,6 +13004,7 @@ namespace GameCore
         public Item? I14_Bathtub { get; set; }
         public Item? I14_Toilet { get; set; }
         public Item? I14_Flushing { get; set; }
+        public Item? I14_Door_Red{ get; set; }
 
         public int iStatus_Lantern;
 
@@ -12785,6 +13013,11 @@ namespace GameCore
         public int iStatus_Locked;
 
         public int iStatus_Counter_Door;
+
+        public Status? Status_Tuer_Labor;
+        public Status? Status_Tuer_Schlafkammer;
+        public Status? Status_Tuer_Bibliothek;
+
 
         public CoAdv()
         {

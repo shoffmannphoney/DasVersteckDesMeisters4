@@ -123,9 +123,163 @@ public partial class Order: AbstractOrder
         bool success = true;
         int OldLoc = PersonID!.locationID;
 
+        if ((Persons!.GetLoc(PersonID) == Co.CA!.L02_In_Front_Of_A_Hut ) && (Dir == Co.DIR_N) && (CA!.I02_Door!.IsClosed))
+        {
+            ParseTokenList PT = new ParseTokenList();
+            PT.AddVerb(CB!.Verb_Open);
+            PT.AddItem(CA!.I02_Door);
+            Open(PersonID, PT);
+            success = true;
+        }
+        else if ((Persons!.GetLoc(PersonID) == Co.CA!.L03_In_The_Parlor ) && (Dir == Co.DIR_S) && (CA!.I03_Door_Outside!.IsClosed))
+        {
+            ParseTokenList PT = new ParseTokenList();
+            PT.AddVerb(CB!.Verb_Open);
+            PT.AddItem(CA!.I03_Door_Outside);
+            Open(PersonID, PT);
+            success = true;
+        }
+        else if ((Persons!.GetLoc(PersonID) == Co.CA!.L03_In_The_Parlor) && (Dir == Co.DIR_E) && (CA!.I03_Door!.IsClosed))
+        {
+            ParseTokenList PT = new ParseTokenList();
+            PT.AddVerb(CB!.Verb_Open);
+            PT.AddItem(CA!.I03_Door);
+            Open(PersonID, PT);
+            success = true;
+        }
+        else if ((Persons!.GetLoc(PersonID) == Co.CA!.L04_Shabby_Little_Chamber) && (Dir == Co.DIR_W) && (CA!.I04_Door!.IsClosed))
+        {
+            ParseTokenList PT = new ParseTokenList();
+            PT.AddVerb(CB!.Verb_Open);
+            PT.AddItem(CA!.I04_Door);
+            Open(PersonID, PT);
+            success = true;
+        }
+        else if ((Persons!.GetLoc(PersonID) == Co.CA!.L05_Atrium) && (Dir == Co.DIR_W) && (CA!.I05_Library_Door!.IsClosed))
+        {
+            ParseTokenList PT = new ParseTokenList();
+            PT.AddVerb(CB!.Verb_Open);
+            PT.AddItem(CA!.I05_Library_Door);
+            success = Open(PersonID, PT);
+        }
+        else if ((Persons!.GetLoc(PersonID) == Co.CA!.L05_Atrium) && (Dir == Co.DIR_S) && (CA!.I05_Door!.IsClosed))
+        {
+            ParseTokenList PT = new ParseTokenList();
+            PT.AddVerb(CB!.Verb_Open);
+            PT.AddItem(CA!.I05_Door);
+            success = Open(PersonID, PT);
+        }
+        else if ((Persons!.GetLoc(PersonID) == Co.CA!.L06_Long_Floor) && (Dir == Co.DIR_S) && (CA!.I06_Door!.IsClosed))
+        {
+            ParseTokenList PT = new ParseTokenList();
+            PT.AddVerb(CB!.Verb_Open);
+            PT.AddItem(CA!.I06_Door);
+            success = Open(PersonID, PT);
+        }
+        else if ((Persons!.GetLoc(PersonID) == Co.CA!.L06_Long_Floor) && (Dir == Co.DIR_N) && (CA!.I06_Door_Wide!.IsClosed))
+        {
+            ParseTokenList PT = new ParseTokenList();
+            PT.AddVerb(CB!.Verb_Open);
+            PT.AddItem(CA!.I06_Door_Wide);
+            success = Open(PersonID, PT);
+        }
+        else if ((Persons!.GetLoc(PersonID) == Co.CA!.L06_Long_Floor) && (Dir == Co.DIR_E) && (CA!.I06_Door_White.IsClosed))
+        {
+            ParseTokenList PT = new ParseTokenList();
+            PT.AddVerb(CB!.Verb_Open);
+            PT.AddItem(CA!.I06_Door_White);
+            success = Open(PersonID, PT);
+        }
+        else if ((Persons!.GetLoc(PersonID) == Co.CA!.L06_Long_Floor) && (Dir == Co.DIR_W) && (CA!.I06_Door_Red!.IsClosed))
+        {
+            ParseTokenList PT = new ParseTokenList();
+            PT.AddVerb(CB!.Verb_Open);
+            PT.AddItem(CA!.I06_Door_Red);
+            success = Open(PersonID, PT);
+        }
+        else if ((Persons!.GetLoc(PersonID) == Co.CA!.L07_Lower_Floor ) && (Dir == Co.DIR_E) && (CA!.I07_Door!.IsClosed))
+        {
+            ParseTokenList PT = new ParseTokenList();
+            PT.AddVerb(CB!.Verb_Open);
+            PT.AddItem(CA!.I07_Door);
+            success = Open(PersonID, PT);
+        }
+        else if ((Persons!.GetLoc(PersonID) == Co.CA!.L07_Lower_Floor) && (Dir == Co.DIR_S) && (CA!.I07_Door_Blue!.IsClosed))
+        {
+            ParseTokenList PT = new ParseTokenList();
+            PT.AddVerb(CB!.Verb_Open);
+            PT.AddItem(CA!.I07_Door_Blue);
+            success = Open(PersonID, PT);
+        }
+        else if ((Persons!.GetLoc(PersonID) == Co.CA!.L07_Lower_Floor) && (Dir == Co.DIR_W) && (CA!.I07_Door_Green!.IsClosed))
+        {
+            ParseTokenList PT = new ParseTokenList();
+            PT.AddVerb(CB!.Verb_Open);
+            PT.AddItem(CA!.I07_Door_Green);
+            success = Open(PersonID, PT);
+        }
+        else if ((Persons!.GetLoc(PersonID) == Co.CA!.L08_Laundry_Room ) && (Dir == Co.DIR_E) && (CA!.I08_Door_Green!.IsClosed))
+        {
+            ParseTokenList PT = new ParseTokenList();
+            PT.AddVerb(CB!.Verb_Open);
+            PT.AddItem(CA!.I08_Door_Green);
+            success = Open(PersonID, PT);
+        }
+        else if ((Persons!.GetLoc(PersonID) == Co.CA!.L09_Library) && (Dir == Co.DIR_E) && (CA!.I09_Library_Door!.IsClosed))
+        {
+            ParseTokenList PT = new ParseTokenList();
+            PT.AddVerb(CB!.Verb_Open);
+            PT.AddItem(CA!.I09_Library_Door);
+            success = Open(PersonID, PT);
+        }
+        else if ((Persons!.GetLoc(PersonID) == Co.CA!.L10_Laboratory ) && (Dir == Co.DIR_W) && (CA!.I10_Labor_Door!.IsClosed))
+        {
+            ParseTokenList PT = new ParseTokenList();
+            PT.AddVerb(CB!.Verb_Open);
+            PT.AddItem(CA!.I10_Labor_Door);
+            success = Open(PersonID, PT);
+        }
+        else if ((Persons!.GetLoc(PersonID) == Co.CA!.L11_Storage_Room ) && (Dir == Co.DIR_S) && (CA!.I11_Door_Blue!.IsClosed))
+        {
+            ParseTokenList PT = new ParseTokenList();
+            PT.AddVerb(CB!.Verb_Open);
+            PT.AddItem(CA!.I11_Door_Blue);
+            success = Open(PersonID, PT);
+        }
+        else if ((Persons!.GetLoc(PersonID) == Co.CA!.L12_Sleeping_Room ) && (Dir == Co.DIR_N) && (CA!.I12_Door!.IsClosed))
+        {
+            ParseTokenList PT = new ParseTokenList();
+            PT.AddVerb(CB!.Verb_Open);
+            PT.AddItem(CA!.I12_Door);
+            success = Open(PersonID, PT);
+        }
+        else if ((Persons!.GetLoc(PersonID) == Co.CA!.L13_Kitchen ) && (Dir == Co.DIR_W) && (CA!.I13_Door_White!.IsClosed))
+        {
+            ParseTokenList PT = new ParseTokenList();
+            PT.AddVerb(CB!.Verb_Open);
+            PT.AddItem(CA!.I13_Door_White);
+            success = Open(PersonID, PT);
+        }
+        else if ((Persons!.GetLoc(PersonID) == Co.CA!.L14_Bathroom ) && (Dir == Co.DIR_E) && (CA!.I14_Door_Red !.IsClosed))
+        {
+            ParseTokenList PT = new ParseTokenList();
+            PT.AddVerb(CB!.Verb_Open);
+            PT.AddItem(CA!.I14_Door_Red);
+            success = Open(PersonID, PT);
+        }
+
+
+
+
+        // Noch immer aktuell, die Basisklasse aufzurufen? Tja, dann tun wir das.
         if (success)
         {
+            handled = success = base.Go(PersonID, Dir);
+            of.Success = success;
+            of.Handled = true;
+            of.Action = true;
         }
+
         // Nachträglich kann auch noch was ausgegeben werden, sogar abhängig vom Rückgabewert
         if (success)
         {

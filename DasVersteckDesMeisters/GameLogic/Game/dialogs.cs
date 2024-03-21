@@ -7,11 +7,7 @@ namespace GameCore
 
     public partial class Order: AbstractOrder
     {
-        public void StoryIntro()
-        {
-            AdvGame!.locations!.ShowlocationFull(A!.ActLoc);
-        }
-
+ 
         public bool SetupDialogSimpleMC(List<MCMenuEntry> MCMEntry)
         {
             if( !AdvGame!.GD!.SilentMode )
@@ -87,6 +83,17 @@ namespace GameCore
             mcM.Last()!.SetSpeaker(CB!.VT_sagen, CA!.Adj_genervt);
             mcM.Last()!.SetDel(KlauseFail2);
             */
+        }
+        public void StoryIntro()
+        {
+            AdvGame!.StoryOutput(loca.Adv_Intro0);
+            AdvGame!.StoryOutput(String.Format(loca.Adv_Intro1, GD!.Version.GetVersion(), GD!.Version.GetVersionDate()));
+
+            AdvGame!.StoryOutput(loca.Adv_Intro2);
+            AdvGame!.StoryOutput(loca.Adv_Intro3);
+            AdvGame!.StoryOutput(loca.Adv_Intro4);
+
+            AdvGame!.locations!.ShowlocationFull(A!.ActLoc);
         }
 
 

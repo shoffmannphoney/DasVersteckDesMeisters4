@@ -4511,155 +4511,174 @@ namespace GameCore
           
             foreach( PropertyInfo pix in pi )
             {
-                // Hier passiert nix, das hat alles so seine Richtigkeit
-                if (pix.PropertyType.Name == "Int32")
+                try
                 {
-                }
-                else if (pix.PropertyType.Name == "Item")
-                {
-                    Item item = (pix.GetValue(CA) as Item)!;
-                    if (item != null)
-                    {
 
-                        Item item2 = so!.jsonItems!.List![item!.ID!]!;
-                        pix.SetValue(CA, item2);
-                    }
-                }
-                else if (pix.PropertyType.Name == "Person")
-                {
-                    Person person = (pix.GetValue(CA) as Person)!;
-                    if (person != null)
+                    // Hier passiert nix, das hat alles so seine Richtigkeit
+                    if (pix.PropertyType.Name == "Int32")
                     {
-                        Person? person2 = so!.jsonPersons!.List![person!.ID!]!;
-                        pix.SetValue(CA, person2);
                     }
-                }
-                else if (pix.PropertyType.Name == "Topic")
-                {
-                    Topic topic = (pix.GetValue(CA) as Topic)!;
-                    if (topic != null)
+                    else if (pix.PropertyType.Name == "Item")
                     {
-                        Topic topic2 = so!.jsonTopics!.List[topic!.ID];
-                        pix.SetValue(CA, topic2);
+                        Item item = (pix.GetValue(CA) as Item)!;
+                        if (item != null)
+                        {
+                            if( item.ID == 3788)
+                            {
+
+                            }
+                            Item item2 = so!.jsonItems!.List![item!.ID!]!;
+                            pix.SetValue(CA, item2);
+                        }
+                    }
+                    else if (pix.PropertyType.Name == "Person")
+                    {
+                        Person person = (pix.GetValue(CA) as Person)!;
+                        if (person != null)
+                        {
+                            Person? person2 = so!.jsonPersons!.List![person!.ID!]!;
+                            pix.SetValue(CA, person2);
+                        }
+                    }
+                    else if (pix.PropertyType.Name == "Topic")
+                    {
+                        Topic topic = (pix.GetValue(CA) as Topic)!;
+                        if (topic != null)
+                        {
+                            Topic topic2 = so!.jsonTopics!.List[topic!.ID];
+                            pix.SetValue(CA, topic2);
+                        }
+                    }
+                    else
+                    {
+                        // int a = 5;
                     }
                 }
-                else
+                catch (Exception e)
                 {
-                    // int a = 5;
+
                 }
             }
             System.Reflection.FieldInfo[] fi = CA.GetType().GetFields();
 
             foreach ( FieldInfo fix in fi)
             {
-                if (fix.FieldType.Name == "Int32")
+                try
                 {
-                }
-                else if (fix.FieldType.Name == "Item")
-                {
-                    Item item = (fix.GetValue(CA) as Item)!;
-                    if (item != null)
-                    {
 
-                        Item item2 = so!.jsonItems!.List![item!.ID!]!;
-                        fix.SetValue(CA, item2);
-                    }
-                }
-                else if (fix.FieldType.Name == "Person")
-                {
-                    Person person = (fix.GetValue(CA) as Person)!;
-                    if (person != null)
+                    if (fix.FieldType.Name == "Int32")
                     {
-                        Person person2 = so!.jsonPersons!.List![person!.ID!]!;
-                        fix.SetValue(CA, person2);
                     }
-                }
-                else if (fix.FieldType.Name == "Topic")
-                {
-                    Topic topic = (fix.GetValue(CA) as Topic)!;
-                    if (topic != null)
+                    else if (fix.FieldType.Name == "Item")
                     {
-                        Topic topic2 = so!.jsonTopics!.Find( topic!.ID )!;
-                        fix.SetValue(CA, topic2);
-                    }
-                }
-                else if (fix.FieldType.Name == "Verb")
-                {
-                    Verb verb = (fix.GetValue(CA) as Verb)!;
-                    if (verb!= null)
-                    {
-                        Verb verb2 = so!.jsonVerbs!.Find(verb!.ID!)!;
-                        fix.SetValue(CA, verb2);
-                    }
-                }
-                else if (fix.FieldType.Name == "Noun")
-                {
-                    Noun noun = (fix.GetValue(CA) as Noun)!;
-                    if (noun != null)
-                    {
-                        Noun noun2 = so!.jsonNouns!.Find(noun!.ID!)!;
-                        fix.SetValue(CA, noun2);
-                    }
-                }
-                else if (fix.FieldType.Name == "Adj")
-                {
-                    Adj adj = (fix.GetValue(CA) as Adj)!;
-                    if (adj != null)
-                    {
-                        Adj adj2 = so!.jsonAdjs!.Find(adj!.ID)!;
-                        fix.SetValue(CA, adj2);
-                    }
-                }
-                else if (fix.FieldType.Name == "Fill")
-                {
-                    Fill fill = (fix.GetValue(CA) as Fill)!;
-                    if (fill != null)
-                    {
-                        Fill fill2 = so!.jsonFills!.Find(fill!.ID!)!;
-                        fix.SetValue(CA, fill2);
-                    }
-                }
-                else if (fix.FieldType.Name == "Prep")
-                {
-                    Prep prep = (fix.GetValue(CA) as Prep)!;
-                    if (prep != null)
-                    {
-                        Prep prep2 = so!.jsonPreps!.Find(prep!.ID!);
-                        fix.SetValue(CA, prep2);
-                    }
-                }
-                else if (fix.FieldType.Name == "Pronoun")
-                {
-                    Pronoun pronoun = (fix.GetValue(CA) as Pronoun)!;
-                    if (pronoun != null)
-                    {
-                        Pronoun pronoun2 = so!.jsonPronouns!.Find(pronoun!.ID!);
-                        fix.SetValue(CA, pronoun2);
-                    }
-                }
-                else if (fix.FieldType.Name == "Status")
-                {
-                    Status status = (fix.GetValue(CA) as Status)!;
-                    if (status != null)
-                    {
-                        Status status2 = so!.jsonStats!.Find(status!.ID!)!;
-                        fix.SetValue(CA, status2);
-                    }
-                }
-                else if (fix.FieldType.Name == "Score")
-                {
-                    Score score = (fix.GetValue(CA) as Score)!;
-                    if (score != null)
-                    {
-                        Score score2 = so!.jsonScores!.Find(score!.ID!)!;
-                        fix.SetValue(CA, score2);
-                    }
-                }
-                else
-                {
-                    // int a = 5;
-                }
+                        Item item = (fix.GetValue(CA) as Item)!;
+                        if (item != null)
+                        {
 
+                            Item item2 = so!.jsonItems!.List![item!.ID!]!;
+                            fix.SetValue(CA, item2);
+                        }
+                    }
+                    else if (fix.FieldType.Name == "Person")
+                    {
+                        Person person = (fix.GetValue(CA) as Person)!;
+                        if (person != null)
+                        {
+                            Person person2 = so!.jsonPersons!.List![person!.ID!]!;
+                            fix.SetValue(CA, person2);
+                        }
+                    }
+                    else if (fix.FieldType.Name == "Topic")
+                    {
+                        Topic topic = (fix.GetValue(CA) as Topic)!;
+                        if (topic != null)
+                        {
+                            Topic topic2 = so!.jsonTopics!.Find(topic!.ID)!;
+                            fix.SetValue(CA, topic2);
+                        }
+                    }
+                    else if (fix.FieldType.Name == "Verb")
+                    {
+                        Verb verb = (fix.GetValue(CA) as Verb)!;
+                        if (verb != null)
+                        {
+                            Verb verb2 = so!.jsonVerbs!.Find(verb!.ID!)!;
+                            fix.SetValue(CA, verb2);
+                        }
+                    }
+                    else if (fix.FieldType.Name == "Noun")
+                    {
+                        Noun noun = (fix.GetValue(CA) as Noun)!;
+                        if (noun != null)
+                        {
+                            Noun noun2 = so!.jsonNouns!.Find(noun!.ID!)!;
+                            fix.SetValue(CA, noun2);
+                        }
+                    }
+                    else if (fix.FieldType.Name == "Adj")
+                    {
+                        Adj adj = (fix.GetValue(CA) as Adj)!;
+                        if (adj != null)
+                        {
+                            Adj adj2 = so!.jsonAdjs!.Find(adj!.ID)!;
+                            fix.SetValue(CA, adj2);
+                        }
+                    }
+                    else if (fix.FieldType.Name == "Fill")
+                    {
+                        Fill fill = (fix.GetValue(CA) as Fill)!;
+                        if (fill != null)
+                        {
+                            Fill fill2 = so!.jsonFills!.Find(fill!.ID!)!;
+                            fix.SetValue(CA, fill2);
+                        }
+                    }
+                    else if (fix.FieldType.Name == "Prep")
+                    {
+                        Prep prep = (fix.GetValue(CA) as Prep)!;
+                        if (prep != null)
+                        {
+                            Prep prep2 = so!.jsonPreps!.Find(prep!.ID!);
+                            fix.SetValue(CA, prep2);
+                        }
+                    }
+                    else if (fix.FieldType.Name == "Pronoun")
+                    {
+                        Pronoun pronoun = (fix.GetValue(CA) as Pronoun)!;
+                        if (pronoun != null)
+                        {
+                            Pronoun pronoun2 = so!.jsonPronouns!.Find(pronoun!.ID!);
+                            fix.SetValue(CA, pronoun2);
+                        }
+                    }
+                    else if (fix.FieldType.Name == "Status")
+                    {
+                        Status status = (fix.GetValue(CA) as Status)!;
+                        if (status != null)
+                        {
+                            Status status2 = so!.jsonStats!.Find(status!.ID!)!;
+                            fix.SetValue(CA, status2);
+                        }
+                    }
+                    else if (fix.FieldType.Name == "Score")
+                    {
+                        Score score = (fix.GetValue(CA) as Score)!;
+                        if (score != null)
+                        {
+                            Score score2 = so!.jsonScores!.Find(score!.ID!)!;
+                            fix.SetValue(CA, score2);
+                        }
+                    }
+                    else
+                    {
+                        // int a = 5;
+                    }
+
+                }
+                catch (Exception e)
+                {
+
+                }
             }
             CoBase CB = so.jsonCB!;
 

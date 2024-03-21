@@ -7,5 +7,7 @@ namespace Maui.Windows.Interfaces
   {
     void Alert(string message);
     void CaptureSignature(string instructions);
-  }
+       void SetYPos(int yPos);
+        void cbFullyLoaded(string message);
+    }
 }
