@@ -161,6 +161,8 @@ public partial class Order: AbstractOrder
             PT.AddVerb(CB!.Verb_Open);
             PT.AddItem(CA!.I05_Library_Door);
             success = Open(PersonID, PT);
+            if (CA!.I05_Library_Door.IsClosed == true)
+                success = false;
         }
         else if ((Persons!.GetLoc(PersonID) == Co.CA!.L05_Atrium) && (Dir == Co.DIR_S) && (CA!.I05_Door!.IsClosed))
         {
@@ -175,6 +177,8 @@ public partial class Order: AbstractOrder
             PT.AddVerb(CB!.Verb_Open);
             PT.AddItem(CA!.I06_Door);
             success = Open(PersonID, PT);
+            if (CA!.I06_Door.IsClosed == true)
+                success = false;
         }
         else if ((Persons!.GetLoc(PersonID) == Co.CA!.L06_Long_Floor) && (Dir == Co.DIR_N) && (CA!.I06_Door_Wide!.IsClosed))
         {
@@ -203,6 +207,8 @@ public partial class Order: AbstractOrder
             PT.AddVerb(CB!.Verb_Open);
             PT.AddItem(CA!.I07_Door);
             success = Open(PersonID, PT);
+            if (CA!.I07_Door.IsClosed == true)
+                success = false;
         }
         else if ((Persons!.GetLoc(PersonID) == Co.CA!.L07_Lower_Floor) && (Dir == Co.DIR_S) && (CA!.I07_Door_Blue!.IsClosed))
         {

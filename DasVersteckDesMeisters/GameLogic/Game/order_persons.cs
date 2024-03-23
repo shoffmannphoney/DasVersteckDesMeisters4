@@ -20,7 +20,6 @@ public partial class Order: AbstractOrder
         bool handled = false;
         Person person = PTL.GetFirstPerson()!; //  GetPersonRef(Adv_PT[2].WordID);
 
-        
         if (!handled)
         {
             AdvGame!.StoryOutput(  Helper.Insert(loca.Order_SayToP_Person_Eremitin_13619, person ));
@@ -33,6 +32,44 @@ public partial class Order: AbstractOrder
             else 
             */
         }
+
+        if (person == CA.Person_Owl && CA.Status_Eule_Klaue.Val <= 0)
+        {
+            AdvGame!.StoryOutput(loca.Talk_Owl_Dead);
+            handled = true;
+        }
+        if (person == CA.Person_Knights_Armor && CA.Status_Ritterruestung_Klaue.Val <= 0)
+        {
+            AdvGame!.StoryOutput(loca.Talk_Knights_Armor_Dead);
+            handled = true;
+        }
+        if (person == CA.Person_Librarian && CA.Status_Skelett_Klaue.Val <= 0)
+        {
+            AdvGame!.StoryOutput(loca.Talk_Skeleton_Dead);
+            handled = true;
+        }
+        if (person == CA.Person_Fish && CA.Status_Fisch_Klaue.Val <= 0)
+        {
+            AdvGame!.StoryOutput(loca.Talk_Fish_Dead);
+            handled = true;
+        }
+        if (person == CA.Person_Parrot && CA.Status_Papagei_Klaue.Val <= 0)
+        {
+            AdvGame!.StoryOutput(loca.Talk_Parrot_Dead);
+            handled = true;
+        }
+        if (person == CA.Person_Magpie && CA.Status_Elster_Klaue.Val <= 0)
+        {
+            AdvGame!.StoryOutput(loca.Talk_Magpie_Dead);
+            handled = true;
+        }
+        if (person == CA.Person_Snake && CA.Status_Schlange_Klaue.Val <= 0)
+        {
+            AdvGame!.StoryOutput(loca.Talk_Snake_Dead);
+            handled = true;
+        }
+
+
         // Hier wird immer false zurückgegeben, denn zwischen Dialogauftakt und Start des Multiple Choice Menüs sollen keine Actions mehr angestoßen werden
         return (handled);
     }

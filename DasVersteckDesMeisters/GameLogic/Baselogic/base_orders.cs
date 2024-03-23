@@ -605,6 +605,7 @@ namespace GameCore
             }
             if ((item.CanPutOn) && (!item.InvisibleOn))
             {
+                Persons?.ListPersons(AdvGame!.CB!.LocType_On_Item, item!.ID, (int)(Persons?.Find(PersonID)!.locationID!));
                 ListItems(Helper.Insert(loca.OrderFeedback_Examine_Person_3rdperson_13906, item!.ID, CA!.Person_3rdperson!), PersonID, CB!.LocType_On_Item, item!.ID, false, true, Co.CASE_AKK_UNDEF);
                 item.InvisibleOn = false;
             }
@@ -848,7 +849,7 @@ namespace GameCore
             }
             else
             {
-                AdvGame!.FeedbackOutput(PersonID, Helper.Insert(loca.OrderFeedback_Go_Person_Everyone_13925));
+                AdvGame!.FeedbackOutput(PersonID, Helper.Insert(loca.OrderFeedback_Go_Person_Everyone_13925, Items!.Find(CA!.I00_Nullbehaelter!)!));
                 of.FeedbackOutput = true;
             }
             return (success);
@@ -1837,10 +1838,11 @@ namespace GameCore
                 mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.OrderFeedback_Restart_Person_Self_13996, 2, -1, false));
                 mcM.Last()!.SetDel(AdvGame!.DoMCRestartDeutsch);
 
+                /*
                 cFollower.Add(3);
                 mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.OrderFeedback_Restart_Person_Self_13996a, 3, -1, false));
                 mcM.Last()!.SetDel(AdvGame!.DoMCRestartEnglisch);
-
+                */
                 // 4 
                 cFollower.Add(4);
                 mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.OrderFeedback_Restart_Person_Self_13997, 4, -1, false));
@@ -1851,11 +1853,11 @@ namespace GameCore
                 cFollower.Add(2);
                 mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.OrderFeedback_Restart_Person_Self_13996, 2, -1, false));
                 mcM.Last()!.SetDel(AdvGame!.DoMCRestartEnglisch);
-
+                /*
                 cFollower.Add(3);
                 mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.OrderFeedback_Restart_Person_Self_13996a, 3, -1, false));
                 mcM.Last()!.SetDel(AdvGame!.DoMCRestartDeutsch);
-
+                */
                 // 4 
                 cFollower.Add(4);
                 mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.OrderFeedback_Restart_Person_Self_13997, 4, -1, false));

@@ -2341,6 +2341,14 @@ public partial class Adv : AdvBase
         PLL.Add(new ParseLine(CA!.PL_Touch, PList, Orders!.TouchP));
 
 
+        // berühre Person mit
+        PList = new ParseTokenList();
+        PList.AddVerb(CA!.Verb_Touch);
+        PList.AddPerson();
+        PList.AddPrep(CB!.Prep_mit );
+        PList.AddItem();
+        PLL.Add(new ParseLine(CA!.PL_Touch, PList, Orders!.TouchPW));
+
         // Klopfe
         PList = new ParseTokenList();
         PList.AddVerb(CA!.Verb_Knock);
@@ -3319,6 +3327,14 @@ public partial class Adv : AdvBase
         PList.AddItem();
         PLL.Add(new ParseLine(CA!.PL_Clean_W, PList, Orders!.CleanW));
 
+        // Clean Person with
+        PList = new ParseTokenList();
+        PList.AddVerb(CA!.Verb_Clean);
+        PList.AddPerson();
+        PList.AddPrep(CB!.Prep_mit);
+        PList.AddItem();
+        PLL.Add(new ParseLine(CA!.PL_Clean_W, PList, Orders!.CleanPW));
+
         /*
         // Wash
         PList = new ParseTokenList();
@@ -3358,6 +3374,15 @@ public partial class Adv : AdvBase
         PList.AddPrep(CB!.Prep_in);
         PList.AddItem();
         PLL.Add(new ParseLine(CA!.PL_Wrap2, PList, Orders!.WrapP2));
+
+        // wickle
+        PList = new ParseTokenList();
+        PList.AddVerb(CA!.Verb_Wrap);
+        PList.AddItem();
+        PList.AddPrep(CB!.Prep_um);
+        PList.AddItem();
+        PLL.Add(new ParseLine(CA!.PL_Wrap2, PList, Orders!.WrapAround));
+
 
         // wickle Solo
         PList = new ParseTokenList();
@@ -3619,6 +3644,20 @@ public partial class Adv : AdvBase
         PList.AddPrep(CB!.Prep_mit);
         PList.AddItem();
         PLL.Add(new ParseLine(CA!.PL_WipeW, PList, Orders!.WipeW));
+
+        // Wischen
+        PList = new ParseTokenList();
+        PList.AddVerb(CA!.Verb_Wipe);
+        PList.AddPerson();
+        PLL.Add(new ParseLine(CA!.PL_Wipe, PList, Orders!.WipeP));
+
+        PList = new ParseTokenList();
+        PList.AddVerb(CA!.Verb_Wipe);
+        PList.AddPerson();
+        PList.AddPrep(CB!.Prep_mit);
+        PList.AddItem();
+        PLL.Add(new ParseLine(CA!.PL_WipeW, PList, Orders!.WipeWP));
+
 
         // Ausgänge
         PList = new ParseTokenList();
@@ -6563,6 +6602,14 @@ public partial class Adv : AdvBase
         PList.AddPerson();
         PLLEng.Add(new ParseLine(CA!.PL_Touch, PList, Orders!.TouchP));
 
+        // berühre Person mit
+        PList = new ParseTokenList();
+        PList.AddVerb(CA!.Verb_Touch);
+        PList.AddPerson();
+        PList.AddPrep(CB!.Prep_mit);
+        PList.AddItem();
+        PLLEng.Add(new ParseLine(CA!.PL_Touch, PList, Orders!.TouchPW));
+
 
         // Klopfe
         PList = new ParseTokenList();
@@ -7641,6 +7688,7 @@ public partial class Adv : AdvBase
         PList.AddItem();
         PLLEng.Add(new ParseLine(CA!.PL_Clean, PList, Orders!.CleanIn));
 
+
         // Clean
         PList = new ParseTokenList();
         PList.AddVerb(CA!.Verb_Clean);
@@ -7654,6 +7702,14 @@ public partial class Adv : AdvBase
         PList.AddPrep(CB!.Prep_with);
         PList.AddItem();
         PLLEng.Add(new ParseLine(CA!.PL_Clean_W, PList, Orders!.CleanW));
+
+        // Clean Person with
+        PList = new ParseTokenList();
+        PList.AddVerb(CA!.Verb_Clean);
+        PList.AddPerson();
+        PList.AddPrep(CB!.Prep_mit);
+        PList.AddItem();
+        PLLEng.Add(new ParseLine(CA!.PL_Clean_W, PList, Orders!.CleanPW));
 
         // Split
         PList = new ParseTokenList();
@@ -7978,6 +8034,19 @@ public partial class Adv : AdvBase
         PList.AddPrep(CB!.Prep_with);
         PList.AddItem();
         PLLEng.Add(new ParseLine(CA!.PL_WipeW, PList, Orders!.WipeW));
+
+        // Wischen
+        PList = new ParseTokenList();
+        PList.AddVerb(CA!.Verb_Wipe);
+        PList.AddPerson();
+        PLLEng.Add(new ParseLine(CA!.PL_Wipe, PList, Orders!.WipeP));
+
+        PList = new ParseTokenList();
+        PList.AddVerb(CA!.Verb_Wipe);
+        PList.AddPerson();
+        PList.AddPrep(CB!.Prep_mit);
+        PList.AddItem();
+        PLLEng.Add(new ParseLine(CA!.PL_WipeW, PList, Orders!.WipeWP));
 
         // Ausgänge
         PList = new ParseTokenList();

@@ -86,9 +86,10 @@ namespace GameCore
         }
         public void StoryIntro()
         {
+            /*
             AdvGame!.StoryOutput(loca.Adv_Intro0);
             AdvGame!.StoryOutput(String.Format(loca.Adv_Intro1, GD!.Version.GetVersion(), GD!.Version.GetVersionDate()));
-
+            */
             AdvGame!.StoryOutput(loca.Adv_Intro2);
             AdvGame!.StoryOutput(loca.Adv_Intro3);
             AdvGame!.StoryOutput(loca.Adv_Intro4);

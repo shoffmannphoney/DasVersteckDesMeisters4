@@ -641,7 +641,17 @@ public partial class SettingsPage : ContentPage, IMenuExtension
 
     protected override async void OnNavigatedTo(NavigatedToEventArgs args)
     {
- 
+        // Diese Menüpunkte werden für "Das Versteck des Meisters" zunächst nicht angeboten
+        MGMInner.RowDefinitions[0].Height = new GridLength(0);
+        MGMInner.RowDefinitions[1].Height = new GridLength(0);
+        MGMInner.RowDefinitions[2].Height = new GridLength(0);
+        MGMInner.RowDefinitions[3].Height = new GridLength(0);
+        MGMInner.RowDefinitions[4].Height = new GridLength(0);
+        MGMInner.RowDefinitions[5].Height = new GridLength(0);
+        MGMInner.RowDefinitions[6].Height = new GridLength(0);
+        MGMInner.RowDefinitions[7].Height = new GridLength(0);
+
+
         _viewModelGeneral.SetCallbackChangeOrientation((IGlobalData._callbackChangeOrientation)ChangeOrientation);
         _viewModelGeneral!.SetCallbackResize((IGlobalData._callbackResize)DoResize);
         base.OnNavigatedTo(args);

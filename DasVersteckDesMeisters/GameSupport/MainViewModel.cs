@@ -40,7 +40,7 @@ public class MainViewModel : BaseViewModel
         SelectReplayCommand = new Command<ReplayInfo>(SelectReplay);
         SelectGlobalMenuCommand = new Command(SelectGlobalMenu);
 
-        SelectedTheme = (ResourceDictionary) new Resources.Styles.ThemeC();
+        SelectedTheme = (ResourceDictionary) new Resources.Styles.ThemeD();
         SelectedReplay = _globalSpecs.GetCurrentReplayInfo();
 
         GlobalSpecs.CurrentGlobalSpecs!.AppRunning = IGlobalSpecs.appRunning.running;

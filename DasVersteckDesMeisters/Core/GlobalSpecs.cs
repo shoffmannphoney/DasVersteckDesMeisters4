@@ -1707,14 +1707,17 @@ public class GlobalSpecs : IGlobalSpecs
         ReloadFontSizeInfo();
         ReloadReplayInfo();
 
-        _currentTheme = _themeInfo![2]!;
+        _currentTheme = _themeInfo![3]!;
         _currentFont = _fontInfo![1]!;
         _currentFontSize = _fontSizeInfo![2]!;
         _currentReplayInfo = _replayInfo![0]!;
 
          GlobalData.CurrentGlobalData!.SetHtmlFromTheme();
+        SetCurrentTheme(_currentTheme);
+        AppShell._mainAppShell!.ChangeTheme(new Resources.Styles.ThemeD());
 
-         AppRunning = IGlobalSpecs.appRunning.start;
+
+        AppRunning = IGlobalSpecs.appRunning.start;
     }
 
     public IGlobalData? GetGlobalData()

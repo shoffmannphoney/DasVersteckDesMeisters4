@@ -922,12 +922,14 @@ namespace GameCore
                     if (ZeroLoad == false)
                     {
                         StoryOutput(loca.Adv_Intro0 );
+                        StoryOutput(String.Format(loca.Adv_Intro1, GD!.Version.GetVersion(), GD!.Version.GetVersionDate()));
                     }
-                    StoryOutput(String.Format(loca.Adv_Intro1, GD!.Version.GetVersion(), GD!.Version.GetVersionDate()));
 
+                    /*
                     StoryOutput(loca.Adv_Intro2);
                     StoryOutput(loca.Adv_Intro3);
                     StoryOutput(loca.Adv_Intro4);
+                    */
                     /*
                     StoryOutput( loca.Adv_Adv_2234);
 
@@ -2553,6 +2555,8 @@ namespace GameCore
 
             // Neue Nouns
             CA!.Noun_Ritterruestung = Nouns!.Add(Noun.NounLoca("Noun_Ritterruestung"));
+            CA!.Noun_Ritter = Nouns!.Add(Noun.NounLoca("Noun_Ritter"));
+            CA!.Noun_Ruestung = Nouns!.Add(Noun.NounLoca("Noun_Ruestung"));
             CA!.Noun_Eule = Nouns!.Add(Noun.NounLoca("Noun_Eule"));
             CA!.Noun_Skelett = Nouns!.Add(Noun.NounLoca("Noun_Skelett"));
             CA!.Noun_Fish = Nouns!.Add(Noun.NounLoca("Noun_Fish"));
@@ -2600,6 +2604,11 @@ namespace GameCore
             CA!.Noun_Kachel = Nouns!.Add(Noun.NounLoca("Noun_Pentagramm"));
             CA!.Noun_Badewanne = Nouns!.Add(Noun.NounLoca("Noun_Pentagramm"));
             CA!.Noun_Spuelung = Nouns!.Add(Noun.NounLoca("Noun_Pentagramm"));
+            CA!.Noun_Kerze = Nouns!.Add(Noun.NounLoca("Noun_Kerze"));
+            CA!.Noun_Matte= Nouns!.Add(Noun.NounLoca("Noun_Matte"));
+            CA!.Noun_Halter = Nouns!.Add(Noun.NounLoca("Noun_Halter"));
+            CA!.Noun_Beutel = Nouns!.Add(Noun.NounLoca("Noun_Beutel"));
+            CA!.Noun_Buchstaben = Nouns!.Add(Noun.NounLoca("Noun_Buchstaben"));
 
 
             CA!.Noun_Seil = Nouns!.Add(Noun.NounLoca("Adv_InitializeGame_Person_I_3263"));
@@ -3964,6 +3973,8 @@ namespace GameCore
 
             // Neue Nouns
             CA!.Noun_Ritterruestung = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Ritterruestung, "Noun_Ritterruestung"));
+            CA!.Noun_Ritter = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Ritter, "Noun_Ritter"));
+            CA!.Noun_Ruestung = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Ruestung, "Noun_Ruestung"));
             CA!.Noun_Eule = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Eule, "Noun_Eule"));
             CA!.Noun_Skelett = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Skelett, "Noun_Skelett"));
             CA!.Noun_Fish = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Fish, "Noun_Fish"));
@@ -4010,6 +4021,11 @@ namespace GameCore
             CA!.Noun_Kachel = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Kachel, "Noun_Kachel"));
             CA!.Noun_Badewanne = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Badewanne, "Noun_Badewanne"));
             CA!.Noun_Spuelung = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Spuelung, "Noun_Spuelung"));
+            CA!.Noun_Kerze = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Kerze, "Noun_Kerze"));
+            CA!.Noun_Matte = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Matte, "Noun_Matte"));
+            CA!.Noun_Halter = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Halter, "Noun_Halter"));
+            CA!.Noun_Beutel = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Beutel, "Noun_Beutel"));
+            CA!.Noun_Buchstaben = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Buchstaben, "Noun_Buchstaben"));
 
             CA!.Noun_Seil = Nouns!.Add(Noun.NounLocaLoca(loca.Adv_InitializeGame_Person_I_3263, "Adv_InitializeGame_Person_I_3263"));
             CA!.Noun_Revolver = Nouns!.Add(Noun.NounLocaLoca(loca.Adv_InitializeGame_Person_I_3264, "Adv_InitializeGame_Person_I_3264"));
@@ -5188,8 +5204,6 @@ namespace GameCore
 
             CA!.Noun_Schreib = Nouns.Add(Noun.NounLocaLoca(loca.Adv_InitializeGame_Person_I_4401, "Adv_InitializeGame_Person_I_4401"));
             CA!.Noun_Stifthalter = Nouns.Add(Noun.NounLocaLoca(loca.Adv_InitializeGame_Person_I_4402, "Adv_InitializeGame_Person_I_4402"));
-            CA!.Noun_Halter = Nouns.Add(Noun.NounLocaLoca(loca.Adv_InitializeGame_Person_I_4403, "Adv_InitializeGame_Person_I_4403"));
-            CA!.Noun_Lieferscheine = Nouns.Add(Noun.NounLocaLoca(loca.Adv_InitializeGame_Person_I_4404, "Adv_InitializeGame_Person_I_4404"));
             CA!.Noun_Scheine = Nouns.Add(Noun.NounLocaLoca(loca.Adv_InitializeGame_Person_I_4405, "Adv_InitializeGame_Person_I_4405"));
             CA!.Noun_Glasschneider = Nouns.Add(Noun.NounLocaLoca(loca.Adv_InitializeGame_Person_I_4406, "Adv_InitializeGame_Person_I_4406"));
             CA!.Noun_Schneider = Nouns.Add(Noun.NounLocaLoca(loca.Adv_InitializeGame_Person_I_4407, "Adv_InitializeGame_Person_I_4407"));
@@ -5346,14 +5360,15 @@ namespace GameCore
 
         void InitPersons()
         {
-            CA!.Person_Knights_Armor = Persons!.Add(Person.PersonLoca(new List<Noun> { CA!.Noun_Ritterruestung! }, new List<Adj> { CA!.Adj_stattlich! }, Co.SEX_FEMALE, CB!.LocType_Loc, CA!.L06_Long_Floor, "Adv_Person_Knights_Armor", Co.SZ_medium, true, null, Nouns, Adjs));
+            CA!.Person_Knights_Armor = Persons!.Add(Person.PersonLoca(new List<Noun> { CA!.Noun_Ritterruestung! }, new List<Adj> { CA!.Adj_stattlich! }, Co.SEX_FEMALE, CB!.LocType_Loc, CA!.L06_Long_Floor, "Adv_Person_Knights_Armor", Co.SZ_medium, true, DoRitterruestung, Nouns, Adjs));
+            Persons!.Last()!.SynNames = new List<Noun> { CA!.Noun_Ritter, CA!.Noun_Ruestung };
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Talkable));
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_GiveTarget));
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_QuestionTarget));
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_UsableWith));
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Listenable));
 
-            CA!.Person_Owl = Persons!.Add(Person.PersonLoca(new List<Noun> { CA!.Noun_Eule! }, new List<Adj> { CA!.Adj_ausgestopft! }, Co.SEX_FEMALE, CB!.LocType_Loc, CA!.L05_Atrium, "Adv_Person_Owl", Co.SZ_medium, true, null, Nouns, Adjs));
+            CA!.Person_Owl = Persons!.Add(Person.PersonLoca(new List<Noun> { CA!.Noun_Eule! }, new List<Adj> { CA!.Adj_ausgestopft! }, Co.SEX_FEMALE, CB!.LocType_On_Item, CA!.I05_Sill.ID, "Adv_Person_Owl", Co.SZ_medium, true, null, Nouns, Adjs));
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Talkable));
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_GiveTarget));
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_QuestionTarget));
@@ -5665,7 +5680,19 @@ namespace GameCore
             CA!.Status_Tuer_Bibliothek = Stats!.Add(new Status());
             CA!.Status_Tuer_Schlafkammer = Stats!.Add(new Status());
             CA!.Status_Tuer_Labor = Stats!.Add(new Status());
+            CA!.Status_Kerzenhalter = Stats!.Add(new Status());
 
+            CA!.Status_Eule_Klaue = Stats!.Add(new Status());
+            CA!.Status_Ritterruestung_Klaue = Stats!.Add(new Status());
+            CA!.Status_Schlange_Klaue = Stats!.Add(new Status());
+            CA!.Status_Elster_Klaue = Stats!.Add(new Status());
+            CA!.Status_Fisch_Klaue = Stats!.Add(new Status());
+            CA!.Status_Papagei_Klaue = Stats!.Add(new Status());
+            CA!.Status_Skelett_Klaue = Stats!.Add(new Status());
+
+            CA!.Status_Antwort_Unterwaesche = Stats!.Add(new Status());
+            CA!.Status_Antwort_Ruestung = Stats!.Add(new Status());
+            CA!.Status_Antwort_Lieblingstier = Stats!.Add(new Status());
         }
 
         void InitScores()
@@ -5691,7 +5718,73 @@ namespace GameCore
             get; set;
         }
 
-       
+
+
+        public bool DoRitterruestung(int locationID)
+        {
+            if (CA!.Person_I.locationID == locationID)
+            {
+                if (CA.Status_Ritterruestung_Klaue.Val <= 0 && (Items.IsItemInv(CA.I00_Unstable_Pliers_With_Claw) || Items.IsItemInv(CA.I00_Stable_Pliers_With_Claw)))
+                {
+                    int val = GD!.RandomNumber(0, 10);
+                    {
+                        if (val < 1)
+                        {
+                            StoryOutput(CA!.L06_Long_Floor, CA!.Person_I, loca.DoRR_Seufzen);
+                        }
+                        else if (val < 2)
+                        {
+                            StoryOutput(CA!.L06_Long_Floor, CA!.Person_I, loca.DoRR_Wispern);
+                        }
+                        else if (val < 3)
+                        {
+                            StoryOutput(CA!.L06_Long_Floor, CA!.Person_I, loca.DoRR_Bewegen);
+                        }
+
+                    }
+                }
+                else if (CA!.Status_Ritterruestung_Klaue.Val > 0)
+                {
+                    CA!.Status_Ritterruestung_Klaue.Val--;
+                    if (CA!.Status_Ritterruestung_Klaue.Val == 0)
+                    {
+                        StoryOutput(CA!.L06_Long_Floor, CA!.Person_I, loca.DoRR_Finish);
+
+                    }
+                    else
+                    {
+
+
+                        int val = GD!.RandomNumber(0, 10);
+                        {
+                            if (val < 1)
+                            {
+                                StoryOutput(CA!.L06_Long_Floor, CA!.Person_I, loca.DoRR_Action1);
+                            }
+                            else if (val < 2)
+                            {
+                                StoryOutput(CA!.L06_Long_Floor, CA!.Person_I, loca.DoRR_Action2);
+                            }
+                            else if (val < 3)
+                            {
+                                StoryOutput(CA!.L06_Long_Floor, CA!.Person_I, loca.DoRR_Action3);
+                            }
+                            else if (val < 4)
+                            {
+                                StoryOutput(CA!.L06_Long_Floor, CA!.Person_I, loca.DoRR_Action4);
+                            }
+                            else if (val < 5)
+                            {
+                                StoryOutput(CA!.L06_Long_Floor, CA!.Person_I, loca.DoRR_Action5);
+                            }
+
+                        }
+                    }
+
+                }
+            }
+            return true;
+        }
 
         public string? PathSegment( string s, int segmentNo )
         {
@@ -8170,6 +8263,9 @@ namespace GameCore
         }
     }
 
+
+
+
     [Serializable]
 
     public class CoAdv
@@ -8724,6 +8820,7 @@ namespace GameCore
 
         public Adj? Adj_blau;
 
+        public Adj? Adj_gekachelt;
         public Adj? Adj_episch;
 
         public Adj? Adj_erlogen;
@@ -9133,8 +9230,6 @@ namespace GameCore
         public Adj? Adj_verfuehrerisch;
 
         public Adj? Adj_guenstig;
-
-        public Adj? Adj_gekachelt;
 
         public Adj? Adj_glattpoliert;
 
@@ -12177,6 +12272,8 @@ namespace GameCore
         public Noun? Noun_Waste;
 
         public Noun? Noun_Ritterruestung;
+        public Noun? Noun_Ritter;
+        public Noun? Noun_Ruestung;
         public Noun? Noun_Eule;
         public Noun? Noun_Skelett;
         public Noun? Noun_Fish;
@@ -12227,6 +12324,10 @@ namespace GameCore
         public Noun? Noun_Kachel;
         public Noun? Noun_Badewanne;
         public Noun? Noun_Spuelung;
+        public Noun? Noun_Matte;
+        public Noun? Noun_Beutel;
+        public Noun? Noun_Kerze;
+        public Noun? Noun_Buchstaben;
 
 
         public Person? Person_Everyone;
@@ -12937,6 +13038,7 @@ namespace GameCore
         public Item? I06_Door_Red { get; set; }
         public Item? I06_Door_Wide { get; set; }
         public Item? I06_Door_White { get; set; }
+        public Item? I06_Letters { get; set; }
 
         public Item? I07_Door { get; set; }
         public Item? I07_Door_Blue { get; set; }
@@ -13017,7 +13119,18 @@ namespace GameCore
         public Status? Status_Tuer_Labor;
         public Status? Status_Tuer_Schlafkammer;
         public Status? Status_Tuer_Bibliothek;
+        public Status? Status_Kerzenhalter;
+        public Status? Status_Eule_Klaue;
+        public Status? Status_Ritterruestung_Klaue;
+        public Status? Status_Schlange_Klaue;
+        public Status? Status_Elster_Klaue;
+        public Status? Status_Fisch_Klaue;
+        public Status? Status_Papagei_Klaue;
+        public Status? Status_Skelett_Klaue;
 
+        public Status? Status_Antwort_Unterwaesche;
+        public Status? Status_Antwort_Ruestung;
+        public Status? Status_Antwort_Lieblingstier;
 
         public CoAdv()
         {
