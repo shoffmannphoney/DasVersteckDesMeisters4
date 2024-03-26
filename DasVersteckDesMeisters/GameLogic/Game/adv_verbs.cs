@@ -16,6 +16,12 @@ public partial class Adv: AdvBase
 
         }
 
+        CA!.Verb_Enlight = Verbs!.AddLoca("Verb_beleuchte");
+        Verbs.AddLoca(CA!.Verb_Enlight.ID, "Verb_bescheine");
+        Verbs.AddLoca(CA!.Verb_Enlight.ID, "Verb_erhelle");
+
+
+        CA!.Verb_Spread = Verbs!.AddLoca( "Verb_streue");
 
         CA!.Verb_Story = Verbs!.AddLoca("Order_Story");
         Verbs.AddLoca(CA!.Verb_Story.ID, "Verb_Script");
@@ -548,6 +554,7 @@ public partial class Adv: AdvBase
 
         Verbs!.SetupVerbBuffer(600);
 
+
         CB!.Verb_German = Verbs.AddLocaLoca( loca.AdvBase_Deutsch, "AdvBase_Deutsch");
         Verbs.AddLocaLoca( loca.AdvBase_Deutsch2, CB!.Verb_German.ID, "AdvBase_Deutsch2");
         Verbs.AddLocaLoca( loca.AdvBase_Deutsch3, CB!.Verb_German.ID, "AdvBase_Deutsch3");
@@ -776,7 +783,11 @@ public partial class Adv: AdvBase
     }
     public void InitVerbsPart2Fast(int size = -1)
     {
+        CA!.Verb_Enlight = Verbs!.AddLocaLoca(loca.Verb_beleuchte, "Verb_beleuchte");
+        Verbs.AddLocaLoca(loca.Verb_bescheine, CA!.Verb_Enlight.ID, "Verb_bescheine");
+        Verbs.AddLocaLoca(loca.Verb_erhelle, CA!.Verb_Enlight.ID, "Verb_erhelle");
 
+        CA!.Verb_Spread = Verbs!.AddLocaLoca(loca.Verb_streue, "Verb_streue");
 
         CA!.Verb_Story = Verbs!.AddLocaLoca( loca.Order_Story, "Order_Story");
         Verbs.AddLocaLoca( loca.Verb_Script, CA!.Verb_Story.ID, "Verb_Script");

@@ -574,6 +574,7 @@ public class GlobalData : IGlobalData
 
     IGlobalData._setGlobalMenuState? SetGlobalMenuState = null;
     IGlobalData._setLocalMenuState? SetLocalMenuState = null;
+    [JsonIgnore][NonSerialized] Random GDRandom;
 
     public IGlobalData.microMode STTMicroState { get; set; }
     public static Page? MainPage;
@@ -1306,12 +1307,13 @@ public class GlobalData : IGlobalData
 
     public void InitRandom(int num)
     {
+        GDRandom = new Random(num);
 
     }
 
     public int RandomNumber(int min, int max)
     {
-        return 0;
+        return GDRandom.Next(min, max);
     }
 
     public void ResetLanguageCallbacks()

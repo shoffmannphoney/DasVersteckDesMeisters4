@@ -50,6 +50,11 @@ public partial class Order: AbstractOrder
             of.Handled = true;
             of.Action = true;
         }
+        if (item == CA!.I10_Hatch)
+        {
+            Items.TransferItem(CA!.I10_Opening.ID, CB.LocType_On_Item, CA!.I10_Darkness_Machine.ID);
+            AdvGame.StoryOutput(loca.Open_L10_Flap);
+        }
 
         if ((success) && (item.GetStatus(CA!.iStatus_Counter_Door) > 0))
         {
@@ -90,6 +95,11 @@ public partial class Order: AbstractOrder
             of.Success = true;
             of.Handled = true;
             of.Action = true;
+        }
+
+        if (item == CA!.I10_Hatch)
+        {
+            Items.TransferItem(CA!.I10_Opening.ID, CB.LocType_In_Item, CA!.I00_Nullbehaelter3.ID );
         }
 
         // Post

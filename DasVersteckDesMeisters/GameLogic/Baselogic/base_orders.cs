@@ -6260,7 +6260,7 @@ namespace GameCore
                         break;
                 }
             }
-            catch // (Exception e)
+            catch (Exception e)
             {
 
             }

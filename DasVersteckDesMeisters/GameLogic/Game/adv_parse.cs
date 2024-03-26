@@ -1035,6 +1035,49 @@ public partial class Adv : AdvBase
         PList.AddItem();
         PLL.Add(new ParseLine(CA!.PL_Throw, PList, Orders!.Throw));
 
+        // Wirf nach
+        PList = new ParseTokenList();
+        PList.AddVerb(CA!.Verb_Throw);
+        PList.AddPerson();
+        PList.AddPrep(CB!.Prep_nach);
+        PList.AddItem();
+        PLL.Add(new ParseLine(CA!.PL_Throw, PList, Orders!.ThrowPnach));
+
+        PList = new ParseTokenList();
+        PList.AddVerb(CA!.Verb_Throw);
+        PList.AddPerson();
+        PList.AddPrep(CB!.Prep_zu);
+        PList.AddItem();
+        PLL.Add(new ParseLine(CA!.PL_Throw, PList, Orders!.ThrowPnach));
+
+        PList = new ParseTokenList();
+        PList.AddVerb(CA!.Verb_Throw);
+        PList.AddPerson();
+        PList.AddPrep(CB!.Prep_auf);
+        PList.AddItem();
+        PLL.Add(new ParseLine(CA!.PL_Throw, PList, Orders!.ThrowPnach));
+
+        PList = new ParseTokenList();
+        PList.AddNoun(CA!.Noun_Schleuder!.ID);
+        PList.AddPerson();
+        PList.AddPrep(CB!.Prep_nach);
+        PList.AddItem();
+        PLL.Add(new ParseLine(CA!.PL_Throw, PList, Orders!.ThrowPnach));
+
+        PList = new ParseTokenList();
+        PList.AddNoun(CA!.Noun_Schleuder!.ID);
+        PList.AddPerson();
+        PList.AddPrep(CB!.Prep_zu);
+        PList.AddItem();
+        PLL.Add(new ParseLine(CA!.PL_Throw, PList, Orders!.ThrowPnach));
+
+        PList = new ParseTokenList();
+        PList.AddNoun(CA!.Noun_Schleuder.ID);
+        PList.AddPerson();
+        PList.AddPrep(CB!.Prep_auf);
+        PList.AddItem();
+        PLL.Add(new ParseLine(CA!.PL_Throw, PList, Orders!.ThrowPnach));
+
         // Wirf nach MC
         PList = new ParseTokenList();
         PList.AddVerb(CA!.Verb_Throw);
@@ -1670,6 +1713,13 @@ public partial class Adv : AdvBase
         PList.AddItem();
         PLL.Add(new ParseLine(CA!.PL_Read, PList, Orders!.Read));
 
+        PList = new ParseTokenList();
+        PList.AddVerb(CA!.Verb_Read);
+        PList.AddItem();
+        PList.AddPrep(CB!.Prep_mit);
+        PList.AddItem();
+        PLL.Add(new ParseLine(CA!.PL_Read, PList, Orders!.ReadW));
+
         // lies MC
         PList = new ParseTokenList();
         PList.AddVerb(CA!.Verb_Read);
@@ -2108,6 +2158,22 @@ public partial class Adv : AdvBase
         PList = new ParseTokenList();
         PList.AddVerb(CA!.Verb_Fish);
         PLL.Add(new ParseLine(CA!.PL_Fish, PList, Orders!.FishWithMC, false));
+
+        // Streue
+        PList = new ParseTokenList();
+        PList.AddVerb(CA!.Verb_Spread);
+        PList.AddItem();
+        PList.AddPrep(CB!.Prep_auf);
+        PList.AddItem();
+        PLL.Add(new ParseLine(CA!.PL_EnlightW, PList, Orders!.SpreadOn));
+
+        // Beleuchte
+        PList = new ParseTokenList();
+        PList.AddVerb(CA!.Verb_Enlight);
+        PList.AddItem();
+        PList.AddPrep(CB!.Prep_mit);
+        PList.AddItem();
+        PLL.Add(new ParseLine(CA!.PL_EnlightW, PList, Orders!.EnlightenW));
 
         // entzünde
         PList = new ParseTokenList();
@@ -5283,6 +5349,49 @@ public partial class Adv : AdvBase
         PList.AddPrep(CB!.Prep_away);
         PLLEng.Add(new ParseLine(CB!.PL_Drop2, PList, Orders!.Drop));
 
+        // Wirf nach
+        PList = new ParseTokenList();
+        PList.AddVerb(CA!.Verb_Throw);
+        PList.AddPerson();
+        PList.AddPrep(CB!.Prep_nach);
+        PList.AddItem();
+        PLLEng.Add(new ParseLine(CA!.PL_Throw, PList, Orders!.ThrowPnach));
+
+        PList = new ParseTokenList();
+        PList.AddVerb(CA!.Verb_Throw);
+        PList.AddPerson();
+        PList.AddPrep(CB!.Prep_zu);
+        PList.AddItem();
+        PLLEng.Add(new ParseLine(CA!.PL_Throw, PList, Orders!.ThrowPnach));
+
+        PList = new ParseTokenList();
+        PList.AddVerb(CA!.Verb_Throw);
+        PList.AddPerson();
+        PList.AddPrep(CB!.Prep_auf);
+        PList.AddItem();
+        PLLEng.Add(new ParseLine(CA!.PL_Throw, PList, Orders!.ThrowPnach));
+
+        PList = new ParseTokenList();
+        PList.AddNoun(CA!.Noun_Schleuder!.ID);
+        PList.AddPerson();
+        PList.AddPrep(CB!.Prep_nach);
+        PList.AddItem();
+        PLLEng.Add(new ParseLine(CA!.PL_Throw, PList, Orders!.ThrowPnach));
+
+        PList = new ParseTokenList();
+        PList.AddNoun(CA!.Noun_Schleuder!.ID);
+        PList.AddPerson();
+        PList.AddPrep(CB!.Prep_zu);
+        PList.AddItem();
+        PLLEng.Add(new ParseLine(CA!.PL_Throw, PList, Orders!.ThrowPnach));
+
+        PList = new ParseTokenList();
+        PList.AddNoun(CA!.Noun_Schleuder.ID);
+        PList.AddPerson();
+        PList.AddPrep(CB!.Prep_auf);
+        PList.AddItem();
+        PLLEng.Add(new ParseLine(CA!.PL_Throw, PList, Orders!.ThrowPnach));
+
         // Throw out of
         PList = new ParseTokenList();
         PList.AddVerb(CA!.Verb_Throw);
@@ -5917,6 +6026,13 @@ public partial class Adv : AdvBase
         PList.AddItem();
         PLLEng.Add(new ParseLine(CA!.PL_Read, PList, Orders!.Read));
 
+        PList = new ParseTokenList();
+        PList.AddVerb(CA!.Verb_Read);
+        PList.AddItem();
+        PList.AddPrep(CB!.Prep_mit);
+        PList.AddItem();
+        PLLEng.Add(new ParseLine(CA!.PL_Read, PList, Orders!.ReadW));
+
         // lies MC
         PList = new ParseTokenList();
         PList.AddVerb(CA!.Verb_Read);
@@ -6326,6 +6442,22 @@ public partial class Adv : AdvBase
         PList = new ParseTokenList();
         PList.AddVerb(CA!.Verb_Fish);
         PLLEng.Add(new ParseLine(CA!.PL_Fish, PList, Orders!.FishWithMC, false));
+
+        // Streue
+        PList = new ParseTokenList();
+        PList.AddVerb(CA!.Verb_Spread);
+        PList.AddItem();
+        PList.AddPrep(CB!.Prep_on);
+        PList.AddItem();
+        PLLEng.Add(new ParseLine(CA!.PL_EnlightW, PList, Orders!.SpreadOn));
+
+        // Beleuchte
+        PList = new ParseTokenList();
+        PList.AddVerb(CA!.Verb_Enlight);
+        PList.AddItem();
+        PList.AddPrep(CB!.Prep_with);
+        PList.AddItem();
+        PLLEng.Add(new ParseLine(CA!.PL_LightW, PList, Orders!.EnlightenW));
 
         // entzünde
         PList = new ParseTokenList();
