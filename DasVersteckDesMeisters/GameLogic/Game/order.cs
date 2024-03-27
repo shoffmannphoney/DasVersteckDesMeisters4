@@ -1613,6 +1613,10 @@ namespace GameCore
 
             if( item1 == CA.I00_Nullbehaelter)
             {
+                CA.I10_Metall_Tray.CanPutIn = true;
+                CA.I10_Metall_Tray.StorageIn = 30;
+
+                /*
                 // CA.Status_Elster_Klaue.Val = 30;
                 // CA.Status_Eule_Klaue.Val = 30;
                 // CA.Status_Ritterruestung_Klaue.Val = 30;
@@ -1630,12 +1634,12 @@ namespace GameCore
                 Items.TransferItem(CA.I00_Magic_Candle.ID, CB.LocType_Person, CA.Person_I.ID);
                 Items.TransferItem(CA.I00_Lightless_Stone.ID, CB.LocType_Person, CA.Person_I.ID);
 
-                A.ActLoc = CA.L09_Library;
+                A.ActLoc = CA.L12_Sleeping_Room;
                 Persons.TransferPerson(CA.Person_I.ID, CB.LocType_Person, A.ActLoc);
                 locations.ShowlocationFull(A.ActLoc);
 
                 AdvGame.StoryOutput("Möp");
-
+                */
                 success = true;
             }
 
@@ -1806,6 +1810,7 @@ namespace GameCore
             {
                 CA.Status_Schale_Befestigt.Val = 1;
                 AdvGame!.StoryOutput(loca.AttachTo_Schale_Ok);
+                handled = true;
             }
 
             if (!handled)
@@ -2513,7 +2518,7 @@ namespace GameCore
             {
                 if( CA.Status_Schale_Befestigt.Val == 0 )
                 {
-                    AdvGame.StoryOutput( loca.Heat_NoTray)
+                    AdvGame.StoryOutput(loca.Heat_NoTray);
                 }
                 else if (CA.Status_Kerzenhalter.Val == 0)
                 {

@@ -491,7 +491,7 @@ namespace GameCore
             mcM.Last()!.SetSpeaker(CB!.VT_sagen);
 
             cFollower.Add(104);
-            mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Lib_Dialog_Meister", 104, 240, true, false));
+            mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Lib_Dialog_Meister", 104, 240, true, true));
             mcM.Last()!.SetSpeaker(CB!.VT_sagen);
 
             cFollower.Add(199);
@@ -821,15 +821,15 @@ namespace GameCore
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Book_Dialog_Start", 1, 1 + CB!.MCE_Choice_Off, true));
 
             cFollower.Add(100);
-            mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Book_Dialog_Gunnar", 100, 200, true, true));
+            mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Book_Dialog_Gunnar", 100, 200, true, false));
             mcM.Last()!.SetSpeaker(CB!.VT_sagen);
 
             cFollower.Add(101);
-            mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Book_Dialog_Teleports", 101, 210, true, true));
+            mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Book_Dialog_Teleports", 101, 210, true, false));
             mcM.Last()!.SetSpeaker(CB!.VT_sagen);
 
             cFollower.Add(102);
-            mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Book_Dialog_Sextips", 102, 220, true, true));
+            mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Book_Dialog_Sextips", 102, 220, true, false));
             mcM.Last()!.SetSpeaker(CB!.VT_sagen);
 
             cFollower.Add(199);

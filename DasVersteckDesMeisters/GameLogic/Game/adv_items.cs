@@ -145,7 +145,7 @@ public partial class Adv: AdvBase
         Items!.Last().CanPutIn = true;
         Items!.Last().StorageIn = 20;
 
-        CA!.I05_Pentagram = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Pentagramm! }, null, Co.SEX_NEUTER, CB!.LocType_Loc, CA!.L03_In_The_Parlor, loca.Adv_I05_Pentagram, "Adv_I05_Pentagram", Co.SZ_small, true, false, Nouns, Adjs));
+        CA!.I05_Pentagram = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Pentagramm! }, null, Co.SEX_NEUTER, CB!.LocType_Loc, CA!.L05_Atrium, loca.Adv_I05_Pentagram, "Adv_I05_Pentagram", Co.SZ_small, true, false, Nouns, Adjs));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
@@ -429,6 +429,8 @@ public partial class Adv: AdvBase
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
+        Items!.Last().CanPutIn = true;
+        Items!.Last().StorageIn = 30;
 
         CA!.I10_Darkness_Machine = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Dunkelheitsmaschine! }, new List<Adj> { CA!.Adj_sinister! }, Co.SEX_FEMALE, CB!.LocType_Loc, CA!.L10_Laboratory, loca.Adv_I10_Darkness_Machine, "Adv_I10_Darkness_Machine", Co.SZ_small, true, false, Nouns, Adjs));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
@@ -519,7 +521,7 @@ public partial class Adv: AdvBase
         Items!.Last().CanPutOn = true;
         Items!.Last().StorageOn = 20;
 
-        CA!.I12_Matress = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Matratze! }, null, Co.SEX_FEMALE, CB!.LocType_On_Item, CA!.I12_Bed.ID, loca.Adv_I12_Matress, "Adv_I12_Matress", Co.SZ_small, true, false, Nouns, Adjs));
+        CA!.I12_Matress = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Matratze! }, null, Co.SEX_FEMALE, CB!.LocType_Loc, CA!.L12_Sleeping_Room, loca.Adv_I12_Matress, "Adv_I12_Matress", Co.SZ_small, true, false, Nouns, Adjs));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));

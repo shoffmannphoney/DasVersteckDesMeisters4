@@ -1408,6 +1408,12 @@ namespace GameCore
                         ct++;
                 }
             }
+
+            if( ct >= 2)
+            {
+
+            }
+
             return (ct);
         }
 
@@ -3528,6 +3534,8 @@ namespace GameCore
                 }
             }
             */
+
+            GD.UIS.InitBrowserUpdate();
             return found;
         }
 
