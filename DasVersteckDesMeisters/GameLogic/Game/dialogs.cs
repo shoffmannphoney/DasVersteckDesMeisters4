@@ -258,6 +258,7 @@ namespace GameCore
             AdvGame!.StoryOutput(loca.Owl_Library_Door);
 
             CA.Status_Tuer_Bibliothek.Val = 1;
+            persistentMCMenu!.FindID(102)!.Hidden = MCMenuEntry.HiddenType.outdated;
 
             return true;
         }

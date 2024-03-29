@@ -4,7 +4,8 @@ using System.Collections.Generic;
 
 namespace GameCore
 {
-    [Serializable]
+    [Serializable]
+
     public class Topic: AbstractAdvObject
     {
         /*
@@ -20,7 +21,8 @@ namespace GameCore
         public Topic()
         {
 
-        }
+        }
+
         public Topic(int pTopicID, List<Noun> pNames, List<Adj> pAdjectives, int pSex, NounList pNouns, AdjList pAdjs )
            : base(pTopicID, pNames, null, pAdjectives, null, pSex, null, true, null, pNouns, pAdjs)
         {
@@ -43,19 +45,22 @@ namespace GameCore
                 Names.Add(element);
             }
             */
-        }
+        }
+
         public Topic(List<Noun> pNames, List<Adj> pAdjectives, int pSex, NounList pNouns, AdjList pAdjs)
                  : this(SerialNumberGenerator.Instance.NextSerial, pNames, pAdjectives, pSex, pNouns, pAdjs)
 
         {
-        }
+        }
+
         public Topic Clone()
         {
             Topic t = (Topic)this.MemberwiseClone();
             return t;
         }
     }
-    [Serializable]
+    [Serializable]
+
     public class TopicList: AbstractAdvObjectList<AdvObject>
     {
 #pragma warning disable CS0108 // "TopicList.List" blendet den vererbten Member "AbstractAdvObjectList<AdvObject>.List" aus. Verwenden Sie das new-Schlüsselwort, wenn das Ausblenden vorgesehen war.
@@ -72,7 +77,8 @@ namespace GameCore
 #pragma warning restore CS0108 // "TopicList.Last()" blendet den vererbten Member "AbstractAdvObjectList<AdvObject>.Last()" aus. Verwenden Sie das new-Schlüsselwort, wenn das Ausblenden vorgesehen war.
         {
             return (List[List.Count - 1]);
-        }
+        }
+
         public Topic Add(Topic I)
         {
             if (List == null)
@@ -100,7 +106,8 @@ namespace GameCore
                 if (ret != null) break;
             }
             return ret;
-        }
+        }
+
         public Topic? Find(Topic T)
         {
             Topic? ret = null;
@@ -132,7 +139,8 @@ namespace GameCore
             }
             return index;
 
-        }
+        }
+
         public bool IsTopicHere(Topic T, int Mode)
         {
             bool foundTopic = false;
@@ -148,7 +156,8 @@ namespace GameCore
             }
 
             return (foundTopic);
-        }
+        }
+
         public int GetTopicIx(int TopicID)
         {
             int rTopicIX = 0;
@@ -160,7 +169,8 @@ namespace GameCore
                 }
             }
             return (rTopicIX);
-        }
+        }
+
         public int GetTopicIx(Topic T )
         {
             int rTopicIX = 0;
@@ -172,7 +182,8 @@ namespace GameCore
                 }
             }
             return (rTopicIX);
-        }
+        }
+
         public string GetTopicName(int TopicID, int Case)
         {
             return (this.List[this.FindIx(TopicID)].FullName(this.Find(TopicID)!, Case )!);

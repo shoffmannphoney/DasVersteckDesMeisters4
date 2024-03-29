@@ -164,6 +164,17 @@ namespace GameCore
             // Nach den gesamten Prüfungen von Adv_PT ist garantiert, dass sich die Werte an dieser Stelle befinden.
             Person person = PTL.GetFirstPerson()!; //  GetPersonRef(Adv_PT[1].WordID);
 
+            if( person == CA.Person_Owl)
+            {
+                AdvGame.StoryOutput(loca.Take_Eule);
+                success = true;
+            }
+            else if (person == CA.Person_Magpie)
+            {
+                AdvGame.StoryOutput(loca.Take_Elster);
+                success = true;
+            }
+
             // Lokale Abfragen
             if (success)
                 success = base.TakeP(PersonID, PTL);
@@ -309,6 +320,12 @@ namespace GameCore
         public bool ItemFromInv( Item item1, Person PersonID )
         {
             bool canBeDropped = true;
+
+            if( item1 == CA!.I00_Pouch)
+            {
+                AdvGame.StoryOutput(loca.Drop_Pouch_Fail);
+                canBeDropped = false;
+            }
 
             if( item1.IsDressed == true )
             {
@@ -985,6 +1002,28 @@ namespace GameCore
 
             AdvGame!.StoryOutput(  Helper.Insert(loca.Order_GrabSolo_475, item1!.ID ));
 
+            return (handled);
+        }
+        public bool GrabIn(Person PersonID, ParseTokenList PTL)
+        {
+            bool handled = false;
+            Item item1 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[1].WordID);
+
+            if( item1 == CA.I14_Opening )
+            {
+                AdvGame.StoryOutput(loca.Grab_In_Find );
+                item1.InvisibleIn = false;
+            }
+            else if (item1 == CA.I04_Opening )
+            {
+                AdvGame.StoryOutput(loca.Grab_In_Find);
+                item1.InvisibleIn = false;
+            }
+
+            if (!handled)
+            {
+                AdvGame!.StoryOutput(Helper.Insert(loca.Grab_In_Fail, item1!.ID));
+            }
             return (handled);
         }
 
@@ -2343,26 +2382,6 @@ namespace GameCore
 
                 }
 
-#if (DEBUG)
-                string s = string.Format( loca.Order_Score_907, (double) ( ( c1score * 100 ) / c1totalscore) );
-                AdvGame!.StoryOutput( String.Format( loca.Order_Score_908,  s )  );
-
-                s = string.Format( loca.Order_Score_909, (double)( ( c2score * 100 ) / c2totalscore ) );
-                AdvGame!.StoryOutput(String.Format(loca.Order_Score_910, s)) ;
-
-                s = string.Format( loca.Order_Score_911, (double)( ( c3score * 100) / c3totalscore ) );
-                AdvGame!.StoryOutput(String.Format(loca.Order_Score_912, s)) ;
-
-                s = string.Format( loca.Order_Score_913, (double)( ( c4score *100) / c4totalscore ) );
-                AdvGame!.StoryOutput(String.Format(loca.Order_Score_914, s)) ;
-
-                double cscore = c1score + c2score + c3score + c4score;
-                double ctotalscore = c1totalscore + c2totalscore + c3totalscore + c4totalscore;
-
-                s = string.Format( loca.Order_Score_915, (double)(( cscore * 100) / ctotalscore));
-                AdvGame!.StoryOutput(String.Format(loca.Order_Score_916, s)) ;
-
-#endif
             }
 
             AdvGame!.SetScoreOutput();
@@ -4267,7 +4286,9 @@ namespace GameCore
             Item item1 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[1].WordID);
             Item item2 = PTL.GetSecondItem()!; //  GetItemRef(Adv_PT[3].WordID);
 
-            if( item1 == CA.I00_Sugar_Pliers && item2 == CA.I00_Claw )
+            if(     ( item1 == CA.I00_Sugar_Pliers && item2 == CA.I00_Claw )
+                || (item2 == CA.I00_Sugar_Pliers && item1 == CA.I00_Claw)
+                )
             {
                 AdvGame!.StoryOutput(loca.UseW_SugarPliers_Claw);
                 Items.TransferItem(CA.I00_Claw.ID, CA.I00_Nullbehaelter2.ID);
@@ -4289,6 +4310,20 @@ namespace GameCore
             else if (item1 == CA!.I08_Water && item2 == CA!.I00_Magic_Candle)
             {
                 EnlightenW(PersonID, PTL);
+
+                handled = true;
+            }
+            else if (       ( item1 == CA!.I00_Magic_Powder && item2 == CA!.I00_Magic_Candle)
+                        || (item2 == CA!.I00_Magic_Powder && item1 == CA!.I00_Magic_Candle)
+                    )
+            {
+                ParseTokenList PT = new ParseTokenList();
+                PT.AddVerb(CA!.Verb_Tip);
+                PT.AddItem(CA!.I00_Magic_Powder);
+                PT.AddPrep(CB!.Prep_auf);
+                PT.AddItem(CA!.I00_Magic_Candle);
+
+                Tip(PersonID, PT);
 
                 handled = true;
             }
@@ -4447,6 +4482,11 @@ namespace GameCore
             Item item1 = PTL.GetFirstItem()!; //  
             Item item2 = PTL.GetSecondItem()!;
 
+            if( item1 == CA.I00_Claw && item2 == CA.I00_Sugar_Pliers )
+            {
+                UseW(PersonID, PTL);
+                success = true;
+            }
  
             if (!success)
             {
@@ -4519,6 +4559,7 @@ namespace GameCore
             }
             return (success);
         }
+
 
         public bool Tie(Person PersonID, ParseTokenList PTL)
         {
@@ -4806,6 +4847,16 @@ namespace GameCore
                 AdvGame!.StoryOutput(loca.Adv_I14_Writing );
                 success = true;
 
+            }
+            if( item1 == CA!.I05_Sign )
+            {
+                Examine(PersonID, PTL);
+                success = true;
+            }
+            if (item1 == CA!.I06_Sign)
+            {
+                Examine(PersonID, PTL);
+                success = true;
             }
             else if ( item1 == CA.I00_Book_Master)
             {
@@ -6235,6 +6286,7 @@ namespace GameCore
                 AdvGame.StoryOutput(loca.Wrap_Rollpflaster_Pliers_Ok);
                 Items.TransferItem(CA.I00_Unstable_Pliers_With_Claw.ID, CA.I00_Nullbehaelter.ID);
                 Items.TransferItem(CA.I00_Stable_Pliers_With_Claw.ID, CB.LocType_Person, CA!.Person_I.ID);
+                Items.TransferItem(CA.I00_Roll_Plaster.ID, CA.I00_Nullbehaelter.ID);
                 success = true;
             }
 

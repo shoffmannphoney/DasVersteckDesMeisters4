@@ -10,6 +10,6 @@
     <Color x:Key="BGMC">#38040e</Color>
     <Color x:Key="FGMC">#d69498</Color>
     <Color x:Key="BGInactive">#2d030b</Color>
-    <Color x:Key="FGInactive">#791c22</Color>
+    <Color x:Key="FGInactive">#96686a</Color>
     <Color x:Key="BGInputline">#263f3f</Color>
 </ResourceDictionary>

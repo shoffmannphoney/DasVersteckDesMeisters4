@@ -28,9 +28,6 @@ public partial class Adv: AdvBase
 
         CA!.Verb_Undo = Verbs!.AddLoca("Verb_Undo");
 
-        CA!.Verb_PV_Up = Verbs!.AddLoca( "Adv_12999");
-        CA!.Verb_PV_Down = Verbs.AddLoca( "Adv_13000");
-
         CA!.Verb_Testwindow = Verbs.AddLoca( "Adv_13001");
 
         CA!.Verb_Phone = Verbs.AddLoca( "Adv_13002");
@@ -793,9 +790,6 @@ public partial class Adv: AdvBase
         Verbs.AddLocaLoca( loca.Verb_Script, CA!.Verb_Story.ID, "Verb_Script");
 
         CA!.Verb_Undo = Verbs!.AddLocaLoca( loca.Verb_Undo, "Verb_Undo");
-
-        CA!.Verb_PV_Up = Verbs!.AddLocaLoca( loca.Adv_12999, "Adv_12999");
-        CA!.Verb_PV_Down = Verbs.AddLocaLoca( loca.Adv_13000, "Adv_13000");
 
         CA!.Verb_Testwindow = Verbs.AddLocaLoca( loca.Adv_13001, "Adv_13001");
 

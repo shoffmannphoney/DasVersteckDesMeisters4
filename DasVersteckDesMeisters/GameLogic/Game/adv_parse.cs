@@ -910,6 +910,13 @@ public partial class Adv : AdvBase
         PList.AddPerson();
         PLL.Add(new ParseLine(CA!.PL_Use_W_P, PList, Orders!.UseWP));
 
+        PList = new ParseTokenList();
+        PList.AddVerb(CB!.Verb_Use);
+        PList.AddPerson();
+        PList.AddPrep(CB!.Prep_mit);
+        PList.AddItem();
+        PLL.Add(new ParseLine(CA!.PL_Use_W_P, PList, Orders!.UsePW));
+
         // Schraube los
         PList = new ParseTokenList();
         PList.AddNoun(CA!.Noun_Schraube!.ID);
@@ -2240,6 +2247,13 @@ public partial class Adv : AdvBase
         PList.AddPrep(CB!.Prep_mit);
         PList.AddItem();
         PLL.Add(new ParseLine(CA!.PL_Grab, PList, Orders!.Grab));
+
+        // greifen in
+        PList = new ParseTokenList();
+        PList.AddVerb(CA!.Verb_Grab);
+        PList.AddPrep(CB!.Prep_in);
+        PList.AddItem();
+        PLL.Add(new ParseLine(CA!.PL_GrabSolo, PList, Orders!.GrabIn));
 
         // greifen MC
         PList = new ParseTokenList();
@@ -5238,6 +5252,13 @@ public partial class Adv : AdvBase
         PList.AddPerson();
         PLLEng.Add(new ParseLine(CA!.PL_Use_W_P, PList, Orders!.UseWP));
 
+        PList = new ParseTokenList();
+        PList.AddVerb(CB!.Verb_Use);
+        PList.AddPerson();
+        PList.AddPrep(CB!.Prep_with);
+        PList.AddItem();
+        PLLEng.Add(new ParseLine(CA!.PL_Use_W_P, PList, Orders!.UsePW));
+
         // Schraube los
         PList = new ParseTokenList();
         PList.AddVerb(CB!.Verb_Unscrew);
@@ -6525,6 +6546,13 @@ public partial class Adv : AdvBase
         PList.AddPrep(CB!.Prep_with);
         PList.AddItem();
         PLLEng.Add(new ParseLine(CA!.PL_Grab, PList, Orders!.Grab));
+
+        // greifen in
+        PList = new ParseTokenList();
+        PList.AddVerb(CA!.Verb_Grab);
+        PList.AddPrep(CB!.Prep_in);
+        PList.AddItem();
+        PLLEng.Add(new ParseLine(CA!.PL_GrabSolo, PList, Orders!.GrabIn));
 
         // greifen MC
         PList = new ParseTokenList();

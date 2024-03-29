@@ -293,6 +293,7 @@ public partial class Adv: AdvBase
         Items!.Last().StorageOn = 0;
 
         CA!.I08_Wooden_Cover = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Holzabdeckung! }, new List<Adj> { CA!.Adj_schwer! }, Co.SEX_FEMALE, CB!.LocType_On_Item, CA!.I08_Well.ID, loca.Adv_I08_Wooden_Cover, "Adv_I08_Wooden_Cover", Co.SZ_small, true, false, Nouns, Adjs));
+        Items!.Last().SynNames = new List<Noun> { CA.Noun_Holz, CA.Noun_Abdeckung, CA.Noun_Deckel };
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
@@ -403,6 +404,7 @@ public partial class Adv: AdvBase
         Items!.Last().IsClosed = true;
 
         CA!.I10_First_Aid_Kit = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Erstehilfekasten! }, new List<Adj> { CA!.Adj_modern! }, Co.SEX_MALE, CB!.LocType_Loc, CA!.L10_Laboratory, loca.Adv_I10_First_Aid_Kit, "Adv_I10_First_Aid_Kit", Co.SZ_small, true, false, Nouns, Adjs));
+        Items!.Last().SynNames = new List<Noun> { CA!.Noun_Kasten, CA!.Noun_Verbandskasten };
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
@@ -426,6 +428,7 @@ public partial class Adv: AdvBase
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
 
         CA!.I10_Metall_Tray= Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Metallschale! }, new List<Adj> { CA!.Adj_angekokelt! }, Co.SEX_FEMALE, CB!.LocType_On_Item, CA!.I10_Labor_Table.ID, loca.Adv_I10_Metal_Tray, "Adv_I10_Metal_Tray", Co.SZ_small, true, true, Nouns, Adjs));
+        Items!.Last().SynNames = new List<Noun>{ CA!.Noun_Schale };
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
@@ -644,12 +647,14 @@ public partial class Adv: AdvBase
         Items!.Last().StorageIn = 20;
 
         CA!.I00_Magic_Powder = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Pulver! }, new List<Adj> { CA!.Adj_magisch! }, Co.SEX_NEUTER, CB!.LocType_In_Item, CA!.I00_Pouch.ID, loca.Adv_I00_Pouch, "Adv_I00_Magic_Powder", Co.SZ_small, false, true, Nouns, Adjs));
+        Items!.Last().SynNames = new List<Noun> { CA!.Noun_Staub! };
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Eatable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
 
         CA!.I00_Supermagic_Powder = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Pulver! }, new List<Adj> { CA!.Adj_magisch! }, Co.SEX_NEUTER, CB!.LocType_In_Item, CA!.I00_Nullbehaelter.ID, loca.Adv_I00_Supermagic_Powder, "Adv_I00_Supermagic_Powder", Co.SZ_small, false, false, Nouns, Adjs));
+        Items!.Last().SynNames = new List<Noun> { CA!.Noun_Staub! };
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Eatable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
@@ -678,8 +683,7 @@ public partial class Adv: AdvBase
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
 
         CA!.I00_Roll_Plaster = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Rollpflaster! }, new List<Adj> { CA!.Adj_vergilbt! }, Co.SEX_NEUTER, CB!.LocType_In_Item, CA!.I10_First_Aid_Kit.ID, loca.Adv_I00_Roll_Plaster, "Adv_I00_Roll_Plaster", Co.SZ_small, false, true, Nouns, Adjs));
-        Items!.Last().SynNames = new List<Noun> { CA!.Noun_Pflaster};
-        Items!.Last().SynNames = new List<Noun> { CA!.Noun_Rolle };
+        Items!.Last().SynNames = new List<Noun> { CA!.Noun_Pflaster, CA!.Noun_Rolle};
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
@@ -713,6 +717,7 @@ public partial class Adv: AdvBase
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
 
         CA!.I00_Paper_Sheets = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Papierboegen! }, new List<Adj> { CA!.Adj_beschrieben! }, Co.SEX_MALE_PL, CB!.LocType_Below_Item, CA!.I12_Matress.ID, loca.Adv_I00_Paper_Sheets, "Adv_I00_Paper_Sheets", Co.SZ_small, false, true, Nouns, Adjs));
+        Items!.Last().SynNames = new List<Noun> { CA.Noun_Papier, CA.Noun_Bogen, CA.Noun_Boegen };
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
@@ -743,11 +748,13 @@ public partial class Adv: AdvBase
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
 
         CA!.I00_Plastic_Bag = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Plastikbeutel! }, new List<Adj> { CA!.Adj_gekuehlt! }, Co.SEX_MALE, CB!.LocType_In_Item, CA!.I13_Freezer.ID, loca.Adv_I00_Plastic_Bag, "Adv_I00_Plastic_Bag", Co.SZ_small, false, true, Nouns, Adjs));
+        Items!.Last().SynNames = new List<Noun> { CA!.Noun_Beutel, CA!.Noun_Plastik, CA.Noun_Pilz, CA.Noun_Schimmel, CA.Noun_Funghi, CA.Noun_Sporen };
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
 
         CA!.I00_Wonder_Wart_Sponge = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Wunderwarzenschwamm! }, new List<Adj> { CA!.Adj_prachtvoll! }, Co.SEX_MALE, CB!.LocType_In_Item, CA!.I00_Nullbehaelter.ID, loca.Adv_I00_Wonder_Wart_Sponge, "Adv_I00_Wonder_Wart_Sponge", Co.SZ_small, false, true, Nouns, Adjs));
+        Items!.Last().SynNames = new List<Noun> { CA.Noun_Pilz, CA.Noun_Schimmel, CA.Noun_Funghi, CA.Noun_Sporen, CA.Noun_Schwamm };
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));

@@ -1052,7 +1052,7 @@ public class UIServices : IUIServices
     }
     public bool WriteStory()
     {
-        string pathfileName = CurrentPathPlusFilename("Phoney_Island_Story_Recording.html");
+        string pathfileName = CurrentPathPlusFilename("Versteck_Meister_Story_Recording.html");
 
         try
         {

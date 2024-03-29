@@ -2554,6 +2554,17 @@ namespace GameCore
             }
 
             // Neue Nouns
+            CA!.Noun_Abdeckung = Nouns!.Add(Noun.NounLoca("Noun_Abdeckung"));
+            CA!.Noun_Deckel = Nouns!.Add(Noun.NounLoca("Noun_Deckel"));
+            CA!.Noun_Verbandskasten = Nouns!.Add(Noun.NounLoca("Noun_Verbandskasten"));
+            CA!.Noun_Plastik = Nouns!.Add(Noun.NounLoca("Noun_Plastik"));
+            CA!.Noun_Pilz = Nouns!.Add(Noun.NounLoca("Noun_Pilz"));
+            CA!.Noun_Funghi = Nouns!.Add(Noun.NounLoca("Noun_Funghi"));
+            CA!.Noun_Sporen = Nouns!.Add(Noun.NounLoca("Noun_Sporen"));
+            CA!.Noun_Schwamm = Nouns!.Add(Noun.NounLoca("Noun_Schwamm"));
+
+
+
             CA!.Noun_Ritterruestung = Nouns!.Add(Noun.NounLoca("Noun_Ritterruestung"));
             CA!.Noun_Ritter = Nouns!.Add(Noun.NounLoca("Noun_Ritter"));
             CA!.Noun_Ruestung = Nouns!.Add(Noun.NounLoca("Noun_Ruestung"));
@@ -3974,6 +3985,16 @@ namespace GameCore
             string s = loca.Adv_InitializeGame_Person_I_3263;
 
             // Neue Nouns
+            CA!.Noun_Abdeckung = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Abdeckung, "Noun_Abdeckung"));
+            CA!.Noun_Deckel = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Deckel, "Noun_Deckel"));
+            CA!.Noun_Verbandskasten = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Verbandskasten, "Noun_Verbandskasten"));
+            CA!.Noun_Plastik = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Plastik, "Noun_Plastik"));
+            CA!.Noun_Pilz = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Pilz, "Noun_Pilz"));
+            CA!.Noun_Funghi = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Funghi, "Noun_Funghi"));
+            CA!.Noun_Sporen = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Sporen, "Noun_Sporen"));
+            CA!.Noun_Schwamm = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Schwamm, "Noun_Schwamm"));
+
+
             CA!.Noun_Ritterruestung = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Ritterruestung, "Noun_Ritterruestung"));
             CA!.Noun_Ritter = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Ritter, "Noun_Ritter"));
             CA!.Noun_Ruestung = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Ruestung, "Noun_Ruestung"));
@@ -12452,6 +12473,16 @@ namespace GameCore
         public Noun? Noun_Kerze;
         public Noun? Noun_Buchstaben;
         public Noun? Noun_Rolle;
+
+        // Neue Nouns
+        public Noun? Noun_Abdeckung;
+        public Noun? Noun_Deckel;
+        public Noun? Noun_Verbandskasten;
+        public Noun? Noun_Plastik;
+        public Noun? Noun_Pilz;
+        public Noun? Noun_Funghi;
+        public Noun? Noun_Sporen;
+        public Noun? Noun_Schwamm;
 
 
         public Person? Person_Everyone;
