@@ -114,6 +114,32 @@ namespace GameCore
                 ix += 10;
             }
 
+            ix = CalcIx(CA!.imc_Uhu_Fragen );
+            if (CA.Status_Quiz_Start.Val == 1 && CA.Status_Tuer_Bibliothek.Val == 0 )
+            {
+                cFollower.Add(ix);
+                mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Uhu_Fragen, ix, CB!.MCE_Choice1, true, true));
+                ix += 10;
+
+                ix = CalcIx(CA!.imc_Uhu_Fragen_Unterwaesche );
+                cFollower.Add(ix);
+                mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Uhu_Fragen_Unterwaesche, ix, CB!.MCE_Choice1, true, true));
+
+                ix = CalcIx(CA!.imc_Uhu_Fragen_Ruestung);
+                cFollower.Add(ix);
+                mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Uhu_Fragen_Ruestung, ix, CB!.MCE_Choice1, true, true));
+
+                ix = CalcIx(CA!.imc_Uhu_Fragen_Tier);
+                cFollower.Add(ix);
+                mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Uhu_Fragen_Tier, ix, CB!.MCE_Choice1, true, true));
+            }
+
+            ix = CalcIx(CA!.imc_Neues_Pulver_Wie );
+            if( CA.Status_Rezept_Gelesen.Val == 1 && CA.I00_Supermagic_Powder == CA.I00_Nullbehaelter)
+            {
+                cFollower.Add(ix);
+                mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Neues_Rezept_Wie, ix, CB!.MCE_Choice1, true, true));
+            }
 
             cFollower.Add(ix);
             mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Order_InfoMCDialog_Person_Self_11228, ix, -1, true, false));

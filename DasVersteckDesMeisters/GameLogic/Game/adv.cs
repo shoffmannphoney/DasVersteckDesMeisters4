@@ -2629,6 +2629,7 @@ namespace GameCore
             CA!.Noun_Ente = Nouns.Add(Noun.NounLoca("Noun_Ente"));
             CA!.Noun_Entchen = Nouns.Add(Noun.NounLoca("Noun_Entchen"));
             CA!.Noun_Gummiente = Nouns.Add(Noun.NounLoca("Noun_Gummiente"));
+            CA!.Noun_Flamme = Nouns.Add(Noun.NounLoca("Noun_Flamme"));
 
             CA!.Noun_Seil = Nouns!.Add(Noun.NounLoca("Adv_InitializeGame_Person_I_3263"));
             CA!.Noun_Revolver = Nouns!.Add(Noun.NounLoca("Adv_InitializeGame_Person_I_3264"));
@@ -4066,6 +4067,7 @@ namespace GameCore
             CA!.Noun_Ente = Nouns.Add(Noun.NounLocaLoca(loca.Noun_Ente, "Noun_Ente"));
             CA!.Noun_Entchen = Nouns.Add(Noun.NounLocaLoca(loca.Noun_Entchen, "Noun_Entchen"));
             CA!.Noun_Gummiente = Nouns.Add(Noun.NounLocaLoca(loca.Noun_Gummiente, "Noun_Gummiente"));
+            CA!.Noun_Flamme = Nouns.Add(Noun.NounLocaLoca(loca.Noun_Flamme, "Noun_Flamme"));
 
             CA!.Noun_Seil = Nouns!.Add(Noun.NounLocaLoca(loca.Adv_InitializeGame_Person_I_3263, "Adv_InitializeGame_Person_I_3263"));
             CA!.Noun_Revolver = Nouns!.Add(Noun.NounLocaLoca(loca.Adv_InitializeGame_Person_I_3264, "Adv_InitializeGame_Person_I_3264"));
@@ -5745,6 +5747,8 @@ namespace GameCore
             CA!.Status_Schale_Befestigt = Stats!.Add(new Status());
             CA!.Status_Elster_Tauschintro = Stats!.Add(new Status());
             CA!.Status_Klaue_Nehmversuch = Stats!.Add(new Status());
+            CA!.Status_Quiz_Start = Stats!.Add(new Status());
+            CA!.Status_Rezept_Gelesen = Stats!.Add(new Status());
         }
 
         void InitScores()
@@ -6140,6 +6144,57 @@ namespace GameCore
                 if (CA!.Status_Schlange_Klaue.Val == 0)
                 {
                     StoryOutput(CA!.Person_Snake.locationID, CA!.Person_I, loca.Do_Snake_Finish);
+                }
+            }
+
+            if (CA!.Person_I.locationID == locationID)
+            {
+                if (CA.Status_Schlange_Klaue.Val <= 0 && (Items.IsItemInv(CA.I00_Unstable_Pliers_With_Claw) || Items.IsItemInv(CA.I00_Stable_Pliers_With_Claw)))
+                {
+                    int a = 5;
+                    int val = GD!.RandomNumber(0, 30);
+                    {
+                        if (val < 1)
+                        {
+                            StoryOutput(CA!.Person_Snake.locationID, CA!.Person_I, loca.Do_Snake_Reaktion1);
+                        }
+                        else if (val < 2)
+                        {
+                            StoryOutput(CA!.Person_Snake.locationID, CA!.Person_I, loca.Do_Snake_Reaktion2);
+                        }
+                        else if (val < 3)
+                        {
+                            StoryOutput(CA!.Person_Snake.locationID, CA!.Person_I, loca.Do_Snake_Reaktion3);
+                        }
+
+                    }
+                }
+                else if (CA!.Status_Schlange_Klaue.Val > 0)
+                {
+                    int val = GD!.RandomNumber(0, 30);
+                    {
+                        if (val < 1)
+                        {
+                            StoryOutput(CA!.Person_Snake.locationID, CA!.Person_I, loca.Do_Snake_Action1);
+                        }
+                        else if (val < 2)
+                        {
+                            StoryOutput(CA!.Person_Snake.locationID, CA!.Person_I, loca.Do_Snake_Action2);
+                        }
+                        else if (val < 3)
+                        {
+                            StoryOutput(CA!.Person_Snake.locationID, CA!.Person_I, loca.Do_Snake_Action3);
+                        }
+                        else if (val < 4)
+                        {
+                            StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Snake_Action4);
+                        }
+                        else if (val < 5)
+                        {
+                            StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Snake_Action5);
+                        }
+
+                    }
                 }
             }
 
@@ -12702,6 +12757,7 @@ namespace GameCore
         public Noun? Noun_Ente;
         public Noun? Noun_Entchen;
         public Noun? Noun_Gummiente;
+        public Noun? Noun_Flamme;
 
         // Neue Nouns
         public Noun? Noun_Abdeckung;
@@ -13529,7 +13585,8 @@ namespace GameCore
         public Status? Status_Schale_Befestigt;
         public Status? Status_Elster_Tauschintro;
         public Status? Status_Klaue_Nehmversuch;
-
+        public Status? Status_Quiz_Start;
+        public Status? Status_Rezept_Gelesen;
 
         public Score? Score_Beutelchen;         // set
         public Score? Score_Kerzenhalter;       // set

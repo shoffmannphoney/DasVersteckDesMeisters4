@@ -271,6 +271,7 @@ namespace GameCore
 
         public bool OwlDialog_Quizstart(List<MCMenuEntry> MCMEntry)
         {
+            CA.Status_Quiz_Start.Val = 1;
             persistentMCMenu!.SetNewStart(11);
             if ( CA.Status_Antwort_Lieblingstier.Val > 0 )
             {
@@ -897,6 +898,12 @@ namespace GameCore
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Snake, "Snake_Dialog_Meister4", 222, 1 + CB!.MCE_Choice_Off, true));
             mcM.Last()!.SetSpeaker(CB!.VT_sagen);
         }
+        public bool BookDialog_Rezept(List<MCMenuEntry> MCMEntry)
+        {
+            CA.Status_Rezept_Gelesen.Val = 1;
+
+            return true;
+        }
         public void BookDialog(MCMenu mcM, List<int> tFollower, List<int> cFollower)
         {
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Book_Dialog_Start", 1, 1 + CB!.MCE_Choice_Off, true));
@@ -930,6 +937,7 @@ namespace GameCore
             // 210
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Book_Dialog_Teleports2", 210, 1 + CB!.MCE_Choice_Off, true));
             mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetDel(BookDialog_Rezept);
 
             // 220
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Book_Dialog_Sextips2", 220, 1 + CB!.MCE_Choice_Off    , true));

@@ -242,6 +242,61 @@ public static class loca
         }
 
     }
+    public static string Info_Uhu_Fragen
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Die Eule hatte Fragen an mich, die ich beantworten musste, um in die Bibliothek zu gelangen.";
+            else
+                return "Die Eule hatte Fragen an mich, die ich beantworten musste, um in die Bibliothek zu gelangen.";
+        }
+
+    }
+    public static string Info_Uhu_Fragen_Unterwaesche
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Die erste Frage der Eule bezog sich auf die Unterwäsche-Marke des Meisters.";
+            else
+                return "Die erste Frage der Eule bezog sich auf die Unterwäsche-Marke des Meisters.";
+        }
+
+    }
+    public static string Info_Uhu_Fragen_Ruestung
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Die zweite Frage der Eule bezog sich auf den früheren Besitzer der Ritterrüstung.";
+            else
+                return "Die zweite Frage der Eule bezog sich auf den früheren Besitzer der Ritterrüstung.";
+        }
+
+    }
+    public static string Info_Uhu_Fragen_Tier
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Die dritte Frage der Eule bezog sich auf das Lieblingstier des Meisters.";
+            else
+                return "Die dritte Frage der Eule bezog sich auf das Lieblingstier des Meisters.";
+        }
+
+    }
+    public static string Info_Neues_Rezept_Wie
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Ich wusste nun, wie man das magische Pulver für den Teleport herstellte. War das mein Ticket aus dem Versteck heraus?";
+            else
+                return "Ich wusste nun, wie man das magische Pulver für den Teleport herstellte. War das mein Ticket aus dem Versteck heraus?";
+        }
+
+    }
     public static string Order_Switch_English_Fail
     {
         get
@@ -550,6 +605,16 @@ public static class loca
                 return "Ich erhitzte die Metallschale mit den Zutaten darin, und konnte mitansehen, wie sie zu Schlacke verschmolzen.";
             else
                 return "Ich erhitzte die Metallschale mit den Zutaten darin, und konnte mitansehen, wie sie zu Schlacke verschmolzen.";
+        }
+    }
+    public static string Eat_Forest_Gras
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Ich überlegte einen Sekundenbruchteil lang, mich gierig auf das Waldgras zu stürzen und es in mich hinein zu schlingen. Dann fiel mir wieder ein, dass ich vorhin gut gegessen und daher überhaupt keinen Hunger hatte.";
+            else
+                return "Ich überlegte einen Sekundenbruchteil lang, mich gierig auf das Waldgras zu stürzen und es in mich hinein zu schlingen. Dann fiel mir wieder ein, dass ich vorhin gut gegessen und daher überhaupt keinen Hunger hatte.";
         }
     }
     public static string Take_Eule
@@ -1149,6 +1214,86 @@ public static class loca
                 return "Ein letztes Zischeln, dann wurde die Snake wieder steif und leblos.";
         }
     }
+    public static string Do_Snake_Reaktion1
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Hatte ich da eben ein leises Zischeln gehört?";
+            else
+                return "Hatte ich da eben ein leises Zischeln gehört?";
+        }
+    }
+    public static string Do_Snake_Reaktion2
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Dieses Rascheln gerade hatte ich mir doch nicht eingebildet!";
+            else
+                return "Dieses Rascheln gerade hatte ich mir doch nicht eingebildet!";
+        }
+    }
+    public static string Do_Snake_Reaktion3
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Ich vernahm ein leises Knistern. Woher das wohl kam?";
+            else
+                return "Ich vernahm ein leises Knistern. Woher das wohl kam?";
+        }
+    }
+    public static string Do_Snake_Action1
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Die Schlange zischelte wütend.";
+            else
+                return "Die Schlange zischelte wütend.";
+        }
+    }
+    public static string Do_Snake_Action2
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Die Schlange zischelte fröhlich.";
+            else
+                return "Die Schlange zischelte fröhlich.";
+        }
+    }
+    public static string Do_Snake_Action3
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Die Schlange zischelte zischelnd.";
+            else
+                return "Die Schlange zischelte zischelnd.";
+        }
+    }
+    public static string Do_Snake_Action4
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Die Schlange schlängelte sich.";
+            else
+                return "Die Schlange schlängelte sich.";
+        }
+    }
+    public static string Do_Snake_Action5
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Die Schlange bleckte mit ihrer langen Zunge um sich.";
+            else
+                return "Die Schlange bleckte mit ihrer langen Zunge um sich.";
+        }
+    }
 
     public static string DoOwl_Finish
     {
@@ -1351,6 +1496,16 @@ public static class loca
                 return "Angewidert zog ich die Stinkewäsche aus der Waschmaschine. Ich schaffte es gerade noch, sie in den Wäschekorb zu befördern, bevor mir redlich schlecht wurde.";
             else
                 return "Angewidert zog ich die Stinkewäsche aus der Waschmaschine. Ich schaffte es gerade noch, sie in den Wäschekorb zu befördern, bevor mir redlich schlecht wurde.";
+        }
+    }
+    public static string Take_Tuermatte
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Ich griff nach der Türmatte, ließ sie aber dann doch liegen. Was wollte ich mit dem ollen Ding?";
+            else
+                return "Ich griff nach der Türmatte, ließ sie aber dann doch liegen. Was wollte ich mit dem ollen Ding?";
         }
     }
 
@@ -1605,9 +1760,9 @@ public static class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ich stellte mich in die Mitte des Pentagramms und ließ das magische Pulver in die Flamme rieseln. Sofort ergoss sich ein riesiger Funkenregen über mich und eine Stimme flüsterte in mein Ohr: \"KABUMM!\"<br><br>Im nächsten Moment schwebte ich mitten durch eine sternklare Nacht. Unter mir endlose Schwärze, nur ein helles Rechteck leuchtete unter mir. Ich stürzte direkt darauf zu. Ich schrie und schrie.<br><br>Plötzlich öffnete sich auf meinem Rücken ein Päckchen, dessen Anwesenheit ich bisher nicht wahrgenommen hatte. Ein magischer Fallschirm entfaltete sich und bremste meinen Sturz. Sacht sank ich auf das helle Rechteck zu und landete schließlich sanft auf meinen Füßen. Im selben Moment verschwand der magische Fallschirm...<br><br>";
+                return "Ich stellte mich in die Mitte des Pentagramms und ließ das magische Pulver in die Flamme rieseln. Sofort ergoss sich ein riesiger Funkenregen über mich und eine Stimme flüsterte in mein Ohr: \"KABUMM!\"<br><br>Im nächsten Moment schwebte ich mitten durch eine sternklare Nacht. Unter mir endlose Schwärze, nur ein helles Rechteck leuchtete unter mir. Ich stürzte direkt darauf zu. Ich schrie und schrie.<br><br>Plötzlich öffnete sich auf meinem Rücken ein Päckchen, dessen Anwesenheit ich bisher nicht wahrgenommen hatte. Ein magischer Fallschirm entfaltete sich und bremste meinen Sturz. Sacht sank ich auf das helle Rechteck zu und landete schließlich sanft auf meinen Füßen. Im selben Moment verschwand der magische Fallschirm. Ich war angekommen im Versteck des Meisters! Jetzt musste ich nur noch die Klaue einstecken und schauen, dass ich so schnell wie möglich wegkam.<br><br>";
             else
-                return "Ich stellte mich in die Mitte des Pentagramms und ließ das magische Pulver in die Flamme rieseln. Sofort ergoss sich ein riesiger Funkenregen über mich und eine Stimme flüsterte in mein Ohr: \"KABUMM!\"<br><br>Im nächsten Moment schwebte ich mitten durch eine sternklare Nacht. Unter mir endlose Schwärze, nur ein helles Rechteck leuchtete unter mir. Ich stürzte direkt darauf zu. Ich schrie und schrie.<br><br>Plötzlich öffnete sich auf meinem Rücken ein Päckchen, dessen Anwesenheit ich bisher nicht wahrgenommen hatte. Ein magischer Fallschirm entfaltete sich und bremste meinen Sturz. Sacht sank ich auf das helle Rechteck zu und landete schließlich sanft auf meinen Füßen. Im selben Moment verschwand der magische Fallschirm...<br><br>";
+                return "Ich stellte mich in die Mitte des Pentagramms und ließ das magische Pulver in die Flamme rieseln. Sofort ergoss sich ein riesiger Funkenregen über mich und eine Stimme flüsterte in mein Ohr: \"KABUMM!\"<br><br>Im nächsten Moment schwebte ich mitten durch eine sternklare Nacht. Unter mir endlose Schwärze, nur ein helles Rechteck leuchtete unter mir. Ich stürzte direkt darauf zu. Ich schrie und schrie.<br><br>Plötzlich öffnete sich auf meinem Rücken ein Päckchen, dessen Anwesenheit ich bisher nicht wahrgenommen hatte. Ein magischer Fallschirm entfaltete sich und bremste meinen Sturz. Sacht sank ich auf das helle Rechteck zu und landete schließlich sanft auf meinen Füßen. Im selben Moment verschwand der magische Fallschirm. Ich war angekommen im Versteck des Meisters! Jetzt musste ich nur noch die Klaue einstecken und schauen, dass ich so schnell wie möglich wegkam.<br><br>";
         }
     }
     public static string Tip_SupermagicPowder_MagicCandle_Do
@@ -1862,6 +2017,26 @@ public static class loca
                 return "Ich schob die Holzabdeckung vom Brunnen weg. Darunter blickte ich in tiefe Schwärze.";
         }
     }
+    public static string Push_Mist
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Ich versuche, den Nebel mit meinen Händen wegzuschieben. Erschreckenderweise griffen die Hände einfach durch die Schwaden hindurch.";
+            else
+                return "Ich versuche, den Nebel mit meinen Händen wegzuschieben. Erschreckenderweise griffen die Hände einfach durch die Schwaden hindurch.";
+        }
+    }
+    public static string Climb_Tree_Fail
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Der Stamm des Baumes war vom Nebel viel zu nass. Meine Hände rutschen ab, zumal es keine tief hängenden Äste gab, an denen man sich hätte gut festhalten können. Überhaupt: Was wollte ich da oben?";
+            else
+                return "Der Stamm des Baumes war vom Nebel viel zu nass. Meine Hände rutschen ab, zumal es keine tief hängenden Äste gab, an denen man sich hätte gut festhalten können. Überhaupt: Was wollte ich da oben?";
+        }
+    }
     public static string Open_Library_Door_Locked
     {
         get
@@ -2037,9 +2212,9 @@ public static class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Seit Stunden stapfte ich durch dieses neblige Gehölz und verlor so langsam die Geduld. Dabei hatte alles so verheißungsvoll angefangen.<br>Meister Gunnar hatte uns Studenten gestern verkündet, dass er mit einer erlesenen Schar seiner Anbeter im Gefolge ins Land Polonistan reisen würde, um sich dort in den hohen magischen Giftkünsten zu schulen. Eine fürwahr einmalige Gelegenheit, wie er fand!";
+                return "Seit Stunden stapfte ich durch dieses neblige Gehölz und verlor so langsam die Geduld. Noch immer kochte in mir die Wut! Was bildete sich dieser Mistkerl eigentlich ein?<br>Meister Gunnar hatte uns Studenten gestern verkündet, dass er mit einer erlesenen Schar seiner Anbeter im Gefolge ins Land Polonistan reisen würde, um sich dort in den hohen magischen Giftkünsten zu schulen. Natürlich konnte ich mein vorlautes Maul nicht halten und musste ihn fragen, ob ich auch mitkommen dürfe.<br>Er musterte mich von oben bis unten, dann brach er in Lachen aus.<br>In dem Moment zerbrach etwas in mir. Ich beschloss, meine unnützen Studien bei Meister Gunnar zu beenden. Ich würde es ihm heimzahlen und ihm das Wertvollste nehmen, was er besaß. Er würde den Tag noch verfluchten, an dem er mich so vor den Kopf geschlagen hatte.";
             else
-                return "Seit Stunden stapfte ich durch dieses neblige Gehölz und verlor so langsam die Geduld. Dabei hatte alles so verheißungsvoll angefangen.<br>Meister Gunnar hatte uns Studenten gestern verkündet, dass er mit einer erlesenen Schar seiner Anbeter im Gefolge ins Land Polonistan reisen würde, um sich dort in den hohen magischen Giftkünsten zu schulen. Eine fürwahr einmalige Gelegenheit, wie er fand!";
+                return "Seit Stunden stapfte ich durch dieses neblige Gehölz und verlor so langsam die Geduld. Noch immer kochte in mir die Wut! Was bildete sich dieser Mistkerl eigentlich ein?<br>Meister Gunnar hatte uns Studenten gestern verkündet, dass er mit einer erlesenen Schar seiner Anbeter im Gefolge ins Land Polonistan reisen würde, um sich dort in den hohen magischen Giftkünsten zu schulen. Natürlich konnte ich mein vorlautes Maul nicht halten und musste ihn fragen, ob ich auch mitkommen dürfe.<br>Er musterte mich von oben bis unten, dann brach er in Lachen aus.<br>In dem Moment zerbrach etwas in mir. Ich beschloss, meine unnützen Studien bei Meister Gunnar zu beenden. Ich würde es ihm heimzahlen und ihm das Wertvollste nehmen, was er besaß. Er würde den Tag noch verfluchten, an dem er mich so vor den Kopf geschlagen hatte.";
         }
     }
     public static string Adv_Intro3
@@ -2047,9 +2222,9 @@ public static class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Und so dachte ich auch! Denn ich war gewiss nicht der gelehrigste seiner Schüler, hatte aber ein großes Interesse an den Reichtümern des Meisters, die er, wie man hörte, in seiner gut verborgenen Hütte im Wald versteckte. Darunter sei sogar die berühmte Klaue zu finden, der wohl wertvollste magische Edelstein der Welt. Und jetzt, wo der Meister auf und davon war, hatte ich die einmalige Chance, diese Reichtümer an mich zu bringen.";
+                return "Es war ja richtig: Ich war gewiss nicht sein gelehrigster Schüler. Und wenn sich bei mir irgendwo ein Talent gezeigt hätte, dann im Abschreiben, Ausleihen und nicht zurückbringen, oder auch schlicht im Stehlen. Ich hatte durchaus ein großes Interesse an Reichtümern aller Art, also auch jenen, die Meister Gunnar, wie man hörte, in seiner gut verborgenen Hütte im Wald versteckte. Darunter sogar die berühmte Klaue, das wohl wertvollste magische Juwel der Welt. Und jetzt, wo der Meister auf und davon war, konnte er mich nicht darana hindern, diesen Schatz an mich zu bringen. Ich hatte nicht nur meine Rache, sondern wurde auch noch steinreich!";
             else
-                return "Und so dachte ich auch! Denn ich war gewiss nicht der gelehrigste seiner Schüler, hatte aber ein großes Interesse an den Reichtümern des Meisters, die er, wie man hörte, in seiner gut verborgenen Hütte im Wald versteckte. Darunter sei sogar die berühmte Klaue zu finden, der wohl wertvollste magische Edelstein der Welt. Und jetzt, wo der Meister auf und davon war, hatte ich die einmalige Chance, diese Reichtümer an mich zu bringen.";
+                return "Es war ja richtig: Ich war gewiss nicht sein gelehrigster Schüler. Und wenn sich bei mir irgendwo ein Talent gezeigt hätte, dann im Abschreiben, Ausleihen und nicht zurückbringen, oder auch schlicht im Stehlen. Ich hatte durchaus ein großes Interesse an Reichtümern aller Art, also auch jenen, die Meister Gunnar, wie man hörte, in seiner gut verborgenen Hütte im Wald versteckte. Darunter sogar die berühmte Klaue, das wohl wertvollste magische Juwel der Welt. Und jetzt, wo der Meister auf und davon war, konnte er mich nicht darana hindern, diesen Schatz an mich zu bringen. Ich hatte nicht nur meine Rache, sondern wurde auch noch steinreich!";
         }
     }
     public static string Adv_Intro4
@@ -2057,9 +2232,9 @@ public static class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Damit wäre dann wohl mein Studium der Magie bei Meister Gunnar beendet, aber einer neuen Karriere als Meisterdieb stünde nichts mehr im Wege. Jetzt musste ich nur noch den Weg zur Hütte finden in diesem verdammten Nebel!";
+                return "Mein Studium der Magie war ohnehin verloren. Immerhin, mit der Klaue im Gepäck würde mich die Diebesgilde mit Handkuss nehmen. Jetzt musste ich nur noch den Weg zur Hütte finden in diesem verdammten Nebel!<br/><br/>";
             else
-                return "Damit wäre dann wohl mein Studium der Magie bei Meister Gunnar beendet, aber einer neuen Karriere als Meisterdieb stünde nichts mehr im Wege. Jetzt musste ich nur noch den Weg zur Hütte finden in diesem verdammten Nebel!";
+                return "Mein Studium der Magie war ohnehin verloren. Immerhin, mit der Klaue im Gepäck würde mich die Diebesgilde mit Handkuss nehmen. Jetzt musste ich nur noch den Weg zur Hütte finden in diesem verdammten Nebel!<br/><br/>";
         }
     }
 
@@ -2284,6 +2459,16 @@ public static class loca
                 return "besonders";
             else
                 return "besonders";
+        }
+    }
+    public static string Noun_Flamme
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Flamme";
+            else
+                return "Flamme";
         }
     }
     public static string Noun_Rune
@@ -3024,7 +3209,7 @@ public static class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ich streifte durch einen nebligen Wald. Längst war die Nacht herein gebrochen, und ich sah kaum die Hand vor Augen. Das einzige Licht, das es gab, kam von den Nebelschwaden, die vom hellen Vollmondlicht erleuchtet wurden. Die Silhouetten der knorrigen Bäume waberten im sachten Wind auf mich zu und griffen nach mir.";
+                return "Ich streifte durch einen [I:I01_Forest]nebligen Wald[/I]. Längst war die Nacht herein gebrochen, und ich sah kaum die Hand vor Augen. Das einzige Licht, das es gab, kam von [I:I01_Mist]den Nebelschwaden[/I], die vom hellen Vollmondlicht erleuchtet wurden. Die Silhouetten [I:I01_Trees]der knorrigen Bäume[/I] waberten im sachten Wind auf mich zu und griffen nach mir. Die mit  [I:I01_Forest_Grass]dichtem Waldgras[/I] bewachsenen Wege führten [L:L02_In_Front_Of_A_Hut]in alle Richtungen[/L].";
             else
                 return "Ich streifte durch einen nebligen Wald. Längst war die Nacht herein gebrochen, und ich sah kaum die Hand vor Augen. Das einzige Licht, das es gab, kam von den Nebelschwaden, die vom hellen Vollmondlicht erleuchtet wurden. Die Silhouetten der knorrigen Bäume waberten im sachten Wind auf mich zu und griffen nach mir.";
         }
@@ -3109,9 +3294,9 @@ public static class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ich stand im Atrium des Verstecks von Meister Gunnar. Der große Raum war von fast quadratischer Form. Durch das offene Dach konnte ich hinausblicken in eine endlose, sternenklare Nacht. Ansonsten gab es keinerlei Hinweis darauf, in welcher seltsamen Dimension ich mich hier befand. Immerhin: Hier gab es keinen Nebel.<br>Eine breite, verzierte Tür in der westlichen Wand mit der Aufschrift \"Bibliothek\" weckte meine Aufmerksamkeit. Daneben befand sich ein schmales Sims.<br>Genau im Zentrum des Atriums stand ein hohes, mit Gold verziertes Podest. In einer Ecke war ein großes, rotes Pentagramm auf den Boden gemalt. Eine weitere Tür führte nach Süden.";
+                return "Ich stand im Atrium des Verstecks von Meister Gunnar. Der große Raum war von fast quadratischer Form. Durch das offene Dach konnte ich hinausblicken in eine endlose, sternenklare Nacht mit einem riesigen Vollmond. Ansonsten gab es keinerlei Hinweis darauf, in welcher seltsamen Dimension ich mich hier befand. Immerhin: Hier gab es keinen Nebel.<br>Eine breite, verzierte Tür in der westlichen Wand mit der Aufschrift \"Bibliothek\" weckte meine Aufmerksamkeit. Daneben befand sich ein schmales Sims.<br>Genau im Zentrum des Atriums stand ein hohes, mit Gold verziertes Podest. In einer Ecke war ein großes, rotes Pentagramm auf den Boden gemalt. Eine weitere Tür führte nach Süden.";
             else
-                return "Ich stand im Atrium des Verstecks von Meister Gunnar. Der große Raum war von fast quadratischer Form. Durch das offene Dach konnte ich hinausblicken in eine endlose, sternenklare Nacht. Ansonsten gab es keinerlei Hinweis darauf, in welcher seltsamen Dimension ich mich hier befand. Immerhin: Hier gab es keinen Nebel.<br>Eine breite, verzierte Tür in der westlichen Wand mit der Aufschrift \"Bibliothek\" weckte meine Aufmerksamkeit. Daneben befand sich ein schmales Sims.<br>Genau im Zentrum des Atriums stand ein hohes, mit Gold verziertes Podest. In einer Ecke war ein großes, rotes Pentagramm auf den Boden gemalt. Eine weitere Tür führte nach Süden.";
+                return "Ich stand im Atrium des Verstecks von Meister Gunnar. Der große Raum war von fast quadratischer Form. Durch das offene Dach konnte ich hinausblicken in eine endlose, sternenklare Nacht mit einem riesigen Vollmond. Ansonsten gab es keinerlei Hinweis darauf, in welcher seltsamen Dimension ich mich hier befand. Immerhin: Hier gab es keinen Nebel.<br>Eine breite, verzierte Tür in der westlichen Wand mit der Aufschrift \"Bibliothek\" weckte meine Aufmerksamkeit. Daneben befand sich ein schmales Sims.<br>Genau im Zentrum des Atriums stand ein hohes, mit Gold verziertes Podest. In einer Ecke war ein großes, rotes Pentagramm auf den Boden gemalt. Eine weitere Tür führte nach Süden.";
         }
     }
 
@@ -3292,9 +3477,9 @@ public static class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Das Badezimmer des Meisters fiel feudaler aus als gedacht. Die große Badewanne enthielt eine Whirlpoolfunction. Über dem Waschbecken hing ein großer, fein gearbeiteter Spiegel. Nur die Toilette nebst Spülung war No-Name-Ware aus dem Baumarkt. In der östlichen Wand befand sich eine Tür zurück zum Flur.";
+                return "Das Badezimmer des Meisters fiel feudaler aus als gedacht. Das fing an mit den auffällig gemaserten grauen Kacheln an der Wand. Die große Badewanne enthielt eine Whirlpoolfunction. Über dem Waschbecken hing ein großer, fein gearbeiteter Spiegel. Nur die Toilette nebst Spülung war No-Name-Ware aus dem Baumarkt. In der östlichen Wand befand sich eine Tür zurück zum Flur.";
             else
-                return "Das Badezimmer des Meisters fiel feudaler aus als gedacht. Die große Badewanne enthielt eine Whirlpoolfunction. Über dem Waschbecken hing ein großer, fein gearbeiteter Spiegel. Nur die Toilette nebst Spülung war No-Name-Ware aus dem Baumarkt. In der östlichen Wand befand sich eine Tür zurück zum Flur.";
+                return "Das Badezimmer des Meisters fiel feudaler aus als gedacht. Das fing an mit den auffällig gemaserten grauen Kacheln an der Wand. Die große Badewanne enthielt eine Whirlpoolfunction. Über dem Waschbecken hing ein großer, fein gearbeiteter Spiegel. Nur die Toilette nebst Spülung war No-Name-Ware aus dem Baumarkt. In der östlichen Wand befand sich eine Tür zurück zum Flur.";
         }
     }
     public static string Adv_L15_Nowhere
@@ -5158,9 +5343,9 @@ public static class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Die wichtigsten Hardfacts über Kurzstreckenteleports!<br>Man benötigt 3 Zutaten, erhitze diese, bis sie zu Schlacke verbrennen, zerreibe diese dann zu Pulver und entzünde dies. Und dann: \"Kabumm!\"<br>Die Zutaten sind:<br>- Ein Mondstein<br>- eine goldene Münze<br>- ein Wunderwarzenschwamm<br>Na, das klang ja fast machbar.";
+                return "Die wichtigsten Hardfacts über Kurzstreckenteleports!<br>Man benötigt 3 Zutaten, erhitze diese, bis sie zu Schlacke verbrennen, zerreibe diese dann zu Pulver und entzünde dies. Und dann: \"Kabumm!\"<br>Die Zutaten sind:<br>- Ein Mondstein<br>- eine goldene Münze<br>- ein Wunderwarzenschwamm<br>Na, das klang ja fast machbar. War das mein Ticket aus diesem vermaledeiten Versteck?";
             else
-                return "Dieses Kapitel berichtete gewohnt bescheiden über Meister Gunnar: Meistermagier, brillianter Wissenschaftler, Sexgott... Ich ließ das Buch sinken und holte erst mal kräftig Luft.";
+                return "Die wichtigsten Hardfacts über Kurzstreckenteleports!<br>Man benötigt 3 Zutaten, erhitze diese, bis sie zu Schlacke verbrennen, zerreibe diese dann zu Pulver und entzünde dies. Und dann: \"Kabumm!\"<br>Die Zutaten sind:<br>- Ein Mondstein<br>- eine goldene Münze<br>- ein Wunderwarzenschwamm<br>Na, das klang ja fast machbar. War das mein Ticket aus diesem vermaledeiten Versteck?";
         }
     }
     public static string Book_Dialog_Sextips

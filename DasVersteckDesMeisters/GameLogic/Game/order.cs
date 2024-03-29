@@ -110,12 +110,6 @@ namespace GameCore
                 handled = true;
 
             }
-            if (item == CA.I10_Metall_Tray && CA.Status_Schale_Befestigt.Val == 1 )
-            {
-                AdvGame!.StoryOutput(loca.Take_Schale);
-                handled = true;
-
-            }
             if (item == CA.I00_Coin && CA.Status_Coin_Taken.Val == 0 )
             {
                 AdvGame!.StoryOutput(loca.Take_Coin);
@@ -129,14 +123,7 @@ namespace GameCore
                 handled = true;
 
             }
-            if (item == CA!.I08_Clothes && CA.I08_Clothes.locationID == CA!.I08_Washing_Machine.ID)
-            {
-                AdvGame!.StoryOutput(loca.Take_Clothes);
-                Items.TransferItem(CA!.I08_Clothes.ID, CA!.I08_Laundry_Basket.ID);
-                handled = true;
-
-            }
-            if( item == CA!.I00_Pouch )
+            if (item == CA!.I00_Pouch)
             {
                 AdvGame!.SetScoreToken(CA!.Score_Beutelchen);
 
@@ -166,7 +153,7 @@ namespace GameCore
                 AdvGame!.SetScoreToken(CA!.Score_Polierlappen);
 
             }
-            if (item == CA!.I00_Key )
+            if (item == CA!.I00_Key)
             {
                 AdvGame!.SetScoreToken(CA!.Score_Schluessel);
 
@@ -179,6 +166,25 @@ namespace GameCore
             if (item == CA!.I00_Book_Master)
             {
                 AdvGame!.SetScoreToken(CA!.Score_Buch);
+
+            }
+            if (item == CA.I02_Doormat )
+            {
+                AdvGame!.StoryOutput(loca.Take_Tuermatte);
+                handled = true;
+
+            }
+            if (item == CA!.I08_Clothes && CA.I08_Clothes.locationID == CA!.I08_Washing_Machine.ID)
+            {
+                AdvGame!.StoryOutput(loca.Take_Clothes);
+                Items.TransferItem(CA!.I08_Clothes.ID, CA!.I08_Laundry_Basket.ID);
+                handled = true;
+
+            }
+            if (item == CA.I10_Metall_Tray && CA.Status_Schale_Befestigt.Val == 1)
+            {
+                AdvGame!.StoryOutput(loca.Take_Schale);
+                handled = true;
 
             }
 
@@ -1718,6 +1724,19 @@ namespace GameCore
             bool handled = false;
             Item item1 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[1].WordID);
 
+            if (item1 == CA.I00_Magic_Candle)
+            {
+                if( CA.Status_Kerzenhalter.Val == 0)
+                {
+                    Light(PersonID, PTL);
+                }
+                else
+                {
+                    Extinguish(PersonID, PTL);
+                }
+
+                success = true;
+            }
 
             if( item1 == CA.I00_Nullbehaelter)
             {
@@ -2667,6 +2686,13 @@ namespace GameCore
             bool handled = false;
             Item item1 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[1].WordID);
             
+            if( item1 == CA.I01_Forest_Grass)
+            {
+                AdvGame.StoryOutput(loca.Eat_Forest_Gras);
+                handled = true;
+
+            }
+
             if (!handled)
             {
                 AdvGame!.StoryOutput(  Helper.Insert(loca.Order_Heat_I2_24_Schalter_942, item1!.ID ));
@@ -4116,6 +4142,12 @@ namespace GameCore
             bool success = false;
             Item item1 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[1].WordID);
 
+            if( item1 == CA.I01_Trees || item1 == CA.I02_Trees)
+            {
+                AdvGame.StoryOutput(loca.Climb_Tree_Fail);
+                success = true;
+            }
+
             if (!success)
             {
                 AdvGame!.FeedbackOutput(PersonID,  Helper.Insert(loca.Order_Climb_I2_26_Treppe_1340, item1!.ID ));
@@ -4880,6 +4912,12 @@ namespace GameCore
             bool handled = false;
             Item item1 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[1].WordID);
 
+            if( item1 == CA.I04_Cupboard )
+            {
+                Push( PersonID, PTL);
+                handled = true;
+            }
+
             // Hier Erfolgsoperationen auflisten und Success auf true setzen
             if (!handled)
             {
@@ -4952,6 +4990,11 @@ namespace GameCore
                 CA.I08_Well.StorageIn = 50;
                 AdvGame!.SetScoreToken(CA!.Score_Deckel);
 
+                handled = true;
+            }
+            else if (item1 == CA!.I01_Mist || item1 == CA!.I02_Mist)
+            {
+                AdvGame.StoryOutput(loca.Push_Mist);
                 handled = true;
             }
 
