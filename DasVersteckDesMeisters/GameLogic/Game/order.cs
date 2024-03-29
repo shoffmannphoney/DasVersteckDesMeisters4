@@ -100,6 +100,7 @@ namespace GameCore
             if( item == CA.I00_Claw)
             {
                 AdvGame!.StoryOutput( loca.Take_Claw_Sign );
+                CA!.Status_Klaue_Nehmversuch.Val = 1;
                 handled = true;
 
             }
@@ -135,6 +136,52 @@ namespace GameCore
                 handled = true;
 
             }
+            if( item == CA!.I00_Pouch )
+            {
+                AdvGame!.SetScoreToken(CA!.Score_Beutelchen);
+
+            }
+            if (item == CA!.I00_Magic_Candle)
+            {
+                AdvGame!.SetScoreToken(CA!.Score_Kerzenhalter);
+
+            }
+            if (item == CA!.I00_Sugar_Pliers)
+            {
+                AdvGame!.SetScoreToken(CA!.Score_Zuckerzange);
+
+            }
+            if (item == CA!.I00_Cheese)
+            {
+                AdvGame!.SetScoreToken(CA!.Score_Kaese);
+
+            }
+            if (item == CA!.I00_Plastic_Bag)
+            {
+                AdvGame!.SetScoreToken(CA!.Score_Plastiktuete);
+
+            }
+            if (item == CA!.I00_Polishing_Rag)
+            {
+                AdvGame!.SetScoreToken(CA!.Score_Polierlappen);
+
+            }
+            if (item == CA!.I00_Key )
+            {
+                AdvGame!.SetScoreToken(CA!.Score_Schluessel);
+
+            }
+            if (item == CA!.I00_Roll_Plaster)
+            {
+                AdvGame!.SetScoreToken(CA!.Score_Rollpflaster);
+
+            }
+            if (item == CA!.I00_Book_Master)
+            {
+                AdvGame!.SetScoreToken(CA!.Score_Buch);
+
+            }
+
 
             if (!success && !handled)
             {
@@ -167,12 +214,12 @@ namespace GameCore
             if( person == CA.Person_Owl)
             {
                 AdvGame.StoryOutput(loca.Take_Eule);
-                success = true;
+                success = false;
             }
             else if (person == CA.Person_Magpie)
             {
                 AdvGame.StoryOutput(loca.Take_Elster);
-                success = true;
+                success = false;
             }
 
             // Lokale Abfragen
@@ -271,10 +318,13 @@ namespace GameCore
             }
             if( item == CA.I00_Paper_Sheets)
             {
+                AdvGame!.SetScoreToken(CA!.Score_Antwort_Tier);
+
                 CA.Status_Antwort_Lieblingstier.Val = 1;
             }
             if (item == CA.I08_Underpants)
             {
+                AdvGame!.SetScoreToken( CA!.Score_Antwort_Unterwaesche );
                 CA.Status_Antwort_Unterwaesche.Val = 1;
             }
             if (item == CA.I06_Sign)
@@ -289,6 +339,12 @@ namespace GameCore
             if( item == CA.I00_Coin && CA!.Status_Coin_Taken.Val == 0 )
             {
                 AdvGame!.StoryOutput(loca.Adv_I00_Coin2);
+            }
+
+            if( item == CA.I08_Water && CA.I00_Coin.locationID == CA.I00_Nullbehaelter.ID )
+            {
+                AdvGame!.StoryOutput(loca.Adv_I08_Well_3 );
+
             }
 
             return (handled);
@@ -755,9 +811,20 @@ namespace GameCore
             // Pre
             if( item1 == CA.I07_Door && item2 == CA.I00_Key)
             {
-                CA.Status_Tuer_Labor.Val = 1;
-                AdvGame!.StoryOutput(loca.Unlock_Labor_Door);
-                handled = true;
+                if( CA.Status_Tuer_Labor.Val >0 )
+                {
+                    AdvGame!.StoryOutput( loca.Unlock_Labor_Door_Fail );
+                    handled = true;
+                }
+                else
+                {
+                    AdvGame!.SetScoreToken(CA!.Score_Tuer_aufschliessen);
+
+                    CA.Status_Tuer_Labor.Val = 1;
+                    AdvGame!.StoryOutput(loca.Unlock_Labor_Door);
+                    handled = true;
+
+                }
             }
 
 
@@ -1011,13 +1078,15 @@ namespace GameCore
 
             if( item1 == CA.I14_Opening )
             {
-                AdvGame.StoryOutput(loca.Grab_In_Find );
+                AdvGame.StoryOutput(Helper.Insert(loca.Grab_In_Find, item1.ID));
                 item1.InvisibleIn = false;
+                handled = true;
             }
             else if (item1 == CA.I04_Opening )
             {
-                AdvGame.StoryOutput(loca.Grab_In_Find);
+                AdvGame.StoryOutput(Helper.Insert(loca.Grab_In_Find, item1.ID ) );
                 item1.InvisibleIn = false;
+                handled = true;
             }
 
             if (!handled)
@@ -1669,16 +1738,19 @@ namespace GameCore
                 // CA.Status_Tuer_Schlafkammer.Val = 1;
 
                 // Items.TransferItem(CA.I00_Unstable_Pliers_With_Claw.ID, CB.LocType_Person, CA.Person_I.ID);
-                Items.TransferItem(CA.I00_Stable_Pliers_With_Claw.ID, CB.LocType_Person, CA.Person_I.ID);
-                Items.TransferItem(CA.I00_Magic_Candle.ID, CB.LocType_Person, CA.Person_I.ID);
                 Items.TransferItem(CA.I00_Lightless_Stone.ID, CB.LocType_Person, CA.Person_I.ID);
 
-                A.ActLoc = CA.L12_Sleeping_Room;
-                Persons.TransferPerson(CA.Person_I.ID, CB.LocType_Person, A.ActLoc);
-                locations.ShowlocationFull(A.ActLoc);
 
                 AdvGame.StoryOutput("Möp");
                 */
+                Items.TransferItem(CA.I00_Stable_Pliers_With_Claw.ID, CB.LocType_Person, CA.Person_I.ID);
+                Items.TransferItem(CA.I00_Magic_Candle.ID, CB.LocType_Person, CA.Person_I.ID);
+
+                Persons.TransferPerson( CA!.Person_Fish.ID, CB.LocType_Person, CA.Person_I.ID);
+
+                A.ActLoc = CA.L08_Laundry_Room;
+                Persons.TransferPerson(CA.Person_I.ID, CB.LocType_Person, A.ActLoc);
+                locations.ShowlocationFull(A.ActLoc);
                 success = true;
             }
 
@@ -1748,6 +1820,36 @@ namespace GameCore
                 if ( !response )
                 {
                     AdvGame!.StoryOutput( loca.Order_KnockOn_I2_36_Muellcontainer_772);
+                    response = true;
+
+                }
+            }
+            return (success);
+        }
+
+        public override bool KnockOnP(Person PersonID, ParseTokenList PTL)
+        {
+            bool success = false;
+            bool response = false;
+            Person person1 = PTL.GetFirstPerson()!; //  GetItemRef(Adv_PT[1].WordID);
+
+            if( person1 == CA!.Person_Knights_Armor)
+            {
+                AdvGame!.StoryOutput(loca.KnockOn_Armor);
+
+                success = true;
+            }
+
+            if (!success)
+            {
+                success = base.KnockOnP(PersonID, PTL);
+            }
+            if (success)
+            {
+
+                if (!response)
+                {
+                    AdvGame!.StoryOutput(loca.KnockOn_Fail );
                     response = true;
 
                 }
@@ -1905,6 +2007,8 @@ namespace GameCore
                 }
                 else
                 {
+                    AdvGame!.SetScoreToken(CA!.Score_Transfer1);
+
                     AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, loca.Tip_MagicPowder_MagicCandle_Do);
                     Items.TransferItem(CA.I00_Magic_Powder.ID, CA.I00_Nullbehaelter.ID);
                     A.ActLoc = CA.L05_Atrium;
@@ -1927,6 +2031,7 @@ namespace GameCore
                 }
                 else
                 {
+                    AdvGame!.SetScoreToken(CA!.Score_Transfer2);
                     AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, loca.Tip_SupermagicPowder_MagicCandle_Do);
                     Items.TransferItem(CA.I00_Supermagic_Powder.ID, CA.I00_Nullbehaelter.ID);
                     A.ActLoc = CA.L15_Nowhere;
@@ -2274,10 +2379,7 @@ namespace GameCore
                 loca.Order_Score_894,
                 loca.Order_Score_895,
                 loca.Order_Score_896,
-                loca.Order_Score_897,
-                loca.Order_Score_898,
-                loca.Order_Score_899,
-                loca.Order_Score_900
+                loca.Order_Score_897
             };
 
             if (!handled)
@@ -2286,23 +2388,17 @@ namespace GameCore
                 int max = 0;
                 AdvGame!.StoryOutput( String.Format( loca.Order_Score_901, val, Scores!.MaximumScore() ) );
 
-                if (val > 4000)
-                    max = 9;
-                else if (val > 3500)
-                    max = 8;
-                else if (val > 3000)
-                    max = 7;
-                else if (val > 2500)
+                if (val >= 760)
                     max = 6;
-                else if (val > 2000)
+                else if (val > 650)
                     max = 5;
-                else if (val > 1500)
+                else if (val > 520)
                     max = 4;
-                else if (val > 1000)
+                else if (val > 390)
                     max = 3;
-                else if (val > 600)
+                else if (val > 260)
                     max = 2;
-                else if (val > 300)
+                else if (val > 130)
                     max = 1;
 
                 if (max > 0)
@@ -2554,6 +2650,7 @@ namespace GameCore
                     Items.TransferItem(CA.I00_Coin.ID, CA.I00_Nullbehaelter2.ID);
                     Items.TransferItem(CA.I00_Wonder_Wart_Sponge.ID, CA.I00_Nullbehaelter2.ID);
                     Items.TransferItem(CA.I00_Slag.ID, CA.I10_Metall_Tray.ID);
+                    AdvGame!.SetScoreToken(CA!.Score_Schlacke);
                 }
                 handled = true;
             }
@@ -3430,6 +3527,7 @@ namespace GameCore
                     Items.TransferItem(CA!.I00_Polished_Stone.ID, CA.I00_Nullbehaelter.ID);
                     Items.TransferItem(CA!.I00_Lightless_Stone.ID, CA.I10_Opening.ID);
                     AdvGame!.StoryOutput(loca.Press_Switch_Saug);
+                    AdvGame!.SetScoreToken(CA!.Score_Lichtloser_Stein);
                 }
                 else
                 {
@@ -4294,6 +4392,7 @@ namespace GameCore
                 Items.TransferItem(CA.I00_Claw.ID, CA.I00_Nullbehaelter2.ID);
                 Items.TransferItem(CA.I00_Sugar_Pliers.ID, CA.I00_Nullbehaelter2.ID);
                 Items.TransferItem(CA.I00_Unstable_Pliers_With_Claw.ID, CB.LocType_Person, CA.Person_I.ID);
+                AdvGame!.SetScoreToken(CA!.Score_Klauenzange1);
 
                 handled = true;
             }
@@ -4304,6 +4403,7 @@ namespace GameCore
                 AdvGame!.StoryOutput(loca.UseW_Plunger_Slag);
                 Items.TransferItem(CA.I00_Slag.ID, CA.I00_Nullbehaelter2.ID);
                 Items.TransferItem(CA.I00_Supermagic_Powder.ID, CA.I10_Giant_Mortar.ID);
+                AdvGame!.SetScoreToken(CA!.Score_Meues_Pulver);
 
                 handled = true;
             }
@@ -4320,6 +4420,20 @@ namespace GameCore
                 ParseTokenList PT = new ParseTokenList();
                 PT.AddVerb(CA!.Verb_Tip);
                 PT.AddItem(CA!.I00_Magic_Powder);
+                PT.AddPrep(CB!.Prep_auf);
+                PT.AddItem(CA!.I00_Magic_Candle);
+
+                Tip(PersonID, PT);
+
+                handled = true;
+            }
+            else if ((item1 == CA!.I00_Supermagic_Powder && item2 == CA!.I00_Magic_Candle)
+                        || (item2 == CA!.I00_Supermagic_Powder && item1 == CA!.I00_Magic_Candle)
+                    )
+            {
+                ParseTokenList PT = new ParseTokenList();
+                PT.AddVerb(CA!.Verb_Tip);
+                PT.AddItem(CA!.I00_Supermagic_Powder);
                 PT.AddPrep(CB!.Prep_auf);
                 PT.AddItem(CA!.I00_Magic_Candle);
 
@@ -4396,8 +4510,19 @@ namespace GameCore
                     AdvGame!.StoryOutput(loca.SpreadOn_Clothes_WWS);
                     Items.TransferItem(CA!.I00_Plastic_Bag.ID, CB.LocType_In_Item, CA!.I00_Nullbehaelter.ID);
                     Items.TransferItem(CA!.I00_Wonder_Wart_Sponge.ID, CB.LocType_In_Item, CA!.I08_Laundry_Basket.ID);
+                    AdvGame!.SetScoreToken(CA!.Score_Schwamm);
 
                 }
+                success = true;
+            }
+            else if ( item1 == CA.I00_Magic_Powder && item2 == CA!.I00_Magic_Candle)
+            {
+                Tip(PersonID, PTL);
+                success = true;
+            }
+            else if (item1 == CA.I00_Supermagic_Powder && item2 == CA!.I00_Magic_Candle)
+            {
+                Tip(PersonID, PTL);
                 success = true;
             }
 
@@ -4526,17 +4651,34 @@ namespace GameCore
             Person person1 = PTL.GetFirstPerson()!; //  GetItemRef(Adv_PT[3].WordID);
             Item item2 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[1].WordID);
 
-            if( person1 == CA.Person_Fish && item2 == CA.I08_Water && CA.I00_Coin.locationID == CA.I08_Well.ID )
+            if( person1 == CA.Person_Fish && item2 == CA.I08_Water  )
             {
-                AdvGame!.StoryOutput(loca.UsePW_Fish_Coin );
-                Items.TransferItem(CA.I00_Coin.ID, CB.LocType_Person, CA.Person_I.ID);
-                CA.Status_Coin_Taken.Val = 1;
+                if( CA.Status_Fisch_Klaue.Val == 0)
+                {
+                    AdvGame!.StoryOutput(loca.UsePW_Fish_Coin_Fail);
+
+                }
+                else if(CA.I00_Coin.locationID == CA.I08_Well.ID)
+                {
+                    AdvGame!.StoryOutput(loca.UsePW_Fish_Coin);
+                    Items.TransferItem(CA.I00_Coin.ID, CB.LocType_Person, CA.Person_I.ID);
+                    CA.Status_Coin_Taken.Val = 1;
+                    AdvGame!.SetScoreToken(CA!.Score_Muenze);
+
+                }
+                else
+                {
+                    AdvGame!.StoryOutput(loca.UsePW_Fish_Solo);
+
+                }
+
+
                 success = true;
             }
 
             if (!success)
             {
-                AdvGame!.FeedbackOutput(PersonID, Helper.Insert(loca.UsePW_Fail, person1!.ID, item2));
+                AdvGame!.FeedbackOutput(PersonID, Helper.Insert(loca.UsePW_Fail, person1!, item2.ID));
             }
             return (success);
         }
@@ -4623,9 +4765,19 @@ namespace GameCore
 
             if( person1 == CA.Person_Parrot && item2 == CA.I05_Moon && CA.I00_Lightless_Stone.locationID == CA.Person_Parrot.ID )
             {
-                AdvGame.StoryOutput(loca.Throw_Parrot_Mondstein);
-                Items.TransferItem(CA.I00_Moonstone.ID, CB.LocType_Person, CA.Person_I.ID);
-                Items.TransferItem(CA.I00_Lightless_Stone.ID, CB.LocType_In_Item, CA.I00_Nullbehaelter.ID);
+                if( CA.Status_Papagei_Klaue.Val == 0)
+                {
+                    AdvGame.StoryOutput(loca.Throw_Parrot_Mondstein_Fail);
+
+                }
+                else
+                {
+                    AdvGame.StoryOutput(loca.Throw_Parrot_Mondstein);
+                    Items.TransferItem(CA.I00_Moonstone.ID, CB.LocType_Person, CA.Person_I.ID);
+                    Items.TransferItem(CA.I00_Lightless_Stone.ID, CB.LocType_In_Item, CA.I00_Nullbehaelter.ID);
+                    AdvGame!.SetScoreToken(CA!.Score_Mondstein);
+
+                }
                 success = true;
 
             }
@@ -4633,6 +4785,25 @@ namespace GameCore
             if (!success)
             {
                 AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, PersonID, Helper.Insert(loca.ThrowPersonAt_Fail, PersonID, person1!, item2.ID));
+            }
+            return (success);
+        }
+        public bool ThrowPin(Person PersonID, ParseTokenList PTL)
+        {
+            bool success = false;
+            Person person1 = PTL.GetFirstPerson()!; //  GetItemRef(Adv_PT[3].WordID);
+            Item item2 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[1].WordID);
+
+            if (person1 == CA!.Person_Fish && item2 == CA.I08_Water ) 
+            {
+                UsePW( PersonID, PTL);
+                success = true;
+
+            }
+
+            if (!success)
+            {
+                AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, PersonID, Helper.Insert(loca.ThrowPersonIn_Fail, PersonID, person1!, item2.ID));
             }
             return (success);
         }
@@ -4773,11 +4944,13 @@ namespace GameCore
             }
             else if (item1 == CA!.I08_Wooden_Cover && CA.I08_Wooden_Cover.locationID == CA.I08_Well.ID)
             {
+
                 AdvGame.StoryOutput(loca.Push_L08_Wooden_Cover);
                 Items.TransferItem(CA.I08_Wooden_Cover.ID, CB.LocType_Loc, CA.L08_Laundry_Room);
                 CA.I08_Well.CanPutOn = false;
                 CA.I08_Well.CanPutIn = true;
                 CA.I08_Well.StorageIn = 50;
+                AdvGame!.SetScoreToken(CA!.Score_Deckel);
 
                 handled = true;
             }
@@ -4858,9 +5031,45 @@ namespace GameCore
                 Examine(PersonID, PTL);
                 success = true;
             }
-            else if ( item1 == CA.I00_Book_Master)
+            if (item1 == CA!.I00_Paper_Sheets)
+            {
+                Examine(PersonID, PTL);
+                success = true;
+            }
+            if (item1 == CA!.I09_Angry_Book )
+            {
+                Examine(PersonID, PTL);
+                success = true;
+            }
+            if (item1 == CA!.I09_Books_Master)
+            {
+                Examine(PersonID, PTL);
+                success = true;
+            }
+            if (item1 == CA!.I09_Crazy_Book)
+            {
+                Examine(PersonID, PTL);
+                success = true;
+            }
+            if (item1 == CA!.I09_Demonic_Book)
+            {
+                Examine(PersonID, PTL);
+                success = true;
+            }
+            if (item1 == CA!.I09_Satanic_Book)
+            {
+                Examine(PersonID, PTL);
+                success = true;
+            }
+            if ( item1 == CA.I00_Book_Master)
             {
                 GenericDialog(CA!.Person_I, BookDialog);
+                success = true;
+
+            }
+            if (item1 == CA.I06_Letters)
+            {
+                Examine(PersonID, PTL);
                 success = true;
 
             }
@@ -4887,6 +5096,8 @@ namespace GameCore
             }
             else if ( item1 == CA.I06_Letters && item2 == CA.I00_Magnifier )
             {
+                AdvGame!.SetScoreToken(CA!.Score_Antwort_Ruestung);
+
                 AdvGame!.StoryOutput(loca.Read_Letters);
                 CA!.Status_Antwort_Ruestung.Val = 1;
                 success = true;
@@ -5094,7 +5305,9 @@ namespace GameCore
             }
             else if (person1 == CA.Person_Knights_Armor && item2 == CA.I00_Stable_Pliers_With_Claw)
             {
-                if( CA!.Status_Ritterruestung_Klaue.Val == 0)
+                AdvGame!.SetScoreToken(CA!.Score_Erste_Belebung);
+
+                if ( CA!.Status_Ritterruestung_Klaue.Val == 0)
                     AdvGame!.StoryOutput(loca.Touch_KnightsArmour_StableClaw_Wake );
                 else
                     AdvGame!.StoryOutput(loca.Touch_KnightsArmour_StableClaw_WakeAgain);
@@ -5104,7 +5317,8 @@ namespace GameCore
             }
             else if (person1 == CA.Person_Owl && item2 == CA.I00_Stable_Pliers_With_Claw)
             {
-                if( CA!.Status_Eule_Klaue.Val == 0 )
+                AdvGame!.SetScoreToken(CA!.Score_Erste_Belebung);
+                if ( CA!.Status_Eule_Klaue.Val == 0 )
                     AdvGame!.StoryOutput(loca.Touch_Owl_StableClaw_Wake);
                 else
                     AdvGame!.StoryOutput(loca.Touch_Owl_StableClaw_WakeAgain);
@@ -5114,6 +5328,7 @@ namespace GameCore
             }
             else if (person1 == CA.Person_Librarian && item2 == CA.I00_Stable_Pliers_With_Claw)
             {
+                AdvGame!.SetScoreToken(CA!.Score_Erste_Belebung);
                 if (CA!.Status_Skelett_Klaue.Val == 0)
                     AdvGame!.StoryOutput(loca.Touch_Librarian_StableClaw_Wake);
                 else
@@ -5124,6 +5339,7 @@ namespace GameCore
             }
             else if (person1 == CA.Person_Fish && item2 == CA.I00_Stable_Pliers_With_Claw)
             {
+                AdvGame!.SetScoreToken(CA!.Score_Erste_Belebung);
                 if (CA!.Status_Fisch_Klaue.Val == 0)
                     AdvGame!.StoryOutput(loca.Touch_Fish_StableClaw_Wake);
                 else
@@ -5134,6 +5350,7 @@ namespace GameCore
             }
             else if (person1 == CA.Person_Snake && item2 == CA.I00_Stable_Pliers_With_Claw)
             {
+                AdvGame!.SetScoreToken(CA!.Score_Erste_Belebung);
                 if (CA!.Status_Schlange_Klaue.Val == 0)
                     AdvGame!.StoryOutput(loca.Touch_Snake_StableClaw_Wake);
                 else
@@ -5144,6 +5361,7 @@ namespace GameCore
             }
             else if (person1 == CA.Person_Magpie && item2 == CA.I00_Stable_Pliers_With_Claw)
             {
+                AdvGame!.SetScoreToken(CA!.Score_Erste_Belebung);
                 if (CA!.Status_Elster_Klaue.Val == 0)
                     AdvGame!.StoryOutput(loca.Touch_Magpie_StableClaw_Wake);
                 else
@@ -5154,6 +5372,7 @@ namespace GameCore
             }
             else if (person1 == CA.Person_Parrot && item2 == CA.I00_Stable_Pliers_With_Claw)
             {
+                AdvGame!.SetScoreToken(CA!.Score_Erste_Belebung);
                 if (CA!.Status_Papagei_Klaue.Val == 0)
                     AdvGame!.StoryOutput(loca.Touch_Parrot_StableClaw_Wake);
                 else
@@ -6283,16 +6502,18 @@ namespace GameCore
             // Hier Erfolgsoperationen auflisten und Success auf true setzen
             if( item1 == CA.I00_Roll_Plaster && item2 == CA.I00_Unstable_Pliers_With_Claw)
             {
+
                 AdvGame.StoryOutput(loca.Wrap_Rollpflaster_Pliers_Ok);
                 Items.TransferItem(CA.I00_Unstable_Pliers_With_Claw.ID, CA.I00_Nullbehaelter.ID);
                 Items.TransferItem(CA.I00_Stable_Pliers_With_Claw.ID, CB.LocType_Person, CA!.Person_I.ID);
                 Items.TransferItem(CA.I00_Roll_Plaster.ID, CA.I00_Nullbehaelter.ID);
+                AdvGame!.SetScoreToken(CA!.Score_Klauenzange2);
                 success = true;
             }
 
             if (!success)
             {
-                AdvGame!.StoryOutput(Helper.Insert(loca.Order_WrapP_Person_Ludmilla_PV1_1975, item2, item1!.ID));
+                AdvGame!.StoryOutput(Helper.Insert(loca.Order_WrapAround_Not, item2!.ID, item1!.ID));
             }
             return (success);
         }

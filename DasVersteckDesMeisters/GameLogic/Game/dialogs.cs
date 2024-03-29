@@ -130,6 +130,8 @@ namespace GameCore
         }
         public bool KADialog_Tuer_Einrennen(List<MCMenuEntry> MCMEntry)
         {
+            AdvGame!.SetScoreToken(CA!.Score_Tuer_eintreten);
+
             AdvGame!.StoryOutput(loca.KnightArmour_Tuer);
 
             CA.Status_Tuer_Schlafkammer.Val = 1;
@@ -137,7 +139,11 @@ namespace GameCore
             CA.I06_Door.LocaDescription = "Adv_I06_Door_Broken";
             CA.I06_Door.LocaDescriptionHandle= loca.Adv_I06_Door_Broken;
 
+            CA.I06_Seal.LocaDescription = "Adv_I06_Seal_Broken";
+            CA.I06_Seal.LocaDescriptionHandle = loca.Adv_I06_Seal_Broken;
 
+            CA.I06_Sign.LocaDescription = "Adv_I06_Sign_Broken";
+            CA.I06_Sign.LocaDescriptionHandle = loca.Adv_I06_Sign_Broken;
 
 
             KADialogCalc(MCMEntry);
@@ -256,7 +262,7 @@ namespace GameCore
         public bool OwlDialog_Quizende(List<MCMenuEntry> MCMEntry)
         {
             AdvGame!.StoryOutput(loca.Owl_Library_Door);
-
+            AdvGame!.SetScoreToken(CA!.Score_Bibliothek_offen);
             CA.Status_Tuer_Bibliothek.Val = 1;
             persistentMCMenu!.FindID(102)!.Hidden = MCMenuEntry.HiddenType.outdated;
 
@@ -645,10 +651,18 @@ namespace GameCore
 
             return true;
         }
+        public bool MagpieDialog_Swap_Intro(List<MCMenuEntry> MCMEntry)
+        {
+            CA.Status_Elster_Tauschintro.Val = 1;
+            MagpieDialogCalc(MCMEntry);
+
+            return true;
+        }
         public bool MagpieDialog_Swap( List<MCMenuEntry> MCMEntry)
         {
             Items.TransferItem(CA.I00_Cheese.ID, CB!.LocType_In_Item, CA.I00_Nullbehaelter2.ID);
             Items.TransferItem(CA!.I00_Polished_Stone.ID, CB!.LocType_Person, CA.Person_I.ID);
+            AdvGame!.SetScoreToken(CA!.Score_Polierter_Stein);
             return true;
         }
 
@@ -707,7 +721,7 @@ namespace GameCore
             mcM.Last()!.SetSpeaker(CB!.VT_sagen);
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Magpie, "Magpie_Dialog_Herkunft4", 212, 1 + CB!.MCE_Choice_Off, true));
             mcM.Last()!.SetSpeaker(CB!.VT_sagen);
-            mcM.Last()!.SetDel(MagpieDialogCalc);
+            mcM.Last()!.SetDel(MagpieDialog_Swap_Intro);
 
             // 220
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Magpie, "Magpie_Dialog_Kette2", 220, true));
@@ -817,6 +831,72 @@ namespace GameCore
             mcM.Last()!.SetSpeaker(CB!.VT_sagen);
             mcM.Last()!.SetDel(ParrotDialog_Fliegen);
         }
+        public bool SnakeDialogCalc(List<MCMenuEntry> MCMEntry)
+        {
+            persistentMCMenu!.SetNewStart(11);
+
+             return true;
+        }
+ 
+        public void SnakeDialog(MCMenu mcM, List<int> tFollower, List<int> cFollower)
+        {
+            mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Snake, "Snake_Dialog_Start_Long", 1, 2, true));
+            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+
+            mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Snake_Dialog_Start_Long2", 2, 3, true));
+            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+
+            mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Snake, "Snake_Dialog_Start_Long3", 3, 1 + CB!.MCE_Choice_Off, true));
+            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetDel(SnakeDialogCalc);
+
+            // 1 
+            mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Snake, "Snake_Dialog_Start_Short", 11, 1 + CB!.MCE_Choice_Off, true));
+            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetDel(SnakeDialogCalc);
+
+            cFollower.Add(100);
+            mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Snake_Dialog_Belebung", 100, 200, true, true));
+            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+
+            cFollower.Add(101);
+            mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Snake_Dialog_Herkunft", 101, 210, true, true));
+            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+
+            cFollower.Add(102);
+            mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Snake_Dialog_Meister", 102, 220, true, true));
+            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+
+            cFollower.Add(199);
+            mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Snake_Dialog_Ende", 199, -1, true, false));
+            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+
+            mcM.Add(new MCMenuEntry(1 + CB!.MCE_Choice_Off, cFollower));
+
+            // 200
+            mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Snake, "Snake_Dialog_Belebung2", 200, true));
+            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Snake_Dialog_Belebung3", 201, true));
+            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Snake, "Snake_Dialog_Belebung4", 202, 1 + CB!.MCE_Choice_Off, true));
+            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+
+            // 210
+            mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Snake, "Snake_Dialog_Herkunft2", 210, true));
+            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Snake_Dialog_Herkunft3", 211, true));
+            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Snake, "Snake_Dialog_Herkunft4", 212, 1 + CB!.MCE_Choice_Off, true));
+            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+
+            // 220
+            mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Snake, "Snake_Dialog_Meister2", 220, true));
+            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Snake_Dialog_Meister3", 221, true));
+            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Snake, "Snake_Dialog_Meister4", 222, 1 + CB!.MCE_Choice_Off, true));
+            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+        }
         public void BookDialog(MCMenu mcM, List<int> tFollower, List<int> cFollower)
         {
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Book_Dialog_Start", 1, 1 + CB!.MCE_Choice_Off, true));
@@ -831,6 +911,10 @@ namespace GameCore
 
             cFollower.Add(102);
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Book_Dialog_Sextips", 102, 220, true, false));
+            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+
+            cFollower.Add(103);
+            mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Book_Dialog_Mondsteine", 103, 230, true, false));
             mcM.Last()!.SetSpeaker(CB!.VT_sagen);
 
             cFollower.Add(199);
@@ -849,6 +933,10 @@ namespace GameCore
 
             // 220
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Book_Dialog_Sextips2", 220, 1 + CB!.MCE_Choice_Off    , true));
+            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+
+            // 230
+            mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Book_Dialog_Mondsteine2", 230, 1 + CB!.MCE_Choice_Off, true));
             mcM.Last()!.SetSpeaker(CB!.VT_sagen);
         }
     }

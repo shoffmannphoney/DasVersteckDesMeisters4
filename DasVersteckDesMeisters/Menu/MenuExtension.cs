@@ -1314,6 +1314,7 @@ public class MenuExtension
             {
                 GlobalData.CurrentGlobalData!.UIS!.InitBrowserUpdate();
                 GlobalData.CurrentGlobalData!.Adventure!.Orders!.GenericDialog(null, GlobalData.CurrentGlobalData.Adventure!.Orders!.SetupDialog);
+                GlobalData.CurrentGlobalData!.UIS!.FinishBrowserUpdate();
                 GlobalData.CurrentGlobalData!.OrderList!.FlushCollection();
                 /*
                 GlobalData.CurrentGlobalData.UIS.StoryTextObj.RecalcLatest();

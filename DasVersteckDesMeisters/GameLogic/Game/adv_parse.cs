@@ -1042,6 +1042,21 @@ public partial class Adv : AdvBase
         PList.AddItem();
         PLL.Add(new ParseLine(CA!.PL_Throw, PList, Orders!.Throw));
 
+        // Wirf P in
+        PList = new ParseTokenList();
+        PList.AddVerb(CA!.Verb_Throw);
+        PList.AddPerson();
+        PList.AddPrep(CB!.Prep_in);
+        PList.AddItem();
+        PLL.Add(new ParseLine(CA!.PL_Throw, PList, Orders!.ThrowPin));
+
+        PList = new ParseTokenList();
+        PList.AddNoun(CA!.Noun_Schleuder.ID);
+        PList.AddPerson();
+        PList.AddPrep(CB!.Prep_in);
+        PList.AddItem();
+        PLL.Add(new ParseLine(CA!.PL_Throw, PList, Orders!.ThrowPin));
+
         // Wirf nach
         PList = new ParseTokenList();
         PList.AddVerb(CA!.Verb_Throw);
@@ -2446,6 +2461,24 @@ public partial class Adv : AdvBase
         PList.AddPrep(CB!.Prep_auf);
         PList.AddItem();
         PLL.Add(new ParseLine(CA!.PL_Knock2, PList, Orders!.KnockOn));
+
+        // Klopfe Person
+        PList = new ParseTokenList();
+        PList.AddVerb(CA!.Verb_Knock);
+        PList.AddPerson();
+        PLL.Add(new ParseLine(CA!.PL_Knock, PList, Orders!.KnockOnP));
+
+        PList = new ParseTokenList();
+        PList.AddVerb(CA!.Verb_Knock);
+        PList.AddPrep(CB!.Prep_an);
+        PList.AddPerson();
+        PLL.Add(new ParseLine(CA!.PL_Knock2, PList, Orders!.KnockOnP));
+
+        PList = new ParseTokenList();
+        PList.AddVerb(CA!.Verb_Knock);
+        PList.AddPrep(CB!.Prep_auf);
+        PList.AddPerson();
+        PLL.Add(new ParseLine(CA!.PL_Knock2, PList, Orders!.KnockOnP));
 
         // Klopfe
         PList = new ParseTokenList();
@@ -5333,6 +5366,21 @@ public partial class Adv : AdvBase
         PList.AddVerb(CB!.Verb_ProtOff);
         PLLEng.Add(new ParseLine(CB!.PL_Prot_Off, PList, Orders!.ProtOff));
 
+        // Wirf P in
+        PList = new ParseTokenList();
+        PList.AddVerb(CA!.Verb_Throw);
+        PList.AddPerson();
+        PList.AddPrep(CB!.Prep_in);
+        PList.AddItem();
+        PLLEng.Add(new ParseLine(CA!.PL_Throw, PList, Orders!.ThrowPin));
+
+        PList = new ParseTokenList();
+        PList.AddNoun(CA!.Noun_Schleuder.ID);
+        PList.AddPerson();
+        PList.AddPrep(CB!.Prep_in);
+        PList.AddItem();
+        PLLEng.Add(new ParseLine(CA!.PL_Throw, PList, Orders!.ThrowPin));
+
         // Wirf nach
         PList = new ParseTokenList();
         PList.AddVerb(CA!.Verb_Throw);
@@ -6787,6 +6835,24 @@ public partial class Adv : AdvBase
         PList = new ParseTokenList();
         PList.AddVerb(CA!.Verb_Knock);
         PLLEng.Add(new ParseLine(CA!.PL_Knock_Solo, PList, Orders!.KnockSolo));
+
+        // Klopfe Person
+        PList = new ParseTokenList();
+        PList.AddVerb(CA!.Verb_Knock);
+        PList.AddPerson();
+        PLLEng.Add(new ParseLine(CA!.PL_Knock, PList, Orders!.KnockOnP));
+
+        PList = new ParseTokenList();
+        PList.AddVerb(CA!.Verb_Knock);
+        PList.AddPrep(CB!.Prep_an);
+        PList.AddPerson();
+        PLLEng.Add(new ParseLine(CA!.PL_Knock2, PList, Orders!.KnockOnP));
+
+        PList = new ParseTokenList();
+        PList.AddVerb(CA!.Verb_Knock);
+        PList.AddPrep(CB!.Prep_auf);
+        PList.AddPerson();
+        PLLEng.Add(new ParseLine(CA!.PL_Knock2, PList, Orders!.KnockOnP));
 
         // spucke
         PList = new ParseTokenList();

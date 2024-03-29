@@ -110,14 +110,258 @@ public static class loca
             return null;
 
     }
+    public static string Verb_zerstosse
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "zerstoße";
+            else
+                return "zerstoße";
+        }
+
+    }
+    public static string Verb_zerstoss
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "zerstoß";
+            else
+                return "zerstoß";
+        }
+
+    }
+    public static string Verb_zerdruecke
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "zerdrücke";
+            else
+                return "zerdrücke";
+        }
+
+    }
+    public static string Verb_zerdrueck
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "zerdrück";
+            else
+                return "zerdrück";
+        }
+
+    }
+    public static string Info_Start
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Ich stand mitten im Wald. Wo befand sich bloß das Versteck des Meisters? Hier irgendwo in der Nähe musste doch seine Hütte sein!";
+            else
+                return "Ich stand mitten im Wald. Wo befand sich bloß das Versteck des Meisters? Hier irgendwo in der Nähe musste doch seine Hütte sein!";
+        }
+
+    }
+    public static string Info_Suche_Versteck
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Die Hütte des Meisters hatte ich gefunden. Aber das war ganz sicher nicht sein Versteck, zumindest sah sie aus wie eine baufällige Bruchbude. Irgendwo hier musste doch ein verborgener Eingang liegen!";
+            else
+                return "Die Hütte des Meisters hatte ich gefunden. Aber das war ganz sicher nicht sein Versteck, zumindest sah sie aus wie eine baufällige Bruchbude. Irgendwo hier musste doch ein verborgener Eingang liegen!";
+        }
+
+    }
+    public static string Info_Pentagramm
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Ein Pentagramm mitten in der Stube der Hütte. Das hatte doch gewiss etwas zu bedeuten. Aber was?";
+            else
+                return "Ein Pentagramm mitten in der Stube der Hütte. Das hatte doch gewiss etwas zu bedeuten. Aber was?";
+        }
+
+    }
+    public static string Info_Atrium_Ankunft
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Ich war im Versteck des Meisters angekommen. Jetzt noch schnell die Klaue an mich nehmen und nichts wie raus hier!";
+            else
+                return "Ich war im Versteck des Meisters angekommen. Jetzt noch schnell die Klaue an mich nehmen und nichts wie raus hier!";
+        }
+
+    }
+    public static string Info_Klaue_nicht_nehmbar
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Ich hatte die Klaue gefunden. Leider schien es viel zu gefährlich zu sein, sie einfach zu nehmen.";
+            else
+                return "Ich hatte die Klaue gefunden. Leider schien es viel zu gefährlich zu sein, sie einfach zu nehmen.";
+        }
+
+    }
+    public static string Info_Klaue_nicht_fixiert
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Ich hatte die Klaue gefunden und mit der Zuckerzange an mich genommen. Leider war das Gebilde alles anderes als stabil.";
+            else
+                return "Ich hatte die Klaue gefunden und mit der Zuckerzange an mich genommen. Leider war das Gebilde alles anderes als stabil.";
+        }
+
+    }
+    public static string Info_Klaue_noch_niemand_belebt
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Ich hatte nun diese schicke Klauenzange. Aber was sollte ich damit machen?";
+            else
+                return "Ich hatte nun diese schicke Klauenzange. Aber was sollte ich damit machen?";
+        }
+
+    }
+    public static string Info_Klaue_noch_niemand_gesprochen
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Ich hatte nun diese schicke Klauenzange und damit auch schon etwas belebt. Aber was sollte ich jetzt damit machen?";
+            else
+                return "Ich hatte nun diese schicke Klauenzange und damit auch schon etwas belebt. Aber was sollte ich jetzt damit machen?";
+        }
+
+    }
+    public static string Order_Switch_English_Fail
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Das Spiel würde jetzt gerne auf Englisch wechseln, aber die englischen Texte sind noch gar nicht fertig. Kommt irgendwann noch!";
+            else
+                return "Das Spiel würde jetzt gerne auf Englisch wechseln, aber die englischen Texte sind noch gar nicht fertig. Kommt irgendwann noch!";
+        }
+
+    }
+    public static string KnockOn_Fail
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Ich klopfte an [Pl1,Nom]. Nichts weiter geschah.";
+            else
+                return "Ich klopfte an [Pl1,Nom]. Nothing else happened.";
+        }
+    }
+    public static string KnockOn_Armor
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Ich klopfte an die Ritterrüstung. Es schepperte, ansonsten geschah wenig.";
+            else
+                return "Ich klopfte an die Ritterrüstung. Es schepperte, ansonsten geschah wenig.";
+        }
+    }
+    public static string Order_Score_891
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "... eines hoffnungslosen Kleinkriminellen...";
+            else
+                return "... eines hoffnungslosen Kleinkriminellen...";
+        }
+    }
+    public static string Order_Score_892
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "... eines schwächlichen Strauchdiebs...";
+            else
+                return "... eines schwächlichen Strauchdiebs...";
+        }
+    }
+    public static string Order_Score_893
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "... eines hoffnungsvollen Straßenräubers...";
+            else
+                return "... eines hoffnungsvollen Straßenräubers...";
+        }
+    }
+    public static string Order_Score_894
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "... eines ambitionierten Verbrechers...";
+            else
+                return "... eines ambitionierten Verbrechers...";
+        }
+    }
+    public static string Order_Score_895
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "... eines fortgeschrittenen Diebeskünstlers...";
+            else
+                return "... eines fortgeschrittenen Diebeskünstlers...";
+        }
+    }
+    public static string Order_Score_896
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "... eines Masterminds des unfreiwilligen Eigentumstransfers...";
+            else
+                return "... eines Masterminds des unfreiwilligen Eigentumstransfers...";
+        }
+    }
+    public static string Order_Score_897
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "... eines wahren Meisterdiebs...";
+            else
+                return "... eines wahren Meisterdiebs...";
+        }
+    }
+
+    public static string Give_Magpie_Fail
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Wozu sollte ich der Elster meinen schönen Kä#se anbieten? Vielleicht sollte ich erst mal mit ihr reden.";
+            else
+                return "Wozu sollte ich der Elster meinen schönen Kä#se anbieten? Vielleicht sollte ich erst mal mit ihr reden.";
+        }
+    }
     public static string Grab_In_Fail
     {
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "In Il1,Nom] konnte ich nicht hineingreifen?";
+                return "In [Il1,Nom] konnte ich nicht hineingreifen.";
             else
-                return "In Il1,Nom] konnte ich nicht hineingreifen?";
+                return "In [Il1,Nom] konnte ich nicht hineingreifen.";
         }
     }
     public static string Grab_In_Find
@@ -125,9 +369,9 @@ public static class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ich griff in Il1,Nom] hinein und ertastete so einiges";
+                return "Ich griff in [Il1,Nom] hinein und ertastete so einiges.";
             else
-                return "Ich griff in Il1,Nom] hinein und ertastete so einiges";
+                return "Ich griff in [Il1,Nom] hinein und ertastete so einiges.";
         }
     }
     public static string Drop_Pouch_Fail
@@ -323,9 +567,9 @@ public static class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Die D";
+                return "Die Elster war magisch festgekettet. Die würde ich wohl nicht hier wegbekommen.";
             else
-                return "Die Eule war auf dem Sims festgeklebt. Vermutlich ein Klimaschützer.";
+                return "Die Elster war magisch festgekettet. Die würde ich wohl nicht hier wegbekommen.";
         }
     }
     public static string Take_Schale
@@ -347,6 +591,16 @@ public static class loca
                 return "Nach reiflicher Überlegung fiel [RP:1,Dat] doch kein guter Grund ein, [Pl2,Nom] nach [Il3,Dat] zu werfen.";
             else
                 return "After careful consideration, [RP:1,Dat] could not think of a good reason to throw [Pl2,Nom] at [Ll3,Dat] after all.";
+        }
+    }
+    public static string ThrowPersonIn_Fail
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Nach reiflicher Überlegung fiel [RP:1,Dat] doch kein guter Grund ein, [Pl2,Nom] in [Il3,Dat] zu werfen.";
+            else
+                return "After careful consideration, [RP:1,Dat] could not think of a good reason to throw [Pl2,Nom] in [Ll3,Dat] after all.";
         }
     }
     public static string TouchW_Books
@@ -634,6 +888,167 @@ public static class loca
                 return "Mit einem leisen Krächzen verwandelte sich der Papagei wieder in seine eigentliche, ausgestopfte Version zurück.";
         }
     }
+    public static string Do_Parrot_Reaktion1
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Hatte ich da eben ein leises Krächzen gehört?";
+            else
+                return "Hatte ich da eben ein leises Krächzen gehört?";
+        }
+    }
+    public static string Do_Parrot_Reaktion2
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Der ausgestopfte Papagei schien mich auffordernd anzustarren.";
+            else
+                return "Der ausgestopfte Papagei schien mich auffordernd anzustarren.";
+        }
+    }
+    public static string Do_Parrot_Reaktion3
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Der ausgestopfte Papagei schien langsam sein Gefieder zu plustern. Äh, ich musste mir das einbilden...";
+            else
+                return "Der ausgestopfte Papagei schien langsam sein Gefieder zu plustern. Äh, ich musste mir das einbilden...";
+        }
+    }
+    public static string Do_Parrot_Action1
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Der ausgestopfte Papagei musterte mich unverhohlen. \"Fürwahr, fürwahr, man kann sich seinen Besuch nicht immer aussuchen.\" ";
+            else
+                return "Der ausgestopfte Papagei musterte mich unverhohlen. \"Fürwahr, fürwahr, man kann sich seinen Besuch nicht immer aussuchen.\" ";
+        }
+    }
+    public static string Do_Parrot_Action2
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Der ausgestopfte Papagei musterte mich unverchämt. \"Hat dir schon mal jemand gesagt, dass du sehr viel besser aussähest, wenn du dein Gesicht mit Nougatcreme einriebest?\" ";
+            else
+                return "Der ausgestopfte Papagei musterte mich unverchämt. \"Hat dir schon mal jemand gesagt, dass du sehr viel besser aussähest, wenn du dein Gesicht mit Nougatcreme einriebest?\" ";
+        }
+    }
+    public static string Do_Parrot_Action3
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Der ausgestopfte Papagei gähnte genervt. ";
+            else
+                return "Der ausgestopfte Papagei gähnte genervt. ";
+        }
+    }
+    public static string Do_Parrot_Action4
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Der ausgestopfte Papagei plusterte sein Gefieder auf. ";
+            else
+                return "Der ausgestopfte Papagei plusterte sein Gefieder auf. ";
+        }
+    }
+    public static string Do_Parrot_Action5
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Der ausgestopfte Papagei musterte mich herablassend.";
+            else
+                return "Der ausgestopfte Papagei musterte mich herablassend.";
+        }
+    }
+
+    public static string Do_Magpie_Reaktion1
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Hatte ich da eben aus der Richtung der Elster ein leises Krächzen gehört?";
+            else
+                return "Hatte ich da eben aus der Richtung der Elster ein leises Krächzen gehört?";
+        }
+    }
+    public static string Do_Magpie_Reaktion2
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Diese dämliche Elster schien mich ausgesprochen unverschämterweise anzustarren.";
+            else
+                return "Diese dämliche Elster schien mich ausgesprochen unverschämterweise anzustarren.";
+        }
+    }
+    public static string Do_Magpie_Reaktion3
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Aus den Augenwinkeln heraus nahm ich wahr, dass die Elster sich bewegt hatte. Nur einen Millimeter, aber ich war mir sicher!";
+            else
+                return "Aus den Augenwinkeln heraus nahm ich wahr, dass die Elster sich bewegt hatte. Nur einen Millimeter, aber ich war mir sicher!";
+        }
+    }
+    public static string Do_Magpie_Action1
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Die Elster schimpfte mit derartig schrecklichen Schimpfworten vor sich hin, dass ich ganz rot wurde.";
+            else
+                return "Die Elster schimpfte mit derartig schrecklichen Schimpfworten vor sich hin, dass ich ganz rot wurde.";
+        }
+    }
+    public static string Do_Magpie_Action2
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Die Elster schnappte nach mir. Zum Glück war ich schneller.";
+            else
+                return "Die Elster schnappte nach mir. Zum Glück war ich schneller.";
+        }
+    }
+    public static string Do_Magpie_Action3
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Die Elster pickte nach meiner Hand. Zum Glück war ich schneller.";
+            else
+                return "Die Elster pickte nach meiner Hand. Zum Glück war ich schneller.";
+        }
+    }
+    public static string Do_Magpie_Action4
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Die Elster krächzte eine schiere Schimpfkanonade auf mich los.";
+            else
+                return "Die Elster krächzte eine schiere Schimpfkanonade auf mich los.";
+        }
+    }
+    public static string Do_Magpie_Action5
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Die Elster schaute mich wüte4nd an.";
+            else
+                return "Die Elster schaute mich wüte4nd an.";
+        }
+    }
     public static string Do_Skeleton_Finish
     {
         get
@@ -642,6 +1057,86 @@ public static class loca
                 return "Die Knochen des Skeletts klapperten noch einmal vor sich hin, dann war wieder Stille.";
             else
                 return "Die Knochen des Skeletts klapperten noch einmal vor sich hin, dann war wieder Stille.";
+        }
+    }
+    public static string DoSkelett_Reaktion1
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Die Knochen des Skeletts klapperten leise vor sich hin.";
+            else
+                return "Die Knochen des Skeletts klapperten leise vor sich hin.";
+        }
+    }
+    public static string DoSkelett_Reaktion2
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Das Skelett schien mich durchdringend anzustarren.";
+            else
+                return "Das Skelett schien mich durchdringend anzustarren.";
+        }
+    }
+    public static string DoSkelett_Reaktion3
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Das Skelett schien irgendwas zu wispern und die Hand nach mir zu recken.";
+            else
+                return "Das Skelett schien irgendwas zu wispern und die Hand nach mir zu recken.";
+        }
+    }
+    public static string DoSkelett_Action1
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Das Skelett nahm ein Buch vom Stapel, drückte einen Stempel auf ein Einlegeblatt, und legte es dann auf den nächsten Stapel.";
+            else
+                return "Das Skelett nahm ein Buch vom Stapel, drückte einen Stempel auf ein Einlegeblatt, und legte es dann auf den nächsten Stapel.";
+        }
+    }
+    public static string DoSkelett_Action2
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Das Skelett sah mich durchdringend an. \"Keine Eselsohren in die Bücher machen!\" ";
+            else
+                return "Das Skelett sah mich durchdringend an. \"Keine Eselsohren in die Bücher machen!\" ";
+        }
+    }
+    public static string DoSkelett_Action3
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Das Skelett stützte den Kopf auf die Hände und stöhnte: \"Das wird mir alles zuviel...\" ";
+            else
+                return "Das Skelett stützte den Kopf auf die Hände und stöhnte: \"Das wird mir alles zuviel...\" ";
+        }
+    }
+    public static string DoSkelett_Action4
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Das Skelett musterte mich skeptisch. \"Die Bücher in den Regalen bitte nicht anfassen. Sonst endest du wie ich.\" ";
+            else
+                return "Das Skelett musterte mich skeptisch. \"Die Bücher in den Regalen bitte nicht anfassen. Sonst endest du wie ich.\" ";
+        }
+    }
+    public static string DoSkelett_Action5
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Das Skelett summte leise vor sich hin.";
+            else
+                return "Das Skelett summte leise vor sich hin.";
         }
     }
     public static string Do_Snake_Finish
@@ -823,9 +1318,9 @@ public static class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ich ließ die Unterhose hängen, wo sie war. Wenn Meister Gunnar seiner Wäsche bedurfte, dann sollte er selbst drauf achten.";
+                return "Ich ließ die Unterhose liegen, wo sie war. Wenn Meister Gunnar seiner Wäsche bedurfte, dann sollte er selbst drauf achten.";
             else
-                return "Ich ließ die Unterhose hängen, wo sie war. Wenn Meister Gunnar seiner Wäsche bedurfte, dann sollte er selbst drauf achten.";
+                return "Ich ließ die Unterhose liegen, wo sie war. Wenn Meister Gunnar seiner Wäsche bedurfte, dann sollte er selbst drauf achten.";
         }
     }
     public static string Take_Coin
@@ -1110,9 +1605,9 @@ public static class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ich stellte mich in die Mitte des Pentagramms und ließ das magische Pulver in die Flamme rieseln. Sofort ergoss sich ein riesiger Funkenregen über mich und eine Stimme flüsterte in mein Ohr: \"KABUMM!\"<br>Im nächsten Moment schwebte ich mitten durch eine sternklare Nacht. Unter mir endlose Schwärze, nur ein helles Rechteck leuchtete unter mir. Ich stürzte direkt darauf zu. Ich schrie und schrie.<br><br>Plötzlich öffnete sich auf meinem Rücken ein Päckchen, dessen Anwesenheit ich bisher nicht wahrgenommen hatte. Ein magischer Fallschirm entfaltete sich und bremste meinen Sturz. Sacht sank ich auf das helle Rechteck zu und landete schließlich sanft auf meinen Füßen. Im selben Moment verschwand der magische Fallschirm...";
+                return "Ich stellte mich in die Mitte des Pentagramms und ließ das magische Pulver in die Flamme rieseln. Sofort ergoss sich ein riesiger Funkenregen über mich und eine Stimme flüsterte in mein Ohr: \"KABUMM!\"<br><br>Im nächsten Moment schwebte ich mitten durch eine sternklare Nacht. Unter mir endlose Schwärze, nur ein helles Rechteck leuchtete unter mir. Ich stürzte direkt darauf zu. Ich schrie und schrie.<br><br>Plötzlich öffnete sich auf meinem Rücken ein Päckchen, dessen Anwesenheit ich bisher nicht wahrgenommen hatte. Ein magischer Fallschirm entfaltete sich und bremste meinen Sturz. Sacht sank ich auf das helle Rechteck zu und landete schließlich sanft auf meinen Füßen. Im selben Moment verschwand der magische Fallschirm...<br><br>";
             else
-                return "Ich stellte mich in die Mitte des Pentagramms und ließ das magische Pulver in die Flamme rieseln. Sofort ergoss sich ein riesiger Funkenregen über mich und eine Stimme flüsterte in mein Ohr: \"KABUMM!\"<br>Im nächsten Moment schwebte ich mitten durch eine sternklare Nacht. Unter mir endlose Schwärze, nur ein helles Rechteck leuchtete unter mir. Ich stürzte direkt darauf zu. Ich schrie und schrie.<br><br>Plötzlich öffnete sich auf meinem Rücken ein Päckchen, dessen Anwesenheit ich bisher nicht wahrgenommen hatte. Ein magischer Fallschirm entfaltete sich und bremste meinen Sturz. Sacht sank ich auf das helle Rechteck zu und landete schließlich sanft auf meinen Füßen. Im selben Moment verschwand der magische Fallschirm...";
+                return "Ich stellte mich in die Mitte des Pentagramms und ließ das magische Pulver in die Flamme rieseln. Sofort ergoss sich ein riesiger Funkenregen über mich und eine Stimme flüsterte in mein Ohr: \"KABUMM!\"<br><br>Im nächsten Moment schwebte ich mitten durch eine sternklare Nacht. Unter mir endlose Schwärze, nur ein helles Rechteck leuchtete unter mir. Ich stürzte direkt darauf zu. Ich schrie und schrie.<br><br>Plötzlich öffnete sich auf meinem Rücken ein Päckchen, dessen Anwesenheit ich bisher nicht wahrgenommen hatte. Ein magischer Fallschirm entfaltete sich und bremste meinen Sturz. Sacht sank ich auf das helle Rechteck zu und landete schließlich sanft auf meinen Füßen. Im selben Moment verschwand der magische Fallschirm...<br><br>";
         }
     }
     public static string Tip_SupermagicPowder_MagicCandle_Do
@@ -1120,9 +1615,9 @@ public static class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ich stellte mich in die Mitte des Pentagramms und ließ das magische Pulver in die Flamme rieseln. Sofort ergoss sich ein riesiger Funkenregen über mich und eine Stimme flüsterte in mein Ohr: \"KABUMM!\"<br>Im nächsten Moment stand ich in einem anderen Raum. Wo war ich? Alles war dunkel.<br>Und plötzlich öffneten sich nicht weit entfernt von mir zwei glutrot leuchtende Augen.";
+                return "Ich stellte mich in die Mitte des Pentagramms und ließ das magische Pulver in die Flamme rieseln. Sofort ergoss sich ein riesiger Funkenregen über mich und eine Stimme flüsterte in mein Ohr: \"KABUMM!\"<br><br>Im nächsten Moment stand ich in einem anderen Raum. Wo war ich? Alles war dunkel.<br>Und plötzlich öffneten sich nicht weit entfernt von mir zwei glutrot leuchtende Augen.";
             else
-                return "Ich stellte mich in die Mitte des Pentagramms und ließ das magische Pulver in die Flamme rieseln. Sofort ergoss sich ein riesiger Funkenregen über mich und eine Stimme flüsterte in mein Ohr: \"KABUMM!\"<br>Im nächsten Moment stand ich in einem anderen Raum. Wo war ich? Alles war dunkel.<br>Und plötzlich öffneten sich nicht weit entfernt von mir zwei glutrot leuchtende Augen.";
+                return "Ich stellte mich in die Mitte des Pentagramms und ließ das magische Pulver in die Flamme rieseln. Sofort ergoss sich ein riesiger Funkenregen über mich und eine Stimme flüsterte in mein Ohr: \"KABUMM!\"<br><br>Im nächsten Moment stand ich in einem anderen Raum. Wo war ich? Alles war dunkel.<br>Und plötzlich öffneten sich nicht weit entfernt von mir zwei glutrot leuchtende Augen.";
         }
     }
     public static string UseW_SugarPliers_Claw
@@ -1184,6 +1679,16 @@ public static class loca
                 return "Ich steckte den Schlüssel in das Schloss der Tür zum Labor. Die Tür ließ sich ohne Probleme aufschließen.";
             else
                 return "Ich steckte den Schlüssel in das Schloss der Tür zum Labor. Die Tür ließ sich ohne Probleme aufschließen.";
+        }
+    }
+    public static string Unlock_Labor_Door_Fail
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Ich steckte den Schlüssel in das Schloss der Tür zum Labor. Die Tür ließ sich aber nicht aufschließen, da sie schon aufgeschlossen war.";
+            else
+                return "Ich steckte den Schlüssel in das Schloss der Tür zum Labor. Die Tür ließ sich aber nicht aufschließen, da sie schon aufgeschlossen war.";
         }
     }
     public static string Take_Claw_Sign
@@ -1779,6 +2284,86 @@ public static class loca
                 return "besonders";
             else
                 return "besonders";
+        }
+    }
+    public static string Noun_Rune
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Rune";
+            else
+                return "Rune";
+        }
+    }
+    public static string Noun_Warnschild
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Warnschild";
+            else
+                return "Warnschild";
+        }
+    }
+    public static string Noun_Wasch
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Wasch";
+            else
+                return "Wasch";
+        }
+    }
+    public static string Noun_Gefrier
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Gefrier";
+            else
+                return "Gefrier";
+        }
+    }
+    public static string Noun_Froster
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Froster";
+            else
+                return "Froster";
+        }
+    }
+    public static string Noun_Ente
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Ente";
+            else
+                return "Ente";
+        }
+    }
+    public static string Noun_Entchen
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Entchen";
+            else
+                return "Entchen";
+        }
+    }
+    public static string Noun_Gummiente
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Gummiente";
+            else
+                return "Gummiente";
         }
     }
     public static string Noun_Abdeckung
@@ -2429,9 +3014,9 @@ public static class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ein dunkler Wald (lang)";
+                return "Ein dunkler Wald";
             else
-                return "Ein dunkler Wald (lang)";
+                return "Ein dunkler Wald";
         }
     }
     public static string Adv_L01_Dark_Forest_Lang
@@ -2626,9 +3211,9 @@ public static class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Im Labor des Meisters (lang)";
+                return "Dies also war das großartige Privatlabor des Meisters. Zu Zeiten, in denen ich mein Studium noch ernst genommen hätte, wäre ich vor Ehrfurcht erstarrt. Vor mir lag der große Labortisch mit allerlei Hilfsmitteln darauf. Im Tisch befand sich eine Schublade. Neben dem Tisch erkannte ich eine der berühmten Dunkelheitsmaschinen, die angeblich Meister Gunnar selbst erfunden hatte. An der Wand hing vorbildlicherweise ein großer Erste-Hilfe-Kasten. In der westlichen Wand führte eine Tür zurück zum Flur.";
             else
-                return "Im Labor des Meisters (lang)";
+                return "Dies also war das großartige Privatlabor des Meisters. Zu Zeiten, in denen ich mein Studium noch ernst genommen hätte, wäre ich vor Ehrfurcht erstarrt. Vor mir lag der große Labortisch mit allerlei Hilfsmitteln darauf. Im Tisch befand sich eine Schublade. Neben dem Tisch erkannte ich eine der berühmten Dunkelheitsmaschinen, die angeblich Meister Gunnar selbst erfunden hatte. An der Wand hing vorbildlicherweise ein großer Erste-Hilfe-Kasten. In der westlichen Wand führte eine Tür zurück zum Flur.";
         }
     }
     public static string Adv_L11_Storage_Room
@@ -2646,9 +3231,9 @@ public static class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "In einem Lagerraum (lang)";
+                return "Ich befand mich in einem niedrigen, aber sehr großen Lagerraum. Hier befand sich in endlosen Regalen der Krempel von Meister Gunnar. Besondere Aufmerksamkeit weckten dabei bei mir das linke und das rechte Regal direkt vor mir, sowie ein Vogelständer. Eine Tür in der Nordwand führte nach draußen.";
             else
-                return "In einem Lagerraum (lang)";
+                return "Ich befand mich in einem niedrigen, aber sehr großen Lagerraum. Hier befand sich in endlosen Regalen der Krempel von Meister Gunnar. Besondere Aufmerksamkeit weckten dabei bei mir das linke und das rechte Regal direkt vor mir, sowie ein Vogelständer. Eine Tür in der Nordwand führte nach draußen.";
         }
     }
     public static string Adv_L12_Sleeping_Room
@@ -2666,9 +3251,9 @@ public static class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Im Schlafgemach des Meisters (lang)";
+                return "Das also war das geheimnisvolle Schlafgemach des Meisters. Nicht gerade eine Liebeshöhle, um willige Studentinnen abzuschleppen. Eher ein Mancave für Fortgeschrittene. Ein riesiges Bett dominierte den Raum, auf dem eine hohe, luftige Matratze lag. In einer Raumecke stand ein Schrank. Durch eine kaputte Tür in der Nordwand gelangte man zurück zum Flur.";
             else
-                return "Im Schlafgemach des Meisters (lang)";
+                return "Das also war das geheimnisvolle Schlafgemach des Meisters. Nicht gerade eine Liebeshöhle, um willige Studentinnen abzuschleppen. Eher ein Mancave für Fortgeschrittene. Ein riesiges Bett dominierte den Raum, auf dem eine hohe, luftige Matratze lag. In einer Raumecke stand ein Schrank. Durch eine kaputte Tür in der Nordwand gelangte man zurück zum Flur.";
         }
     }
 
@@ -2687,9 +3272,9 @@ public static class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "In einer Küche (lang)";
+                return "Ich befand mich in einer überwiegend rustikal eingerichteten Küche. Neben einem rustikalen Küchenschrank gab es eine Anrichte mit einer breiten Schublader darin. Neben dem Küchenschrank befand sich ein großer magischer Kühlschrank mit einem ebensolchen Gefrierfach. Der einzige Ausgang führte westlich zurück auf den Flur.";
             else
-                return "In einer Küche (lang)";
+                return "Ich befand mich in einer überwiegend rustikal eingerichteten Küche. Neben einem rustikalen Küchenschrank gab es eine Anrichte mit einer breiten Schublader darin. Neben dem Küchenschrank befand sich ein großer magischer Kühlschrank mit einem ebensolchen Gefrierfach. Der einzige Ausgang führte westlich zurück auf den Flur.";
         }
     }
     public static string Adv_L14_Bathroom
@@ -2707,9 +3292,9 @@ public static class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Im Badezimmer (lang)";
+                return "Das Badezimmer des Meisters fiel feudaler aus als gedacht. Die große Badewanne enthielt eine Whirlpoolfunction. Über dem Waschbecken hing ein großer, fein gearbeiteter Spiegel. Nur die Toilette nebst Spülung war No-Name-Ware aus dem Baumarkt. In der östlichen Wand befand sich eine Tür zurück zum Flur.";
             else
-                return "Im Badezimmer (lang)";
+                return "Das Badezimmer des Meisters fiel feudaler aus als gedacht. Die große Badewanne enthielt eine Whirlpoolfunction. Über dem Waschbecken hing ein großer, fein gearbeiteter Spiegel. Nur die Toilette nebst Spülung war No-Name-Ware aus dem Baumarkt. In der östlichen Wand befand sich eine Tür zurück zum Flur.";
         }
     }
     public static string Adv_L15_Nowhere
@@ -2727,9 +3312,9 @@ public static class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Irgendwo im Nirgendwo (lang)";
+                return "Ich befand mich im Nirgendwo. Hier gab es nichts, keine Ausgänge, keine Gegenstände, nicht einmal ausgestopfte Tiere. Nein, hier gab es nur nackte Verzweiflung und die nicht mehr zu leugnende Erkenntnis:<br>GAME OVER!";
             else
-                return "Irgendwo im Nirgendwo (lang)";
+                return "Ich befand mich im Nirgendwo. Hier gab es nichts, keine Ausgänge, keine Gegenstände, nicht einmal ausgestopfte Tiere. Nein, hier gab es nur nackte Verzweiflung und die nicht mehr zu leugnende Erkenntnis:<br>GAME OVER!";
         }
     }
 
@@ -2738,9 +3323,9 @@ public static class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ein ledernes Beutelchen (lang)";
+                return "Ein kleines ledernes Beutelchen.";
             else
-                return "Ein ledernes Beutelchen (lang)";
+                return "Ein kleines ledernes Beutelchen.";
         }
     }
     public static string Adv_I00_Magic_Powder
@@ -2748,9 +3333,9 @@ public static class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Magisches Pulver (lang)";
+                return "Ein fein gemahlenes Pulver, das sich leicht magisch anfühlte.";
             else
-                return "Magisches Pulver (lang)";
+                return "Ein fein gemahlenes Pulver, das sich leicht magisch anfühlte.";
         }
     }
     public static string Adv_I00_Supermagic_Powder
@@ -2758,9 +3343,9 @@ public static class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Magisches Pulver, 2. Teil (lang)";
+                return "Ein fein gemahlenes Pulver, das sich leicht magisch anfühlte.";
             else
-                return "Magisches Pulver, 2. Teil (lang)";
+                return "Ein fein gemahlenes Pulver, das sich leicht magisch anfühlte.";
         }
     }
     public static string Adv_I00_Magic_Candle
@@ -2839,9 +3424,9 @@ public static class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Eine Rolle mit Pflaster (lang)";
+                return "Eine Rolle mit altem, vergilbtem Pflaster.";
             else
-                return "Eine Rolle mit Pflaster (lang)";
+                return "Eine Rolle mit altem, vergilbtem Pflaster.";
         }
     }
     public static string Adv_I00_Unstable_Pliers_With_Claw
@@ -2849,9 +3434,9 @@ public static class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Eine instabile Klauenzange (lang)";
+                return "In der Zuckerzange steckt vorne die Klaue drin. Das ganze Gebilde war ganz schön instabil.";
             else
-                return "Eine instabile Klauenzange (lang)";
+                return "In der Zuckerzange steckt vorne die Klaue drin. Das ganze Gebilde war ganz schön instabil.";
         }
     }
     public static string Adv_I00_Stable_Pliers_With_Claw
@@ -2859,9 +3444,9 @@ public static class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Eine stabile Klauenzange (lang)";
+                return "In der Zuckerzange steckt vorne die Klaue drin. Da der Zangengriff mit Rollplflaster umwickelt war, war die Klaue stabil eingeklemmt in der Zange.";
             else
-                return "Eine stabile Klauenzange (lang)";
+                return "In der Zuckerzange steckt vorne die Klaue drin. Da der Zangengriff mit Rollplflaster umwickelt war, war die Klaue stabil eingeklemmt in der Zange.";
         }
     }
     public static string Adv_I00_Magnifier
@@ -2869,9 +3454,9 @@ public static class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Eine Lupe (lang)";
+                return "Eine sehr große, stark vergrößernde Lupe";
             else
-                return "Eine Lupe (lang)";
+                return "Eine sehr große, stark vergrößernde Lupe";
         }
     }
     public static string Adv_I00_Squeaky_Duck
@@ -2899,9 +3484,9 @@ public static class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ein Belegexemplar des Buchs von Meister Gunnar (lang)";
+                return "Ein Belegexemplar des Buchs von Meister Gunnar: \"Die geheimen Magietricks von Meister Gunnar\" Auf einer der ersten Seiten befand sich eine Lithografie von Meister Gunnar, die ihn sehr naturgetreu, aber auch unfassbar schmierig darstelle.";
             else
-                return "Ein Belegexemplar des Buchs von Meister Gunnar (lang)";
+                return "Ein Belegexemplar des Buchs von Meister Gunnar: \"Die geheimen Magietricks von Meister Gunnar\" Auf einer der ersten Seiten befand sich eine Lithografie von Meister Gunnar, die ihn sehr naturgetreu, aber auch unfassbar schmierig darstelle.";
         }
     }
     public static string Adv_I00_Cheese
@@ -2919,9 +3504,9 @@ public static class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ein polierter Stein (lang)";
+                return "Ein blank polierter Kieselstein.";
             else
-                return "Ein polierter Stein (lang)";
+                return "Ein blank polierter Kieselstein.";
         }
     }
     public static string Adv_I00_Sugar_Pliers
@@ -2939,9 +3524,9 @@ public static class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ein Schlüssel (lang)";
+                return "Ein verzierter, altmodischer Bartschlüssel ";
             else
-                return "Ein Schlüssel (lang)";
+                return "Ein verzierter, altmodischer Bartschlüssel ";
         }
     }
     public static string Adv_I00_Polishing_Rag
@@ -2949,9 +3534,9 @@ public static class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ein Polierlappen (lang)";
+                return "Ein Lappen, wie man ihn zum Polieren von Metall verwendete.";
             else
-                return "Ein Polierlappen (lang)";
+                return "Ein Lappen, wie man ihn zum Polieren von Metall verwendete.";
         }
     }
 
@@ -2971,9 +3556,9 @@ public static class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ein Mondstein (lang)";
+                return "Der Kiesel war nun vollständig mit Mondlicht vollgesogen. Das machte ihn zum Mondstein.";
             else
-                return "Ein Mondstein (lang)";
+                return "Der Kiesel war nun vollständig mit Mondlicht vollgesogen. Das machte ihn zum Mondstein.";
         }
     }
     public static string Adv_I00_Plastic_Bag
@@ -2991,9 +3576,9 @@ public static class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ein prachtvoller Wunderwarzenschwamm (lang)";
+                return "Noch nie zuvor hatte ich einen deartig prachtvollen Wunderwarzenschwamm gesehen. Das konnte natürlich auch daran liegen, dass ich noch nie zuvor ein solches Ding gesehen hatte.";
             else
-                return "Ein prachtvoller Wunderwarzenschwamm (lang)";
+                return "Noch nie zuvor hatte ich einen deartig prachtvollen Wunderwarzenschwamm gesehen. Das konnte natürlich auch daran liegen, dass ich noch nie zuvor ein solches Ding gesehen hatte.";
         }
     }
     public static string Adv_I00_Slag
@@ -3001,9 +3586,9 @@ public static class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ein Schlackeklumpen (lang)";
+                return "Aus meinen schönen Zutaten war ein unansehnlicher Schlackeklumpen gworden.";
             else
-                return "Ein Schlackeklumpen (lang)";
+                return "Aus meinen schönen Zutaten war ein unansehnlicher Schlackeklumpen gworden.";
         }
     }
     public static string Adv_I00_Plunger
@@ -3011,9 +3596,9 @@ public static class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ein Stößel (lang)";
+                return "Ein großer Stößel für einen großen Mörser.";
             else
-                return "Ein Stößel (lang)";
+                return "Ein großer Stößel für einen großen Mörser.";
         }
     }
     public static string Adv_I00_Coin
@@ -3141,9 +3726,9 @@ public static class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Jede Menge Nebel (lang)";
+                return "Nebel, soweit das Auge reichte.";
             else
-                return "Jede Menge Nebel (lang)";
+                return "Nebel, soweit das Auge reichte.";
         }
     }
     public static string Adv_I03_Pentagram
@@ -3372,12 +3957,22 @@ public static class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Es handelte sich um ein magisches Siegel mit den Initialen von Meister Gunnar darauf";
+                return "Es handelte sich um ein magisches Siegel mit den Initialen von Meister Gunnar darauf.";
             else
-                return "Es handelte sich um ein magisches Siegel mit den Initialen von Meister Gunnar darauf";
+                return "Es handelte sich um ein magisches Siegel mit den Initialen von Meister Gunnar darauf.";
         }
     }
-    public static string Adv_I06_Sign
+    public static string Adv_I06_Seal_Broken
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Es handelte sich um ein magisches Siegel mit den Initialen von Meister Gunnar darauf. Das Siegel war mitten durchgebrochen. Iregendwie enttäuschend für ein magisches Siegel...";
+            else
+                return "Es handelte sich um ein magisches Siegel mit den Initialen von Meister Gunnar darauf. Das Siegel war mitten durchgebrochen. Iregendwie enttäuschend für ein magisches Siegel...";
+        }
+    }
+        public static string Adv_I06_Sign
     {
         get
         {
@@ -3385,6 +3980,16 @@ public static class loca
                 return "Auf dem Schild stand groß \"Privat\". Sehr witzig. Und darunter stand noch in klein: \"Keine rohe Gewalt anwenden!\" Tja, warum eigentlich nicht?";
             else
                 return "Auf dem Schild stand groß \"Privat\". Sehr witzig. Und darunter stand noch in klein: \"Keine rohe Gewalt anwenden!\" Tja, warum eigentlich nicht?";
+        }
+    }
+    public static string Adv_I06_Sign_Broken
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Auf dem Schild stand groß \"Privat\". Sehr witzig. Und darunter stand noch in klein: \"Keine rohe Gewalt anwenden!\" Danke nochmal für den Tipp, liebes Schild.";
+            else
+                return "Auf dem Schild stand groß \"Privat\". Sehr witzig. Und darunter stand noch in klein: \"Keine rohe Gewalt anwenden!\" Danke nochmal für den Tipp, liebes Schild.";
         }
     }
 
@@ -3469,6 +4074,16 @@ public static class loca
                 return "Die hölzerne Abdeckung deckte den Brunnen ab.";
         }
     }
+    public static string Adv_I08_Well_3
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Irgendwo tief unten im Brunnen hatte kurz etwas geschimmert. Aber es war zu dunkel, um wirklich etwas im Wasser zu erkennen.";
+            else
+                return "Irgendwo tief unten im Brunnen hatte kurz etwas geschimmert. Aber es war zu dunkel, um wirklich etwas im Wasser zu erkennen.";
+        }
+    }
     public static string Adv_I08_Wooden_Cover
     {
         get
@@ -3534,9 +4149,9 @@ public static class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ein rotes Regal (lang)";
+                return "Ein recht robust aussehendes rotes Regal.";
             else
-                return "Ein rotes Regal (lang)";
+                return "Ein recht robust aussehendes rotes Regal.";
         }
     }
     public static string Adv_I09_Green_Shelf
@@ -3544,9 +4159,9 @@ public static class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ein grünes Regal (lang)";
+                return "Ein recht robust aussehendes grünes Regal.";
             else
-                return "Ein grünes Regal (lang)";
+                return "Ein recht robust aussehendes grünes Regal.";
         }
     }
     public static string Adv_I09_Library_Door
@@ -3554,9 +4169,9 @@ public static class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Eine Tür, die zurück ins Atrium führt (lang)";
+                return "Durch die verzierte Tür gelangte man ins Atrium zurück.";
             else
-                return "Eine Tür, die zurück ins Atrium führt (lang)";
+                return "Durch die verzierte Tür gelangte man ins Atrium zurück.";
         }
     }
     public static string Adv_I09_Librarians_Desk
@@ -3564,9 +4179,9 @@ public static class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Der Bibliothekarstresen (lang)";
+                return "Ein schwerer hölzerner Bbliothekstresen.";
             else
-                return "Der Bibliothekarstresen (lang)";
+                return "Ein schwerer hölzerner Bbliothekstresen.";
         }
     }
     public static string Adv_I09_Angry_Book
@@ -3624,9 +4239,9 @@ public static class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ein Schild (lang)";
+                return "Auf dem Schild stand: \"Bücher nicht ohne sachkundige Unterstützung berühren! Lebensgefahr!\"";
             else
-                return "Ein Schild (lang)";
+                return "Auf dem Schild stand: \"Bücher nicht ohne sachkundige Unterstützung berühren! Lebensgefahr!\"";
         }
     }
     public static string Adv_I09_Carton
@@ -3634,9 +4249,9 @@ public static class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ein großer, schwerer Karton (lang)";
+                return "Ein großer, schwerer Karton von \"Egobooster Selfpublishing\"";
             else
-                return "Ein großer, schwerer Karton (lang)";
+                return "Ein großer, schwerer Karton von \"Egobooster Selfpublishing\"";
         }
     }
     public static string Adv_I09_Books_Master
@@ -3644,9 +4259,9 @@ public static class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ein Stapel Belegexemplare (lang)";
+                return "Ein Stapel Belegexemplare des Buchs von Meister Gunnar: \"Die geheimen Magietricks von Meister Gunnar\" Auf einer der ersten Seiten befand sich eine Lithografie von Meister Gunnar, die ihn sehr naturgetreu, aber auch unfassbar schmierig darstelle.<br>Ich konnte einen Brechreiz gerade so noch unterdrücken.";
             else
-                return "Ein Stapel Belegexemplare (lang)";
+                return "Ein Stapel Belegexemplare des Buchs von Meister Gunnar: \"Die geheimen Magietricks von Meister Gunnar\" Auf einer der ersten Seiten befand sich eine Lithografie von Meister Gunnar, die ihn sehr naturgetreu, aber auch unfassbar schmierig darstelle.<br>Ich konnte einen Brechreiz gerade so noch unterdrücken.";
         }
     }
     public static string Adv_I10_Labor_Table
@@ -3674,9 +4289,9 @@ public static class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Eine grüne Tür (lang)";
+                return "Die grüne Tür in der Nordwand führte nach draußen.";
             else
-                return "Eine grüne Tür (lang)";
+                return "Die grüne Tür in der Nordwand führte nach draußen.";
         }
     }
     public static string Adv_I10_First_Aid_Kit
@@ -3694,9 +4309,9 @@ public static class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Eine Schublade (lang)";
+                return "Im Labortisch befand sich eine gewöhnliche Schublade.";
             else
-                return "Eine Schublade (lang)";
+                return "Im Labortisch befand sich eine gewöhnliche Schublade.";
         }
     }
     public static string Adv_I10_Bracket
@@ -3764,9 +4379,9 @@ public static class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ein riesiger Mörser (lang)";
+                return "Ein sehr großer Mörser, in dem Meister Gunnar vermutlich seine Pülverchen zusammenstößelte.";
             else
-                return "Ein riesiger Mörser (lang)";
+                return "Ein sehr großer Mörser, in dem Meister Gunnar vermutlich seine Pülverchen zusammenstößelte.";
         }
     }
     public static string Adv_I10_Labor_Door
@@ -3774,9 +4389,9 @@ public static class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Die Tür des Labors (lang)";
+                return "Die Tür in der Westwand des Labors führte nach draußen zum Flur.";
             else
-                return "Die Tür des Labors (lang)";
+                return "Die Tür in der Westwand des Labors führte nach draußen zum Flur.";
         }
     }
     public static string Adv_I11_Left_Shelf
@@ -3784,9 +4399,9 @@ public static class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Das linke Regal (lang)";
+                return "Links von mir befand sich ein hohes Regal.";
             else
-                return "Das linke Regal (lang)";
+                return "Links von mir befand sich ein hohes Regal.";
         }
     }
     public static string Adv_I11_Right_Shelf
@@ -3794,9 +4409,9 @@ public static class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Das rechte Regal (lang)";
+                return "Rechts von mir befand sich ein hohes Regal.";
             else
-                return "Das rechte Regal (lang)";
+                return "Rechts von mir befand sich ein hohes Regal.";
         }
     }
     public static string Adv_I11_Bird_Stand
@@ -3804,9 +4419,9 @@ public static class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Eine Vogelstange (lang)";
+                return "Auf der Vogelstange saß eine - festgekettete - ausgestopfte Elster.";
             else
-                return "Eine Vogelstange (lang)";
+                return "Auf der Vogelstange saß eine - festgekettete - ausgestopfte Elster.";
         }
     }
     public static string Adv_I12_Door
@@ -3814,9 +4429,19 @@ public static class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Eine Tür (lang)";
+                return "Eine angedetschte Tür in der Nordwand führte zurück zum Flur.";
             else
-                return "Eine Tür (lang)";
+                return "Eine angedetschte Tür in der Nordwand führte zurück zum Flur.";
+        }
+    }
+    public static string Adv_I12_Wardrobe
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Der wuchtige Kleiderschrank war mit kitschigen Motiven bemalt. Er nahm gefühlt die eine Hälfe des Raumes ein. ";
+            else
+                return "Der wuchtige Kleiderschrank war mit kitschigen Motiven bemalt. Er nahm gefühlt die eine Hälfe des Raumes ein. ";
         }
     }
     public static string Adv_I12_Bed
@@ -3834,9 +4459,9 @@ public static class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Eine Matratze (lang)";
+                return "Eine sehr dicke, teure Matratze mit XXL-Ausmaßen. Groß genug, um darauf eine Ferienwohnung zu errichten.";
             else
-                return "Eine Matratze(lang)";
+                return "Eine sehr dicke, teure Matratze mit XXL-Ausmaßen. Groß genug, um darauf eine Ferienwohnung zu errichten.";
         }
     }
     public static string Adv_I13_Drawer
@@ -3844,9 +4469,9 @@ public static class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Eine Schublade (lang)";
+                return "Eine hölzerne Schublade in der Anrichte.";
             else
-                return "Eine Schublade (lang)";
+                return "Eine hölzerne Schublade in der Anrichte.";
         }
     }
     public static string Adv_I13_Door_White
@@ -3854,9 +4479,9 @@ public static class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Eine weiße Tür (lang)";
+                return "Eine weiße Tür in der westlichen Wand führte zurück zum Flur.";
             else
-                return "Eine weiße Tür (lang)";
+                return "Eine weiße Tür in der westlichen Wand führte zurück zum Flur.";
         }
     }
     public static string Adv_I13_Cupboard
@@ -3864,9 +4489,9 @@ public static class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ein Schrank (lang)";
+                return "Ein wenig aufregender Küchenschrank stand an der Wand.";
             else
-                return "Ein Schrank (lang)";
+                return "Ein wenig aufregender Küchenschrank stand an der Wand.";
         }
     }
     public static string Adv_I13_Fridge
@@ -3874,9 +4499,9 @@ public static class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ein Kühlschrank (lang)";
+                return "Ein sehr moderner magischer Kühlschrank, wie dafür gemacht, köstliche Leckereien lange frisch zu halten.";
             else
-                return "Ein Kühlschrank (lang)";
+                return "Ein sehr moderner magischer Kühlschrank, wie dafür gemacht, köstliche Leckereien lange frisch zu halten.";
         }
     }
     public static string Adv_I13_Freezer
@@ -3884,9 +4509,9 @@ public static class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ein Gefrierfach (lang)";
+                return "An der Unterseite des Kühlschranks befand sich ein großes Gefrierfach.";
             else
-                return "Ein Gefrierfach (lang)";
+                return "An der Unterseite des Kühlschranks befand sich ein großes Gefrierfach.";
         }
     }
     public static string Adv_I14_Mirror
@@ -3904,9 +4529,9 @@ public static class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Eine rote Tür (lang)";
+                return "Eine rote Tür in der östlichen Wand führte zurück zum Flur.";
             else
-                return "Eine rote Tür (lang)";
+                return "Eine rote Tür in der östlichen Wand führte zurück zum Flur.";
         }
     }
     public static string Adv_I14_Writing
@@ -3944,9 +4569,9 @@ public static class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Eine Badewanne (lang)";
+                return "Eine große Badewanne mit magischem Whirlpool-Einsatz.";
             else
-                return "Eine Badewanne (long)";
+                return "Eine große Badewanne mit magischem Whirlpool-Einsatz.";
         }
     }
     public static string Adv_I14_Special_Tile
@@ -3964,9 +4589,9 @@ public static class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Eine Toilette (lang)";
+                return "Eine ganz gewöhnliche Toilette. Wo blieb hier die Magie, Meister Gunnar?";
             else
-                return "Eine Toilette (long)";
+                return "Eine ganz gewöhnliche Toilette. Wo blieb hier die Magie, Meister Gunnar?";
         }
     }
     public static string Adv_I14_Opening
@@ -3974,9 +4599,9 @@ public static class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Eine Öffnung (lang)";
+                return "Dort, wo sich die Projektion einer Fliese befunden hatte, befand sich nun eine kachelgroße Öffnung in der Wand.";
             else
-                return "Eine Öffnung (long)";
+                return "Dort, wo sich die Projektion einer Fliese befunden hatte, befand sich nun eine kachelgroße Öffnung in der Wand.";
         }
     }
     public static string Adv_I14_Flushing
@@ -3984,9 +4609,9 @@ public static class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Die Toilettenspülung (lang)";
+                return "Eine unmagische Toilettenspülung.";
             else
-                return "Die Toilettenspülung (long)";
+                return "Eine unmagische Toilettenspülung.";
         }
     }
 
@@ -4513,9 +5138,9 @@ public static class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Dieses Kapitel berichtete gewohnt bescheiden über Meister Gunnar: Meistermagier, brillianter Wissenschaftler, Sexgott... Ich ließ das Buch sinken und holte erst mal kräftig Luft.";
+                return "Dieses Kapitel berichtete gewohnt bescheiden über Meister Gunnar: Meistermagier, brillianter Wissenschaftler, Sexgott... Daneben prangte eine sehr lebensechte, aber unfassbar schmierige Lithografie von Meister Gunnar. Ich ließ das Buch sinken und holte erst mal kräftig Luft.";
             else
-                return "Dieses Kapitel berichtete gewohnt bescheiden über Meister Gunnar: Meistermagier, brillianter Wissenschaftler, Sexgott... Ich ließ das Buch sinken und holte erst mal kräftig Luft.";
+                return "Dieses Kapitel berichtete gewohnt bescheiden über Meister Gunnar: Meistermagier, brillianter Wissenschaftler, Sexgott... Daneben prangte eine sehr lebensechte, aber unfassbar schmierige Lithografie von Meister Gunnar. Ich ließ das Buch sinken und holte erst mal kräftig Luft.";
         }
     }
     public static string Book_Dialog_Teleports
@@ -4556,6 +5181,27 @@ public static class loca
                 return "'Magie ist nicht nur ein sehr gutes Aphrodisaikum, sondern auch sonst beflügelnd für alle Spielarten des Matratzensports. Wenn Sie den perfekten Liebhaber suchen...'<br>Ich ließ das Buch sinken und starrte ein paar Sekunden einfach nur ins Nichts.";
             else
                 return "'Magie ist nicht nur ein sehr gutes Aphrodisaikum, sondern auch sonst beflügelnd für alle Spielarten des Matratzensports. Wenn Sie den perfekten Liebhaber suchen...'<br>Ich ließ das Buch sinken und starrte ein paar Sekunden einfach nur ins Nichts.";
+        }
+    }
+    public static string Book_Dialog_Mondsteine
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Über die Herstellung von Mondsteinen";
+            else
+                return "Über die Herstellung von Mondsteinen";
+        }
+    }
+
+    public static string Book_Dialog_Mondsteine2
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Die Herstellung von Mondsteinen ist dank meiner Erfindung der Dunkelheitsmaschine fast ein Kinderspiel geworden. Man nehme einen gewöhnlichen Kiesel und entziehe ihm mit meiner neuartigen Erfindung jegliches Licht. Zurück bleibt ein Stein, der vollkommen lichtlos ist und der unfassbare Schwärze ausstrahlt. Das einzige, was ihn nun dazu bewegen kann, sich noch einmal mit Licht anzureichern, ist helles, konzentriertes Mondlicht. Dazu muss man allerdings möglichst nah an den Mond heran. Für dieses Problem habe ich noch keine gute Lösung gefunden, aber Ihnen fällt schon was ein! Wie man hört, können manche Vögel sehr hoch fliegen. Vielleicht reicht das ja schon, um den Stein ausreichend nah ans Mondlicht heran zu bringen.";
+            else
+                return "Die Herstellung von Mondsteinen ist dank meiner Erfindung der Dunkelheitsmaschine fast ein Kinderspiel geworden. Man nehme einen gewöhnlichen Kiesel und entziehe ihm mit meiner neuartigen Erfindung jegliches Licht. Zurück bleibt ein Stein, der vollkommen lichtlos ist und der unfassbare Schwärze ausstrahlt. Das einzige, was ihn nun dazu bewegen kann, sich noch einmal mit Licht anzureichern, ist helles, konzentriertes Mondlicht. Dazu muss man allerdings möglichst nah an den Mond heran. Für dieses Problem habe ich noch keine gute Lösung gefunden, aber Ihnen fällt schon was ein! Wie man hört, können manche Vögel sehr hoch fliegen. Vielleicht reicht das ja schon, um den Stein ausreichend nah ans Mondlicht heran zu bringen.";
         }
     }
 
@@ -4813,6 +5459,177 @@ public static class loca
         }
     }
 
+    public static string Snake_Dialog_Ende
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Ich schlängel mich mal davon.";
+            else
+                return "Ich schlängel mich mal davon.";
+        }
+    }
+    public static string Snake_Dialog_Start_Long
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Äh, ja? Wasss gibtsss?";
+            else
+                return "Äh, ja? Wasss gibtsss?";
+        }
+    }
+    public static string Snake_Dialog_Start_Long2
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Du wirkst so verpeilt. Alles okay bei dir?";
+            else
+                return "Du wirkst so verpeilt. Alles okay bei dir?";
+        }
+    }
+    public static string Snake_Dialog_Start_Long3
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Äh nein. Vorhin war ich noch tot, davor mal am Leben, davor wieder tot... Wer soll sich das eigentlich merken können?";
+            else
+                return "Äh nein. Vorhin war ich noch tot, davor mal am Leben, davor wieder tot... Wer soll sich das eigentlich merken können?";
+        }
+    }
+    public static string Snake_Dialog_Start_Short
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Äh, ja? Wasss gibtsss?";
+            else
+                return "Äh, ja? Wasss gibtsss?";
+        }
+    }
+    public static string Snake_Dialog_Belebung
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Ich habe dich mittels modernster Magie wiederbelebt. Ist das nicht toll?";
+            else
+                return "Ich habe dich mittels modernster Magie wiederbelebt. Ist das nicht toll?";
+        }
+    }
+    public static string Snake_Dialog_Belebung2
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Äh, was ist daran bitte toll? Ich war ganz zzzzufrieden damit, tot und ausgestopft zu sein. Das Schlimmste aber ist das ewige hin und her. Ich lag gerade mal für einige Jahre tot in diesem Regal herum, jetzt muss ich mich schon wieder umgewöhnen.";
+            else
+                return "Äh, was ist daran bitte toll? Ich war ganz zzzzufrieden damit, tot und ausgestopft zu sein. Das Schlimmste aber ist das ewige hin und her. Ich lag gerade mal für einige Jahre tot in diesem Regal herum, jetzt muss ich mich schon wieder umgewöhnen.";
+        }
+    }
+    public static string Snake_Dialog_Belebung3
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Ans Totsein muss man sich nicht gewöhnen, das passiert alles von ganz allein.";
+            else
+                return "Ans Totsein muss man sich nicht gewöhnen, das passiert alles von ganz allein.";
+        }
+    }
+    public static string Snake_Dialog_Belebung4
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Du hassssst natürlich voll den Durchblick, du neunmalkluger Nichttoter.";
+            else
+                return "Du hassssst natürlich voll den Durchblick, du neunmalkluger Nichttoter.";
+        }
+    }
+    public static string Snake_Dialog_Herkunft
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Und wo kommst du ursprünglich her?";
+            else
+                return "Und wo kommst du ursprünglich her?";
+        }
+    }
+    public static string Snake_Dialog_Herkunft2
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Woher soll ich das wissen? Ich kann mich noch dran erinnern, früher durch das tiefe Gras einer Wiese geschlängelt zu sein. Dann plötzlich packt mich jemand - un dann wird es schwarz um mich.";
+            else
+                return "Woher soll ich das wissen? Ich kann mich noch dran erinnern, früher durch das tiefe Gras einer Wiese geschlängelt zu sein. Dann plötzlich packt mich jemand - un dann wird es schwarz um mich.";
+        }
+    }
+    public static string Snake_Dialog_Herkunft3
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Das klingt ja schrecklich. Aber wer kommt auf die Idee, eine Schlange auszustopfen? Eine eher langweilige wie dich zumal...";
+            else
+                return "Das klingt ja schrecklich. Aber wer kommt auf die Idee, eine Schlange auszustopfen? Eine eher langweilige wie dich zumal...";
+        }
+    }
+    public static string Snake_Dialog_Herkunft4
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Na danke. Das Ausstopfen war zwar unangenehm, aber seitdem sind meine gesamten Zipperlein verschwunden. Ich kann nur jedem empfehlen, sich ausstopfen zu lassen.";
+            else
+                return "Na danke. Das Ausstopfen war zwar unangenehm, aber seitdem sind meine gesamten Zipperlein verschwunden. Ich kann nur jedem empfehlen, sich ausstopfen zu lassen.";
+        }
+    }
+    public static string Snake_Dialog_Meister
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Was kannst du mir über Meister Gunnar sagen?";
+            else
+                return "Was kannst du mir über Meister Gunnar sagen?";
+        }
+    }
+    public static string Snake_Dialog_Meister2
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Er ist unser Meissster hier! Ich persönlich finde ja... aber lassen wir das...";
+            else
+                return "Er ist unser Meissster hier! Ich persönlich finde ja... aber lassen wir das...";
+        }
+    }
+    public static string Snake_Dialog_Meister3
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Sprich dich ruhig aus.";
+            else
+                return "Sprich dich ruhig aus.";
+        }
+    }
+    public static string Snake_Dialog_Meister4
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Ach, ich finde einfach, ein Großmeister der Magie sollte es irgendwann auch mal hinbekommen, nicht seine Socken überall herumliegen zu lassen.";
+            else
+                return "Ach, ich finde einfach, ein Großmeister der Magie sollte es irgendwann auch mal hinbekommen, nicht seine Socken überall herumliegen zu lassen.";
+        }
+    }
+
     public static string Parrot_Dialog_Ende
     {
         get
@@ -5023,6 +5840,16 @@ public static class loca
                 return "Das klingt nach einem großartigen Auftrag für einen wie mich, der gerne hoch hinaus will. Gib mir den Stein und wirf mich in den Himmel. Ich werde mein Möglichstes tun!";
             else
                 return "Das klingt nach einem großartigen Auftrag für einen wie mich, der gerne hoch hinaus will. Gib mir den Stein und wirf mich in den Himmel. Ich werde mein Möglichstes tun!";
+        }
+    }
+    public static string Throw_Parrot_Mondstein_Fail
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Ich wollte den Papagei in die Luft werfen, aber da fiel mir auf, dass seine Lebensenergie wieder erloschen war.";
+            else
+                return "Ich wollte den Papagei in die Luft werfen, aber da fiel mir auf, dass seine Lebensenergie wieder erloschen war.";
         }
     }
     public static string Throw_Parrot_Mondstein
@@ -10473,114 +11300,14 @@ public static class loca
                 return "I confessed all the wrongdoings I had committed in my young life. Immediately I felt much better.";
         }
     }
-    public static string Order_Score_891
-    {
-        get
-        {
-            if (_gd!.Language == IGlobalData.language.german)
-                return "... eines hoffnungsfrohen Hilfsschwindlers...";
-            else
-                return "... of a hopeful auxiliary swindler...";
-        }
-    }
-    public static string Order_Score_892
-    {
-        get
-        {
-            if (_gd!.Language == IGlobalData.language.german)
-                return "... eines tollpatschigen Flunkerers...";
-            else
-                return "... of a clumsy fibber...";
-        }
-    }
-    public static string Order_Score_893
-    {
-        get
-        {
-            if (_gd!.Language == IGlobalData.language.german)
-                return "... eines notorischen Lügenboldes...";
-            else
-                return "... of a notorious liar....";
-        }
-    }
-    public static string Order_Score_894
-    {
-        get
-        {
-            if (_gd!.Language == IGlobalData.language.german)
-                return "... eines infamen Heuchlers...";
-            else
-                return "... of an infamous hypocrite...";
-        }
-    }
-    public static string Order_Score_895
-    {
-        get
-        {
-            if (_gd!.Language == IGlobalData.language.german)
-                return "... eines niederträchtigen Scharlatans...";
-            else
-                return "... of a vile charlatan....";
-        }
-    }
-    public static string Order_Score_896
-    {
-        get
-        {
-            if (_gd!.Language == IGlobalData.language.german)
-                return "... eines abscheulichen Hetzers...";
-            else
-                return "... of a despicable agitator....";
-        }
-    }
-    public static string Order_Score_897
-    {
-        get
-        {
-            if (_gd!.Language == IGlobalData.language.german)
-                return "... eines Lügenteufels in Menschengestalt...";
-            else
-                return "... of a lying devil in human form....";
-        }
-    }
-    public static string Order_Score_898
-    {
-        get
-        {
-            if (_gd!.Language == IGlobalData.language.german)
-                return "... einer Ausgeburt der niedersten Lügenhölle...";
-            else
-                return "... a spawn of the lowest hell of lies....";
-        }
-    }
-    public static string Order_Score_899
-    {
-        get
-        {
-            if (_gd!.Language == IGlobalData.language.german)
-                return "... eines Immobilienmaklers...";
-            else
-                return "... of a real estate agent...";
-        }
-    }
-    public static string Order_Score_900
-    {
-        get
-        {
-            if (_gd!.Language == IGlobalData.language.german)
-                return "... eines Wiedergängers von Boris Johnson...";
-            else
-                return "... of a revenant of Boris Johnson...";
-        }
-    }
     public static string Order_Score_901
     {
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ich überprüfte meinen Punktestand und stellte fest, dass ich bereits {0} Punkte hatte, von {1} möglichen Punkten (Für alle 4 Episoden).";
+                return "Ich überprüfte meinen Punktestand und stellte fest, dass ich bereits {0} Punkte hatte, von {1} möglichen Punkten.";
             else
-                return "I checked my score and found that I already had {0} points, out of {1} possible points (For all 4 episodes).";
+                return "I checked my score and found that I already had {0} points, out of {1} possible points.";
         }
     }
     public static string Order_Score_902
@@ -16973,6 +17700,16 @@ public static class loca
                 return "How should [Pl1,Akk] be used with [Il2,Nom]?";
         }
     }
+    public static string UsePW_Fish_Coin_Fail
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Ich wollte den Fisch in den Brunnen werfen, aber warum sollte ich das mit einem toten, ausgestopften Fisch tun?";
+            else
+                return "Ich wollte den Fisch in den Brunnen werfen, aber warum sollte ich das mit einem toten, ausgestopften Fisch tun?";
+        }
+    }
     public static string UsePW_Fish_Coin
     {
         get
@@ -16981,6 +17718,16 @@ public static class loca
                 return "Ich warf den Fisch in den Brunnen, wo er sogleich nach unten tauchte, die Münze schnappte und wieder auftauchte. Artig reckte er mir sein Maul mit der Münze darin entgegen und ich nahm sie an mich. Dann aber tauchte der Fisch noch einmal ab und drehte einige Runden im Kreis, im Kreis, im Kreis... ok, ich glaube, es wird deutlich. Danach ließ er sich von mir wieder auf die Hand nehmen.";
             else
                 return "Ich warf den Fisch in den Brunnen, wo er sogleich nach unten tauchte, die Münze schnappte und wieder auftauchte. Artig reckte er mir sein Maul mit der Münze darin entgegen und ich nahm sie an mich. Dann aber tauchte der Fisch noch einmal ab und drehte einige Runden im Kreis, im Kreis, im Kreis... ok, ich glaube, es wird deutlich. Danach ließ er sich von mir wieder auf die Hand nehmen.";
+        }
+    }
+    public static string UsePW_Fish_Solo
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Ich warf den Fisch in den Brunnen, wo er sogleich nach unten tauchteund einige Runden im Kreis, im Kreis, im Kreis... drehte... ok, ich glaube, es wurde deutlich. Danach ließ er sich von mir wieder auf die Hand nehmen.";
+            else
+                return "Ich warf den Fisch in den Brunnen, wo er sogleich nach unten tauchteund einige Runden im Kreis, im Kreis, im Kreis... drehte... ok, ich glaube, es wurde deutlich. Danach ließ er sich von mir wieder auf die Hand nehmen.";
         }
     }
     public static string Order_Tie_Person_I_1534
@@ -21561,7 +22308,7 @@ public static class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "Nach reiflicher Überlegung fiel mir doch kein guter Grund ein, [Il1,Nom] um [Il2,Dat] zu wickeln.";
             else
-                return "After careful consideration, I couldn't think of a good reason to wrap [Il1,Nom] in [Il2,Dat] after all.";
+                return "After careful consideration, I couldn't think of a good reason to wrap [Il1,Nom] around [Il2,Dat] after all.";
         }
     }
     public static string Order_PaintP_Person_Ludmilla_1976

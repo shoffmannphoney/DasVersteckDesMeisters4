@@ -2718,7 +2718,8 @@ namespace GameCore
 
             }
 
-            // UIS!.SetScore(cscore, ctotalscore, score, totalscore, AdvGame.CA!.Status_Episode.Val);
+            int val = 0;
+            UIS!.SetScore(cscore, ctotalscore, score, totalscore, val);
 
             /* delegiert an UIS
 

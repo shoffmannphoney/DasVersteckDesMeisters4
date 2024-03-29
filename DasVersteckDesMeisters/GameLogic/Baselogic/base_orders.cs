@@ -646,10 +646,10 @@ namespace GameCore
         }
         public virtual bool English(Person PersonID, ParseTokenList PTL)
         {
-            AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, loca.Order_Switch_English);
-            loca.GD!.Language = IGlobalData.language.english;
-            LayoutRefresh();
-            locations!.Showlocation(A!.ActLoc);
+            AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, loca.Order_Switch_English_Fail);
+            // loca.GD!.Language = IGlobalData.language.english;
+            // LayoutRefresh();
+            // locations!.Showlocation(A!.ActLoc);
             return true;
         }
         public virtual bool ExamineP(Person PersonID, ParseTokenList PTL)
@@ -2019,6 +2019,18 @@ namespace GameCore
             OrderFeedback of = new OrderFeedback();
             Item item1 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[2].WordID);
             AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_KnockOn_Person_Everyone_14010, PersonID, item1!.ID));
+            of.StoryOutput = true;
+            of.Handled = true;
+            of.Success = true;
+            of.Action = true;
+            return (true);
+
+        }
+        public virtual bool KnockOnP(Person PersonID, ParseTokenList PTL)
+        {
+            OrderFeedback of = new OrderFeedback();
+            Person person1= PTL.GetFirstPerson()!; //  GetItemRef(Adv_PT[2].WordID);
+            AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_KnockOn_Person_Everyone_14010, PersonID, person1));
             of.StoryOutput = true;
             of.Handled = true;
             of.Success = true;
@@ -5310,6 +5322,24 @@ namespace GameCore
                             if (s2[1] == "True") canPutBehind = true;
 
                             soDest!.jsonItems!.List![currentItem].CanPutBehind = canPutBehind;
+                            handled = true;
+                        }
+                        else if (s2[0] == "CanPutIn:")
+                        {
+                            bool canPutIn = false;
+
+                            if (s2[1] == "True") canPutIn = true;
+
+                            soDest!.jsonItems!.List![currentItem].CanPutIn = canPutIn;
+                            handled = true;
+                        }
+                        else if (s2[0] == "CanPutOn:")
+                        {
+                            bool canPutOn = false;
+
+                            if (s2[1] == "True") canPutOn = true;
+
+                            soDest!.jsonItems!.List![currentItem].CanPutOn = canPutOn;
                             handled = true;
                         }
                     }

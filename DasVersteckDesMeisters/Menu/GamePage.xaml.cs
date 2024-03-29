@@ -3553,6 +3553,7 @@ public partial class GamePage : ContentPage, IMenuExtension
         {
             if (GD.Adventure != null)
             {
+                /*
                 double val1 = cscore / 100;
                 if (val1 < 0.1)
                     val1 = 0.1;
@@ -3563,8 +3564,12 @@ public partial class GamePage : ContentPage, IMenuExtension
                 if ( val1 == 0)
                     PB1.ColumnDefinitions[0].Width = new GridLength(0, GridUnitType.Absolute);
                 else
-                    PB1.ColumnDefinitions[0].Width = new GridLength( val1, GridUnitType.Star);
-                PB1.ColumnDefinitions[1].Width = new GridLength( val2, GridUnitType.Star);
+                    PB1.ColumnDefinitions[0].Width = new GridLength( 0, GridUnitType.Absolute);
+
+                PB1.ColumnDefinitions[1].Width = new GridLength( 0, GridUnitType.Absolute);
+                */
+                double val1;
+                double val2;
 
                 val1 = score / 100;
                 if (val1 < 0.1)

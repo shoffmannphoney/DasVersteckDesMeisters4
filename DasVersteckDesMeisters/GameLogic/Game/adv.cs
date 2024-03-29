@@ -2563,8 +2563,6 @@ namespace GameCore
             CA!.Noun_Sporen = Nouns!.Add(Noun.NounLoca("Noun_Sporen"));
             CA!.Noun_Schwamm = Nouns!.Add(Noun.NounLoca("Noun_Schwamm"));
 
-
-
             CA!.Noun_Ritterruestung = Nouns!.Add(Noun.NounLoca("Noun_Ritterruestung"));
             CA!.Noun_Ritter = Nouns!.Add(Noun.NounLoca("Noun_Ritter"));
             CA!.Noun_Ruestung = Nouns!.Add(Noun.NounLoca("Noun_Ruestung"));
@@ -2623,6 +2621,14 @@ namespace GameCore
             CA!.Noun_Buchstaben = Nouns!.Add(Noun.NounLoca("Noun_Buchstaben"));
             CA!.Noun_Rolle = Nouns!.Add(Noun.NounLoca("Noun_Rolle"));
 
+            CA!.Noun_Rune = Nouns.Add(Noun.NounLoca("Noun_Rune"));
+            CA!.Noun_Warnschild = Nouns.Add(Noun.NounLoca("Noun_Warnschild"));
+            CA!.Noun_Wasch = Nouns.Add(Noun.NounLoca("Noun_Wasch"));
+            CA!.Noun_Gefrier = Nouns.Add(Noun.NounLoca("Noun_Gefrier"));
+            CA!.Noun_Froster = Nouns.Add(Noun.NounLoca("Noun_Froster"));
+            CA!.Noun_Ente = Nouns.Add(Noun.NounLoca("Noun_Ente"));
+            CA!.Noun_Entchen = Nouns.Add(Noun.NounLoca("Noun_Entchen"));
+            CA!.Noun_Gummiente = Nouns.Add(Noun.NounLoca("Noun_Gummiente"));
 
             CA!.Noun_Seil = Nouns!.Add(Noun.NounLoca("Adv_InitializeGame_Person_I_3263"));
             CA!.Noun_Revolver = Nouns!.Add(Noun.NounLoca("Adv_InitializeGame_Person_I_3264"));
@@ -4051,6 +4057,15 @@ namespace GameCore
             CA!.Noun_Beutel = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Beutel, "Noun_Beutel"));
             CA!.Noun_Buchstaben = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Buchstaben, "Noun_Buchstaben"));
             CA!.Noun_Rolle = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Rolle, "Noun_Rolle"));
+
+            CA!.Noun_Rune = Nouns.Add(Noun.NounLocaLoca(loca.Noun_Rune, "Noun_Rune"));
+            CA!.Noun_Warnschild = Nouns.Add(Noun.NounLocaLoca(loca.Noun_Warnschild, "Noun_Warnschild"));
+            CA!.Noun_Wasch = Nouns.Add(Noun.NounLocaLoca(loca.Noun_Wasch, "Noun_Wasch"));
+            CA!.Noun_Gefrier = Nouns.Add(Noun.NounLocaLoca(loca.Noun_Gefrier, "Noun_Gefrier"));
+            CA!.Noun_Froster = Nouns.Add(Noun.NounLocaLoca(loca.Noun_Froster, "Noun_Froster"));
+            CA!.Noun_Ente = Nouns.Add(Noun.NounLocaLoca(loca.Noun_Ente, "Noun_Ente"));
+            CA!.Noun_Entchen = Nouns.Add(Noun.NounLocaLoca(loca.Noun_Entchen, "Noun_Entchen"));
+            CA!.Noun_Gummiente = Nouns.Add(Noun.NounLocaLoca(loca.Noun_Gummiente, "Noun_Gummiente"));
 
             CA!.Noun_Seil = Nouns!.Add(Noun.NounLocaLoca(loca.Adv_InitializeGame_Person_I_3263, "Adv_InitializeGame_Person_I_3263"));
             CA!.Noun_Revolver = Nouns!.Add(Noun.NounLocaLoca(loca.Adv_InitializeGame_Person_I_3264, "Adv_InitializeGame_Person_I_3264"));
@@ -5728,11 +5743,41 @@ namespace GameCore
             CA!.Status_Coin_Entdeckt = Stats!.Add(new Status());
 
             CA!.Status_Schale_Befestigt = Stats!.Add(new Status());
+            CA!.Status_Elster_Tauschintro = Stats!.Add(new Status());
+            CA!.Status_Klaue_Nehmversuch = Stats!.Add(new Status());
         }
 
         void InitScores()
         {
-
+            CA!.Score_Beutelchen = Scores.Add(new Score((int)scoreVal.easy, scoreChapter.chapter_one));
+            CA!.Score_Kerzenhalter = Scores.Add(new Score((int)scoreVal.easy, scoreChapter.chapter_one));
+            CA!.Score_Transfer1 = Scores.Add(new Score((int)scoreVal.mediocre, scoreChapter.chapter_one));
+            CA!.Score_Zuckerzange = Scores.Add(new Score((int)scoreVal.easy, scoreChapter.chapter_one));
+            CA!.Score_Kaese = Scores.Add(new Score((int)scoreVal.easy, scoreChapter.chapter_one));
+            CA!.Score_Polierlappen = Scores.Add(new Score((int)scoreVal.easy, scoreChapter.chapter_one));
+            CA!.Score_Plastiktuete = Scores.Add(new Score((int)scoreVal.easy, scoreChapter.chapter_one));
+            CA!.Score_Schluessel = Scores.Add(new Score((int)scoreVal.easy, scoreChapter.chapter_one));
+            CA!.Score_Erste_Belebung = Scores.Add(new Score((int)scoreVal.mediocre, scoreChapter.chapter_one));
+            CA!.Score_Erstes_Gespraech = Scores.Add(new Score((int)scoreVal.mediocre, scoreChapter.chapter_one));
+            CA!.Score_Tuer_eintreten = Scores.Add(new Score((int)scoreVal.simple, scoreChapter.chapter_one));
+            CA!.Score_Tuer_aufschliessen = Scores.Add(new Score((int)scoreVal.simple, scoreChapter.chapter_one));
+            CA!.Score_Rollpflaster = Scores.Add(new Score((int)scoreVal.easy, scoreChapter.chapter_one));
+            CA!.Score_Klauenzange1 = Scores.Add(new Score((int)scoreVal.simple, scoreChapter.chapter_one));
+            CA!.Score_Klauenzange2 = Scores.Add(new Score((int)scoreVal.advanced, scoreChapter.chapter_one));
+            CA!.Score_Antwort_Unterwaesche = Scores.Add(new Score((int)scoreVal.simple, scoreChapter.chapter_one));
+            CA!.Score_Antwort_Ruestung = Scores.Add(new Score((int)scoreVal.mediocre, scoreChapter.chapter_one));
+            CA!.Score_Antwort_Tier= Scores.Add(new Score((int)scoreVal.simple, scoreChapter.chapter_one));
+            CA!.Score_Bibliothek_offen = Scores.Add(new Score((int)scoreVal.advanced, scoreChapter.chapter_one));
+            CA!.Score_Buch = Scores.Add(new Score((int)scoreVal.easy, scoreChapter.chapter_one));
+            CA!.Score_Deckel = Scores.Add(new Score((int)scoreVal.simple, scoreChapter.chapter_one));
+            CA!.Score_Muenze = Scores.Add(new Score((int)scoreVal.advanced, scoreChapter.chapter_one));
+            CA!.Score_Polierter_Stein = Scores.Add(new Score((int)scoreVal.mediocre, scoreChapter.chapter_one));
+            CA!.Score_Lichtloser_Stein = Scores.Add(new Score((int)scoreVal.mediocre, scoreChapter.chapter_one));
+            CA!.Score_Mondstein = Scores.Add(new Score((int)scoreVal.advanced, scoreChapter.chapter_one));
+            CA!.Score_Schwamm = Scores.Add(new Score((int)scoreVal.advanced, scoreChapter.chapter_one));
+            CA!.Score_Schlacke = Scores.Add(new Score((int)scoreVal.advanced, scoreChapter.chapter_one));
+            CA!.Score_Meues_Pulver = Scores.Add(new Score((int)scoreVal.complex, scoreChapter.chapter_one));
+            CA!.Score_Transfer2= Scores.Add(new Score((int)scoreVal.mindblowing, scoreChapter.chapter_one));
         }
 
         public string? _currentEventName;
@@ -5760,7 +5805,10 @@ namespace GameCore
             if (CA!.Status_Ritterruestung_Klaue.Val > 0)
             {
                 CA!.Status_Ritterruestung_Klaue.Val--;
-                StoryOutput(CA!.L05_Atrium, CA!.Person_I, loca.DoRR_Finish);
+                if (CA!.Status_Ritterruestung_Klaue.Val == 0)
+                {
+                    StoryOutput(CA!.L05_Atrium, CA!.Person_I, loca.DoRR_Finish);
+                }
             }
 
             if (CA!.Person_I.locationID == locationID)
@@ -5821,7 +5869,11 @@ namespace GameCore
             if (CA!.Status_Eule_Klaue.Val > 0)
             {
                 CA!.Status_Eule_Klaue.Val--;
-                StoryOutput(CA!.L05_Atrium, CA!.Person_I, loca.DoOwl_Finish);
+
+                if (CA!.Status_Eule_Klaue.Val == 0)
+                {
+                    StoryOutput(CA!.L05_Atrium, CA!.Person_I, loca.DoOwl_Finish);
+                }
             }
             if (CA!.Person_I.locationID == locationID)
             {
@@ -5880,7 +5932,61 @@ namespace GameCore
             if (CA!.Status_Skelett_Klaue.Val > 0)
             {
                 CA!.Status_Skelett_Klaue.Val--;
-                StoryOutput(CA!.L09_Library, CA!.Person_I, loca.Do_Skeleton_Finish);
+                if (CA!.Status_Skelett_Klaue.Val == 0)
+                {
+                    StoryOutput(CA!.L09_Library, CA!.Person_I, loca.Do_Skeleton_Finish);
+                }
+            }
+
+            if (CA!.Person_I.locationID == locationID)
+            {
+                if (CA.Status_Skelett_Klaue.Val <= 0 && (Items.IsItemInv(CA.I00_Unstable_Pliers_With_Claw) || Items.IsItemInv(CA.I00_Stable_Pliers_With_Claw)))
+                {
+                    int a = 5;
+                    int val = GD!.RandomNumber(0, 10);
+                    {
+                        if (val < 1)
+                        {
+                            StoryOutput(CA!.L09_Library, CA!.Person_I, loca.DoSkelett_Reaktion1);
+                        }
+                        else if (val < 2)
+                        {
+                            StoryOutput(CA!.L09_Library, CA!.Person_I, loca.DoSkelett_Reaktion2);
+                        }
+                        else if (val < 3)
+                        {
+                            StoryOutput(CA!.L09_Library, CA!.Person_I, loca.DoSkelett_Reaktion3);
+                        }
+
+                    }
+                }
+                else if (CA!.Status_Skelett_Klaue.Val > 0)
+                {
+                    int val = GD!.RandomNumber(0, 10);
+                    {
+                        if (val < 1)
+                        {
+                            StoryOutput(CA!.L09_Library, CA!.Person_I, loca.DoSkelett_Action1);
+                        }
+                        else if (val < 2)
+                        {
+                            StoryOutput(CA!.L09_Library, CA!.Person_I, loca.DoSkelett_Action2);
+                        }
+                        else if (val < 3)
+                        {
+                            StoryOutput(CA!.L09_Library, CA!.Person_I, loca.DoSkelett_Action3);
+                        }
+                        else if (val < 4)
+                        {
+                            StoryOutput(CA!.L09_Library, CA!.Person_I, loca.DoSkelett_Action4);
+                        }
+                        else if (val < 5)
+                        {
+                            StoryOutput(CA!.L09_Library, CA!.Person_I, loca.DoSkelett_Action5);
+                        }
+
+                    }
+                }
             }
 
             return true;
@@ -5890,7 +5996,61 @@ namespace GameCore
             if (CA!.Status_Papagei_Klaue.Val > 0)
             {
                 CA!.Status_Papagei_Klaue.Val--;
-                StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Parrot_Finish);
+                if (CA!.Status_Papagei_Klaue.Val == 0)
+                {
+                    StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Parrot_Finish);
+                }
+            }
+
+            if (CA!.Person_I.locationID == locationID)
+            {
+                if (CA.Status_Papagei_Klaue.Val <= 0 && (Items.IsItemInv(CA.I00_Unstable_Pliers_With_Claw) || Items.IsItemInv(CA.I00_Stable_Pliers_With_Claw)))
+                {
+                    int a = 5;
+                    int val = GD!.RandomNumber(0, 30);
+                    {
+                        if (val < 1)
+                        {
+                            StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Parrot_Reaktion1);
+                        }
+                        else if (val < 2)
+                        {
+                            StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Parrot_Reaktion2);
+                        }
+                        else if (val < 3)
+                        {
+                            StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Parrot_Reaktion3);
+                        }
+
+                    }
+                }
+                else if (CA!.Status_Papagei_Klaue.Val > 0)
+                {
+                    int val = GD!.RandomNumber(0, 30);
+                    {
+                        if (val < 1)
+                        {
+                            StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Parrot_Action1);
+                        }
+                        else if (val < 2)
+                        {
+                            StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Parrot_Action2);
+                        }
+                        else if (val < 3)
+                        {
+                            StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Parrot_Action3);
+                        }
+                        else if (val < 4)
+                        {
+                            StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Parrot_Action4);
+                        }
+                        else if (val < 5)
+                        {
+                            StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Parrot_Action5);
+                        }
+
+                    }
+                }
             }
 
             return true;
@@ -5900,7 +6060,61 @@ namespace GameCore
             if (CA!.Status_Elster_Klaue.Val > 0)
             {
                 CA!.Status_Elster_Klaue.Val--;
-                StoryOutput(CA!.Person_Magpie.locationID, CA!.Person_I, loca.Do_Magpie_Finish);
+                if (CA!.Status_Elster_Klaue.Val == 0)
+                {
+                    StoryOutput(CA!.Person_Magpie.locationID, CA!.Person_I, loca.Do_Magpie_Finish);
+                }
+            }
+
+            if (CA!.Person_I.locationID == locationID)
+            {
+                if (CA.Status_Elster_Klaue.Val <= 0 && (Items.IsItemInv(CA.I00_Unstable_Pliers_With_Claw) || Items.IsItemInv(CA.I00_Stable_Pliers_With_Claw)))
+                {
+                    int a = 5;
+                    int val = GD!.RandomNumber(0, 30);
+                    {
+                        if (val < 1)
+                        {
+                            StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Magpie_Reaktion1);
+                        }
+                        else if (val < 2)
+                        {
+                            StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Magpie_Reaktion2);
+                        }
+                        else if (val < 3)
+                        {
+                            StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Magpie_Reaktion3);
+                        }
+
+                    }
+                }
+                else if (CA!.Status_Elster_Klaue.Val > 0)
+                {
+                    int val = GD!.RandomNumber(0, 30);
+                    {
+                        if (val < 1)
+                        {
+                            StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Magpie_Action1);
+                        }
+                        else if (val < 2)
+                        {
+                            StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Magpie_Action2);
+                        }
+                        else if (val < 3)
+                        {
+                            StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Magpie_Action3);
+                        }
+                        else if (val < 4)
+                        {
+                            StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Magpie_Action4);
+                        }
+                        else if (val < 5)
+                        {
+                            StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Magpie_Action5);
+                        }
+
+                    }
+                }
             }
 
             return true;
@@ -5910,7 +6124,10 @@ namespace GameCore
             if (CA!.Status_Fisch_Klaue.Val > 0)
             {
                 CA!.Status_Fisch_Klaue.Val--;
-                StoryOutput(CA!.Person_Fish.locationID, CA!.Person_I, loca.Do_Fish_Finish);
+                if (CA!.Status_Fisch_Klaue.Val == 0)
+                {
+                    StoryOutput(CA!.Person_Fish.locationID, CA!.Person_I, loca.Do_Fish_Finish);
+                }
             }
 
             return true;
@@ -5920,7 +6137,10 @@ namespace GameCore
             if (CA!.Status_Schlange_Klaue.Val > 0)
             {
                 CA!.Status_Schlange_Klaue.Val--;
-                StoryOutput(CA!.Person_Snake.locationID, CA!.Person_I, loca.Do_Snake_Finish);
+                if (CA!.Status_Schlange_Klaue.Val == 0)
+                {
+                    StoryOutput(CA!.Person_Snake.locationID, CA!.Person_I, loca.Do_Snake_Finish);
+                }
             }
 
             return true;
@@ -12474,6 +12694,15 @@ namespace GameCore
         public Noun? Noun_Buchstaben;
         public Noun? Noun_Rolle;
 
+        public Noun? Noun_Rune;
+        public Noun? Noun_Warnschild;
+        public Noun? Noun_Wasch;
+        public Noun? Noun_Gefrier;
+        public Noun? Noun_Froster;
+        public Noun? Noun_Ente;
+        public Noun? Noun_Entchen;
+        public Noun? Noun_Gummiente;
+
         // Neue Nouns
         public Noun? Noun_Abdeckung;
         public Noun? Noun_Deckel;
@@ -13251,6 +13480,7 @@ namespace GameCore
         public Item? I12_Door{ get; set; }
         public Item? I12_Bed { get; set; }
 
+        public Item? I12_Wardrobe { get; set; }
 
         public Item? I13_Drawer { get; set; }
         public Item? I13_Cupboard { get; set; }
@@ -13297,6 +13527,74 @@ namespace GameCore
         public Status? Status_Fish_Coin;
         public Status? Status_Coin_Entdeckt;
         public Status? Status_Schale_Befestigt;
+        public Status? Status_Elster_Tauschintro;
+        public Status? Status_Klaue_Nehmversuch;
+
+
+        public Score? Score_Beutelchen;         // set
+        public Score? Score_Kerzenhalter;       // set
+        public Score? Score_Transfer1; // set
+        public Score? Score_Zuckerzange;    // set
+        public Score? Score_Kaese;  // set
+        public Score? Score_Polierlappen; // set
+        public Score? Score_Plastiktuete; // set
+        public Score? Score_Schluessel; // set
+        public Score? Score_Erste_Belebung; // set
+        public Score? Score_Erstes_Gespraech; // set
+        public Score? Score_Tuer_eintreten; // set
+        public Score? Score_Tuer_aufschliessen; // Set
+        public Score? Score_Rollpflaster;   // Set
+        public Score? Score_Klauenzange1; // Set
+        public Score? Score_Klauenzange2; // Set
+        public Score? Score_Antwort_Unterwaesche; // Set
+        public Score? Score_Antwort_Ruestung; // Set
+        public Score? Score_Antwort_Tier; // Set
+        public Score? Score_Bibliothek_offen; // Set
+        public Score? Score_Buch;           // set
+        public Score? Score_Deckel;        // set
+        public Score? Score_Muenze; // set
+        public Score? Score_Polierter_Stein; // set
+        public Score? Score_Lichtloser_Stein; // set
+        public Score? Score_Mondstein; // set
+        public Score? Score_Schwamm;  // set
+        public Score? Score_Schlacke;   // set
+        public Score? Score_Meues_Pulver;
+        public Score? Score_Transfer2; // set
+
+        public int imc_Suche_Versteck = 2;
+        public int imc_Pentagramm = 3;
+        public int imc_Klaue_nicht_nehmbar = 4;
+        public int imc_Rede_Tote_Eule = 5;
+        public int imc_Rede_Tote_Ruestung = 6;
+        public int imc_Zuckerzange = 7;
+        public int imc_Kaese = 8;
+        public int imc_Klauenzange_fixieren = 9;
+        public int imc_Start = 10;
+        public int imc_Atrium_Ankunft = 11;
+        public int imc_Klaue_nicht_fixiert = 12;
+        public int imc_Klaue_noch_niemand_belebt = 13;
+        public int imc_Klaue_noch_niemand_gesprochen = 14;
+        public int imc_Klaue_ok_Exit = 15;
+        public int imc_Uhu_Fragen = 20;
+        public int imc_Uhu_Fragen_Unterwaesche = 21;
+        public int imc_Uhu_Fragen_Ruestung = 22;
+        public int imc_Uhu_Fragen_Tier = 23;
+        public int imc_Neues_Pulver_Wie = 24;
+        public int imc_Mondstein_Woher = 25;
+        public int imc_Schwamm_Woher = 26;
+        public int imc_Goldmuenze_Woher = 27;
+        public int imc_Muenze_Bergen_Wie = 28;
+        public int imc_Kaese_Wozu = 29;
+        public int imc_Kiesel_Wozu = 30;
+        public int imc_Lichtloser_Stein_Wozu = 31;
+        public int imc_Sporen_Wozu = 32;
+        public int imc_Alle_Zutaten_da = 33;
+        public int imc_Schlacke_Wozu = 34;
+        public int imc_Neues_Pulver_Wozu = 35;
+        public int imc_Ende = 36;
+
+
+
         public CoAdv()
         {
             L01_Dark_Forest = SerialNumberGenerator.Instance.NextSerial;

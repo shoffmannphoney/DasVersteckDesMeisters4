@@ -45,11 +45,13 @@ public partial class Order: AbstractOrder
         }
         else if (person == CA.Person_Knights_Armor && CA.Status_Ritterruestung_Klaue.Val >= 1)
         {
+            AdvGame!.SetScoreToken(CA!.Score_Erstes_Gespraech);
             GenericDialog(CA!.Person_Knights_Armor, KnightsArmorDialog);
             handled = true;
         }
         else if (person == CA.Person_Owl && CA.Status_Eule_Klaue.Val >= 1)
         {
+            AdvGame!.SetScoreToken(CA!.Score_Erstes_Gespraech);
             GenericDialog(CA!.Person_Owl, OwlDialog);
             handled = true;
         }
@@ -60,6 +62,7 @@ public partial class Order: AbstractOrder
         }
         else if (person == CA.Person_Librarian && CA.Status_Skelett_Klaue.Val >= 1)
         {
+            AdvGame!.SetScoreToken(CA!.Score_Erstes_Gespraech);
             GenericDialog(CA!.Person_Librarian, LibrarianDialog);
             handled = true;
         }
@@ -70,6 +73,7 @@ public partial class Order: AbstractOrder
         }
         else if (person == CA.Person_Fish && CA.Status_Fisch_Klaue.Val >= 1)
         {
+            AdvGame!.SetScoreToken(CA!.Score_Erstes_Gespraech);
             GenericDialog(CA!.Person_Fish, FishDialog);
             handled = true;
         }
@@ -85,17 +89,25 @@ public partial class Order: AbstractOrder
         }
         else if (person == CA.Person_Magpie && CA.Status_Elster_Klaue.Val >= 1)
         {
+            AdvGame!.SetScoreToken(CA!.Score_Erstes_Gespraech);
             GenericDialog(CA!.Person_Magpie, MagpieDialog);
             handled = true;
         }
-        else if (person == CA.Person_Parrot && CA.Status_Papagei_Klaue.Val >= 1)
+        if (person == CA.Person_Parrot && CA.Status_Papagei_Klaue.Val >= 1)
         {
+            AdvGame!.SetScoreToken(CA!.Score_Erstes_Gespraech);
             GenericDialog(CA!.Person_Parrot, ParrotDialog);
             handled = true;
         }
         if (person == CA.Person_Snake && CA.Status_Schlange_Klaue.Val <= 0)
         {
             AdvGame!.StoryOutput(loca.Talk_Snake_Dead);
+            handled = true;
+        }
+        else if (person == CA.Person_Snake && CA.Status_Schlange_Klaue.Val >= 1)
+        {
+            AdvGame!.SetScoreToken(CA!.Score_Erstes_Gespraech);
+            GenericDialog(CA!.Person_Snake, SnakeDialog);
             handled = true;
         }
 
@@ -189,6 +201,20 @@ public partial class Order: AbstractOrder
         bool handled = false;
         Item item1 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[1].WordID);
         Person person2 = PTL.GetFirstPerson()!; //  GetPersonRef(Adv_PT[3].WordID);
+
+        if( item1 == CA!.I00_Cheese && person2 == CA!.Person_Magpie)
+        {
+            if( CA!.Status_Elster_Tauschintro.Val == 0)
+            {
+                AdvGame!.StoryOutput(loca.Give_Magpie_Fail);
+            }
+            else
+            {
+                GenericDialog(CA!.Person_Magpie, MagpieDialog, 103, false, MagpieDialogCalc);
+
+            }
+            handled = true;
+        }
 
         // Pre
         if (!handled)

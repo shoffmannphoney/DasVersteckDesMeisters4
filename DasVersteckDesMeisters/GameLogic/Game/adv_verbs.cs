@@ -20,7 +20,6 @@ public partial class Adv: AdvBase
         Verbs.AddLoca(CA!.Verb_Enlight.ID, "Verb_bescheine");
         Verbs.AddLoca(CA!.Verb_Enlight.ID, "Verb_erhelle");
 
-
         CA!.Verb_Spread = Verbs!.AddLoca( "Verb_streue");
 
         CA!.Verb_Story = Verbs!.AddLoca("Order_Story");
@@ -451,6 +450,10 @@ public partial class Adv: AdvBase
         Verbs.AddLoca(CA!.Verb_Pulverize.ID, "Adv_13294");
         Verbs.AddLoca(CA!.Verb_Pulverize.ID, "Adv_13295");
         Verbs.AddLoca(CA!.Verb_Pulverize.ID, "Adv_13296");
+        Verbs.AddLoca(CA!.Verb_Pulverize.ID, "Verb_zerstosse");
+        Verbs.AddLoca(CA!.Verb_Pulverize.ID, "Verb_zerstoss");
+        Verbs.AddLoca(CA!.Verb_Pulverize.ID, "Verb_zerdruecke");
+        Verbs.AddLoca(CA!.Verb_Pulverize.ID, "Verb_zerdrueck");
 
         CA!.Verb_Tidy = Verbs.AddLoca( "Adv_13297");
         Verbs.AddLoca(CA!.Verb_Tidy.ID, "Adv_13298");

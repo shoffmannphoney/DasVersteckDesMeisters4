@@ -48,12 +48,71 @@ namespace GameCore
             int ix = 10000;
             AdvGame!.GenericTipps = new();
 
-            // ix = CalcIx(CA!.imc_Start_dialog);
 
+            // ix = CalcIx(CA!.imc_Start_dialog);
             cFollower.Add(ix);
             mcM.Add(new MCMenuEntry(null, loca.Order_InfoMCDialog_Person_Self_10362, ix, CB!.MCE_Choice1, true, true));
             ix += 10;
 
+
+            ix = CalcIx(CA!.imc_Start);
+            if (locations.Find( CA!.L02_In_Front_Of_A_Hut ).Visited == false )
+            {
+                cFollower.Add(ix);
+                mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Start, ix, CB!.MCE_Choice1, true, true));
+                ix += 10;
+            }
+            ix = CalcIx(CA!.imc_Suche_Versteck);
+            if (locations.Find(CA!.L02_In_Front_Of_A_Hut).Visited == true && locations.Find(CA!.L05_Atrium ).Visited == false)
+            {
+                cFollower.Add(ix);
+                mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Suche_Versteck, ix, CB!.MCE_Choice1, true, true));
+                ix += 10;
+            }
+            ix = CalcIx(CA!.imc_Pentagramm);
+            if (locations.Find(CA!.L03_In_The_Parlor ).Visited == true && locations.Find(CA!.L05_Atrium).Visited == false )
+            {
+                cFollower.Add(ix);
+                mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Pentagramm, ix, CB!.MCE_Choice1, true, true));
+                ix += 10;
+            }
+
+            ix = CalcIx(CA!.imc_Atrium_Ankunft);
+            if (locations.Find(CA!.L05_Atrium).Visited == true && CA.Status_Klaue_Nehmversuch.Val == 0 && CA.I00_Claw.locationID == CA.I05_Pedestal.ID )
+            {
+                cFollower.Add(ix);
+                mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Atrium_Ankunft, ix, CB!.MCE_Choice1, true, true));
+                ix += 10;
+            }
+            ix = CalcIx(CA!.imc_Klaue_nicht_nehmbar);
+            if ( CA.Status_Klaue_Nehmversuch.Val == 1 && CA.I00_Claw.locationID == CA.I05_Pedestal.ID)
+            {
+                cFollower.Add(ix);
+                mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Klaue_nicht_nehmbar, ix, CB!.MCE_Choice1, true, true));
+                ix += 10;
+            }
+
+            ix = CalcIx(CA!.imc_Klaue_nicht_fixiert);
+            if ( CA.I00_Unstable_Pliers_With_Claw.locationID != CA.I00_Nullbehaelter.ID && CA.I00_Unstable_Pliers_With_Claw.locationID != CA.I00_Nullbehaelter2.ID)
+            {
+                cFollower.Add(ix);
+                mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Klaue_nicht_fixiert, ix, CB!.MCE_Choice1, true, true));
+                ix += 10;
+            }
+            ix = CalcIx(CA!.imc_Klaue_noch_niemand_belebt );
+            if (CA.I00_Stable_Pliers_With_Claw.locationID != CA.I00_Nullbehaelter.ID && CA.Score_Erste_Belebung.Active == false )
+            {
+                cFollower.Add(ix);
+                mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Klaue_noch_niemand_belebt, ix, CB!.MCE_Choice1, true, true));
+                ix += 10;
+            }
+            else  if (CA.I00_Stable_Pliers_With_Claw.locationID != CA.I00_Nullbehaelter.ID && CA.Score_Erstes_Gespraech.Active == false)
+            {
+                ix = CalcIx(CA!.imc_Klaue_noch_niemand_gesprochen);
+                cFollower.Add(ix);
+                mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Klaue_noch_niemand_gesprochen, ix, CB!.MCE_Choice1, true, true));
+                ix += 10;
+            }
 
 
             cFollower.Add(ix);
