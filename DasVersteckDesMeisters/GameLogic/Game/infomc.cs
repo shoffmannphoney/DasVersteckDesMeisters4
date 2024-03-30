@@ -66,15 +66,36 @@ namespace GameCore
             if (locations.Find(CA!.L02_In_Front_Of_A_Hut).Visited == true && locations.Find(CA!.L05_Atrium ).Visited == false)
             {
                 cFollower.Add(ix);
-                mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Suche_Versteck, ix, CB!.MCE_Choice1, true, true));
-                ix += 10;
+                mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Suche_Versteck, ix, ChoiceIx(ix), true, false));
+                SetGenericTipps(mcM, loca.Info_Suche_Versteck_0, CA!.Score_Transfer1!, ix);
+
+                mcM.AddEntry(null, loca.Info_Suche_Versteck_1, ChoiceIx(ix) + 10, ChoiceIx(ix), true);
+                mcM.Last()!.SetDel(SucheVersteck25);
+
+                mcM.AddEntry(null, loca.Info_Suche_Versteck_2, ChoiceIx(ix) + 20, ChoiceIx(ix), true);
+                mcM.Last()!.SetDel(SucheVersteck50);
+
+                mcM.AddEntry(null, loca.Info_Suche_Versteck_3, ChoiceIx(ix) + 30, ChoiceIx(ix), true);
+                mcM.Last()!.SetDel(SucheVersteck75);
+
+
+                // ix += 30;
             }
             ix = CalcIx(CA!.imc_Pentagramm);
             if (locations.Find(CA!.L03_In_The_Parlor ).Visited == true && locations.Find(CA!.L05_Atrium).Visited == false )
             {
                 cFollower.Add(ix);
-                mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Pentagramm, ix, CB!.MCE_Choice1, true, true));
-                ix += 10;
+                mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Pentagramm, ix, ChoiceIx(ix), true, false));
+                SetGenericTipps(mcM, loca.Info_Pentagramm_0, CA!.Score_Transfer1!, ix);
+
+                mcM.AddEntry(null, loca.Info_Pentagramm_1, ChoiceIx(ix) + 10, ChoiceIx(ix), true);
+                mcM.Last()!.SetDel(SucheVersteck25);
+
+                mcM.AddEntry(null, loca.Info_Pentagramm_2, ChoiceIx(ix) + 20, ChoiceIx(ix), true);
+                mcM.Last()!.SetDel(SucheVersteck50);
+
+                mcM.AddEntry(null, loca.Info_Pentagramm_3, ChoiceIx(ix) + 30, ChoiceIx(ix), true);
+                mcM.Last()!.SetDel(SucheVersteck75);
             }
 
             ix = CalcIx(CA!.imc_Atrium_Ankunft);
@@ -88,23 +109,50 @@ namespace GameCore
             if ( CA.Status_Klaue_Nehmversuch.Val == 1 && CA.I00_Claw.locationID == CA.I05_Pedestal.ID)
             {
                 cFollower.Add(ix);
-                mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Klaue_nicht_nehmbar, ix, CB!.MCE_Choice1, true, true));
-                ix += 10;
+                mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Klaue_nicht_nehmbar, ix, ChoiceIx(ix), true, false));
+                SetGenericTipps(mcM, loca.Info_Klaue_nicht_nehmbar_0, CA!.Score_Klauenzange1!, ix);
+
+                mcM.AddEntry(null, loca.Info_Klaue_nicht_nehmbar_1, ChoiceIx(ix) + 10, ChoiceIx(ix), true);
+                mcM.Last()!.SetDel(Klauenzange1_25);
+
+                mcM.AddEntry(null, loca.Info_Klaue_nicht_nehmbar_2, ChoiceIx(ix) + 20, ChoiceIx(ix), true);
+                mcM.Last()!.SetDel(Klauenzange1_50);
+
+                mcM.AddEntry(null, loca.Info_Klaue_nicht_nehmbar_3, ChoiceIx(ix) + 30, ChoiceIx(ix), true);
+                mcM.Last()!.SetDel(Klauenzange1_75);
             }
 
             ix = CalcIx(CA!.imc_Klaue_nicht_fixiert);
             if ( CA.I00_Unstable_Pliers_With_Claw.locationID != CA.I00_Nullbehaelter.ID && CA.I00_Unstable_Pliers_With_Claw.locationID != CA.I00_Nullbehaelter2.ID)
             {
                 cFollower.Add(ix);
-                mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Klaue_nicht_fixiert, ix, CB!.MCE_Choice1, true, true));
-                ix += 10;
+                mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Klaue_nicht_fixiert, ix, ChoiceIx(ix), true, false));
+                SetGenericTipps(mcM, loca.Info_Klaue_nicht_fixiert_0, CA!.Score_Klauenzange2!, ix);
+
+                mcM.AddEntry(null, loca.Info_Klaue_nicht_fixiert_1, ChoiceIx(ix) + 10, ChoiceIx(ix), true);
+                mcM.Last()!.SetDel(Klauenzange2_25);
+
+                mcM.AddEntry(null, loca.Info_Klaue_nicht_fixiert_2, ChoiceIx(ix) + 20, ChoiceIx(ix), true);
+                mcM.Last()!.SetDel(Klauenzange2_50);
+
+                mcM.AddEntry(null, loca.Info_Klaue_nicht_fixiert_3, ChoiceIx(ix) + 30, ChoiceIx(ix), true);
+                mcM.Last()!.SetDel(Klauenzange2_75);
             }
             ix = CalcIx(CA!.imc_Klaue_noch_niemand_belebt );
             if (CA.I00_Stable_Pliers_With_Claw.locationID != CA.I00_Nullbehaelter.ID && CA.Score_Erste_Belebung.Active == false )
             {
                 cFollower.Add(ix);
-                mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Klaue_noch_niemand_belebt, ix, CB!.MCE_Choice1, true, true));
-                ix += 10;
+                mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Klaue_noch_niemand_belebt, ix, ChoiceIx(ix), true, false));
+                SetGenericTipps(mcM, loca.Info_Klaue_noch_niemand_belebt_0, CA!.Score_Erste_Belebung!, ix);
+
+                mcM.AddEntry(null, loca.IInfo_Klaue_noch_niemand_belebt_1, ChoiceIx(ix) + 10, ChoiceIx(ix), true);
+                mcM.Last()!.SetDel(ErsteBelebung25);
+
+                mcM.AddEntry(null, loca.Info_Klaue_noch_niemand_belebt_2, ChoiceIx(ix) + 20, ChoiceIx(ix), true);
+                mcM.Last()!.SetDel(ErsteBelebung50);
+
+                mcM.AddEntry(null, loca.Info_Klaue_noch_niemand_belebt_3, ChoiceIx(ix) + 30, ChoiceIx(ix), true);
+                mcM.Last()!.SetDel(ErsteBelebung75);
             }
             else  if (CA.I00_Stable_Pliers_With_Claw.locationID != CA.I00_Nullbehaelter.ID && CA.Score_Erstes_Gespraech.Active == false)
             {
@@ -139,7 +187,79 @@ namespace GameCore
             {
                 cFollower.Add(ix);
                 mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Neues_Rezept_Wie, ix, CB!.MCE_Choice1, true, true));
+
+                if (CA!.I00_Cheese.locationID == CA.I13_Fridge.ID)
+                {
+                    ix = CalcIx(CA!.imc_Kaese_Not_Found);
+                    cFollower.Add(ix);
+                    mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Kaese_Not_Found, ix, CB!.MCE_Choice1, true, true));
+                }
+                else if (CA.I00_Polished_Stone.locationID == CA.I00_Nullbehaelter.ID)
+                {
+                    ix = CalcIx(CA!.imc_Kaese_Wozu);
+                    cFollower.Add(ix);
+                    mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Kaese_Wozu, ix, CB!.MCE_Choice1, true, true));
+                }
+                else if (CA.I00_Lightless_Stone.locationID == CA.I00_Nullbehaelter.ID)
+                {
+                    ix = CalcIx(CA!.imc_Kiesel_Wozu );
+                    cFollower.Add(ix);
+                    mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Kiesel_Wozu, ix, CB!.MCE_Choice1, true, true));
+                }
+                else if (CA.I00_Moonstone.locationID == CA.I00_Nullbehaelter.ID)
+                {
+                    ix = CalcIx(CA!.imc_Lichtloser_Stein_Wozu );
+                    cFollower.Add(ix);
+                    mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Lichtloser_Stein_Wozu, ix, CB!.MCE_Choice1, true, true));
+                }
+
+
+                if (CA.I00_Coin.locationID == CA.I00_Nullbehaelter.ID  )
+                {
+                    ix = CalcIx(CA.imc_Goldmuenze_Woher);
+                    cFollower.Add(ix);
+                    mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Goldmuenze_Woher, ix, CB!.MCE_Choice1, true, true));
+                }
+                else if (CA.I00_Coin.locationID == CA.I08_Water.ID)
+                {
+                    ix = CalcIx(CA.imc_Goldmuenze_Woher2);
+                    cFollower.Add(ix);
+                    mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Goldmuenze_Woher2, ix, CB!.MCE_Choice1, true, true));
+                }
+
+                if (CA.I00_Wonder_Wart_Sponge.locationID == CA.I00_Nullbehaelter.ID )
+                {
+                    ix = CalcIx(CA.imc_Schwamm_Woher);
+                    cFollower.Add(ix);
+                    mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Schwamm_Woher, ix, CB!.MCE_Choice1, true, true));
+                }
             }
+            if ( Items.IsItemInv( CA.I00_Moonstone ) && Items.IsItemInv( CA.I00_Wonder_Wart_Sponge ) && Items.IsItemInv( CA.I00_Coin ) )
+            {
+                ix = CalcIx(CA.imc_Alle_Zutaten_da);
+                cFollower.Add(ix);
+                mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Alle_Zutaten_da, ix, CB!.MCE_Choice1, true, true));
+            }
+            if ( CA.I00_Slag.locationID != CA.I00_Nullbehaelter.ID && CA.I00_Slag.locationID != CA.I00_Nullbehaelter2.ID)
+            {
+                ix = CalcIx(CA.imc_Schlacke_Wozu);
+                cFollower.Add(ix);
+                mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Schlacke_Wozu, ix, CB!.MCE_Choice1, true, true));
+            }
+            if (CA.I00_Supermagic_Powder.locationID != CA.I00_Nullbehaelter.ID )
+            {
+                ix = CalcIx(CA.imc_Neues_Pulver_Wozu);
+                cFollower.Add(ix);
+                mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Neues_Pulver_Wozu, ix, CB!.MCE_Choice1, true, true));
+            }
+            if (CA.Person_I.locationID == CA.L15_Nowhere )
+            {
+                ix = CalcIx(CA.imc_Ende );
+                cFollower.Add(ix);
+                mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Ende, ix, CB!.MCE_Choice1, true, true));
+            }
+
+            ix += 10;
 
             cFollower.Add(ix);
             mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Order_InfoMCDialog_Person_Self_11228, ix, -1, true, false));
@@ -156,6 +276,30 @@ namespace GameCore
             }
         }
 
+        public bool SucheVersteck25(List<MCMenuEntry> MCMEntry)
+        {
+            CA!.Score_Transfer1!.IncSpoilerState(spoiler.tipp);
+
+            CalcGenericTipps(AdvGame!.UIS!.MCM!);
+            return true;
+        }
+
+        public bool SucheVersteck50(List<MCMenuEntry> MCMEntry)
+        {
+            CA!.Score_Transfer1!.IncSpoilerState(spoiler.spoiler);
+
+            CalcGenericTipps(AdvGame!.UIS!.MCM!);
+            return true;
+        }
+
+        public bool SucheVersteck75(List<MCMenuEntry> MCMEntry)
+        {
+            CA!.Score_Transfer1!.IncSpoilerState(spoiler.solution);
+            CalcGenericTipps(AdvGame!.UIS!.MCM!);
+
+
+            return true;
+        }
 
         public void CalcGenericTipp(MCMenu mcM, Score scoreentry, int ix)
         {

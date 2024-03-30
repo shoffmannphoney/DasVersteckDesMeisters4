@@ -140,7 +140,7 @@ public partial class Adv: AdvBase
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
 
-        CA!.I04_Flap = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Klappe! }, null, Co.SEX_FEMALE, CB!.LocType_In_Item, CA!.I00_Nullbehaelter.ID, loca.Adv_I04_Flap, "Adv_I04_Flap", Co.SZ_small, true, false, Nouns, Adjs));
+        CA!.I04_Flap = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Klappe! }, null, Co.SEX_FEMALE, CB!.LocType_In_Item, CA!.I00_Nullbehaelter.ID, loca.Adv_I04_Flap, "Adv_I04_Flap", Co.SZ_small, false, false, Nouns, Adjs));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
@@ -154,7 +154,7 @@ public partial class Adv: AdvBase
         Items!.Last().CanPutIn = true;
         Items!.Last().StorageIn = 20;
 
-        CA!.I05_Pentagram = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Pentagramm! }, null, Co.SEX_NEUTER, CB!.LocType_Loc, CA!.L05_Atrium, loca.Adv_I05_Pentagram, "Adv_I05_Pentagram", Co.SZ_small, true, false, Nouns, Adjs));
+        CA!.I05_Pentagram = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Pentagramm! }, null, Co.SEX_NEUTER, CB!.LocType_Loc, CA!.L05_Atrium, loca.Adv_I05_Pentagram, "Adv_I05_Pentagram", Co.SZ_small, false, false, Nouns, Adjs));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));

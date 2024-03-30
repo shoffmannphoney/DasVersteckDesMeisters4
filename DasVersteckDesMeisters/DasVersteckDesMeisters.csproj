@@ -49,7 +49,7 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
 
 		<GenerateAppInstallerFile>False</GenerateAppInstallerFile>
-		<AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
+		<AppxPackageSigningEnabled>False</AppxPackageSigningEnabled>
 		<PackageCertificateThumbprint>3F5F279C13CB65FDFB4B5BB3DE4D112024B36481</PackageCertificateThumbprint>
 		<AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
 		<AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
@@ -102,7 +102,6 @@
 	<ItemGroup>
 		<Folder Include="Core\" />
 		<Folder Include="GameSupport\" />
-		<Folder Include="GameLogic\" />
 		<Folder Include="Pages\" />
 		<Folder Include="Resources\Splash\" />
 		<Folder Include="Resources\Styles\" />

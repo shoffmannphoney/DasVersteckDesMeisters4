@@ -6134,6 +6134,57 @@ namespace GameCore
                 }
             }
 
+            if (CA!.Person_I.locationID == locationID)
+            {
+                if (CA.Status_Fisch_Klaue.Val <= 0 && (Items.IsItemInv(CA.I00_Unstable_Pliers_With_Claw) || Items.IsItemInv(CA.I00_Stable_Pliers_With_Claw)))
+                {
+                    int a = 5;
+                    int val = GD!.RandomNumber(0, 30);
+                    {
+                        if (val < 1)
+                        {
+                            StoryOutput(CA!.Person_Fish.locationID, CA!.Person_I, loca.Do_Fish_Reaktion1);
+                        }
+                        else if (val < 2)
+                        {
+                            StoryOutput(CA!.Person_Fish.locationID, CA!.Person_I, loca.Do_Fish_Reaktion2);
+                        }
+                        else if (val < 3)
+                        {
+                            StoryOutput(CA!.Person_Fish.locationID, CA!.Person_I, loca.Do_Fish_Reaktion3);
+                        }
+
+                    }
+                }
+                else if (CA!.Status_Fisch_Klaue.Val > 0)
+                {
+                    int val = GD!.RandomNumber(0, 30);
+                    {
+                        if (val < 1)
+                        {
+                            StoryOutput(CA!.Person_Fish.locationID, CA!.Person_I, loca.Do_Fish_Action1);
+                        }
+                        else if (val < 2)
+                        {
+                            StoryOutput(CA!.Person_Fish.locationID, CA!.Person_I, loca.Do_Fish_Action2);
+                        }
+                        else if (val < 3)
+                        {
+                            StoryOutput(CA!.Person_Fish.locationID, CA!.Person_I, loca.Do_Fish_Action3);
+                        }
+                        else if (val < 4)
+                        {
+                            StoryOutput(CA!.Person_Fish.locationID, CA!.Person_I, loca.Do_Fish_Action4);
+                        }
+                        else if (val < 5)
+                        {
+                            StoryOutput(CA!.Person_Fish.locationID, CA!.Person_I, loca.Do_Fish_Action5);
+                        }
+
+                    }
+                }
+            }
+
             return true;
         }
         public bool DoSnake(int locationID)
@@ -13649,6 +13700,8 @@ namespace GameCore
         public int imc_Schlacke_Wozu = 34;
         public int imc_Neues_Pulver_Wozu = 35;
         public int imc_Ende = 36;
+        public int imc_Kaese_Not_Found = 37;
+        public int imc_Goldmuenze_Woher2 = 38;
 
 
 

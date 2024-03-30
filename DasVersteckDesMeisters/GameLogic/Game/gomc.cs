@@ -22,9 +22,96 @@ namespace GameCore
         {
         }
 
+        public void DoRoute(int Dest, bool doRecord = false, bool forceBrief = true)
+        {
+            bool success = false;
+
+            bool brief = AdvGame!.GD!.Brief;
+            bool silent = AdvGame!.GD!.UISuppressed;
+
+            if (forceBrief)
+                AdvGame!.GD!.Brief = true;
+
+            AdvGame!.GD!.UISuppressed = true;
+
+            if (Persons!.Find(A!.ActPerson)!.locationID != Dest)
+            {
+
+                List<int> Route = locations!.FindRoute(Persons!.Find(A!.ActPerson), Dest);
+                if (Route != null)
+                {
+                    for (int i = 0; i < Route.Count; i++)
+                    {
+                        bool oldBrief = AdvGame!.GD!.Brief;
+
+                        if (doRecord)
+                        {
+                            string? recordString = null;
+                            if (Route[i] == Co.DIR_N)
+                                recordString = loca.Order_DoRoute_10296;
+                            else if (Route[i] == Co.DIR_NE)
+                                recordString = loca.Order_DoRoute_10297;
+                            else if (Route[i] == Co.DIR_E)
+                                recordString = loca.Order_DoRoute_10298;
+                            else if (Route[i] == Co.DIR_SE)
+                                recordString = loca.Order_DoRoute_10299;
+                            else if (Route[i] == Co.DIR_S)
+                                recordString = loca.Order_DoRoute_10300;
+                            else if (Route[i] == Co.DIR_SW)
+                                recordString = loca.Order_DoRoute_10301;
+                            else if (Route[i] == Co.DIR_W)
+                                recordString = loca.Order_DoRoute_10302;
+                            else if (Route[i] == Co.DIR_NW)
+                                recordString = loca.Order_DoRoute_10303;
+                            else if (Route[i] == Co.DIR_U)
+                                recordString = loca.Order_DoRoute_10304;
+                            else if (Route[i] == Co.DIR_D)
+                                recordString = loca.Order_DoRoute_10305;
+
+                            AdvGame!.RecordOrder(recordString);
+                        }
+                        if (i == Route.Count - 1)
+                        {
+                            AdvGame!.GD!.Brief = brief;
+                        }
+                        success = GoDir(Persons!.Find(A!.ActPerson), Route[i]);
+                        if (!success) break;
+
+                        // if (AdvGame!.DialogOngoing == false && AdvGame!.SkipAfterDialog == false)
+                        {
+                            Persons!.DoNPCs();
+                            locations!.Dolocations();
+                        }
+
+                        AdvGame!.GD!.Brief = oldBrief;
+                    }
+                }
+            }
+
+            AdvGame!.GD!.Brief = brief;
+
+            AdvGame!.GD!.UISuppressed = silent;
+            // AdvGame!.UIS!.DoUIUpdate();
+        }
+
         public bool GoTargetlocation(int loc)
         {
-            return false;
+            if (loc >= CA!.L05_Atrium && loc <= CA!.L14_Bathroom && A.ActLoc >= CA!.L05_Atrium && A.ActLoc <= CA!.L14_Bathroom)
+            {
+                DoRoute(loc, true);
+
+            }
+            else if (loc >= CA!.L01_Dark_Forest && loc <= CA!.L04_Shabby_Little_Chamber && A.ActLoc >= CA!.L01_Dark_Forest && A.ActLoc <= CA!.L04_Shabby_Little_Chamber)
+            {
+                DoRoute(loc, true);
+
+            }
+            else
+            {
+                AdvGame!.StoryOutput(loca.Order_GoTargetlocation_10306);
+            }
+
+            return true;
         }
         public bool Manual(Person PersonID, ParseTokenList PTL)
         {
