@@ -5775,6 +5775,7 @@ namespace GameCore
             CA!.Score_Buch = Scores.Add(new Score((int)scoreVal.easy, scoreChapter.chapter_one));
             CA!.Score_Deckel = Scores.Add(new Score((int)scoreVal.simple, scoreChapter.chapter_one));
             CA!.Score_Muenze = Scores.Add(new Score((int)scoreVal.advanced, scoreChapter.chapter_one));
+            CA!.Score_Muenze_Gefunden = Scores.Add(new Score((int)scoreVal.advanced, scoreChapter.chapter_one));
             CA!.Score_Polierter_Stein = Scores.Add(new Score((int)scoreVal.mediocre, scoreChapter.chapter_one));
             CA!.Score_Lichtloser_Stein = Scores.Add(new Score((int)scoreVal.mediocre, scoreChapter.chapter_one));
             CA!.Score_Mondstein = Scores.Add(new Score((int)scoreVal.advanced, scoreChapter.chapter_one));
@@ -13661,6 +13662,7 @@ namespace GameCore
         public Score? Score_Buch;           // set
         public Score? Score_Deckel;        // set
         public Score? Score_Muenze; // set
+        public Score? Score_Muenze_Gefunden; // set
         public Score? Score_Polierter_Stein; // set
         public Score? Score_Lichtloser_Stein; // set
         public Score? Score_Mondstein; // set

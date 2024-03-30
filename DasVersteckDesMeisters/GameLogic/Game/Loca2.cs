@@ -670,14 +670,25 @@ public static partial class loca
         }
 
     }
-    public static string Info_Uhu_Fragen_Tier_xxx
+    public static string Info_Uhu_Fragen_Tier_2
     {
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "(Tipps) Vielleicht fand sich das besagte Lieblingstier ja irgendwo? Hatte der Meister vielleicht in seinem allerprivatesten Refugium solche Hinweise hinterlassen?";
+                return "(Hilfe) Ich musste ins Schlafgemach des Meisters. Dass die Tür versiegelt war, war vermutlich für eine zerstörungswütige Ritterrüstung kein so großes Hindernis.";
             else
-                return "(Tipps) Vielleicht fand sich das besagte Lieblingstier ja irgendwo? Hatte der Meister vielleicht in seinem allerprivatesten Refugium solche Hinweise hinterlassen?";
+                return "(Hilfe) Ich musste ins Schlafgemach des Meisters. Dass die Tür versiegelt war, war vermutlich für eine zerstörungswütige Ritterrüstung kein so großes Hindernis.";
+        }
+
+    }
+    public static string Info_Uhu_Fragen_Tier_3
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "(Lösung) Ich musste ins Schlafgemach des Meisters. Um die Tür aufzubekommen, sollte ich mir Schild und Siegel darauf genau anschauen. Dann redete ich am Besten mit der wiederbelebten Ritterrüstung und sagte ihr, sie solle die Tür einrennen. Im Schlafzimmer fand ich dann unter der Matratze Liebeslyrik der verstörenden Art.";
+            else
+                return "(Lösung) Ich musste ins Schlafgemach des Meisters. Um die Tür aufzubekommen, sollte ich mir Schild und Siegel darauf genau anschauen. Dann redete ich am Besten mit der wiederbelebten Ritterrüstung und sagte ihr, sie solle die Tür einrennen. Im Schlafzimmer fand ich dann unter der Matratze Liebeslyrik der verstörenden Art.";
         }
 
     }
@@ -697,9 +708,53 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ich hatte nicht die geringste Ahnung, wo ich hier hier einen Mondstein auftreiben sollte.";
+                return "(Tipps!) Ich hatte nicht die geringste Ahnung, wo ich hier hier einen Mondstein auftreiben sollte.";
             else
-                return "Ich hatte nicht die geringste Ahnung, wo ich hier hier einen Mondstein auftreiben sollte.";
+                return "(Tipps!) Ich hatte nicht die geringste Ahnung, wo ich hier hier einen Mondstein auftreiben sollte.";
+        }
+
+    }
+    public static string Info_Kaese_Not_Found_0
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Wie kam ich an einen Mondstein?";
+            else
+                return "Wie kam ich an einen Mondstein?";
+        }
+
+    }
+    public static string Info_Kaese_Not_Found_1
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "(Tipp) Nun, nicht alles, was ein Mondstein war, hatte auch als solches angefangen. Manchmal begann alles mit hart gewordenen Lebensmitteln.";
+            else
+                return "(Tipp) Nun, nicht alles, was ein Mondstein war, hatte auch als solches angefangen. Manchmal begann alles mit hart gewordenen Lebensmitteln.";
+        }
+
+    }
+    public static string Info_Kaese_Not_Found_2
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "(Hilfe) Im Kühlschrank fand ich alten, harten Käse. Vielleicht half mir der. ";
+            else
+                return "(Hilfe) Im Kühlschrank fand ich alten, harten Käse. Vielleicht half mir der. ";
+        }
+
+    }
+    public static string Info_Kaese_Not_Found_3
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "(Hilfe) Im Kühlschrank fand ich alten, harten Käse. Vielleicht konnte ich den später gegen etwas eintauschen.";
+            else
+                return "(Hilfe) Im Kühlschrank fand ich alten, harten Käse. Vielleicht konnte ich den später gegen etwas eintauschen.";
         }
 
     }
@@ -708,9 +763,53 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
+                return "(Tipps!) Was sollte ich bloß mit einem vertrockneten Stück Käse anfangen?";
+            else
+                return "(Tipps!) Was sollte ich bloß mit einem vertrockneten Stück Käse anfangen?";
+        }
+
+    }
+    public static string Info_Kaese_Wozu_0
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
                 return "Was sollte ich bloß mit einem vertrockneten Stück Käse anfangen?";
             else
                 return "Was sollte ich bloß mit einem vertrockneten Stück Käse anfangen?";
+        }
+
+    }
+    public static string Info_Kaese_Wozu_1
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "(Tipp) Vielleicht konnte ich das Ding irgendwo eintauschen? Wer tauschte überhaupt im Domizil?";
+            else
+                return "(Tipp) Vielleicht konnte ich das Ding irgendwo eintauschen? Wer tauschte überhaupt im Domizil?";
+        }
+
+    }
+    public static string Info_Kaese_Wozu_2
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "(Hilfe) Vielleicht konnte ich das Ding bei der Elster eintauschen?";
+            else
+                return "(Hilfe) Vielleicht konnte ich das Ding bei der Elster eintauschen?";
+        }
+
+    }
+    public static string Info_Kaese_Wozu_3
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "(Lösung) Vielleicht konnte ich das Ding bei der Elster eintauschen? Auch wenn das Ergebnis des Tauschgeschäfts vielleicht nur ein Zwischenschritt war.";
+            else
+                return "(Lösung) Vielleicht konnte ich das Ding bei der Elster eintauschen? Auch wenn das Ergebnis des Tauschgeschäfts vielleicht nur ein Zwischenschritt war.";
         }
 
     }
@@ -719,9 +818,53 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Was sollte ich bloß mit einem dämlichen Kiesel anfangen? Da konnte die Elster auch noch so stolz auf ihren depperten Schatz sein...";
+                return "(Tipps!) Was sollte ich bloß mit einem dämlichen Kiesel anfangen? Da konnte die Elster auch noch so stolz auf ihren depperten Schatz sein...";
             else
-                return "Was sollte ich bloß mit einem dämlichen Kiesel anfangen? Da konnte die Elster auch noch so stolz auf ihren depperten Schatz sein...";
+                return "(Tipps!) Was sollte ich bloß mit einem dämlichen Kiesel anfangen? Da konnte die Elster auch noch so stolz auf ihren depperten Schatz sein...";
+        }
+
+    }
+    public static string Info_Kiesel_Wozu_0
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Was sollte ich mit dem Kiesel anfangen?";
+            else
+                return "Was sollte ich mit dem Kiesel anfangen?";
+        }
+
+    }
+    public static string Info_Kiesel_Wozu_1
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "(Tipp) Das Buch des Meisters in der Bibliothek enthielt einige Tipps dazu.";
+            else
+                return "(Tipp) Das Buch des Meisters in der Bibliothek enthielt einige Tipps dazu.";
+        }
+
+    }
+    public static string Info_Kiesel_Wozu_2
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "(Hilfe) Die Dunkelheitsmaschine im Labor konnte dem Kiesel zumindest mal alles Licht entziehen. Das wäre doch schon mal ein ordentlicher Fortschritt.";
+            else
+                return "(Hilfe) Die Dunkelheitsmaschine im Labor konnte dem Kiesel zumindest mal alles Licht entziehen. Das wäre doch schon mal ein ordentlicher Fortschritt.";
+        }
+
+    }
+    public static string Info_Kiesel_Wozu_3
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "(Lösung) Ich legte den Kiesel in die Dunkelheitsmaschine, betätigte den Schalter, und bekam einen vollkommen lichtlosen Stein. Der ideale Grundstoff für den nächsten Schritt: Den Mondstein!";
+            else
+                return "(Lösung) Ich legte den Kiesel in die Dunkelheitsmaschine, betätigte den Schalter, und bekam einen vollkommen lichtlosen Stein. Der ideale Grundstoff für den nächsten Schritt: Den Mondstein!";
         }
 
     }
@@ -730,9 +873,53 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Was sollte ich bloß mit diesem komischen lichtlosen Kiesel anfangen?";
+                return "(Tipps!) Was sollte ich bloß mit diesem komischen lichtlosen Kiesel anfangen?";
             else
-                return "Was sollte ich bloß mit diesem komischen lichtlosen Kiesel anfangen?";
+                return "(Tipps!) Was sollte ich bloß mit diesem komischen lichtlosen Kiesel anfangen?";
+        }
+
+    }
+    public static string Info_Lichtloser_Stein_Wozu_0
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Was konnte ich mit dem lichtlosen Kiesel anfangen?";
+            else
+                return "Was konnte ich mit dem lichtlosen Kiesel anfangen?";
+        }
+
+    }
+    public static string Info_Lichtloser_Stein_Wozu_1
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "(Tipp) Ein lichtloser Stein war geradezu dafür gemacht, um sich mit Mondlicht vollzusaugen. Dazu musste man nur dem Mond so nahe wie möglich kommen.";
+            else
+                return "(Tipp) Ein lichtloser Stein war geradezu dafür gemacht, um sich mit Mondlicht vollzusaugen. Dazu musste man nur dem Mond so nahe wie möglich kommen.";
+        }
+
+    }
+    public static string Info_Lichtloser_Stein_Wozu_2
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "(Hilfe) Der lichtlose Stein würde sich mit Mondlicht vollsaugen, wenn er dem Mond nahe genug kam. Nun brauchte es nur noch eine Möglichkeit, vom Atrium aus zum Vollmond zu fliegen.";
+            else
+                return "(Hilfe) Der lichtlose Stein würde sich mit Mondlicht vollsaugen, wenn er dem Mond nahe genug kam. Nun brauchte es nur noch eine Möglichkeit, vom Atrium aus zum Vollmond zu fliegen.";
+        }
+
+    }
+    public static string Info_Lichtloser_Stein_Wozu_3
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "(Lösung) Der lichtlose Stein würde sich mit Mondlicht vollsaugen, wenn er dem Mond nahe genug kam. Das konnte der Papagei übernehmen, wenn ich ihm gut zuredete und anschließend in den Himmel warf.";
+            else
+                return "(Lösung) Der lichtlose Stein würde sich mit Mondlicht vollsaugen, wenn er dem Mond nahe genug kam. Das konnte der Papagei übernehmen, wenn ich ihm gut zuredete und anschließend in den Himmel warf.";
         }
 
     }
@@ -741,9 +928,53 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ich hatte eine goldene Münze unten im Brunnen entdeckt. Wie kam ich dort heran?";
+                return "(Tipps!) Ich brauchte eine Goldmünze. Wo fand ich hier sowas?";
             else
-                return "Ich hatte eine goldene Münze unten im Brunnen entdeckt. Wie kam ich dort heran?";
+                return "(Tipps!) Ich brauchte eine Goldmünze. Wo fand ich hier sowas?";
+        }
+
+    }
+    public static string Info_Goldmuenze_Woher_0
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Wie kam ich hier an eine Goldmünze?";
+            else
+                return "Wie kam ich hier an eine Goldmünze?";
+        }
+
+    }
+    public static string Info_Goldmuenze_Woher_1
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "(Tipp) Meistens fand sich ja in Brunnen allerlei Kleingeld, das unbedachte Passanten hinein warfen.";
+            else
+                return "(Tipp) Meistens fand sich ja in Brunnen allerlei Kleingeld, das unbedachte Passanten hinein warfen.";
+        }
+
+    }
+    public static string Info_Goldmuenze_Woher_2
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "(Hilfe) In der Waschküche stand ein Brunnen, dessen Deckel ich wegschieben konnte. Jetzt musste ich nur noch im dunklen Wasser etwas entdecken.";
+            else
+                return "(Hilfe) In der Waschküche stand ein Brunnen, dessen Deckel ich wegschieben konnte. Jetzt musste ich nur noch im dunklen Wasser etwas entdecken.";
+        }
+
+    }
+    public static string Info_Goldmuenze_Woher_3
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "(Lösung) In der Waschküche stand ein Brunnen, dessen Deckel ich wegschieben konnte. Wenn ich mit der Kerze ins Wasser leuchtete, würde ich die Münze entdecken.";
+            else
+                return "(Lösung) In der Waschküche stand ein Brunnen, dessen Deckel ich wegschieben konnte. Wenn ich mit der Kerze ins Wasser leuchtete, würde ich die Münze entdecken.";
         }
 
     }
@@ -752,9 +983,53 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Was sollte ich hier bloß mit dieser Goldmünze anfangen?";
+                return "(Tipps!) Ich hatte eine goldene Münze unten im Brunnen entdeckt. Wie kam ich dort heran?";
             else
-                return "Was sollte ich hier bloß mit dieser Goldmünze anfangen?";
+                return "(Tipps!) Ich hatte eine goldene Münze unten im Brunnen entdeckt. Wie kam ich dort heran?";
+        }
+
+    }
+    public static string Info_Goldmuenze_Woher2_0
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Wie kam ich an die Goldmünze im Brunnen?";
+            else
+                return "Wie kam ich an die Goldmünze im Brunnen?";
+        }
+
+    }
+    public static string Info_Goldmuenze_Woher2_1
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "(Tipp) Selbst konnte ich da sicher nicht runtertauchen. Das war viel zu gefährlich.";
+            else
+                return "(Tipp) Selbst konnte ich da sicher nicht runtertauchen. Das war viel zu gefährlich.";
+        }
+
+    }
+    public static string Info_Goldmuenze_Woher2_2
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "(Hilfe) Vielleicht konnte ich den ausgestopften Fisch überreden, in den Brunnen zu tauchen?";
+            else
+                return "(Hilfe) Vielleicht konnte ich den ausgestopften Fisch überreden, in den Brunnen zu tauchen?";
+        }
+
+    }
+    public static string Info_Goldmuenze_Woher2_3
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "(Lösung) Ich sollte den Fisch bitten, nach der Münze zu tauchen. Wenn er erst eingewilligt hatte, brauchte ich ihn nur ins Wasser zu werfen.";
+            else
+                return "(Lösung) Ich sollte den Fisch bitten, nach der Münze zu tauchen. Wenn er erst eingewilligt hatte, brauchte ich ihn nur ins Wasser zu werfen.";
         }
 
     }
@@ -763,9 +1038,53 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Wie sollte ich bloß einen Wunderwarzenschwamm auftreiben? Und was war das eigenetlich für ein bescheuerter Name?";
+                return "(Tipps) Wie sollte ich bloß einen Wunderwarzenschwamm auftreiben? Und was war das eigenetlich für ein bescheuerter Name?";
             else
-                return "Wie sollte ich bloß einen Wunderwarzenschwamm auftreiben? Und was war das eigenetlich für ein bescheuerter Name?";
+                return "(Tipps) Wie sollte ich bloß einen Wunderwarzenschwamm auftreiben? Und was war das eigenetlich für ein bescheuerter Name?";
+        }
+
+    }
+    public static string Info_Schwamm_Woher_0
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Wie sollte ich einen Wunderwarzenschwamm auftreiben?";
+            else
+                return "Wie sollte ich einen Wunderwarzenschwamm auftreiben?";
+        }
+
+    }
+    public static string Info_Schwamm_Woher_1
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "(Tipp) Wenn hier sowas nicht wuchs, dann konnte ich es vielleicht züchten?";
+            else
+                return "(Tipp) Wenn hier sowas nicht wuchs, dann konnte ich es vielleicht züchten?";
+        }
+
+    }
+    public static string Info_Schwamm_Woher_2
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "(Hilfe) Wenn hier sowas nicht wuchs, dann konnte ich es vielleicht züchten. Ich brauchte die passenden Sporen und einen feuchten Untergrund.";
+            else
+                return "(Hilfe) Wenn hier sowas nicht wuchs, dann konnte ich es vielleicht züchten. Ich brauchte die passenden Sporen und einen feuchten Untergrund.";
+        }
+
+    }
+    public static string Info_Schwamm_Woher_3
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "(Lösung) Im Gefrierfach fand ich die Sporen. In der Waschküche konnte ich die Wäsche aus der Waschmaschine nehmen und in den Wäschekorb legen. Wenn ich die Sporen auf die nasse Wäsche legte, würde in Nullkommanichts ein Wunderwarzenschwamm gedeihen.";
+            else
+                return "(Lösung) Im Gefrierfach fand ich die Sporen. In der Waschküche konnte ich die Wäsche aus der Waschmaschine nehmen und in den Wäschekorb legen. Wenn ich die Sporen auf die nasse Wäsche legte, würde in Nullkommanichts ein Wunderwarzenschwamm gedeihen.";
         }
 
     }
@@ -774,9 +1093,53 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ich hatte alle Zutaten für das magische Pulver. Und jetzt?";
+                return "(Tipps!) Ich hatte alle Zutaten für das magische Pulver. Und jetzt?";
             else
-                return "Ich hatte alle Zutaten für das magische Pulver. Und jetzt?";
+                return "(Tipps!) Ich hatte alle Zutaten für das magische Pulver. Und jetzt?";
+        }
+
+    }
+    public static string Info_Alle_Zutaten_da_0
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Wie konnte ich das magische Pulver herstellen?";
+            else
+                return "Wie konnte ich das magische Pulver herstellen?";
+        }
+
+    }
+    public static string Info_Alle_Zutaten_da_1
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "(Tipp) Im Labor befand sich eine Metallschale, die ich an einer Halterung befestigen konnte. Kein schlechter Start.";
+            else
+                return "(Tipp) Im Labor befand sich eine Metallschale, die ich an einer Halterung befestigen konnte. Kein schlechter Start.";
+        }
+
+    }
+    public static string Info_Alle_Zutaten_da_2
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "(Hilfe) Im Labor befand sich eine Metallschale, die ich an einer Halterung befestigen konnte. Dann legte ich alle Zutaten hinein. Und jetzt brauchte die Sache nur noch etwas Feuer!";
+            else
+                return "(Hilfe) Im Labor befand sich eine Metallschale, die ich an einer Halterung befestigen konnte. Dann legte ich alle Zutaten hinein. Und jetzt brauchte die Sache nur noch etwas Feuer!";
+        }
+
+    }
+    public static string Info_Alle_Zutaten_da_3
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "(Lösung) Im Labor befand sich eine Metallschale, die ich an einer Halterung befestigte. Dann legte ich alle Zutaten hinein und erhitzte das ganze mit der magischen Kerze!";
+            else
+                return "(Lösung) Im Labor befand sich eine Metallschale, die ich an einer Halterung befestigte. Dann legte ich alle Zutaten hinein und erhitzte das ganze mit der magischen Kerze!";
         }
 
     }
@@ -785,9 +1148,53 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ich hatte einen netten Klumpen Schlacke erzeugt. Was machte ich jetzt damit?";
+                return "(Tipps) Ich hatte einen netten Klumpen Schlacke erzeugt. Was machte ich jetzt damit?";
             else
-                return "Ich hatte einen netten Klumpen Schlacke erzeugt. Was machte ich jetzt damit?";
+                return "(Tipps) Ich hatte einen netten Klumpen Schlacke erzeugt. Was machte ich jetzt damit?";
+        }
+
+    }
+    public static string Info_Schlacke_Wozu_0
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Was konnte ich jetzt mit der Schlacke tun?";
+            else
+                return "Was konnte ich jetzt mit der Schlacke tun?";
+        }
+
+    }
+    public static string Info_Schlacke_Wozu_1
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "(Tipp) Praktischerweise fand sich alles Handwerkszeug zur Weiterverarbeitung im Labor.";
+            else
+                return "(Tipp) Praktischerweise fand sich alles Handwerkszeug zur Weiterverarbeitung im Labor.";
+        }
+
+    }
+    public static string Info_Schlacke_Wozu_2
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "(Hilfe) Im Labor fanden sich Mörser und Stößel, um den Klumpen klein zu stößeln.";
+            else
+                return "(Hilfe) Im Labor fanden sich Mörser und Stößel, um den Klumpen klein zu stößeln.";
+        }
+
+    }
+    public static string Info_Schlacke_Wozu_3
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "(Lösung) Ich legte die Schlacke in den Mörser und bearbeitete sie mit dem Stößel. Das Ergebnis war das magische Pulver, das ich so dringend benötigte.";
+            else
+                return "(Lösung) Ich legte die Schlacke in den Mörser und bearbeitete sie mit dem Stößel. Das Ergebnis war das magische Pulver, das ich so dringend benötigte.";
         }
 
     }
@@ -796,9 +1203,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ich hatte magisches Pulver hergestellt. Meister Gunnar wäre stolz auf mich. Also solange er nicht mitbekam, was ich sonst noch so ausgefressen hatte.";
+                return "Ich hatte magisches Pulver hergestellt. Meister Gunnar wäre stolz auf mich. Also solange er nicht mitbekam, was ich sonst noch so ausgefressen hatte. Jetzt musste ich hier allerdings noch den Abflug machen.";
             else
-                return "Ich hatte magisches Pulver hergestellt. Meister Gunnar wäre stolz auf mich. Also solange er nicht mitbekam, was ich sonst noch so ausgefressen hatte.";
+                return "Ich hatte magisches Pulver hergestellt. Meister Gunnar wäre stolz auf mich. Also solange er nicht mitbekam, was ich sonst noch so ausgefressen hatte. Jetzt musste ich hier allerdings noch den Abflug machen.";
         }
 
     }
@@ -3973,9 +4380,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ich stand in einer verwunschenen Kammer, in der sich Regal an Regal reihte, die über und über mit zahllosen unheimlich aussehenden Büchern vollgestellt werden. Dabei sah ein Band gefährlicher aus als der andere. In einer Ecke befand sich ein Bibliothekarstresen, hinter dem ein Skelett saß. In einer Ecke stand ein Karton. Der einzige Weg nach draußen war durch eine verzierte Tür in der Ostwand.";
+                return "Ich stand in einem hohen Raum, in dem sich Regal an Regal reihte, die über und über mit zahllosen unheimlich aussehenden Büchern vollgestellt werden. Besonders [I:I09_Green_Shelf]ein grünes Regal[/I] und [I:I09_Red_Shelf]ein rotes Regal[/I} fielen mir dabei ins Auge. Dabei sah ein Band gefährlicher aus als der andere. In einer Ecke befand sich [I:I09_Librarians_Desk]ein Bibliothekarstresen[/I], hinter dem [P:Person_Librarian]ein Skelett[/P] saß. In einer Ecke stand [I:I09_Carton]ein Karton[/I]. Der einzige Weg nach draußen war durch [I:I09_Library_Door]eine verzierte Tür[/I] in der [L:L05_Atrium]Ostwand[/L].";
             else
-                return "Ich stand in einer verwunschenen Kammer, in der sich Regal an Regal reihte, die über und über mit zahllosen unheimlich aussehenden Büchern vollgestellt werden. Dabei sah ein Band gefährlicher aus als der andere. In einer Ecke befand sich ein Bibliothekarstresen, hinter dem ein Skelett saß. In einer Ecke stand ein Karton. Der einzige Weg nach draußen war durch eine verzierte Tür in der Ostwand.";
+                return "Ich stand in einem hohen Raum, in dem sich Regal an Regal reihte, die über und über mit zahllosen unheimlich aussehenden Büchern vollgestellt werden. Besonders [I:I09_Green_Shelf]ein grünes Regal[/I] und [I:I09_Red_Shelf]ein rotes Regal[/I} fielen mir dabei ins Auge. Dabei sah ein Band gefährlicher aus als der andere. In einer Ecke befand sich [I:I09_Librarians_Desk]ein Bibliothekarstresen[/I], hinter dem [P:Person_Librarian]ein Skelett[/P] saß. In einer Ecke stand [I:I09_Carton]ein Karton[/I]. Der einzige Weg nach draußen war durch [I:I09_Library_Door]eine verzierte Tür[/I] in der [L:L05_Atrium]Ostwand[/L].";
         }
     }
 
@@ -3994,9 +4401,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Dies also war das großartige Privatlabor des Meisters. Zu Zeiten, in denen ich mein Studium noch ernst genommen hätte, wäre ich vor Ehrfurcht erstarrt. Vor mir lag der große Labortisch mit allerlei Hilfsmitteln darauf. Im Tisch befand sich eine Schublade. Neben dem Tisch erkannte ich eine der berühmten Dunkelheitsmaschinen, die angeblich Meister Gunnar selbst erfunden hatte. An der Wand hing vorbildlicherweise ein großer Erste-Hilfe-Kasten. In der westlichen Wand führte eine Tür zurück zum Flur.";
+                return "Dies also war das großartige Privatlabor des Meisters. Als mir mein Studium noch wichtig war, wäre ich vor Ehrfurcht erstarrt. Vor mir lag [I:I10_Labor_Table]der große Labortisch[/I] des Meisters mit allerlei Hilfsmitteln darauf. Im Tisch befand sich [I:I10_Drawer]eine Schublade[/I]. Neben dem Tisch erkannte ich [I:I10_Darkness_Machine]eine der berühmten Dunkelheitsmaschinen[/I], die angeblich Meister Gunnar selbst erfunden hatte. An der Wand hing vorbildlicherweise [I:I10_First_Aid_Kit]ein großer Erste-Hilfe-Kasten[/I]. In [L:L07_Lower_Floor]der westlichen Wand[/L] führte [I:I10_Labor_Door]eine Tür[/I] zurück zum Flur.";
             else
-                return "Dies also war das großartige Privatlabor des Meisters. Zu Zeiten, in denen ich mein Studium noch ernst genommen hätte, wäre ich vor Ehrfurcht erstarrt. Vor mir lag der große Labortisch mit allerlei Hilfsmitteln darauf. Im Tisch befand sich eine Schublade. Neben dem Tisch erkannte ich eine der berühmten Dunkelheitsmaschinen, die angeblich Meister Gunnar selbst erfunden hatte. An der Wand hing vorbildlicherweise ein großer Erste-Hilfe-Kasten. In der westlichen Wand führte eine Tür zurück zum Flur.";
+                return "Dies also war das großartige Privatlabor des Meisters. Als mir mein Studium noch wichtig war, wäre ich vor Ehrfurcht erstarrt. Vor mir lag [I:I10_Labor_Table]der große Labortisch[/I] des Meisters mit allerlei Hilfsmitteln darauf. Im Tisch befand sich [I:I10_Drawer]eine Schublade[/I]. Neben dem Tisch erkannte ich [I:I10_Darkness_Machine]eine der berühmten Dunkelheitsmaschinen[/I], die angeblich Meister Gunnar selbst erfunden hatte. An der Wand hing vorbildlicherweise [I:I10_First_Aid_Kit]ein großer Erste-Hilfe-Kasten[/I]. In [L:L07_Lower_Floor]der westlichen Wand[/L] führte [I:I10_Labor_Door]eine Tür[/I] zurück zum Flur.";
         }
     }
     public static string Adv_L11_Storage_Room
@@ -4014,9 +4421,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ich befand mich in einem niedrigen, aber sehr großen Lagerraum. Hier befand sich in endlosen Regalen der Krempel von Meister Gunnar. Besondere Aufmerksamkeit weckten dabei bei mir das linke und das rechte Regal direkt vor mir, sowie ein Vogelständer. Eine Tür in der Nordwand führte nach draußen.";
+                return "Ich befand mich in einem niedrigen, aber sehr lang gezoenen Lagerraum. Hier befand sich in endlosen Regalen der Krempel von Meister Gunnar. Besondere Aufmerksamkeit weckten dabei bei mir [I:I11_Left_Shelf]das linke Regal[/I] und [I:I11_Right_Shelf]das rechte Regal[/I] direkt vor mir, sowie [I:I11_Bird_Stand]ein Vogelständer[/I]. [I:I11_Door_Blue]Eine blaue Tür[/I] [L:L07_Lower_Floor]in der Nordwand führte nach draußen[/L].";
             else
-                return "Ich befand mich in einem niedrigen, aber sehr großen Lagerraum. Hier befand sich in endlosen Regalen der Krempel von Meister Gunnar. Besondere Aufmerksamkeit weckten dabei bei mir das linke und das rechte Regal direkt vor mir, sowie ein Vogelständer. Eine Tür in der Nordwand führte nach draußen.";
+                return "Ich befand mich in einem niedrigen, aber sehr lang gezoenen Lagerraum. Hier befand sich in endlosen Regalen der Krempel von Meister Gunnar. Besondere Aufmerksamkeit weckten dabei bei mir [I:I11_Left_Shelf]das linke Regal[/I] und [I:I11_Right_Shelf]das rechte Regal[/I] direkt vor mir, sowie [I:I11_Bird_Stand]ein Vogelständer[/I]. [I:I11_Door_Blue]Eine blaue Tür[/I] [L:L07_Lower_Floor]in der Nordwand führte nach draußen[/L].";
         }
     }
     public static string Adv_L12_Sleeping_Room
@@ -4034,9 +4441,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Das also war das geheimnisvolle Schlafgemach des Meisters. Nicht gerade eine Liebeshöhle, um willige Studentinnen abzuschleppen. Eher ein Mancave für Fortgeschrittene. Ein riesiges Bett dominierte den Raum, auf dem eine hohe, luftige Matratze lag. In einer Raumecke stand ein Schrank. Durch eine kaputte Tür in der Nordwand gelangte man zurück zum Flur.";
+                return "Das also war das geheimnisvolle Schlafgemach des Meisters. Nicht gerade eine verruchte Liebeshöhle, um willige Studentinnen abzuschleppen. Eher ein Mancave für Fortgeschrittene. [I:I12_Bed]Ein riesiges Bett[/I] dominierte den Raum, auf dem [I:I12_Matress]eine hohe, luftige Matratze[/I] lag. In einer Raumecke stand [I:I12_Wardrobe]ein Schrank[/I]. Durch [I:I12_Door]eine zerbrochene Tür[/I] in der Nordwand gelangte man [L:L06_Long_Floor]zurück zum Flur[/L].";
             else
-                return "Das also war das geheimnisvolle Schlafgemach des Meisters. Nicht gerade eine Liebeshöhle, um willige Studentinnen abzuschleppen. Eher ein Mancave für Fortgeschrittene. Ein riesiges Bett dominierte den Raum, auf dem eine hohe, luftige Matratze lag. In einer Raumecke stand ein Schrank. Durch eine kaputte Tür in der Nordwand gelangte man zurück zum Flur.";
+                return "Das also war das geheimnisvolle Schlafgemach des Meisters. Nicht gerade eine verruchte Liebeshöhle, um willige Studentinnen abzuschleppen. Eher ein Mancave für Fortgeschrittene. [I:I12_Bed]Ein riesiges Bett[/I] dominierte den Raum, auf dem [I:I12_Matress]eine hohe, luftige Matratze[/I] lag. In einer Raumecke stand [I:I12_Wardrobe]ein Schrank[/I]. Durch [I:I12_Door]eine zerbrochene Tür[/I] in der Nordwand gelangte man [L:L06_Long_Floor]zurück zum Flur[/L].";
         }
     }
 
@@ -4055,9 +4462,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ich befand mich in einer überwiegend rustikal eingerichteten Küche. Neben einem rustikalen Küchenschrank gab es eine Anrichte mit einer breiten Schublader darin. Neben dem Küchenschrank befand sich ein großer magischer Kühlschrank mit einem ebensolchen Gefrierfach. Der einzige Ausgang führte westlich zurück auf den Flur.";
+                return "Ich befand mich in einer überwiegend rustikal eingerichteten Küche. Neben [I:I13_Cupboard]einem rustikalen Küchenschrank[/I] gab es eine Anrichte mit [I:I13_Drawer]einer breiten Schublade[/I] darin. Neben dem Küchenschrank befand sich [I:I13_Fridge]ein großer magischer Kühlschrank[/I] mit [I:I13_Freezer]einem ebensolchen Gefrierfach[/I]. Der einzige Ausgang führte durch [I:I13_Door_White]die westliche Tür[/I] zurück [L:L06_Long_Floor]auf den Flur[/L].";
             else
-                return "Ich befand mich in einer überwiegend rustikal eingerichteten Küche. Neben einem rustikalen Küchenschrank gab es eine Anrichte mit einer breiten Schublader darin. Neben dem Küchenschrank befand sich ein großer magischer Kühlschrank mit einem ebensolchen Gefrierfach. Der einzige Ausgang führte westlich zurück auf den Flur.";
+                return "Ich befand mich in einer überwiegend rustikal eingerichteten Küche. Neben [I:I13_Cupboard]einem rustikalen Küchenschrank[/I] gab es eine Anrichte mit [I:I13_Drawer]einer breiten Schublade[/I] darin. Neben dem Küchenschrank befand sich [I:I13_Fridge]ein großer magischer Kühlschrank[/I] mit [I:I13_Freezer]einem ebensolchen Gefrierfach[/I]. Der einzige Ausgang führte durch [I:I13_Door_White]die westliche Tür[/I] zurück [L:L06_Long_Floor]auf den Flur[/L].";
         }
     }
     public static string Adv_L14_Bathroom
@@ -4075,9 +4482,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Das Badezimmer des Meisters fiel feudaler aus als gedacht. Das fing an mit den auffällig gemaserten grauen Kacheln an der Wand. Die große Badewanne enthielt eine Whirlpoolfunction. Über dem Waschbecken hing ein großer, fein gearbeiteter Spiegel. Nur die Toilette nebst Spülung war No-Name-Ware aus dem Baumarkt. In der östlichen Wand befand sich eine Tür zurück zum Flur.";
+                return "Das Badezimmer des Meisters fiel feudaler aus als gedacht. Das fing an mit den auffällig gemaserten [I:I14_Tiles]grauen Kacheln an der Wand[/I]. [I:I14_Bathtub]Die große Badewanne[/I] wies eine Whirlpoolfunction auf. Über dem Waschbecken hing [I:I14_Mirror]ein großer, fein gearbeiteter Spiegel[/I]. Nur [I:I14_Toilet]die Toilette[/I] nebst [I:I14_Flushing]Spülung[/I] war No-Name-Ware aus dem Baumarkt. In der [L:L06_Long_Floor]östlichen Wand[/L] führte [I:I14_Door_Red]eine Tür[/I] zurück [L:L06_Long_Floor]zum Flur[/L].";
             else
-                return "Das Badezimmer des Meisters fiel feudaler aus als gedacht. Das fing an mit den auffällig gemaserten grauen Kacheln an der Wand. Die große Badewanne enthielt eine Whirlpoolfunction. Über dem Waschbecken hing ein großer, fein gearbeiteter Spiegel. Nur die Toilette nebst Spülung war No-Name-Ware aus dem Baumarkt. In der östlichen Wand befand sich eine Tür zurück zum Flur.";
+                return "Das Badezimmer des Meisters fiel feudaler aus als gedacht. Das fing an mit den auffällig gemaserten [I:I14_Tiles]grauen Kacheln an der Wand[/I]. [I:I14_Bathtub]Die große Badewanne[/I] wies eine Whirlpoolfunction auf. Über dem Waschbecken hing [I:I14_Mirror]ein großer, fein gearbeiteter Spiegel[/I]. Nur [I:I14_Toilet]die Toilette[/I] nebst [I:I14_Flushing]Spülung[/I] war No-Name-Ware aus dem Baumarkt. In der [L:L06_Long_Floor]östlichen Wand[/L] führte [I:I14_Door_Red]eine Tür[/I] zurück [L:L06_Long_Floor]zum Flur[/L].";
         }
     }
     public static string Adv_L15_Nowhere
@@ -7389,7 +7796,87 @@ public static partial class loca
                 return "Die Ritterrüstung nahm Anlauf und rannte dann brüllend auf die Tür des meisterlichen Schlafgemachs zu - und krachte schließlich gegen die solide Tür, die prompt aus den Angeln flog. Die Ritterrüstung rappelte sich auf, hängte etwas betreten die Tür wieder ein und kehrte an ihren Platz zurück. \"Ah, das tat gut!\"";
         }
     }
+    public static string Order_InfoMCDialog_Person_Self_11228
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Danke, reicht.";
+            else
+                return "Thank you, enough.";
+        }
+    }
+    public static string Order_SetGenericTipps_Person_Self_11229
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Tipp";
+            else
+                return "clue";
+        }
+    }
+    public static string Order_SetGenericTipps_Person_Self_11230
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Tipp";
+            else
+                return "clue";
+        }
+    }
+    public static string Order_SetGenericTipps_Person_Self_11231
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Hilfe";
+            else
+                return "Help";
+        }
+    }
+    public static string Order_SetGenericTipps_Person_Self_11232
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Hilfe";
+            else
+                return "Help";
+        }
+    }
+    public static string Order_SetGenericTipps_Person_Self_11233
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Lösung";
+            else
+                return "Solution";
+        }
+    }
+    public static string Order_SetGenericTipps_Person_Self_11234
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Lösung";
+            else
+                return "Solution";
+        }
+    }
+    public static string Order_SetGenericTipps_Person_Self_11235
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Kein Tipp";
+            else
+                return "No clue";
+        }
+    }
 }
 
 
- 
+

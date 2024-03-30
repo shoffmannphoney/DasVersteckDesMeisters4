@@ -4589,6 +4589,7 @@ namespace GameCore
                     AdvGame!.StoryOutput(loca.Enlight_Find_Coin );
                     Items.TransferItem(CA!.I00_Coin.ID, CB.LocType_In_Item, CA!.I08_Well.ID);
                     CA!.Status_Coin_Entdeckt.Val = 1;
+                    AdvGame.SetScoreToken(CA!.Score_Muenze_Gefunden);
 
                 }
                 success = true;

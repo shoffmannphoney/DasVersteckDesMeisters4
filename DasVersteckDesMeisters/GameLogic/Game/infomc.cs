@@ -145,7 +145,7 @@ namespace GameCore
                 mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Klaue_noch_niemand_belebt, ix, ChoiceIx(ix), true, false));
                 SetGenericTipps(mcM, loca.Info_Klaue_noch_niemand_belebt_0, CA!.Score_Erste_Belebung!, ix);
 
-                mcM.AddEntry(null, loca.IInfo_Klaue_noch_niemand_belebt_1, ChoiceIx(ix) + 10, ChoiceIx(ix), true);
+                mcM.AddEntry(null, loca.Info_Klaue_noch_niemand_belebt_1, ChoiceIx(ix) + 10, ChoiceIx(ix), true);
                 mcM.Last()!.SetDel(ErsteBelebung25);
 
                 mcM.AddEntry(null, loca.Info_Klaue_noch_niemand_belebt_2, ChoiceIx(ix) + 20, ChoiceIx(ix), true);
@@ -158,8 +158,17 @@ namespace GameCore
             {
                 ix = CalcIx(CA!.imc_Klaue_noch_niemand_gesprochen);
                 cFollower.Add(ix);
-                mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Klaue_noch_niemand_gesprochen, ix, CB!.MCE_Choice1, true, true));
-                ix += 10;
+                mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Klaue_noch_niemand_gesprochen, ix, ChoiceIx(ix), true, false));
+                SetGenericTipps(mcM, loca.Info_Klaue_noch_niemand_gesprochen_0, CA.Score_Erstes_Gespraech!, ix);
+
+                mcM.AddEntry(null, loca.Info_Klaue_noch_niemand_gesprochen_1, ChoiceIx(ix) + 10, ChoiceIx(ix), true);
+                mcM.Last()!.SetDel(ErstesGespraech25);
+
+                mcM.AddEntry(null, loca.Info_Klaue_noch_niemand_gesprochen_2, ChoiceIx(ix) + 20, ChoiceIx(ix), true);
+                mcM.Last()!.SetDel(ErstesGespraech50);
+
+                mcM.AddEntry(null, loca.Info_Klaue_noch_niemand_gesprochen_3, ChoiceIx(ix) + 30, ChoiceIx(ix), true);
+                mcM.Last()!.SetDel(ErstesGespraech75);
             }
 
             ix = CalcIx(CA!.imc_Uhu_Fragen );
@@ -169,17 +178,56 @@ namespace GameCore
                 mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Uhu_Fragen, ix, CB!.MCE_Choice1, true, true));
                 ix += 10;
 
-                ix = CalcIx(CA!.imc_Uhu_Fragen_Unterwaesche );
-                cFollower.Add(ix);
-                mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Uhu_Fragen_Unterwaesche, ix, CB!.MCE_Choice1, true, true));
+                if( CA.Status_Antwort_Unterwaesche.Val == 0)
+                {
+                    ix = CalcIx(CA!.imc_Uhu_Fragen_Unterwaesche );
+                    cFollower.Add(ix);
+                    mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Uhu_Fragen_Unterwaesche, ix, ChoiceIx(ix), true, false));
+                    SetGenericTipps(mcM, loca.Info_Uhu_Fragen_Unterwaesche_0, CA.Score_Antwort_Unterwaesche, ix);
 
-                ix = CalcIx(CA!.imc_Uhu_Fragen_Ruestung);
-                cFollower.Add(ix);
-                mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Uhu_Fragen_Ruestung, ix, CB!.MCE_Choice1, true, true));
+                    mcM.AddEntry(null, loca.Info_Uhu_Fragen_Unterwaesche_1, ChoiceIx(ix) + 10, ChoiceIx(ix), true);
+                    mcM.Last()!.SetDel(AntwortUnterwaesche25);
 
-                ix = CalcIx(CA!.imc_Uhu_Fragen_Tier);
-                cFollower.Add(ix);
-                mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Uhu_Fragen_Tier, ix, CB!.MCE_Choice1, true, true));
+                    mcM.AddEntry(null, loca.Info_Uhu_Fragen_Unterwaesche_2, ChoiceIx(ix) + 20, ChoiceIx(ix), true);
+                    mcM.Last()!.SetDel(AntwortUnterwaesche50);
+
+                    mcM.AddEntry(null, loca.Info_Uhu_Fragen_Unterwaesche_3, ChoiceIx(ix) + 30, ChoiceIx(ix), true);
+                    mcM.Last()!.SetDel(AntwortUnterwaesche75);
+                }
+
+                if ( CA.Status_Antwort_Ruestung.Val == 0)
+                {
+                    ix = CalcIx(CA!.imc_Uhu_Fragen_Ruestung);
+                    cFollower.Add(ix);
+                    mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Uhu_Fragen_Ruestung, ix, ChoiceIx(ix), true, false));
+                    SetGenericTipps(mcM, loca.Info_Uhu_Fragen_Ruestung_0, CA.Score_Antwort_Ruestung, ix);
+
+                    mcM.AddEntry(null, loca.Info_Uhu_Fragen_Ruestung_1, ChoiceIx(ix) + 10, ChoiceIx(ix), true);
+                    mcM.Last()!.SetDel(AntwortRuestung25);
+
+                    mcM.AddEntry(null, loca.Info_Uhu_Fragen_Ruestung_2, ChoiceIx(ix) + 20, ChoiceIx(ix), true);
+                    mcM.Last()!.SetDel(AntwortRuestung50);
+
+                    mcM.AddEntry(null, loca.Info_Uhu_Fragen_Ruestung_3, ChoiceIx(ix) + 30, ChoiceIx(ix), true);
+                    mcM.Last()!.SetDel(AntwortRuestung75);
+                }
+
+                if (CA.Status_Antwort_Lieblingstier.Val == 0)
+                {
+                    ix = CalcIx(CA!.imc_Uhu_Fragen_Tier);
+                    cFollower.Add(ix);
+                    mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Uhu_Fragen_Tier, ix, ChoiceIx(ix), true, false));
+                    SetGenericTipps(mcM, loca.Info_Uhu_Fragen_Tier_0, CA.Score_Antwort_Tier, ix);
+
+                    mcM.AddEntry(null, loca.Info_Uhu_Fragen_Tier_1, ChoiceIx(ix) + 10, ChoiceIx(ix), true);
+                    mcM.Last()!.SetDel(AntwortTier25);
+
+                    mcM.AddEntry(null, loca.Info_Uhu_Fragen_Tier_2, ChoiceIx(ix) + 20, ChoiceIx(ix), true);
+                    mcM.Last()!.SetDel(AntwortTier50);
+
+                    mcM.AddEntry(null, loca.Info_Uhu_Fragen_Tier_3, ChoiceIx(ix) + 30, ChoiceIx(ix), true);
+                    mcM.Last()!.SetDel(AntwortTier75);
+                }
             }
 
             ix = CalcIx(CA!.imc_Neues_Pulver_Wie );
@@ -192,25 +240,65 @@ namespace GameCore
                 {
                     ix = CalcIx(CA!.imc_Kaese_Not_Found);
                     cFollower.Add(ix);
-                    mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Kaese_Not_Found, ix, CB!.MCE_Choice1, true, true));
+                    mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Kaese_Not_Found, ix, ChoiceIx(ix), true, false));
+                    SetGenericTipps(mcM, loca.Info_Kaese_Not_Found_0, CA.Score_Kaese, ix);
+
+                    mcM.AddEntry(null, loca.Info_Kaese_Not_Found_1, ChoiceIx(ix) + 10, ChoiceIx(ix), true);
+                    mcM.Last()!.SetDel(Kaese25);
+
+                    mcM.AddEntry(null, loca.Info_Kaese_Not_Found_2, ChoiceIx(ix) + 20, ChoiceIx(ix), true);
+                    mcM.Last()!.SetDel(Kaese50);
+
+                    mcM.AddEntry(null, loca.Info_Kaese_Not_Found_3, ChoiceIx(ix) + 30, ChoiceIx(ix), true);
+                    mcM.Last()!.SetDel(Kaese75);
                 }
                 else if (CA.I00_Polished_Stone.locationID == CA.I00_Nullbehaelter.ID)
                 {
                     ix = CalcIx(CA!.imc_Kaese_Wozu);
                     cFollower.Add(ix);
-                    mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Kaese_Wozu, ix, CB!.MCE_Choice1, true, true));
+                    mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Kaese_Wozu, ix, ChoiceIx(ix), true, false));
+                    SetGenericTipps(mcM, loca.Info_Kaese_Wozu_0, CA.Score_Polierter_Stein, ix);
+
+                    mcM.AddEntry(null, loca.Info_Kaese_Wozu_1, ChoiceIx(ix) + 10, ChoiceIx(ix), true);
+                    mcM.Last()!.SetDel(PolierterStein25);
+
+                    mcM.AddEntry(null, loca.Info_Kaese_Wozu_2, ChoiceIx(ix) + 20, ChoiceIx(ix), true);
+                    mcM.Last()!.SetDel(PolierterStein50);
+
+                    mcM.AddEntry(null, loca.Info_Kaese_Wozu_3, ChoiceIx(ix) + 30, ChoiceIx(ix), true);
+                    mcM.Last()!.SetDel(PolierterStein75);
                 }
                 else if (CA.I00_Lightless_Stone.locationID == CA.I00_Nullbehaelter.ID)
                 {
                     ix = CalcIx(CA!.imc_Kiesel_Wozu );
                     cFollower.Add(ix);
-                    mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Kiesel_Wozu, ix, CB!.MCE_Choice1, true, true));
+                    mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Kiesel_Wozu, ix, ChoiceIx(ix), true, false));
+                    SetGenericTipps(mcM, loca.Info_Kiesel_Wozu_0, CA.Score_Lichtloser_Stein, ix);
+
+                    mcM.AddEntry(null, loca.Info_Kiesel_Wozu_1, ChoiceIx(ix) + 10, ChoiceIx(ix), true);
+                    mcM.Last()!.SetDel(LichtloserStein25);
+
+                    mcM.AddEntry(null, loca.Info_Kiesel_Wozu_2, ChoiceIx(ix) + 20, ChoiceIx(ix), true);
+                    mcM.Last()!.SetDel(LichtloserStein50);
+
+                    mcM.AddEntry(null, loca.Info_Kiesel_Wozu_3, ChoiceIx(ix) + 30, ChoiceIx(ix), true);
+                    mcM.Last()!.SetDel(LichtloserStein75);
                 }
                 else if (CA.I00_Moonstone.locationID == CA.I00_Nullbehaelter.ID)
                 {
                     ix = CalcIx(CA!.imc_Lichtloser_Stein_Wozu );
                     cFollower.Add(ix);
-                    mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Lichtloser_Stein_Wozu, ix, CB!.MCE_Choice1, true, true));
+                    mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Lichtloser_Stein_Wozu, ix, ChoiceIx(ix), true, false));
+                    SetGenericTipps(mcM, loca.Info_Lichtloser_Stein_Wozu_0, CA.Score_Mondstein, ix);
+
+                    mcM.AddEntry(null, loca.Info_Lichtloser_Stein_Wozu_1, ChoiceIx(ix) + 10, ChoiceIx(ix), true);
+                    mcM.Last()!.SetDel(Mondstein25);
+
+                    mcM.AddEntry(null, loca.Info_Lichtloser_Stein_Wozu_2, ChoiceIx(ix) + 20, ChoiceIx(ix), true);
+                    mcM.Last()!.SetDel(Mondstein50);
+
+                    mcM.AddEntry(null, loca.Info_Lichtloser_Stein_Wozu_3, ChoiceIx(ix) + 30, ChoiceIx(ix), true);
+                    mcM.Last()!.SetDel(Mondstein75);
                 }
 
 
@@ -218,33 +306,83 @@ namespace GameCore
                 {
                     ix = CalcIx(CA.imc_Goldmuenze_Woher);
                     cFollower.Add(ix);
-                    mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Goldmuenze_Woher, ix, CB!.MCE_Choice1, true, true));
+                    mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Goldmuenze_Woher, ix, ChoiceIx(ix), true, false));
+                    SetGenericTipps(mcM, loca.Info_Goldmuenze_Woher_0, CA.Score_Muenze_Gefunden, ix);
+
+                    mcM.AddEntry(null, loca.Info_Goldmuenze_Woher_1, ChoiceIx(ix) + 10, ChoiceIx(ix), true);
+                    mcM.Last()!.SetDel(MuenzeGefunden25);
+
+                    mcM.AddEntry(null, loca.Info_Goldmuenze_Woher_2, ChoiceIx(ix) + 20, ChoiceIx(ix), true);
+                    mcM.Last()!.SetDel(MuenzeGefunden50);
+
+                    mcM.AddEntry(null, loca.Info_Goldmuenze_Woher_3, ChoiceIx(ix) + 30, ChoiceIx(ix), true);
+                    mcM.Last()!.SetDel(MuenzeGefunden75);
                 }
                 else if (CA.I00_Coin.locationID == CA.I08_Water.ID)
                 {
                     ix = CalcIx(CA.imc_Goldmuenze_Woher2);
                     cFollower.Add(ix);
-                    mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Goldmuenze_Woher2, ix, CB!.MCE_Choice1, true, true));
+                    mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Goldmuenze_Woher2, ix, ChoiceIx(ix), true, false));
+                    SetGenericTipps(mcM, loca.Info_Goldmuenze_Woher2_0, CA.Score_Muenze, ix);
+
+                    mcM.AddEntry(null, loca.Info_Goldmuenze_Woher2_1, ChoiceIx(ix) + 10, ChoiceIx(ix), true);
+                    mcM.Last()!.SetDel(Muenze25);
+
+                    mcM.AddEntry(null, loca.Info_Goldmuenze_Woher2_2, ChoiceIx(ix) + 20, ChoiceIx(ix), true);
+                    mcM.Last()!.SetDel(Muenze50);
+
+                    mcM.AddEntry(null, loca.Info_Goldmuenze_Woher2_3, ChoiceIx(ix) + 30, ChoiceIx(ix), true);
+                    mcM.Last()!.SetDel(Muenze75);
                 }
 
                 if (CA.I00_Wonder_Wart_Sponge.locationID == CA.I00_Nullbehaelter.ID )
                 {
                     ix = CalcIx(CA.imc_Schwamm_Woher);
                     cFollower.Add(ix);
-                    mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Schwamm_Woher, ix, CB!.MCE_Choice1, true, true));
+                    mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Schwamm_Woher, ix, ChoiceIx(ix), true, false));
+                    SetGenericTipps(mcM, loca.Info_Schwamm_Woher_0, CA.Score_Schwamm, ix);
+
+                    mcM.AddEntry(null, loca.Info_Schwamm_Woher_1, ChoiceIx(ix) + 10, ChoiceIx(ix), true);
+                    mcM.Last()!.SetDel(Schwamm25);
+
+                    mcM.AddEntry(null, loca.Info_Schwamm_Woher_2, ChoiceIx(ix) + 20, ChoiceIx(ix), true);
+                    mcM.Last()!.SetDel(Schwamm50);
+
+                    mcM.AddEntry(null, loca.Info_Schwamm_Woher_3, ChoiceIx(ix) + 30, ChoiceIx(ix), true);
+                    mcM.Last()!.SetDel(Schwamm75);
                 }
             }
             if ( Items.IsItemInv( CA.I00_Moonstone ) && Items.IsItemInv( CA.I00_Wonder_Wart_Sponge ) && Items.IsItemInv( CA.I00_Coin ) )
             {
                 ix = CalcIx(CA.imc_Alle_Zutaten_da);
                 cFollower.Add(ix);
-                mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Alle_Zutaten_da, ix, CB!.MCE_Choice1, true, true));
+                mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Alle_Zutaten_da, ix, ChoiceIx(ix), true, false));
+                SetGenericTipps(mcM, loca.Info_Alle_Zutaten_da_0, CA.Score_Schlacke, ix);
+
+                mcM.AddEntry(null, loca.Info_Alle_Zutaten_da_1, ChoiceIx(ix) + 10, ChoiceIx(ix), true);
+                mcM.Last()!.SetDel(Schlacke25);
+
+                mcM.AddEntry(null, loca.Info_Alle_Zutaten_da_2, ChoiceIx(ix) + 20, ChoiceIx(ix), true);
+                mcM.Last()!.SetDel(Schlacke50);
+
+                mcM.AddEntry(null, loca.Info_Alle_Zutaten_da_3, ChoiceIx(ix) + 30, ChoiceIx(ix), true);
+                mcM.Last()!.SetDel(Schlacke75);
             }
             if ( CA.I00_Slag.locationID != CA.I00_Nullbehaelter.ID && CA.I00_Slag.locationID != CA.I00_Nullbehaelter2.ID)
             {
                 ix = CalcIx(CA.imc_Schlacke_Wozu);
                 cFollower.Add(ix);
-                mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Schlacke_Wozu, ix, CB!.MCE_Choice1, true, true));
+                mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Schlacke_Wozu, ix, ChoiceIx(ix), true, false));
+                SetGenericTipps(mcM, loca.Info_Schlacke_Wozu_0, CA.Score_Meues_Pulver, ix);
+
+                mcM.AddEntry(null, loca.Info_Schlacke_Wozu_1, ChoiceIx(ix) + 10, ChoiceIx(ix), true);
+                mcM.Last()!.SetDel(NeuesPulver25);
+
+                mcM.AddEntry(null, loca.Info_Schlacke_Wozu_2, ChoiceIx(ix) + 20, ChoiceIx(ix), true);
+                mcM.Last()!.SetDel(NeuesPulver50);
+
+                mcM.AddEntry(null, loca.Info_Schlacke_Wozu_3, ChoiceIx(ix) + 30, ChoiceIx(ix), true);
+                mcM.Last()!.SetDel(NeuesPulver75);
             }
             if (CA.I00_Supermagic_Powder.locationID != CA.I00_Nullbehaelter.ID )
             {
@@ -295,6 +433,390 @@ namespace GameCore
         public bool SucheVersteck75(List<MCMenuEntry> MCMEntry)
         {
             CA!.Score_Transfer1!.IncSpoilerState(spoiler.solution);
+            CalcGenericTipps(AdvGame!.UIS!.MCM!);
+
+
+            return true;
+        }
+        public bool Klauenzange1_25(List<MCMenuEntry> MCMEntry)
+        {
+            CA!.Score_Klauenzange1!.IncSpoilerState(spoiler.tipp);
+
+            CalcGenericTipps(AdvGame!.UIS!.MCM!);
+            return true;
+        }
+
+        public bool Klauenzange1_50(List<MCMenuEntry> MCMEntry)
+        {
+            CA!.Score_Klauenzange1!.IncSpoilerState(spoiler.spoiler);
+
+            CalcGenericTipps(AdvGame!.UIS!.MCM!);
+            return true;
+        }
+
+        public bool Klauenzange1_75(List<MCMenuEntry> MCMEntry)
+        {
+            CA!.Score_Klauenzange1!.IncSpoilerState(spoiler.solution);
+            CalcGenericTipps(AdvGame!.UIS!.MCM!);
+
+
+            return true;
+        }
+        public bool Klauenzange2_25(List<MCMenuEntry> MCMEntry)
+        {
+            CA!.Score_Klauenzange2!.IncSpoilerState(spoiler.tipp);
+
+            CalcGenericTipps(AdvGame!.UIS!.MCM!);
+            return true;
+        }
+
+        public bool Klauenzange2_50(List<MCMenuEntry> MCMEntry)
+        {
+            CA!.Score_Klauenzange2!.IncSpoilerState(spoiler.spoiler);
+
+            CalcGenericTipps(AdvGame!.UIS!.MCM!);
+            return true;
+        }
+
+        public bool Klauenzange2_75(List<MCMenuEntry> MCMEntry)
+        {
+            CA!.Score_Klauenzange2!.IncSpoilerState(spoiler.solution);
+            CalcGenericTipps(AdvGame!.UIS!.MCM!);
+
+
+            return true;
+        }
+        public bool ErsteBelebung25(List<MCMenuEntry> MCMEntry)
+        {
+            CA!.Score_Erste_Belebung!.IncSpoilerState(spoiler.tipp);
+
+            CalcGenericTipps(AdvGame!.UIS!.MCM!);
+            return true;
+        }
+
+        public bool ErsteBelebung50(List<MCMenuEntry> MCMEntry)
+        {
+            CA!.Score_Erste_Belebung!.IncSpoilerState(spoiler.spoiler);
+
+            CalcGenericTipps(AdvGame!.UIS!.MCM!);
+            return true;
+        }
+
+        public bool ErsteBelebung75(List<MCMenuEntry> MCMEntry)
+        {
+            CA!.Score_Erste_Belebung!.IncSpoilerState(spoiler.solution);
+            CalcGenericTipps(AdvGame!.UIS!.MCM!);
+
+
+            return true;
+        }
+        public bool ErstesGespraech25(List<MCMenuEntry> MCMEntry)
+        {
+            CA!.Score_Erstes_Gespraech!.IncSpoilerState(spoiler.tipp);
+
+            CalcGenericTipps(AdvGame!.UIS!.MCM!);
+            return true;
+        }
+
+        public bool ErstesGespraech50(List<MCMenuEntry> MCMEntry)
+        {
+            CA!.Score_Erstes_Gespraech!.IncSpoilerState(spoiler.spoiler);
+
+            CalcGenericTipps(AdvGame!.UIS!.MCM!);
+            return true;
+        }
+
+        public bool ErstesGespraech75(List<MCMenuEntry> MCMEntry)
+        {
+            CA!.Score_Erstes_Gespraech!.IncSpoilerState(spoiler.solution);
+            CalcGenericTipps(AdvGame!.UIS!.MCM!);
+
+
+            return true;
+        }
+        public bool AntwortUnterwaesche25(List<MCMenuEntry> MCMEntry)
+        {
+            CA!.Score_Antwort_Unterwaesche!.IncSpoilerState(spoiler.tipp);
+
+            CalcGenericTipps(AdvGame!.UIS!.MCM!);
+            return true;
+        }
+
+        public bool AntwortUnterwaesche50(List<MCMenuEntry> MCMEntry)
+        {
+            CA!.Score_Antwort_Unterwaesche!.IncSpoilerState(spoiler.spoiler);
+
+            CalcGenericTipps(AdvGame!.UIS!.MCM!);
+            return true;
+        }
+
+        public bool AntwortUnterwaesche75(List<MCMenuEntry> MCMEntry)
+        {
+            CA!.Score_Antwort_Unterwaesche!.IncSpoilerState(spoiler.solution);
+            CalcGenericTipps(AdvGame!.UIS!.MCM!);
+
+
+            return true;
+        }
+        public bool AntwortRuestung25(List<MCMenuEntry> MCMEntry)
+        {
+            CA!.Score_Antwort_Ruestung!.IncSpoilerState(spoiler.tipp);
+
+            CalcGenericTipps(AdvGame!.UIS!.MCM!);
+            return true;
+        }
+
+        public bool AntwortRuestung50(List<MCMenuEntry> MCMEntry)
+        {
+            CA!.Score_Antwort_Ruestung!.IncSpoilerState(spoiler.spoiler);
+
+            CalcGenericTipps(AdvGame!.UIS!.MCM!);
+            return true;
+        }
+
+        public bool AntwortRuestung75(List<MCMenuEntry> MCMEntry)
+        {
+            CA!.Score_Antwort_Ruestung!.IncSpoilerState(spoiler.solution);
+            CalcGenericTipps(AdvGame!.UIS!.MCM!);
+
+
+            return true;
+        }
+        public bool AntwortTier25(List<MCMenuEntry> MCMEntry)
+        {
+            CA!.Score_Antwort_Tier!.IncSpoilerState(spoiler.tipp);
+
+            CalcGenericTipps(AdvGame!.UIS!.MCM!);
+            return true;
+        }
+
+        public bool AntwortTier50(List<MCMenuEntry> MCMEntry)
+        {
+            CA!.Score_Antwort_Tier!.IncSpoilerState(spoiler.spoiler);
+
+            CalcGenericTipps(AdvGame!.UIS!.MCM!);
+            return true;
+        }
+
+        public bool AntwortTier75(List<MCMenuEntry> MCMEntry)
+        {
+            CA!.Score_Antwort_Tier!.IncSpoilerState(spoiler.solution);
+            CalcGenericTipps(AdvGame!.UIS!.MCM!);
+
+
+            return true;
+        }
+        public bool Kaese25(List<MCMenuEntry> MCMEntry)
+        {
+            CA!.Score_Kaese!.IncSpoilerState(spoiler.tipp);
+
+            CalcGenericTipps(AdvGame!.UIS!.MCM!);
+            return true;
+        }
+
+        public bool Kaese50(List<MCMenuEntry> MCMEntry)
+        {
+            CA!.Score_Kaese!.IncSpoilerState(spoiler.spoiler);
+
+            CalcGenericTipps(AdvGame!.UIS!.MCM!);
+            return true;
+        }
+
+        public bool Kaese75(List<MCMenuEntry> MCMEntry)
+        {
+            CA!.Score_Kaese!.IncSpoilerState(spoiler.solution);
+            CalcGenericTipps(AdvGame!.UIS!.MCM!);
+
+
+            return true;
+        }
+        public bool PolierterStein25(List<MCMenuEntry> MCMEntry)
+        {
+            CA!.Score_Polierter_Stein!.IncSpoilerState(spoiler.tipp);
+
+            CalcGenericTipps(AdvGame!.UIS!.MCM!);
+            return true;
+        }
+
+        public bool PolierterStein50(List<MCMenuEntry> MCMEntry)
+        {
+            CA!.Score_Polierter_Stein!.IncSpoilerState(spoiler.spoiler);
+
+            CalcGenericTipps(AdvGame!.UIS!.MCM!);
+            return true;
+        }
+
+        public bool PolierterStein75(List<MCMenuEntry> MCMEntry)
+        {
+            CA!.Score_Polierter_Stein!.IncSpoilerState(spoiler.solution);
+            CalcGenericTipps(AdvGame!.UIS!.MCM!);
+
+
+            return true;
+        }
+        public bool LichtloserStein25(List<MCMenuEntry> MCMEntry)
+        {
+            CA!.Score_Lichtloser_Stein!.IncSpoilerState(spoiler.tipp);
+
+            CalcGenericTipps(AdvGame!.UIS!.MCM!);
+            return true;
+        }
+
+        public bool LichtloserStein50(List<MCMenuEntry> MCMEntry)
+        {
+            CA!.Score_Lichtloser_Stein!.IncSpoilerState(spoiler.spoiler);
+
+            CalcGenericTipps(AdvGame!.UIS!.MCM!);
+            return true;
+        }
+
+        public bool LichtloserStein75(List<MCMenuEntry> MCMEntry)
+        {
+            CA!.Score_Lichtloser_Stein!.IncSpoilerState(spoiler.solution);
+            CalcGenericTipps(AdvGame!.UIS!.MCM!);
+
+
+            return true;
+        }
+        public bool Mondstein25(List<MCMenuEntry> MCMEntry)
+        {
+            CA!.Score_Mondstein!.IncSpoilerState(spoiler.tipp);
+
+            CalcGenericTipps(AdvGame!.UIS!.MCM!);
+            return true;
+        }
+
+        public bool Mondstein50(List<MCMenuEntry> MCMEntry)
+        {
+            CA!.Score_Mondstein!.IncSpoilerState(spoiler.spoiler);
+
+            CalcGenericTipps(AdvGame!.UIS!.MCM!);
+            return true;
+        }
+
+        public bool Mondstein75(List<MCMenuEntry> MCMEntry)
+        {
+            CA!.Score_Mondstein!.IncSpoilerState(spoiler.solution);
+            CalcGenericTipps(AdvGame!.UIS!.MCM!);
+
+
+            return true;
+        }
+        public bool MuenzeGefunden25(List<MCMenuEntry> MCMEntry)
+        {
+            CA!.Score_Muenze_Gefunden!.IncSpoilerState(spoiler.tipp);
+
+            CalcGenericTipps(AdvGame!.UIS!.MCM!);
+            return true;
+        }
+
+        public bool MuenzeGefunden50(List<MCMenuEntry> MCMEntry)
+        {
+            CA!.Score_Muenze_Gefunden!.IncSpoilerState(spoiler.spoiler);
+
+            CalcGenericTipps(AdvGame!.UIS!.MCM!);
+            return true;
+        }
+
+        public bool MuenzeGefunden75(List<MCMenuEntry> MCMEntry)
+        {
+            CA!.Score_Muenze_Gefunden!.IncSpoilerState(spoiler.solution);
+            CalcGenericTipps(AdvGame!.UIS!.MCM!);
+
+
+            return true;
+        }
+        public bool Muenze25(List<MCMenuEntry> MCMEntry)
+        {
+            CA!.Score_Muenze!.IncSpoilerState(spoiler.tipp);
+
+            CalcGenericTipps(AdvGame!.UIS!.MCM!);
+            return true;
+        }
+
+        public bool Muenze50(List<MCMenuEntry> MCMEntry)
+        {
+            CA!.Score_Muenze!.IncSpoilerState(spoiler.spoiler);
+
+            CalcGenericTipps(AdvGame!.UIS!.MCM!);
+            return true;
+        }
+
+        public bool Muenze75(List<MCMenuEntry> MCMEntry)
+        {
+            CA!.Score_Muenze!.IncSpoilerState(spoiler.solution);
+            CalcGenericTipps(AdvGame!.UIS!.MCM!);
+
+
+            return true;
+        }
+        public bool Schwamm25(List<MCMenuEntry> MCMEntry)
+        {
+            CA!.Score_Schwamm!.IncSpoilerState(spoiler.tipp);
+
+            CalcGenericTipps(AdvGame!.UIS!.MCM!);
+            return true;
+        }
+
+        public bool Schwamm50(List<MCMenuEntry> MCMEntry)
+        {
+            CA!.Score_Schwamm!.IncSpoilerState(spoiler.spoiler);
+
+            CalcGenericTipps(AdvGame!.UIS!.MCM!);
+            return true;
+        }
+
+        public bool Schwamm75(List<MCMenuEntry> MCMEntry)
+        {
+            CA!.Score_Schwamm!.IncSpoilerState(spoiler.solution);
+            CalcGenericTipps(AdvGame!.UIS!.MCM!);
+
+
+            return true;
+        }
+        public bool Schlacke25(List<MCMenuEntry> MCMEntry)
+        {
+            CA!.Score_Schlacke!.IncSpoilerState(spoiler.tipp);
+
+            CalcGenericTipps(AdvGame!.UIS!.MCM!);
+            return true;
+        }
+
+        public bool Schlacke50(List<MCMenuEntry> MCMEntry)
+        {
+            CA!.Score_Schlacke!.IncSpoilerState(spoiler.spoiler);
+
+            CalcGenericTipps(AdvGame!.UIS!.MCM!);
+            return true;
+        }
+
+        public bool Schlacke75(List<MCMenuEntry> MCMEntry)
+        {
+            CA!.Score_Schlacke!.IncSpoilerState(spoiler.solution);
+            CalcGenericTipps(AdvGame!.UIS!.MCM!);
+
+
+            return true;
+        }
+        public bool NeuesPulver25(List<MCMenuEntry> MCMEntry)
+        {
+            CA!.Score_Meues_Pulver!.IncSpoilerState(spoiler.tipp);
+
+            CalcGenericTipps(AdvGame!.UIS!.MCM!);
+            return true;
+        }
+
+        public bool NeuesPulver50(List<MCMenuEntry> MCMEntry)
+        {
+            CA!.Score_Meues_Pulver!.IncSpoilerState(spoiler.spoiler);
+
+            CalcGenericTipps(AdvGame!.UIS!.MCM!);
+            return true;
+        }
+
+        public bool NeuesPulver75(List<MCMenuEntry> MCMEntry)
+        {
+            CA!.Score_Meues_Pulver!.IncSpoilerState(spoiler.solution);
             CalcGenericTipps(AdvGame!.UIS!.MCM!);
 
 

@@ -3037,7 +3037,7 @@ public partial class GamePage : ContentPage, IMenuExtension
 
         tv1 = AddTreeViewItem(tv, loca.MAUI_UI_Menu_Movement, null);
         tv1.CurrentTreeState = TreeViewItem.TreeState.open;
-        AddTreeViewItem(tv1, loca.MAUI_UI_Menu_Go, loca.MAUI_UI_Menu_Order_Go);
+        // AddTreeViewItem(tv1, loca.MAUI_UI_Menu_Go, loca.MAUI_UI_Menu_Order_Go);
         if (l!.LocExit[1] > 0)
             AddTreeViewItem(tv1, loca.MAUI_UI_Menu_GoN, loca.MAUI_UI_Menu_Order_GoN);
         if (l!.LocExit[2] > 0)
@@ -3148,8 +3148,8 @@ public partial class GamePage : ContentPage, IMenuExtension
             tv1 = AddTreeViewItemEmpty(tv);
             tv1.ID = loca.MAUI_UI_Menu_Movement.GetHashCode();
 
-            tv2 = AddTreeViewItemEmpty(tv1);
-            tv2.ID = loca.MAUI_UI_Menu_Go.GetHashCode();
+            // tv2 = AddTreeViewItemEmpty(tv1);
+            // tv2.ID = loca.MAUI_UI_Menu_Go.GetHashCode();
             if (l!.LocExit[1] > 0)
             {
                 tv2 = AddTreeViewItemEmpty(tv1);

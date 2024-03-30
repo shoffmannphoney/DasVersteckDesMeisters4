@@ -555,7 +555,7 @@ public class LayoutDescription : ILayoutDescription
         ClickMargin = ILayoutDescription.eClickMargin.very_high;
 #endif
 
-        ParagraphClusterMode = ILayoutDescription.ParagraphClusters.latest;
+        ParagraphClusterMode = ILayoutDescription.ParagraphClusters.none;
     }
 }
 
@@ -1907,10 +1907,10 @@ public class Version
 
     public Version()
     {
-        this.Version1 = 0;
-        this.Version2 = 14;
-        this.Version3 = 1;
-        this.VersionDate = new DateTime(2024, 03, 02);
+        this.Version1 = 1;
+        this.Version2 = 0;
+        this.Version3 = 0;
+        this.VersionDate = new DateTime(2024, 04, 01);
     }
 
     public int Version1
