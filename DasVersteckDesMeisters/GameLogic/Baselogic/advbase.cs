@@ -338,6 +338,14 @@ namespace GameCore
         public int Cat_Undressable = 115;
 
         public int Cat_Followable = 116;
+        public int Cat_Illuminated = 117;
+        public int Cat_Grabintoable= 118;
+
+        public int Cat_TakeWith = 119;
+        public int Cat_Wraparoundable = 120;
+        public int Cat_Touchwithable = 121;
+        public int Cat_Readwithable = 122;
+        public int Cat_Heatable = 123;
 
         public int CounterCat_Fill = 1001;
 
@@ -425,6 +433,12 @@ namespace GameCore
 
         public int CounterCat_ShowTarget = 1046;
 
+        public int CounterCat_TakeWith_Tool = 1047;
+
+        public int CounterCat_Wraparound_Tool = 1048;
+        public int CounterCat_TouchWith_Tool = 1049;
+        public int CounterCat_Read_Tool = 1050;
+        public int CounterCat_Heater = 1051;
 
         public bool Finish = false;
 
@@ -2390,6 +2404,7 @@ namespace GameCore
             VerbTenses.Add(VTList.VerbTensesLoca(CB!.VT_druecken, "AdvBase_InitializeGame_14733", "AdvBase_InitializeGame_14734", "AdvBase_InitializeGame_14735", "AdvBase_InitializeGame_14736", "AdvBase_InitializeGame_14737", "AdvBase_InitializeGame_14738", "AdvBase_InitializeGame_14739", "AdvBase_InitializeGame_14740", "AdvBase_InitializeGame_14741", "AdvBase_InitializeGame_14742", "AdvBase_InitializeGame_14743", "AdvBase_InitializeGame_14744", "AdvBase_InitializeGame_14745"));
             VerbTenses.Add(VTList.VerbTensesLoca(CB!.VT_fallen, "AdvBase_InitializeGame_14746", "AdvBase_InitializeGame_14747", "AdvBase_InitializeGame_14748", "AdvBase_InitializeGame_14749", "AdvBase_InitializeGame_14750", "AdvBase_InitializeGame_14751", "AdvBase_InitializeGame_14752", "AdvBase_InitializeGame_14753", "AdvBase_InitializeGame_14754", "AdvBase_InitializeGame_14755", "AdvBase_InitializeGame_14756", "AdvBase_InitializeGame_14757", "AdvBase_InitializeGame_14758"));
             VerbTenses.Add(VTList.VerbTensesLoca(CB!.VT_sagen, "AdvBase_InitializeGame_14759", "AdvBase_InitializeGame_14760", "AdvBase_InitializeGame_14761", "AdvBase_InitializeGame_14762", "AdvBase_InitializeGame_14763", "AdvBase_InitializeGame_14764", "AdvBase_InitializeGame_14765", "AdvBase_InitializeGame_14766", "AdvBase_InitializeGame_14767", "AdvBase_InitializeGame_14768", "AdvBase_InitializeGame_14769", "AdvBase_InitializeGame_14770", "AdvBase_InitializeGame_14771"));
+            VerbTenses.Add(VTList.VerbTensesLoca(CB!.VT_blubbern, "Blubbern1", "Blubbern2", "Blubbern3", "Blubbern4", "Blubbern5", "Blubbern6", "Blubbern7", "Blubbern8", "Blubbern9", "Blubbern10", "Blubbern11", "Blubbern12", "Blubbern13"));
             VerbTenses.Add(VTList.VerbTensesLoca(CB!.VT_fragen, "AdvBase_InitializeGame_14772", "AdvBase_InitializeGame_14773", "AdvBase_InitializeGame_14774", "AdvBase_InitializeGame_14775", "AdvBase_InitializeGame_14776", "AdvBase_InitializeGame_14777", "AdvBase_InitializeGame_14778", "AdvBase_InitializeGame_14779", "AdvBase_InitializeGame_14780", "AdvBase_InitializeGame_14781", "AdvBase_InitializeGame_14782", "AdvBase_InitializeGame_14783", "AdvBase_InitializeGame_14784"));
             VerbTenses.Add(VTList.VerbTensesLoca(CB!.VT_lesen, "AdvBase_InitializeGame_14785", "AdvBase_InitializeGame_14786", "AdvBase_InitializeGame_14787", "AdvBase_InitializeGame_14788", "AdvBase_InitializeGame_14789", "AdvBase_InitializeGame_14790", "AdvBase_InitializeGame_14791", "AdvBase_InitializeGame_14792", "AdvBase_InitializeGame_14793", "AdvBase_InitializeGame_14794", "AdvBase_InitializeGame_14795", "AdvBase_InitializeGame_14796", "AdvBase_InitializeGame_14797"));
             VerbTenses.Add(VTList.VerbTensesLoca(CB!.VT_steigen, "AdvBase_InitializeGame_14798", "AdvBase_InitializeGame_14799", "AdvBase_InitializeGame_14800", "AdvBase_InitializeGame_14801", "AdvBase_InitializeGame_14802", "AdvBase_InitializeGame_14803", "AdvBase_InitializeGame_14804", "AdvBase_InitializeGame_14805", "AdvBase_InitializeGame_14806", "AdvBase_InitializeGame_14807", "AdvBase_InitializeGame_14808", "AdvBase_InitializeGame_14809", "AdvBase_InitializeGame_14810"));
@@ -3945,8 +3960,9 @@ namespace GameCore
         public   int VT_fallen { get; set; }
 
         public   int VT_sagen { get; set; }
+        public int VT_blubbern { get; set; }
 
-        public  int VT_knurren { get; set; }
+        public int VT_knurren { get; set; }
 
         public int VT_fragen { get; set; }
 
@@ -4469,6 +4485,7 @@ namespace GameCore
             VT_druecken = SerialNumberGenerator.Instance.NextSerial;
             VT_fallen = SerialNumberGenerator.Instance.NextSerial;
             VT_sagen = SerialNumberGenerator.Instance.NextSerial;
+            VT_blubbern = SerialNumberGenerator.Instance.NextSerial;
             VT_fragen = SerialNumberGenerator.Instance.NextSerial;
             VT_lesen = SerialNumberGenerator.Instance.NextSerial;
             VT_steigen = SerialNumberGenerator.Instance.NextSerial;

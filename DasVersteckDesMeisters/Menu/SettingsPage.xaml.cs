@@ -646,10 +646,6 @@ public partial class SettingsPage : ContentPage, IMenuExtension
         MGMInner.RowDefinitions[1].Height = new GridLength(0);
         MGMInner.RowDefinitions[2].Height = new GridLength(0);
         MGMInner.RowDefinitions[3].Height = new GridLength(0);
-        MGMInner.RowDefinitions[4].Height = new GridLength(0);
-        MGMInner.RowDefinitions[5].Height = new GridLength(0);
-        MGMInner.RowDefinitions[6].Height = new GridLength(0);
-        MGMInner.RowDefinitions[7].Height = new GridLength(0);
 
 
         _viewModelGeneral.SetCallbackChangeOrientation((IGlobalData._callbackChangeOrientation)ChangeOrientation);

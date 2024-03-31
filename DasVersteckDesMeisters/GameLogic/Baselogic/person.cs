@@ -824,7 +824,8 @@ namespace GameCore
                 // Noloca: 003
                 s = "<a style='cursor:pointer' class='class1' onclick='" +scr + "'>" +s + "</a>";
 #elif MAUI
-                string scr = System.Web.HttpUtility.HtmlEncode( "boundAsync.JSCallback(\"Person: " + $"{PersonID.ID:00000}\");");
+                string scr = System.Web.HttpUtility.HtmlEncode("window.location.href = 'https://defineobject.Person/" + $"{PersonID.ID:00000}';");
+                // string scr = System.Web.HttpUtility.HtmlEncode( "boundAsync.JSCallback(\"Person: " + $"{PersonID.ID:00000}\");");
                 s = "<a style='cursor:pointer' class='class1' onclick='" +scr + "'>" +s + "</a>";
 #else
                 // Ignores: 003
@@ -841,7 +842,8 @@ namespace GameCore
                 // Noloca: 003
                 s = "<a style='cursor:pointer' onclick='" +scr + "'>" +s + "</a>";
 #elif MAUI
-                string scr = System.Web.HttpUtility.HtmlEncode( "boundAsync.JSCallback(\"Person: " + $"{PersonID.ID:00000}\");");
+                string scr = System.Web.HttpUtility.HtmlEncode("window.location.href = 'https://defineobject.Person/" + $"{PersonID.ID:00000}';");
+                // string scr = System.Web.HttpUtility.HtmlEncode( "boundAsync.JSCallback(\"Person: " + $"{PersonID.ID:00000}\");");
                 s = "<a style='cursor:pointer' onclick='" +scr + "'>" +s + "</a>";
 #else
                 // Ignores: 003

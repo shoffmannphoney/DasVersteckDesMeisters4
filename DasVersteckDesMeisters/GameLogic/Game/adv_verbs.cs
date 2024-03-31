@@ -1076,6 +1076,8 @@ public partial class Adv: AdvBase
         Verbs.AddLocaLoca( loca.Adv_13200, CA!.Verb_Clean.ID, "Adv_13200");
         Verbs.AddLocaLoca( loca.Adv_13201, CA!.Verb_Clean.ID, "Adv_13201");
         Verbs.AddLocaLoca( loca.Adv_13202, CA!.Verb_Clean.ID, "Adv_13202");
+        Verbs.AddLocaLoca(loca.Verb_putze, CA!.Verb_Clean.ID, "Verb_putze");
+
 
         CA!.Verb_Soil = Verbs.AddLocaLoca( loca.Verb_Soil, "Verb_Soil");
         Verbs.AddLocaLoca( loca.Verb_Soil2, CA!.Verb_Soil.ID, "Verb_Soil2");

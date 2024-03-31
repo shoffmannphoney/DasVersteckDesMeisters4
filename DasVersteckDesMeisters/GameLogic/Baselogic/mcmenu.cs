@@ -876,6 +876,7 @@ namespace GameCore
                 }
                 else if ( tMCME!.Type == CB!.MCE_Choice)
                 {
+                    // AdvGame!.StoryDividingLine();
                     ResetCurrent();
 
                     for (int i = 0; i < tMCME!.Follower!.Count; i++)
@@ -941,7 +942,8 @@ namespace GameCore
                                         tMCME.Hidden = MCMenuEntry.HiddenType.outdated;
                                     if (Persons!.Find(tMCME.Speaker!) != null && tMCME.StoryRelevant)
                                     {
-                                        AdvGame!.StoryDividingLine();
+                                        // 31.03.2024
+                                        // AdvGame!.StoryDividingLine();
                                         AdvGame!.StoryOutput(Persons!.Find(tMCME!.Speaker!)!.locationID, A!.Adventure!.CA!.Person_Everyone, "---");
                                     }
                                 }
@@ -982,9 +984,11 @@ namespace GameCore
                             speakertext += loca.MCMenu_Set_Person_Everyone_16166;
                             speakertext = Helper.FirstUpper(speakertext!)!;
 
+
                             if( _addEmptyLine )
                             {
-                                empty = " <br> </br>";
+                                AdvGame!.StoryDividingLine();
+                                // empty = " <br> </br>";
                                 _addEmptyLine = false;
                             }
 
@@ -992,18 +996,21 @@ namespace GameCore
                             {
                                 if( empty != null )
                                 {
-                                    AdvGame!.StoryDividingLine();
+                                    // 31.03.2024
+                                    // AdvGame!.StoryDividingLine();
                                     AdvGame!.StoryOutput(0, A!.Adventure!.CA!.Person_Everyone, empty);
                                 }
                                 if (speakertext != "")
                                 {
                                     // Ignores: 001
-                                    AdvGame!.StoryDividingLine();
+                                    // 31.03.2024
+                                    // AdvGame!.StoryDividingLine();
                                     AdvGame!.StoryOutput(0, A!.Adventure!.CA!.Person_Everyone, speakertext + loca.MCMenu_Set_Person_Everyone_16167 + Helper.ShrinkQuotationMark(tMCME.Text!) + loca.MCMenu_Set_Person_Everyone_16168);
                                 }
                                 else
                                 {
-                                    AdvGame!.StoryDividingLine();
+                                    // 31.03.2024
+                                    // AdvGame!.StoryDividingLine();
                                     AdvGame!.StoryOutput(0, A!.Adventure!.CA!.Person_Everyone, tMCME.Text);
                                 }
                             }
@@ -1031,12 +1038,14 @@ namespace GameCore
                             if (speakertext != "")
                             {
                                 // Ignores: 001
-                                AdvGame!.StoryDividingLine();
+                                // 31.03.2024
+                                // AdvGame!.StoryDividingLine();
                                 AdvGame!.StoryOutput(0, A!.Adventure!.CA!.Person_Everyone, speakertext + loca.MCMenu_Set_Person_Everyone_16169 + Helper.ShrinkQuotationMark(tMCME.Text) + loca.MCMenu_Set_Person_Everyone_16170);
                             }
                             else
                             {
-                                AdvGame!.StoryDividingLine();
+                                // 31.03.2024
+                                // AdvGame!.StoryDividingLine();
                                 AdvGame!.StoryOutput(0, A!.Adventure!.CA!.Person_Everyone, tMCME.Text);
                             }
                             SetCallBack(tMCME);
@@ -1052,13 +1061,14 @@ namespace GameCore
                             }
                             if (empty != null)
                             {
-                                AdvGame!.StoryDividingLine();
+                                // 31.03.2024
+                                // AdvGame!.StoryDividingLine();
                                 AdvGame!.StoryOutput(0, A!.Adventure!.CA!.Person_Everyone, empty);
                                 AdvGame!.StoryOutput(0, A!.Adventure!.CA!.Person_Everyone, tMCME.Text);
                             }
                             else
                             {
-                                AdvGame!.StoryDividingLine();
+                                // AdvGame!.StoryDividingLine();
                                 AdvGame!.StoryOutput(0, A!.Adventure!.CA!.Person_Everyone, tMCME.Text);
 
                             }
@@ -1123,6 +1133,7 @@ namespace GameCore
                     {
                         Persons!.Find(MCSpeakerText[i].SpeakerID)!.ActivityBlocked = false;
                     }
+
                     MCS.Close();
                     AdvGame!.DialogOngoing = false;
                     AdvGame!.SkipAfterDialog = true;

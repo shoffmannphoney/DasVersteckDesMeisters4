@@ -23,7 +23,7 @@ public partial class Adv: AdvBase
 
         locations!.Add(location.locationLocaLoca(CA!.L03_In_The_Parlor, loca.Adv_L03_In_The_Parlor, "Adv_L03_In_The_Parlor",
             loca.Adv_L03_In_The_Parlor_Lang, "Adv_L03_In_The_Parlor_Lang",
-            0, 0, CA!.L04_Shabby_Little_Chamber, 0, CA!.L02_In_Front_Of_A_Hut, 0, 0, 0, 0, CA!.L05_Atrium));
+            0, 0, CA!.L04_Shabby_Little_Chamber, 0, CA!.L02_In_Front_Of_A_Hut, 0, 0, 0, 0, 0));
 
         locations!.Add(location.locationLocaLoca(CA!.L04_Shabby_Little_Chamber, loca.Adv_L04_Shabby_Little_Chamber, "Adv_L04_Shabby_Little_Chamber",
             loca.Adv_L04_Shabby_Little_Chamber_Lang, "Adv_L04_Shabby_Little_Chamber_Lang",
@@ -31,7 +31,7 @@ public partial class Adv: AdvBase
 
         locations!.Add(location.locationLocaLoca(CA!.L05_Atrium, loca.Adv_L05_Atrium, "Adv_L05_Atrium",
             loca.Adv_L05_Atrium_Lang, "Adv_L05_Atrium_Lang",
-            0, 0, 0, 0, CA!.L06_Long_Floor, 0, CA!.L09_Library, 0, CA!.L03_In_The_Parlor, 0));
+            0, 0, 0, 0, CA!.L06_Long_Floor, 0, CA!.L09_Library, 0, 0, 0));
 
         locations!.Add(location.locationLocaLoca(CA!.L06_Long_Floor, loca.Adv_L06_Long_Floor, "Adv_L06_Long_Floor",
             loca.Adv_L06_Long_Floor_Lang, "Adv_L06_Long_Floor_Lang",

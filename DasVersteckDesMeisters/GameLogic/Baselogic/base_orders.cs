@@ -5315,6 +5315,15 @@ namespace GameCore
                             soDest!.jsonItems!.List![currentItem]!.InvisibleBehind = invisibleBehind;
                             handled = true;
                         }
+                        else if (s2[0] == "InvisibleIn:")
+                        {
+                            bool invisibleIn = false;
+
+                            if (s2[1] == "True") invisibleIn= true;
+
+                            soDest!.jsonItems!.List![currentItem]!.InvisibleIn = invisibleIn;
+                            handled = true;
+                        }
                         else if (s2[0] == "CanPutBehind:")
                         {
                             bool canPutBehind = false;
@@ -5890,6 +5899,17 @@ namespace GameCore
                             if (s2[1] == "True") active = true;
 
                             soDest!.jsonScores!.Scores![currentItem].Active = active;
+                            handled = true;
+                        }
+                        else if (s2[0] == "SpoilerState:")
+                        {
+                            spoiler spoiler = spoiler.nospoiler;
+
+                            if (s2[1] == "solution") spoiler = spoiler.solution;
+                            if (s2[1] == "spoiler") spoiler = spoiler.spoiler;
+                            if (s2[1] == "tipp") spoiler = spoiler.tipp;
+
+                            soDest!.jsonScores!.Scores![currentItem].SpoilerState = spoiler;
                             handled = true;
                         }
 

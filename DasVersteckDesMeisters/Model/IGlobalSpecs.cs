@@ -110,7 +110,10 @@ public interface IGlobalData
         get => (GameCore.OrderList?) GlobalSpecs.CurrentOrderList;
     }
     public bool SilentMode { get; set; }
-
+    public bool StartNewDialog
+    {
+        get; set;
+    }
     public language Language { get; set; }
     public enum language { german, english }
 

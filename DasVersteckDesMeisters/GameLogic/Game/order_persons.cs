@@ -202,7 +202,7 @@ public partial class Order: AbstractOrder
         Item item1 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[1].WordID);
         Person person2 = PTL.GetFirstPerson()!; //  GetPersonRef(Adv_PT[3].WordID);
 
-        if( item1 == CA!.I00_Cheese && person2 == CA!.Person_Magpie)
+        if( item1.ID == CA!.I00_Cheese.ID && person2.ID == CA!.Person_Magpie.ID)
         {
             if( CA!.Status_Elster_Tauschintro.Val == 0)
             {

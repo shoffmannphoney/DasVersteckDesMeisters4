@@ -617,7 +617,7 @@ public partial class GamePage : ContentPage, IMenuExtension
 
             if (rdc[0].Height.IsAbsolute)
             {
-                _menuExtension!.ListCalls.Add(new ListCall(SetMCOffHeight, 1) );
+                _menuExtension!.ListCalls.Add(new ListCall(SetMCOffHeight, 0) );
                 // Test: Grid
 
             }

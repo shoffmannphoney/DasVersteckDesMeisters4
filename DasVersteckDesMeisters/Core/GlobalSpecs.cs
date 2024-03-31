@@ -1271,6 +1271,10 @@ public class GlobalData : IGlobalData
     {
         get; set;
     }
+    public bool StartNewDialog
+    {
+        get; set;
+    }
     public OrderList? OrderList
     {
         get => GlobalSpecs.CurrentOrderList;

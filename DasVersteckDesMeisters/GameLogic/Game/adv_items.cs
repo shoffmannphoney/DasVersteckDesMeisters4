@@ -45,7 +45,6 @@ public partial class Adv: AdvBase
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
-
         Items!.Last().CanPutBelow = true;
         Items!.Last().StorageBelow = 15;
         Items!.Last().InvisibleBelow = true;
@@ -99,6 +98,7 @@ public partial class Adv: AdvBase
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Readable));
 
         CA!.I03_Door = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Tuer! }, new List<Adj> { CA!.Adj_schaebig! }, Co.SEX_FEMALE, CB!.LocType_Loc, CA!.L03_In_The_Parlor, loca.Adv_I03_Door, "Adv_I03_Door", Co.SZ_small, true, false, Nouns, Adjs));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
@@ -127,6 +127,8 @@ public partial class Adv: AdvBase
         Items!.Last().StorageOn = 30;
 
         CA!.I04_Cupboard = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Schrank! }, new List<Adj> { CA!.Adj_wuchtig! }, Co.SEX_MALE, CB!.LocType_Loc, CA!.L04_Shabby_Little_Chamber, loca.Adv_I04_Cupboard, "Adv_I04_Cupboard", Co.SZ_small, true, false, Nouns, Adjs));
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Pushable));
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Pullable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
@@ -148,13 +150,14 @@ public partial class Adv: AdvBase
         Items!.Last().IsClosed = true;
 
         CA!.I04_Opening = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Oeffnung! }, null, Co.SEX_FEMALE, CB!.LocType_In_Item, CA!.I00_Nullbehaelter.ID, loca.Adv_I04_Opening, "Adv_I04_Opening", Co.SZ_small, true, false, Nouns, Adjs));
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_ExamineInable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
         Items!.Last().CanPutIn = true;
         Items!.Last().StorageIn = 20;
 
-        CA!.I05_Pentagram = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Pentagramm! }, null, Co.SEX_NEUTER, CB!.LocType_Loc, CA!.L05_Atrium, loca.Adv_I05_Pentagram, "Adv_I05_Pentagram", Co.SZ_small, false, false, Nouns, Adjs));
+        CA!.I05_Pentagram = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Pentagramm! }, null, Co.SEX_NEUTER, CB!.LocType_Loc, CA!.L05_Atrium, loca.Adv_I05_Pentagram, "Adv_I05_Pentagram", Co.SZ_small, true, false, Nouns, Adjs));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
@@ -171,6 +174,7 @@ public partial class Adv: AdvBase
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Readable));
 
         CA!.I05_Sill = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Sims! }, new List<Adj> { CA!.Adj_hoch! }, Co.SEX_NEUTER, CB!.LocType_Loc, CA!.L05_Atrium, loca.Adv_I05_Sill, "Adv_I05_Sill", Co.SZ_small, true, false, Nouns, Adjs));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
@@ -198,6 +202,7 @@ public partial class Adv: AdvBase
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
+        Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_ThrowTarget));
 
         CA!.I06_Door_Wide = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Tuer! }, new List<Adj> { CA!.Adj_breit! }, Co.SEX_FEMALE, CB!.LocType_Loc, CA!.L06_Long_Floor, loca.Adv_I06_Door_Wide, "Adv_I06_Door_Wide", Co.SZ_small, true, false, Nouns, Adjs));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
@@ -233,16 +238,20 @@ public partial class Adv: AdvBase
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Readable));
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Readwithable));
 
         CA!.I06_Seal = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Siegel! }, new List<Adj> { CA!.Adj_edel! }, Co.SEX_NEUTER, CB!.LocType_Loc, CA!.L06_Long_Floor, loca.Adv_I06_Seal, "Adv_I06_Seal", Co.SZ_small, true, false, Nouns, Adjs));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Breakable));
 
         CA!.I06_Sign = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Schild! }, null, Co.SEX_NEUTER, CB!.LocType_Loc, CA!.L06_Long_Floor, loca.Adv_I06_Sign, "Adv_I06_Sign", Co.SZ_small, true, false, Nouns, Adjs));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Readable));
 
         CA!.I07_Door = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Tuer! }, new List<Adj> { CA!.Adj_massiv! }, Co.SEX_FEMALE, CB!.LocType_Loc, CA!.L07_Lower_Floor, loca.Adv_I07_Door, "Adv_I07_Door", Co.SZ_small, true, false, Nouns, Adjs));
         Items!.Last().SynAdjectives = new List<Adj> { CA!.Adj_schwer! };
@@ -293,7 +302,7 @@ public partial class Adv: AdvBase
         Items!.Last().StorageIn = 30;
         Items!.Last().InvisibleIn = false;
 
-        CA!.I08_Underpants = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Unterhose! }, new List<Adj> { CA!.Adj_zerschlissen! }, Co.SEX_FEMALE, CB!.LocType_In_Item, CA!.I08_Washing_Machine.ID, loca.Adv_I08_Underpants, "Adv_I08_Underpants", Co.SZ_small, true, false, Nouns, Adjs));
+        CA!.I08_Underpants = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Unterhose! }, new List<Adj> { CA!.Adj_zerschlissen! }, Co.SEX_FEMALE, CB!.LocType_In_Item, CA!.I08_Washing_Machine.ID, loca.Adv_I08_Underpants, "Adv_I08_Underpants", Co.SZ_small, false, false, Nouns, Adjs));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
@@ -310,17 +319,21 @@ public partial class Adv: AdvBase
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Pushable));
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Pullable));
 
         CA!.I08_Water = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Wasser! }, null, Co.SEX_NEUTER, CB!.LocType_In_Item, CA!.I08_Well.ID, loca.Adv_I08_Water, "Adv_I08_Water", Co.SZ_small, true, false, Nouns, Adjs));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Illuminated));
 
-  
-        CA!.I08_Clothes = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Waesche! }, new List<Adj> { CA!.Adj_mueffelnd! }, Co.SEX_FEMALE, CB!.LocType_In_Item, CA!.I08_Washing_Machine.ID, loca.Adv_I08_Clothes, "Adv_I08_Clothes", Co.SZ_small, true, false, Nouns, Adjs));
+
+        CA!.I08_Clothes = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Waesche! }, new List<Adj> { CA!.Adj_mueffelnd! }, Co.SEX_FEMALE, CB!.LocType_In_Item, CA!.I08_Washing_Machine.ID, loca.Adv_I08_Clothes, "Adv_I08_Clothes", Co.SZ_small, false, true, Nouns, Adjs));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
+        Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_TipTarget));
 
         CA!.I08_Machine_For_Hanging_Up_Laundry = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Waescheaufhaengmaschine! }, new List<Adj> { CA!.Adj_kaputt! }, Co.SEX_FEMALE, CB!.LocType_Loc, CA!.L08_Laundry_Room, loca.Adv_I08_Machine_For_Hanging_Up_Laundry, "Adv_I08_Machine_For_Hanging_Up_Laundry", Co.SZ_small, true, false, Nouns, Adjs));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
@@ -366,31 +379,37 @@ public partial class Adv: AdvBase
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Readable));
 
         CA!.I09_Crazy_Book = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Buch! }, new List<Adj> { CA!.Adj_verrueckt! }, Co.SEX_NEUTER, CB!.LocType_In_Item, CA!.I09_Green_Shelf.ID, loca.Adv_I09_Crazy_Book, "Adv_I09_Crazy_Book", Co.SZ_small, true, false, Nouns, Adjs));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Readable));
 
         CA!.I09_Demonic_Book = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Buch! }, new List<Adj> { CA!.Adj_daemonisch! }, Co.SEX_NEUTER, CB!.LocType_In_Item, CA!.I09_Red_Shelf.ID, loca.Adv_I09_Demonic_Book, "Adv_I09_Demonic_Book", Co.SZ_small, true, false, Nouns, Adjs));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Readable));
 
         CA!.I09_Satanic_Book = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Buch! }, new List<Adj> { CA!.Adj_satanisch! }, Co.SEX_NEUTER, CB!.LocType_In_Item, CA!.I09_Red_Shelf.ID, loca.Adv_I09_Satanic_Book, "Adv_I09_Satanic_Book", Co.SZ_small, true, false, Nouns, Adjs));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Readable));
 
         CA!.I09_Weird_Book = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Buch! }, new List<Adj> { CA!.Adj_seltsam! }, Co.SEX_NEUTER, CB!.LocType_In_Item, CA!.I09_Red_Shelf.ID, loca.Adv_I09_Weird_Book, "Adv_I09_Weird_Book", Co.SZ_small, true, false, Nouns, Adjs));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Readable));
 
         CA!.I09_Sign = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Schild! }, new List<Adj> { CA!.Adj_auffaellig! }, Co.SEX_NEUTER, CB!.LocType_Loc, CA!.L09_Library, loca.Adv_I09_Sign, "Adv_I09_Sign", Co.SZ_small, true, false, Nouns, Adjs));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Readable));
 
         CA!.I09_Carton = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Karton! }, new List<Adj> { CA!.Adj_gross! }, Co.SEX_MALE, CB!.LocType_Loc, CA!.L09_Library, loca.Adv_I09_Carton, "Adv_I09_Carton", Co.SZ_small, true, false, Nouns, Adjs));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
@@ -405,6 +424,7 @@ public partial class Adv: AdvBase
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Readable));
 
         CA!.I10_Labor_Table = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Labortisch! }, new List<Adj> { CA!.Adj_stabil! }, Co.SEX_MALE, CB!.LocType_Loc, CA!.L10_Laboratory, loca.Adv_I10_Labor_Table, "Adv_I10_Labor_Table", Co.SZ_small, true, false, Nouns, Adjs));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
@@ -451,6 +471,7 @@ public partial class Adv: AdvBase
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Heatable ));
         Items!.Last().CanPutIn = true;
         Items!.Last().StorageIn = 30;
 
@@ -479,6 +500,7 @@ public partial class Adv: AdvBase
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Pressable));
 
         CA!.I10_Giant_Mortar = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Moerser! }, new List<Adj> { CA!.Adj_gigantisch! }, Co.SEX_MALE, CB!.LocType_Loc, CA!.L10_Laboratory, loca.Adv_I10_Giant_Mortar, "Adv_I10_Giant_Mortar", Co.SZ_small, true, false, Nouns, Adjs));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
@@ -521,6 +543,7 @@ public partial class Adv: AdvBase
         Items!.Last().StorageOn = 30;
 
         CA!.I11_Bird_Stand = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Vogelstaender! }, new List<Adj> { CA!.Adj_robust! }, Co.SEX_MALE, CB!.LocType_Loc, CA!.L11_Storage_Room, loca.Adv_I11_Bird_Stand, "Adv_I11_Bird_Stand", Co.SZ_small, true, false, Nouns, Adjs));
+        Items!.Last().SynNames = new List<Noun> { CA!.Noun_Staender };
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
@@ -552,6 +575,7 @@ public partial class Adv: AdvBase
         Items!.Last().StorageOn = 20;
 
         CA!.I12_Matress = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Matratze! }, null, Co.SEX_FEMALE, CB!.LocType_Loc, CA!.L12_Sleeping_Room, loca.Adv_I12_Matress, "Adv_I12_Matress", Co.SZ_small, true, false, Nouns, Adjs));
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_ExamineBelowable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
@@ -626,6 +650,14 @@ public partial class Adv: AdvBase
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Readable));
+
+        CA!.I14_Sink = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Waschbecken! }, null, Co.SEX_NEUTER, CB!.LocType_Loc, CA!.L14_Bathroom, loca.Adv_I14_Sink, "Adv_I14_Sink", Co.SZ_small, true, false, Nouns, Adjs));
+        Items!.Last().SynNames = new List<Noun> { CA!.Noun_Becken };
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
+        Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Readable));
 
         CA!.I14_Tiles = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Wand! }, new List<Adj> { CA!.Adj_gekachelt}, Co.SEX_FEMALE_PL, CB!.LocType_Loc, CA!.L14_Bathroom, loca.Adv_I14_Kacheln, "Adv_I14_Kacheln", Co.SZ_small, true, false, Nouns, Adjs));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
@@ -641,6 +673,8 @@ public partial class Adv: AdvBase
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Grabintoable));
+
         Items!.Last().CanPutIn = true;
         Items!.Last().StorageIn = 20;
         Items!.Last().InvisibleIn = true;
@@ -654,14 +688,14 @@ public partial class Adv: AdvBase
 
         CA!.I14_Toilet = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Toilette! }, null, Co.SEX_FEMALE, CB!.LocType_Loc, CA!.L14_Bathroom, loca.Adv_I14_Toilet, "Adv_I14_Toilet", Co.SZ_small, true, false, Nouns, Adjs));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
-        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Usable));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
         Items!.Last().IsClosed = true;
         Items!.Last().CanBeClosed = true;
 
         CA!.I14_Flushing = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Spuelung! }, null, Co.SEX_FEMALE, CB!.LocType_Loc, CA!.L14_Bathroom, loca.Adv_I14_Flushing, "Adv_I14_Flushing", Co.SZ_small, true, false, Nouns, Adjs));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
-        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Usable));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
 
 
@@ -682,6 +716,7 @@ public partial class Adv: AdvBase
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Tipable));
 
         CA!.I00_Supermagic_Powder = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Pulver! }, new List<Adj> { CA!.Adj_magisch! }, Co.SEX_NEUTER, CB!.LocType_In_Item, CA!.I00_Nullbehaelter.ID, loca.Adv_I00_Supermagic_Powder, "Adv_I00_Supermagic_Powder", Co.SZ_small, false, false, Nouns, Adjs));
         Items!.Last().SynNames = new List<Noun> { CA!.Noun_Staub! };
@@ -689,77 +724,98 @@ public partial class Adv: AdvBase
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Tipable));
 
         CA!.I00_Magic_Candle = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Kerzenhalter! }, new List<Adj> { CA!.Adj_magisch! }, Co.SEX_MALE, CB!.LocType_In_Item, CA!.I04_Opening.ID, loca.Adv_I00_Magic_Candle, "Adv_I00_Magic_Candle", Co.SZ_small, false, true, Nouns, Adjs));
         Items!.Last().SynNames = new List<Noun> { CA!.Noun_Kerze!, CA!.Noun_Halter!, CA!.Noun_Flamme };
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Enlightable));
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Usable));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
+        Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_TipTarget));
+        Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_Heater));
+        Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_Lighter));
 
         CA!.I00_Claw = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Klaue! }, new List<Adj> { CA!.Adj_funkelnd! }, Co.SEX_FEMALE, CB!.LocType_On_Item, CA!.I05_Pedestal.ID, loca.Adv_I00_Claw, "Adv_I00_Claw", Co.SZ_small, false, true, Nouns, Adjs));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_TakeWith ));
 
         CA!.I00_Sugar_Pliers = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Zuckerzange! }, new List<Adj> { CA!.Adj_verziert! }, Co.SEX_FEMALE, CB!.LocType_In_Item, CA!.I13_Drawer.ID, loca.Adv_I00_Sugar_Pliers, "Adv_I00_Sugar_Pliers", Co.SZ_small, false, true, Nouns, Adjs));
         Items!.Last().SynNames = new List<Noun> { CA!.Noun_Zange };
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
+        Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_TakeWith_Tool));
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Wraparoundable));
 
         CA!.I00_Key = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Schluessel! }, new List<Adj> { CA!.Adj_verziert! }, Co.SEX_MALE, CB!.LocType_In_Item, CA!.I14_Opening.ID, loca.Adv_I00_Key, "Adv_I00_Key", Co.SZ_small, false, true, Nouns, Adjs));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
+        Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_Key));
 
         CA!.I00_Roll_Plaster = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Rollpflaster! }, new List<Adj> { CA!.Adj_vergilbt! }, Co.SEX_NEUTER, CB!.LocType_In_Item, CA!.I10_First_Aid_Kit.ID, loca.Adv_I00_Roll_Plaster, "Adv_I00_Roll_Plaster", Co.SZ_small, false, true, Nouns, Adjs));
         Items!.Last().SynNames = new List<Noun> { CA!.Noun_Pflaster, CA!.Noun_Rolle};
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Wraparoundable));
 
         CA!.I00_Unstable_Pliers_With_Claw = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Klauenzange! }, new List<Adj> { CA!.Adj_instabil! }, Co.SEX_FEMALE, CB!.LocType_In_Item, CA!.I00_Nullbehaelter.ID, loca.Adv_I00_Unstable_Pliers_With_Claw, "Adv_I00_Unstable_Pliers_With_Claw", Co.SZ_small, false, true, Nouns, Adjs));
         Items!.Last().SynNames = new List<Noun> { CA!.Noun_Klaue, CA!.Noun_Zange };
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
+        Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_TakeWith_Tool));
+        Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_Wraparound_Tool));
 
         CA!.I00_Stable_Pliers_With_Claw = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Klauenzange! }, new List<Adj> { CA!.Adj_stabil! }, Co.SEX_FEMALE, CB!.LocType_In_Item, CA!.I00_Nullbehaelter.ID, loca.Adv_I00_Stable_Pliers_With_Claw, "Adv_I00_Stable_Pliers_With_Claw", Co.SZ_small, false, true, Nouns, Adjs));
         Items!.Last().SynNames = new List<Noun> { CA!.Noun_Klaue, CA!.Noun_Zange };
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
+        Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_Wraparound_Tool));
+        Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_TouchWith_Tool));
 
         CA!.I00_Polishing_Rag = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Polierlappen! }, new List<Adj> { CA!.Adj_alt! }, Co.SEX_MALE, CB!.LocType_In_Item, CA!.I13_Cupboard.ID, loca.Adv_I00_Polishing_Rag, "Adv_I00_Polishing_Rag", Co.SZ_small, false, true, Nouns, Adjs));
         Items!.Last().SynNames = new List<Noun> { CA!.Noun_Lappen };
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
+        Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_CleanTool));
 
         CA!.I00_Magnifier = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Lupe! }, new List<Adj> { CA!.Adj_gross! }, Co.SEX_FEMALE, CB!.LocType_In_Item, CA!.I10_Drawer.ID, loca.Adv_I00_Magnifier, "Adv_I00_Magnifier", Co.SZ_small, false, true, Nouns, Adjs));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
+        Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_Read_Tool));
 
         CA!.I00_Squeaky_Duck = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Quietscheentchen! }, new List<Adj> { CA!.Adj_gelb! }, Co.SEX_NEUTER, CB!.LocType_On_Item, CA!.I14_Bathtub.ID, loca.Adv_I00_Squeaky_Duck, "Adv_I00_Squeaky_Duck", Co.SZ_small, false, true, Nouns, Adjs));
         Items!.Last().SynNames = new List<Noun> { CA!.Noun_Ente!, CA!.Noun_Entchen, CA!.Noun_Gummiente };
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
-        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Usable));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Talkable));
 
         CA!.I00_Paper_Sheets = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Papierboegen! }, new List<Adj> { CA!.Adj_beschrieben! }, Co.SEX_MALE_PL, CB!.LocType_Below_Item, CA!.I12_Matress.ID, loca.Adv_I00_Paper_Sheets, "Adv_I00_Paper_Sheets", Co.SZ_small, false, true, Nouns, Adjs));
         Items!.Last().SynNames = new List<Noun> { CA.Noun_Papier, CA.Noun_Bogen, CA.Noun_Boegen };
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Readable));
 
         CA!.I00_Book_Master = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Buch! }, new List<Adj> { CA!.Adj_peinlich! }, Co.SEX_NEUTER, CB!.LocType_In_Item, CA!.I09_Carton.ID, loca.Adv_I00_Book_Master, "Adv_I00_Book_Master", Co.SZ_small, false, true, Nouns, Adjs));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Readable));
 
         CA!.I00_Cheese = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Kaese! }, new List<Adj> { CA!.Adj_vertrocknet! }, Co.SEX_MALE, CB!.LocType_In_Item, CA!.I13_Fridge.ID, loca.Adv_I00_Cheese, "Adv_I00_Cheese", Co.SZ_small, false, true, Nouns, Adjs));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Eatable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
 
@@ -784,6 +840,7 @@ public partial class Adv: AdvBase
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Tipable));
 
         CA!.I00_Wonder_Wart_Sponge = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Wunderwarzenschwamm! }, new List<Adj> { CA!.Adj_prachtvoll! }, Co.SEX_MALE, CB!.LocType_In_Item, CA!.I00_Nullbehaelter.ID, loca.Adv_I00_Wonder_Wart_Sponge, "Adv_I00_Wonder_Wart_Sponge", Co.SZ_small, false, true, Nouns, Adjs));
         Items!.Last().SynNames = new List<Noun> { CA.Noun_Pilz, CA.Noun_Schimmel, CA.Noun_Funghi, CA.Noun_Sporen, CA.Noun_Schwamm };

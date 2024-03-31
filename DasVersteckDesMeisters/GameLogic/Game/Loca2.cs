@@ -120,6 +120,17 @@ public static partial class loca
                 return "I had nowhere to go from here.";
         }
     }
+    public static string Verb_putze
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "putze";
+            else
+                return "putze";
+        }
+
+    }
     public static string Verb_zerstosse
     {
         get
@@ -301,9 +312,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "(Tipps) Ich hatte die Klaue gefunden. Leider schien es viel zu gefährlich zu sein, sie einfach zu nehmen.";
+                return "(Tipps!) Ich hatte die Klaue gefunden. Leider schien es viel zu gefährlich zu sein, sie einfach zu nehmen.";
             else
-                return "(Tipps) Ich hatte die Klaue gefunden. Leider schien es viel zu gefährlich zu sein, sie einfach zu nehmen.";
+                return "(Tipps!) Ich hatte die Klaue gefunden. Leider schien es viel zu gefährlich zu sein, sie einfach zu nehmen.";
         }
 
     }
@@ -378,9 +389,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "(Tipps) Ich brauchte ja eigentlich nur etwas, das die Zuckerzange zusammendrücke.";
+                return "(Tipps!) Ich brauchte ja eigentlich nur etwas, das die Zuckerzange zusammendrücke.";
             else
-                return "(Tipps) Ich brauchte ja eigentlich nur etwas, das die Zuckerzange zusammendrücke.";
+                return "(Tipps!) Ich brauchte ja eigentlich nur etwas, das die Zuckerzange zusammendrücke.";
         }
 
     }
@@ -466,9 +477,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "(Tipps) Ich hatte nun diese schicke Klauenzange und damit auch schon etwas belebt. Aber was sollte ich jetzt damit machen?";
+                return "(Tipps!) Ich hatte nun diese schicke Klauenzange und damit auch schon etwas belebt. Aber was sollte ich jetzt damit machen?";
             else
-                return "(Tipps) Ich hatte nun diese schicke Klauenzange und damit auch schon etwas belebt. Aber was sollte ich jetzt damit machen?";
+                return "(Tipps!) Ich hatte nun diese schicke Klauenzange und damit auch schon etwas belebt. Aber was sollte ich jetzt damit machen?";
         }
 
     }
@@ -664,9 +675,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "(Tipps) Vielleicht fand sich das besagte Lieblingstier ja irgendwo? Hatte der Meister vielleicht in seinem allerprivatesten Refugium solche Hinweise hinterlassen?";
+                return "(Tipps!) Vielleicht fand sich das besagte Lieblingstier ja irgendwo? Hatte der Meister vielleicht in seinem allerprivatesten Refugium solche Hinweise hinterlassen?";
             else
-                return "(Tipps) Vielleicht fand sich das besagte Lieblingstier ja irgendwo? Hatte der Meister vielleicht in seinem allerprivatesten Refugium solche Hinweise hinterlassen?";
+                return "(Tipps!) Vielleicht fand sich das besagte Lieblingstier ja irgendwo? Hatte der Meister vielleicht in seinem allerprivatesten Refugium solche Hinweise hinterlassen?";
         }
 
     }
@@ -1038,9 +1049,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "(Tipps) Wie sollte ich bloß einen Wunderwarzenschwamm auftreiben? Und was war das eigenetlich für ein bescheuerter Name?";
+                return "(Tipps!) Wie sollte ich bloß einen Wunderwarzenschwamm auftreiben? Und was war das eigentlich für ein bescheuerter Name?";
             else
-                return "(Tipps) Wie sollte ich bloß einen Wunderwarzenschwamm auftreiben? Und was war das eigenetlich für ein bescheuerter Name?";
+                return "(Tipps!) Wie sollte ich bloß einen Wunderwarzenschwamm auftreiben? Und was war das eigentlich für ein bescheuerter Name?";
         }
 
     }
@@ -1148,9 +1159,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "(Tipps) Ich hatte einen netten Klumpen Schlacke erzeugt. Was machte ich jetzt damit?";
+                return "(Tipps!) Ich hatte einen netten Klumpen Schlacke erzeugt. Was machte ich jetzt damit?";
             else
-                return "(Tipps) Ich hatte einen netten Klumpen Schlacke erzeugt. Was machte ich jetzt damit?";
+                return "(Tipps!) Ich hatte einen netten Klumpen Schlacke erzeugt. Was machte ich jetzt damit?";
         }
 
     }
@@ -1538,6 +1549,356 @@ public static partial class loca
                 return "Ich überlegte einen Sekundenbruchteil lang, mich gierig auf das Waldgras zu stürzen und es in mich hinein zu schlingen. Dann fiel mir wieder ein, dass ich vorhin gut gegessen und daher überhaupt keinen Hunger hatte.";
             else
                 return "Ich überlegte einen Sekundenbruchteil lang, mich gierig auf das Waldgras zu stürzen und es in mich hinein zu schlingen. Dann fiel mir wieder ein, dass ich vorhin gut gegessen und daher überhaupt keinen Hunger hatte.";
+        }
+    }
+    public static string Eat_Cheese
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Das Käsestück war knochenhart, das konnte ich wirklich nicht essen.";
+            else
+                return "Das Käsestück war knochenhart, das konnte ich wirklich nicht essen.";
+        }
+    }
+    public static string Smell_Forest_Grass
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Das Waldgras roch wie Waldgras, das sich vollends mit Feuchtigkeit vollgesogen hatte.";
+            else
+                return "Das Waldgras roch wie Waldgras, das sich vollends mit Feuchtigkeit vollgesogen hatte.";
+        }
+    }
+    public static string Smell_I02_Doormat
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Die Türmatte roch feucht und muffig.";
+            else
+                return "Die Türmatte roch feucht und muffig.";
+        }
+    }
+    public static string Smell_I04_Cupboard
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Der Schrank roch nach altem, wurmstichigen Holz.";
+            else
+                return "Der Schrank roch nach altem, wurmstichigen Holz.";
+        }
+    }
+    public static string Smell_I04_Shelf
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Das Regal roch nach altem, wurmstichigen Holz.";
+            else
+                return "Das Regal roch nach altem, wurmstichigen Holz.";
+        }
+    }
+    public static string Smell_I03_Pentagram
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Das Pentagramm roch ein wenig nach alter Farbe.";
+            else
+                return "Das Pentagramm roch ein wenig nach alter Farbe.";
+        }
+    }
+    public static string Smell_I05_Pentagram
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Das Pentagramm roch ein wenig nach alter Farbe.";
+            else
+                return "Das Pentagramm roch ein wenig nach alter Farbe.";
+        }
+    }
+    public static string Smell_I06_Seal
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Ich roch ein wenig altes Siegelwachs";
+            else
+                return "Ich roch ein wenig altes Siegelwachs";
+        }
+    }
+    public static string Smell_I07_Door
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Die Tür roch ein wenig nach allen möglichen magischen Zutaten. Meister Gunnar sollte sich mal öfters die Hände waschen, wenn er hier rumlief.";
+            else
+                return "Die Tür roch ein wenig nach allen möglichen magischen Zutaten. Meister Gunnar sollte sich mal öfters die Hände waschen, wenn er hier rumlief.";
+        }
+    }
+    public static string Smell_I08_Clothes
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Die Wäsche roch so muffig, wie Wäsche eben riecht, wenn sie ewig nass in der Waschmaschine gelegen hat.";
+            else
+                return "Die Wäsche roch so muffig, wie Wäsche eben riecht, wenn sie ewig nass in der Waschmaschine gelegen hat.";
+        }
+    }
+    public static string Smell_I09_Books_Master
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Die Bücher verbreiteten den verheißungsvollen Duft druckfrischer Bücher. Schade, dass der Buchinhalt da nicht mithalten konnte.";
+            else
+                return "Die Bücher verbreiteten den verheißungsvollen Duft druckfrischer Bücher. Schade, dass der Buchinhalt da nicht mithalten konnte.";
+        }
+    }
+    public static string Smell_I10_Giant_Mortar
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Im Mörser roch es nach allerlei zerstößelten Magiepülverchen.";
+            else
+                return "Im Mörser roch es nach allerlei zerstößelten Magiepülverchen.";
+        }
+    }
+    public static string Smell_I10_Metal_Tray
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Die Schale roch nach alten Verbrennungsrückständen.";
+            else
+                return "Die Schale roch nach alten Verbrennungsrückständen.";
+        }
+    }
+    public static string Smell_I12_Matress
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Die Matratze roch nach einem fragwürdigen Duftspray. Wozu war diese Aktion wohl notwendig geworden?";
+            else
+                return "Die Matratze roch nach einem fragwürdigen Duftspray. Wozu war diese Aktion wohl notwendig geworden?";
+        }
+    }
+    public static string Smell_I13_Cupboard
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Der Küchenschrank roch nur noch wenig nach Holz.";
+            else
+                return "Der Küchenschrank roch nur noch wenig nach Holz.";
+        }
+    }
+    public static string Smell_I14_Bathtub
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Ich roch nichts besonderes.";
+            else
+                return "Ich roch nichts besonderes.";
+        }
+    }
+    public static string Smell_I14_Toilet
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Die Toilette roch nun auch nicht viel anders als viele andere Toiletten, die ich gesehen hatte.";
+            else
+                return "Die Toilette roch nun auch nicht viel anders als viele andere Toiletten, die ich gesehen hatte.";
+        }
+    }
+    public static string Smell_I14_Flushing
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Die Spülung roch nach nichts weiter.";
+            else
+                return "Die Spülung roch nach nichts weiter.";
+        }
+    }
+    public static string Smell_I00_Book_Master
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Das Buch verströmte den hoffnungsfrohen Geruch eines frischgedruckten Exemplars.";
+            else
+                return "Das Buch verströmte den hoffnungsfrohen Geruch eines frischgedruckten Exemplars.";
+        }
+    }
+    public static string Smell_I00_Cheese
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Der Käse roch ein wenig säuerlich, verströmte aber sehr wenig Geruch.";
+            else
+                return "Der Käse roch ein wenig säuerlich, verströmte aber sehr wenig Geruch.";
+        }
+    }
+    public static string Smell_I00_Magic_Candle
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Die magische Kerze verströmte ein wenig Geruch von magischem Kerzenwachs.";
+            else
+                return "Die magische Kerze verströmte ein wenig Geruch von magischem Kerzenwachs.";
+        }
+    }
+    public static string Smell_I00_Magic_Powder
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Ich ging besser nicht zu nah an das Pulver mit der Nase, sonst zog ich mir noch versehentlich eine Line von dem Zeug.";
+            else
+                return "Ich ging besser nicht zu nah an das Pulver mit der Nase, sonst zog ich mir noch versehentlich eine Line von dem Zeug.";
+        }
+    }
+    public static string Smell_I00_Supermagic_Powder
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Ich ging besser nicht zu nah an das Pulver mit der Nase, sonst zog ich mir noch versehentlich eine Line von dem Zeug.";
+            else
+                return "Ich ging besser nicht zu nah an das Pulver mit der Nase, sonst zog ich mir noch versehentlich eine Line von dem Zeug.";
+        }
+    }
+    public static string Smell_I00_Paper_Sheets
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Die Papierbögen rochen leicht muffig.";
+            else
+                return "Die Papierbögen rochen leicht muffig.";
+        }
+    }
+    public static string Smell_I00_Plastic_Bag
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Der Plastikbeutel mit den Sporen roch nach feuchtem Erdboden.";
+            else
+                return "Der Plastikbeutel mit den Sporen roch nach feuchtem Erdboden.";
+        }
+    }
+    public static string Smell_I00_Polishing_Rag
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Der Polierlappen verströmte genau den muffigen Geruch, den man solchen Lappen immer nachsagte.";
+            else
+                return "Der Polierlappen verströmte genau den muffigen Geruch, den man solchen Lappen immer nachsagte.";
+        }
+    }
+    public static string Smell_I00_Pouch
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Das Beutelchen roch nach altem Leder.";
+            else
+                return "Das Beutelchen roch nach altem Leder.";
+        }
+    }
+    public static string Smell_I00_Roll_Plaster
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Das Pflaster roch ein wenig nach Klebstoff.";
+            else
+                return "Das Pflaster roch ein wenig nach Klebstoff.";
+        }
+    }
+    public static string Smell_I00_Slag
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Die Schlacke roch verkohlt.";
+            else
+                return "Die Schlacke roch verkohlt.";
+        }
+    }
+    public static string Smell_I00_Wonder_Wart_Sponge
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Der Wunderwarzenschwamm verströmte einen herrlichen und unverwechselbaren wunderwarzenschwammartigen Geruch.";
+            else
+                return "Der Wunderwarzenschwamm verströmte einen herrlichen und unverwechselbaren wunderwarzenschwammartigen Geruch.";
+        }
+    }
+    public static string Smell_Person_Fish
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Der Fisch roch unangenehm nach nassem Sägemehl.";
+            else
+                return "Der Fisch roch unangenehm nach nassem Sägemehl.";
+        }
+    }
+    public static string Smell_Person_Owl
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Die Eule roch etwas muffig.";
+            else
+                return "Die Eule roch etwas muffig.";
+        }
+    }
+    public static string Smell_Person_Magpie
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Die Elster roch wie ein ungewaschener Rabenvogel.";
+            else
+                return "Die Elster roch wie ein ungewaschener Rabenvogel.";
+        }
+    }
+    public static string Smell_Knights_Armor
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Die Ritterrüstung roch leicht nach Poliermittel.";
+            else
+                return "Die Ritterrüstung roch leicht nach Poliermittel.";
+        }
+    }
+    public static string Smell_Person_Parrot
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Der Papagei roch einfach nach nichts.";
+            else
+                return "Der Papagei roch einfach nach nichts.";
         }
     }
     public static string Take_Eule
@@ -2664,6 +3025,26 @@ public static partial class loca
         }
     }
 
+    public static string Touch_Duck_UnstableClaw
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Ich wollte das Quietscheentchen mit der Klaue berühren. Aber ich hatte Angst, das mir diese instabile Konstruktion um die Ohren flog und die Klaue auf den Boden purzelte. Ich musste meinen Klauenhalter irgendwie stabilisieren.";
+            else
+                return "Ich wollte das Quietscheentchen mit der Klaue berühren. Aber ich hatte Angst, das mir diese instabile Konstruktion um die Ohren flog und die Klaue auf den Boden purzelte. Ich musste meinen Klauenhalter irgendwie stabilisieren.";
+        }
+    }
+    public static string Touch_Duck_StableClaw
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Ich berührte das Quietscheentchen mit der Klaue. Das gelbe Ding gab einen absolut jämmerlichen Klagelaut von sich und erlosch wieder mit einem tiefen Seufzer. Was nur, was hatte dieses arme \"Tier\" erlebt?";
+            else
+                return "Ich berührte das Quietscheentchen mit der Klaue. Das gelbe Ding gab einen absolut jämmerlichen Klagelaut von sich und erlosch wieder mit einem tiefen Seufzer. Was nur, was hatte dieses arme \"Tier\" erlebt?";
+        }
+    }
 
 
     public static string Touch_Owl_UnstableClaw
@@ -3225,9 +3606,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Es war ja richtig: Ich war gewiss nicht sein gelehrigster Schüler. Und wenn sich bei mir irgendwo ein Talent gezeigt hätte, dann im Abschreiben, Ausleihen und nicht zurückbringen, oder auch schlicht im Stehlen. Ich hatte durchaus ein großes Interesse an Reichtümern aller Art, also auch jenen, die Meister Gunnar, wie man hörte, in seiner gut verborgenen Hütte im Wald versteckte. Darunter sogar die berühmte Klaue, das wohl wertvollste magische Juwel der Welt. Und jetzt, wo der Meister auf und davon war, konnte er mich nicht darana hindern, diesen Schatz an mich zu bringen. Ich hatte nicht nur meine Rache, sondern wurde auch noch steinreich!";
+                return "Es war ja richtig: Ich war gewiss nicht sein gelehrigster Schüler. Und wenn sich bei mir irgendwo ein Talent gezeigt hätte, dann im Abschreiben, Ausleihen und nicht zurückbringen, oder auch schlicht im Stehlen. Ich hatte durchaus ein großes Interesse an Reichtümern aller Art, also auch jenen, die Meister Gunnar, wie man hörte, in seiner gut verborgenen Hütte im Wald versteckte. Darunter sogar die berühmte Klaue, das wohl wertvollste magische Juwel der Welt. Und jetzt, wo der Meister auf und davon war, konnte er mich nicht daran hindern, diesen Schatz an mich zu bringen. Ich hatte nicht nur meine Rache, sondern wurde auch noch steinreich!";
             else
-                return "Es war ja richtig: Ich war gewiss nicht sein gelehrigster Schüler. Und wenn sich bei mir irgendwo ein Talent gezeigt hätte, dann im Abschreiben, Ausleihen und nicht zurückbringen, oder auch schlicht im Stehlen. Ich hatte durchaus ein großes Interesse an Reichtümern aller Art, also auch jenen, die Meister Gunnar, wie man hörte, in seiner gut verborgenen Hütte im Wald versteckte. Darunter sogar die berühmte Klaue, das wohl wertvollste magische Juwel der Welt. Und jetzt, wo der Meister auf und davon war, konnte er mich nicht darana hindern, diesen Schatz an mich zu bringen. Ich hatte nicht nur meine Rache, sondern wurde auch noch steinreich!";
+                return "Es war ja richtig: Ich war gewiss nicht sein gelehrigster Schüler. Und wenn sich bei mir irgendwo ein Talent gezeigt hätte, dann im Abschreiben, Ausleihen und nicht zurückbringen, oder auch schlicht im Stehlen. Ich hatte durchaus ein großes Interesse an Reichtümern aller Art, also auch jenen, die Meister Gunnar, wie man hörte, in seiner gut verborgenen Hütte im Wald versteckte. Darunter sogar die berühmte Klaue, das wohl wertvollste magische Juwel der Welt. Und jetzt, wo der Meister auf und davon war, konnte er mich nicht daran hindern, diesen Schatz an mich zu bringen. Ich hatte nicht nur meine Rache, sondern wurde auch noch steinreich!";
         }
     }
     public static string Adv_Intro4
@@ -3459,9 +3840,29 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "besonders";
+                return "besonder";
             else
-                return "besonders";
+                return "besonder";
+        }
+    }
+    public static string Noun_Stand
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Stand";
+            else
+                return "___Stand";
+        }
+    }
+    public static string Noun_Waschbecken
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Waschbecken";
+            else
+                return "Waschbecken";
         }
     }
     public static string Noun_Flamme
@@ -4233,9 +4634,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ich stand vor [I:I02_Shed]einer verfallenen Hütte[/] im [I:I02_Forest]Wald[/I]. Eigentlich sah ich wenig mehr als die Silhouette [I:I02_Shed]eines niedrigen Gebäudes[/I], das sich [I:I02_Mist]aus dem dichten Nebel[/I] hervorhob.<br>Das sollte das edle Domizil von Meister Gunnar sein? Schwer zu glauben, dass er sein fettes Uni-Salär nicht für etwas besseres hätte aufwenden können, eine schicke Stadtvilla zum Beispiel. Also gut, er wohnte wohl freiwillig in dieser Bruchbude. Ganz sicher hatte diese Immobilie noch ein Geheimnis, das sie preiszugeben hatte.<br>[I:I02_Shed]Die Hütte[/I] war aus grobem Stein gemauert und hatte [I:I02_Door]eine solide Eingangstür[/I]. Dass davor ordentlich drapiert [I:I02_Doormat]eine Fußmatte[/I] lag, verbesserte den Gesamteindruck nicht wesentlich. [L:L03_In_The_Parlor]Der Eingang zur Hütte lag nördlich[/L]. [L:L01_Dark_Forest]Alle anderen Wege führten zurück in den Wald[/L].";
+                return "Ich stand vor [I:I02_Shed]einer verfallenen Hütte[/I] im [I:I02_Forest]Wald[/I]. Eigentlich sah ich wenig mehr als die Silhouette [I:I02_Shed]eines niedrigen Gebäudes[/I], das sich [I:I02_Mist]aus dem dichten Nebel[/I] hervorhob.<br>Das sollte das edle Domizil von Meister Gunnar sein? Schwer zu glauben, dass er sein fettes Uni-Salär nicht für etwas besseres hätte aufwenden können, eine schicke Stadtvilla zum Beispiel. Also gut, er wohnte wohl freiwillig in dieser Bruchbude. Ganz sicher hatte diese Immobilie noch ein Geheimnis, das sie preiszugeben hatte.<br>[I:I02_Shed]Die Hütte[/I] war aus grobem Stein gemauert und hatte [I:I02_Door]eine solide Eingangstür[/I]. Dass davor ordentlich drapiert [I:I02_Doormat]eine Fußmatte[/I] lag, verbesserte den Gesamteindruck nicht wesentlich. [L:L03_In_The_Parlor]Der Eingang zur Hütte lag nördlich[/L]. [L:L01_Dark_Forest]Alle anderen Wege führten zurück in den Wald[/L].";
             else
-                return "Ich stand vor [I:I02_Shed]einer verfallenen Hütte[/] im [I:I02_Forest]Wald[/I]. Eigentlich sah ich wenig mehr als die Silhouette [I:I02_Shed]eines niedrigen Gebäudes[/I], das sich [I:I02_Mist]aus dem dichten Nebel[/I] hervorhob.<br>Das sollte das edle Domizil von Meister Gunnar sein? Schwer zu glauben, dass er sein fettes Uni-Salär nicht für etwas besseres hätte aufwenden können, eine schicke Stadtvilla zum Beispiel. Also gut, er wohnte wohl freiwillig in dieser Bruchbude. Ganz sicher hatte diese Immobilie noch ein Geheimnis, das sie preiszugeben hatte.<br>[I:I02_Shed]Die Hütte[/I] war aus grobem Stein gemauert und hatte [I:I02_Door]eine solide Eingangstür[/I]. Dass davor ordentlich drapiert [I:I02_Doormat]eine Fußmatte[/I] lag, verbesserte den Gesamteindruck nicht wesentlich. [L:L03_In_The_Parlor]Der Eingang zur Hütte lag nördlich[/L]. [L:L01_Dark_Forest]Alle anderen Wege führten zurück in den Wald[/L].";
+                return "Ich stand vor [I:I02_Shed]einer verfallenen Hütte[/I] im [I:I02_Forest]Wald[/I]. Eigentlich sah ich wenig mehr als die Silhouette [I:I02_Shed]eines niedrigen Gebäudes[/I], das sich [I:I02_Mist]aus dem dichten Nebel[/I] hervorhob.<br>Das sollte das edle Domizil von Meister Gunnar sein? Schwer zu glauben, dass er sein fettes Uni-Salär nicht für etwas besseres hätte aufwenden können, eine schicke Stadtvilla zum Beispiel. Also gut, er wohnte wohl freiwillig in dieser Bruchbude. Ganz sicher hatte diese Immobilie noch ein Geheimnis, das sie preiszugeben hatte.<br>[I:I02_Shed]Die Hütte[/I] war aus grobem Stein gemauert und hatte [I:I02_Door]eine solide Eingangstür[/I]. Dass davor ordentlich drapiert [I:I02_Doormat]eine Fußmatte[/I] lag, verbesserte den Gesamteindruck nicht wesentlich. [L:L03_In_The_Parlor]Der Eingang zur Hütte lag nördlich[/L]. [L:L01_Dark_Forest]Alle anderen Wege führten zurück in den Wald[/L].";
         }
     }
 
@@ -4254,9 +4655,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Das hier konnte ja wohl nicht die Stube sein, in der der Meister lebte! Ich stand nämlich in einem komplett leeren, kalten Raum. Immerhin kündete [I:I03_Pentagram]in rot geschmiertes Pentagramm[/I] auf dem Boden davon, dass hier irgendwer irgendwas mit Zauberkräften am Hut hatte. Auch [I:I03_Runes]die Runen an der Wand hinterließen eine einigermaßen klare Botschaft.<br>Also gut, das war definitiv nicht das Wohngemach des Meisters. Aber vielleicht war dieser Ort ja der Eingang zu seinem eigentlichen Domizil. Das läge zumindest nahe.<br>In [L:L04_Shabby_Little_Chamber]östlicher Richtung[L] befand sich [I:I03_Door]eine schäbige kleine Tür[/I]. [L:L02_In_Front_Of_A_Hut]Nach Süden[/L] gings [I:I03_Door_Outside]durch eine schwere Tür[/I] wieder nach draußen.";
+                return "Das hier konnte ja wohl nicht die Stube sein, in der der Meister lebte! Ich stand nämlich in einem komplett leeren, kalten Raum. Immerhin kündete [I:I03_Pentagram]in rot geschmiertes Pentagramm[/I] auf dem Boden davon, dass hier irgendwer irgendwas mit Zauberkräften am Hut hatte. Auch [I:I03_Runes]die Runen an der Wand hinterließen eine einigermaßen klare Botschaft.<br>Also gut, das war definitiv nicht das Wohngemach des Meisters. Aber vielleicht war dieser Ort ja der Eingang zu seinem eigentlichen Domizil. Das läge zumindest nahe.<br>In [L:L04_Shabby_Little_Chamber]östlicher Richtung[/L] befand sich [I:I03_Door]eine schäbige kleine Tür[/I]. [L:L02_In_Front_Of_A_Hut]Nach Süden[/L] gings [I:I03_Door_Outside]durch eine schwere Tür[/I] wieder nach draußen.";
             else
-                return "Das hier konnte ja wohl nicht die Stube sein, in der der Meister lebte! Ich stand nämlich in einem komplett leeren, kalten Raum. Immerhin kündete [I:I03_Pentagram]in rot geschmiertes Pentagramm[/I] auf dem Boden davon, dass hier irgendwer irgendwas mit Zauberkräften am Hut hatte. Auch [I:I03_Runes]die Runen an der Wand hinterließen eine einigermaßen klare Botschaft.<br>Also gut, das war definitiv nicht das Wohngemach des Meisters. Aber vielleicht war dieser Ort ja der Eingang zu seinem eigentlichen Domizil. Das läge zumindest nahe.<br>In [L:L04_Shabby_Little_Chamber]östlicher Richtung[L] befand sich [I:I03_Door]eine schäbige kleine Tür[/I]. [L:L02_In_Front_Of_A_Hut]Nach Süden[/L] gings [I:I03_Door_Outside]durch eine schwere Tür[/I] wieder nach draußen.";
+                return "Das hier konnte ja wohl nicht die Stube sein, in der der Meister lebte! Ich stand nämlich in einem komplett leeren, kalten Raum. Immerhin kündete [I:I03_Pentagram]in rot geschmiertes Pentagramm[/I] auf dem Boden davon, dass hier irgendwer irgendwas mit Zauberkräften am Hut hatte. Auch [I:I03_Runes]die Runen an der Wand hinterließen eine einigermaßen klare Botschaft.<br>Also gut, das war definitiv nicht das Wohngemach des Meisters. Aber vielleicht war dieser Ort ja der Eingang zu seinem eigentlichen Domizil. Das läge zumindest nahe.<br>In [L:L04_Shabby_Little_Chamber]östlicher Richtung[/L] befand sich [I:I03_Door]eine schäbige kleine Tür[/I]. [L:L02_In_Front_Of_A_Hut]Nach Süden[/L] gings [I:I03_Door_Outside]durch eine schwere Tür[/I] wieder nach draußen.";
         }
     }
 
@@ -4297,9 +4698,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ich stand im Atrium des geheimen Domizils von Meister Gunnar. Das sah schon eher nach einer standesgemäßen Butze für einen angeblichen Meistermagier aus. Der große Raum war von fast quadratischer Form. Durch das offene Dach konnte ich hinausblicken in eine endlose, sternenklare Nacht mit [I:I05_Moon]einem riesigen Vollmond[/I]. Darüber hinaus gab es keinerlei Hinweis darauf, in welcher seltsamen Dimension ich mich hier befand. Immerhin: Hier gab es keinen Nebel.<br>[I:I05_Library_Door]Eine breite, verzierte Tür[/I] in der [L:L09_Library]westlichen Wand[/L] mit der Aufschrift \"Bibliothek\" weckte meine Aufmerksamkeit. Daneben befand sich [I:I05_Sill]ein schmales Sims[/I].<br>Genau im Zentrum des Atriums stand [I:I05_Pedestal]ein hohes, mit Gold verziertes Podest[/I]. In einer Ecke war [I:I05_Pentagram]ein großes, rotes Pentagramm[/I] auf den Boden gemalt. [I:I05_Door]Eine weitere Tür[/I] führte [L:L06_Long_Floor]nach Süden[/L].";
+                return "Ich stand im Atrium des geheimen Domizils von Meister Gunnar. Das sah schon eher nach einer standesgemäßen Butze für einen angeblichen Meistermagier aus. Der große Raum war von fast quadratischer Form. Durch das offene Dach konnte ich hinausblicken in eine endlose, sternenklare Nacht mit [I:I05_Moon]einem riesigen Vollmond[/I]. Darüber hinaus gab es keinerlei Hinweis darauf, in welcher seltsamen Dimension ich mich hier befand. Immerhin: Hier gab es keinen Nebel.<br>[I:I05_Library_Door]Eine breite, verzierte Tür[/I] in der [L:L09_Library]westlichen Wand[/L] mit der Aufschrift \"Bibliothek\" weckte meine Aufmerksamkeit. Daneben befand sich [I:I05_Sill]ein schmales Sims[/I], auf dem eine ausgestopfte Eule saß.<br>Genau im Zentrum des Atriums stand [I:I05_Pedestal]ein hohes, mit Gold verziertes Podest[/I]. In einer Ecke war [I:I05_Pentagram]ein großes, rotes Pentagramm[/I] auf den Boden gemalt. [I:I05_Door]Eine weitere Tür[/I] führte [L:L06_Long_Floor]nach Süden[/L].";
             else
-                return "Ich stand im Atrium des geheimen Domizils von Meister Gunnar. Das sah schon eher nach einer standesgemäßen Butze für einen angeblichen Meistermagier aus. Der große Raum war von fast quadratischer Form. Durch das offene Dach konnte ich hinausblicken in eine endlose, sternenklare Nacht mit [I:I05_Moon]einem riesigen Vollmond[/I]. Darüber hinaus gab es keinerlei Hinweis darauf, in welcher seltsamen Dimension ich mich hier befand. Immerhin: Hier gab es keinen Nebel.<br>[I:I05_Library_Door]Eine breite, verzierte Tür[/I] in der [L:L09_Library]westlichen Wand[/L] mit der Aufschrift \"Bibliothek\" weckte meine Aufmerksamkeit. Daneben befand sich [I:I05_Sill]ein schmales Sims[/I].<br>Genau im Zentrum des Atriums stand [I:I05_Pedestal]ein hohes, mit Gold verziertes Podest[/I]. In einer Ecke war [I:I05_Pentagram]ein großes, rotes Pentagramm[/I] auf den Boden gemalt. [I:I05_Door]Eine weitere Tür[/I] führte [L:L06_Long_Floor]nach Süden[/L].";
+                return "Ich stand im Atrium des geheimen Domizils von Meister Gunnar. Das sah schon eher nach einer standesgemäßen Butze für einen angeblichen Meistermagier aus. Der große Raum war von fast quadratischer Form. Durch das offene Dach konnte ich hinausblicken in eine endlose, sternenklare Nacht mit [I:I05_Moon]einem riesigen Vollmond[/I]. Darüber hinaus gab es keinerlei Hinweis darauf, in welcher seltsamen Dimension ich mich hier befand. Immerhin: Hier gab es keinen Nebel.<br>[I:I05_Library_Door]Eine breite, verzierte Tür[/I] in der [L:L09_Library]westlichen Wand[/L] mit der Aufschrift \"Bibliothek\" weckte meine Aufmerksamkeit. Daneben befand sich [I:I05_Sill]ein schmales Sims[/I], auf dem eine ausgestopfte Eule saß.<br>Genau im Zentrum des Atriums stand [I:I05_Pedestal]ein hohes, mit Gold verziertes Podest[/I]. In einer Ecke war [I:I05_Pentagram]ein großes, rotes Pentagramm[/I] auf den Boden gemalt. [I:I05_Door]Eine weitere Tür[/I] führte [L:L06_Long_Floor]nach Süden[/L].";
         }
     }
 
@@ -4340,7 +4741,7 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Es war erstaunlich, dass dieser Flur tatsächlich aussah wie ein Kellerflur. Gab es doch nicht das geringste Anzeichen dafür, dass sich dieses Geschoss in einem Keller befand. Im trüben Licht einer Funzel erkannte ich weiß gestrichene Wände, graue Bodenkacheln und insgesamt drei Türen. Dabei lag [L:L08_Laundry_Room]westlich[/L] eine [I:I07_Door_Green]grüne Tür[/I], [L:L11_Storage_Room]südlich[L/L] [I:I07_Door_Blue]eine blaue Tür[/I], sowie [L:L10_Laboratory]im Osten[/L] [I:I07_Door]eine massive schwere Tür[/I]. Eine gewendelte Treppe führte [L:L06_Long_Floor]nach oben[/L].";
+                return "Es war erstaunlich, dass dieser Flur tatsächlich aussah wie ein Kellerflur. Gab es doch nicht das geringste Anzeichen dafür, dass sich dieses Geschoss in einem Keller befand. Im trüben Licht einer Funzel erkannte ich weiß gestrichene Wände, graue Bodenkacheln und insgesamt drei Türen. Dabei lag [L:L08_Laundry_Room]westlich[/L] eine [I:I07_Door_Green]grüne Tür[/I], [L:L11_Storage_Room]südlich[/L] [I:I07_Door_Blue]eine blaue Tür[/I], sowie [L:L10_Laboratory]im Osten[/L] [I:I07_Door]eine massive schwere Tür[/I]. Eine gewendelte Treppe führte [L:L06_Long_Floor]nach oben[/L].";
             else
                 return "Es war erstaunlich, dass dieser Flur tatsächlich aussah wie ein Kellerflur. Gab es doch nicht das geringste Anzeichen dafür, dass sich dieses Geschoss in einem Keller befand. Im trüben Licht einer Funzel erkannte ich weiß gestrichene Wände, graue Bodenkacheln und insgesamt drei Türen. Dabei lag [L:L08_Laundry_Room]westlich[/L] eine [I:I07_Door_Green]grüne Tür[/I], [L:L11_Storage_Room]südlich[L/L] [I:I07_Door_Blue]eine blaue Tür[/I], sowie [L:L10_Laboratory]im Osten[/L] [I:I07_Door]eine massive schwere Tür[/I]. Eine gewendelte Treppe führte [L:L06_Long_Floor]nach oben[/L].";
         }
@@ -4482,7 +4883,7 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Das Badezimmer des Meisters fiel feudaler aus als gedacht. Das fing an mit den auffällig gemaserten [I:I14_Tiles]grauen Kacheln an der Wand[/I]. [I:I14_Bathtub]Die große Badewanne[/I] wies eine Whirlpoolfunction auf. Über dem Waschbecken hing [I:I14_Mirror]ein großer, fein gearbeiteter Spiegel[/I]. Nur [I:I14_Toilet]die Toilette[/I] nebst [I:I14_Flushing]Spülung[/I] war No-Name-Ware aus dem Baumarkt. In der [L:L06_Long_Floor]östlichen Wand[/L] führte [I:I14_Door_Red]eine Tür[/I] zurück [L:L06_Long_Floor]zum Flur[/L].";
+                return "Das Badezimmer des Meisters fiel feudaler aus als gedacht. Das fing an mit den auffällig gemaserten [I:I14_Tiles]grauen Kacheln an der Wand[/I]. [I:I14_Bathtub]Die große Badewanne[/I] wies eine Whirlpoolfunction auf. Über [I:I14_Sink]dem Waschbecken[/I] hing [I:I14_Mirror]ein großer, fein gearbeiteter Spiegel[/I]. Nur [I:I14_Toilet]die Toilette[/I] nebst [I:I14_Flushing]Spülung[/I] war No-Name-Ware aus dem Baumarkt. In der [L:L06_Long_Floor]östlichen Wand[/L] führte [I:I14_Door_Red]eine Tür[/I] zurück [L:L06_Long_Floor]zum Flur[/L].";
             else
                 return "Das Badezimmer des Meisters fiel feudaler aus als gedacht. Das fing an mit den auffällig gemaserten [I:I14_Tiles]grauen Kacheln an der Wand[/I]. [I:I14_Bathtub]Die große Badewanne[/I] wies eine Whirlpoolfunction auf. Über dem Waschbecken hing [I:I14_Mirror]ein großer, fein gearbeiteter Spiegel[/I]. Nur [I:I14_Toilet]die Toilette[/I] nebst [I:I14_Flushing]Spülung[/I] war No-Name-Ware aus dem Baumarkt. In der [L:L06_Long_Floor]östlichen Wand[/L] führte [I:I14_Door_Red]eine Tür[/I] zurück [L:L06_Long_Floor]zum Flur[/L].";
         }
@@ -5742,6 +6143,16 @@ public static partial class loca
                 return "Das Badezimmer war mit sehr gewöhnlich aussehenden grauen Kacheln gekachelt.";
             else
                 return "Das Badezimmer war mit sehr gewöhnlich aussehenden grauen Kacheln gekachelt.";
+        }
+    }
+    public static string Adv_I14_Sink
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Eins von diesen pseudomodernen hohen runden Dingern, die ebenso so stylisch wie teuer aussahen.";
+            else
+                return "Eins von diesen pseudomodernen hohen runden Dingern, die ebenso so stylisch wie teuer aussahen.";
         }
     }
     public static string Examine_I14_Kacheln_Kachel
@@ -7239,9 +7650,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Das ist ja bretthart und ungenießbar! Ich kann dir höchstens einen schönen, polierten Stein dafür anbieten!";
+                return "Das ist ja bretthart und ungenießbar! Geil! Dafür kann ich dir einen schönen, polierten Stein dafür anbieten!";
             else
-                return "Das ist ja bretthart und ungenießbar! Ich kann dir höchstens einen schönen, polierten Stein dafür anbieten!";
+                return "Das ist ja bretthart und ungenießbar! Geil! Dafür kann ich dir einen schönen, polierten Stein dafür anbieten!";
         }
     }
     public static string Magpie_Dialog_Tauschen3
@@ -7874,6 +8285,430 @@ public static partial class loca
                 return "Kein Tipp";
             else
                 return "No clue";
+        }
+    }
+    public static string Illuminate1
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "<nameNom>";
+            else
+                return "<nameNom>";
+        }
+    }
+    public static string Illuminate2
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "<nameNom>";
+            else
+                return "<nameNom>";
+        }
+    }
+    public static string Illuminate3
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "<nameNom> mit <> beleuchten";
+            else
+                return "ignite <nameNom> with <>";
+        }
+    }
+    public static string Illuminate4
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "beleuchte <nameNom> mit <nameDat2>";
+            else
+                return "ignite <nameNom> with <nameDat2>";
+        }
+    }
+    public static string Grabinto1
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "<nameNom>";
+            else
+                return "<nameNom>";
+        }
+    }
+    public static string Grabinto2
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "<nameNom>";
+            else
+                return "<nameNom>";
+        }
+    }
+    public static string Grabinto3
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "in <nameNom> greifen";
+            else
+                return "grab <nameNom> with <>";
+        }
+    }
+    public static string Grabinto4
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "greife in <nameNom>";
+            else
+                return "grab <nameNom> with <nameDat2>";
+        }
+    }
+    public static string Takewith1
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "<nameNom>";
+            else
+                return "<nameNom>";
+        }
+    }
+    public static string Takewith2
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "<nameNom>";
+            else
+                return "<nameNom>";
+        }
+    }
+    public static string Takewith3
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "<nameNom> mit <> nehmen";
+            else
+                return "grab <nameNom> with <>";
+        }
+    }
+    public static string Takewith4
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "nimm <nameNom> mit <nameDat2>";
+            else
+                return "grab <nameNom> with <nameDat2>";
+        }
+    }
+    public static string WrapAround1
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "<nameNom>";
+            else
+                return "<nameNom>";
+        }
+    }
+    public static string WrapAround2
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "<nameNom>";
+            else
+                return "<nameNom>";
+        }
+    }
+    public static string WrapAround3
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "<nameNom> um <> wickeln";
+            else
+                return "grab <nameNom> with <>";
+        }
+    }
+    public static string WrapAround4
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "wickle <nameNom> um <nameDat2>";
+            else
+                return "grab <nameNom> with <nameDat2>";
+        }
+    }
+
+    public static string TouchWith1
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "<nameNom>";
+            else
+                return "<nameNom>";
+        }
+    }
+    public static string TouchWith2
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "<nameNom>";
+            else
+                return "<nameNom>";
+        }
+    }
+    public static string TouchWith3
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "<nameNom> mit <> berühren";
+            else
+                return "grab <nameNom> with <>";
+        }
+    }
+    public static string TouchWith4
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "berühre <nameNom> mit <nameDat2>";
+            else
+                return "grab <nameNom> with <nameDat2>";
+        }
+    }
+    public static string ReadWith1
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "<nameNom>";
+            else
+                return "<nameNom>";
+        }
+    }
+    public static string ReadWith2
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "<nameNom>";
+            else
+                return "<nameNom>";
+        }
+    }
+    public static string ReadWith3
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "<nameNom> mit <> lesen";
+            else
+                return "grab <nameNom> with <>";
+        }
+    }
+    public static string ReadWith4
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "lies <nameNom> mit <nameDat2>";
+            else
+                return "grab <nameNom> with <nameDat2>";
+        }
+    }
+    public static string Heatable1
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "<nameNom>";
+            else
+                return "<nameNom>";
+        }
+    }
+    public static string Heatable2
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "<nameNom>";
+            else
+                return "<nameNom>";
+        }
+    }
+    public static string Heatable3
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "<nameNom> mit <> erhitzen";
+            else
+                return "grab <nameNom> with <>";
+        }
+    }
+    public static string Heatable4
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "erhitze <nameNom> mit <nameDat2>";
+            else
+                return "grab <nameNom> with <nameDat2>";
+        }
+    }
+    public static string Blubbern1
+    {
+        get
+        {
+            return "blubbern";
+            /*
+           if (_gd!.Language == IGlobalData.language.german)
+               return "sagen";
+           else
+               return "say";
+               */
+        }
+    }
+    public static string Blubbern2
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "blubbere";
+            else
+                return "say";
+        }
+    }
+    public static string Blubbern3
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "blubberst";
+            else
+                return "say";
+        }
+    }
+    public static string Blubbern4
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "blubbert";
+            else
+                return "says";
+        }
+    }
+    public static string Blubbern5
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "blubbern";
+            else
+                return "say";
+        }
+    }
+    public static string Blubbern6
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "blubbert";
+            else
+                return "say";
+        }
+    }
+    public static string Blubbern7
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "blubbern";
+            else
+                return "say";
+        }
+    }
+    public static string Blubbern8
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "blubberte";
+            else
+                return "said";
+        }
+    }
+    public static string Blubbern9
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "blubbertest";
+            else
+                return "said";
+        }
+    }
+    public static string Blubbern10
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "blubberte";
+            else
+                return "said";
+        }
+    }
+    public static string Blubbern11
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "blubberten";
+            else
+                return "said";
+        }
+    }
+    public static string Blubbern12
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "blubbertet";
+            else
+                return "said";
+        }
+    }
+    public static string Blubbern13
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "blubberten";
+            else
+                return "said";
+        }
+    }
+    public static string Order_Credits_1937
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Ein besonderer Dank geht an die - freiwilligen und weniger freiwilligen - Tester, sobald es welche gibt.";
+            else
+                return "Ein besonderer Dank geht an die - freiwilligen und weniger freiwilligen - Tester, sobald es welche gibt.";
         }
     }
 }

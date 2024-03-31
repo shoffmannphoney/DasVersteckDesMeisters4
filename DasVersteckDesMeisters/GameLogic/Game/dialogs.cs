@@ -294,18 +294,18 @@ namespace GameCore
         public void OwlDialog(MCMenu mcM, List<int> tFollower, List<int> cFollower)
         {
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Owl, "Owl_Dialog_Start_Long", 1, 2, true));
-            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetSpeaker(CB!.VT_sprechen);
 
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Owl_Dialog_Start_Long2", 2, 3, true));
             mcM.Last()!.SetSpeaker(CB!.VT_sagen);
 
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Owl, "Owl_Dialog_Start_Long3", 3, 1 + CB!.MCE_Choice_Off, true));
-            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetSpeaker(CB!.VT_sprechen);
             mcM.Last()!.SetDel(OwlDialogCalc);
 
             // 1 
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Owl, "Owl_Dialog_Start_Short", 11, 1 + CB!.MCE_Choice_Off, true));
-            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetSpeaker(CB!.VT_sprechen);
             mcM.Last()!.SetDel(OwlDialogCalc);
 
             cFollower.Add(100);
@@ -336,40 +336,40 @@ namespace GameCore
 
             // 200
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Owl, "Owl_Dialog_Job2", 200, true));
-            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetSpeaker(CB!.VT_sprechen);
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Owl_Dialog_Job3", 201, true));
             mcM.Last()!.SetSpeaker(CB!.VT_sagen);
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Owl, "Owl_Dialog_Job4", 202, 1 + CB!.MCE_Choice_Off, true));
-            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetSpeaker(CB!.VT_sprechen);
 
             // 210
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Owl, "Owl_Dialog_Klaue2", 210, true));
-            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetSpeaker(CB!.VT_sprechen);
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Owl_Dialog_Klaue3", 211, true));
             mcM.Last()!.SetSpeaker(CB!.VT_sagen);
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Owl, "Owl_Dialog_Klaue4", 212, 1 + CB!.MCE_Choice_Off, true));
-            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetSpeaker(CB!.VT_sprechen);
 
             // 220
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Owl, "Owl_Dialog_Bibliothek2", 220, 2 + CB!.MCE_Choice_Off, true));
-            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetSpeaker(CB!.VT_sprechen);
             mcM.Last()!.SetDel(OwlDialog_Quizstart);
 
             // 230
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Owl, "Owl_Dialog_Woin5Jahren2", 230, true));
-            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetSpeaker(CB!.VT_sprechen);
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Owl_Dialog_Woin5Jahren3", 231, true));
             mcM.Last()!.SetSpeaker(CB!.VT_sagen);
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Owl, "Owl_Dialog_Woin5Jahren4", 232, 1 + CB!.MCE_Choice_Off, true));
-            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetSpeaker(CB!.VT_sprechen);
 
             // 240
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Owl, "Owl_Dialog_MeisterGunnar2", 240, true));
-            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetSpeaker(CB!.VT_sprechen);
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Owl_Dialog_MeisterGunnar3", 241, true));
             mcM.Last()!.SetSpeaker(CB!.VT_sagen);
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Owl, "Owl_Dialog_MeisterGunnar4", 242, 1 + CB!.MCE_Choice_Off, true));
-            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetSpeaker(CB!.VT_sprechen);
 
             cFollower = new List<int>();
             cFollower.Add(250);
@@ -389,16 +389,16 @@ namespace GameCore
 
 
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Owl, "Owl_Dialog_Quiz1_1_2", 260, 1 + CB!.MCE_Choice_Off, true));
-            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetSpeaker(CB!.VT_sprechen);
 
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Owl, "Owl_Dialog_Quiz1_2_2", 270, 1 + CB!.MCE_Choice_Off, true));
-            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetSpeaker(CB!.VT_sprechen);
 
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Owl, "Owl_Dialog_Quiz1_3_2", 280, 1 + CB!.MCE_Choice_Off, true));
-            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetSpeaker(CB!.VT_sprechen);
 
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Owl, "Owl_Dialog_Quiz1_4_2", 290, 3 + CB!.MCE_Choice_Off, true));
-            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetSpeaker(CB!.VT_sprechen);
 
             cFollower = new List<int>();
             cFollower.Add(300);
@@ -417,16 +417,16 @@ namespace GameCore
             mcM.Add(new MCMenuEntry(3 + CB!.MCE_Choice_Off, cFollower));
 
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Owl, "Owl_Dialog_Quiz2_1_2", 310, 1 + CB!.MCE_Choice_Off, true));
-            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetSpeaker(CB!.VT_sprechen);
 
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Owl, "Owl_Dialog_Quiz2_2_2", 320, 1 + CB!.MCE_Choice_Off, true));
-            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetSpeaker(CB!.VT_sprechen);
 
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Owl, "Owl_Dialog_Quiz2_3_2", 330, 1 + CB!.MCE_Choice_Off, true));
-            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetSpeaker(CB!.VT_sprechen);
 
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Owl, "Owl_Dialog_Quiz2_4_2", 340, 4 + CB!.MCE_Choice_Off, true));
-            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetSpeaker(CB!.VT_sprechen);
 
             cFollower = new List<int>();
             cFollower.Add(350);
@@ -444,16 +444,16 @@ namespace GameCore
             mcM.Add(new MCMenuEntry(4 + CB!.MCE_Choice_Off, cFollower));
 
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Owl, "Owl_Dialog_Quiz3_1_2", 360, 1 + CB!.MCE_Choice_Off, true));
-            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetSpeaker(CB!.VT_sprechen);
 
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Owl, "Owl_Dialog_Quiz3_2_2", 370, 1 + CB!.MCE_Choice_Off, true));
-            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetSpeaker(CB!.VT_sprechen);
 
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Owl, "Owl_Dialog_Quiz3_3_2", 380, 1 + CB!.MCE_Choice_Off, true));
-            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetSpeaker(CB!.VT_sprechen);
 
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Owl, "Owl_Dialog_Quiz3_4_2", 390, 1 + CB!.MCE_Choice_Off, true));
-            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetSpeaker(CB!.VT_sprechen);
 
             mcM.Last()!.SetDel(OwlDialog_Quizende);
         }
@@ -569,18 +569,18 @@ namespace GameCore
         public void FishDialog(MCMenu mcM, List<int> tFollower, List<int> cFollower)
         {
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Fish, "Fish_Dialog_Start_Long", 1, 2, true));
-            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetSpeaker(CB!.VT_blubbern);
 
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Fish_Dialog_Start_Long2", 2, 3, true));
             mcM.Last()!.SetSpeaker(CB!.VT_sagen);
 
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Fish, "Fish_Dialog_Start_Long3", 3, 1 + CB!.MCE_Choice_Off, true));
-            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetSpeaker(CB!.VT_blubbern);
             mcM.Last()!.SetDel(FishDialogCalc);
 
             // 1 
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Fish, "Fish_Dialog_Start_Short", 11, 1 + CB!.MCE_Choice_Off, true));
-            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetSpeaker(CB!.VT_blubbern);
             mcM.Last()!.SetDel(FishDialogCalc);
 
             cFollower.Add(100);
@@ -608,35 +608,35 @@ namespace GameCore
 
             // 200
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Fish, "Fish_Dialog_Belebung2", 200, true));
-            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetSpeaker(CB!.VT_blubbern);
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Fish_Dialog_Belebung3", 201, true));
             mcM.Last()!.SetSpeaker(CB!.VT_sagen);
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Fish, "Fish_Dialog_Belebung4", 202, 1 + CB!.MCE_Choice_Off, true));
-            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetSpeaker(CB!.VT_blubbern);
 
             // 210
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Fish, "Fish_Dialog_Herkunft2", 210, true));
-            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetSpeaker(CB!.VT_blubbern);
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Fish_Dialog_Herkunft3", 211, true));
             mcM.Last()!.SetSpeaker(CB!.VT_sagen);
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Fish, "Fish_Dialog_Herkunft4", 212, 1 + CB!.MCE_Choice_Off, true));
-            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetSpeaker(CB!.VT_blubbern);
 
             // 220
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Fish, "Fish_Dialog_Leben2", 220, true));
-            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetSpeaker(CB!.VT_blubbern);
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Fish_Dialog_Leben3", 221, true));
             mcM.Last()!.SetSpeaker(CB!.VT_sagen);
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Fish, "Fish_Dialog_Leben4", 222, 1 + CB!.MCE_Choice_Off, true));
-            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetSpeaker(CB!.VT_blubbern);
 
             // 230
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Fish, "Fish_Dialog_Coin2", 230, true));
-            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetSpeaker(CB!.VT_blubbern);
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Fish_Dialog_Coin3", 231, true));
             mcM.Last()!.SetSpeaker(CB!.VT_sagen);
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Fish, "Fish_Dialog_Coin4", 232, 1 + CB!.MCE_Choice_Off, true));
-            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetSpeaker(CB!.VT_blubbern);
             mcM.Last()!.SetDel(FishDialog_Coin);
         }
         public bool MagpieDialogCalc(List<MCMenuEntry> MCMEntry)
@@ -670,13 +670,13 @@ namespace GameCore
         public void MagpieDialog(MCMenu mcM, List<int> tFollower, List<int> cFollower)
         {
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Magpie, "Magpie_Dialog_Start_Long", 1, 2, true));
-            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetSpeaker(CB!.VT_kraechzen);
 
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Magpie_Dialog_Start_Long2", 2, 3, true));
             mcM.Last()!.SetSpeaker(CB!.VT_sagen);
 
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Magpie, "Magpie_Dialog_Start_Long3", 3, 1 + CB!.MCE_Choice_Off, true));
-            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetSpeaker(CB!.VT_kraechzen);
             mcM.Last()!.SetDel(MagpieDialogCalc);
 
             // 1 
@@ -709,36 +709,36 @@ namespace GameCore
 
             // 200
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Magpie, "Magpie_Dialog_Belebung2", 200, true));
-            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetSpeaker(CB!.VT_kraechzen);
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Magpie_Dialog_Belebung3", 201, true));
             mcM.Last()!.SetSpeaker(CB!.VT_sagen);
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Magpie, "Magpie_Dialog_Belebung4", 202, 1 + CB!.MCE_Choice_Off, true));
-            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetSpeaker(CB!.VT_kraechzen);
 
             // 210
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Magpie, "Magpie_Dialog_Herkunft2", 210, true));
-            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetSpeaker(CB!.VT_kraechzen);
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Magpie_Dialog_Herkunft3", 211, true));
             mcM.Last()!.SetSpeaker(CB!.VT_sagen);
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Magpie, "Magpie_Dialog_Herkunft4", 212, 1 + CB!.MCE_Choice_Off, true));
-            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetSpeaker(CB!.VT_kraechzen);
             mcM.Last()!.SetDel(MagpieDialog_Swap_Intro);
 
             // 220
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Magpie, "Magpie_Dialog_Kette2", 220, true));
-            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetSpeaker(CB!.VT_kraechzen);
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Magpie_Dialog_Kette3", 221, true));
             mcM.Last()!.SetSpeaker(CB!.VT_sagen);
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Magpie, "Magpie_Dialog_Kette4", 222, 1 + CB!.MCE_Choice_Off, true));
-            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetSpeaker(CB!.VT_kraechzen);
 
             // 230
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Magpie, "Magpie_Dialog_Tauschen2", 230, true));
-            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetSpeaker(CB!.VT_kraechzen);
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Magpie_Dialog_Tauschen3", 231, true));
             mcM.Last()!.SetSpeaker(CB!.VT_sagen);
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Magpie, "Magpie_Dialog_Tauschen4", 232, 1 + CB!.MCE_Choice_Off, true));
-            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetSpeaker(CB!.VT_kraechzen);
             mcM.Last()!.SetDel(MagpieDialog_Swap);
         }
         public bool ParrotDialogCalc(List<MCMenuEntry> MCMEntry)
@@ -762,18 +762,18 @@ namespace GameCore
         public void ParrotDialog(MCMenu mcM, List<int> tFollower, List<int> cFollower)
         {
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Parrot, "Parrot_Dialog_Start_Long", 1, 2, true));
-            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetSpeaker(CB!.VT_kraechzen);
 
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Parrot_Dialog_Start_Long2", 2, 3, true));
             mcM.Last()!.SetSpeaker(CB!.VT_sagen);
 
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Parrot, "Parrot_Dialog_Start_Long3", 3, 1 + CB!.MCE_Choice_Off, true));
-            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetSpeaker(CB!.VT_kraechzen);
             mcM.Last()!.SetDel(ParrotDialogCalc);
 
             // 1 
-            mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Magpie, "Parrot_Dialog_Start_Short", 11, 1 + CB!.MCE_Choice_Off, true));
-            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Parrot, "Parrot_Dialog_Start_Short", 11, 1 + CB!.MCE_Choice_Off, true));
+            mcM.Last()!.SetSpeaker(CB!.VT_kraechzen);
             mcM.Last()!.SetDel(ParrotDialogCalc);
 
             cFollower.Add(100);
@@ -801,35 +801,35 @@ namespace GameCore
 
             // 200
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Parrot, "Parrot_Dialog_Belebung2", 200, true));
-            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetSpeaker(CB!.VT_kraechzen);
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Parrot_Dialog_Belebung3", 201, true));
             mcM.Last()!.SetSpeaker(CB!.VT_sagen);
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Parrot, "Parrot_Dialog_Belebung4", 202, 1 + CB!.MCE_Choice_Off, true));
-            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetSpeaker(CB!.VT_kraechzen);
 
             // 210
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Parrot, "Parrot_Dialog_Herkunft2", 210, true));
-            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetSpeaker(CB!.VT_kraechzen);
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Parrot_Dialog_Herkunft3", 211, true));
             mcM.Last()!.SetSpeaker(CB!.VT_sagen);
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Parrot, "Parrot_Dialog_Herkunft4", 212, 1 + CB!.MCE_Choice_Off, true));
-            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetSpeaker(CB!.VT_kraechzen);
 
             // 220
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Parrot, "Parrot_Dialog_Meister2", 220, true));
-            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetSpeaker(CB!.VT_kraechzen);
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Parrot_Dialog_Meister3", 221, true));
             mcM.Last()!.SetSpeaker(CB!.VT_sagen);
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Parrot, "Parrot_Dialog_Meister4", 222, 1 + CB!.MCE_Choice_Off, true));
-            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetSpeaker(CB!.VT_kraechzen);
 
             // 230
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Parrot, "Parrot_Dialog_Fliegen2", 230, true));
-            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetSpeaker(CB!.VT_kraechzen);
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Parrot_Dialog_Fliegen3", 231, true));
             mcM.Last()!.SetSpeaker(CB!.VT_sagen);
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Parrot, "Parrot_Dialog_Fliegen4", 232, 1 + CB!.MCE_Choice_Off, true));
-            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetSpeaker(CB!.VT_kraechzen);
             mcM.Last()!.SetDel(ParrotDialog_Fliegen);
         }
         public bool SnakeDialogCalc(List<MCMenuEntry> MCMEntry)
@@ -842,13 +842,13 @@ namespace GameCore
         public void SnakeDialog(MCMenu mcM, List<int> tFollower, List<int> cFollower)
         {
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Snake, "Snake_Dialog_Start_Long", 1, 2, true));
-            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetSpeaker(CB!.VT_zischen);
 
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Snake_Dialog_Start_Long2", 2, 3, true));
             mcM.Last()!.SetSpeaker(CB!.VT_sagen);
 
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Snake, "Snake_Dialog_Start_Long3", 3, 1 + CB!.MCE_Choice_Off, true));
-            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetSpeaker(CB!.VT_zischen);
             mcM.Last()!.SetDel(SnakeDialogCalc);
 
             // 1 
@@ -876,27 +876,27 @@ namespace GameCore
 
             // 200
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Snake, "Snake_Dialog_Belebung2", 200, true));
-            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetSpeaker(CB!.VT_zischen);
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Snake_Dialog_Belebung3", 201, true));
             mcM.Last()!.SetSpeaker(CB!.VT_sagen);
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Snake, "Snake_Dialog_Belebung4", 202, 1 + CB!.MCE_Choice_Off, true));
-            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetSpeaker(CB!.VT_zischen);
 
             // 210
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Snake, "Snake_Dialog_Herkunft2", 210, true));
-            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetSpeaker(CB!.VT_zischen);
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Snake_Dialog_Herkunft3", 211, true));
             mcM.Last()!.SetSpeaker(CB!.VT_sagen);
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Snake, "Snake_Dialog_Herkunft4", 212, 1 + CB!.MCE_Choice_Off, true));
-            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetSpeaker(CB!.VT_zischen);
 
             // 220
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Snake, "Snake_Dialog_Meister2", 220, true));
-            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetSpeaker(CB!.VT_zischen);
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Snake_Dialog_Meister3", 221, true));
-            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetSpeaker(CB!.VT_zischen);
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Snake, "Snake_Dialog_Meister4", 222, 1 + CB!.MCE_Choice_Off, true));
-            mcM.Last()!.SetSpeaker(CB!.VT_sagen);
+            mcM.Last()!.SetSpeaker(CB!.VT_zischen);
         }
         public bool BookDialog_Rezept(List<MCMenuEntry> MCMEntry)
         {
@@ -906,7 +906,7 @@ namespace GameCore
         }
         public void BookDialog(MCMenu mcM, List<int> tFollower, List<int> cFollower)
         {
-            mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Book_Dialog_Start", 1, 1 + CB!.MCE_Choice_Off, true));
+            mcM.Add(MCMenuEntry.MCMenuEntryLoca(null, "Book_Dialog_Start", 1, 1 + CB!.MCE_Choice_Off, true));
 
             cFollower.Add(100);
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Book_Dialog_Gunnar", 100, 200, true, false));
@@ -931,20 +931,20 @@ namespace GameCore
             mcM.Add(new MCMenuEntry(1 + CB!.MCE_Choice_Off, cFollower));
 
             // 200
-            mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Book_Dialog_Gunnar2", 200, 1 + CB!.MCE_Choice_Off, true));
+            mcM.Add(MCMenuEntry.MCMenuEntryLoca(null, "Book_Dialog_Gunnar2", 200, 1 + CB!.MCE_Choice_Off, true));
             mcM.Last()!.SetSpeaker(CB!.VT_sagen);
 
             // 210
-            mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Book_Dialog_Teleports2", 210, 1 + CB!.MCE_Choice_Off, true));
+            mcM.Add(MCMenuEntry.MCMenuEntryLoca(null, "Book_Dialog_Teleports2", 210, 1 + CB!.MCE_Choice_Off, true));
             mcM.Last()!.SetSpeaker(CB!.VT_sagen);
             mcM.Last()!.SetDel(BookDialog_Rezept);
 
             // 220
-            mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Book_Dialog_Sextips2", 220, 1 + CB!.MCE_Choice_Off    , true));
+            mcM.Add(MCMenuEntry.MCMenuEntryLoca(null, "Book_Dialog_Sextips2", 220, 1 + CB!.MCE_Choice_Off    , true));
             mcM.Last()!.SetSpeaker(CB!.VT_sagen);
 
             // 230
-            mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Book_Dialog_Mondsteine2", 230, 1 + CB!.MCE_Choice_Off, true));
+            mcM.Add(MCMenuEntry.MCMenuEntryLoca(null, "Book_Dialog_Mondsteine2", 230, 1 + CB!.MCE_Choice_Off, true));
             mcM.Last()!.SetSpeaker(CB!.VT_sagen);
         }
     }

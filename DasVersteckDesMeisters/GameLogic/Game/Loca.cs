@@ -5124,26 +5124,6 @@ public static partial class loca
                 return "I had no idea how to heat [Il1,Nom].";
         }
     }
-    public static string Order_Pulverize_I00_Schlaftabletten_943
-    {
-        get
-        {
-            if (_gd!.Language == IGlobalData.language.german)
-                return "Wenn ich die Tabletten zerrieb, hatte ich anschließend überall weißes Pulver im Inventar. Das war keine gute Idee. Außerdem konnte ich die Tabletten immer noch zerreiben, sobald es notwendig wurde.";
-            else
-                return "When I crushed the tablets, I had white powder all over my inventory afterwards. That was not a good idea. Besides, I could still grind the tablets as soon as it became necessary.";
-        }
-    }
-    public static string Order_Pulverize_I00_Schlaftabletten_stark_944
-    {
-        get
-        {
-            if (_gd!.Language == IGlobalData.language.german)
-                return "Wenn ich die Tabletten zerrieb, hatte ich anschließend überall weißes Pulver im Inventar. Das war keine gute Idee. ";
-            else
-                return "When I crushed the tablets, I had white powder all over my inventory afterwards. That was not a good idea. ";
-        }
-    }
     public static string Order_Pulverize_I00_Schlaftabletten_stark_945
     {
         get
@@ -13104,6 +13084,26 @@ public static partial class loca
                 return "Mit der Lupe konnte ich die Buchstaben mühelos entziffern. Dort stand: \"Eigentum von Ritter Norbert, dem Reinlichen\"";
         }
     }
+    public static string Break_Seal1
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Das magische Siegel würde ich niemals zerbrechen können. Das war allerdings auch nicht nötig, da die ganze Tür zerbrochen war.";
+            else
+                return "Das magische Siegel würde ich niemals zerbrechen können. Das war allerdings auch nicht nötig, da die ganze Tür zerbrochen war.";
+        }
+    }
+    public static string Break_Seal2
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Das magische Siegel würde ich niemals zerbrechen können. Das brauchte ich gar nicht erst zu versuchen.";
+            else
+                return "Das magische Siegel würde ich niemals zerbrechen können. Das brauchte ich gar nicht erst zu versuchen.";
+        }
+    }
 
     public static string Order_Break_I0_06_Wendeltreppe_1728
     {
@@ -15113,16 +15113,6 @@ public static partial class loca
                 return "Ein Spiel von Stefan Hoffmann<br>";
             else
                 return "A game by Stefan Hoffmann<br>";
-        }
-    }
-    public static string Order_Credits_1937
-    {
-        get
-        {
-            if (_gd!.Language == IGlobalData.language.german)
-                return "Ein besonderer Dank geht an die - freiwilligen und weniger freiwilligen - Tester: Martin Oehm, Heiko Spies, Wiebke Scholz, Martin Barth, Brian Rushton, Marc Biegota, Alexander Jossifov, StJohn Limbo, Olaf Nowacki";
-            else
-                return "Special thanks to the - voluntary and less voluntary - testers: Martin Oehm, Heiko Spies, Wiebke Scholz, Martin Barth, Brian Rushton, Marc Biegota, Alexander Jossifov, StJohn Limbo, Olaf Nowacki";
         }
     }
     public static string Order_IllustrationSmall_1938
@@ -89020,7 +89010,7 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Kapitel 1";
+                return "Das Versteck des Meisters";
             else
                 return "Chapter 1";
         }

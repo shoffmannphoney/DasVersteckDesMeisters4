@@ -23,7 +23,6 @@
     <WebView2DispatchAdapterIncludeFilters>Maui.Windows.Interfaces;$(WebView2DispatchAdapterIncludeFilters)</WebView2DispatchAdapterIncludeFilters>
     <WebView2DispatchAdapterExcludeFilters>Maui.Windows.Interfaces.EmptyHelper</WebView2DispatchAdapterExcludeFilters>
   </PropertyGroup>
-
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|ARM">

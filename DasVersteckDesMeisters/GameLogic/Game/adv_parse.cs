@@ -305,6 +305,12 @@ public partial class Adv : AdvBase
         PList.AddItemRange(Co.Range_Visible);
         PLL.Add(new ParseLine(CB!.PL_Examine, PList, Orders!.Examine));
 
+        PList = new ParseTokenList();
+        PList.AddVerb(CB!.Verb_Examine);
+        PList.AddItemRange(Co.Range_Visible);
+        PList.AddPrep(CB!.Prep_an);
+        PLL.Add(new ParseLine(CB!.PL_Examine, PList, Orders!.Examine));
+
         // Examine MC
         PList = new ParseTokenList();
         PList.AddVerb(CB!.Verb_Examine);
