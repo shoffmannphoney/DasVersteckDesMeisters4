@@ -558,6 +558,12 @@ namespace GameCore
                 persistentMCMenu!.FindID(103)!.Hidden = MCMenuEntry.HiddenType.visible;
                 
             }
+            if (persistentMCMenu!.FindID(103)!.Hidden == MCMenuEntry.HiddenType.visible && CA.Score_Muenze.Active == true )
+            {
+
+                persistentMCMenu!.FindID(103)!.Hidden = MCMenuEntry.HiddenType.outdated;
+
+            }
             return true;
         }
         public bool FishDialog_Coin(List<MCMenuEntry> MCMEntry)

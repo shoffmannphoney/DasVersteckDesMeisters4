@@ -3179,7 +3179,17 @@ public static partial class loca
                 return "Ich zerstößelte die Schlacke und erhielt ein feines Pulver. Sehr schön, mein Ticket nach Hause war mir sicher.";
         }
     }
-
+    public static string UseW_Pentagram_Powder
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Das magische Pulver einfach aufs Pentagramm streuen? Ha, so einfach wars dann doch nicht! Ein wenig Hitzeentwicklung war sicherlich förderlich.";
+            else
+                return "Das magische Pulver einfach aufs Pentagramm streuen? Ha, so einfach wars dann doch nicht! Ein wenig Hitzeentwicklung war sicherlich förderlich.";
+        }
+    }
+ 
     public static string Wrap_Rollpflaster_Pliers_Ok
     {
         get
@@ -6414,9 +6424,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Du meinst, ob er in Wirklichkeit dralle Blondinen hierher einlädt, um ihnen die 'Geheimnisse der Magie' hautnah zu zeigen?";
+                return "Du meinst, ob er das nur vortäuscht und in Wirklichkeit dralle Blondinen hierher einlädt, um ihnen die 'Geheimnisse der Magie' hautnah zu zeigen?";
             else
-                return "Du meinst, ob er in Wirklichkeit dralle Blondinen hierher einlädt, um ihnen die 'Geheimnisse der Magie' hautnah zu zeigen?";
+                return "Du meinst, ob er das nur vortäuscht und in Wirklichkeit dralle Blondinen hierher einlädt, um ihnen die 'Geheimnisse der Magie' hautnah zu zeigen?";
         }
     }
     public static string Owl_Dialog_MeisterGunnar3
@@ -6434,9 +6444,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Wer weiß, vielleicht stimmt ja auch das sorgfältig gehegte Image des verschrobenen Grantlers, der am liebsten mit ausgestopften Tieren und unbelebten Gegenständen redet, weil ihn Menschen überfordern. Die Wahrheit ist irgendwo da draußen...";
+                return "Wer weiß, vielleicht stimmt ja auch das sorgfältig gehegte Image des verschrobenen Grantlers, der am liebsten mit ausgestopften Tieren und unbelebten Gegenständen redet, weil ihn Menschen überfordern. Die Wahrheit ist... nun... kompliziert... aber glücklicherweise kann sie uns egal sein.";
             else
-                return "Wer weiß, vielleicht stimmt ja auch das sorgfältig gehegte Image des verschrobenen Grantlers, der am liebsten mit ausgestopften Tieren und unbelebten Gegenständen redet, weil ihn Menschen überfordern. Die Wahrheit ist irgendwo da draußen...";
+                return "Wer weiß, vielleicht stimmt ja auch das sorgfältig gehegte Image des verschrobenen Grantlers, der am liebsten mit ausgestopften Tieren und unbelebten Gegenständen redet, weil ihn Menschen überfordern. Die Wahrheit ist... nun... kompliziert... aber glücklicherweise kann sie uns egal sein.";
         }
     }
     public static string Owl_Dialog_Quiz1_1
@@ -6664,9 +6674,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Das Quietscheentchen! Wo wurde jemals soviel reine Liebe entdeckt wie zwischen einem Mann und seinem Quietscheentchen?";
+                return "Das Quietscheentchen! Wo wurde jemals soviel reine Liebe gefunden wie zwischen einem Mann und seinem Quietscheentchen?";
             else
-                return "Das Quietscheentchen! Wo wurde jemals soviel reine Liebe entdeckt wie zwischen einem Mann und seinem Quietscheentchen?";
+                return "Das Quietscheentchen! Wo wurde jemals soviel reine Liebe gefunden wie zwischen einem Mann und seinem Quietscheentchen?";
         }
     }
     public static string Owl_Dialog_Quiz3_4_2
@@ -6739,9 +6749,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Dieses Kapitel berichtete gewohnt bescheiden über Meister Gunnar: Meistermagier, brillianter Wissenschaftler, Sexgott... Daneben prangte eine sehr lebensechte, aber unfassbar schmierige Lithografie von Meister Gunnar. Ich ließ das Buch sinken und holte erst mal kräftig Luft.";
+                return "Dieses Kapitel berichtete gewohnt bescheiden über Meister Gunnar: Meistermagier, brillanter Wissenschaftler, Sexgott... Daneben prangte eine sehr lebensechte, aber unfassbar schmierige Lithografie von Meister Gunnar. Ich ließ das Buch sinken und holte erst mal kräftig Luft.";
             else
-                return "Dieses Kapitel berichtete gewohnt bescheiden über Meister Gunnar: Meistermagier, brillianter Wissenschaftler, Sexgott... Daneben prangte eine sehr lebensechte, aber unfassbar schmierige Lithografie von Meister Gunnar. Ich ließ das Buch sinken und holte erst mal kräftig Luft.";
+                return "Dieses Kapitel berichtete gewohnt bescheiden über Meister Gunnar: Meistermagier, brillanter Wissenschaftler, Sexgott... Daneben prangte eine sehr lebensechte, aber unfassbar schmierige Lithografie von Meister Gunnar. Ich ließ das Buch sinken und holte erst mal kräftig Luft.";
         }
     }
     public static string Book_Dialog_Teleports
@@ -6769,9 +6779,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Die neuesten heißen Sextips";
+                return "So optimieren Sie Ihr Liebesleben!";
             else
-                return "Die neuesten heißen Sextips";
+                return "So optimieren Sie Ihr Liebesleben!";
         }
     }
     public static string Book_Dialog_Sextips2
@@ -6779,9 +6789,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "'Magie ist nicht nur ein sehr gutes Aphrodisaikum, sondern auch sonst beflügelnd für alle Spielarten des Matratzensports. Wenn Sie den perfekten Liebhaber suchen...'<br>Ich ließ das Buch sinken und starrte ein paar Sekunden einfach nur ins Nichts.";
+                return "'Magie kennt nicht nur hervorragende Aphrodisiaka, sondern kann auch bei allen anderen Belangen der geschlechtlichen Liebe zur Förderung und Erbauung eingesetzt werden. Es ist also wahr: Wenn Sie den perfekten Liebhaber suchen, dann werden Sie...'<br>Ich ließ das Buch sinken und starrte ein paar Sekunden einfach nur ins Nichts.";
             else
-                return "'Magie ist nicht nur ein sehr gutes Aphrodisaikum, sondern auch sonst beflügelnd für alle Spielarten des Matratzensports. Wenn Sie den perfekten Liebhaber suchen...'<br>Ich ließ das Buch sinken und starrte ein paar Sekunden einfach nur ins Nichts.";
+                return "'Magie kennt nicht nur hervorragende Aphrodisiaka, sondern kann auch bei allen anderen Belangen der geschlechtlichen Liebe zur Förderung und Erbauung eingesetzt werden. Es ist also wahr: Wenn Sie den perfekten Liebhaber suchen, dann werden Sie...'<br>Ich ließ das Buch sinken und starrte ein paar Sekunden einfach nur ins Nichts.";
         }
     }
     public static string Book_Dialog_Mondsteine
@@ -7034,9 +7044,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Nun, ein weiser alter Mann, dessen Vorliebe für blutjunge Gespielinnen durchaus größer ausgeprägt ist als die Vorliebe blutjunger Gespielinnen für alte verwelkte Zauberer. Darüber hinaus ist er ein passabler Zauberer.";
+                return "Nun, ein weiser alter Mann, dessen Vorliebe für blutjunge Gespielinnen durchaus stärker ausgeprägt ist als die Vorliebe blutjunger Gespielinnen für alte verwelkte Zauberer. Darüber hinaus ist er ein passabler Zauberer.";
             else
-                return "Nun, ein weiser alter Mann, dessen Vorliebe für blutjunge Gespielinnen durchaus größer ausgeprägt ist als die Vorliebe blutjunger Gespielinnen für alte verwelkte Zauberer. Darüber hinaus ist er ein passabler Zauberer.";
+                return "Nun, ein weiser alter Mann, dessen Vorliebe für blutjunge Gespielinnen durchaus stärker ausgeprägt ist als die Vorliebe blutjunger Gespielinnen für alte verwelkte Zauberer. Darüber hinaus ist er ein passabler Zauberer.";
         }
     }
     public static string Lib_Dialog_Meister3
@@ -7458,9 +7468,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ich warf den Papageien in den Himmel. Er flog hoch hinauf und verschwand bald ganz aus meinem Blick.<br>Ich wartete und wartete, aber der Papagei kam nicht zurück.<br>Doch da, plötzlich, sah ich ihn herabsinken, in seinem Schnabel einen glimmenden Stein. Ein Mondstein! Er hatte es tatsächlich geschafft. Er sank herab und landete auf meinem Arm. Bereitwillig ließ er den Mondstein in meine offene fallen.<br>\"Das war fürwahr eine wundervolle Reise. So nah war ich dem Mond noch nie\" seufzte der Papagei, mal ganz ohne Mikroagressionen.";
+                return "Ich warf den Papageien in den Himmel. Er flog hoch hinauf und verschwand bald ganz aus meinem Blick.<br>Ich wartete und wartete, aber der Papagei kam nicht zurück.<br>Doch da, plötzlich, sah ich ihn herabsinken, in seinem Schnabel einen glimmenden Stein. Ein Mondstein! Er hatte es tatsächlich geschafft. Er sank herab und landete auf meinem Arm. Bereitwillig ließ er den Mondstein in meine offene Hand fallen.<br>\"Das war fürwahr eine wundervolle Reise. So nah war ich dem Mond noch nie\" seufzte der Papagei, mal ganz ohne Mikroagressionen.";
             else
-                return "Ich warf den Papageien in den Himmel. Er flog hoch hinauf und verschwand bald ganz aus meinem Blick.<br>Ich wartete und wartete, aber der Papagei kam nicht zurück.<br>Doch da, plötzlich, sah ich ihn herabsinken, in seinem Schnabel einen glimmenden Stein. Ein Mondstein! Er hatte es tatsächlich geschafft. Er sank herab und landete auf meinem Arm. Bereitwillig ließ er den Mondstein in meine offene fallen.<br>\"Das war fürwahr eine wundervolle Reise. So nah war ich dem Mond noch nie\" seufzte der Papagei, mal ganz ohne Mikroagressionen.";
+                return "Ich warf den Papageien in den Himmel. Er flog hoch hinauf und verschwand bald ganz aus meinem Blick.<br>Ich wartete und wartete, aber der Papagei kam nicht zurück.<br>Doch da, plötzlich, sah ich ihn herabsinken, in seinem Schnabel einen glimmenden Stein. Ein Mondstein! Er hatte es tatsächlich geschafft. Er sank herab und landete auf meinem Arm. Bereitwillig ließ er den Mondstein in meine offene Hand fallen.<br>\"Das war fürwahr eine wundervolle Reise. So nah war ich dem Mond noch nie\" seufzte der Papagei, mal ganz ohne Mikroagressionen.";
         }
     }
 
@@ -8564,6 +8574,46 @@ public static partial class loca
         {
             if (_gd!.Language == IGlobalData.language.german)
                 return "erhitze <nameNom> mit <nameDat2>";
+            else
+                return "grab <nameNom> with <nameDat2>";
+        }
+    }
+    public static string Light1
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "<nameNom>";
+            else
+                return "<nameNom>";
+        }
+    }
+    public static string Light2
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "<nameNom>";
+            else
+                return "<nameNom>";
+        }
+    }
+    public static string Light3
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "<nameNom> entzünden";
+            else
+                return "grab <nameNom> with <>";
+        }
+    }
+    public static string Light4
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "entzünde <nameNom>";
             else
                 return "grab <nameNom> with <nameDat2>";
         }

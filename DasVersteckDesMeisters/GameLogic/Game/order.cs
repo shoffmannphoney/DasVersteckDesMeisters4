@@ -1685,6 +1685,10 @@ namespace GameCore
             bool success = true;
             Item item1 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[2].WordID);
 
+            // base
+            if (success)
+                success = base.Smell(PersonID, PTL);
+
 
             // Pre
             if (item1.ID == CA!.I01_Forest_Grass.ID)
@@ -1834,10 +1838,6 @@ namespace GameCore
             }
 
 
-            // base
-            if (success)
-                success = base.Smell(PersonID, PTL);
-
             // Post
             return (success);
         }
@@ -1846,6 +1846,10 @@ namespace GameCore
         {
             bool success = true;
             Person person1 = PTL.GetFirstPerson()!; //  GetItemRef(Adv_PT[2].WordID);
+
+            // base
+            if (success)
+                success = base.SmellP(PersonID, PTL);
 
             // Pre
             if (person1.ID == CA!.Person_Fish.ID)
@@ -1874,9 +1878,6 @@ namespace GameCore
                 success = true;
             }
 
-            // base
-            if (success)
-                success = base.SmellP(PersonID, PTL);
 
             // Post
 
@@ -2234,8 +2235,12 @@ namespace GameCore
                 }
                 handled = true;
             }
-
-            if (!handled)
+            else if (item1.ID == CA!.I00_Plastic_Bag.ID && item2.ID == CA!.I08_Clothes.ID)
+            {
+                SpreadOn( PersonID, PTL);
+                handled = true;
+            }
+                if (!handled)
             {
                 AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone,  Helper.Insert(loca.Order_TipSolo_Person_Everyone_822, item1!.ID ));
             }
@@ -3747,7 +3752,7 @@ namespace GameCore
                 }
                 else if ( CA.I00_Polished_Stone.locationID == CA!.I10_Opening.ID )
                 {
-                    Items.TransferItem(CA!.I00_Polished_Stone.ID, CA.I00_Nullbehaelter.ID);
+                    Items.TransferItem(CA!.I00_Polished_Stone.ID, CA.I00_Nullbehaelter2.ID);
                     Items.TransferItem(CA!.I00_Lightless_Stone.ID, CA.I10_Opening.ID);
                     AdvGame!.StoryOutput(loca.Press_Switch_Saug);
                     AdvGame!.SetScoreToken(CA!.Score_Lichtloser_Stein);
@@ -4670,6 +4675,14 @@ namespace GameCore
 
                 handled = true;
             }
+            else if ((item1.ID == CA!.I03_Pentagram.ID && item2.ID == CA!.I00_Magic_Powder.ID)
+                       || (item2.ID == CA!.I03_Pentagram.ID && item1.ID == CA!.I00_Magic_Powder.ID)
+                   )
+            {
+
+                AdvGame!.StoryOutput(loca.UseW_Pentagram_Powder);
+                handled = true;
+            }
             if (!handled)
             {
                 AdvGame!.StoryOutput(  Helper.Insert(loca.Order_UseW_I00_Blasebalg_1477, item1!.ID, item2!.ID ));
@@ -4905,6 +4918,11 @@ namespace GameCore
 
                 success = true;
             }
+            else if( item2.ID == CA.I00_Unstable_Pliers_With_Claw.ID || item2.ID == CA.I00_Stable_Pliers_With_Claw.ID)
+            {
+                TouchPW(PersonID, PTL);
+                success = true;
+            }
 
             if (!success)
             {
@@ -4979,7 +4997,17 @@ namespace GameCore
             bool success = false;
             Item item1 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[1].WordID);
             Person person2  = PTL.GetFirstPerson()!; //  GetItemRef(Adv_PT[3].WordID);
+            if (person2.ID == CA.Person_Parrot.ID && item1.ID == CA.I05_Moon.ID && CA.I00_Lightless_Stone.locationID == CA.Person_Parrot.ID)
+            {
+                ThrowPnach(PersonID, PTL);
+                success = true;
+            }
+            if (person2.ID == CA!.Person_Fish.ID && item1.ID == CA.I08_Water.ID)
+            {
+                UsePW(PersonID, PTL);
+                success = true;
 
+            }
 
             if (!success)
             {

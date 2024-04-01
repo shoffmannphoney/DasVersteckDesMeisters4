@@ -1127,6 +1127,7 @@ namespace GameCore
             Categories!.Add(new CategoryRel(Category.CategoryLoca(A.Cat_DrawOffable, -1, "Adv_InitializeGame_Person_I_2629", "Adv_InitializeGame_Person_I_2630", "Adv_InitializeGame_Person_I_2631", "Adv_InitializeGame_Person_I_2632"), relTypes.r_low));
             Categories!.Add(new CategoryRel(Category.CategoryLoca(A.Cat_ClimbInable, -1, "Adv_InitializeGame_Person_I_2633", "Adv_InitializeGame_Person_I_2634", "Adv_InitializeGame_Person_I_2635", "Adv_InitializeGame_Person_I_2636"), relTypes.r_low));
             Categories!.Add(new CategoryRel(Category.CategoryLoca(A.Cat_Freeable, -1, "Adv_InitializeGame_Person_I_2637", "Adv_InitializeGame_Person_I_2638", "Adv_InitializeGame_Person_I_2639", "Adv_InitializeGame_Person_I_2640"), relTypes.r_low));
+            Categories!.Add(new CategoryRel(Category.CategoryLoca(A.Cat_Lightable, -1, "Light1", "Light2", "Light3", "Light4"), relTypes.r_essential));
             // Categories!.Add(new CategoryRel(Category.CategoryLoca(A.Cat_UseKamerable, -1, $"<nameNom>", $"<nameNom>", $"<nameNom> mit der Kamera fotografieren", $"fotografiere <nameNom> mit der Kamera"), relTypes.r_low));
             Categories!.Add(new CategoryRel(new Category(A.CounterCat_UsableWith), relTypes.r_essential));
             Categories!.Add(new CategoryRel(new Category(A.CounterCat_Fill), relTypes.r_low));
@@ -5455,6 +5456,7 @@ namespace GameCore
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Listenable));
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Touchwithable));
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_UsableWith));
+            Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Throwable));
 
             CA!.Person_Parrot = Persons!.Add(Person.PersonLoca(new List<Noun> { CA!.Noun_Papagei! }, new List<Adj> { CA!.Adj_ausgestopft! }, Co.SEX_MALE, CB!.LocType_On_Item, CA!.I11_Left_Shelf.ID, "Adv_Person_Parrot", Co.SZ_medium, true, DoParrot, Nouns, Adjs));
             CA!.Person_Parrot.CanBeTaken = true;
@@ -5465,6 +5467,7 @@ namespace GameCore
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_UsableWith));
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Listenable));
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Touchwithable));
+            Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Throwable));
 
             CA!.Person_Snake = Persons!.Add(Person.PersonLoca(new List<Noun> { CA!.Noun_Schlange! }, new List<Adj> { CA!.Adj_ausgestopft! }, Co.SEX_FEMALE, CB!.LocType_On_Item, CA!.I11_Right_Shelf.ID, "Adv_Person_Snake", Co.SZ_medium, true, DoSnake, Nouns, Adjs));
             CA!.Person_Snake.CanBeTaken = true;
@@ -5475,6 +5478,7 @@ namespace GameCore
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_UsableWith));
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Listenable));
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Touchwithable));
+            Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Throwable));
 
             CA!.Person_Magpie = Persons!.Add(Person.PersonLoca(new List<Noun> { CA!.Noun_Elster! }, new List<Adj> { CA!.Adj_ausgestopft! }, Co.SEX_FEMALE, CB!.LocType_On_Item, CA!.I11_Bird_Stand.ID, "Adv_Person_Magpie", Co.SZ_medium, true, DoMagpie, Nouns, Adjs));
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Talkable));
@@ -5843,7 +5847,7 @@ namespace GameCore
                 CA!.Status_Ritterruestung_Klaue.Val--;
                 if (CA!.Status_Ritterruestung_Klaue.Val == 0)
                 {
-                    StoryOutput(CA!.L05_Atrium, CA!.Person_I, loca.DoRR_Finish);
+                    StoryOutput(CA!.L06_Long_Floor, CA!.Person_I, loca.DoRR_Finish);
                 }
             }
 

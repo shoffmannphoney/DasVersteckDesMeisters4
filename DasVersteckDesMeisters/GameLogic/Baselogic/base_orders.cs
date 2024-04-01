@@ -5351,6 +5351,15 @@ namespace GameCore
                             soDest!.jsonItems!.List![currentItem].CanPutOn = canPutOn;
                             handled = true;
                         }
+                        else if (s2[0] == "CanBeTaken:")
+                        {
+                            bool canBetTaken = false;
+
+                            if (s2[1] == "True") canBetTaken = true;
+
+                            soDest!.jsonItems!.List![currentItem].CanBeTaken = canBetTaken;
+                            handled = true;
+                        }
                     }
                     else if (SGType == sgTypes.person)
                     {

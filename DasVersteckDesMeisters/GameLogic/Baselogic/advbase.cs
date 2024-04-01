@@ -346,6 +346,7 @@ namespace GameCore
         public int Cat_Touchwithable = 121;
         public int Cat_Readwithable = 122;
         public int Cat_Heatable = 123;
+        public int Cat_Lightable = 124;
 
         public int CounterCat_Fill = 1001;
 

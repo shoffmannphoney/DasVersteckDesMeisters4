@@ -231,7 +231,7 @@ namespace GameCore
             }
 
             ix = CalcIx(CA!.imc_Neues_Pulver_Wie );
-            if( CA.Status_Rezept_Gelesen.Val == 1 && CA.I00_Supermagic_Powder.ID == CA.I00_Nullbehaelter.ID)
+            if( CA.Status_Rezept_Gelesen.Val == 1 && CA.I00_Supermagic_Powder.locationID == CA.I00_Nullbehaelter.ID)
             {
                 cFollower.Add(ix);
                 mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Neues_Rezept_Wie, ix, CB!.MCE_Choice1, true, true));
