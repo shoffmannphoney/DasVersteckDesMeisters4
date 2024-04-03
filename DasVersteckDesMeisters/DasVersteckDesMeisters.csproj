@@ -75,7 +75,6 @@
 
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
 
 		<!-- Splash Screen -->
 		<MauiImage Update="Resources\Images\splash.svg" BaseSize="208,208" />
@@ -89,7 +88,6 @@
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
-		<MauiImage Update="Resources\Images\dotnet_bot.svg" BaseSize="168,208" />
 
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />
@@ -112,6 +110,22 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="gem.png.scale-200.png" />
+	  <None Remove="gem.png.scale-400.png" />
+	  <None Remove="gem.scale-100.png" />
+	  <None Remove="gem.scale-125.png" />
+	  <None Remove="gem.scale-150.png" />
+	  <None Remove="gem.scale-200.png" />
+	  <None Remove="gem.scale-400.png" />
+	  <None Remove="gem.targetsize-256.png" />
+	  <None Remove="gem.targetsize-48.png" />
+	  <None Remove="Platforms\Android\ball.ico" />
+	  <None Remove="Platforms\Android\ball.png" />
+	  <None Remove="Resources\AppIcon\claw.scale-100.png" />
+	  <None Remove="Resources\AppIcon\claw.scale-125.png" />
+	  <None Remove="Resources\AppIcon\claw.scale-150.png" />
+	  <None Remove="Resources\AppIcon\claw.scale-200.png" />
+	  <None Remove="Resources\AppIcon\claw.scale-400.png" />
 	  <None Remove="Resources\Images\splash.svg" />
 	  <None Remove="Resources\Raw\Index.html" />
 	</ItemGroup>
@@ -125,6 +139,7 @@
 		<MauiCss Remove="GameLogic\Model\**" />
 		<MauiXaml Remove="GameLogic\Model\**" />
 		<None Remove="GameLogic\Model\**" />
+		<AndroidResource Remove="Platforms\Android\Resources\values\styles.xml" />
 		<None Remove="PhoneyIslandGame_TemporaryKey.pfx" />
 		<None Remove="Directory.Build.props" />
 		<None Remove="Resources\AppIcon\ballsmaller.png" />
@@ -184,6 +199,22 @@
 	<ItemGroup>
 		<MauiXaml Remove="Pages\SignatureCapturePage.xaml" />
 		<MauiXaml Remove="Pages\SignaturePage.xaml" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Content Include="gem.scale-100.png" />
+	  <Content Include="gem.scale-125.png" />
+	  <Content Include="gem.scale-150.png" />
+	  <Content Include="gem.scale-200.png" />
+	  <Content Include="gem.scale-400.png" />
+	  <Content Include="gem.targetsize-256.png" />
+	  <Content Include="gem.targetsize-48.png" />
+	  <Content Include="Resources\AppIcon\claw.scale-100.png" />
+	  <Content Include="Resources\AppIcon\claw.scale-125.png" />
+	  <Content Include="Resources\AppIcon\claw.scale-150.png" />
+	  <Content Include="Resources\AppIcon\claw.scale-200.png" />
+	  <Content Include="Resources\AppIcon\claw.scale-400.png" />
+	  <Content Include="Resources\AppIcon\gem.png.scale-200.png" />
+	  <Content Include="Resources\AppIcon\gem.png.scale-400.png" />
 	</ItemGroup>
 	<ItemGroup>
 	  <EmbeddedResource Include="Resources\Raw\empty.html" />

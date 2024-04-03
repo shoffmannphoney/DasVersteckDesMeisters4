@@ -2222,6 +2222,7 @@ namespace GameCore
                 int Val = i + 1;
                 // string? pathName = GlobalData.CurrentPath();
                 // Ignores: 002
+                // string? fileName = Phoney_MAUI.Core.GlobalData.CurrentPath() + loca.OrderFeedback_LoadMC_Person_I_14025 + Val + loca.OrderFeedback_LoadMC_Person_I_14026;
                 string? fileName = loca.OrderFeedback_LoadMC_Person_I_14025 + Val + loca.OrderFeedback_LoadMC_Person_I_14026;
 
                 if (AdvGame.UIS!.ExistFile(fileName))

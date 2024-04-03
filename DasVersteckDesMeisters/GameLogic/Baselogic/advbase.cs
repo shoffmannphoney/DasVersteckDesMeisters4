@@ -347,6 +347,7 @@ namespace GameCore
         public int Cat_Readwithable = 122;
         public int Cat_Heatable = 123;
         public int Cat_Lightable = 124;
+        public int Cat_Pulverizable = 125;
 
         public int CounterCat_Fill = 1001;
 
@@ -440,6 +441,7 @@ namespace GameCore
         public int CounterCat_TouchWith_Tool = 1049;
         public int CounterCat_Read_Tool = 1050;
         public int CounterCat_Heater = 1051;
+        public int CounterCat_Pulverizer = 1052;
 
         public bool Finish = false;
 

@@ -6,14 +6,14 @@
   xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
   IgnorableNamespaces="uap rescap">
 
-  <Identity Name="InteractiveOnions.DasVersteckdesMeisters" Publisher="CN=02EBC7A8-BF84-4789-BAE2-705A9D398FAC" Version="1.0.0.0" />
+  <Identity Name="InteractiveOnions.VersteckdesMeisters" Publisher="CN=02EBC7A8-BF84-4789-BAE2-705A9D398FAC" Version="1.0.9.0" />
 
   <mp:PhoneIdentity PhoneProductId="F1600F3D-BDED-4EF5-BB92-0A86C174315B" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>$placeholder$</DisplayName>
+    <DisplayName>Versteck des Meisters</DisplayName>
     <PublisherDisplayName>Interactive Onions</PublisherDisplayName>
-    <Logo>$placeholder$.png</Logo>
+    <Logo>Resources\AppIcon\claw.png</Logo>
   </Properties>
 
   <Dependencies>
@@ -27,15 +27,20 @@
 
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="$targetentrypoint$">
-      <uap:VisualElements
-        DisplayName="$placeholder$"
-        Description="$placeholder$"
-        Square150x150Logo="$placeholder$.png"
-        Square44x44Logo="$placeholder$.png"
-        BackgroundColor="transparent">
-        <uap:DefaultTile Square71x71Logo="$placeholder$.png" Wide310x150Logo="$placeholder$.png" Square310x310Logo="$placeholder$.png" />
-        <uap:SplashScreen Image="$placeholder$.png" />
-      </uap:VisualElements>
+        <uap:VisualElements DisplayName="Versteck des Meisters"
+                            Description="$placeholder$"
+                            Square150x150Logo="gem.png"
+                            BackgroundColor="transparent" Square44x44Logo="Resources\AppIcon\claw.png">
+            <uap:DefaultTile Wide310x150Logo="gem.png" Square310x310Logo="gem.png" Square71x71Logo="Resources\AppIcon\claw.png">
+                <uap:ShowNameOnTiles>
+                    <uap:ShowOn Tile="square150x150Logo" />
+                    <uap:ShowOn Tile="wide310x150Logo" />
+                    <uap:ShowOn Tile="square310x310Logo" />
+                </uap:ShowNameOnTiles>
+            </uap:DefaultTile>
+            <uap:SplashScreen Image="$placeholder$.png" />
+            <uap:LockScreen Notification="badge" BadgeLogo="Resources\AppIcon\claw.png" />
+        </uap:VisualElements>
     </Application>
   </Applications>
 

@@ -1039,7 +1039,7 @@ namespace GameCore
             Categories!.Add(new CategoryRel(Category.CategoryLoca(A.Cat_Illuminated, A.CounterCat_Lighter, "Illuminate1", "Illuminate2", "Illuminate3", "Illuminate4"), relTypes.r_low));
             Categories!.Add(new CategoryRel(Category.CategoryLoca(A.Cat_Extinguishable, -1, "Adv_InitializeGame_Person_I_2333", null, "Adv_InitializeGame_Person_I_2334", "Adv_InitializeGame_Person_I_2335"), relTypes.r_low));
             Categories!.Add(new CategoryRel(Category.CategoryLoca(A.Cat_Grabable, A.CounterCat_Grabber, "Adv_InitializeGame_Person_I_2336", "Adv_InitializeGame_Person_I_2337", "Adv_InitializeGame_Person_I_2338", "Adv_InitializeGame_Person_I_2339"), relTypes.r_low));
-            Categories!.Add(new CategoryRel(Category.CategoryLoca(A.Cat_Grabintoable, -1, "Grabinto1", "Grabinto2", "Grabinto3", "Grabinto4"), relTypes.r_low));
+            Categories!.Add(new CategoryRel(Category.CategoryLoca(A.Cat_Grabintoable, -1, "Grabinto1", "Grabinto2", "Grabinto3", "Grabinto4"), relTypes.r_essential));
             Categories!.Add(new CategoryRel(Category.CategoryLoca(A.Cat_Sellable, A.CounterCat_SellTarget, "Adv_InitializeGame_Person_I_2340", "Adv_InitializeGame_Person_I_2341", "Adv_InitializeGame_Person_I_2342", "Adv_InitializeGame_Person_I_2343"), relTypes.r_low));
             Categories!.Add(new CategoryRel(Category.CategoryLoca(A.Cat_Pickable, A.CounterCat_PickTarget, "Adv_InitializeGame_Person_I_2344", "Adv_InitializeGame_Person_I_2345", "Adv_InitializeGame_Person_I_2346", "Adv_InitializeGame_Person_I_2347"), relTypes.r_low));
             Categories!.Add(new CategoryRel(Category.CategoryLoca(A.Cat_Catcheable, -1, "Adv_InitializeGame_Person_I_2348", null, "Adv_InitializeGame_Person_I_2349", "Adv_InitializeGame_Person_I_2350"), relTypes.r_low));
@@ -1114,6 +1114,7 @@ namespace GameCore
             Categories!.Add(new CategoryRel(Category.CategoryLoca(A.Cat_Touchwithable, A.CounterCat_TouchWith_Tool, "TouchWith1", "TouchWith2", "TouchWith3", "TouchWith4"), relTypes.r_essential));
             Categories!.Add(new CategoryRel(Category.CategoryLoca(A.Cat_Readwithable, A.CounterCat_Read_Tool, "ReadWith1", "ReadWith2", "ReadWith3", "ReadWith4"), relTypes.r_essential));
             Categories!.Add(new CategoryRel(Category.CategoryLoca(A.Cat_Heatable, A.CounterCat_Heater, "Heatable1", "Heatable2", "Heatable3", "Heatable4"), relTypes.r_essential));
+            Categories!.Add(new CategoryRel(Category.CategoryLoca(A.Cat_Pulverizable, A.CounterCat_Pulverizer, "Pulverize1", "Pulverize2", "Pulverize3", "Pulverize"), relTypes.r_essential));
             Categories!.Add(new CategoryRel(Category.CategoryLoca(A.Cat_Crackable, -1, "Adv_InitializeGame_Person_I_2589", "Adv_InitializeGame_Person_I_2590", "Adv_InitializeGame_Person_I_2591", "Adv_InitializeGame_Person_I_2592"), relTypes.r_low));
             Categories!.Add(new CategoryRel(Category.CategoryLoca(A.Cat_Breathable, -1, "Adv_InitializeGame_Person_I_2593", "Adv_InitializeGame_Person_I_2594", "Adv_InitializeGame_Person_I_2595", "Adv_InitializeGame_Person_I_2596"), relTypes.r_low));
             Categories!.Add(new CategoryRel(Category.CategoryLoca(A.Cat_Smokeable, -1, "Adv_InitializeGame_Person_I_2597", "Adv_InitializeGame_Person_I_2598", "Adv_InitializeGame_Person_I_2599", "Adv_InitializeGame_Person_I_2600"), relTypes.r_low));
@@ -1172,6 +1173,7 @@ namespace GameCore
             Categories!.Add(new CategoryRel(new Category(A.CounterCat_TouchWith_Tool), relTypes.r_low));
             Categories!.Add(new CategoryRel(new Category(A.CounterCat_Read_Tool), relTypes.r_low));
             Categories!.Add(new CategoryRel(new Category(A.CounterCat_Heater), relTypes.r_low));
+            Categories!.Add(new CategoryRel(new Category(A.CounterCat_Pulverizer), relTypes.r_low));
 
         }
 
@@ -5421,73 +5423,73 @@ namespace GameCore
             CA!.Person_Knights_Armor = Persons!.Add(Person.PersonLoca(new List<Noun> { CA!.Noun_Ritterruestung! }, new List<Adj> { CA!.Adj_stattlich! }, Co.SEX_FEMALE, CB!.LocType_Loc, CA!.L06_Long_Floor, "Adv_Person_Knights_Armor", Co.SZ_medium, true, DoRitterruestung, Nouns, Adjs));
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Takeable));
             Persons!.Last()!.SynNames = new List<Noun> { CA!.Noun_Ritter, CA!.Noun_Ruestung };
-            Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Talkable));
+            Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Talkable), relTypes.r_essential);
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_GiveTarget));
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_QuestionTarget));
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_UsableWith));
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Listenable));
-            Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Touchwithable));
+            Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Touchwithable), relTypes.r_essential);
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_CleanableWith));
 
             CA!.Person_Owl = Persons!.Add(Person.PersonLoca(new List<Noun> { CA!.Noun_Eule! }, new List<Adj> { CA!.Adj_ausgestopft! }, Co.SEX_FEMALE, CB!.LocType_Loc, CA!.L05_Atrium, "Adv_Person_Owl", Co.SZ_medium, true, DoOwl, Nouns, Adjs));
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Takeable));
-            Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Talkable));
+            Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Talkable), relTypes.r_essential);
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_GiveTarget));
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_QuestionTarget));
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_UsableWith));
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Listenable));
-            Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Touchwithable));
+            Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Touchwithable), relTypes.r_essential);
 
             CA!.Person_Librarian = Persons!.Add(Person.PersonLoca(new List<Noun> { CA!.Noun_Skelett! }, new List<Adj> { CA!.Adj_vergilbt! }, Co.SEX_NEUTER, CB!.LocType_Loc, CA!.L09_Library, "Adv_Person_Librarian", Co.SZ_medium, true, DoSkeleton, Nouns, Adjs));
-            Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Talkable));
+            Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Talkable), relTypes.r_essential);
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_GiveTarget));
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_QuestionTarget));
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_UsableWith));
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Listenable));
-            Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Touchwithable));
+            Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Touchwithable), relTypes.r_essential);
 
             CA!.Person_Fish = Persons!.Add(Person.PersonLoca(new List<Noun> { CA!.Noun_Fish! }, new List<Adj> { CA!.Adj_ausgestopft! }, Co.SEX_MALE, CB!.LocType_On_Item, CA!.I11_Left_Shelf.ID, "Adv_Person_Fish", Co.SZ_medium, true, DoFish, Nouns, Adjs));
             CA!.Person_Fish.CanBeTaken = true;
-            Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Takeable));
-            Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Talkable));
+            Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Takeable), relTypes.r_essential);
+            Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Talkable), relTypes.r_essential);
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_GiveTarget));
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_QuestionTarget));
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_UsableWith));
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Listenable));
-            Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Touchwithable));
+            Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Touchwithable), relTypes.r_essential);
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_UsableWith));
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Throwable));
 
             CA!.Person_Parrot = Persons!.Add(Person.PersonLoca(new List<Noun> { CA!.Noun_Papagei! }, new List<Adj> { CA!.Adj_ausgestopft! }, Co.SEX_MALE, CB!.LocType_On_Item, CA!.I11_Left_Shelf.ID, "Adv_Person_Parrot", Co.SZ_medium, true, DoParrot, Nouns, Adjs));
             CA!.Person_Parrot.CanBeTaken = true;
-            Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Takeable));
-            Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Talkable));
+            Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Takeable), relTypes.r_essential);
+            Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Talkable), relTypes.r_essential);
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_GiveTarget));
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_QuestionTarget));
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_UsableWith));
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Listenable));
-            Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Touchwithable));
-            Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Throwable));
+            Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Touchwithable), relTypes.r_essential);
+            Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Throwable), relTypes.r_essential);
 
             CA!.Person_Snake = Persons!.Add(Person.PersonLoca(new List<Noun> { CA!.Noun_Schlange! }, new List<Adj> { CA!.Adj_ausgestopft! }, Co.SEX_FEMALE, CB!.LocType_On_Item, CA!.I11_Right_Shelf.ID, "Adv_Person_Snake", Co.SZ_medium, true, DoSnake, Nouns, Adjs));
             CA!.Person_Snake.CanBeTaken = true;
-            Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Takeable));
-            Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Talkable));
+            Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Takeable), relTypes.r_essential);
+            Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Talkable), relTypes.r_essential);
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_GiveTarget));
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_QuestionTarget));
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_UsableWith));
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Listenable));
-            Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Touchwithable));
-            Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Throwable));
+            Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Touchwithable), relTypes.r_essential);
+            Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Throwable), relTypes.r_essential);
 
             CA!.Person_Magpie = Persons!.Add(Person.PersonLoca(new List<Noun> { CA!.Noun_Elster! }, new List<Adj> { CA!.Adj_ausgestopft! }, Co.SEX_FEMALE, CB!.LocType_On_Item, CA!.I11_Bird_Stand.ID, "Adv_Person_Magpie", Co.SZ_medium, true, DoMagpie, Nouns, Adjs));
-            Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Talkable));
-            Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Takeable));
+            Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Talkable), relTypes.r_essential);
+            Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Takeable), relTypes.r_essential);
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_GiveTarget));
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_QuestionTarget));
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_UsableWith));
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Listenable));
-            Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Touchwithable));
+            Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Touchwithable), relTypes.r_essential);
         }
 
         // List<IUIServices.ZipObject> zo2 = UIS.LoadFromZip("initdata");
@@ -7275,7 +7277,12 @@ namespace GameCore
                         dfollower.Add(idCtChoice + CB!.MCE_Choice_Off);
 
                     cfollower.Add(idCt);
-                    mcM.Add(new MCMenuEntry(CB!.MCE_Text, CA!.Person_I,  Helper.Insert(loca.Adv_DoMCItem_Person_I_4611, itemID ), idCt++, dfollower, null, 0, false, false, false, null,  Helper.Insert(loca.Adv_DoMCItem_Person_I_4612, itemID )));
+
+                    string s5 = Helper.Insert(loca.Adv_DoMCItem_Person_I_4612, itemID);
+
+                    s5 = null;
+
+                    mcM.Add(new MCMenuEntry(CB!.MCE_Text, CA!.Person_I,  Helper.Insert(loca.Adv_DoMCItem_Person_I_4611, itemID ), idCt++, dfollower, null, 0, false, false, false, null,  s5));
 
                     efollower.Add(idCt);
                     mcM.Add(new MCMenuEntry(CB!.MCE_Text, null,  Helper.Insert(loca.Adv_DoMCItem_Person_I_4613, itemID ), idCt++, follower, null, 0, false, false, false, null, null));
@@ -7521,7 +7528,10 @@ namespace GameCore
                                                 if ((c.Category!.CategoryID == cr.CounterCategoryID) && (Items!.IsItemHere(it2, Co.Range_Visible) == true))
                                                 {
                                                     string s4 = it2.FullName(Co.CASE_DAT, true)!;
-                                                    if (cr.ParseLine!.Contains(loca.Adv_DoMCItem_Person_I_4633))
+
+                                                    if (cr.ParseLine == null)
+                                                        s4 = "";
+                                                    else if (cr.ParseLine!.Contains(loca.Adv_DoMCItem_Person_I_4633))
                                                         s4 = it2.FullName(Co.CASE_NOM, true)!;
                                                     else if (cr.ParseLine!.Contains(loca.Adv_DoMCItem_Person_I_4634))
                                                         s4 = it2.FullName(Co.CASE_AKK, true)!;
@@ -7882,7 +7892,7 @@ namespace GameCore
                             if (CountCounter > 0)
                             {
                                 efollower.Add(idCt);
-                                mcM.Add(new MCMenuEntry(CB!.MCE_Text, null, "Schlumpfsuppe", idCt++, follower, null, 0, false, false, false, null, null));
+                                mcM.Add(new MCMenuEntry(CB!.MCE_Text, null, s1, idCt++, follower, null, 0, false, false, false, null, null));
                                 // mcM.Add(new MCMenuEntry(CB!.MCE_Text, null, s1, idCt++, follower, null, 0, false, false, false, null, null));
                                 foreach (Item? it2 in Items!.List!.Values)
                                 {

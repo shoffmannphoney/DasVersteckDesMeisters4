@@ -1039,14 +1039,14 @@ public class UIServices : IUIServices
 
     public bool ExistFile(string fileName)
     {
-        string pathFileName = GlobalData.CurrentPath() + "\\" + fileName;
+        string pathFileName = GlobalData.CurrentPath() + "/" + fileName;
 
         return (File.Exists(pathFileName));
     }
 
     public string CurrentPathPlusFilename( string fileName )
     {
-        string pathFileName = GlobalData.CurrentPath() + "\\" + fileName;
+        string pathFileName = GlobalData.CurrentPath() + "/" + fileName;
 
         return pathFileName;
     }
@@ -1610,7 +1610,7 @@ public class UIServices : IUIServices
                 SpeechToText.Default.StateChanged += OnStateChanged;
                 asyncSpeechListening = true;
                 // i = 4;
-            }
+            }       
             else
             {
 
@@ -1638,7 +1638,7 @@ public class UIServices : IUIServices
             }
             // i = 7;
         }
-        catch // (Exception e)
+        catch ( Exception e )
         {
 
         }
@@ -1658,7 +1658,8 @@ public class UIServices : IUIServices
                 {
                     await SpeechToText.StopListenAsync((CancellationToken) _ct!);
                     asyncSpeechRunning = false;
-                    STTStartTime!.Stop();
+                    if(STTStartTime != null )
+                        STTStartTime!.Stop();
                     STTStartTime = null;
                 }
                 // CancellationToken cancellationToken = CancellationToken.None;

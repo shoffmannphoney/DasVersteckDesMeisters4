@@ -2675,9 +2675,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Aus der Richtung der Eule dran ein leises Gurren an mein Ohr.";
+                return "Aus der Richtung der Eule dran ein leiser Eulenruf an mein Ohr.";
             else
-                return "Aus der Richtung der Eule dran ein leises Gurren an mein Ohr.";
+                return "Aus der Richtung der Eule dran ein leiser Eulenruf an mein Ohr.";
         }
     }
     public static string DoOwl_Bewegen
@@ -3195,9 +3195,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ich klebte einen langen Klebestreifen um die Zuckerzange mit der Klaue darin. Der Klebestreifen hielt die Zuckerzange so fest zusammen, dass die Klaue sicher befestgt war.<br>Das Rollpflaster war alle, also warf ich die leere Rolle weg.";
+                return "Ich klebte einen langen Klebestreifen um die Zuckerzange mit der Klaue darin. Der Klebestreifen hielt die Zuckerzange so fest zusammen, dass die Klaue sicher befestgt war.<br>Das Rollpflaster war alle, also warf ich die leere Rolle weg.<br><br>Perfekt, ich hatte also die Klaue an mich genommen. Wie aber kam ich jetzt aus diesem seltsamen Domizil wieder heraus? Einen Ausgang hatte ich bisher nicht gefunden. Dafür gab es ja sicherlich auch einen Grund.";
             else
-                return "Ich klebte einen langen Klebestreifen um die Zuckerzange mit der Klaue darin. Der Klebestreifen hielt die Zuckerzange so fest zusammen, dass die Klaue sicher befestgt war.<br>Das Rollpflaster war alle, also warf ich die leere Rolle weg.";
+                return "Ich klebte einen langen Klebestreifen um die Zuckerzange mit der Klaue darin. Der Klebestreifen hielt die Zuckerzange so fest zusammen, dass die Klaue sicher befestgt war.<br>Das Rollpflaster war alle, also warf ich die leere Rolle weg.<br><br>Perfekt, ich hatte also die Klaue an mich genommen. Wie aber kam ich jetzt aus diesem seltsamen Domizil wieder heraus? Einen Ausgang hatte ich bisher nicht gefunden. Dafür gab es ja sicherlich auch einen Grund.";
         }
     }
     public static string Wipe_KnightsArmor
@@ -3406,9 +3406,19 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ich schob die Holzabdeckung vom Brunnen weg. Darunter blickte ich in tiefe Schwärze.";
+                return "Ich schob die Holzabdeckung vom Brunnen weg. Darunter blickte ich in tiefes dunkles Wassser.";
             else
-                return "Ich schob die Holzabdeckung vom Brunnen weg. Darunter blickte ich in tiefe Schwärze.";
+                return "Ich schob die Holzabdeckung vom Brunnen weg. Darunter blickte ich in tiefes dunkles Wassser.";
+        }
+    }
+    public static string Examine_Well2
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Im Brunnen schimmerte das dunkle, tiefe Wasser.";
+            else
+                return "Im Brunnen schimmerte das dunkle, tiefe Wasser.";
         }
     }
     public static string Push_Mist
@@ -7367,9 +7377,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Wenn es so wäre, würde ich es einem Fremden niemals gestehen! Ich würde davon berichten, dass es immer schon mein Traum war, mit Holzwolle ausgestopft herum zu liegen und die Vergänglichkeit des Daseins zu zelebrieren. Zum Glück krieege ich ja die meiste Zeit davon gar nichts mit.";
+                return "Wenn es so wäre, würde ich es einem Fremden niemals gestehen! Ich würde davon berichten, dass es immer schon mein Traum war, mit Holzwolle ausgestopft herum zu liegen und die Vergänglichkeit des Daseins zu zelebrieren. Zum Glück kriege ich ja die meiste Zeit davon gar nichts mit.";
             else
-                return "Wenn es so wäre, würde ich es einem Fremden niemals gestehen! Ich würde davon berichten, dass es immer schon mein Traum war, mit Holzwolle ausgestopft herum zu liegen und die Vergänglichkeit des Daseins zu zelebrieren. Zum Glück krieege ich ja die meiste Zeit davon gar nichts mit.";
+                return "Wenn es so wäre, würde ich es einem Fremden niemals gestehen! Ich würde davon berichten, dass es immer schon mein Traum war, mit Holzwolle ausgestopft herum zu liegen und die Vergänglichkeit des Daseins zu zelebrieren. Zum Glück kriege ich ja die meiste Zeit davon gar nichts mit.";
         }
     }
     public static string Parrot_Dialog_Meister
@@ -8578,6 +8588,46 @@ public static partial class loca
                 return "grab <nameNom> with <nameDat2>";
         }
     }
+    public static string Pulverize1
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "<nameNom>";
+            else
+                return "<nameNom>";
+        }
+    }
+    public static string Pulverize2
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "<nameNom>";
+            else
+                return "<nameNom>";
+        }
+    }
+    public static string Pulverize3
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "<nameNom> mit <> zerreiben";
+            else
+                return "grab <nameNom> with <>";
+        }
+    }
+    public static string Pulverize4
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "zerreibe <nameNom> mit <nameDat2>";
+            else
+                return "grab <nameNom> with <nameDat2>";
+        }
+    }
     public static string Light1
     {
         get
@@ -8756,11 +8806,23 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ein besonderer Dank geht an die - freiwilligen und weniger freiwilligen - Tester, sobald es welche gibt.";
+                return "Ein besonderer Dank geht an die - freiwilligen und weniger freiwilligen - Tester, sobald es welche gibt.<br>Icon von macrovector on Freepik";
             else
-                return "Ein besonderer Dank geht an die - freiwilligen und weniger freiwilligen - Tester, sobald es welche gibt.";
+                return "Ein besonderer Dank geht an die - freiwilligen und weniger freiwilligen - Tester, sobald es welche gibt.<br>Icon von macrovector on Freepik";
         }
     }
+
+    public static string General_Info
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Feedback willkommen insbesondere zum User Interface von \"Das Versteck des Meisters\". Das System lässt sich auf vielfältige Weisen bedienen: Texteingabe, Multiple Choice, Spracheingabe, und gerne auch eine Kombination aus allen dreien.\nSo richtig perfekt ist keiner der Input-Modi, fehlerfrei erst recht nicht. Ich freue mich sehr auf eure Rückmeldung, um die Oberfläche nun mal richtig rund zu schleifen.\nWer Lust hat, etwas zu experimentieren, der findet in den Settings jede Menge fragwürdiger Optionen.\nWarnung: Der Portrait-Modus (schaltet sich automatisch ein, wenn die App eher hoch als breit ist) ist noch etwas buggy. Lieber Landscape-Modus spielen, oder Multiple Choice Menüs weglassen.\n\n\n\n";
+            else
+                return "Feedback willkommen insbesondere zum User Interface von \"Das Versteck des Meisters\". Das System lässt sich auf vielfältige Weisen bedienen: Texteingabe, Multiple Choice, Spracheingabe, und gerne auch eine Kombination aus allen dreien.\nSo richtig perfekt ist keiner der Input-Modi, fehlerfrei erst recht nicht. Ich freue mich sehr auf eure Rückmeldung, um die Oberfläche nun mal richtig rund zu schleifen.\nWer Lust hat, etwas zu experimentieren, der findet in den Settings jede Menge fragwürdiger Optionen.\nWarnung: Der Portrait-Modus (schaltet sich automatisch ein, wenn die App eher hoch als breit ist) ist noch etwas buggy. Lieber Landscape-Modus spielen, oder Multiple Choice Menüs weglassen.\n\n\n\n";
+        }
+    }
+
 }
 
 

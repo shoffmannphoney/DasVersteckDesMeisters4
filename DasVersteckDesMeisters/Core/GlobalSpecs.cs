@@ -191,7 +191,9 @@ class HttpServer
     {
         listener = new HttpListener();
         listener.Prefixes.Add(url);
+#if WINDOWS
         listener.Start();
+#endif
         Task listenTask = HttpServer.HandleIncomingConnections();
         // listenTask.GetAwaiter().GetResult();
         
@@ -1140,7 +1142,7 @@ public class GlobalData : IGlobalData
 
 #if ANDROID
         DeviceDisplay.Current.MainDisplayInfoChanged += RotateDevice;
-#endif 
+#endif
 
 #if WINDOWS
         LoadDataSync();

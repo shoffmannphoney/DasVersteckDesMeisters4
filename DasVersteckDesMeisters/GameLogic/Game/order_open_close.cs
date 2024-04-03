@@ -108,7 +108,7 @@ public partial class Order: AbstractOrder
             if (item == CA!.I04_Flap)
             {
                 AdvGame.StoryOutput(loca.Close_L04_Flap);
-                Items.TransferItem(CA.I04_Opening.ID, CB.LocType_In_Item, CA.I00_Nullbehaelter.ID);
+                Items.TransferItem(CA.I04_Opening.ID, CB.LocType_In_Item, CA.I00_Nullbehaelter2.ID);
 
             }
         }

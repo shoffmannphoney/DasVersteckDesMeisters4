@@ -53803,7 +53803,7 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Die wichtigsten Befehl";
+                return "Die wichtigsten Befehle";
             else
                 return "The main command";
         }
@@ -63959,9 +63959,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "\\slot";
+                return "/slot";
             else
-                return "\\slot";
+                return "/slot";
         }
     }
     public static string OrderFeedback_LoadMC_Person_I_14026
@@ -64049,9 +64049,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "\\slotdescription.json";
+                return "/slotdescription.json";
             else
-                return "\\slotdescription.json";
+                return "/slotdescription.json";
         }
     }
     public static string OrderFeedback_WriteSlotDescription_14043
@@ -64059,9 +64059,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "\\slotdescription.json";
+                return "/slotdescription.json";
             else
-                return "\\slotdescription.json";
+                return "/slotdescription.json";
         }
     }
     public static string OrderFeedback_Save_14044
@@ -64109,9 +64109,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "\\slot";
+                return "/slot";
             else
-                return "\\Slot";
+                return "/Slot";
         }
     }
     public static string OrderFeedback_PathFileNameFromSlot_14051
@@ -64130,9 +64130,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "\\";
+                return "/";
             else
-                return "\\";
+                return "/";
         }
     }
     public static string OrderFeedback_FindOrAddOrderList_14055
@@ -85957,9 +85957,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "\\";
+                return "/";
             else
-                return "\\";
+                return "/";
         }
     }
     public static string OrderList_OrderList_16200
@@ -85977,9 +85977,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "\\";
+                return "/";
             else
-                return "\\";
+                return "/";
         }
     }
     public static string OrderList_OrderList_16202
@@ -85997,9 +85997,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "\\";
+                return "/";
             else
-                return "\\";
+                return "/";
         }
     }
     public static string OrderList_OrderList_16204
@@ -90822,6 +90822,26 @@ public static partial class loca
                 return "Hilfe";
             else
                 return "Help";
+        }
+    }
+     public static string MAUI_UI_Menu_Order_Score
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Score";
+            else
+                return "Score";
+        }
+    }
+    public static string MAUI_UI_Menu_Score
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Score";
+            else
+                return "Score";
         }
     }
     public static string MAUI_UI_Menu_Inv

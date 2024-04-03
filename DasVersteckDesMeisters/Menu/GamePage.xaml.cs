@@ -3025,6 +3025,7 @@ public partial class GamePage : ContentPage, IMenuExtension
         AddTreeViewItem(tv1, loca.MAUI_UI_Menu_Info, loca.MAUI_UI_Menu_Order_Info);
         AddTreeViewItem(tv1, loca.MAUI_UI_Menu_Manual, loca.MAUI_UI_Menu_Order_Manual);
         AddTreeViewItem(tv1, loca.MAUI_UI_Menu_Help, loca.MAUI_UI_Menu_Order_Help);
+        AddTreeViewItem(tv1, loca.MAUI_UI_Menu_Score, loca.MAUI_UI_Menu_Order_Score);
         // AddTreeViewItem(tv1, loca.MAUI_UI_Menu_Info, loca.MAUI_UI_Menu_Order_Info);
 
         tv1 = AddTreeViewItem(tv, loca.MAUI_UI_Menu_General, null);
@@ -4448,6 +4449,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                                 break;
                         }
                     }
+                    UIS.RecordedText = "";
                 }
                 else if (Grid_More.IsVisible == true)
                 {
