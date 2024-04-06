@@ -835,21 +835,27 @@ namespace GameCore
 
                     CA.Status_Tuer_Labor.Val = 1;
                     AdvGame!.StoryOutput(loca.Unlock_Labor_Door);
+                    AdvGame!.LockedDoorSwitchToUnlocked(item1);
                     handled = true;
 
                 }
+            }
+            else if (item1.ID == CA.I05_Library_Door.ID && item2.ID == CA.I00_Key.ID)
+            {
+                AdvGame!.StoryOutput(loca.Unlock_Library_Door_Fail);
+                handled = true;
             }
 
 
             // Base
             if (!handled)
                 handled = base.UnlockW(PersonID, PTL);
+
             if (!handled)
             {
             }
             else
             {
-                AdvGame!.LockedDoorSwitchToUnlocked(item1);
 
             }
             return (handled);
@@ -4632,6 +4638,30 @@ namespace GameCore
                 Items.TransferItem(CA.I00_Unstable_Pliers_With_Claw.ID, CB.LocType_Person, CA.Person_I.ID);
                 AdvGame!.SetScoreToken(CA!.Score_Klauenzange1);
 
+                handled = true;
+            }
+            if ((item1.ID == CA!.I07_Door.ID && item2.ID == CA.I00_Key.ID)
+                || (item2.ID == CA!.I07_Door.ID && item1.ID == CA.I00_Key.ID)
+                )
+            {
+                ParseTokenList ptNew = new();
+                ptNew.AddVerb(CA.Verb_Unlock);
+                ptNew.AddItem(CA.I07_Door);
+                ptNew.AddPrep(CB.Prep_with);
+                ptNew.AddItem(CA.I00_Key);
+                UnlockW(PersonID, ptNew);
+                handled = true;
+            }
+            if ((item1.ID == CA!.I05_Library_Door.ID && item2.ID == CA.I00_Key.ID)
+                || (item2.ID == CA!.I05_Library_Door.ID && item1.ID == CA.I00_Key.ID)
+                )
+            {
+                ParseTokenList ptNew = new();
+                ptNew.AddVerb(CA.Verb_Unlock);
+                ptNew.AddItem(CA.I05_Library_Door);
+                ptNew.AddPrep(CB.Prep_with);
+                ptNew.AddItem(CA.I00_Key);
+                UnlockW(PersonID, ptNew);
                 handled = true;
             }
             if ((item1.ID == CA.I00_Roll_Plaster.ID && item2.ID == CA.I00_Unstable_Pliers_With_Claw.ID)

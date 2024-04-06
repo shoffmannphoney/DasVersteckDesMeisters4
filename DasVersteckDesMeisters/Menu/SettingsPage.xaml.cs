@@ -647,6 +647,11 @@ public partial class SettingsPage : ContentPage, IMenuExtension
         MGMInner.RowDefinitions[2].Height = new GridLength(0);
         MGMInner.RowDefinitions[3].Height = new GridLength(0);
 
+        IllustrationLabel.IsVisible = false;
+        IllustrationGrid.IsVisible = false;
+
+        LanguageLabel.IsVisible = false;
+        LanguageGrid.IsVisible = false;
 
         _viewModelGeneral.SetCallbackChangeOrientation((IGlobalData._callbackChangeOrientation)ChangeOrientation);
         _viewModelGeneral!.SetCallbackResize((IGlobalData._callbackResize)DoResize);

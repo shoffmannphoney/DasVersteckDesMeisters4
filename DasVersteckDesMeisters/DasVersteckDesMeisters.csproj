@@ -73,9 +73,16 @@
 		<RuntimeIdentifier>$(RuntimeIdentifierOverride)</RuntimeIdentifier>
 	</PropertyGroup>
 
+	<ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">
+		<MauiIcon Include="Resources\AppIcon\claw.png" />
+	</ItemGroup>
+	<ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">
+		<MauiIcon Include="Resources\AppIcon\clawmobile.png" />
+	</ItemGroup>
+
 	<ItemGroup>
 		<!-- App Icon -->
-
+		
 		<!-- Splash Screen -->
 		<MauiImage Update="Resources\Images\splash.svg" BaseSize="208,208" />
 
@@ -121,11 +128,14 @@
 	  <None Remove="gem.targetsize-48.png" />
 	  <None Remove="Platforms\Android\ball.ico" />
 	  <None Remove="Platforms\Android\ball.png" />
+	  <None Remove="Platforms\Android\Resources\values\styles.xml" />
+	  <None Remove="Resources\AppIcon\claw.png" />
 	  <None Remove="Resources\AppIcon\claw.scale-100.png" />
 	  <None Remove="Resources\AppIcon\claw.scale-125.png" />
 	  <None Remove="Resources\AppIcon\claw.scale-150.png" />
 	  <None Remove="Resources\AppIcon\claw.scale-200.png" />
 	  <None Remove="Resources\AppIcon\claw.scale-400.png" />
+	  <None Remove="Resources\AppIcon\clawmobile.png" />
 	  <None Remove="Resources\Images\splash.svg" />
 	  <None Remove="Resources\Raw\Index.html" />
 	</ItemGroup>
@@ -139,7 +149,6 @@
 		<MauiCss Remove="GameLogic\Model\**" />
 		<MauiXaml Remove="GameLogic\Model\**" />
 		<None Remove="GameLogic\Model\**" />
-		<AndroidResource Remove="Platforms\Android\Resources\values\styles.xml" />
 		<None Remove="PhoneyIslandGame_TemporaryKey.pfx" />
 		<None Remove="Directory.Build.props" />
 		<None Remove="Resources\AppIcon\ballsmaller.png" />
@@ -208,11 +217,13 @@
 	  <Content Include="gem.scale-400.png" />
 	  <Content Include="gem.targetsize-256.png" />
 	  <Content Include="gem.targetsize-48.png" />
+	  <Content Include="Resources\AppIcon\claw.png" />
 	  <Content Include="Resources\AppIcon\claw.scale-100.png" />
 	  <Content Include="Resources\AppIcon\claw.scale-125.png" />
 	  <Content Include="Resources\AppIcon\claw.scale-150.png" />
 	  <Content Include="Resources\AppIcon\claw.scale-200.png" />
 	  <Content Include="Resources\AppIcon\claw.scale-400.png" />
+	  <Content Include="Resources\AppIcon\clawmobile.png" />
 	  <Content Include="Resources\AppIcon\gem.png.scale-200.png" />
 	  <Content Include="Resources\AppIcon\gem.png.scale-400.png" />
 	</ItemGroup>
@@ -229,6 +240,7 @@
 	  <EmbeddedResource Include="Resources\Raw\HTMLPage5.html" />
 	  <EmbeddedResource Include="Resources\Raw\HTMLPage6.html" />
 	</ItemGroup>
+	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadGenericExceptionInfoBarDasVersteckDesMeistersHideInfoBar="True" /></VisualStudio></ProjectExtensions>
 
 
 </Project>

@@ -80,7 +80,7 @@
                                     <RowDefinition Height="180"/>
                                 </Grid.RowDefinitions>
                                 <Label x:Name="LanguageLabel" Grid.Row="0" StyleClass="Label_Normal" HorizontalOptions="Center" VerticalOptions="End" Margin="0,0,0,15" FontSize="Large"  Text="Sprache"/>
-                                <Grid Grid.Row="1" WidthRequest="300">
+                                <Grid x:Name="LanguageGrid" Grid.Row="1" WidthRequest="300">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="60"/>
                                         <RowDefinition Height="60"/>
@@ -89,7 +89,7 @@
                                     <Button x:Name="LanguageButton_English" Clicked="OnClickEnglish" Grid.Row="1" StyleClass="Button_Settings" CornerRadius="1" Text="Englisch"/>
                                 </Grid>
                                 <Label x:Name="IllustrationLabel" Grid.Row="2" StyleClass="Label_Normal" HorizontalOptions="Center" VerticalOptions="End" Margin="0,0,0,15" FontSize="Large"  Text="Illustration"/>
-                                <Grid Grid.Row="3" WidthRequest="300">
+                                <Grid x:Name="IllustrationGrid" Grid.Row="3" WidthRequest="300">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="60"/>
                                         <RowDefinition Height="60"/>

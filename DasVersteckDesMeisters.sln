@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31611.283
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheBridgesOfMaui", "DasVersteckDesMeisters\DasVersteckDesMeisters.csproj", "{C0BB67B8-B297-4A1B-A97E-751A53C6FFBC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DasVersteckDesMeisters", "DasVersteckDesMeisters\DasVersteckDesMeisters.csproj", "{C0BB67B8-B297-4A1B-A97E-751A53C6FFBC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebViewInterop", "WebViewInterop\WebViewInterop.csproj", "{1AA39E37-64C6-486B-B1C6-ECFE605519B5}"
 EndProject
@@ -25,9 +25,9 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C0BB67B8-B297-4A1B-A97E-751A53C6FFBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C0BB67B8-B297-4A1B-A97E-751A53C6FFBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C0BB67B8-B297-4A1B-A97E-751A53C6FFBC}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{C0BB67B8-B297-4A1B-A97E-751A53C6FFBC}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{C0BB67B8-B297-4A1B-A97E-751A53C6FFBC}.Debug|Any CPU.Build.0 = Debug|x64
+		{C0BB67B8-B297-4A1B-A97E-751A53C6FFBC}.Debug|Any CPU.Deploy.0 = Debug|x64
 		{C0BB67B8-B297-4A1B-A97E-751A53C6FFBC}.Debug|ARM.ActiveCfg = Debug|Any CPU
 		{C0BB67B8-B297-4A1B-A97E-751A53C6FFBC}.Debug|ARM.Build.0 = Debug|Any CPU
 		{C0BB67B8-B297-4A1B-A97E-751A53C6FFBC}.Debug|ARM.Deploy.0 = Debug|Any CPU
@@ -55,8 +55,8 @@ Global
 		{C0BB67B8-B297-4A1B-A97E-751A53C6FFBC}.Release|x86.ActiveCfg = Release|Any CPU
 		{C0BB67B8-B297-4A1B-A97E-751A53C6FFBC}.Release|x86.Build.0 = Release|Any CPU
 		{C0BB67B8-B297-4A1B-A97E-751A53C6FFBC}.Release|x86.Deploy.0 = Release|Any CPU
-		{1AA39E37-64C6-486B-B1C6-ECFE605519B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1AA39E37-64C6-486B-B1C6-ECFE605519B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AA39E37-64C6-486B-B1C6-ECFE605519B5}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{1AA39E37-64C6-486B-B1C6-ECFE605519B5}.Debug|Any CPU.Build.0 = Debug|x64
 		{1AA39E37-64C6-486B-B1C6-ECFE605519B5}.Debug|ARM.ActiveCfg = Debug|Any CPU
 		{1AA39E37-64C6-486B-B1C6-ECFE605519B5}.Debug|ARM.Build.0 = Debug|Any CPU
 		{1AA39E37-64C6-486B-B1C6-ECFE605519B5}.Debug|ARM64.ActiveCfg = Debug|Any CPU
@@ -95,7 +95,8 @@ Global
 		{CCD4EC79-3F61-4BAF-AE39-D73857B19B82}.Release|x64.Build.0 = Release|x64
 		{CCD4EC79-3F61-4BAF-AE39-D73857B19B82}.Release|x86.ActiveCfg = Release|Win32
 		{CCD4EC79-3F61-4BAF-AE39-D73857B19B82}.Release|x86.Build.0 = Release|Win32
-		{2746B9A5-3BC0-470A-A813-1C5D510911A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2746B9A5-3BC0-470A-A813-1C5D510911A1}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{2746B9A5-3BC0-470A-A813-1C5D510911A1}.Debug|Any CPU.Build.0 = Debug|x64
 		{2746B9A5-3BC0-470A-A813-1C5D510911A1}.Debug|ARM.ActiveCfg = Debug|Any CPU
 		{2746B9A5-3BC0-470A-A813-1C5D510911A1}.Debug|ARM64.ActiveCfg = Debug|Any CPU
 		{2746B9A5-3BC0-470A-A813-1C5D510911A1}.Debug|x64.ActiveCfg = Debug|x64

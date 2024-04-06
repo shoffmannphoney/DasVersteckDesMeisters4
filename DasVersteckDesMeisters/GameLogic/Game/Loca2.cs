@@ -3230,6 +3230,16 @@ public static partial class loca
                 return "Ich steckte den Schlüssel in das Schloss der Tür zum Labor. Die Tür ließ sich ohne Probleme aufschließen.";
         }
     }
+    public static string Unlock_Library_Door_Fail
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Ich versuchte den verzierten Schlüssel in die verzierte Tür der Bibliothek zu stecken, aber leider hörten die Gemeinsamkeiten bei den Verzierungen auf. Der Schlüssel passte nicht.";
+            else
+                return "Ich versuchte den verzierten Schlüssel in die verzierte Tür der Bibliothek zu stecken, aber leider hörten die Gemeinsamkeiten bei den Verzierungen auf. Der Schlüssel passte nicht.";
+        }
+    }
     public static string Unlock_Labor_Door_Fail
     {
         get
@@ -8806,9 +8816,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ein besonderer Dank geht an die - freiwilligen und weniger freiwilligen - Tester, sobald es welche gibt.<br>Icon von macrovector on Freepik";
+                return "Ein besonderer Dank geht an die - freiwilligen und weniger freiwilligen - Tester: Wiebke Scholz (more to follow) <br>Icon von macrovector on Freepik";
             else
-                return "Ein besonderer Dank geht an die - freiwilligen und weniger freiwilligen - Tester, sobald es welche gibt.<br>Icon von macrovector on Freepik";
+                return "Ein besonderer Dank geht an die - freiwilligen und weniger freiwilligen - Tester: Wiebke Scholz (more to follow) <br>Icon von macrovector on Freepik";
         }
     }
 

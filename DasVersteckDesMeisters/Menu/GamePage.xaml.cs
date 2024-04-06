@@ -523,6 +523,14 @@ public partial class GamePage : ContentPage, IMenuExtension
         GridWebView.HeightRequest = rdc[0].Height.Value;
         Grid_Inter.HeightRequest = rdc[2].Height.Value;
         GameOut.HeightRequest = rdc[0].Height.Value;
+
+        double gesHeight = rdc[0].Height.Value + rdc[1].Height.Value + rdc[2].Height.Value;
+
+        Grid_Output.HeightRequest = gesHeight;
+
+        MenuGridMenuVertical.HeightRequest = PageGrid.Height - 40;
+        MGM0.HeightRequest = PageGrid.Height - 40;
+        MenuGridMenuInner.HeightRequest = gesHeight;
         /*
         if ( UIS != null && UIS.Scr != null )
         {
