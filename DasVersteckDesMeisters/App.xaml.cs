@@ -17,6 +17,7 @@ public partial class App : Application
     public static Window? MainWindow;
 
     private Phoney_MAUI.Model.DelVoid? DestroyCallback { get; set; }
+    private Phoney_MAUI.Model.DelVoid? StoppedCallback { get; set; }
 
     // Erstellen Sie einen Delegaten für die asynchrone Methode
     // Func<Task<bool>>? asyncMethod; 
@@ -52,12 +53,33 @@ public partial class App : Application
         if (DestroyCallback != null)
         {
             DestroyCallback();
+            DestroyCallback = null;
+        }
+        OnDestroy();
+    }
+    protected void OnDestroy()
+    {
+        AppState = appState.closing;
+        if (DestroyCallback != null)
+        {
+            DestroyCallback();
+            DestroyCallback = null;
         }
     }
-
     protected override Window CreateWindow(IActivationState? activationState)
     {   
         MainWindow = base.CreateWindow(activationState);
+
+#if ANDROID
+        MainWindow.Stopped+= (s, e) =>
+        {
+            if( StoppedCallback != null)
+            {
+                StoppedCallback();
+            }   
+        };
+#endif
+        
         AppState = appState.running;
 #if WINDOWS
         Phoney_MAUI.Model.ILayoutDescription? ld = UIServices.ReadConfig();
@@ -92,6 +114,10 @@ public partial class App : Application
     public void SetDestroyCallback( Phoney_MAUI.Model.DelVoid destroyCallback)
     {
         DestroyCallback = destroyCallback;
+    }
+    public void SetStoppedCallback(Phoney_MAUI.Model.DelVoid stoppedCallback)
+    {
+        StoppedCallback = stoppedCallback;
     }
 }
 

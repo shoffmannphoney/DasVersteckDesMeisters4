@@ -2489,6 +2489,7 @@ public class TabItem: Grid, INotifyPropertyChanged
         t.SelectButton.ID = TabPanels.Count;
         t.SelectButton.CornerRadius = 1;
         t.SelectButton.Clicked += SelectTabItem;
+        // t.SelectButton.Background = Colors.Red;
         t.TypeID = typeID;
 
         TabPanels.Add(t);
@@ -2502,14 +2503,19 @@ public class TabItem: Grid, INotifyPropertyChanged
 
 
         t.TabPanelGrid = new();
+        // t.TabPanelGrid.Background = Colors.Green;
+        t.TabPanelGrid.VerticalOptions = LayoutOptions.FillAndExpand;
         t.TabPanelSV.Content =  t.TabPanelGrid;
+        // t.TabPanelSV.Background = Colors.Yellow;
+        t.TabPanelSV.VerticalOptions = LayoutOptions.FillAndExpand;
         List<string> grStyles = new();
         grStyles.Add("Grid_Normal");
         t.TabPanelGrid.StyleClass = grStyles;
 
         Label l1 = new();
-        l1.Text = TabPanels.Count + ". Panel";
+        l1.Text = TabPanels.Count + ". Panelinjni";
         l1.TextColor = Colors.White;
+        // l1.Background = Colors.Blue;
         t.TabPanelGrid.Add(l1);
 
         SyncTabStyles();

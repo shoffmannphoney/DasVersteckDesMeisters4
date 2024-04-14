@@ -1294,7 +1294,11 @@ public class OrderList : IOrderList
         if (otl1.Zipped)
             ReadZipOrderTable(otl1ix, otl1!.Name!);
 
-        if (otl1.OT!.Count != otl2.OT!.Count) identical = false;
+        if (otl1.OT == null || otl2.OT == null) 
+            identical = false;
+        else if (otl1.OT!.Count != otl2.OT!.Count) 
+            identical = false;
+
         int x = 0;
 
         if (identical == true)
@@ -1592,7 +1596,11 @@ public class OrderList : IOrderList
         // Split des aktuellen Runs, wenn mitten im Run ein neuer Befehl auftaucht. Ausnahme: Index == 0. Dieser Fall wird nicht auftreten, also muss auch
         // der Run nicht gesplittet werden.
         // Der Split ist nur noch möglich im Debug-Modus
-        if ((OTL![Index].Point < (OTL![Index].OT!.Count - 1)) && Index != 0)
+        if (OTL![Index].OT == null )
+        {
+            
+        }
+        else if ((OTL![Index].Point < (OTL![Index].OT!.Count - 1)) && Index != 0)
         {
 
             // Ignores: 001

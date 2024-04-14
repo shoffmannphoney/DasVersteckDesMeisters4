@@ -118,8 +118,19 @@ namespace GameCore
             }
             if (item.ID == CA.I00_Supermagic_Powder.ID && CA.I00_Supermagic_Powder.locationID == CA.I10_Giant_Mortar.ID )
             {
-                AdvGame!.StoryOutput(loca.Take_Supermagic_Powder);
-                Items.TransferItem(CA.I00_Supermagic_Powder.ID, CA.I00_Pouch.ID);
+                if( Items.IsItemInv(CA.I00_Pouch))
+                { 
+                    AdvGame!.StoryOutput(loca.Take_Supermagic_Powder);
+                    Items.TransferItem(CA.I00_Supermagic_Powder.ID, CA.I00_Pouch.ID);
+                    handled = true;
+                }
+                else
+                {
+                    AdvGame!.StoryOutput(loca.Take_Supermagic_Powder_NoPouch);
+                    Items.TransferItem(CA.I00_Supermagic_Powder.ID, CB.LocType_Person, CA.Person_I.ID);
+                    handled = true;
+                }
+
                 handled = true;
 
             }
@@ -355,6 +366,12 @@ namespace GameCore
             if( item.ID == CA.I08_Water.ID && CA.I00_Coin.locationID == CA.I00_Nullbehaelter.ID )
             {
                 AdvGame!.StoryOutput(loca.Adv_I08_Well_3 );
+
+            }
+
+            if( item.ID == CA.I10_Darkness_Machine.ID && CA.I10_Hatch.IsClosed == false)
+            {
+                AdvGame!.StoryOutput(loca.Adv_I10_Darkness_Machine_a);
 
             }
 
@@ -4676,12 +4693,20 @@ namespace GameCore
                     || (item1.ID == CA.I00_Plunger.ID && item2.ID == CA.I00_Slag.ID)
                )
             {
-                AdvGame!.StoryOutput(loca.UseW_Plunger_Slag);
-                Items.TransferItem(CA.I00_Slag.ID, CA.I00_Nullbehaelter2.ID);
-                Items.TransferItem(CA.I00_Supermagic_Powder.ID, CA.I10_Giant_Mortar.ID);
-                AdvGame!.SetScoreToken(CA!.Score_Meues_Pulver);
+                if( CA.I00_Slag.locationID == CA.I10_Giant_Mortar.ID )
+                {
+                    AdvGame!.StoryOutput(loca.UseW_Plunger_Slag);
+                    Items.TransferItem(CA.I00_Slag.ID, CA.I00_Nullbehaelter2.ID);
+                    Items.TransferItem(CA.I00_Supermagic_Powder.ID, CA.I10_Giant_Mortar.ID);
+                    AdvGame!.SetScoreToken(CA!.Score_Meues_Pulver);
 
-                handled = true;
+                    handled = true;
+                }
+                else
+                {
+                    AdvGame!.StoryOutput(loca.UseW_Plunger_Slag_Fail);
+                    handled = true;
+                }
             }
             else if (item1.ID == CA!.I08_Water.ID && item2.ID == CA!.I00_Magic_Candle.ID)
             {

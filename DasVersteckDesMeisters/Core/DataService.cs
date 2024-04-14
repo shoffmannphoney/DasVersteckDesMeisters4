@@ -83,10 +83,11 @@ namespace Phoney_MAUI.Core
 
         public bool ReadZipOrderTable(int val, string name)
         {
+            string orderTableName = "/ordertable.zip";
             // Ignores: 001
             string? pathName = DeviceData._deviceData!.GetSavePath()!;
             // Ignores: 002
-            string? pathfileName = pathName + "/ordertable.zip";
+            string? pathfileName = pathName + orderTableName;
 
             // Ignores: 001
             string? jsonName = name + ".json";
@@ -239,9 +240,10 @@ namespace Phoney_MAUI.Core
 
         public bool ZipOrderTable(int val)
         {
+            string orderTableName = "/ordertable.zip";
             // Noloca: 003
             string? pathName = DeviceData._deviceData!.GetSavePath()!;
-            string? pathfileName = pathName + "/ordertable.zip";
+            string? pathfileName = pathName + orderTableName;
 
 
             string? jsonString =

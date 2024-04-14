@@ -374,11 +374,11 @@ public partial class SettingsPage : ContentPage, IMenuExtension
             ItemsInvListPosButton_RD.Text = loca.MAUI_UI_Buttonstate_RD;
 
         int columns = 0;
-        if (GD.LayoutDescription.OrderListPosPT != ILayoutDescription.selectedPositionPT.off)
+        if (FirstColumnUsed() == true)
             columns++;
-        if (GD.LayoutDescription.ItemsLocListPosPT != ILayoutDescription.selectedPositionPT.off)
+        if (SecondColumnUsed() == true)
             columns++;
-        if (GD.LayoutDescription.ItemsInvListPosPT != ILayoutDescription.selectedPositionPT.off)
+        if (ThirdColumnUsed() == true)
             columns++;
 
         // OrderList PT
@@ -480,11 +480,9 @@ public partial class SettingsPage : ContentPage, IMenuExtension
         else
             STTMode_Manuell.Text = loca.MAUI_STT_Manual;
 
-        var tres = UIS.STTInqSpeech();
+        bool speech = UIS.STTInqSpeechSync();
         
-        tres.Wait();
-
-        if ( tres.Result == false)
+        if ( speech  == false)
         {
             STTMode_Manuell.FontAttributes = FontAttributes.Italic;
         }
@@ -499,7 +497,7 @@ public partial class SettingsPage : ContentPage, IMenuExtension
         else
             STTMode_Continuous.Text = loca.MAUI_STT_Continuous;
 
-        if (UIS.STTInqSpeech().Result == false)
+        if (speech == false)
         {
             STTMode_Continuous.FontAttributes = FontAttributes.Italic;
         }
@@ -572,13 +570,13 @@ public partial class SettingsPage : ContentPage, IMenuExtension
         */
 
         // OrderList
-        if (columns < 1 || (columns == 1 && GD.LayoutDescription.OrderListPosPT == ILayoutDescription.selectedPositionPT.first))
+        if (columns < 1 ) // || (columns == 1 && GD.LayoutDescription.OrderListPosPT == ILayoutDescription.selectedPositionPT.first))
         {
             OrderListPosButtonPT_3rd.IsVisible = false;
             OrderListPosButtonPT_2nd.IsVisible = false;
             MGMInner.RowDefinitions[15].Height = new GridLength(120);
         }
-        else if (columns < 2 || (columns == 2 && (GD.LayoutDescription.OrderListPosPT == ILayoutDescription.selectedPositionPT.second || GD.LayoutDescription.OrderListPosPT == ILayoutDescription.selectedPositionPT.first)))
+        else if (columns < 2 ) // || (columns == 2 && (GD.LayoutDescription.OrderListPosPT == ILayoutDescription.selectedPositionPT.second || GD.LayoutDescription.OrderListPosPT == ILayoutDescription.selectedPositionPT.first)))
         {
             OrderListPosButtonPT_3rd.IsVisible = false;
             OrderListPosButtonPT_2nd.IsVisible = true;
@@ -592,13 +590,13 @@ public partial class SettingsPage : ContentPage, IMenuExtension
         }
 
         // Items Loc
-        if (columns < 1 || (columns == 1 && GD.LayoutDescription.ItemsLocListPosPT == ILayoutDescription.selectedPositionPT.first))
+        if (columns < 1) // || (columns == 1 && GD.LayoutDescription.OrderListPosPT == ILayoutDescription.selectedPositionPT.first))
         {
             ItemsLocListPosButtonPT_3rd.IsVisible = false;
             ItemsLocListPosButtonPT_2nd.IsVisible = false;
             MGMInner.RowDefinitions[17].Height = new GridLength(120);
         }
-        else if (columns < 2 || (columns == 2 && (GD.LayoutDescription.ItemsLocListPosPT == ILayoutDescription.selectedPositionPT.second || GD.LayoutDescription.ItemsLocListPosPT == ILayoutDescription.selectedPositionPT.first)))
+        else if (columns < 2) // || (columns == 1 && GD.LayoutDescription.OrderListPosPT == ILayoutDescription.selectedPositionPT.first))
         {
             ItemsLocListPosButtonPT_3rd.IsVisible = false;
             ItemsLocListPosButtonPT_2nd.IsVisible = true;
@@ -613,13 +611,13 @@ public partial class SettingsPage : ContentPage, IMenuExtension
 
 
         // Items Inv
-        if (columns < 1 || (columns == 1 && GD.LayoutDescription.ItemsInvListPosPT == ILayoutDescription.selectedPositionPT.first))
+        if (columns < 1) // || (columns == 1 && GD.LayoutDescription.OrderListPosPT == ILayoutDescription.selectedPositionPT.first))
         {
             ItemsInvListPosButtonPT_3rd.IsVisible = false;
             ItemsInvListPosButtonPT_2nd.IsVisible = false;
             MGMInner.RowDefinitions[19].Height = new GridLength(120);
         }
-        else if (columns < 2 || (columns == 2 && (GD.LayoutDescription.ItemsInvListPosPT == ILayoutDescription.selectedPositionPT.second || GD.LayoutDescription.ItemsInvListPosPT == ILayoutDescription.selectedPositionPT.first)))
+        else if (columns < 2) // || (columns == 1 && GD.LayoutDescription.OrderListPosPT == ILayoutDescription.selectedPositionPT.first))
         {
             ItemsInvListPosButtonPT_3rd.IsVisible = false;
             ItemsInvListPosButtonPT_2nd.IsVisible = true;
@@ -1024,8 +1022,80 @@ public partial class SettingsPage : ContentPage, IMenuExtension
         SetButtonStates();
     }
 
+    bool FirstColumnUsed()
+    {
+        if (GD.LayoutDescription.OrderListPosPT == ILayoutDescription.selectedPositionPT.first || GD.LayoutDescription.ItemsLocListPosPT == ILayoutDescription.selectedPositionPT.first || GD.LayoutDescription.ItemsInvListPosPT == ILayoutDescription.selectedPositionPT.first)
+            return true;
+
+        return false;
+    }
+    bool SecondColumnUsed()
+    {
+        if (GD.LayoutDescription.OrderListPosPT == ILayoutDescription.selectedPositionPT.second|| GD.LayoutDescription.ItemsLocListPosPT == ILayoutDescription.selectedPositionPT.second || GD.LayoutDescription.ItemsInvListPosPT == ILayoutDescription.selectedPositionPT.second  )
+            return true;
+
+        return false;
+    }
+    bool ThirdColumnUsed()
+    {
+        if (GD.LayoutDescription.OrderListPosPT == ILayoutDescription.selectedPositionPT.third || GD.LayoutDescription.ItemsLocListPosPT == ILayoutDescription.selectedPositionPT.third || GD.LayoutDescription.ItemsInvListPosPT == ILayoutDescription.selectedPositionPT.third)
+            return true;
+
+        return false;
+    }
+
+    void SecondToFirst()
+    {
+        if (GD.LayoutDescription.OrderListPosPT == ILayoutDescription.selectedPositionPT.second)
+            GD.LayoutDescription.OrderListPosPT = ILayoutDescription.selectedPositionPT.first;
+
+        if (GD.LayoutDescription.ItemsLocListPosPT == ILayoutDescription.selectedPositionPT.second)
+            GD.LayoutDescription.ItemsLocListPosPT = ILayoutDescription.selectedPositionPT.first;
+
+        if (GD.LayoutDescription.ItemsInvListPosPT == ILayoutDescription.selectedPositionPT.second)
+            GD.LayoutDescription.ItemsInvListPosPT = ILayoutDescription.selectedPositionPT.first;
+    }
+    void ThirdToSecond()
+    {
+        if (GD.LayoutDescription.OrderListPosPT == ILayoutDescription.selectedPositionPT.third)
+            GD.LayoutDescription.OrderListPosPT = ILayoutDescription.selectedPositionPT.second;
+
+        if (GD.LayoutDescription.ItemsLocListPosPT == ILayoutDescription.selectedPositionPT.third)
+            GD.LayoutDescription.ItemsLocListPosPT = ILayoutDescription.selectedPositionPT.second;
+
+        if (GD.LayoutDescription.ItemsInvListPosPT == ILayoutDescription.selectedPositionPT.third)
+            GD.LayoutDescription.ItemsInvListPosPT = ILayoutDescription.selectedPositionPT.second;
+    }
+    void CompactPortraitColumns()
+    {
+        bool again = true;
+
+        do
+        {
+            again = false;
+            if (FirstColumnUsed() == false && (SecondColumnUsed() == true || ThirdColumnUsed() == true))
+            {
+                SecondToFirst();
+                ThirdToSecond();
+                again = true;
+            }
+        } while (again == true );
+
+        do
+        {
+            again = false;
+            if (SecondColumnUsed() == false && (ThirdColumnUsed() == true))
+            {
+                ThirdToSecond();
+                again = true;
+            }
+        } while (again == true);
+    }
+
+
     public void SetPTOrder(int ID, int Ix)
     {
+        /*
         try
         {
 
@@ -1045,11 +1115,72 @@ public partial class SettingsPage : ContentPage, IMenuExtension
         {
             // int a = 5;
         }
+        */
 
-        GD.LayoutDescription.OrderListPosPT = ILayoutDescription.selectedPositionPT.off;
-        GD.LayoutDescription.ItemsLocListPosPT = ILayoutDescription.selectedPositionPT.off;
-        GD.LayoutDescription.ItemsInvListPosPT = ILayoutDescription.selectedPositionPT.off;
+  
+        // Order
+        if( ID == 1)
+        {
+            if( Ix == 0)
+            {
+                GD.LayoutDescription.OrderListPosPT = ILayoutDescription.selectedPositionPT.first;
+            }
+            else if (Ix == 1)
+            {
+                GD.LayoutDescription.OrderListPosPT = ILayoutDescription.selectedPositionPT.second;
+            }
+            else if (Ix == 2)
+            {
+                GD.LayoutDescription.OrderListPosPT = ILayoutDescription.selectedPositionPT.third;
+            }
+            else
+            {
+                GD.LayoutDescription.OrderListPosPT = ILayoutDescription.selectedPositionPT.off;
+            }
+            
+        }
+        if (ID == 2)
+        {
+            if (Ix == 0)
+            {
+                GD.LayoutDescription.ItemsLocListPosPT= ILayoutDescription.selectedPositionPT.first;
+            }
+            else if (Ix == 1)
+            {
+                GD.LayoutDescription.ItemsLocListPosPT = ILayoutDescription.selectedPositionPT.second;
+            }
+            else if (Ix == 2)
+            {
+                GD.LayoutDescription.ItemsLocListPosPT = ILayoutDescription.selectedPositionPT.third;
+            }
+            else             
+            {
+                GD.LayoutDescription.ItemsLocListPosPT = ILayoutDescription.selectedPositionPT.off;
+            }
+        }
+        if (ID == 3)
+        {
+            if (Ix == 0)
+            {
+                GD.LayoutDescription.ItemsInvListPosPT = ILayoutDescription.selectedPositionPT.first;
+            }
+            else if (Ix == 1)
+            {
+                GD.LayoutDescription.ItemsInvListPosPT = ILayoutDescription.selectedPositionPT.second;
+            }
+            else if (Ix == 2)
+            {
+                GD.LayoutDescription.ItemsInvListPosPT = ILayoutDescription.selectedPositionPT.third;
+            }
+            else            
+            {
+                GD.LayoutDescription.ItemsInvListPosPT = ILayoutDescription.selectedPositionPT.off;
+            }
 
+        }
+
+        CompactPortraitColumns();
+        /*
         if (GD.LayoutDescription.PTOrder.Count > 0)
         {
             if (GD.LayoutDescription.PTOrder[0] == 1)
@@ -1095,6 +1226,7 @@ public partial class SettingsPage : ContentPage, IMenuExtension
                 GD.LayoutDescription.ItemsInvListPosPT = ILayoutDescription.selectedPositionPT.third;
             }
         }
+        */
     }
     public AbsoluteLayout GetAbsoluteLayout()
     {

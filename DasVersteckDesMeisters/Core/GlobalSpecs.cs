@@ -529,7 +529,7 @@ public class LayoutDescription : ILayoutDescription
 
     public ILayoutDescription.ParagraphClusters ParagraphClusterMode { get; set; }
 
-    public List<ILayoutDescription.PortraitColumn> PortraitColumns { get; set; }
+    public ILayoutDescription.PortraitColumn[,] PortraitColumns { get; set; }
 
     public ILayoutDescription.selectedPosition OrderListPos { get; set; }
     public ILayoutDescription.selectedPosition ItemsLocListPos { get; set; }
@@ -545,11 +545,16 @@ public class LayoutDescription : ILayoutDescription
 
     public LayoutDescription()
     {
-        PortraitColumns = new();
+        PortraitColumns = new ILayoutDescription.PortraitColumn[3,3];
 
-        PortraitColumns.Add( ILayoutDescription.PortraitColumn.none );
-        PortraitColumns.Add( ILayoutDescription.PortraitColumn.none );
-        PortraitColumns.Add( ILayoutDescription.PortraitColumn.none );
+        PortraitColumns[0, 0] = ILayoutDescription.PortraitColumn.none;
+        PortraitColumns[1, 0] = ILayoutDescription.PortraitColumn.none;
+        PortraitColumns[2, 0] = ILayoutDescription.PortraitColumn.none;
+
+
+        // PortraitColumns.Add( ILayoutDescription.PortraitColumn.none );
+        // PortraitColumns.Add( ILayoutDescription.PortraitColumn.none );
+        // PortraitColumns.Add( ILayoutDescription.PortraitColumn.none );
 
 #if WINDOWS
         ClickMargin = ILayoutDescription.eClickMargin.very_low;

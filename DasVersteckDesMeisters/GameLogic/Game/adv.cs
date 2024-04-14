@@ -790,6 +790,7 @@ namespace GameCore
             Adv? advStore1;
 #if MAUI
             Phoney_MAUI.App.ThisApplication!.SetDestroyCallback( UIS!.QuitApplication );
+            Phoney_MAUI.App.ThisApplication!.SetStoppedCallback(UIS!.DoStatusSave);
 #endif
             // CA = new();
             // MWx = Ausgabeklasse;
@@ -2600,6 +2601,7 @@ namespace GameCore
             CA!.Noun_Mondstein = Nouns!.Add(Noun.NounLoca("Noun_Mondstein"));
             CA!.Noun_Mond = Nouns!.Add(Noun.NounLoca("Noun_Mond"));
             CA!.Noun_Plastikbeutel = Nouns!.Add(Noun.NounLoca("Noun_Plastikbeutel"));
+            CA!.Noun_Plastiktuete = Nouns!.Add(Noun.NounLoca("Noun_Plastiktuete"));
             CA!.Noun_Wunderwarzenschwamm = Nouns!.Add(Noun.NounLoca("Noun_Wunderwarzenschwamm"));
             CA!.Noun_Schlacke = Nouns!.Add(Noun.NounLoca("Noun_Schlacke"));
             CA!.Noun_Muenze = Nouns!.Add(Noun.NounLoca("Noun_Muenze"));
@@ -2645,6 +2647,10 @@ namespace GameCore
             CA!.Noun_Entchen = Nouns.Add(Noun.NounLoca("Noun_Entchen"));
             CA!.Noun_Gummiente = Nouns.Add(Noun.NounLoca("Noun_Gummiente"));
             CA!.Noun_Flamme = Nouns.Add(Noun.NounLoca("Noun_Flamme"));
+            CA!.Noun_Juwel = Nouns!.Add(Noun.NounLoca("Noun_Juwel"));
+            CA!.Noun_Edelstein = Nouns!.Add(Noun.NounLoca("Noun_Edelstein"));
+
+
 
             CA!.Noun_Seil = Nouns!.Add(Noun.NounLoca("Adv_InitializeGame_Person_I_3263"));
             CA!.Noun_Revolver = Nouns!.Add(Noun.NounLoca("Adv_InitializeGame_Person_I_3264"));
@@ -2770,6 +2776,7 @@ namespace GameCore
             CA!.Noun_Schachtel_mit_Crackern = Nouns.Add(Noun.NounLoca("Adv_InitializeGame_Person_I_3374"));
             CA!.Noun_Akten = Nouns.Add(Noun.NounLoca("Adv_InitializeGame_Person_I_3375"));
             CA!.Noun_Schrank = Nouns.Add(Noun.NounLoca("Adv_InitializeGame_Person_I_3376"));
+            CA!.Noun_Kuechenschrank = Nouns.Add(Noun.NounLoca("Noun_Kuechenschrank"));
             CA!.Noun_Zelle = Nouns.Add(Noun.NounLoca("Adv_InitializeGame_Person_I_3377"));
             CA!.Noun_Streichholzbriefchen = Nouns.Add(Noun.NounLoca("Adv_InitializeGame_Person_I_3378"));
             CA!.Noun_Streichhoelzer = Nouns.Add(Noun.NounLoca("Adv_InitializeGame_Person_I_3379"));
@@ -4040,6 +4047,7 @@ namespace GameCore
             CA!.Noun_Mondstein = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Mondstein, "Noun_Mondstein"));
             CA!.Noun_Mond = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Mond, "Noun_Mond"));
             CA!.Noun_Plastikbeutel = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Plastikbeutel, "Noun_Plastikbeutel"));
+            CA!.Noun_Plastiktuete = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Plastiktuete, "Noun_Plastiktuete"));
             CA!.Noun_Wunderwarzenschwamm = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Wunderwarzenschwamm, "Noun_Wunderwarzenschwamm"));
             CA!.Noun_Schlacke = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Schlacke, "Noun_Schlacke"));
             CA!.Noun_Muenze = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Muenze, "Noun_Muenze"));
@@ -4084,6 +4092,8 @@ namespace GameCore
             CA!.Noun_Entchen = Nouns.Add(Noun.NounLocaLoca(loca.Noun_Entchen, "Noun_Entchen"));
             CA!.Noun_Gummiente = Nouns.Add(Noun.NounLocaLoca(loca.Noun_Gummiente, "Noun_Gummiente"));
             CA!.Noun_Flamme = Nouns.Add(Noun.NounLocaLoca(loca.Noun_Flamme, "Noun_Flamme"));
+            CA!.Noun_Juwel = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Juwel, "Noun_Juwel"));
+            CA!.Noun_Edelstein = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Edelstein, "Noun_Edelstein"));
 
             CA!.Noun_Seil = Nouns!.Add(Noun.NounLocaLoca(loca.Adv_InitializeGame_Person_I_3263, "Adv_InitializeGame_Person_I_3263"));
             CA!.Noun_Revolver = Nouns!.Add(Noun.NounLocaLoca(loca.Adv_InitializeGame_Person_I_3264, "Adv_InitializeGame_Person_I_3264"));
@@ -4204,6 +4214,7 @@ namespace GameCore
             CA!.Noun_Schachtel_mit_Crackern = Nouns.Add(Noun.NounLocaLoca(loca.Adv_InitializeGame_Person_I_3374, "Adv_InitializeGame_Person_I_3374"));
             CA!.Noun_Akten = Nouns.Add(Noun.NounLocaLoca(loca.Adv_InitializeGame_Person_I_3375, "Adv_InitializeGame_Person_I_3375"));
             CA!.Noun_Schrank = Nouns.Add(Noun.NounLocaLoca(loca.Adv_InitializeGame_Person_I_3376, "Adv_InitializeGame_Person_I_3376"));
+            CA!.Noun_Kuechenschrank = Nouns.Add(Noun.NounLocaLoca(loca.Noun_Kuechenschrank, "Noun_Kuechenschrank"));
             CA!.Noun_Zelle = Nouns.Add(Noun.NounLocaLoca(loca.Adv_InitializeGame_Person_I_3377, "Adv_InitializeGame_Person_I_3377"));
             CA!.Noun_Streichholzbriefchen = Nouns.Add(Noun.NounLocaLoca(loca.Adv_InitializeGame_Person_I_3378, "Adv_InitializeGame_Person_I_3378"));
             CA!.Noun_Streichhoelzer = Nouns.Add(Noun.NounLocaLoca(loca.Adv_InitializeGame_Person_I_3379, "Adv_InitializeGame_Person_I_3379"));
@@ -10603,6 +10614,7 @@ namespace GameCore
         public Noun? Noun_Schachtel_mit_Crackern;
 
         public Noun? Noun_Schrank;
+        public Noun? Noun_Kuechenschrank;
 
         public Noun? Noun_Akten;
 
@@ -12861,6 +12873,9 @@ namespace GameCore
         public Noun? Noun_Entchen;
         public Noun? Noun_Gummiente;
         public Noun? Noun_Flamme;
+        public Noun? Noun_Juwel;
+        public Noun? Noun_Edelstein;
+        public Noun? Noun_Plastiktuete;
 
         // Neue Nouns
         public Noun? Noun_Abdeckung;

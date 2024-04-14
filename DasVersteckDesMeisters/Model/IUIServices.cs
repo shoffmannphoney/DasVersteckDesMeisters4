@@ -84,6 +84,7 @@ public interface IUIServices
     public double GetWindowsScaling();
 
     public bool QuitApplication();
+    public bool DoStatusSave();
 
     public int FlushSize();
 
@@ -172,6 +173,7 @@ public interface IUIServices
     public string RecordedText { get; set; }
 
     public  Task<bool> STTInqSpeech();
+    public bool STTInqSpeechSync();
     public Task STTStartListening(sttListeningMode slm, string callerName = "" );
     public Task STTStopListening(bool restartMode = false);
     public DelListeningMode? STTListenigModeChangeCB { get; set; }

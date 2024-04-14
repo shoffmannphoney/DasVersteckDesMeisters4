@@ -79,6 +79,9 @@
                             <ColumnDefinition Width="0"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
                         <Grid x:Name="MGM0"/>
                         <Grid Grid.Column="1" x:Name="MenuGridMenuVertical" StyleClass="Grid_BGBG" >
                             <Grid.RowDefinitions>
@@ -95,7 +98,7 @@
                                     <ColumnDefinition Width="10"/>
                                     <ColumnDefinition Width="1*"/>
                                 </Grid.ColumnDefinitions>
-                                <Grid x:Name="Grid_MC_Left" Grid.Column="0" BackgroundColor="BlueViolet" >
+                                <Grid x:Name="Grid_MC_Left" Grid.Column="0" >
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="*"/>
                                         <RowDefinition Height="10"/>
@@ -136,6 +139,9 @@
                                         <RowDefinition Height="50"/>
                                     </Grid.RowDefinitions>
                                     <Grid x:Name="GridWebView" Grid.Row="0" StyleClass="Grid_BGBG" Padding="0" Margin="0,0,0,0" >
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
                                         <controls:BridgedWebView x:Name="GameOut" Margin="0,0,-1,0" BackgroundColor="Blue" />
                                         <!--
                                         <WebView  x:Name="GameOut" Margin="0,0,-1,0" BackgroundColor="Blue" Source="file:///empty.html" HandlerChanged="WebView_HandlerChanged">
@@ -180,12 +186,12 @@
                                                 <Button x:Name="Mike2" VerticalOptions="End" StyleClass="Button_Normal_NoBorder" Clicked="Clicked_Microphone2" HorizontalOptions="Center" FontFamily="Fa-Solid" Text="{x:Static core:FaSolid.Microphone}"/>
                                             </Grid>
                                         </Grid>
-                                        <Grid x:Name="Grid_More" StyleClass="Grid_BGBG" Margin="0,0,0,0" IsVisible="false" >
+                                        <Grid x:Name="Grid_More" StyleClass="Grid_BGBG" Margin="0,0,0,0" IsVisible="false"  >
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="*"/>
                                                 <ColumnDefinition Width="30"/>
                                             </Grid.ColumnDefinitions>
-                                            <Button x:Name="Button_More_Inner" Text="[Mehr]" Margin="6,13,6,3" Clicked="ButtonMoreClicked" BackgroundColor="Red" FontAttributes="Bold" TextColor="White" windows:VisualElement.AccessKey="F"
+                                            <Button x:Name="Button_More_Inner" Text="[Mehr]" Margin="6,13,6,3" Clicked="ButtonMoreClicked" FontAttributes="Bold" TextColor="White" Background="Red" windows:VisualElement.AccessKey="F"
 >
 
                                             </Button>
@@ -232,7 +238,7 @@
 
                                 </Grid>
                             </Grid>
-                            <Grid Grid.Row="1" x:Name="GridSplitter_Portrait" ZIndex="101" StyleClass="Grid_BGBG">
+                            <Grid Grid.Row="1" x:Name="GridSplitter_Portrait" ZIndex="101" StyleClass="Grid_BGBG" >
                                 <Grid.GestureRecognizers>
 
                                     <TapGestureRecognizer Tapped="OnTappedGridPortrait">
@@ -243,7 +249,7 @@
                                     </PointerGestureRecognizer>
                                 </Grid.GestureRecognizers>
                             </Grid>
-                            <Grid x:Name="OrderItemGrid" Margin="0,0,0,0" Grid.Row="2">
+                            <Grid x:Name="OrderItemGrid" Margin="0,0,0,0" Grid.Row="2" >
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="10"/>
@@ -254,7 +260,7 @@
 
                                 <Grid Margin="0,10,0,5" Grid.Column="0" x:Name="GridCol1" StyleClass="Grid_Normal" >
 
-                                         <Grid x:Name="PortraitCol1" Margin="0,0,0,10" VerticalOptions="Start" StyleClass="Grid_Normal">
+                                    <Grid x:Name="PortraitCol1" Margin="0,0,0,10" Background="Green" VerticalOptions="Start" StyleClass="Grid_Normal">
                                         </Grid>
  
                                 </Grid>

@@ -1500,9 +1500,9 @@ namespace GameCore
         {
             string s = "";
 
-            s += loca.AdvBase_StateDescription_14122;
+            // s += loca.AdvBase_StateDescription_14122;
 
-            s += loca.AdvBase_StateDescription_14123;
+            // s += loca.AdvBase_StateDescription_14123;
 
             s += locations!.GetLocName(locations!.Find(A!.ActLoc)!.LocName!)!;
 

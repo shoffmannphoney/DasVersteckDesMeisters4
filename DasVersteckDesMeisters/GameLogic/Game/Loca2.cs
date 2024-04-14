@@ -2847,9 +2847,19 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ich füllte das magische Pülverchen in mein kleines magisches Beutelchen.";
+                return "Ich füllte das magische Pülverchen in mein kleines Lederbeutelchen.";
             else
-                return "Ich füllte das magische Pülverchen in mein kleines magisches Beutelchen.";
+                return "Ich füllte das magische Pülverchen in mein kleines Lederbeutelchen.";
+        }
+    }
+    public static string Take_Supermagic_Powder_NoPouch
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Ich füllte das magische Pülverchen in mein kleines Lederbeutelchen.";
+            else
+                return "Ich füllte das magische Pülverchen in mein kleines Lederbeutelchen.";
         }
     }
     public static string Take_Clothes
@@ -3177,6 +3187,16 @@ public static partial class loca
                 return "Ich zerstößelte die Schlacke und erhielt ein feines Pulver. Sehr schön, mein Ticket nach Hause war mir sicher.";
             else
                 return "Ich zerstößelte die Schlacke und erhielt ein feines Pulver. Sehr schön, mein Ticket nach Hause war mir sicher.";
+        }
+    }
+    public static string UseW_Plunger_Slag_Fail
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Um die Schlacke zu zerstößeln, sollte ich sie erst mal in einen geeigneten Behälter legen.";
+            else
+                return "Um die Schlacke zu zerstößeln, sollte ich sie erst mal in einen geeigneten Behälter legen.";
         }
     }
     public static string UseW_Pentagram_Powder
@@ -3875,6 +3895,36 @@ public static partial class loca
                 return "besonder";
         }
     }
+    public static string Noun_Edelstein
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Edelstein";
+            else
+                return "gem";
+        }
+    }
+    public static string Noun_Kuechenschrank
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Küchenschrank";
+            else
+                return "kitchen cabinet";
+        }
+    }
+    public static string Noun_Juwel
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Juwel";
+            else
+                return "jewel";
+        }
+    }
     public static string Noun_Stand
     {
         get
@@ -4335,6 +4385,16 @@ public static partial class loca
                 return "Plastikbeutel";
             else
                 return "Plastikbeutel";
+        }
+    }
+    public static string Noun_Plastiktuete
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Plastiktüte";
+            else
+                return "Plastiktüte";
         }
     }
     public static string Noun_Wunderwarzenschwamm
@@ -5960,9 +6020,19 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ehrfürchtig betrachtete ich das Gerät. Ich hatte es sofort als die wertvoll Dunkelheitsmaschine erkannt, die Meister Gunnar vor kurzem im Unterricht gezeigt hatte. Damit konnte man einem Gegenstand sämtliches Licht entziehen? Und warum? Damit er neues, magisches Licht aufnahm. Ein beeindruckendes Beispiel fortgeschrittener Magie, von dem ich gerne mehr verstanden hätte. Schade, dass ich gerade dabei war, mein Studium gegen die Wand zu fahren.";
+                return "Ehrfürchtig betrachtete ich das Gerät. Ich hatte es sofort als die wertvoll Dunkelheitsmaschine erkannt, die Meister Gunnar vor kurzem im Unterricht gezeigt hatte. Damit konnte man einem Gegenstand sämtliches Licht entziehen? Und warum? Damit er neues, magisches Licht aufnahm. Ein beeindruckendes Beispiel fortgeschrittener Magie, von dem ich gerne mehr verstanden hätte. Schade, dass ich gerade dabei war, mein Studium gegen die Wand zu fahren.<br>Auf der Oberseite der Maschine befand sich ein Schalter und direkt daneben eine Klappe.";
             else
-                return "Ehrfürchtig betrachtete ich das Gerät. Ich hatte es sofort als die wertvoll Dunkelheitsmaschine erkannt, die Meister Gunnar vor kurzem im Unterricht gezeigt hatte. Damit konnte man einem Gegenstand sämtliches Licht entziehen? Und warum? Damit er neues, magisches Licht aufnahm. Ein beeindruckendes Beispiel fortgeschrittener Magie, von dem ich gerne mehr verstanden hätte. Schade, dass ich gerade dabei war, mein Studium gegen die Wand zu fahren.";
+                return "Ehrfürchtig betrachtete ich das Gerät. Ich hatte es sofort als die wertvoll Dunkelheitsmaschine erkannt, die Meister Gunnar vor kurzem im Unterricht gezeigt hatte. Damit konnte man einem Gegenstand sämtliches Licht entziehen? Und warum? Damit er neues, magisches Licht aufnahm. Ein beeindruckendes Beispiel fortgeschrittener Magie, von dem ich gerne mehr verstanden hätte. Schade, dass ich gerade dabei war, mein Studium gegen die Wand zu fahren.<br>Auf der Oberseite der Maschine befand sich ein Schalter und direkt daneben eine Klappe.";
+        }
+    }
+    public static string Adv_I10_Darkness_Machine_a
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Die Klappe war geöffnet und gab den Blick auf eine darunter liegende Öffnung frei.";
+            else
+                return "Die Klappe war geöffnet und gab den Blick auf eine darunter liegende Öffnung frei.";
         }
     }
     public static string Adv_I10_Hatch
@@ -8830,6 +8900,16 @@ public static partial class loca
                 return "Feedback willkommen insbesondere zum User Interface von \"Das Versteck des Meisters\". Das System lässt sich auf vielfältige Weisen bedienen: Texteingabe, Multiple Choice, Spracheingabe, und gerne auch eine Kombination aus allen dreien.\nSo richtig perfekt ist keiner der Input-Modi, fehlerfrei erst recht nicht. Ich freue mich sehr auf eure Rückmeldung, um die Oberfläche nun mal richtig rund zu schleifen.\nWer Lust hat, etwas zu experimentieren, der findet in den Settings jede Menge fragwürdiger Optionen.\nWarnung: Der Portrait-Modus (schaltet sich automatisch ein, wenn die App eher hoch als breit ist) ist noch etwas buggy. Lieber Landscape-Modus spielen, oder Multiple Choice Menüs weglassen.\n\n\n\n";
             else
                 return "Feedback willkommen insbesondere zum User Interface von \"Das Versteck des Meisters\". Das System lässt sich auf vielfältige Weisen bedienen: Texteingabe, Multiple Choice, Spracheingabe, und gerne auch eine Kombination aus allen dreien.\nSo richtig perfekt ist keiner der Input-Modi, fehlerfrei erst recht nicht. Ich freue mich sehr auf eure Rückmeldung, um die Oberfläche nun mal richtig rund zu schleifen.\nWer Lust hat, etwas zu experimentieren, der findet in den Settings jede Menge fragwürdiger Optionen.\nWarnung: Der Portrait-Modus (schaltet sich automatisch ein, wenn die App eher hoch als breit ist) ist noch etwas buggy. Lieber Landscape-Modus spielen, oder Multiple Choice Menüs weglassen.\n\n\n\n";
+        }
+    }
+    public static string Verb_speichern
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "speichern";
+            else
+                return "___save";
         }
     }
 

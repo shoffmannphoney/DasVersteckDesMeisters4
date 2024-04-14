@@ -612,11 +612,11 @@ public class UIServices : IUIServices
         QuitApplication();
     }
 
-    public bool QuitApplication()
+    public bool DoStatusSave()
     {
         GD.LayoutDescription.WinWidth = App.MainWindow!.Width;
         GD.LayoutDescription.WinHeight = App.MainWindow!.Height;
-        GD.LayoutDescription.WinX= App.MainWindow!.X;
+        GD.LayoutDescription.WinX = App.MainWindow!.X;
         GD.LayoutDescription.WinY = App.MainWindow!.Y;
 
         string? pathfileName = DeviceData._deviceData!.GetSavePath()! + "/" + loca.MAUI_Win_Config;
@@ -624,8 +624,13 @@ public class UIServices : IUIServices
 
         string? jsonDest = JsonConvert.SerializeObject(GD.LayoutDescription, Newtonsoft.Json.Formatting.Indented);
         File.WriteAllText(pathfileName, jsonDest);
-        GD!.Adventure!.Autosave( true );
+        GD!.Adventure!.Autosave(true);
 
+        return true;
+    }
+    public bool QuitApplication()
+    {
+        DoStatusSave();
         App.ThisApplication!.Quit();
         GlobalSpecs.CurrentGlobalSpecs!.AppRunning = IGlobalSpecs.appRunning.quit;
 
@@ -962,9 +967,14 @@ public class UIServices : IUIServices
 
     public string? LoadString(string fileName)
     {
+        string? sSlash = "/";
         string? s = null;
 
-        string pathfileName = GlobalData.CurrentPath() + "\\" + fileName;
+        if( fileName.StartsWith("/"))
+        {
+            sSlash = "";
+        }
+        string pathfileName = GlobalData.CurrentPath() + sSlash + fileName;
         if (File.Exists(pathfileName))
         {
             s = File.ReadAllText(pathfileName);
@@ -1039,14 +1049,24 @@ public class UIServices : IUIServices
 
     public bool ExistFile(string fileName)
     {
-        string pathFileName = GlobalData.CurrentPath() + "/" + fileName;
+        string slash = "/";
+
+        if (fileName.StartsWith("/"))
+            slash = "";
+
+        string pathFileName = GlobalData.CurrentPath() + slash + fileName;
 
         return (File.Exists(pathFileName));
     }
 
     public string CurrentPathPlusFilename( string fileName )
     {
-        string pathFileName = GlobalData.CurrentPath() + "/" + fileName;
+        string slash = "/";
+
+        if (fileName.StartsWith("/"))
+            slash = "";
+
+        string pathFileName = GlobalData.CurrentPath() + slash + fileName;
 
         return pathFileName;
     }
@@ -1540,6 +1560,8 @@ public class UIServices : IUIServices
     public void STTTestRunning()
     {
 #if ANDROID
+     try
+     {
         if (asyncSpeechRunning == true && STTStartTime != null)
         {
             if(STTStartTime.ElapsedMilliseconds > 5000)
@@ -1547,54 +1569,74 @@ public class UIServices : IUIServices
                 STTStopListening(false).GetAwaiter();
             }
         }
+        }
+        catch (Exception e)
+        {
+
+        }
 #endif
     }
 
+    public bool STTInqSpeechSync()
+    {
+        var result = Task.Run(async () => await STTInqSpeech()).Result;
+        return result;
+    }
     public async Task<bool> STTInqSpeech()
     {
-        var isGranted = await SpeechToText.RequestPermissions(CancellationToken.None);
-        if (isGranted)
+        try
         {
-            // return false;
-            return true;
+            var isGranted = await SpeechToText.RequestPermissions(CancellationToken.None);
+            if (isGranted)
+            {
+                // return false;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
-        else
+        catch (Exception e)
         {
-            return false;
+
         }
+
+        return false;
 
     }
     public async Task STTStartListening(IUIServices.sttListeningMode newMode, [CallerMemberName] string callerName = "")
     {
-       //  int i = 0;
-        if( callerName == null )
-        {
-       
-        }
-        if( /* STTListeningOn != IUIServices.sttListeningMode.off && */ asyncSpeechRunning == true  )
-        {
-            // stopCount = 1;
-            await STTStopListening( false );
-            asyncSpeechRunning = false;
-            STTStartTime!.Stop();
-            STTStartTime = null;
-        }
-        // i = 1;
-        if (_ct == null)
-        {
-            _ct = new CancellationToken();
-        }
-        // CancellationToken cancellationToken = CancellationToken.None;
-
-        // i = 2;
+        //  int i = 0;
         try
         {
-            var isGranted = await SpeechToText.RequestPermissions( (CancellationToken) _ct );
+            if (callerName == null)
+            {
+
+            }
+            if ( /* STTListeningOn != IUIServices.sttListeningMode.off && */ asyncSpeechRunning == true)
+            {
+                // stopCount = 1;
+                await STTStopListening(false);
+                asyncSpeechRunning = false;
+                STTStartTime!.Stop();
+                STTStartTime = null;
+            }
+            // i = 1;
+            if (_ct == null)
+            {
+                _ct = new CancellationToken();
+            }
+            // CancellationToken cancellationToken = CancellationToken.None;
+
+            // i = 2;
+            var isGranted = await SpeechToText.RequestPermissions((CancellationToken)_ct);
             if (!isGranted)
             {
                 // await Toast.Make("Permission not granted").Show(CancellationToken.None);
                 return;
             }
+            
 
             RecordedText = "";
 
@@ -1610,7 +1652,7 @@ public class UIServices : IUIServices
                 SpeechToText.Default.StateChanged += OnStateChanged;
                 asyncSpeechListening = true;
                 // i = 4;
-            }       
+            }
             else
             {
 
@@ -1618,7 +1660,7 @@ public class UIServices : IUIServices
             if (GD.Language == IGlobalData.language.german)
             {
                 // i = 51;
-                await SpeechToText.StartListenAsync(CultureInfo.GetCultureInfo("de-de"), (CancellationToken) _ct);
+                await SpeechToText.StartListenAsync(CultureInfo.GetCultureInfo("de-de"), (CancellationToken)_ct);
                 // i = 52;
                 asyncSpeechRunning = true;
                 STTStartTime = new Stopwatch();
@@ -1629,7 +1671,7 @@ public class UIServices : IUIServices
             }
             else
             {
-                await SpeechToText.StartListenAsync(CultureInfo.GetCultureInfo("en-en"), (CancellationToken) _ct);
+                await SpeechToText.StartListenAsync(CultureInfo.GetCultureInfo("en-en"), (CancellationToken)_ct);
                 asyncSpeechRunning = true;
                 STTStartTime = new Stopwatch();
                 STTStartTime.Start();
@@ -1638,9 +1680,9 @@ public class UIServices : IUIServices
             }
             // i = 7;
         }
-        catch ( Exception e )
+        catch (Exception e)
         {
-
+            GD.STTMicroState = IGlobalData.microMode.off;
         }
     }
 
@@ -1732,25 +1774,32 @@ public class UIServices : IUIServices
 
     void OnStateChanged( object? sender, SpeechToTextStateChangedEventArgs ea )
     {
-        if( ea.State == SpeechToTextState.Stopped)
+        try
         {
-            if( STTListeningOn == IUIServices.sttListeningMode.on)
+            if (ea.State == SpeechToTextState.Stopped)
             {
-                STTListeningOn = IUIServices.sttListeningMode.off;
+                if (STTListeningOn == IUIServices.sttListeningMode.on)
+                {
+                    STTListeningOn = IUIServices.sttListeningMode.off;
+                }
+                else if (STTListeningOn == IUIServices.sttListeningMode.continuous)
+                {
+                    if (App.AppState == App.appState.closing)
+                    {
+                    }
+                    else
+                    {
+                        STTStartListening(STTListeningOn).Wait();
+                    }
+
+                }
             }
-            else if( STTListeningOn == IUIServices.sttListeningMode.continuous)
+            else if (ea.State == SpeechToTextState.Listening)
             {
-                if( App.AppState == App.appState.closing )
-                {
-                }
-                else
-                {
-                    STTStartListening(STTListeningOn).Wait();
-                }
 
             }
         }
-        else if ( ea.State == SpeechToTextState.Listening)
+        catch // (Exception e)
         {
 
         }

@@ -2066,9 +2066,9 @@ namespace GameCore
 
                 // string? pathName = GlobalData.CurrentPath();
                 // Ignores: 002
-                string? fileName = Phoney_MAUI.Core.GlobalData.CurrentPath() + loca.OrderFeedback_LoadMC_Person_I_14025 + Val + loca.OrderFeedback_LoadMC_Person_I_14026;
+                string? fileName = loca.OrderFeedback_LoadMC_Person_I_14025 + Val + loca.OrderFeedback_LoadMC_Person_I_14026;
 
-                if (AdvGame.UIS!.ExistFile( fileName))
+                if (!AdvGame.UIS!.ExistFile( fileName))
                 {
                     AdvGame!.GD!.SlotDescriptions!.SlotDescriptions![Val] = loca.SlotDescription_Init_16284;
                     // mcM.Add(new MCMenuEntry(CB!.MCE_Text, CA!.Person_I, loca.OrderFeedback_SaveMC_Person_I_14013 + loca.OrderFeedback_SaveMC_Person_I_14014 + loca.OrderFeedback_SaveMC_Person_I_14015 + loca.OrderFeedback_SaveMC_Person_I_14016, idCt++, follower, null, 0, false, false, false, null, loca.OrderFeedback_SaveMC_Person_I_14017 + loca.OrderFeedback_SaveMC_Person_I_14018));
@@ -6367,7 +6367,7 @@ namespace GameCore
             // Ignores: 001
             string? pathfileName = pathName + loca.OrderFeedback_ReadSlotDescription_14040;
 
-            string jsonSource = AdvGame!.UIS!.LoadString(loca.OrderFeedback_ReadSlotDescription_14040)!;
+            string jsonSource = AdvGame!.UIS!.LoadString(loca.OrderFeedback_ReadSlotDescription_14040);
             if ( jsonSource != null )
             {
                 AdvGame!.GD!.SlotDescriptions.SlotDescriptions = null;

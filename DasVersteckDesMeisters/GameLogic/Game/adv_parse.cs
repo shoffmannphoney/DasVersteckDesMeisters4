@@ -5201,6 +5201,11 @@ public partial class Adv : AdvBase
         PList.AddVerb(CB!.Verb_Save);
         PLLEng.Add(new ParseLine(CB!.PL_Save_MC, PList, Orders!.SaveMC, false));
 
+        PList = new ParseTokenList();
+        PList.AddNoun(CA!.Noun_Spiel.ID);
+        PList.AddVerb(CB!.Verb_Save);
+        PLLEng.Add(new ParseLine(CB!.PL_Save_MC, PList, Orders!.SaveMC, false));
+
         // Laden
         PList = new ParseTokenList();
         PList.AddVerb(CB!.Verb_Load);

@@ -71,14 +71,14 @@ public class BridgedWebView : View, IBridgedWebView
 #if ANDROID
         Platform.CurrentActivity!.RunOnUiThread(() =>
         {
-            this.BackgroundColor = Colors.Red;
+            this.BackgroundColor = Colors.Black;
             var handler = this.Handler;
 
             if (Handler != null)
                 (handler as BridgedWebViewHandler)!.GetBridge().SetCBFullyLoaded(cbFullyLoaded);
         });
 #else
-        this.BackgroundColor = Colors.Red;
+        this.BackgroundColor = Colors.Black;
         var handler = this.Handler;
 
         if (Handler != null)

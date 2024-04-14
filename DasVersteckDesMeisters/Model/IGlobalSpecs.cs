@@ -44,7 +44,7 @@ public interface ILayoutDescription
     public enum PortraitColumn { none, order, itemloc, iteminv }
 
     public ParagraphClusters ParagraphClusterMode { get; set; }
-    public List<PortraitColumn> PortraitColumns { get; set; }
+    public PortraitColumn[,] PortraitColumns { get; set; }
     public bool SetLeftColumnWidth( double val);
     public bool SetRightColumnWidth(double val);
     public enum selectedOutput { input, mc, more };

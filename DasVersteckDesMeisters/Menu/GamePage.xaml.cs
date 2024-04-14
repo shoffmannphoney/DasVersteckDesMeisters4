@@ -41,10 +41,10 @@ public partial class GamePage : ContentPage, IMenuExtension
     TabItem? TILeftDown { get; set; }
     TabItem? TIRightUp { get; set; }
     TabItem? TIRightDown { get; set; }
-    TabItem? TICol1 { get; set; }
-    TabItem? TICol2 { get; set; }
-    TabItem? TICol3 { get; set; }
-    public GlobalData GD { get; set; }
+    TabItem? TICol1_0 { get; set; }
+    TabItem? TICol2_0 { get; set; }
+    TabItem? TICol3_0 { get; set; }
+     public GlobalData GD { get; set; }
     private IUIServices UIS { get; set; }
     private IGlobalData.screenMode lastSM;
 
@@ -524,13 +524,31 @@ public partial class GamePage : ContentPage, IMenuExtension
         Grid_Inter.HeightRequest = rdc[2].Height.Value;
         GameOut.HeightRequest = rdc[0].Height.Value;
 
-        double gesHeight = rdc[0].Height.Value + rdc[1].Height.Value + rdc[2].Height.Value;
+        GridWebView.RowDefinitions[0].Height = rdc[0].Height;
 
-        Grid_Output.HeightRequest = gesHeight;
+        double gesHeightOutIn = rdc[0].Height.Value + rdc[1].Height.Value + rdc[2].Height.Value;
+        double gesHeightOutInMC = gesHeightOutIn;
 
-        MenuGridMenuVertical.HeightRequest = PageGrid.Height - 40;
+        LayoutDescription ld = (LayoutDescription)GlobalData.CurrentGlobalData!.LayoutDescription!;
+
+        if (GlobalData.CurrentGlobalData!.LayoutDescription.ScreenMode == IGlobalData.screenMode.portrait)
+            gesHeightOutInMC += ld.PortraitColumnsHeight;
+
+
+        Grid_Output.HeightRequest = gesHeightOutIn;
+
+        MenuGridMenuVertical.HeightRequest = gesHeightOutInMC;  // PageGrid.Height - 40;
+        MenuGridMenuVertical.RowDefinitions[0].Height = new GridLength(gesHeightOutIn);
+        MenuGridMenu.HeightRequest = gesHeightOutInMC;
+        MenuGridMenu.RowDefinitions[0].Height = new GridLength(gesHeightOutInMC);
+        // MenuGridMenuBackground.HeightRequest = gesHeightOutIn + Grid_Inter.HeightRequest;
+        // MenuGridMenuBackground.RowDefinitions[1].Height = new GridLength(gesHeightOutIn + Grid_Inter.HeightRequest);
+        MenuGridMenuBackground.HeightRequest = gesHeightOutInMC;
+        MenuGridMenuBackground.RowDefinitions[1].Height = new GridLength(gesHeightOutInMC);
+
+
         MGM0.HeightRequest = PageGrid.Height - 40;
-        MenuGridMenuInner.HeightRequest = gesHeight;
+        MenuGridMenuInner.HeightRequest = gesHeightOutIn;
         /*
         if ( UIS != null && UIS.Scr != null )
         {
@@ -722,11 +740,11 @@ public partial class GamePage : ContentPage, IMenuExtension
          if (ld.PortraitColumn1Width > 0)
          {
              int ctColumns = 0;
-             if (ld.PortraitColumns[0] != ILayoutDescription.PortraitColumn.none)
+             if (ld.PortraitColumns[0,0] != ILayoutDescription.PortraitColumn.none || ld.PortraitColumns[0, 1] != ILayoutDescription.PortraitColumn.none || ld.PortraitColumns[0, 2] != ILayoutDescription.PortraitColumn.none)
                 ctColumns++;
-             if (ld.PortraitColumns[1] != ILayoutDescription.PortraitColumn.none)
+             if (ld.PortraitColumns[1,0] != ILayoutDescription.PortraitColumn.none || ld.PortraitColumns[1, 1] != ILayoutDescription.PortraitColumn.none || ld.PortraitColumns[1, 2] != ILayoutDescription.PortraitColumn.none)
                 ctColumns++;
-             if (ld.PortraitColumns[2] != ILayoutDescription.PortraitColumn.none)
+             if (ld.PortraitColumns[2,0] != ILayoutDescription.PortraitColumn.none || ld.PortraitColumns[2, 1] != ILayoutDescription.PortraitColumn.none || ld.PortraitColumns[2, 2] != ILayoutDescription.PortraitColumn.none)
                 ctColumns++;
 
 
@@ -893,6 +911,40 @@ public partial class GamePage : ContentPage, IMenuExtension
     bool ItemInvTreeHasInitialized = false;
     bool ItemLocTreeHasInitialized = false;
 
+    public bool IsPortraitVisible()
+    {
+        LayoutDescription ld = (LayoutDescription)GlobalData.CurrentGlobalData!.LayoutDescription;
+        bool visible = false;
+
+        for(int ix = 0; ix < 3; ix++)
+        {
+            for(int ix2 = 0; ix2 < 3; ix2++)
+            {
+                if (ld.PortraitColumns[ix, ix2] != ILayoutDescription.PortraitColumn.none)
+                {
+                    visible = true;
+                    break;
+                }
+            }
+        }
+        return visible;
+    }
+    public bool IsPortraitColVisible( int col )
+    {
+        LayoutDescription ld = (LayoutDescription)GlobalData.CurrentGlobalData!.LayoutDescription;
+        bool visible = false;
+
+        for (int ix2 = 0; ix2 < 3; ix2++)
+        {
+            if (ld.PortraitColumns[col, ix2] != ILayoutDescription.PortraitColumn.none)
+            {
+                visible = true;
+                break;
+            }
+        }
+        return visible;
+    }
+
     public void SetPortraitGridDimensions()
     {
         LayoutDescription ld = (LayoutDescription)GlobalData.CurrentGlobalData!.LayoutDescription;
@@ -915,7 +967,7 @@ public partial class GamePage : ContentPage, IMenuExtension
         MenuGridMenuInner.ColumnDefinitions[3].Width = new GridLength(0);
         MenuGridMenuInner.ColumnDefinitions[4].Width = new GridLength(0);
 
-        if (ld.PortraitColumns[0] != ILayoutDescription.PortraitColumn.none)
+        if ( IsPortraitVisible() )
         {
             MenuGridMenuVertical.RowDefinitions[0].Height = new GridLength(GlobalSpecs.CurrentGlobalSpecs!.GetScreenHeight() - ld.PortraitColumnsHeight - PageGrid.RowDefinitions[0].Height.Value - 10);
             MenuGridMenuVertical.RowDefinitions[1].Height = new GridLength(10);
@@ -929,7 +981,7 @@ public partial class GamePage : ContentPage, IMenuExtension
             double xLen = GlobalSpecs.CurrentGlobalSpecs!.GetScreenWidth() - _paddingWidth;
 
             // Nur 1 Spalte?
-            if (ld.PortraitColumns[1] == ILayoutDescription.PortraitColumn.none)
+            if (!IsPortraitColVisible(1) ) 
             {
                 OrderItemGrid.ColumnDefinitions[0].Width = new GridLength(GlobalSpecs.CurrentGlobalSpecs!.GetScreenWidth() - _paddingWidth);
                 OrderItemGrid.ColumnDefinitions[1].Width = 0;
@@ -937,7 +989,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                 OrderItemGrid.ColumnDefinitions[3].Width = 0;
                 OrderItemGrid.ColumnDefinitions[4].Width = 0;
             }
-            else if (ld.PortraitColumns[2] == ILayoutDescription.PortraitColumn.none)
+            else if (!IsPortraitColVisible(2))
             {
                 if (ld.PortraitColumn1Width + 10 > xLen)
                 {
@@ -1136,46 +1188,76 @@ public partial class GamePage : ContentPage, IMenuExtension
         // Einmalig f�r Vertical. Wenn die 3 Grids noch nicht mit den TabItems best�ck sind, dann werden diese hier angelegt.
         if (PortraitCol1.Children.Count == 0)
         {
-            TICol1 = new TabItem();
-            TICol1.AddTabButtonStyleSelected("IDButton");
-            TICol1.AddTabButtonStyleUnselected("IDButton_Invers");
-            TICol1.AddHeadlineStyle("Grid_BGBG");
-            TICol1.AddMainPanelStyle("Grid_Normal");
+            TICol1_0 = new TabItem();
+            TICol1_0.AddTabButtonStyleSelected("IDButton");
+            TICol1_0.AddTabButtonStyleUnselected("IDButton_Invers");
+            TICol1_0.AddHeadlineStyle("Grid_BGBG");
+            TICol1_0.AddMainPanelStyle("Grid_Normal");
 
-            TabItem.TabPanel tp = TICol1.AddTabPanel(FaSolid.Wrench, 1);
+            TabItem.TabPanel tp = TICol1_0.AddTabPanel(FaSolid.Wrench, 1);
             tp.SelectButton!.FontFamily = "Fa-Solid";
             SetButtonCursorHand(tp.SelectButton);
 
-            PortraitCol1.Children.Add( TICol1);
+            TabItem.TabPanel tp1 = TICol1_0.AddTabPanel(FaSolid.MapMarkedAlt, 2);
+            tp1.SelectButton!.FontFamily = "Fa-Solid";
+            SetButtonCursorHand(tp1.SelectButton);
+
+            TabItem.TabPanel tp2 = TICol1_0.AddTabPanel(FaSolid.Suitcase, 3);
+            tp2.SelectButton!.FontFamily = "Fa-Solid";
+            SetButtonCursorHand(tp2.SelectButton);
+
+            PortraitCol1.Add(TICol1_0);
+            TICol1_0.SelectedTabPanel = 0;
+            TICol1_0.SyncTabStyles();
         }
 
         if (PortraitCol2.Children.Count == 0)
         {
-            TICol2 = new TabItem();
-            TICol2.AddTabButtonStyleSelected("IDButton");
-            TICol2.AddTabButtonStyleUnselected("IDButton_Invers");
-            TICol2.AddHeadlineStyle("Grid_BGBG");
-            TICol2.AddMainPanelStyle("Grid_Normal");
+            TICol2_0 = new TabItem();
+            TICol2_0.AddTabButtonStyleSelected("IDButton");
+            TICol2_0.AddTabButtonStyleUnselected("IDButton_Invers");
+            TICol2_0.AddHeadlineStyle("Grid_BGBG");
+            TICol2_0.AddMainPanelStyle("Grid_Normal");
 
-            TabItem.TabPanel tp = TICol2.AddTabPanel(FaSolid.Wrench, 1);
+            TabItem.TabPanel tp = TICol2_0.AddTabPanel(FaSolid.Wrench, 1);
             tp.SelectButton!.FontFamily = "Fa-Solid";
             SetButtonCursorHand(tp.SelectButton);
 
-            PortraitCol2.Children.Add(TICol2);
+            TabItem.TabPanel tp1 = TICol2_0.AddTabPanel(FaSolid.MapMarkedAlt, 1);
+            tp1.SelectButton!.FontFamily = "Fa-Solid";
+            SetButtonCursorHand(tp1.SelectButton);
+
+            TabItem.TabPanel tp2 = TICol2_0.AddTabPanel(FaSolid.Suitcase, 1);
+            tp2.SelectButton!.FontFamily = "Fa-Solid";
+            SetButtonCursorHand(tp2.SelectButton);
+
+            PortraitCol2.Children.Add(TICol2_0);
+            TICol2_0.SelectedTabPanel = 0;
+            TICol2_0.SyncTabStyles();
         }
         if (PortraitCol3.Children.Count == 0)
         {
-            TICol3 = new TabItem();
-            TICol3.AddTabButtonStyleSelected("IDButton");
-            TICol3.AddTabButtonStyleUnselected("IDButton_Invers");
-            TICol3.AddHeadlineStyle("Grid_BGBG");
-            TICol3.AddMainPanelStyle("Grid_Normal");
+            TICol3_0 = new TabItem();
+            TICol3_0.AddTabButtonStyleSelected("IDButton");
+            TICol3_0.AddTabButtonStyleUnselected("IDButton_Invers");
+            TICol3_0.AddHeadlineStyle("Grid_BGBG");
+            TICol3_0.AddMainPanelStyle("Grid_Normal");
 
-            TabItem.TabPanel tp = TICol3.AddTabPanel(FaSolid.Wrench, 1);
+            TabItem.TabPanel tp = TICol3_0.AddTabPanel(FaSolid.Wrench, 1);
             tp.SelectButton!.FontFamily = "Fa-Solid";
             SetButtonCursorHand(tp.SelectButton);
 
-            PortraitCol3.Children.Add(TICol3);
+            TabItem.TabPanel tp1 = TICol3_0.AddTabPanel(FaSolid.MapMarkedAlt, 1);
+            tp1.SelectButton!.FontFamily = "Fa-Solid";
+            SetButtonCursorHand(tp1.SelectButton);
+
+            TabItem.TabPanel tp2 = TICol3_0.AddTabPanel(FaSolid.Suitcase, 1);
+            tp2.SelectButton!.FontFamily = "Fa-Solid";
+            SetButtonCursorHand(tp2.SelectButton);
+
+            PortraitCol3.Children.Add(TICol3_0);
+            TICol3_0.SelectedTabPanel = 0;
+            TICol3_0.SyncTabStyles();
         }
 
         if (GridLU.Children.Count > 0)
@@ -1224,9 +1306,15 @@ public partial class GamePage : ContentPage, IMenuExtension
         ld.RU_ItemInv = false;
         ld.RD_ItemInv = false;
 
-        ld.PortraitColumns[0] = ILayoutDescription.PortraitColumn.none;
-        ld.PortraitColumns[1] = ILayoutDescription.PortraitColumn.none;
-        ld.PortraitColumns[2] = ILayoutDescription.PortraitColumn.none;
+        ld.PortraitColumns[0,0] = ILayoutDescription.PortraitColumn.none;
+        ld.PortraitColumns[1,0] = ILayoutDescription.PortraitColumn.none;
+        ld.PortraitColumns[2,0] = ILayoutDescription.PortraitColumn.none;
+        ld.PortraitColumns[0, 1] = ILayoutDescription.PortraitColumn.none;
+        ld.PortraitColumns[1, 1] = ILayoutDescription.PortraitColumn.none;
+        ld.PortraitColumns[2, 1] = ILayoutDescription.PortraitColumn.none;
+        ld.PortraitColumns[0, 2] = ILayoutDescription.PortraitColumn.none;
+        ld.PortraitColumns[1, 2] = ILayoutDescription.PortraitColumn.none;
+        ld.PortraitColumns[2, 2] = ILayoutDescription.PortraitColumn.none;
 
 
         // ... und dann komplett neu gesetzt
@@ -1282,29 +1370,29 @@ public partial class GamePage : ContentPage, IMenuExtension
         }
 
         if (GD.LayoutDescription.OrderListPosPT == ILayoutDescription.selectedPositionPT.first)
-            ld.PortraitColumns[0] = ILayoutDescription.PortraitColumn.order;
+            ld.PortraitColumns[0,0] = ILayoutDescription.PortraitColumn.order;
         else if (GD.LayoutDescription.OrderListPosPT == ILayoutDescription.selectedPositionPT.second )
-            ld.PortraitColumns[1] = ILayoutDescription.PortraitColumn.order;
+            ld.PortraitColumns[1, 0] = ILayoutDescription.PortraitColumn.order;
         else if (GD.LayoutDescription.OrderListPosPT == ILayoutDescription.selectedPositionPT.third)
-            ld.PortraitColumns[2] = ILayoutDescription.PortraitColumn.order;
+            ld.PortraitColumns[2, 0] = ILayoutDescription.PortraitColumn.order;
 
         if (GD.LayoutDescription.ItemsLocListPosPT == ILayoutDescription.selectedPositionPT.first)
-            ld.PortraitColumns[0] = ILayoutDescription.PortraitColumn.itemloc;
+            ld.PortraitColumns[0,1] = ILayoutDescription.PortraitColumn.itemloc;
         else if (GD.LayoutDescription.ItemsLocListPosPT == ILayoutDescription.selectedPositionPT.second)
-            ld.PortraitColumns[1] = ILayoutDescription.PortraitColumn.itemloc;
+            ld.PortraitColumns[1, 1] = ILayoutDescription.PortraitColumn.itemloc;
         else if (GD.LayoutDescription.ItemsLocListPosPT == ILayoutDescription.selectedPositionPT.third)
-            ld.PortraitColumns[2] = ILayoutDescription.PortraitColumn.itemloc;
+            ld.PortraitColumns[2, 1] = ILayoutDescription.PortraitColumn.itemloc;
 
         if (GD.LayoutDescription.ItemsInvListPosPT == ILayoutDescription.selectedPositionPT.first)
-            ld.PortraitColumns[0] = ILayoutDescription.PortraitColumn.iteminv;
+            ld.PortraitColumns[0,2] = ILayoutDescription.PortraitColumn.iteminv;
         else if (GD.LayoutDescription.ItemsInvListPosPT == ILayoutDescription.selectedPositionPT.second)
-            ld.PortraitColumns[1] = ILayoutDescription.PortraitColumn.iteminv;
+            ld.PortraitColumns[1, 2] = ILayoutDescription.PortraitColumn.iteminv;
         else if (GD.LayoutDescription.ItemsInvListPosPT == ILayoutDescription.selectedPositionPT.third)
-            ld.PortraitColumns[2] = ILayoutDescription.PortraitColumn.iteminv;
+            ld.PortraitColumns[2, 2] = ILayoutDescription.PortraitColumn.iteminv;
 
 
         // Wenn eine Column noch nie initialisiert war, dann wird das hier festgestellt und es werden Defaultwerte eingetragen
-        if( ld.PortraitColumnsHeight <= 0 && (ld.PortraitColumns[0] != ILayoutDescription.PortraitColumn.none ))
+        if( ld.PortraitColumnsHeight <= 0 && IsPortraitVisible() )
         {
             ld.PortraitColumnsHeight = 300;
         }
@@ -1330,11 +1418,11 @@ public partial class GamePage : ContentPage, IMenuExtension
         if( ld.PortraitColumn1Width <= 0)
         {
             int divisor = 0;
-            if (ld.PortraitColumns[0] != ILayoutDescription.PortraitColumn.none)
+            if ( IsPortraitColVisible(0) ) 
                 divisor++;
-            if (ld.PortraitColumns[1] != ILayoutDescription.PortraitColumn.none)
+            if (IsPortraitColVisible(1))
                 divisor++;
-            if (ld.PortraitColumns[2] != ILayoutDescription.PortraitColumn.none)
+            if (IsPortraitColVisible(2))
                 divisor++;
 
             if (divisor > 0)
@@ -1356,6 +1444,8 @@ public partial class GamePage : ContentPage, IMenuExtension
         }
         else if (ld.ScreenMode == IGlobalData.screenMode.landscape)
         {
+            AdaptGridHeights();
+
             double xlen = 0;
 
             if (GetLeftColumnActive())
@@ -1904,112 +1994,183 @@ public partial class GamePage : ContentPage, IMenuExtension
             }
         }
 
-        if (GD.LayoutDescription.ScreenMode == IGlobalData.screenMode.portrait )
+        if (GD.LayoutDescription.ScreenMode == IGlobalData.screenMode.portrait)
         {
 
             // Column 1
-            if (ld.PortraitColumns[0] == ILayoutDescription.PortraitColumn.order)
+            if (IsPortraitColVisible(0))
             {
-                tvOrder = CreateOrderTree();
-                TICol1!.TabPanels[0].TabPanelGrid!.Clear();
-                TICol1!.TabPanels[0].TabPanelGrid!.Add( tvOrder);
+                // TICol1_0!.MainPanel = new();
 
-                TICol1!.TabPanels[0].SelectButton!.IsVisible = true;
-                TICol1!.TabPanels[0].SelectButton!.Text = FaSolid.Wrench;
-                tvOrder.CalcToggles();
-                OrderTreeHasInitialized = true;
+                if (ld.PortraitColumns[0, 0] == ILayoutDescription.PortraitColumn.order)
+                {
+                    tvOrder = CreateOrderTree();
+
+                    // TICol1_0!.AddTabPanel(FaSolid.Wrench, 1);
+                    // TICol1_0!.TabPanels[ix].TabPanelGrid.Clear();
+                    TICol1_0!.TabPanels[0].TabPanelGrid!.Children[0] = tvOrder;
+                    TICol1_0!.TabPanels[0].SelectButton!.IsVisible = true;
+                    TICol1_0!.TabPanels[0].SelectButton!.Text = FaSolid.Wrench;
+                    TICol1_0!.TabPanels[0].SelectButton!.FontFamily = "Fa-Solid";
+                    OrderTreeHasInitialized = true;
+                    tvOrder.CalcToggles();
+                }
+                else
+                {
+                    TICol1_0!.TabPanels[0].SelectButton!.IsVisible = false;
+
+                }
+                if (ld.PortraitColumns[0, 1] == ILayoutDescription.PortraitColumn.itemloc)
+                {
+                    tvOrder = CreateItemLocTree();
+                    // TICol1_0!.AddTabPanel(FaSolid.MapMarkerAlt, 2);
+                    // TICol1_0!.TabPanels[ix].TabPanelGrid.Clear();
+                    TICol1_0!.TabPanels[1].TabPanelGrid!.Children[0] = tvOrder;
+                    TICol1_0!.TabPanels[1].SelectButton!.IsVisible = true;
+                    TICol1_0!.TabPanels[1].SelectButton!.Text = FaSolid.MapMarkerAlt;
+                    TICol1_0!.TabPanels[1].SelectButton!.FontFamily = "Fa-Solid";
+                    ItemLocTreeHasInitialized = true;
+                    tvOrder.CalcToggles();
+                }
+                else
+                {
+                    TICol1_0!.TabPanels[1].SelectButton!.IsVisible = false;
+
+                }
+                if (ld.PortraitColumns[0, 2] == ILayoutDescription.PortraitColumn.iteminv)
+                {
+                    tvOrder = CreateItemInvTree();
+                    // TICol1_0!.TabPanels[ix].TabPanelGrid.Clear();
+                    // TICol1_0!.AddTabPanel(FaSolid.Suitcase, 3);
+                    TICol1_0!.TabPanels[2].TabPanelGrid!.Children[0] = tvOrder;
+                    TICol1_0!.TabPanels[2].SelectButton!.IsVisible = true;
+                    TICol1_0!.TabPanels[2].SelectButton!.Text = FaSolid.Suitcase;
+                    TICol1_0!.TabPanels[2].SelectButton!.FontFamily = "Fa-Solid";
+                    ItemInvTreeHasInitialized = true;
+                    tvOrder.CalcToggles();
+
+                }
+                else
+                {
+                    TICol1_0!.TabPanels[2].SelectButton!.IsVisible = false;
+
+                }
+                TICol1_0.SyncTabStyles();
 
             }
-            else if (ld.PortraitColumns[0] == ILayoutDescription.PortraitColumn.iteminv)
+            if (IsPortraitColVisible(1))
             {
-                tvOrder = CreateItemInvTree();
-                TICol1!.TabPanels![0]!.TabPanelGrid!.Clear();
-                TICol1!.TabPanels[0].TabPanelGrid!.Add(tvOrder);
-                TICol1!.TabPanels[0].SelectButton!.IsVisible = true;
-                TICol1!.TabPanels[0].SelectButton!.Text = FaSolid.Suitcase;
-                tvOrder.CalcToggles();
-                ItemInvTreeHasInitialized = true;
+                // Column 2
+                if (ld.PortraitColumns[1, 0] == ILayoutDescription.PortraitColumn.order)
+                {
+                    tvOrder = CreateOrderTree();
+                    // TICol2_0!.TabPanels[0].TabPanelGrid.Clear();
+                    // TICol2_0!.TabPanels![0].TabPanelGrid!.Clear();
+                    TICol2_0!.TabPanels![0].TabPanelGrid!.Children[0] = tvOrder;
+                    TICol2_0!.TabPanels![0].SelectButton!.IsVisible = true;
+                    TICol2_0!.TabPanels![0].SelectButton!.Text = FaSolid.Wrench;
+                    tvOrder.CalcToggles();
+                    OrderTreeHasInitialized = true;
+
+                }
+                else
+                {
+                    TICol2_0!.TabPanels[0].SelectButton!.IsVisible = false;
+
+                }
+                if (ld.PortraitColumns[1, 1] == ILayoutDescription.PortraitColumn.itemloc)
+                {
+                    tvOrder = CreateItemLocTree();
+                    // TICol2_1!.TabPanels[0].TabPanelGrid.Clear();
+                    // TICol2_1!.TabPanels[0].TabPanelGrid!.Clear();
+                    TICol2_0!.TabPanels[1].TabPanelGrid!.Children[0] = tvOrder;
+                    TICol2_0!.TabPanels[1].SelectButton!.IsVisible = true;
+                    TICol2_0!.TabPanels[1].SelectButton!.Text = FaSolid.MapMarkerAlt;
+                    tvOrder.CalcToggles();
+                    ItemLocTreeHasInitialized = true;
+
+                }
+                else
+                {
+                    TICol2_0!.TabPanels[1].SelectButton!.IsVisible = false;
+
+                }
+                if (ld.PortraitColumns[1, 2] == ILayoutDescription.PortraitColumn.iteminv)
+                {
+                    tvOrder = CreateItemInvTree();
+                    // TICol2_2!.TabPanels[0].TabPanelGrid.Clear();
+                    // TICol2_2!.TabPanels[0].TabPanelGrid!.Clear();
+                    TICol2_0!.TabPanels[2].TabPanelGrid.Children[0] = tvOrder;
+                    TICol2_0!.TabPanels[2].SelectButton!.IsVisible = true;
+                    TICol2_0!.TabPanels[2].SelectButton!.Text = FaSolid.Suitcase;
+                    tvOrder.CalcToggles();
+                    ItemInvTreeHasInitialized = true;
+
+                }
+                else
+                {
+                    TICol2_0!.TabPanels[2].SelectButton!.IsVisible = false;
+
+                }
+                TICol2_0.SyncTabStyles();
 
             }
-            else if (ld.PortraitColumns[0] == ILayoutDescription.PortraitColumn.itemloc)
-            {
-                tvOrder = CreateItemLocTree();
-                TICol1!.TabPanels[0].TabPanelGrid!.Clear();
-                TICol1!.TabPanels[0].TabPanelGrid!.Add(tvOrder);
-                TICol1!.TabPanels[0].SelectButton!.IsVisible = true;
-                TICol1!.TabPanels[0].SelectButton!.Text = FaSolid.MapMarkerAlt;
-                tvOrder.CalcToggles();
-                ItemLocTreeHasInitialized = true;
-
-            }
-
-            // Column 2
-            if (ld.PortraitColumns[1] == ILayoutDescription.PortraitColumn.order)
-            {
-                tvOrder = CreateOrderTree();
-                TICol2!.TabPanels![0].TabPanelGrid!.Clear();
-                TICol2!.TabPanels![0].TabPanelGrid!.Add(tvOrder);
-                TICol2!.TabPanels![0].SelectButton!.IsVisible = true;
-                TICol2!.TabPanels![0].SelectButton!.Text = FaSolid.Wrench;
-                tvOrder.CalcToggles();
-                OrderTreeHasInitialized = true;
-
-            }
-            else if (ld.PortraitColumns[1] == ILayoutDescription.PortraitColumn.iteminv)
-            {
-                tvOrder = CreateItemInvTree();
-                TICol2!.TabPanels[0].TabPanelGrid!.Clear();
-                TICol2!.TabPanels[0].TabPanelGrid!.Add(tvOrder);
-                TICol2!.TabPanels[0].SelectButton!.IsVisible = true;
-                TICol2!.TabPanels[0].SelectButton!.Text = FaSolid.Suitcase;
-                tvOrder.CalcToggles();
-                ItemInvTreeHasInitialized = true;
-
-            }
-            else if (ld.PortraitColumns[1] == ILayoutDescription.PortraitColumn.itemloc)
-            {
-                tvOrder = CreateItemLocTree();
-                TICol2!.TabPanels[0].TabPanelGrid!.Clear();
-                TICol2!.TabPanels[0].TabPanelGrid!.Add(tvOrder);
-                TICol2!.TabPanels[0].SelectButton!.IsVisible = true;
-                TICol2!.TabPanels[0].SelectButton!.Text = FaSolid.MapMarkerAlt;
-                tvOrder.CalcToggles();
-                ItemLocTreeHasInitialized = true;
-
-            }
-
             // Column 3
-            if (ld.PortraitColumns[2] == ILayoutDescription.PortraitColumn.order)
+            if (IsPortraitColVisible(2))
             {
-                tvOrder = CreateOrderTree();
-                TICol3!.TabPanels[0].TabPanelGrid!.Clear();
-                TICol3!.TabPanels[0].TabPanelGrid!.Add(tvOrder);
-                TICol3!.TabPanels[0].SelectButton!.IsVisible = true;
-                TICol3!.TabPanels[0].SelectButton!.Text = FaSolid.Wrench;
-                tvOrder.CalcToggles();
-                OrderTreeHasInitialized = true;
+                if (ld.PortraitColumns[2,0] == ILayoutDescription.PortraitColumn.order)
+                {
+                    tvOrder = CreateOrderTree();
+                    // TICol3_0!.TabPanels[0].TabPanelGrid.Clear();
+                    // TICol3_0!.TabPanels[0].TabPanelGrid!.Clear();
+                    TICol3_0!.TabPanels[0].TabPanelGrid.Children[0] = tvOrder;
+                    TICol3_0!.TabPanels[0].SelectButton!.IsVisible = true;
+                    TICol3_0!.TabPanels[0].SelectButton!.Text = FaSolid.Wrench;
+                    tvOrder.CalcToggles();
+                    OrderTreeHasInitialized = true;
 
-            }
-            else if (ld.PortraitColumns[2] == ILayoutDescription.PortraitColumn.iteminv)
-            {
-                tvOrder = CreateItemInvTree();
-                TICol3!.TabPanels[0].TabPanelGrid!.Clear();
-                TICol3!.TabPanels[0].TabPanelGrid!.Add(tvOrder);
-                TICol3!.TabPanels[0].SelectButton!.IsVisible = true;
-                TICol3!.TabPanels[0].SelectButton!.Text = FaSolid.Suitcase;
-                tvOrder.CalcToggles();
-                ItemInvTreeHasInitialized = true;
+                }
+                else
+                {
+                    TICol3_0!.TabPanels[0].SelectButton!.IsVisible = false;
 
-            }
-            else if (ld.PortraitColumns[2] == ILayoutDescription.PortraitColumn.itemloc)
-            {
-                tvOrder = CreateItemLocTree();
-                TICol3!.TabPanels[0].TabPanelGrid!.Clear();
-                TICol3!.TabPanels[0].TabPanelGrid!.Add(tvOrder);
-                TICol3!.TabPanels[0].SelectButton!.IsVisible = true;
-                TICol3!.TabPanels[0].SelectButton!.Text = FaSolid.MapMarkerAlt;
-                tvOrder.CalcToggles();
-                ItemLocTreeHasInitialized = true;
+                }
+
+                if (ld.PortraitColumns[2,1] == ILayoutDescription.PortraitColumn.itemloc)
+                {
+                    tvOrder = CreateItemLocTree();
+                    // TICol3_1!.TabPanels[0].TabPanelGrid.Clear();
+                    // TICol3_1!.TabPanels[0].TabPanelGrid!.Clear();
+                    TICol3_0!.TabPanels[1].TabPanelGrid!.Children[0] = tvOrder;
+                    TICol3_0!.TabPanels[1].SelectButton!.IsVisible = true;
+                    TICol3_0!.TabPanels[1].SelectButton!.Text = FaSolid.MapMarkerAlt;
+                    tvOrder.CalcToggles();
+                    ItemLocTreeHasInitialized = true;
+
+                }
+                else
+                {
+                    TICol3_0!.TabPanels[1].SelectButton!.IsVisible = false;
+
+                }
+                if (ld.PortraitColumns[2, 2] == ILayoutDescription.PortraitColumn.iteminv)
+                {
+                    tvOrder = CreateItemInvTree();
+                    // TICol3_2!.TabPanels[0].TabPanelGrid.Clear();
+                    // TICol3_2!.TabPanels[0].TabPanelGrid!.Clear();
+                    TICol3_0!.TabPanels[2].TabPanelGrid!.Children[0] = tvOrder;
+                    TICol3_0!.TabPanels[2].SelectButton!.IsVisible = true;
+                    TICol3_0!.TabPanels[2].SelectButton!.Text = FaSolid.Suitcase;
+                    tvOrder.CalcToggles();
+                    ItemInvTreeHasInitialized = true;
+
+                }
+                else
+                {
+                    TICol3_0!.TabPanels[2].SelectButton!.IsVisible = false;
+
+                }
+                TICol3_0.SyncTabStyles();
 
             }
         }
@@ -2387,6 +2548,16 @@ public partial class GamePage : ContentPage, IMenuExtension
         tv.Add(tv1);
         tv1.SetCursorHand();
         tv1.Clicked += SelectTreeViewItem;
+        tv1.HorizontalOptions = LayoutOptions.Start;
+        tv1.CascadeInputTransparent = false;
+        tv1.InputTransparent = false;
+        // tv1.Background = Colors.Blue;
+
+        /*
+        var tap = new TapGestureRecognizer();
+        tap.Tapped += SelectTreeViewItem; 
+        tv1.GestureRecognizers.Add(tap);
+        */
         // tv1.CurrentTreeState = TreeViewItem.TreeState.open;
         return tv1;
     }
@@ -3324,7 +3495,7 @@ public partial class GamePage : ContentPage, IMenuExtension
         // dessen H�he ber�cksichtigen
         if (ld.ScreenMode == IGlobalData.screenMode.portrait)
         {
-            if (ld.PortraitColumns[0] != ILayoutDescription.PortraitColumn.none)
+            if (IsPortraitVisible() == true )
             {
                 GridLength gl1 = new GridLength(GlobalSpecs.CurrentGlobalSpecs!.GetScreenHeight() - ld.PortraitColumnsHeight - _headlineHeight  );
                 if (lastMenuGridMenuVerticalRow0Height.Value != gl1.Value)
@@ -3515,7 +3686,9 @@ public partial class GamePage : ContentPage, IMenuExtension
 
         // GlobalData.CurrentGlobalData!.LayoutDescription.ScreenMode = sm;
         SetGamePageLayout();
+        AdaptGridHeights();
 
+        UIS.Scr.SetToEnd();  
 
         lastSM = sm;
     }
@@ -3524,6 +3697,7 @@ public partial class GamePage : ContentPage, IMenuExtension
         UIS.Scr.SetRescale();
  
         SetGamePageLayout();
+        AdaptGridHeights();
     }
 
     public bool SetLanguage()
@@ -4170,6 +4344,9 @@ public partial class GamePage : ContentPage, IMenuExtension
                     if( ( String.Compare(UIS.RecordedText, "eins", StringComparison.OrdinalIgnoreCase) == 0 )
                         || (String.Compare(UIS.RecordedText, "1", StringComparison.OrdinalIgnoreCase) == 0)
                         || (String.Compare(UIS.RecordedText, "one", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "erstens", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "uno", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "oans", StringComparison.OrdinalIgnoreCase) == 0)
                         )
                     {
                         key = '1';
@@ -4178,7 +4355,9 @@ public partial class GamePage : ContentPage, IMenuExtension
                     if ( (String.Compare(UIS.RecordedText, "zwei", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "2", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "two", StringComparison.OrdinalIgnoreCase) == 0)
-                    )
+                    || (String.Compare(UIS.RecordedText, "zweitens", StringComparison.OrdinalIgnoreCase) == 0)
+                   || (String.Compare(UIS.RecordedText, "dos", StringComparison.OrdinalIgnoreCase) == 0)
+                   )
                     {
                         key = '2';
                     }
@@ -4186,6 +4365,8 @@ public partial class GamePage : ContentPage, IMenuExtension
                     if ( (String.Compare(UIS.RecordedText, "drei", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "3", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "three", StringComparison.OrdinalIgnoreCase) == 0)
+                   || (String.Compare(UIS.RecordedText, "tres", StringComparison.OrdinalIgnoreCase) == 0)
+                   || (String.Compare(UIS.RecordedText, "drittens", StringComparison.OrdinalIgnoreCase) == 0)
                     )
                     {
                         key = '3';
@@ -4194,14 +4375,18 @@ public partial class GamePage : ContentPage, IMenuExtension
                     if ( (String.Compare(UIS.RecordedText, "vier", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "4", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "four", StringComparison.OrdinalIgnoreCase) == 0)
+                   || (String.Compare(UIS.RecordedText, "viertens", StringComparison.OrdinalIgnoreCase) == 0)
+                   || (String.Compare(UIS.RecordedText, "quatro", StringComparison.OrdinalIgnoreCase) == 0)
                     )
                     {
                         key = '4';
                     }
                     else
-                    if ( (String.Compare(UIS.RecordedText, "f�nf", StringComparison.OrdinalIgnoreCase) == 0)
+                    if ( (String.Compare(UIS.RecordedText, "fünf", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "5", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "five", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "fünftens", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "cinco", StringComparison.OrdinalIgnoreCase) == 0)
                     )
                     {
                         key = '5';
@@ -4211,6 +4396,8 @@ public partial class GamePage : ContentPage, IMenuExtension
                     || (String.Compare(UIS.RecordedText, "6", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "six", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "sex", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "seis", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "sechstens", StringComparison.OrdinalIgnoreCase) == 0)
                     )
                     {
                         key = '6';
@@ -4219,6 +4406,8 @@ public partial class GamePage : ContentPage, IMenuExtension
                     if ( (String.Compare(UIS.RecordedText, "sieben", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "7", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "seven", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "siete", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "siebtens", StringComparison.OrdinalIgnoreCase) == 0)
                     )
                     {
                         key = '7';
@@ -4227,6 +4416,8 @@ public partial class GamePage : ContentPage, IMenuExtension
                     if ( (String.Compare(UIS.RecordedText, "acht", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "8", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "eight", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "ocho", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "achtens", StringComparison.OrdinalIgnoreCase) == 0)
                     )
                     {
                         key = '8';
@@ -4235,6 +4426,8 @@ public partial class GamePage : ContentPage, IMenuExtension
                     if ( (String.Compare(UIS.RecordedText, "neun", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "9", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "nine", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "nueve", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "neuntens", StringComparison.OrdinalIgnoreCase) == 0)
                     )
                     {
                         key = '9';
@@ -4243,6 +4436,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                     if ( (String.Compare(UIS.RecordedText, "null", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "0", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "zero", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "nulltens", StringComparison.OrdinalIgnoreCase) == 0)
                     )
                     {
                         key = '0';
@@ -4250,13 +4444,22 @@ public partial class GamePage : ContentPage, IMenuExtension
                     else
                     if ( (String.Compare(UIS.RecordedText, "a", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "ah", StringComparison.OrdinalIgnoreCase) == 0)
-                    )
+                    || (String.Compare(UIS.RecordedText, "Buchstabe a", StringComparison.OrdinalIgnoreCase) == 0)
+                      || (String.Compare(UIS.RecordedText, "Aachen", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Anton", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Alfa", StringComparison.OrdinalIgnoreCase) == 0)
+                     || (String.Compare(UIS.RecordedText, "Alpha", StringComparison.OrdinalIgnoreCase) == 0)
+                 )
                     {
                         key = 'a';
                     }
                     else
                     if ((String.Compare(UIS.RecordedText, "b", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "be", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Buchstabe b", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Berlin", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Berta", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Bravo", StringComparison.OrdinalIgnoreCase) == 0)
                     )
                     {
                         key = 'b';
@@ -4264,6 +4467,11 @@ public partial class GamePage : ContentPage, IMenuExtension
                     else
                     if ((String.Compare(UIS.RecordedText, "c", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "ce", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Buchstabe c", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Chemnitz", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Cäsar", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Caesar", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Charlie", StringComparison.OrdinalIgnoreCase) == 0)
                     )
                     {
                         key = 'c';
@@ -4271,6 +4479,10 @@ public partial class GamePage : ContentPage, IMenuExtension
                     else
                     if ((String.Compare(UIS.RecordedText, "d", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "de", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Buchstabe d", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Düsseldorf", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Dora", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Delta", StringComparison.OrdinalIgnoreCase) == 0)
                     )
                     {
                         key = 'd';
@@ -4278,6 +4490,10 @@ public partial class GamePage : ContentPage, IMenuExtension
                     else
                     if ((String.Compare(UIS.RecordedText, "e", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "e", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Buchstabe e", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Essen", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Emil", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Echo", StringComparison.OrdinalIgnoreCase) == 0)
                     )
                     {
                         key = 'e';
@@ -4285,6 +4501,10 @@ public partial class GamePage : ContentPage, IMenuExtension
                     else
                     if ((String.Compare(UIS.RecordedText, "f", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "ef", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Buchstabe f", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Frankfurt", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Friedrich", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Foxtrott", StringComparison.OrdinalIgnoreCase) == 0)
                     )
                     {
                         key = 'f';
@@ -4292,6 +4512,10 @@ public partial class GamePage : ContentPage, IMenuExtension
                     else
                     if ((String.Compare(UIS.RecordedText, "g", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "g", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Buchstabe g", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Goslar", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Gustav", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Golf", StringComparison.OrdinalIgnoreCase) == 0)
                     )
                     {
                         key = 'g';
@@ -4299,13 +4523,21 @@ public partial class GamePage : ContentPage, IMenuExtension
                     else
                     if ((String.Compare(UIS.RecordedText, "h", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "ha", StringComparison.OrdinalIgnoreCase) == 0)
-                    )
+                    || (String.Compare(UIS.RecordedText, "Buchstabe h", StringComparison.OrdinalIgnoreCase) == 0)
+                      || (String.Compare(UIS.RecordedText, "Hamburg", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Heinrich", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Hotel", StringComparison.OrdinalIgnoreCase) == 0)
+                  )
                     {
                         key = 'h';
                     }
                     else
                     if ((String.Compare(UIS.RecordedText, "i", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "i", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Buchstabe i", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Ingelheim", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Ida", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "India", StringComparison.OrdinalIgnoreCase) == 0)
                     )
                     {
                         key = 'i';
@@ -4313,6 +4545,11 @@ public partial class GamePage : ContentPage, IMenuExtension
                     else
                     if ((String.Compare(UIS.RecordedText, "j", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "jot", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Buchstabe j", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Jena", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Julius", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Juliett", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Juliette", StringComparison.OrdinalIgnoreCase) == 0)
                     )
                     {
                         key = 'j';
@@ -4320,6 +4557,10 @@ public partial class GamePage : ContentPage, IMenuExtension
                     else
                     if ((String.Compare(UIS.RecordedText, "k", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "ka", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Buchstabe k", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Köln", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Kaufmann", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Kilo", StringComparison.OrdinalIgnoreCase) == 0)
                     )
                     {
                         key = 'k';
@@ -4327,6 +4568,10 @@ public partial class GamePage : ContentPage, IMenuExtension
                     else
                     if ((String.Compare(UIS.RecordedText, "l", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "el", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Buchstabe l", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Leipzig", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Ludwig", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Lima", StringComparison.OrdinalIgnoreCase) == 0)
                     )
                     {
                         key = 'l';
@@ -4334,6 +4579,10 @@ public partial class GamePage : ContentPage, IMenuExtension
                     else
                     if ((String.Compare(UIS.RecordedText, "m", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "em", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Buchstabe m", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "München", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Martha", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Mike", StringComparison.OrdinalIgnoreCase) == 0)
                     )
                     {
                         key = 'm';
@@ -4341,6 +4590,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                     else
                     if ((String.Compare(UIS.RecordedText, "n", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "en", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Buchstabe n", StringComparison.OrdinalIgnoreCase) == 0)
                     )
                     {
                         key = 'n';
@@ -4348,6 +4598,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                     else
                     if ((String.Compare(UIS.RecordedText, "o", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "o", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Buchstabe o", StringComparison.OrdinalIgnoreCase) == 0)
                     )
                     {
                         key = 'o';
@@ -4355,6 +4606,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                     else
                     if ((String.Compare(UIS.RecordedText, "p", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "pe", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Buchstabe p", StringComparison.OrdinalIgnoreCase) == 0)
                     )
                     {
                         key = 'p';
@@ -4362,6 +4614,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                     else
                     if ((String.Compare(UIS.RecordedText, "q", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "kuh", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Buchstabe q", StringComparison.OrdinalIgnoreCase) == 0)
                     )
                     {
                         key = 'q';
@@ -4369,6 +4622,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                     else
                     if ((String.Compare(UIS.RecordedText, "r", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "er", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Buchstabe r", StringComparison.OrdinalIgnoreCase) == 0)
                     )
                     {
                         key = 'r';
@@ -4376,6 +4630,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                     else
                     if ((String.Compare(UIS.RecordedText, "s", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "es", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Buchstabe s", StringComparison.OrdinalIgnoreCase) == 0)
                     )
                     {
                         key = 's';
@@ -4383,6 +4638,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                     else
                     if ((String.Compare(UIS.RecordedText, "t", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "te", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Buchstabe te", StringComparison.OrdinalIgnoreCase) == 0)
                     )
                     {
                         key = 't';
@@ -4390,6 +4646,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                     else
                     if ((String.Compare(UIS.RecordedText, "u", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "u", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Buchstabe u", StringComparison.OrdinalIgnoreCase) == 0)
                     )
                     {
                         key = 'u';
@@ -4397,6 +4654,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                     else
                     if ((String.Compare(UIS.RecordedText, "v", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "vau", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Buchstabe v", StringComparison.OrdinalIgnoreCase) == 0)
                     )
                     {
                         key = 'v';
@@ -4404,6 +4662,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                     else
                     if ((String.Compare(UIS.RecordedText, "w", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "weh", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Buchstabe w", StringComparison.OrdinalIgnoreCase) == 0)
                     )
                     {
                         key = 'w';
@@ -4411,6 +4670,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                     else
                     if ((String.Compare(UIS.RecordedText, "x", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "ix", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Buchstabe x", StringComparison.OrdinalIgnoreCase) == 0)
                     )
                     {
                         key = 'x';
@@ -4418,6 +4678,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                     else
                     if ((String.Compare(UIS.RecordedText, "y", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "ypsilon", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Buchstabe y", StringComparison.OrdinalIgnoreCase) == 0)
                     )
                     {
                         key = 'y';
@@ -4425,6 +4686,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                     else
                     if ((String.Compare(UIS.RecordedText, "z", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "zett", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Buchstabe z", StringComparison.OrdinalIgnoreCase) == 0)
                     )
                     {
                         key = 'z';

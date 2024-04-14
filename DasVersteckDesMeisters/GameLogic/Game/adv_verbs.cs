@@ -705,6 +705,7 @@ public partial class Adv: AdvBase
         CB!.Verb_Save = Verbs.AddLocaLoca( loca.AdvBase_InitializeGame_14237, "AdvBase_InitializeGame_14237");
         Verbs.AddLocaLoca( loca.AdvBase_InitializeGame_14238, CB!.Verb_Save.ID, "AdvBase_InitializeGame_14238");
         Verbs.AddLocaLoca( loca.AdvBase_InitializeGame_14239, CB!.Verb_Save.ID, "AdvBase_InitializeGame_14239");
+        Verbs.AddLocaLoca(loca.Verb_speichern, CB!.Verb_Save.ID, "Verb_speichern");
 
         CB!.Verb_Load = Verbs.AddLocaLoca( loca.AdvBase_InitializeGame_14240, "AdvBase_InitializeGame_14240");
         Verbs.AddLocaLoca( loca.AdvBase_InitializeGame_14241, CB!.Verb_Load.ID, "AdvBase_InitializeGame_14241");
