@@ -3626,9 +3626,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>";
+                return "<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>";
             else
-                return "<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>";
+                return "<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>";
         }
     }
     public static string Adv_Intro1
@@ -8910,6 +8910,46 @@ public static partial class loca
                 return "speichern";
             else
                 return "___save";
+        }
+    }
+    public static string MAUI_Infodialog_Ok
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Ok";
+            else
+                return "Ok";
+        }
+    }
+    public static string MAUI_Infodialog_Info
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Wichtige Info";
+            else
+                return "Wichtige Info";
+        }
+    }
+    public static string MAUI_Infodialog_Autosave_Failed
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Der automatisch abgelegte Spielstand war kaputt oder veraltet, und wurde daher nicht geladen.";
+            else
+                return "Der automatisch abgelegte Spielstand war kaputt oder veraltet, und wurde daher nicht geladen.";
+        }
+    }
+    public static string MAUI_Infodialog_Savegame_Failed
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Der gewählte Spielstand war kaputt oder veraltet, und wurde daher nicht geladen.";
+            else
+                return "Der gewählte Spielstand war kaputt oder veraltet, und wurde daher nicht geladen.";
         }
     }
 

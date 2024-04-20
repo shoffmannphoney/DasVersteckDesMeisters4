@@ -81,6 +81,8 @@ public interface IGlobalData
     public delegate void _callbackResize(double width, double height);
     public delegate void _callbackChangeOrientation(screenMode sm);
     public delegate void _setGlobalMenuState(globalMenu gms);
+    public bool AutoloadFailed { get; set; }
+    public bool SavegameFailed { get; set; }
     public delegate void _setLocalMenuState(localMenu lm);
     public DelBoolInt? ProvideMCGrid { get; set; }
     public DelBoolInt? ProvideMoreGrid { get; set; }

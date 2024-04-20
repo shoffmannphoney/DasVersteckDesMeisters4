@@ -4853,10 +4853,9 @@ namespace GameCore
 
             }
         }
-        public SaveObj LoadGame( string fileName, ref IGlobalData.language lang)
-        {
-            string? input = AdvGame!.UIS!.CoreLoadStringFromFile( fileName );
 
+        public SaveObj SetupSaveObject()
+        {
             Adv advTemp = new Adv(false, false, true);
             GD!.AskForPlayLevel = false;
             // SaveObj so_source = AdvGame!.GD!.StartStatus!;
@@ -4877,7 +4876,7 @@ namespace GameCore
             so.jsonPV = advTemp.PV;
 
 
-            if(advTemp!.GD!.OrderList!.OTL![advTemp!.GD!.OrderList!.CurrentOrderListIx].Zipped == true )
+            if (advTemp!.GD!.OrderList!.OTL![advTemp!.GD!.OrderList!.CurrentOrderListIx].Zipped == true)
             {
                 GD.OrderList!.ReadZipOrderTable(advTemp.GD!.OrderList!.CurrentOrderListIx, GD!.OrderList!.OTL![advTemp!.GD!.OrderList!.CurrentOrderListIx].Name!);
             }
@@ -4896,6 +4895,14 @@ namespace GameCore
             so.jsonParser = advTemp.Parser;
             so.jsonVersion = advTemp.GD.Version;
             so.JsonGameDefinitions = advTemp.Orders!.GenerateGameDefinitions(false);
+
+            return so;
+        }
+        public SaveObj LoadGame( string fileName, ref IGlobalData.language lang )
+        {
+            string? input = AdvGame!.UIS!.CoreLoadStringFromFile( fileName );
+
+            SaveObj so = SetupSaveObject();
             /*
             so.jsonItems = Phoney_MAUI.Core.UIServices.ObjectCopier.Clone<ItemList>(so_source!.jsonItems!)!;
             so.jsonPersons = Phoney_MAUI.Core.UIServices.ObjectCopier.Clone<PersonList>(so_source!.jsonPersons!)!;
@@ -4930,9 +4937,20 @@ namespace GameCore
 
             // so!.jsonStoryText.Slines = so.jsonSlines;
 
-            ParseInput(so, input!, ref lang);
+            if (ParseInput(so, input!, ref lang) == true)
+            {
+                RestoreReflection(so);
 
-            RestoreReflection(so);
+            }
+            else
+            {
+                if( fileName == "autosave.sav")
+                    AdvGame.GD.AutoloadFailed = true;
+                else
+                    AdvGame.GD.SavegameFailed = true;
+
+                so = SetupSaveObject();
+            }
             return so;
             // SaveOrderTable(ref output);
         }
@@ -5062,8 +5080,10 @@ namespace GameCore
         enum sgTypes { unclear, item, person, location, stats, score, languages, ki, itemqueue, ste, fbe, a, pv, ordertable, version }
 
  
-        public void ParseInput( SaveObj soDest, string input, ref IGlobalData.language lang)
+        public bool ParseInput( SaveObj soDest, string input, ref IGlobalData.language lang)
         {
+            bool success = true;
+
             sgTypes SGType = sgTypes.unclear;
             bool proceed = true;
             int off = 0;
@@ -6317,13 +6337,17 @@ namespace GameCore
                     if (off >= input.Length)
                         break;
                     if (!handled)
+                    {
+                        success = false;
                         break;
+                    }
                 }
             }
             catch (Exception e)
             {
-
+                success = false;
             }
+            return success;
         }
 
         public  Object? GetPropValue( Object obj, String name)
@@ -6650,9 +6674,20 @@ namespace GameCore
             long mem16 = 0;
             long mem17 = 0;
 
+            Phoney_MAUI.Model.IStoryText? STEBack = AdvGame.STE.Clone();
+
             SaveObj? SO=null;
             IGlobalData.language targetlanguage = IGlobalData.language.german; 
             SO = LoadGame(fileName, ref targetlanguage);
+
+            // GD.SavegameFailed = true;
+
+            if (GD.SavegameFailed == true)
+            {
+                SO = null;
+                AdvGame.STE = (Phoney_MAUI.Core.StoryText) STEBack;
+                AdvGame.STE.RecalcLatest();
+            }
 
             mem14 = GC.GetTotalMemory(true);
             GC.Collect();
@@ -6884,7 +6919,9 @@ namespace GameCore
             SaveObj>(jsonString);
             */
 
-            AdvGame!.FeedbackOutput(PersonID, String.Format( loca.OrderFeedback_Load_14066, slotNr ) , true);
+            if( GD.SavegameFailed == false)
+                AdvGame!.FeedbackOutput(PersonID, String.Format( loca.OrderFeedback_Load_14066, slotNr ) , true);
+
             // locations!.ShowlocationFull(A!.ActLoc);
             AdvGame!.SetScoreOutput();
             return (false);

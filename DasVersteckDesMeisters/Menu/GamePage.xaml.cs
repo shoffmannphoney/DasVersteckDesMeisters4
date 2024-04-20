@@ -26,7 +26,7 @@ public partial class GamePage : ContentPage, IMenuExtension
 {
     
     private const double _mcGridHeight = 200;
-    private const double _inputGridHeight = 50;
+    private const double _inputGridHeight = 60;
     private const double _headlineHeight = 50;
     private const double _paddingWidth = 20;
 
@@ -519,6 +519,9 @@ public partial class GamePage : ContentPage, IMenuExtension
 
     public void AdaptGridHeights()
     {
+        // Mike.FontSize = 25;
+        // Mike.FontSize = 25;
+
         RowDefinitionCollection rdc = Grid_Output.RowDefinitions;
         GridWebView.HeightRequest = rdc[0].Height.Value;
         Grid_Inter.HeightRequest = rdc[2].Height.Value;
@@ -531,7 +534,7 @@ public partial class GamePage : ContentPage, IMenuExtension
 
         LayoutDescription ld = (LayoutDescription)GlobalData.CurrentGlobalData!.LayoutDescription!;
 
-        if (GlobalData.CurrentGlobalData!.LayoutDescription.ScreenMode == IGlobalData.screenMode.portrait)
+        if (GlobalData.CurrentGlobalData!.LayoutDescription.ScreenMode == IGlobalData.screenMode.portrait && IsPortraitColVisible(0))
             gesHeightOutInMC += ld.PortraitColumnsHeight;
 
 
@@ -2893,8 +2896,8 @@ public partial class GamePage : ContentPage, IMenuExtension
                 {
                     PutInChild.Text = String.Format(loca.CustomRequestHandler_DoUIUpdate_Person_You_16303, item.FullName(Co.CASE_DAT, ShowAppendix: true));
                     currentChild.Add(PutInChild);
-                    currentChild.CurrentTreeState = TreeViewItem.TreeState.open;
-                    PutInChild.CurrentTreeState = TreeViewItem.TreeState.open;
+                    // currentChild.CurrentTreeState = TreeViewItem.TreeState.open;
+                    // PutInChild.CurrentTreeState = TreeViewItem.TreeState.open;
                 }
             }
         }
@@ -4296,8 +4299,15 @@ public partial class GamePage : ContentPage, IMenuExtension
         }
         */
 
+        if (GD.SavegameFailed == true)
+        {
+            GD.SavegameFailed = false;
 
-   
+            ShowDialog(loca.MAUI_Infodialog_Savegame_Failed);
+
+        }
+
+
         if ( UIS.RecordedText != null )
         {
             if(UIS.RecordedText.Length > 0 )
@@ -4356,6 +4366,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                     || (String.Compare(UIS.RecordedText, "2", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "two", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "zweitens", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "zwotens", StringComparison.OrdinalIgnoreCase) == 0)
                    || (String.Compare(UIS.RecordedText, "dos", StringComparison.OrdinalIgnoreCase) == 0)
                    )
                     {
@@ -4449,7 +4460,9 @@ public partial class GamePage : ContentPage, IMenuExtension
                     || (String.Compare(UIS.RecordedText, "Anton", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "Alfa", StringComparison.OrdinalIgnoreCase) == 0)
                      || (String.Compare(UIS.RecordedText, "Alpha", StringComparison.OrdinalIgnoreCase) == 0)
-                 )
+                     || (String.Compare(UIS.RecordedText, "Albert", StringComparison.OrdinalIgnoreCase) == 0)
+                     || (String.Compare(UIS.RecordedText, "Augsburg", StringComparison.OrdinalIgnoreCase) == 0)
+                 ) 
                     {
                         key = 'a';
                     }
@@ -4460,6 +4473,8 @@ public partial class GamePage : ContentPage, IMenuExtension
                     || (String.Compare(UIS.RecordedText, "Berlin", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "Berta", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "Bravo", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Bernhard", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Bruno", StringComparison.OrdinalIgnoreCase) == 0)
                     )
                     {
                         key = 'b';
@@ -4472,6 +4487,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                     || (String.Compare(UIS.RecordedText, "Cäsar", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "Caesar", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "Charlie", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Cottbus", StringComparison.OrdinalIgnoreCase) == 0)
                     )
                     {
                         key = 'c';
@@ -4483,6 +4499,8 @@ public partial class GamePage : ContentPage, IMenuExtension
                     || (String.Compare(UIS.RecordedText, "Düsseldorf", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "Dora", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "Delta", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "David", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Dortmund", StringComparison.OrdinalIgnoreCase) == 0)
                     )
                     {
                         key = 'd';
@@ -4505,6 +4523,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                     || (String.Compare(UIS.RecordedText, "Frankfurt", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "Friedrich", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "Foxtrott", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Fritz", StringComparison.OrdinalIgnoreCase) == 0)
                     )
                     {
                         key = 'f';
@@ -4516,6 +4535,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                     || (String.Compare(UIS.RecordedText, "Goslar", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "Gustav", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "Golf", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Görlitz", StringComparison.OrdinalIgnoreCase) == 0)
                     )
                     {
                         key = 'g';
@@ -4527,6 +4547,8 @@ public partial class GamePage : ContentPage, IMenuExtension
                       || (String.Compare(UIS.RecordedText, "Hamburg", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "Heinrich", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "Hotel", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Heinz", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Hannover", StringComparison.OrdinalIgnoreCase) == 0)
                   )
                     {
                         key = 'h';
@@ -4538,6 +4560,8 @@ public partial class GamePage : ContentPage, IMenuExtension
                     || (String.Compare(UIS.RecordedText, "Ingelheim", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "Ida", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "India", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Isidor", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Iserlohn", StringComparison.OrdinalIgnoreCase) == 0)
                     )
                     {
                         key = 'i';
@@ -4550,6 +4574,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                     || (String.Compare(UIS.RecordedText, "Julius", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "Juliett", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "Juliette", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Jacob", StringComparison.OrdinalIgnoreCase) == 0)
                     )
                     {
                         key = 'j';
@@ -4561,6 +4586,10 @@ public partial class GamePage : ContentPage, IMenuExtension
                     || (String.Compare(UIS.RecordedText, "Köln", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "Kaufmann", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "Kilo", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Karl", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Katharina", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Kurfürst", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Konrad", StringComparison.OrdinalIgnoreCase) == 0)
                     )
                     {
                         key = 'k';
@@ -4583,6 +4612,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                     || (String.Compare(UIS.RecordedText, "München", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "Martha", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "Mike", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Marie", StringComparison.OrdinalIgnoreCase) == 0)
                     )
                     {
                         key = 'm';
@@ -4591,6 +4621,11 @@ public partial class GamePage : ContentPage, IMenuExtension
                     if ((String.Compare(UIS.RecordedText, "n", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "en", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "Buchstabe n", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Nürnberg", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Nordpol", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "November", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Nathan", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Norbert", StringComparison.OrdinalIgnoreCase) == 0)
                     )
                     {
                         key = 'n';
@@ -4599,6 +4634,10 @@ public partial class GamePage : ContentPage, IMenuExtension
                     if ((String.Compare(UIS.RecordedText, "o", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "o", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "Buchstabe o", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Offenbach", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Otto", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Oscar", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Oldenburg", StringComparison.OrdinalIgnoreCase) == 0)
                     )
                     {
                         key = 'o';
@@ -4607,6 +4646,10 @@ public partial class GamePage : ContentPage, IMenuExtension
                     if ((String.Compare(UIS.RecordedText, "p", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "pe", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "Buchstabe p", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Potsdam", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Paula", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Papa", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Paul", StringComparison.OrdinalIgnoreCase) == 0)
                     )
                     {
                         key = 'p';
@@ -4615,6 +4658,9 @@ public partial class GamePage : ContentPage, IMenuExtension
                     if ((String.Compare(UIS.RecordedText, "q", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "kuh", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "Buchstabe q", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Quickborn", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Quelle", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Quebec", StringComparison.OrdinalIgnoreCase) == 0)
                     )
                     {
                         key = 'q';
@@ -4623,6 +4669,10 @@ public partial class GamePage : ContentPage, IMenuExtension
                     if ((String.Compare(UIS.RecordedText, "r", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "er", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "Buchstabe r", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Rostock", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Richard", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Romeo", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Regensburg", StringComparison.OrdinalIgnoreCase) == 0)
                     )
                     {
                         key = 'r';
@@ -4631,6 +4681,11 @@ public partial class GamePage : ContentPage, IMenuExtension
                     if ((String.Compare(UIS.RecordedText, "s", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "es", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "Buchstabe s", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Salzwedel", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Samuel", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Sierra", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Siegfried", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Stuttgart", StringComparison.OrdinalIgnoreCase) == 0)
                     )
                     {
                         key = 's';
@@ -4639,7 +4694,11 @@ public partial class GamePage : ContentPage, IMenuExtension
                     if ((String.Compare(UIS.RecordedText, "t", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "te", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "Buchstabe te", StringComparison.OrdinalIgnoreCase) == 0)
-                    )
+                    || (String.Compare(UIS.RecordedText, "Tübingen", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Theodor", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Tango", StringComparison.OrdinalIgnoreCase) == 0)
+                     || (String.Compare(UIS.RecordedText, "Toni", StringComparison.OrdinalIgnoreCase) == 0)
+                  )
                     {
                         key = 't';
                     }
@@ -4647,6 +4706,9 @@ public partial class GamePage : ContentPage, IMenuExtension
                     if ((String.Compare(UIS.RecordedText, "u", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "u", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "Buchstabe u", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Unna", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Ulrich", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Uniform", StringComparison.OrdinalIgnoreCase) == 0)
                     )
                     {
                         key = 'u';
@@ -4655,6 +4717,9 @@ public partial class GamePage : ContentPage, IMenuExtension
                     if ((String.Compare(UIS.RecordedText, "v", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "vau", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "Buchstabe v", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Völklingen", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Viktor", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Victor", StringComparison.OrdinalIgnoreCase) == 0)
                     )
                     {
                         key = 'v';
@@ -4663,6 +4728,9 @@ public partial class GamePage : ContentPage, IMenuExtension
                     if ((String.Compare(UIS.RecordedText, "w", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "weh", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "Buchstabe w", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Wuppertal", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Wilhelm", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Whiskey", StringComparison.OrdinalIgnoreCase) == 0)
                     )
                     {
                         key = 'w';
@@ -4671,6 +4739,9 @@ public partial class GamePage : ContentPage, IMenuExtension
                     if ((String.Compare(UIS.RecordedText, "x", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "ix", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "Buchstabe x", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Xanten", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Xanthippe", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "X-Ray", StringComparison.OrdinalIgnoreCase) == 0)
                     )
                     {
                         key = 'x';
@@ -4679,6 +4750,9 @@ public partial class GamePage : ContentPage, IMenuExtension
                     if ((String.Compare(UIS.RecordedText, "y", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "ypsilon", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "Buchstabe y", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Ypsilon", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Yankee", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Ypern", StringComparison.OrdinalIgnoreCase) == 0)
                     )
                     {
                         key = 'y';
@@ -4687,6 +4761,10 @@ public partial class GamePage : ContentPage, IMenuExtension
                     if ((String.Compare(UIS.RecordedText, "z", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "zett", StringComparison.OrdinalIgnoreCase) == 0)
                     || (String.Compare(UIS.RecordedText, "Buchstabe z", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Zwickau", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Zacharias", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Zulu", StringComparison.OrdinalIgnoreCase) == 0)
+                    || (String.Compare(UIS.RecordedText, "Zeppelin", StringComparison.OrdinalIgnoreCase) == 0)
                     )
                     {
                         key = 'z';
@@ -5948,7 +6026,7 @@ public partial class GamePage : ContentPage, IMenuExtension
 
                         yTotal = yMainNew.Value + ySplitNew.Value;
 
-                        if (yMainNew.Value < 150)
+                         if (yMainNew.Value < 150)
                         {
                             yMainNew = new GridLength(150, GridUnitType.Absolute);
                             ySplitNew = new GridLength(yTotal - yMainNew.Value, GridUnitType.Absolute);
@@ -6619,5 +6697,85 @@ public partial class GamePage : ContentPage, IMenuExtension
         _menuExtension!.CloseContextMenu();
     }
 
+    public void ShowDialog(string ShowText)
+    {
+        // bool doCont = true;
+        Button? b;
+        Point p3 = new();
+
+        b = new();
+
+
+        p3.Y += b!.Height + 3;
+
+        Rect pd = new();
+        pd.X = (GlobalSpecs.CurrentGlobalSpecs!.GetScreenWidth() / 2) - 200;
+        pd.Y = (GlobalSpecs.CurrentGlobalSpecs!.GetScreenHeight() / 2) - 100;
+        pd.Width = 400;
+        pd.Height = 200;
+
+
+        pd = _menuExtension!.CalcBounds(pd);
+
+        int val;
+
+        string Text = loca.MAUI_Infodialog_Info;
+
+        _menuExtension!.OpenShowMenu(true, pd, true, Text);
+
+
+        if (_menuExtension!.MEMenus[_menuExtension!.MEMenus.Count - 1].InnerView != null)
+        {
+            SetInfoMenu(_menuExtension!.MEMenus[_menuExtension!.MEMenus.Count - 1].InnerView, ShowText);
+        }
+        // BlueBox.IsVisible = true;
+        // AbsoluteLayout.SetLayoutBounds(BlueBox, new Rect(p3.X, p3.Y, 400, 200));
+    }
+    public void SetInfoMenu(Grid? contextGrid, string Text)
+    {
+        contextGrid!.Children.Clear();
+
+        RowDefinitionCollection rdc = new();
+        RowDefinition rd1 = new();
+        rd1.Height = new GridLength(1, GridUnitType.Star);
+
+        RowDefinition rd2 = new();
+        rd2.Height = new GridLength(40);
+        rdc.Add(rd1);
+        rdc.Add(rd2);
+
+        Grid? TextGrid = new();
+        contextGrid.Add(TextGrid);
+
+        List<string> LabelStyle = new();
+        LabelStyle.Add("Label_Normal");
+
+        Label l1 = new();
+        l1.Text = Text;
+        l1.VerticalOptions = LayoutOptions.Center;
+        l1.HorizontalOptions = LayoutOptions.Center;
+        l1.HorizontalTextAlignment = TextAlignment.Center;
+        TextGrid.Add(l1);
+        l1.StyleClass = LabelStyle;
+
+        contextGrid.RowDefinitions = rdc;
+
+        Grid ButtonGrid = new();
+        contextGrid.SetRow(ButtonGrid, 1);
+        contextGrid.Add(ButtonGrid);
+        ColumnDefinitionCollection cdc = new();
+        ColumnDefinition cd1 = new();
+        cd1.Width = new GridLength(1, GridUnitType.Star);
+        ColumnDefinition cd2 = new();
+        cd2.Width = new GridLength(4, GridUnitType.Star);
+        cdc.Add(cd1);
+        cdc.Add(cd2);
+        cdc.Add(cd1);
+        ButtonGrid.ColumnDefinitions = cdc;
+
+
+        CreateButtonXY(ButtonGrid, loca.MAUI_Infodialog_Ok, 1, 1, DoCancel);
+
+    }
 
 }

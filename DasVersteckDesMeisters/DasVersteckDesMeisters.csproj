@@ -68,9 +68,50 @@
 	<PropertyGroup>
 		<GenerateAppxPackageOnBuild>true</GenerateAppxPackageOnBuild>
 		<PackageId>$Phon</PackageId>
+		<AndroidSigningKeyStore>am_keystore.jks</AndroidSigningKeyStore>
 	</PropertyGroup>
 	<PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows' and '$(RuntimeIdentifierOverride)' != ''">
 		<RuntimeIdentifier>$(RuntimeIdentifierOverride)</RuntimeIdentifier>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-android|AnyCPU'">
+	  <AndroidKeyStore>True</AndroidKeyStore>
+	  <AndroidSigningStorePass>Lian1234</AndroidSigningStorePass>
+	  <AndroidSigningKeyAlias>mynewkey</AndroidSigningKeyAlias>
+	  <AndroidSigningKeyPass>Lian4321</AndroidSigningKeyPass>
+	  <ApplicationVersion>3</ApplicationVersion>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-android|x64'">
+	  <AndroidKeyStore>True</AndroidKeyStore>
+	  <AndroidSigningStorePass>Lian1234</AndroidSigningStorePass>
+	  <AndroidSigningKeyAlias>mynewkey</AndroidSigningKeyAlias>
+	  <AndroidSigningKeyPass>Lian4321</AndroidSigningKeyPass>
+	  <ApplicationVersion>3</ApplicationVersion>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-android|AnyCPU'">
+	  <AndroidKeyStore>True</AndroidKeyStore>
+	  <AndroidSigningStorePass>Lian1234</AndroidSigningStorePass>
+	  <AndroidSigningKeyAlias>mynewkey</AndroidSigningKeyAlias>
+	  <AndroidSigningKeyPass>Lian4321</AndroidSigningKeyPass>
+	  <ApplicationVersion>3</ApplicationVersion>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-android|x64'">
+	  <AndroidKeyStore>True</AndroidKeyStore>
+	  <AndroidSigningStorePass>Lian1234</AndroidSigningStorePass>
+	  <AndroidSigningKeyAlias>mynewkey</AndroidSigningKeyAlias>
+	  <AndroidSigningKeyPass>Lian4321</AndroidSigningKeyPass>
+	  <ApplicationVersion>3</ApplicationVersion>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-windows10.0.19041.0|AnyCPU'">
+	  <ApplicationVersion>3</ApplicationVersion>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-windows10.0.19041.0|x64'">
+	  <ApplicationVersion>3</ApplicationVersion>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-windows10.0.19041.0|AnyCPU'">
+	  <ApplicationVersion>3</ApplicationVersion>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-windows10.0.19041.0|x64'">
+	  <ApplicationVersion>3</ApplicationVersion>
 	</PropertyGroup>
 
 	<ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">

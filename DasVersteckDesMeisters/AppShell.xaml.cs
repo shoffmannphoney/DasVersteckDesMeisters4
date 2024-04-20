@@ -1027,6 +1027,10 @@ public class TreeViewItem : Grid, INotifyPropertyChanged
             {
                 o = (o as OrderListView)!.Parent;
             }
+            else if (o.GetType() == typeof(TreeViewItem))
+            {
+                o = (o as TreeViewItem )!.Parent;
+            }
             else
             {
             o = (o as Grid)!.Parent;

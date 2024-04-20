@@ -289,6 +289,8 @@ public interface IScroller
 
 public interface IStoryText
 {
+    public IStoryText Clone();
+
 
     public bool FullRefresh { get; set; }
 

@@ -11,6 +11,8 @@ namespace Phoney_MAUI.Menu;
 
 public partial class HomePage : ContentPage, IMenuExtension
 {
+    public bool freshAdventure = false;
+
     private readonly MainViewModel _viewModelMain;
     private readonly GeneralViewModel _viewModelGeneral;
     private readonly MenuExtension _menuExtension;
@@ -168,7 +170,6 @@ public partial class HomePage : ContentPage, IMenuExtension
 
         _viewModelGeneral.InitResize(this.Width, this.Height);
 
-        SetLanguage();
         _menuExtension!.QuitMethod = PressEndLocal;
 
         // B_Continue.Clicked += _menuExtension!.PressGame;
@@ -183,8 +184,36 @@ public partial class HomePage : ContentPage, IMenuExtension
         // vrechts.IsVisible = false;
         ChangeOrientation( GlobalData.CurrentGlobalData!.LayoutDescription.ScreenMode);
 
+        _menuExtension.ListCalls.Add(new(DoLoop, -1));
+
+        // GD.AutoloadFailed = true;
+
+        if( GD.AutoloadFailed == true )
+        {
+            GD.Adventure = null;
+            GD.Adventure = new Adv(false, false);
+        }
+        SetLanguage();
+
     }
-    protected  override void OnNavigatingFrom(NavigatingFromEventArgs args)
+
+    public bool DoLoop()
+    {
+        if (PageGrid.Height <= 0)
+            return false;
+
+
+        if (GD.AutoloadFailed == true)
+        {
+            GD.AutoloadFailed = false;
+
+            ShowDialog(loca.MAUI_Infodialog_Autosave_Failed);
+
+        }
+        return true;
+    }
+
+    protected override void OnNavigatingFrom(NavigatingFromEventArgs args)
     {
         // B_Continue.Clicked += _menuExtension!.PressGame;
         B_Game.Clicked -= _menuExtension!.PressGame;
@@ -232,6 +261,88 @@ public partial class HomePage : ContentPage, IMenuExtension
     {
         return WindowTitle;
     }
+    public void SetInfoMenu(Grid? contextGrid, string Text)
+    {
+        contextGrid!.Children.Clear();
+
+        RowDefinitionCollection rdc = new();
+        RowDefinition rd1 = new();
+        rd1.Height = new GridLength(1, GridUnitType.Star);
+
+        RowDefinition rd2 = new();
+        rd2.Height = new GridLength(40);
+        rdc.Add(rd1);
+        rdc.Add(rd2);
+
+        Grid? TextGrid = new();
+        contextGrid.Add(TextGrid);
+
+        List<string> LabelStyle = new();
+        LabelStyle.Add("Label_Normal");
+
+        Label l1 = new();
+        l1.Text = Text;
+        l1.VerticalOptions = LayoutOptions.Center;
+        l1.HorizontalOptions = LayoutOptions.Center;
+        l1.HorizontalTextAlignment = TextAlignment.Center;
+        TextGrid.Add(l1);
+        l1.StyleClass = LabelStyle;
+
+        contextGrid.RowDefinitions = rdc;
+
+        Grid ButtonGrid = new();
+        contextGrid.SetRow(ButtonGrid, 1);
+        contextGrid.Add(ButtonGrid);
+        ColumnDefinitionCollection cdc = new();
+        ColumnDefinition cd1 = new();
+        cd1.Width = new GridLength(1, GridUnitType.Star);
+        ColumnDefinition cd2 = new();
+        cd2.Width = new GridLength(4, GridUnitType.Star);
+        cdc.Add(cd1);
+        cdc.Add(cd2);
+        cdc.Add(cd1);
+        ButtonGrid.ColumnDefinitions = cdc;
+
+
+        CreateButtonXY(ButtonGrid, loca.MAUI_Infodialog_Ok, 1, 1, DoCancel);
+
+    }
+
+    public void ShowDialog(string ShowText)
+    {
+        // bool doCont = true;
+        Button? b;
+        Point p3 = new();
+
+        b = new();
+
+
+        p3.Y += b!.Height + 3;
+
+        Rect pd = new();
+        pd.X = (GlobalSpecs.CurrentGlobalSpecs!.GetScreenWidth() / 2) - 200;
+        pd.Y = (GlobalSpecs.CurrentGlobalSpecs!.GetScreenHeight() / 2) - 100;
+        pd.Width = 400;
+        pd.Height = 200;
+
+
+        pd = _menuExtension!.CalcBounds(pd);
+
+        int val;
+
+        string Text = loca.MAUI_Infodialog_Info;
+
+        _menuExtension!.OpenShowMenu(true, pd, true, Text);
+
+
+        if (_menuExtension!.MEMenus[_menuExtension!.MEMenus.Count - 1].InnerView != null)
+        {
+            SetInfoMenu(_menuExtension!.MEMenus[_menuExtension!.MEMenus.Count - 1].InnerView, ShowText );
+        }
+        // BlueBox.IsVisible = true;
+        // AbsoluteLayout.SetLayoutBounds(BlueBox, new Rect(p3.X, p3.Y, 400, 200));
+    }
+
     public void PressEndLocal(object? sender, EventArgs ea)
     {
         // bool doCont = true;

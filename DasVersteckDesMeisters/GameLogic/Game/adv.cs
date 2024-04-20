@@ -987,8 +987,13 @@ namespace GameCore
                     UIS.FeedbackTextObj.FeedbackModeMC = false;
                 // Persons!.TransferPerson(Persons!.Find(CA!.Person_I), CB!.LocType_Loc, A!.ActLoc);
                 UIS!.SetDelTextSelect(LinkCallback);
-                UIS!.HeadlineOutput(locations!.Find(AdvGame!.A!.ActLoc)!.LocName!);
-                AdvGame!.SetScoreOutput();
+
+                if (locations != null)
+                {
+                    UIS!.HeadlineOutput(locations!.Find(AdvGame!.A!.ActLoc)!.LocName!);
+
+                    AdvGame!.SetScoreOutput();
+                }
                 UIS!.DoUIUpdate();
 #if !NEWSCROLL
                 UIS.Scr.CompactToEnd();

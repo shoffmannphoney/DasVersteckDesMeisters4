@@ -604,6 +604,8 @@ public class GlobalData : IGlobalData
     public double[] DebugVal { get; set; } = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0 };
 
     public IGlobalData.picMode PicMode { get; set; }
+    public bool AutoloadFailed { get; set; }
+    public bool SavegameFailed { get; set; }
 
     public bool InitProcess { get; set; }
     public ILayoutDescription LayoutDescription { get; set; }
@@ -1112,6 +1114,7 @@ public class GlobalData : IGlobalData
         GameCore.loca.GD = this;
         PicMode = IGlobalData.picMode.off;
         STTMicroState = IGlobalData.microMode.once;
+        AutoloadFailed = false;
 
         LayoutDescription = UIServices.ReadConfig()!;
         if (LayoutDescription == null)
@@ -1919,9 +1922,9 @@ public class Version
     public Version()
     {
         this.Version1 = 1;
-        this.Version2 = 0;
+        this.Version2 = 1;
         this.Version3 = 0;
-        this.VersionDate = new DateTime(2024, 04, 01);
+        this.VersionDate = new DateTime(2024, 04, 14);
     }
 
     public int Version1

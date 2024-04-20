@@ -543,11 +543,11 @@ public class UIServices : IUIServices
 
         GD!.LayoutDescription.OrderListPos = ILayoutDescription.selectedPosition.rightUp;
         GD!.LayoutDescription.ItemsInvListPos = ILayoutDescription.selectedPosition.rightUp;
-        GD!.LayoutDescription.ItemsLocListPos = ILayoutDescription.selectedPosition.rightDown;
+        GD!.LayoutDescription.ItemsLocListPos = ILayoutDescription.selectedPosition.rightUp;
 
         GD.LayoutDescription.OrderListPosPT = ILayoutDescription.selectedPositionPT.first;
-        GD.LayoutDescription.ItemsInvListPosPT = ILayoutDescription.selectedPositionPT.second;
-        GD.LayoutDescription.ItemsLocListPosPT = ILayoutDescription.selectedPositionPT.third;
+        GD.LayoutDescription.ItemsInvListPosPT = ILayoutDescription.selectedPositionPT.first;
+        GD.LayoutDescription.ItemsLocListPosPT = ILayoutDescription.selectedPositionPT.first;
 
         LayoutDescription ld = (LayoutDescription)GlobalData.CurrentGlobalData!.LayoutDescription;
         ld.LU_Order = false;
@@ -573,11 +573,11 @@ public class UIServices : IUIServices
         // Hier noch die Menüs aktualisieren
         GD!.LayoutDescription.OrderListPos = ILayoutDescription.selectedPosition.rightUp;
         GD!.LayoutDescription.ItemsInvListPos = ILayoutDescription.selectedPosition.rightUp;
-        GD!.LayoutDescription.ItemsLocListPos = ILayoutDescription.selectedPosition.rightDown;
+        GD!.LayoutDescription.ItemsLocListPos = ILayoutDescription.selectedPosition.rightUp;
 
         GD.LayoutDescription.OrderListPosPT = ILayoutDescription.selectedPositionPT.first;
-        GD.LayoutDescription.ItemsInvListPosPT = ILayoutDescription.selectedPositionPT.second;
-        GD.LayoutDescription.ItemsLocListPosPT = ILayoutDescription.selectedPositionPT.third;
+        GD.LayoutDescription.ItemsInvListPosPT = ILayoutDescription.selectedPositionPT.first;
+        GD.LayoutDescription.ItemsLocListPosPT = ILayoutDescription.selectedPositionPT.first;
 
         LayoutDescription ld = (LayoutDescription)GlobalData.CurrentGlobalData!.LayoutDescription;
         ld.LU_Order = false;
@@ -4007,6 +4007,20 @@ public class StoryText : IStoryText
     string? latestHtmlOutput = null;
 
     int lastEndLine = -1;
+
+    public IStoryText Clone()
+    {
+        StoryText sto = new( this.UIS);
+
+        int ix = 0;
+
+        for( ix = 0; ix < Slines!.Count; ix++)
+        {
+            sto.Slines!.Add(Slines![ix]);
+        }
+
+        return sto;
+    }
 
     public void RecalcLatest( bool doCompact = true )
     {

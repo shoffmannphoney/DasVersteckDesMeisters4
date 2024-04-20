@@ -152,7 +152,7 @@ public partial class Adv: AdvBase
         Items!.Last().IsClosed = true;
 
         CA!.I04_Opening = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Oeffnung! }, null, Co.SEX_FEMALE, CB!.LocType_In_Item, CA!.I00_Nullbehaelter.ID, loca.Adv_I04_Opening, "Adv_I04_Opening", Co.SZ_small, true, false, Nouns, Adjs));
-        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_ExamineInable));
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_ExamineInable), relTypes.r_essential);
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
@@ -682,6 +682,7 @@ public partial class Adv: AdvBase
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Grabintoable), relTypes.r_essential);
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_ExamineInable), relTypes.r_essential);
 
         Items!.Last().CanPutIn = true;
         Items!.Last().StorageIn = 20;

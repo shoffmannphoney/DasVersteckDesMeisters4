@@ -152,18 +152,18 @@
                                         <Grid x:Name="Grid_Input" Margin="0,0,0,0" StyleClass="Grid_BGBG">
                                             <Grid x:Name="Grid_Input_Sub" StyleClass="Grid_Normal" Margin="2,10,5,0">
                                                 <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="30"/>
-                                                    <ColumnDefinition Width="30"/>
+                                                    <ColumnDefinition Width="40"/>
+                                                    <ColumnDefinition Width="40"/>
                                                     <ColumnDefinition Width="20"/>
                                                     <ColumnDefinition Width="*"/>
                                                     <ColumnDefinition Width="100"/>
                                                 </Grid.ColumnDefinitions>
                                                 <Grid Grid.Column="0" >
-                                                    <Button VerticalOptions="Center" StyleClass="Button_Normal_NoBorder" HorizontalOptions="Center" FontFamily="Fa-Solid" Clicked="Clicked_Keyboard" Text="{x:Static core:FaSolid.Keyboard}"/>
+                                                    <Button x:Name="Keyboard" VerticalOptions="Center" StyleClass="Button_Normal_NoBorder" FontSize="25" HorizontalOptions="Center" FontFamily="Fa-Solid" Clicked="Clicked_Keyboard" Text="{x:Static core:FaSolid.Keyboard}"/>
 
                                                 </Grid>
                                                 <Grid Grid.Column="1" >
-                                                    <Button x:Name="Mike" VerticalOptions="Center" StyleClass="Button_Normal_NoBorder" Clicked="Clicked_Microphone" HorizontalOptions="Center" FontFamily="Fa-Solid" Text="{x:Static core:FaSolid.Microphone}"/>
+                                                    <Button x:Name="Mike" VerticalOptions="Center" FontSize="25" StyleClass="Button_Normal_NoBorder_Big" Clicked="Clicked_Microphone" HorizontalOptions="Center" FontFamily="Fa-Solid" Text="{x:Static core:FaSolid.Microphone}"/>
                                                 </Grid>
                                                 <Grid Grid.Column="2" StyleClass="Grid_BGInputline" Margin="0,4,0,3">
                                                     <Label StyleClass="Label_Normal" HorizontalOptions="Center" Margin="0" Padding="0,5,0,0" VerticalOptions="Start" Text=">"/>
@@ -183,7 +183,7 @@
 
                                             </Grid>
                                             <Grid Grid.Column="1" Margin="0,10,0,0" StyleClass="Grid_Normal">
-                                                <Button x:Name="Mike2" VerticalOptions="End" StyleClass="Button_Normal_NoBorder" Clicked="Clicked_Microphone2" HorizontalOptions="Center" FontFamily="Fa-Solid" Text="{x:Static core:FaSolid.Microphone}"/>
+                                                <Button x:Name="Mike2" VerticalOptions="End" FontSize="Subtitle" StyleClass="Button_Normal_NoBorder_Big" Clicked="Clicked_Microphone2" HorizontalOptions="Center" FontFamily="Fa-Solid" Text="{x:Static core:FaSolid.Microphone}"/>
                                             </Grid>
                                         </Grid>
                                         <Grid x:Name="Grid_More" StyleClass="Grid_BGBG" Margin="0,0,0,0" IsVisible="false"  >
@@ -196,7 +196,7 @@
 
                                             </Button>
                                             <Grid Grid.Column="1" Margin="0,10,0,0" StyleClass="Grid_Normal">
-                                                <Button x:Name="Mike3" VerticalOptions="Center" StyleClass="Button_Normal_NoBorder" Clicked="Clicked_Microphone3" HorizontalOptions="Center" FontFamily="Fa-Solid" Text="{x:Static core:FaSolid.Microphone}"/>
+                                                <Button x:Name="Mike3" VerticalOptions="Center" FontSize="Subtitle" StyleClass="Button_Normal_NoBorder_Big" Clicked="Clicked_Microphone3" HorizontalOptions="Center" FontFamily="Fa-Solid" Text="{x:Static core:FaSolid.Microphone}"/>
                                             </Grid>
                                         </Grid>
                                     </Grid>

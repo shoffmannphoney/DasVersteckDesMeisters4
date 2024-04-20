@@ -1966,10 +1966,12 @@ namespace GameCore
                 */
                 Items.TransferItem(CA.I00_Stable_Pliers_With_Claw.ID, CB.LocType_Person, CA.Person_I.ID);
                 Items.TransferItem(CA.I00_Magic_Candle.ID, CB.LocType_Person, CA.Person_I.ID);
+                Items.TransferItem(CA.I12_Matress.ID, CB.LocType_On_Item, CA.I12_Bed.ID);
+                CA.I12_Matress.IsBackground = false;
 
                 Persons.TransferPerson( CA!.Person_Fish.ID, CB.LocType_Person, CA.Person_I.ID);
 
-                A.ActLoc = CA.L08_Laundry_Room;
+                A.ActLoc = CA.L12_Sleeping_Room;
                 Persons.TransferPerson(CA.Person_I.ID, CB.LocType_Person, A.ActLoc);
                 locations.ShowlocationFull(A.ActLoc);
                 success = true;
