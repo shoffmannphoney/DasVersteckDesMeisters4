@@ -1053,1492 +1053,1635 @@ public partial class GamePage : ContentPage, IMenuExtension
         return true;
     }
 
+    bool gplUpdate = false;
+
     public bool ExecuteGamePageLayout()
-    { 
-        if (GlobalSpecs.CurrentGlobalSpecs!.InitRunning == IGlobalSpecs.initRunning.started)
+    {
+        if (gplUpdate == true)
+        {
             return false;
-
-        GlobalSpecs.CurrentGlobalSpecs.CheckSize(GlobalSpecs.CurrentGlobalSpecs.GetScreenWidth(), GlobalSpecs.CurrentGlobalSpecs.GetScreenHeight());
-        // count++;
-        // if (count > 3)
-        // return true;
-
-
-        /* Wird das wom�glich doch gebraucht? Soweit ich das sehe, frisst es einfach nur Rechenzeit auf 
-        if (GD != null && GD.Adventure != null)
-        {
-            GD.Adventure!.SetScoreOutput();
-        }
-        */
-
-        // Initialisierung der Flaglogik, welche Men�s alles aktiv sein m�ssten
-        LayoutDescription ld = (LayoutDescription) GlobalData.CurrentGlobalData!.LayoutDescription;
-
-        int LDCount = -1;
-        int LUCount = -1;
-        int RDCount = -1;
-        int RUCount = -1;
-
-        int LDPos = -1;
-        int LUPos = -1;
-        int RDPos = -1;
-        int RUPos = -1;
-
-        // Einmalig f�r Horizontal. Wenn die 4 Grids noch nicht mit den TabItems best�ck sind, dann werden diese hier angelegt.
-        if (GridLU.Children.Count == 0)
-        {
-            TILeftUp = new TabItem();
-            TILeftUp.AddTabButtonStyleSelected("IDButton_Edge");
-            TILeftUp.AddTabButtonStyleUnselected("IDButton_Invers_Edge");
-            TILeftUp.AddHeadlineStyle("Grid_BGBG");
-            TILeftUp.AddMainPanelStyle("Grid_BGBG");
-
-            TabItem.TabPanel tp = TILeftUp.AddTabPanel(FaSolid.Wrench, 1);
-            tp.SelectButton!.FontFamily = "Fa-Solid";
-            SetButtonCursorHand(tp.SelectButton);
-
-            TabItem.TabPanel tp2 = TILeftUp.AddTabPanel(FaSolid.MapMarkerAlt, 2);
-            tp2.SelectButton!.FontFamily = "Fa-Solid";
-            SetButtonCursorHand(tp2.SelectButton);
-
-            TabItem.TabPanel tp3 = TILeftUp.AddTabPanel(FaSolid.Suitcase, 3);
-            tp3.SelectButton!.FontFamily = "Fa-Solid";
-            SetButtonCursorHand(tp3.SelectButton);
-
-            LUPos = 0;
-            GridLU.Add(TILeftUp);
-            TILeftUp.SelectedTabPanel = LUPos;
-            TILeftUp.SyncTabStyles();
         }
 
-        if (GridLD.Children.Count == 0)
+        if( MainThread.IsMainThread == false )
         {
-            TILeftDown = new TabItem();
-            TILeftDown.AddTabButtonStyleSelected("IDButton");
-            TILeftDown.AddTabButtonStyleUnselected("IDButton_Invers");
-            TILeftDown.AddHeadlineStyle("Grid_BGBG");
-            TILeftDown.AddMainPanelStyle("Grid_BGBG");
-
-            TabItem.TabPanel tp = TILeftDown.AddTabPanel(FaSolid.Wrench, 1);
-            tp.SelectButton!.FontFamily = "Fa-Solid";
-            SetButtonCursorHand(tp.SelectButton);
-
-            TabItem.TabPanel tp2 = TILeftDown.AddTabPanel(FaSolid.MapMarkerAlt, 2);
-            tp2.SelectButton!.FontFamily = "Fa-Solid";
-            SetButtonCursorHand(tp2.SelectButton);
-
-            TabItem.TabPanel tp3 = TILeftDown.AddTabPanel(FaSolid.Suitcase, 3);
-            tp3.SelectButton!.FontFamily = "Fa-Solid";
-            SetButtonCursorHand(tp3.SelectButton);
-
-            LDPos = 0;
-            GridLD.Add(TILeftDown);
-            TILeftDown.SelectedTabPanel = LDPos;
-            TILeftDown.SyncTabStyles();
+            return false;
         }
 
-        if (GridRU.Children.Count == 0)
+        gplUpdate = true;
+
+        if (GlobalSpecs.CurrentGlobalSpecs!.InitRunning == IGlobalSpecs.initRunning.started)
         {
-            TIRightUp = new TabItem();
-            TIRightUp.AddTabButtonStyleSelected("IDButton");
-            TIRightUp.AddTabButtonStyleUnselected("IDButton_Invers");
-            TIRightUp.AddHeadlineStyle("Grid_BGBG");
-            TIRightUp.AddMainPanelStyle("Grid_BGBG");
-
-            TabItem.TabPanel tp = TIRightUp.AddTabPanel(FaSolid.Wrench, 1);
-            tp.SelectButton!.FontFamily = "Fa-Solid";
-            SetButtonCursorHand(tp.SelectButton);
-
-            TabItem.TabPanel tp2 = TIRightUp.AddTabPanel(FaSolid.MapMarkerAlt, 2);
-            tp2.SelectButton!.FontFamily = "Fa-Solid";
-            SetButtonCursorHand(tp2.SelectButton);
-
-            TabItem.TabPanel tp3 = TIRightUp.AddTabPanel(FaSolid.Suitcase, 3);
-            tp3.SelectButton!.FontFamily = "Fa-Solid";
-            SetButtonCursorHand(tp3.SelectButton);
-
-            RUPos = 0;
-            GridRU.Add(TIRightUp);
-            TIRightUp.SelectedTabPanel = RUPos;
-            TIRightUp.SyncTabStyles();
-        }
-        if (GridRD.Children.Count == 0)
-        {
-            TIRightDown = new TabItem();
-            TIRightDown.AddTabButtonStyleSelected("IDButton");
-            TIRightDown.AddTabButtonStyleUnselected("IDButton_Invers");
-            TIRightDown.AddHeadlineStyle("Grid_BGBG");
-            TIRightDown.AddMainPanelStyle("Grid_BGBG");
-
-            TabItem.TabPanel tp = TIRightDown.AddTabPanel(FaSolid.Wrench, 1);
-            tp.SelectButton!.FontFamily = "Fa-Solid";
-            SetButtonCursorHand(tp.SelectButton);
-
-            TabItem.TabPanel tp2 = TIRightDown.AddTabPanel(FaSolid.MapMarkerAlt, 2);
-            tp2.SelectButton!.FontFamily = "Fa-Solid";
-            SetButtonCursorHand(tp2.SelectButton);
-
-            TabItem.TabPanel tp3 = TIRightDown.AddTabPanel(FaSolid.Suitcase, 3);
-            tp3.SelectButton!.FontFamily = "Fa-Solid";
-            SetButtonCursorHand(tp3.SelectButton);
-
-            RDPos = 0;
-            GridRD.Add(TIRightDown);
-            TIRightDown.SelectedTabPanel = RDPos;
-            TIRightDown.SyncTabStyles();
+            gplUpdate = false;
+            return false;
         }
 
-        // Einmalig f�r Vertical. Wenn die 3 Grids noch nicht mit den TabItems best�ck sind, dann werden diese hier angelegt.
-        if (PortraitCol1.Children.Count == 0)
+        try
         {
-            TICol1_0 = new TabItem();
-            TICol1_0.AddTabButtonStyleSelected("IDButton");
-            TICol1_0.AddTabButtonStyleUnselected("IDButton_Invers");
-            TICol1_0.AddHeadlineStyle("Grid_BGBG");
-            TICol1_0.AddMainPanelStyle("Grid_Normal");
 
-            TabItem.TabPanel tp = TICol1_0.AddTabPanel(FaSolid.Wrench, 1);
-            tp.SelectButton!.FontFamily = "Fa-Solid";
-            SetButtonCursorHand(tp.SelectButton);
-
-            TabItem.TabPanel tp1 = TICol1_0.AddTabPanel(FaSolid.MapMarkedAlt, 2);
-            tp1.SelectButton!.FontFamily = "Fa-Solid";
-            SetButtonCursorHand(tp1.SelectButton);
-
-            TabItem.TabPanel tp2 = TICol1_0.AddTabPanel(FaSolid.Suitcase, 3);
-            tp2.SelectButton!.FontFamily = "Fa-Solid";
-            SetButtonCursorHand(tp2.SelectButton);
-
-            PortraitCol1.Add(TICol1_0);
-            TICol1_0.SelectedTabPanel = 0;
-            TICol1_0.SyncTabStyles();
-        }
-
-        if (PortraitCol2.Children.Count == 0)
-        {
-            TICol2_0 = new TabItem();
-            TICol2_0.AddTabButtonStyleSelected("IDButton");
-            TICol2_0.AddTabButtonStyleUnselected("IDButton_Invers");
-            TICol2_0.AddHeadlineStyle("Grid_BGBG");
-            TICol2_0.AddMainPanelStyle("Grid_Normal");
-
-            TabItem.TabPanel tp = TICol2_0.AddTabPanel(FaSolid.Wrench, 1);
-            tp.SelectButton!.FontFamily = "Fa-Solid";
-            SetButtonCursorHand(tp.SelectButton);
-
-            TabItem.TabPanel tp1 = TICol2_0.AddTabPanel(FaSolid.MapMarkedAlt, 1);
-            tp1.SelectButton!.FontFamily = "Fa-Solid";
-            SetButtonCursorHand(tp1.SelectButton);
-
-            TabItem.TabPanel tp2 = TICol2_0.AddTabPanel(FaSolid.Suitcase, 1);
-            tp2.SelectButton!.FontFamily = "Fa-Solid";
-            SetButtonCursorHand(tp2.SelectButton);
-
-            PortraitCol2.Children.Add(TICol2_0);
-            TICol2_0.SelectedTabPanel = 0;
-            TICol2_0.SyncTabStyles();
-        }
-        if (PortraitCol3.Children.Count == 0)
-        {
-            TICol3_0 = new TabItem();
-            TICol3_0.AddTabButtonStyleSelected("IDButton");
-            TICol3_0.AddTabButtonStyleUnselected("IDButton_Invers");
-            TICol3_0.AddHeadlineStyle("Grid_BGBG");
-            TICol3_0.AddMainPanelStyle("Grid_Normal");
-
-            TabItem.TabPanel tp = TICol3_0.AddTabPanel(FaSolid.Wrench, 1);
-            tp.SelectButton!.FontFamily = "Fa-Solid";
-            SetButtonCursorHand(tp.SelectButton);
-
-            TabItem.TabPanel tp1 = TICol3_0.AddTabPanel(FaSolid.MapMarkedAlt, 1);
-            tp1.SelectButton!.FontFamily = "Fa-Solid";
-            SetButtonCursorHand(tp1.SelectButton);
-
-            TabItem.TabPanel tp2 = TICol3_0.AddTabPanel(FaSolid.Suitcase, 1);
-            tp2.SelectButton!.FontFamily = "Fa-Solid";
-            SetButtonCursorHand(tp2.SelectButton);
-
-            PortraitCol3.Children.Add(TICol3_0);
-            TICol3_0.SelectedTabPanel = 0;
-            TICol3_0.SyncTabStyles();
-        }
-
-        if (GridLU.Children.Count > 0)
-        {
-            TabItem? ti = (GridLU.Children[0] as TabItem)!;
-            ti.CalcTabPanel();
-            LUPos = ti!.SelectedTabPanel;
-            LUCount = ti.Count;
-        }
-        if (GridLD.Children.Count > 0)
-        {
-            TabItem? ti = (GridLD.Children[0] as TabItem)!;
-            ti.CalcTabPanel();
-            LDPos = ti!.SelectedTabPanel;
-            LDCount = ti.Count;
-        }
-        if (GridRU.Children.Count > 0)
-        {
-            TabItem? ti = (GridRU.Children[0] as TabItem)!;
-            ti.CalcTabPanel();
-            RUPos = ti!.SelectedTabPanel;
-            RUCount = ti.Count;
-        }
-        if (GridRD.Children.Count > 0)
-        {
-            TabItem? ti = (GridRD.Children[0] as TabItem)!;
-            ti.CalcTabPanel();
-            RDPos = ti!.SelectedTabPanel;
-            RDCount = ti.Count;
-        }
+            GlobalSpecs.CurrentGlobalSpecs.CheckSize(GlobalSpecs.CurrentGlobalSpecs.GetScreenWidth(), GlobalSpecs.CurrentGlobalSpecs.GetScreenHeight());
+            // count++;
+            // if (count > 3)
+            // return true;
 
 
-        // Flaglogik f�rs Layout wird erstmal grundlegend resettet.
-        ld.LU_Order = false;
-        ld.LD_Order = false;
-        ld.RU_Order = false;
-        ld.RD_Order = false;
-
-        ld.LU_ItemLoc= false;
-        ld.LD_ItemLoc = false;
-        ld.RU_ItemLoc = false;
-        ld.RD_ItemLoc = false;
-
-        ld.LU_ItemInv = false;
-        ld.LD_ItemInv = false;
-        ld.RU_ItemInv = false;
-        ld.RD_ItemInv = false;
-
-        ld.PortraitColumns[0,0] = ILayoutDescription.PortraitColumn.none;
-        ld.PortraitColumns[1,0] = ILayoutDescription.PortraitColumn.none;
-        ld.PortraitColumns[2,0] = ILayoutDescription.PortraitColumn.none;
-        ld.PortraitColumns[0, 1] = ILayoutDescription.PortraitColumn.none;
-        ld.PortraitColumns[1, 1] = ILayoutDescription.PortraitColumn.none;
-        ld.PortraitColumns[2, 1] = ILayoutDescription.PortraitColumn.none;
-        ld.PortraitColumns[0, 2] = ILayoutDescription.PortraitColumn.none;
-        ld.PortraitColumns[1, 2] = ILayoutDescription.PortraitColumn.none;
-        ld.PortraitColumns[2, 2] = ILayoutDescription.PortraitColumn.none;
-
-
-        // ... und dann komplett neu gesetzt
-        if ( GD!.LayoutDescription.OrderListPos == ILayoutDescription.selectedPosition.leftUp)
-        {
-            ld.LU_Order = true;
-        }
-        else if (GD.LayoutDescription.OrderListPos == ILayoutDescription.selectedPosition.leftDown)
-        {
-            ld.LD_Order = true;
-        }
-        else if (GD.LayoutDescription.OrderListPos == ILayoutDescription.selectedPosition.rightUp)
-        {
-            ld.RU_Order = true;
-        }
-        else if (GD.LayoutDescription.OrderListPos == ILayoutDescription.selectedPosition.rightDown)
-        {
-            ld.RD_Order = true;
-        }
-
-        if (GD.LayoutDescription.ItemsLocListPos == ILayoutDescription.selectedPosition.leftUp)
-        {
-            ld.LU_ItemLoc = true;
-        }
-        else if (GD.LayoutDescription.ItemsLocListPos == ILayoutDescription.selectedPosition.leftDown)
-        {
-            ld.LD_ItemLoc = true;
-        }
-        else if (GD.LayoutDescription.ItemsLocListPos == ILayoutDescription.selectedPosition.rightUp)
-        {
-            ld.RU_ItemLoc = true;
-        }
-        else if (GD.LayoutDescription.ItemsLocListPos == ILayoutDescription.selectedPosition.rightDown)
-        {
-            ld.RD_ItemLoc = true;
-        }
-
-        if (GD.LayoutDescription.ItemsInvListPos == ILayoutDescription.selectedPosition.leftUp)
-        {
-            ld.LU_ItemInv = true;
-        }
-        else if (GD.LayoutDescription.ItemsInvListPos == ILayoutDescription.selectedPosition.leftDown)
-        {
-            ld.LD_ItemInv = true;
-        }
-        else if (GD.LayoutDescription.ItemsInvListPos == ILayoutDescription.selectedPosition.rightUp)
-        {
-            ld.RU_ItemInv = true;
-        }
-        else if (GD.LayoutDescription.ItemsInvListPos == ILayoutDescription.selectedPosition.rightDown)
-        {
-            ld.RD_ItemInv = true;
-        }
-
-        if (GD.LayoutDescription.OrderListPosPT == ILayoutDescription.selectedPositionPT.first)
-            ld.PortraitColumns[0,0] = ILayoutDescription.PortraitColumn.order;
-        else if (GD.LayoutDescription.OrderListPosPT == ILayoutDescription.selectedPositionPT.second )
-            ld.PortraitColumns[1, 0] = ILayoutDescription.PortraitColumn.order;
-        else if (GD.LayoutDescription.OrderListPosPT == ILayoutDescription.selectedPositionPT.third)
-            ld.PortraitColumns[2, 0] = ILayoutDescription.PortraitColumn.order;
-
-        if (GD.LayoutDescription.ItemsLocListPosPT == ILayoutDescription.selectedPositionPT.first)
-            ld.PortraitColumns[0,1] = ILayoutDescription.PortraitColumn.itemloc;
-        else if (GD.LayoutDescription.ItemsLocListPosPT == ILayoutDescription.selectedPositionPT.second)
-            ld.PortraitColumns[1, 1] = ILayoutDescription.PortraitColumn.itemloc;
-        else if (GD.LayoutDescription.ItemsLocListPosPT == ILayoutDescription.selectedPositionPT.third)
-            ld.PortraitColumns[2, 1] = ILayoutDescription.PortraitColumn.itemloc;
-
-        if (GD.LayoutDescription.ItemsInvListPosPT == ILayoutDescription.selectedPositionPT.first)
-            ld.PortraitColumns[0,2] = ILayoutDescription.PortraitColumn.iteminv;
-        else if (GD.LayoutDescription.ItemsInvListPosPT == ILayoutDescription.selectedPositionPT.second)
-            ld.PortraitColumns[1, 2] = ILayoutDescription.PortraitColumn.iteminv;
-        else if (GD.LayoutDescription.ItemsInvListPosPT == ILayoutDescription.selectedPositionPT.third)
-            ld.PortraitColumns[2, 2] = ILayoutDescription.PortraitColumn.iteminv;
-
-
-        // Wenn eine Column noch nie initialisiert war, dann wird das hier festgestellt und es werden Defaultwerte eingetragen
-        if( ld.PortraitColumnsHeight <= 0 && IsPortraitVisible() )
-        {
-            ld.PortraitColumnsHeight = 300;
-        }
-        if( ld.ColumLeftWidth<= 0 && ( ld.LU_Order || ld.LU_ItemLoc || ld.LU_ItemInv || ld.LD_Order || ld.LD_ItemLoc || ld.LD_ItemInv))
-        {
-            ld.ColumLeftWidth = 200;
-
-        }
-        if (ld.ColumRightWidth <= 0 && (ld.RU_Order || ld.RU_ItemLoc || ld.RU_ItemInv || ld.RD_Order || ld.RD_ItemLoc || ld.RD_ItemInv))
-        {
-            ld.ColumRightWidth = 200;
-        }
-
-        if( ld.RowLeftUpHeight <= 0)
-        {
-            ld.RowLeftUpHeight = (GlobalSpecs.CurrentGlobalSpecs!.GetScreenHeight() - 40) / 2;
-        }
-        if (ld.RowRightUpHeight <= 0)
-        {
-            ld.RowRightUpHeight = (GlobalSpecs.CurrentGlobalSpecs!.GetScreenHeight() - 40) / 2;
-        }
-
-        if( ld.PortraitColumn1Width <= 0)
-        {
-            int divisor = 0;
-            if ( IsPortraitColVisible(0) ) 
-                divisor++;
-            if (IsPortraitColVisible(1))
-                divisor++;
-            if (IsPortraitColVisible(2))
-                divisor++;
-
-            if (divisor > 0)
+            /* Wird das wom�glich doch gebraucht? Soweit ich das sehe, frisst es einfach nur Rechenzeit auf 
+            if (GD != null && GD.Adventure != null)
             {
-                ld.PortraitColumn1Width = (GlobalSpecs.CurrentGlobalSpecs!.GetScreenWidth() - _paddingWidth) / divisor;
-                ld.PortraitColumn2Width = (GlobalSpecs.CurrentGlobalSpecs!.GetScreenWidth() - _paddingWidth) / divisor;
-                ld.PortraitColumn3Width = (GlobalSpecs.CurrentGlobalSpecs!.GetScreenWidth() - _paddingWidth) / divisor;
-
+                GD.Adventure!.SetScoreOutput();
             }
-        }
-
-
-        SetGridDimensions();
-
-        if (ld.ScreenMode == IGlobalData.screenMode.portrait)
-        {
-            SetPortraitGridDimensions();
-
-        }
-        else if (ld.ScreenMode == IGlobalData.screenMode.landscape)
-        {
-            AdaptGridHeights();
-
-            double xlen = 0;
-
-            if (GetLeftColumnActive())
-            {
-                MenuGridMenuInner.ColumnDefinitions[0].Width = new GridLength(ld.ColumLeftWidth );
-                MenuGridMenuInner.ColumnDefinitions[1].Width = new GridLength(10);
-                xlen += 10 + ld.ColumLeftWidth;
-                // Grid_MC_Left.IsVisible = true;
-
-                double height = MenuGridMenuVertical.RowDefinitions[0].Height.Value;
-
-                if (GetLUActive() == true && GetLDActive() == true)
-                {
-                    if (ld.RowLeftUpHeight > height - 15)
-                    {
-                        ld.RowLeftUpHeight = height - 15;
-                    }
-
-                    Grid_MC_Left.RowDefinitions[0].Height = new GridLength(ld.RowLeftUpHeight);
-                    Grid_MC_Left.RowDefinitions[1].Height = new GridLength(10);
-                    Grid_MC_Left.RowDefinitions[2].Height = new GridLength(height - 10 - ld.RowLeftUpHeight);
-
-                }
-                else
-                {
-                    if (GetLUActive() == false)
-                    {
-                        Grid_MC_Left.RowDefinitions[0].Height = new GridLength(0);
-                        Grid_MC_Left.RowDefinitions[1].Height = new GridLength(0);
-                    }
-                    else
-                    {
-                        Grid_MC_Left.RowDefinitions[0].Height = new GridLength(height );
-                        Grid_MC_Left.RowDefinitions[1].Height = new GridLength(0);
-
-                    }
-                    if (GetLDActive() == false)
-                    {
-                        Grid_MC_Left.RowDefinitions[2].Height = new GridLength(0);
-                        Grid_MC_Left.RowDefinitions[1].Height = new GridLength(0);
-                    }
-                    else
-                    {
-                        Grid_MC_Left.RowDefinitions[2].Height = new GridLength(height);
-                        Grid_MC_Left.RowDefinitions[1].Height = new GridLength(0);
-
-                    }
-                }
-            }
-            else
-            {
-                MenuGridMenuInner.ColumnDefinitions[0].Width = new GridLength(0);
-                MenuGridMenuInner.ColumnDefinitions[1].Width = new GridLength(0);
-
-            }
-            if (GetRightColumnActive())
-            {
-                MenuGridMenuInner.ColumnDefinitions[4].Width = new GridLength(ld.ColumRightWidth);
-                MenuGridMenuInner.ColumnDefinitions[3].Width = new GridLength(10);
-                xlen += 10 + ld.ColumRightWidth;
-                // Grid_MC_Right.IsVisible = true;
-                double height = MenuGridMenuVertical.RowDefinitions[0].Height.Value;
-
-                if (GetRUActive() == true && GetRDActive() == true)
-                {
-                    if( ld.RowRightUpHeight > height - 15)
-                    {
-                        ld.RowRightUpHeight = height - 15;
-                    }
-
-                    Grid_MC_Right.RowDefinitions[0].Height = new GridLength(ld.RowRightUpHeight);
-                    Grid_MC_Right.RowDefinitions[1].Height = new GridLength(10);
-                    Grid_MC_Right.RowDefinitions[2].Height = new GridLength(height - 10 - ld.RowRightUpHeight);
-
-                }
-                else
-                {
-                    if (GetRUActive() == false)
-                    {
-                        Grid_MC_Right.RowDefinitions[0].Height = new GridLength(0);
-                        Grid_MC_Right.RowDefinitions[1].Height = new GridLength(0);
-                    }
-                    else
-                    {
-                        Grid_MC_Right.RowDefinitions[0].Height = new GridLength(height);
-                        Grid_MC_Right.RowDefinitions[1].Height = new GridLength(0);
-
-                    }
-                    if (GetLDActive() == false)
-                    {
-                        Grid_MC_Right.RowDefinitions[2].Height = new GridLength(0);
-                        Grid_MC_Right.RowDefinitions[1].Height = new GridLength(0);
-                    }
-                    else
-                    {
-                        Grid_MC_Right.RowDefinitions[2].Height = new GridLength(height);
-                        Grid_MC_Right.RowDefinitions[1].Height = new GridLength(0);
-
-                    }
-                }
-            }
-            else
-            {
-                MenuGridMenuInner.ColumnDefinitions[4].Width = new GridLength(0);
-                MenuGridMenuInner.ColumnDefinitions[3].Width = new GridLength(0);
-
-            }
-            double x = GlobalSpecs.CurrentGlobalSpecs!.GetScreenWidth() - _paddingWidth;
-
-            // RotateProblem
-
-            // GameOut.WidthRequest = x - xlen;
-            // Grid_Output.WidthRequest = x - xlen;
-            // MenuGridTotal.ColumnDefinitions[1].Width = x;
-            // MenuGridMenuBackground.WidthRequest = x ;
-            /*
-          if(GridWebView.ColumnDefinitions.Count > 0 )
-             GridWebView.ColumnDefinitions[0].Width = new GridLength(x - xlen);
-         */
-            // if (Page_Grid().Width > 0)
-            MenuGridMenuInner.ColumnDefinitions[2].Width = new GridLength(x - xlen);
-            /*
-            MenuGridMenuInner.WidthRequest = x ;
-            MenuGridMenu.ColumnDefinitions[1].Width = new GridLength(x );
-            MenuGridMenu.WidthRequest = x ;
-            MenuGridMenuBackground.WidthRequest = x;
-            MenuGridTotal.ColumnDefinitions[1].Width = new GridLength(x);
-            MenuGridTotal.WidthRequest = x;
             */
-            // MenuGridMenuBackground.ColumnDefinitions[1].Width = new GridLength(x);
 
-            // MenuGridMenuInner.ColumnDefinitions[3].Width = new GridLength(10);
-            // MenuGridMenuInner.ColumnDefinitions[4].Width = new GridLength(150);
+            // Initialisierung der Flaglogik, welche Men�s alles aktiv sein m�ssten
+            LayoutDescription ld = (LayoutDescription)GlobalData.CurrentGlobalData!.LayoutDescription;
 
-            MenuGridMenuVertical.RowDefinitions[2].Height = new GridLength(0);
-        }
-        // SetGridHeights();
+            int LDCount = -1;
+            int LUCount = -1;
+            int RDCount = -1;
+            int RUCount = -1;
 
-        bool OrderTreeHasChanged = false;
-        bool ItemInvTreeHasChanged = false;
-        bool ItemLocTreeHasChanged = false;
+            int LDPos = -1;
+            int LUPos = -1;
+            int RDPos = -1;
+            int RUPos = -1;
 
-        if (OrderTreeHasInitialized == false)
-            OrderTreeHasChanged = true;
-        if (ItemInvTreeHasInitialized == false)
-            ItemInvTreeHasChanged = true;
-        if (ItemLocTreeHasInitialized == false)
-            ItemLocTreeHasChanged = true;
-
-
-        if (UIS.UpdateBrowserBlocked == false)
-        {
-
-            EmptyTreeOrderNew = CreateOrderTreeEmpty();
-            EmptyTreeItemInvNew = CreateItemInvTree_Empty();
-            EmptyTreeItemLocNew = CreateItemLocTree_Empty();
-            if (EmptyTreeOrderOld != null && EmptyTreeOrderNew != null)
+            // Einmalig f�r Horizontal. Wenn die 4 Grids noch nicht mit den TabItems best�ck sind, dann werden diese hier angelegt.
+            if (GridLU.Children.Count == 0)
             {
-                if (CompareEmptyTreeViews(EmptyTreeOrderNew, EmptyTreeOrderOld) == false)
+                TILeftUp = new TabItem();
+                TILeftUp.AddTabButtonStyleSelected("IDButton_Edge");
+                TILeftUp.AddTabButtonStyleUnselected("IDButton_Invers_Edge");
+                TILeftUp.AddHeadlineStyle("Grid_BGBG");
+                TILeftUp.AddMainPanelStyle("Grid_BGBG");
+
+                TabItem.TabPanel tp = TILeftUp.AddTabPanel(FaSolid.Wrench, 1);
+                tp.SelectButton!.FontFamily = "Fa-Solid";
+                SetButtonCursorHand(tp.SelectButton);
+
+                TabItem.TabPanel tp2 = TILeftUp.AddTabPanel(FaSolid.MapMarkerAlt, 2);
+                tp2.SelectButton!.FontFamily = "Fa-Solid";
+                SetButtonCursorHand(tp2.SelectButton);
+
+                TabItem.TabPanel tp3 = TILeftUp.AddTabPanel(FaSolid.Suitcase, 3);
+                tp3.SelectButton!.FontFamily = "Fa-Solid";
+                SetButtonCursorHand(tp3.SelectButton);
+
+                LUPos = 0;
+                GridLU.Add(TILeftUp);
+                TILeftUp.SelectedTabPanel = LUPos;
+                TILeftUp.SyncTabStyles();
+            }
+
+            if (GridLD.Children.Count == 0)
+            {
+                TILeftDown = new TabItem();
+                TILeftDown.AddTabButtonStyleSelected("IDButton");
+                TILeftDown.AddTabButtonStyleUnselected("IDButton_Invers");
+                TILeftDown.AddHeadlineStyle("Grid_BGBG");
+                TILeftDown.AddMainPanelStyle("Grid_BGBG");
+
+                TabItem.TabPanel tp = TILeftDown.AddTabPanel(FaSolid.Wrench, 1);
+                tp.SelectButton!.FontFamily = "Fa-Solid";
+                SetButtonCursorHand(tp.SelectButton);
+
+                TabItem.TabPanel tp2 = TILeftDown.AddTabPanel(FaSolid.MapMarkerAlt, 2);
+                tp2.SelectButton!.FontFamily = "Fa-Solid";
+                SetButtonCursorHand(tp2.SelectButton);
+
+                TabItem.TabPanel tp3 = TILeftDown.AddTabPanel(FaSolid.Suitcase, 3);
+                tp3.SelectButton!.FontFamily = "Fa-Solid";
+                SetButtonCursorHand(tp3.SelectButton);
+
+                LDPos = 0;
+                GridLD.Add(TILeftDown);
+                TILeftDown.SelectedTabPanel = LDPos;
+                TILeftDown.SyncTabStyles();
+            }
+
+            if (GridRU.Children.Count == 0)
+            {
+                TIRightUp = new TabItem();
+                TIRightUp.AddTabButtonStyleSelected("IDButton");
+                TIRightUp.AddTabButtonStyleUnselected("IDButton_Invers");
+                TIRightUp.AddHeadlineStyle("Grid_BGBG");
+                TIRightUp.AddMainPanelStyle("Grid_BGBG");
+
+                TabItem.TabPanel tp = TIRightUp.AddTabPanel(FaSolid.Wrench, 1);
+                tp.SelectButton!.FontFamily = "Fa-Solid";
+                SetButtonCursorHand(tp.SelectButton);
+
+                TabItem.TabPanel tp2 = TIRightUp.AddTabPanel(FaSolid.MapMarkerAlt, 2);
+                tp2.SelectButton!.FontFamily = "Fa-Solid";
+                SetButtonCursorHand(tp2.SelectButton);
+
+                TabItem.TabPanel tp3 = TIRightUp.AddTabPanel(FaSolid.Suitcase, 3);
+                tp3.SelectButton!.FontFamily = "Fa-Solid";
+                SetButtonCursorHand(tp3.SelectButton);
+
+                RUPos = 0;
+                GridRU.Add(TIRightUp);
+                TIRightUp.SelectedTabPanel = RUPos;
+                TIRightUp.SyncTabStyles();
+            }
+            if (GridRD.Children.Count == 0)
+            {
+                TIRightDown = new TabItem();
+                TIRightDown.AddTabButtonStyleSelected("IDButton");
+                TIRightDown.AddTabButtonStyleUnselected("IDButton_Invers");
+                TIRightDown.AddHeadlineStyle("Grid_BGBG");
+                TIRightDown.AddMainPanelStyle("Grid_BGBG");
+
+                TabItem.TabPanel tp = TIRightDown.AddTabPanel(FaSolid.Wrench, 1);
+                tp.SelectButton!.FontFamily = "Fa-Solid";
+                SetButtonCursorHand(tp.SelectButton);
+
+                TabItem.TabPanel tp2 = TIRightDown.AddTabPanel(FaSolid.MapMarkerAlt, 2);
+                tp2.SelectButton!.FontFamily = "Fa-Solid";
+                SetButtonCursorHand(tp2.SelectButton);
+
+                TabItem.TabPanel tp3 = TIRightDown.AddTabPanel(FaSolid.Suitcase, 3);
+                tp3.SelectButton!.FontFamily = "Fa-Solid";
+                SetButtonCursorHand(tp3.SelectButton);
+
+                RDPos = 0;
+                GridRD.Add(TIRightDown);
+                TIRightDown.SelectedTabPanel = RDPos;
+                TIRightDown.SyncTabStyles();
+            }
+
+            // Einmalig f�r Vertical. Wenn die 3 Grids noch nicht mit den TabItems best�ck sind, dann werden diese hier angelegt.
+            if (PortraitCol1.Children.Count == 0)
+            {
+                TICol1_0 = new TabItem();
+                TICol1_0.AddTabButtonStyleSelected("IDButton");
+                TICol1_0.AddTabButtonStyleUnselected("IDButton_Invers");
+                TICol1_0.AddHeadlineStyle("Grid_BGBG");
+                TICol1_0.AddMainPanelStyle("Grid_Normal");
+
+                TabItem.TabPanel tp = TICol1_0.AddTabPanel(FaSolid.Wrench, 1);
+                tp.SelectButton!.FontFamily = "Fa-Solid";
+                SetButtonCursorHand(tp.SelectButton);
+
+                TabItem.TabPanel tp1 = TICol1_0.AddTabPanel(FaSolid.MapMarkedAlt, 2);
+                tp1.SelectButton!.FontFamily = "Fa-Solid";
+                SetButtonCursorHand(tp1.SelectButton);
+
+                TabItem.TabPanel tp2 = TICol1_0.AddTabPanel(FaSolid.Suitcase, 3);
+                tp2.SelectButton!.FontFamily = "Fa-Solid";
+                SetButtonCursorHand(tp2.SelectButton);
+
+                PortraitCol1.Add(TICol1_0);
+                TICol1_0.SelectedTabPanel = 0;
+                TICol1_0.SyncTabStyles();
+            }
+
+            if (PortraitCol2.Children.Count == 0)
+            {
+                TICol2_0 = new TabItem();
+                TICol2_0.AddTabButtonStyleSelected("IDButton");
+                TICol2_0.AddTabButtonStyleUnselected("IDButton_Invers");
+                TICol2_0.AddHeadlineStyle("Grid_BGBG");
+                TICol2_0.AddMainPanelStyle("Grid_Normal");
+
+                TabItem.TabPanel tp = TICol2_0.AddTabPanel(FaSolid.Wrench, 1);
+                tp.SelectButton!.FontFamily = "Fa-Solid";
+                SetButtonCursorHand(tp.SelectButton);
+
+                TabItem.TabPanel tp1 = TICol2_0.AddTabPanel(FaSolid.MapMarkedAlt, 1);
+                tp1.SelectButton!.FontFamily = "Fa-Solid";
+                SetButtonCursorHand(tp1.SelectButton);
+
+                TabItem.TabPanel tp2 = TICol2_0.AddTabPanel(FaSolid.Suitcase, 1);
+                tp2.SelectButton!.FontFamily = "Fa-Solid";
+                SetButtonCursorHand(tp2.SelectButton);
+
+                PortraitCol2.Children.Add(TICol2_0);
+                TICol2_0.SelectedTabPanel = 0;
+                TICol2_0.SyncTabStyles();
+            }
+            if (PortraitCol3.Children.Count == 0)
+            {
+                TICol3_0 = new TabItem();
+                TICol3_0.AddTabButtonStyleSelected("IDButton");
+                TICol3_0.AddTabButtonStyleUnselected("IDButton_Invers");
+                TICol3_0.AddHeadlineStyle("Grid_BGBG");
+                TICol3_0.AddMainPanelStyle("Grid_Normal");
+
+                TabItem.TabPanel tp = TICol3_0.AddTabPanel(FaSolid.Wrench, 1);
+                tp.SelectButton!.FontFamily = "Fa-Solid";
+                SetButtonCursorHand(tp.SelectButton);
+
+                TabItem.TabPanel tp1 = TICol3_0.AddTabPanel(FaSolid.MapMarkedAlt, 1);
+                tp1.SelectButton!.FontFamily = "Fa-Solid";
+                SetButtonCursorHand(tp1.SelectButton);
+
+                TabItem.TabPanel tp2 = TICol3_0.AddTabPanel(FaSolid.Suitcase, 1);
+                tp2.SelectButton!.FontFamily = "Fa-Solid";
+                SetButtonCursorHand(tp2.SelectButton);
+
+                PortraitCol3.Children.Add(TICol3_0);
+                TICol3_0.SelectedTabPanel = 0;
+                TICol3_0.SyncTabStyles();
+            }
+
+            if (GridLU.Children.Count > 0)
+            {
+                TabItem? ti = (GridLU.Children[0] as TabItem)!;
+                ti.CalcTabPanel();
+                LUPos = ti!.SelectedTabPanel;
+                LUCount = ti.Count;
+            }
+            if (GridLD.Children.Count > 0)
+            {
+                TabItem? ti = (GridLD.Children[0] as TabItem)!;
+                ti.CalcTabPanel();
+                LDPos = ti!.SelectedTabPanel;
+                LDCount = ti.Count;
+            }
+            if (GridRU.Children.Count > 0)
+            {
+                TabItem? ti = (GridRU.Children[0] as TabItem)!;
+                ti.CalcTabPanel();
+                RUPos = ti!.SelectedTabPanel;
+                RUCount = ti.Count;
+            }
+            if (GridRD.Children.Count > 0)
+            {
+                TabItem? ti = (GridRD.Children[0] as TabItem)!;
+                ti.CalcTabPanel();
+                RDPos = ti!.SelectedTabPanel;
+                RDCount = ti.Count;
+            }
+
+
+            // Flaglogik f�rs Layout wird erstmal grundlegend resettet.
+            ld.LU_Order = false;
+            ld.LD_Order = false;
+            ld.RU_Order = false;
+            ld.RD_Order = false;
+
+            ld.LU_ItemLoc = false;
+            ld.LD_ItemLoc = false;
+            ld.RU_ItemLoc = false;
+            ld.RD_ItemLoc = false;
+
+            ld.LU_ItemInv = false;
+            ld.LD_ItemInv = false;
+            ld.RU_ItemInv = false;
+            ld.RD_ItemInv = false;
+
+            ld.PortraitColumns[0, 0] = ILayoutDescription.PortraitColumn.none;
+            ld.PortraitColumns[1, 0] = ILayoutDescription.PortraitColumn.none;
+            ld.PortraitColumns[2, 0] = ILayoutDescription.PortraitColumn.none;
+            ld.PortraitColumns[0, 1] = ILayoutDescription.PortraitColumn.none;
+            ld.PortraitColumns[1, 1] = ILayoutDescription.PortraitColumn.none;
+            ld.PortraitColumns[2, 1] = ILayoutDescription.PortraitColumn.none;
+            ld.PortraitColumns[0, 2] = ILayoutDescription.PortraitColumn.none;
+            ld.PortraitColumns[1, 2] = ILayoutDescription.PortraitColumn.none;
+            ld.PortraitColumns[2, 2] = ILayoutDescription.PortraitColumn.none;
+
+
+            // ... und dann komplett neu gesetzt
+            if (GD!.LayoutDescription.OrderListPos == ILayoutDescription.selectedPosition.leftUp)
+            {
+                ld.LU_Order = true;
+            }
+            else if (GD.LayoutDescription.OrderListPos == ILayoutDescription.selectedPosition.leftDown)
+            {
+                ld.LD_Order = true;
+            }
+            else if (GD.LayoutDescription.OrderListPos == ILayoutDescription.selectedPosition.rightUp)
+            {
+                ld.RU_Order = true;
+            }
+            else if (GD.LayoutDescription.OrderListPos == ILayoutDescription.selectedPosition.rightDown)
+            {
+                ld.RD_Order = true;
+            }
+
+            if (GD.LayoutDescription.ItemsLocListPos == ILayoutDescription.selectedPosition.leftUp)
+            {
+                ld.LU_ItemLoc = true;
+            }
+            else if (GD.LayoutDescription.ItemsLocListPos == ILayoutDescription.selectedPosition.leftDown)
+            {
+                ld.LD_ItemLoc = true;
+            }
+            else if (GD.LayoutDescription.ItemsLocListPos == ILayoutDescription.selectedPosition.rightUp)
+            {
+                ld.RU_ItemLoc = true;
+            }
+            else if (GD.LayoutDescription.ItemsLocListPos == ILayoutDescription.selectedPosition.rightDown)
+            {
+                ld.RD_ItemLoc = true;
+            }
+
+            if (GD.LayoutDescription.ItemsInvListPos == ILayoutDescription.selectedPosition.leftUp)
+            {
+                ld.LU_ItemInv = true;
+            }
+            else if (GD.LayoutDescription.ItemsInvListPos == ILayoutDescription.selectedPosition.leftDown)
+            {
+                ld.LD_ItemInv = true;
+            }
+            else if (GD.LayoutDescription.ItemsInvListPos == ILayoutDescription.selectedPosition.rightUp)
+            {
+                ld.RU_ItemInv = true;
+            }
+            else if (GD.LayoutDescription.ItemsInvListPos == ILayoutDescription.selectedPosition.rightDown)
+            {
+                ld.RD_ItemInv = true;
+            }
+
+            if (GD.LayoutDescription.OrderListPosPT == ILayoutDescription.selectedPositionPT.first)
+                ld.PortraitColumns[0, 0] = ILayoutDescription.PortraitColumn.order;
+            else if (GD.LayoutDescription.OrderListPosPT == ILayoutDescription.selectedPositionPT.second)
+                ld.PortraitColumns[1, 0] = ILayoutDescription.PortraitColumn.order;
+            else if (GD.LayoutDescription.OrderListPosPT == ILayoutDescription.selectedPositionPT.third)
+                ld.PortraitColumns[2, 0] = ILayoutDescription.PortraitColumn.order;
+
+            if (GD.LayoutDescription.ItemsLocListPosPT == ILayoutDescription.selectedPositionPT.first)
+                ld.PortraitColumns[0, 1] = ILayoutDescription.PortraitColumn.itemloc;
+            else if (GD.LayoutDescription.ItemsLocListPosPT == ILayoutDescription.selectedPositionPT.second)
+                ld.PortraitColumns[1, 1] = ILayoutDescription.PortraitColumn.itemloc;
+            else if (GD.LayoutDescription.ItemsLocListPosPT == ILayoutDescription.selectedPositionPT.third)
+                ld.PortraitColumns[2, 1] = ILayoutDescription.PortraitColumn.itemloc;
+
+            if (GD.LayoutDescription.ItemsInvListPosPT == ILayoutDescription.selectedPositionPT.first)
+                ld.PortraitColumns[0, 2] = ILayoutDescription.PortraitColumn.iteminv;
+            else if (GD.LayoutDescription.ItemsInvListPosPT == ILayoutDescription.selectedPositionPT.second)
+                ld.PortraitColumns[1, 2] = ILayoutDescription.PortraitColumn.iteminv;
+            else if (GD.LayoutDescription.ItemsInvListPosPT == ILayoutDescription.selectedPositionPT.third)
+                ld.PortraitColumns[2, 2] = ILayoutDescription.PortraitColumn.iteminv;
+
+
+            // Wenn eine Column noch nie initialisiert war, dann wird das hier festgestellt und es werden Defaultwerte eingetragen
+            if (ld.PortraitColumnsHeight <= 0 && IsPortraitVisible())
+            {
+                ld.PortraitColumnsHeight = 300;
+            }
+            if (ld.ColumLeftWidth <= 0 && (ld.LU_Order || ld.LU_ItemLoc || ld.LU_ItemInv || ld.LD_Order || ld.LD_ItemLoc || ld.LD_ItemInv))
+            {
+                ld.ColumLeftWidth = 200;
+
+            }
+            if (ld.ColumRightWidth <= 0 && (ld.RU_Order || ld.RU_ItemLoc || ld.RU_ItemInv || ld.RD_Order || ld.RD_ItemLoc || ld.RD_ItemInv))
+            {
+                ld.ColumRightWidth = 200;
+            }
+
+            if (ld.RowLeftUpHeight <= 0)
+            {
+                ld.RowLeftUpHeight = (GlobalSpecs.CurrentGlobalSpecs!.GetScreenHeight() - 40) / 2;
+            }
+            if (ld.RowRightUpHeight <= 0)
+            {
+                ld.RowRightUpHeight = (GlobalSpecs.CurrentGlobalSpecs!.GetScreenHeight() - 40) / 2;
+            }
+
+            if (ld.PortraitColumn1Width <= 0)
+            {
+                int divisor = 0;
+                if (IsPortraitColVisible(0))
+                    divisor++;
+                if (IsPortraitColVisible(1))
+                    divisor++;
+                if (IsPortraitColVisible(2))
+                    divisor++;
+
+                if (divisor > 0)
+                {
+                    ld.PortraitColumn1Width = (GlobalSpecs.CurrentGlobalSpecs!.GetScreenWidth() - _paddingWidth) / divisor;
+                    ld.PortraitColumn2Width = (GlobalSpecs.CurrentGlobalSpecs!.GetScreenWidth() - _paddingWidth) / divisor;
+                    ld.PortraitColumn3Width = (GlobalSpecs.CurrentGlobalSpecs!.GetScreenWidth() - _paddingWidth) / divisor;
+
+                }
+            }
+
+
+            SetGridDimensions();
+
+            if (ld.ScreenMode == IGlobalData.screenMode.portrait)
+            {
+                SetPortraitGridDimensions();
+
+            }
+            else if (ld.ScreenMode == IGlobalData.screenMode.landscape)
+            {
+                AdaptGridHeights();
+
+                double xlen = 0;
+
+                if (GetLeftColumnActive())
+                {
+                    MenuGridMenuInner.ColumnDefinitions[0].Width = new GridLength(ld.ColumLeftWidth);
+                    MenuGridMenuInner.ColumnDefinitions[1].Width = new GridLength(10);
+                    xlen += 10 + ld.ColumLeftWidth;
+                    // Grid_MC_Left.IsVisible = true;
+
+                    double height = MenuGridMenuVertical.RowDefinitions[0].Height.Value;
+
+                    if (GetLUActive() == true && GetLDActive() == true)
+                    {
+                        if (ld.RowLeftUpHeight > height - 15)
+                        {
+                            ld.RowLeftUpHeight = height - 15;
+                        }
+
+                        Grid_MC_Left.RowDefinitions[0].Height = new GridLength(ld.RowLeftUpHeight);
+                        Grid_MC_Left.RowDefinitions[1].Height = new GridLength(10);
+                        Grid_MC_Left.RowDefinitions[2].Height = new GridLength(height - 10 - ld.RowLeftUpHeight);
+
+                    }
+                    else
+                    {
+                        if (GetLUActive() == false)
+                        {
+                            Grid_MC_Left.RowDefinitions[0].Height = new GridLength(0);
+                            Grid_MC_Left.RowDefinitions[1].Height = new GridLength(0);
+                        }
+                        else
+                        {
+                            Grid_MC_Left.RowDefinitions[0].Height = new GridLength(height);
+                            Grid_MC_Left.RowDefinitions[1].Height = new GridLength(0);
+
+                        }
+                        if (GetLDActive() == false)
+                        {
+                            Grid_MC_Left.RowDefinitions[2].Height = new GridLength(0);
+                            Grid_MC_Left.RowDefinitions[1].Height = new GridLength(0);
+                        }
+                        else
+                        {
+                            Grid_MC_Left.RowDefinitions[2].Height = new GridLength(height);
+                            Grid_MC_Left.RowDefinitions[1].Height = new GridLength(0);
+
+                        }
+                    }
+                }
+                else
+                {
+                    MenuGridMenuInner.ColumnDefinitions[0].Width = new GridLength(0);
+                    MenuGridMenuInner.ColumnDefinitions[1].Width = new GridLength(0);
+
+                }
+                if (GetRightColumnActive())
+                {
+                    MenuGridMenuInner.ColumnDefinitions[4].Width = new GridLength(ld.ColumRightWidth);
+                    MenuGridMenuInner.ColumnDefinitions[3].Width = new GridLength(10);
+                    xlen += 10 + ld.ColumRightWidth;
+                    // Grid_MC_Right.IsVisible = true;
+                    double height = MenuGridMenuVertical.RowDefinitions[0].Height.Value;
+
+                    if (GetRUActive() == true && GetRDActive() == true)
+                    {
+                        if (ld.RowRightUpHeight > height - 15)
+                        {
+                            ld.RowRightUpHeight = height - 15;
+                        }
+
+                        Grid_MC_Right.RowDefinitions[0].Height = new GridLength(ld.RowRightUpHeight);
+                        Grid_MC_Right.RowDefinitions[1].Height = new GridLength(10);
+                        Grid_MC_Right.RowDefinitions[2].Height = new GridLength(height - 10 - ld.RowRightUpHeight);
+
+                    }
+                    else
+                    {
+                        if (GetRUActive() == false)
+                        {
+                            Grid_MC_Right.RowDefinitions[0].Height = new GridLength(0);
+                            Grid_MC_Right.RowDefinitions[1].Height = new GridLength(0);
+                        }
+                        else
+                        {
+                            Grid_MC_Right.RowDefinitions[0].Height = new GridLength(height);
+                            Grid_MC_Right.RowDefinitions[1].Height = new GridLength(0);
+
+                        }
+                        if (GetRDActive() == false)
+                        {
+                            Grid_MC_Right.RowDefinitions[2].Height = new GridLength(0);
+                            Grid_MC_Right.RowDefinitions[1].Height = new GridLength(0);
+                        }
+                        else
+                        {
+                            Grid_MC_Right.RowDefinitions[2].Height = new GridLength(height);
+                            Grid_MC_Right.RowDefinitions[1].Height = new GridLength(0);
+
+                        }
+                    }
+                }
+                else
+                {
+                    MenuGridMenuInner.ColumnDefinitions[4].Width = new GridLength(0);
+                    MenuGridMenuInner.ColumnDefinitions[3].Width = new GridLength(0);
+
+                }
+                double x = GlobalSpecs.CurrentGlobalSpecs!.GetScreenWidth() - _paddingWidth;
+
+                // RotateProblem
+
+                // GameOut.WidthRequest = x - xlen;
+                // Grid_Output.WidthRequest = x - xlen;
+                // MenuGridTotal.ColumnDefinitions[1].Width = x;
+                // MenuGridMenuBackground.WidthRequest = x ;
+                /*
+              if(GridWebView.ColumnDefinitions.Count > 0 )
+                 GridWebView.ColumnDefinitions[0].Width = new GridLength(x - xlen);
+             */
+                // if (Page_Grid().Width > 0)
+                MenuGridMenuInner.ColumnDefinitions[2].Width = new GridLength(x - xlen);
+                /*
+                MenuGridMenuInner.WidthRequest = x ;
+                MenuGridMenu.ColumnDefinitions[1].Width = new GridLength(x );
+                MenuGridMenu.WidthRequest = x ;
+                MenuGridMenuBackground.WidthRequest = x;
+                MenuGridTotal.ColumnDefinitions[1].Width = new GridLength(x);
+                MenuGridTotal.WidthRequest = x;
+                */
+                // MenuGridMenuBackground.ColumnDefinitions[1].Width = new GridLength(x);
+
+                // MenuGridMenuInner.ColumnDefinitions[3].Width = new GridLength(10);
+                // MenuGridMenuInner.ColumnDefinitions[4].Width = new GridLength(150);
+
+                MenuGridMenuVertical.RowDefinitions[2].Height = new GridLength(0);
+            }
+            // SetGridHeights();
+
+            bool OrderTreeHasChanged = false;
+            bool ItemInvTreeHasChanged = false;
+            bool ItemLocTreeHasChanged = false;
+
+            if (OrderTreeHasInitialized == false)
+                OrderTreeHasChanged = true;
+            if (ItemInvTreeHasInitialized == false)
+                ItemInvTreeHasChanged = true;
+            if (ItemLocTreeHasInitialized == false)
+                ItemLocTreeHasChanged = true;
+
+
+            if (UIS.UpdateBrowserBlocked == false)
+            {
+
+                EmptyTreeOrderNew = CreateOrderTreeEmpty();
+                EmptyTreeItemInvNew = CreateItemInvTree_Empty();
+                EmptyTreeItemLocNew = CreateItemLocTree_Empty();
+                if (EmptyTreeOrderOld != null && EmptyTreeOrderNew != null)
+                {
+                    if (CompareEmptyTreeViews(EmptyTreeOrderNew, EmptyTreeOrderOld) == false)
+                    {
+                        OrderTreeHasChanged = true;
+                        // GD.Adventure!.StoryOutput("Befehle haben sich ge�ndert.");
+                    }
+                }
+                else
                 {
                     OrderTreeHasChanged = true;
-                    // GD.Adventure!.StoryOutput("Befehle haben sich ge�ndert.");
                 }
+
+                if (EmptyTreeItemInvOld != null && EmptyTreeItemInvNew != null)
+                {
+                    if (CompareEmptyTreeViews(EmptyTreeItemInvNew, EmptyTreeItemInvOld) == false)
+                    {
+                        ItemInvTreeHasChanged = true;
+                        // GD.Adventure!.StoryOutput("Items im Inventar haben sich ge�ndert.");
+                    }
+                }
+                else
+                {
+                    ItemInvTreeHasChanged = true;
+                }
+
+                if (EmptyTreeItemLocOld != null && EmptyTreeItemLocNew != null)
+                {
+                    if (CompareEmptyTreeViews(EmptyTreeItemLocNew, EmptyTreeItemLocOld) == false)
+                    {
+                        ItemLocTreeHasChanged = true;
+                        // GD.Adventure!.StoryOutput("Items vor Ort haben sich ge�ndert.");
+                    }
+                }
+                else
+                {
+                    ItemLocTreeHasChanged = true;
+
+                }
+
+
+                EmptyTreeOrderOld = EmptyTreeOrderNew;
+                EmptyTreeItemInvOld = EmptyTreeItemInvNew;
+                EmptyTreeItemLocOld = EmptyTreeItemLocNew;
             }
             else
             {
                 OrderTreeHasChanged = true;
-            }
-
-            if (EmptyTreeItemInvOld != null && EmptyTreeItemInvNew != null)
-            {
-                if (CompareEmptyTreeViews(EmptyTreeItemInvNew, EmptyTreeItemInvOld) == false)
-                {
-                    ItemInvTreeHasChanged = true;
-                    // GD.Adventure!.StoryOutput("Items im Inventar haben sich ge�ndert.");
-                }
-            }
-            else
-            {
                 ItemInvTreeHasChanged = true;
-            }
-
-            if (EmptyTreeItemLocOld != null && EmptyTreeItemLocNew != null)
-            {
-                if (CompareEmptyTreeViews(EmptyTreeItemLocNew, EmptyTreeItemLocOld) == false)
-                {
-                    ItemLocTreeHasChanged = true;
-                    // GD.Adventure!.StoryOutput("Items vor Ort haben sich ge�ndert.");
-                }
-            }
-            else
-            {
                 ItemLocTreeHasChanged = true;
-
             }
-
-
-            EmptyTreeOrderOld = EmptyTreeOrderNew;
-            EmptyTreeItemInvOld = EmptyTreeItemInvNew;
-            EmptyTreeItemLocOld = EmptyTreeItemLocNew;
-        }
-        else
-        {
             OrderTreeHasChanged = true;
             ItemInvTreeHasChanged = true;
             ItemLocTreeHasChanged = true;
-        }
-        OrderTreeHasChanged = true;
-        ItemInvTreeHasChanged = true;
-        ItemLocTreeHasChanged = true;
 
 
-        if ( GetLUActive())
-        {
-            TILeftUp!.IsVisible = true;
+            if (GetLUActive())
+            {
+                TILeftUp!.IsVisible = true;
 
-            if (ld.LU_Order == true)
-            {
-                TabItem.TabPanel tp = TILeftUp.TabPanels[0];
-
-                tp.SelectButton!.IsVisible = true;
-            }
-            else
-            {
-                TabItem.TabPanel tp = TILeftUp.TabPanels[0];
-                tp.SelectButton!.IsVisible = false;
-            }
-            if (ld.LU_ItemLoc == true)
-            {
-                TabItem.TabPanel tp = TILeftUp.TabPanels[1];
-                tp.SelectButton!.IsVisible = true;
-            }
-            else
-            {
-                TabItem.TabPanel tp = TILeftUp.TabPanels[1];
-
-                tp.SelectButton!.IsVisible= false;
-            }
-            if (ld.LU_ItemInv == true)
-            {
-                TabItem.TabPanel tp = TILeftUp.TabPanels[2];
-
-                tp.SelectButton!.IsVisible= true;
-            }
-            else
-            {
-                TabItem.TabPanel tp = TILeftUp.TabPanels[2];
-
-                tp.SelectButton!.IsVisible = false;
-            }
- 
-            TILeftUp.SelectedTabPanel = LUPos;
-            TILeftUp.SyncTabStyles();
-        }
-        else
-        {
-            TILeftUp!.IsVisible = false;
-          
-        }
-        if( GetLDActive())
-        {
-            TILeftDown!.IsVisible = true;
-
-            if (ld.LD_Order == true)
-            {
-                TabItem.TabPanel tp = TILeftDown!.TabPanels[0];
-
-                tp.SelectButton!.IsVisible = true;
-            }
-            else
-            {
-                TabItem.TabPanel tp = TILeftDown!.TabPanels[0];
-                tp.SelectButton!.IsVisible = false;
-            }
-            if (ld.LD_ItemLoc == true)
-            {
-                TabItem.TabPanel tp = TILeftDown!.TabPanels[1];
-
-                tp.SelectButton!.IsVisible = true;
-            }
-            else
-            {
-                TabItem.TabPanel tp = TILeftDown!.TabPanels[1];
-
-                tp.SelectButton!.IsVisible= false;
-            }
-            if (ld.LD_ItemInv == true)
-            {
-                TabItem.TabPanel tp = TILeftDown!.TabPanels[2];
-
-                tp.SelectButton!.IsVisible= true;
-            }
-            else
-            {
-                TabItem.TabPanel tp = TILeftDown!.TabPanels[2];
-
-                tp.SelectButton!.IsVisible= false;
-            }
- 
-            TILeftDown!.SelectedTabPanel = LDPos;
-            TILeftDown!.SyncTabStyles();
-        }
-        else
-        {
-            TILeftDown!.IsVisible = false;
-          
-        }
-        if( GetRUActive())
-        {
-            TIRightUp!.IsVisible = true;
-
-            if (ld.RU_Order == true)
-            {
-                TabItem.TabPanel tp = TIRightUp!.TabPanels[0];
-                
-                tp.SelectButton!.IsVisible= true;
-            }
-            else
-            {
-                TabItem.TabPanel tp = TIRightUp!.TabPanels[0];
-                tp.SelectButton!.IsVisible= false;
-            }
-            if (ld.RU_ItemLoc == true)
-            {
-                TabItem.TabPanel tp = TIRightUp!.TabPanels[1];
-                tp.SelectButton!.IsVisible= true;
-            }
-            else
-            {
-                TabItem.TabPanel tp = TIRightUp!.TabPanels[1];
-                tp.SelectButton!.IsVisible= false;
-            }
-            if (ld.RU_ItemInv == true)
-            {
-                TabItem.TabPanel tp = TIRightUp!.TabPanels[2];
-                tp.SelectButton!.IsVisible= true;
-            }
-            else
-            {
-                TabItem.TabPanel tp = TIRightUp!.TabPanels[2];
-                tp.SelectButton!.IsVisible= false;
-            }
- 
-            TIRightUp!.SelectedTabPanel = RUPos;
-            TIRightUp!.SyncTabStyles();
-        }
-        else
-        {
-            TIRightUp!.IsVisible = false;
-          
-        }
-        if( GetRDActive())
-        {
-            TIRightDown!.IsVisible = true;
-
-            if (ld.RD_Order == true)
-            {
-                TabItem.TabPanel tp = TIRightDown!.TabPanels[0];
-                tp.SelectButton!.IsVisible= true;
-                tp.TabPanelSV!.IsVisible = true;
-            }
-            else
-            {
-                TabItem.TabPanel tp = TIRightDown!.TabPanels[0];
-                tp.SelectButton!.IsVisible= false;
-                tp.TabPanelSV!.IsVisible = false;
-            }
-            if (ld.RD_ItemLoc == true)
-            {
-                TabItem.TabPanel tp = TIRightDown!.TabPanels[1];
-                tp.SelectButton!.IsVisible= true;
-                tp.TabPanelSV!.IsVisible = true;
-            }
-            else
-            {
-                TabItem.TabPanel tp = TIRightDown!.TabPanels[1];
-
-                tp.SelectButton!.IsVisible= false;
-                tp.TabPanelSV!.IsVisible = false;
-
-            }
-            if (ld.RD_ItemInv == true)
-            {
-                TabItem.TabPanel tp = TIRightDown!.TabPanels[2];
-                tp.SelectButton!.IsVisible= true;
-                tp.TabPanelSV!.IsVisible = true;
-            }
-            else
-            {
-                TabItem.TabPanel tp = TIRightDown!.TabPanels[2];
-
-                tp.SelectButton!.IsVisible= false;
-                tp.TabPanelSV!.IsVisible = false;
-            }
-
-            TIRightDown!.SelectedTabPanel = RDPos;
-            TIRightDown!.SyncTabStyles();
-        }
-        else
-        {
-            TIRightDown!.IsVisible = false;
-          
-        }
-
-        
-        TreeView? tvOrder = null;
-        if (TILeftUp!.IsVisible == true )
-        {
-            TabItem.TabPanel tp0 = TILeftUp!.TabPanels[0];
-            TabItem.TabPanel tp1 = TILeftUp!.TabPanels[1];
-            TabItem.TabPanel tp2 = TILeftUp!.TabPanels[2];
-            foreach (TabItem.TabPanel tp in TILeftUp!.TabPanels)
-            {
-
-                if ( tp.TypeID == 1 && tp0.SelectButton!.IsVisible == true && OrderTreeHasChanged == true )
+                if (ld.LU_Order == true)
                 {
-                    tvOrder = CreateOrderTree();
-                    tp0.TabPanelGrid!.Children[0] = tvOrder;
-                    tvOrder.CalcToggles();
-                    OrderTreeHasInitialized = true;
-                    // GD!.Adventure!.StoryOutput("Befehle aktualisiert");
-                }
-                else if (tp.TypeID == 2 &&  tp1.SelectButton!.IsVisible == true && ItemLocTreeHasChanged == true )
-                {
-                    tvOrder = CreateItemLocTree();
-                    tp1.TabPanelGrid!.Children[0] = tvOrder;
-                    tvOrder.CalcToggles();
-                    ItemLocTreeHasInitialized = true;
-                    // GD.Adventure!.StoryOutput("Item Loc aktualisiert");
-                }
-                else if (tp.TypeID == 3 &&  tp2.SelectButton!.IsVisible == true && ItemInvTreeHasChanged == true)
-                {
-                    tvOrder = CreateItemInvTree();
-                    tp2.TabPanelGrid!.Children[0] = tvOrder;
-                    tvOrder.CalcToggles();
-                    ItemInvTreeHasInitialized = true;
-                    // GD.Adventure!.StoryOutput("Item Inv aktualisiert");
+                    TabItem.TabPanel tp = TILeftUp.TabPanels[0];
 
-                }
-            }
-        }
-
-        if (TILeftDown!.IsVisible == true )
-        {
-            TabItem.TabPanel tp0 = TILeftDown!.TabPanels[0];
-            TabItem.TabPanel tp1 = TILeftDown!.TabPanels[1];
-            TabItem.TabPanel tp2 = TILeftDown!.TabPanels[2];
-            foreach (TabItem.TabPanel tp in TILeftDown!.TabPanels)
-            {
- 
-                if (tp.TypeID == 1 && tp0.SelectButton!.IsVisible == true && OrderTreeHasChanged == true )
-                {
-                    tvOrder = CreateOrderTree();
-                    tp0.TabPanelGrid!.Children[0] = tvOrder;
-                    tvOrder.CalcToggles();
-                    OrderTreeHasInitialized = true;
-                    // GD.Adventure!.StoryOutput("Befehle aktualisiert");
-
-                }
-                else if (tp.TypeID == 2 &&  tp1.SelectButton!.IsVisible == true && ItemLocTreeHasChanged == true )
-                {
-                    tvOrder = CreateItemLocTree();
-                    tp1.TabPanelGrid!.Children[0]= tvOrder;
-                    tvOrder.CalcToggles();
-                    ItemLocTreeHasInitialized = true;
-                    // GD.Adventure!.StoryOutput("Item Loc aktualisiert");
-                }
-                else if (tp.TypeID == 3 &&  tp2.SelectButton!.IsVisible == true && ItemInvTreeHasChanged == true)
-                {
-                    tvOrder = CreateItemInvTree();
-                    tp2.TabPanelGrid!.Children[0]= tvOrder;
-                    tvOrder.CalcToggles();
-                    ItemInvTreeHasInitialized = true;
-                    // GD.Adventure!.StoryOutput("Item Inv aktualisiert");
-                }
-            }
-        }
-        if (TIRightUp.IsVisible == true )
-        {
-            TabItem.TabPanel tp0 = TIRightUp.TabPanels[0];
-            TabItem.TabPanel tp1 = TIRightUp.TabPanels[1];
-            TabItem.TabPanel tp2 = TIRightUp.TabPanels[2];
-            foreach (TabItem.TabPanel tp in TIRightUp.TabPanels)
-            {
-                
-                if (tp.TypeID == 1 && tp0.SelectButton!.IsVisible == true && OrderTreeHasChanged == true )
-                {
-                    tvOrder = CreateOrderTree();
-                    tp0.TabPanelGrid!.Children[0] = tvOrder;
-                    tvOrder.CalcToggles();
-                    OrderTreeHasInitialized = true;
-                    // GD.Adventure!.StoryOutput("Befehle aktualisiert RU");
-                }
-                else if (tp.TypeID == 2 && tp1.SelectButton!.IsVisible == true && ItemLocTreeHasChanged == true )
-                {
-                    tvOrder = CreateItemLocTree();
-                    tp1.TabPanelGrid!.Children[0] = tvOrder;
-                    tvOrder.CalcToggles();
-                    ItemLocTreeHasInitialized = true;
-                    // GD.Adventure!.StoryOutput("Item Loc aktualisiert RU");
-                }
-                else if (tp.TypeID == 3 && tp2.SelectButton!.IsVisible == true && ItemInvTreeHasChanged == true)
-                {
-                    tvOrder = CreateItemInvTree();
-                    tp2.TabPanelGrid!.Children[0] = tvOrder;
-                    tvOrder.CalcToggles();
-                    ItemInvTreeHasInitialized = true;
-                    // GD.Adventure!.StoryOutput("Item Inv aktualisiert RU");
-                }
-            }
-        }
-
-        if (TIRightDown.IsVisible == true )
-        {
-            TabItem.TabPanel tp0 = TIRightDown.TabPanels[0];
-            TabItem.TabPanel tp1 = TIRightDown.TabPanels[1];
-            TabItem.TabPanel tp2 = TIRightDown.TabPanels[2];
-
-            foreach (TabItem.TabPanel tp in TIRightDown.TabPanels)
-            {
-                if (tp.TypeID == 1 && tp0.SelectButton!.IsVisible == true && OrderTreeHasChanged == true )
-                {
-                    tvOrder = CreateOrderTree();
-                    tp0.TabPanelGrid!.Children[0] = tvOrder;
-                    tvOrder.CalcToggles();
-                    OrderTreeHasInitialized = true;
-                    // GD.Adventure!.StoryOutput("Befehle aktualisiert RD");
-                }
-                else if (tp.TypeID == 2 && tp1.SelectButton!.IsVisible == true && ItemLocTreeHasChanged == true)
-                {
-                    tvOrder = CreateItemLocTree();
-                    tp1.TabPanelGrid!.Children[0] = tvOrder;
-                    tvOrder.CalcToggles();
-                    ItemLocTreeHasInitialized = true;
-                    // GD.Adventure!.StoryOutput("Item Loc aktualisiert RD");
-                }
-                else if (tp.TypeID == 3 && tp2.SelectButton!.IsVisible == true && ItemInvTreeHasChanged == true)
-                {
-                    tvOrder = CreateItemInvTree();
-                    tp2.TabPanelGrid!.Children[0] = tvOrder;
-                    tvOrder.CalcToggles();
-                    ItemInvTreeHasInitialized = true;
-                    // GD.Adventure!.StoryOutput("Item Inv aktualisiert RD");
-
-                }
-            }
-        }
-
-        if (GD.LayoutDescription.ScreenMode == IGlobalData.screenMode.portrait)
-        {
-
-            // Column 1
-            if (IsPortraitColVisible(0))
-            {
-                // TICol1_0!.MainPanel = new();
-
-                if (ld.PortraitColumns[0, 0] == ILayoutDescription.PortraitColumn.order)
-                {
-                    tvOrder = CreateOrderTree();
-
-                    // TICol1_0!.AddTabPanel(FaSolid.Wrench, 1);
-                    // TICol1_0!.TabPanels[ix].TabPanelGrid.Clear();
-                    TICol1_0!.TabPanels[0].TabPanelGrid!.Children[0] = tvOrder;
-                    TICol1_0!.TabPanels[0].SelectButton!.IsVisible = true;
-                    TICol1_0!.TabPanels[0].SelectButton!.Text = FaSolid.Wrench;
-                    TICol1_0!.TabPanels[0].SelectButton!.FontFamily = "Fa-Solid";
-                    OrderTreeHasInitialized = true;
-                    tvOrder.CalcToggles();
+                    tp.SelectButton!.IsVisible = true;
                 }
                 else
                 {
-                    TICol1_0!.TabPanels[0].SelectButton!.IsVisible = false;
-
+                    TabItem.TabPanel tp = TILeftUp.TabPanels[0];
+                    tp.SelectButton!.IsVisible = false;
                 }
-                if (ld.PortraitColumns[0, 1] == ILayoutDescription.PortraitColumn.itemloc)
+                if (ld.LU_ItemLoc == true)
                 {
-                    tvOrder = CreateItemLocTree();
-                    // TICol1_0!.AddTabPanel(FaSolid.MapMarkerAlt, 2);
-                    // TICol1_0!.TabPanels[ix].TabPanelGrid.Clear();
-                    TICol1_0!.TabPanels[1].TabPanelGrid!.Children[0] = tvOrder;
-                    TICol1_0!.TabPanels[1].SelectButton!.IsVisible = true;
-                    TICol1_0!.TabPanels[1].SelectButton!.Text = FaSolid.MapMarkerAlt;
-                    TICol1_0!.TabPanels[1].SelectButton!.FontFamily = "Fa-Solid";
-                    ItemLocTreeHasInitialized = true;
-                    tvOrder.CalcToggles();
+                    TabItem.TabPanel tp = TILeftUp.TabPanels[1];
+                    tp.SelectButton!.IsVisible = true;
                 }
                 else
                 {
-                    TICol1_0!.TabPanels[1].SelectButton!.IsVisible = false;
+                    TabItem.TabPanel tp = TILeftUp.TabPanels[1];
 
+                    tp.SelectButton!.IsVisible = false;
                 }
-                if (ld.PortraitColumns[0, 2] == ILayoutDescription.PortraitColumn.iteminv)
+                if (ld.LU_ItemInv == true)
                 {
-                    tvOrder = CreateItemInvTree();
-                    // TICol1_0!.TabPanels[ix].TabPanelGrid.Clear();
-                    // TICol1_0!.AddTabPanel(FaSolid.Suitcase, 3);
-                    TICol1_0!.TabPanels[2].TabPanelGrid!.Children[0] = tvOrder;
-                    TICol1_0!.TabPanels[2].SelectButton!.IsVisible = true;
-                    TICol1_0!.TabPanels[2].SelectButton!.Text = FaSolid.Suitcase;
-                    TICol1_0!.TabPanels[2].SelectButton!.FontFamily = "Fa-Solid";
-                    ItemInvTreeHasInitialized = true;
-                    tvOrder.CalcToggles();
+                    TabItem.TabPanel tp = TILeftUp.TabPanels[2];
 
+                    tp.SelectButton!.IsVisible = true;
                 }
                 else
                 {
-                    TICol1_0!.TabPanels[2].SelectButton!.IsVisible = false;
+                    TabItem.TabPanel tp = TILeftUp.TabPanels[2];
 
-                }
-                TICol1_0.SyncTabStyles();
-
-            }
-            if (IsPortraitColVisible(1))
-            {
-                // Column 2
-                if (ld.PortraitColumns[1, 0] == ILayoutDescription.PortraitColumn.order)
-                {
-                    tvOrder = CreateOrderTree();
-                    // TICol2_0!.TabPanels[0].TabPanelGrid.Clear();
-                    // TICol2_0!.TabPanels![0].TabPanelGrid!.Clear();
-                    TICol2_0!.TabPanels![0].TabPanelGrid!.Children[0] = tvOrder;
-                    TICol2_0!.TabPanels![0].SelectButton!.IsVisible = true;
-                    TICol2_0!.TabPanels![0].SelectButton!.Text = FaSolid.Wrench;
-                    tvOrder.CalcToggles();
-                    OrderTreeHasInitialized = true;
-
-                }
-                else
-                {
-                    TICol2_0!.TabPanels[0].SelectButton!.IsVisible = false;
-
-                }
-                if (ld.PortraitColumns[1, 1] == ILayoutDescription.PortraitColumn.itemloc)
-                {
-                    tvOrder = CreateItemLocTree();
-                    // TICol2_1!.TabPanels[0].TabPanelGrid.Clear();
-                    // TICol2_1!.TabPanels[0].TabPanelGrid!.Clear();
-                    TICol2_0!.TabPanels[1].TabPanelGrid!.Children[0] = tvOrder;
-                    TICol2_0!.TabPanels[1].SelectButton!.IsVisible = true;
-                    TICol2_0!.TabPanels[1].SelectButton!.Text = FaSolid.MapMarkerAlt;
-                    tvOrder.CalcToggles();
-                    ItemLocTreeHasInitialized = true;
-
-                }
-                else
-                {
-                    TICol2_0!.TabPanels[1].SelectButton!.IsVisible = false;
-
-                }
-                if (ld.PortraitColumns[1, 2] == ILayoutDescription.PortraitColumn.iteminv)
-                {
-                    tvOrder = CreateItemInvTree();
-                    // TICol2_2!.TabPanels[0].TabPanelGrid.Clear();
-                    // TICol2_2!.TabPanels[0].TabPanelGrid!.Clear();
-                    TICol2_0!.TabPanels[2].TabPanelGrid.Children[0] = tvOrder;
-                    TICol2_0!.TabPanels[2].SelectButton!.IsVisible = true;
-                    TICol2_0!.TabPanels[2].SelectButton!.Text = FaSolid.Suitcase;
-                    tvOrder.CalcToggles();
-                    ItemInvTreeHasInitialized = true;
-
-                }
-                else
-                {
-                    TICol2_0!.TabPanels[2].SelectButton!.IsVisible = false;
-
-                }
-                TICol2_0.SyncTabStyles();
-
-            }
-            // Column 3
-            if (IsPortraitColVisible(2))
-            {
-                if (ld.PortraitColumns[2,0] == ILayoutDescription.PortraitColumn.order)
-                {
-                    tvOrder = CreateOrderTree();
-                    // TICol3_0!.TabPanels[0].TabPanelGrid.Clear();
-                    // TICol3_0!.TabPanels[0].TabPanelGrid!.Clear();
-                    TICol3_0!.TabPanels[0].TabPanelGrid.Children[0] = tvOrder;
-                    TICol3_0!.TabPanels[0].SelectButton!.IsVisible = true;
-                    TICol3_0!.TabPanels[0].SelectButton!.Text = FaSolid.Wrench;
-                    tvOrder.CalcToggles();
-                    OrderTreeHasInitialized = true;
-
-                }
-                else
-                {
-                    TICol3_0!.TabPanels[0].SelectButton!.IsVisible = false;
-
+                    tp.SelectButton!.IsVisible = false;
                 }
 
-                if (ld.PortraitColumns[2,1] == ILayoutDescription.PortraitColumn.itemloc)
-                {
-                    tvOrder = CreateItemLocTree();
-                    // TICol3_1!.TabPanels[0].TabPanelGrid.Clear();
-                    // TICol3_1!.TabPanels[0].TabPanelGrid!.Clear();
-                    TICol3_0!.TabPanels[1].TabPanelGrid!.Children[0] = tvOrder;
-                    TICol3_0!.TabPanels[1].SelectButton!.IsVisible = true;
-                    TICol3_0!.TabPanels[1].SelectButton!.Text = FaSolid.MapMarkerAlt;
-                    tvOrder.CalcToggles();
-                    ItemLocTreeHasInitialized = true;
-
-                }
-                else
-                {
-                    TICol3_0!.TabPanels[1].SelectButton!.IsVisible = false;
-
-                }
-                if (ld.PortraitColumns[2, 2] == ILayoutDescription.PortraitColumn.iteminv)
-                {
-                    tvOrder = CreateItemInvTree();
-                    // TICol3_2!.TabPanels[0].TabPanelGrid.Clear();
-                    // TICol3_2!.TabPanels[0].TabPanelGrid!.Clear();
-                    TICol3_0!.TabPanels[2].TabPanelGrid!.Children[0] = tvOrder;
-                    TICol3_0!.TabPanels[2].SelectButton!.IsVisible = true;
-                    TICol3_0!.TabPanels[2].SelectButton!.Text = FaSolid.Suitcase;
-                    tvOrder.CalcToggles();
-                    ItemInvTreeHasInitialized = true;
-
-                }
-                else
-                {
-                    TICol3_0!.TabPanels[2].SelectButton!.IsVisible = false;
-
-                }
-                TICol3_0.SyncTabStyles();
-
-            }
-        }
-
-        /*
-        if (TIRightUp != null)
-        {
-            foreach (TabItem.TabPanel tp in TIRightUp.TabPanels)
-            {
-                if (tp.TypeID == 1)
-                {
-                    tvOrder = CreateOrderTree();
-                    tp.TabPanelGrid.Add(tvOrder);
-                    tvOrder.CalcToggles();
-                }
-                else if (tp.TypeID == 2)
-                {
-                    tvOrder = CreateItemLocTree();
-                    tp.TabPanelGrid.Add(tvOrder);
-                    tvOrder.CalcToggles();
-                }
-                else if (tp.TypeID == 3)
-                {
-                    tvOrder = CreateItemInvTree();
-                    tp.TabPanelGrid.Add(tvOrder);
-                    tvOrder.CalcToggles();
-                }
-            }
-        }
-        if (TILeftDown != null )
-        {
-            foreach (TabItem.TabPanel tp in TILeftDown.TabPanels)
-            {
-                if (tp.TypeID == 1)
-                {
-                    tvOrder = CreateOrderTree();
-                    tp.TabPanelGrid.Add(tvOrder);
-                    tvOrder.CalcToggles();
-                }
-                else if (tp.TypeID == 2)
-                {
-                    tvOrder = CreateItemLocTree();
-                    tp.TabPanelGrid.Add(tvOrder);
-                    tvOrder.CalcToggles();
-                }
-                else if (tp.TypeID == 3)
-                {
-                    tvOrder = CreateItemInvTree();
-                    tp.TabPanelGrid.Add(tvOrder);
-                    tvOrder.CalcToggles();
-                }
-            }
-        }
-        if (TIRightDown != null)
-        {
-            foreach (TabItem.TabPanel tp in TIRightDown.TabPanels)
-            {
-                if (tp.TypeID == 1)
-                {
-                    tvOrder = CreateOrderTree();
-                    tp.TabPanelGrid.Add(tvOrder);
-                    tvOrder.CalcToggles();
-                }
-                else if (tp.TypeID == 2)
-                {
-                    tvOrder = CreateItemLocTree();
-                    tp.TabPanelGrid.Add(tvOrder);
-                    tvOrder.CalcToggles();
-                }
-                else if (tp.TypeID == 3)
-                {
-                    tvOrder = CreateItemInvTree();
-                    tp.TabPanelGrid.Add(tvOrder);
-                    tvOrder.CalcToggles();
-                }
-            }
-        }
-        */
-
-        /*
-        GridLU.Children.Clear();
-        if( GetLUActive())
-        {
-            TILeftUp = new TabItem();
-            TILeftUp.AddTabButtonStyleSelected("IDButton");
-            TILeftUp.AddTabButtonStyleUnselected("IDButton_Invers");
-            TILeftUp.AddHeadlineStyle("Grid_BGBG");
-            TILeftUp.AddMainPanelStyle("Grid_Normal");
-
-            if (ld.LU_Order == true)
-            {
-                TabItem.TabPanel tp = TILeftUp.AddTabPanel(FaSolid.Wrench, 1);
-                tp.SelectButton!.FontFamily = "Fa-Solid";
-                SetButtonCursorHand(tp.SelectButton);
-            }
-            if (ld.LU_ItemLoc == true)
-            {
-                TabItem.TabPanel tp = TILeftUp.AddTabPanel(FaSolid.MapMarkerAlt,2 );
-                tp.SelectButton!.FontFamily = "Fa-Solid";
-                SetButtonCursorHand(tp.SelectButton);
-            }
-            if (ld.LU_ItemInv == true)
-            {
-                TabItem.TabPanel tp = TILeftUp.AddTabPanel(FaSolid.Suitcase, 3);
-                tp.SelectButton!.FontFamily = "Fa-Solid";
-                SetButtonCursorHand(tp.SelectButton);
-            }
-            GridLU.Add(TILeftUp);
-
-            if (TILeftUp.Count == LUCount)
-            {
                 TILeftUp.SelectedTabPanel = LUPos;
                 TILeftUp.SyncTabStyles();
             }
-        }
+            else
+            {
+                TILeftUp!.IsVisible = false;
 
-        GridLD.Children.Clear();
-        if (GetLDActive())
-        {
-            TILeftDown = new TabItem();
-            TILeftDown.AddTabButtonStyleSelected("IDButton");
-            TILeftDown.AddTabButtonStyleUnselected("IDButton_Invers");
-            TILeftDown.AddHeadlineStyle("Grid_BGBG");
-            TILeftDown.AddMainPanelStyle("Grid_Normal");
+            }
+            if (GetLDActive())
+            {
+                TILeftDown!.IsVisible = true;
 
-            if (ld.LD_Order == true)
-            {
-                TabItem.TabPanel tp = TILeftDown.AddTabPanel(FaSolid.Wrench, 1);
-                tp.SelectButton!.FontFamily = "Fa-Solid";
-                SetButtonCursorHand(tp.SelectButton);
-            }
-            if (ld.LD_ItemLoc == true)
-            {
-                TabItem.TabPanel tp = TILeftDown.AddTabPanel(FaSolid.MapMarkerAlt, 2);
-                tp.SelectButton!.FontFamily = "Fa-Solid";
-                SetButtonCursorHand(tp.SelectButton);
-            }
-            if (ld.LD_ItemInv == true)
-            {
-                TabItem.TabPanel tp = TILeftDown.AddTabPanel(FaSolid.Suitcase, 3);
-                tp.SelectButton!.FontFamily = "Fa-Solid";
-                SetButtonCursorHand(tp.SelectButton);
-            }
-            GridLD.Add(TILeftDown);
-
-            if (TILeftDown.Count == LDCount)
-            {
-                TILeftDown.SelectedTabPanel = LDPos;
-                TILeftDown.SyncTabStyles();
-            }
-        }
-
-        GridRU.Children.Clear();
-        if (GetRUActive())
-        {
-            TIRightUp = new TabItem();
-            TIRightUp.AddTabButtonStyleSelected("IDButton");
-            TIRightUp.AddTabButtonStyleUnselected("IDButton_Invers");
-            TIRightUp.AddHeadlineStyle("Grid_BGBG");
-            TIRightUp.AddMainPanelStyle("Grid_Normal");
-
-            if (ld.RU_Order == true)
-            {
-                TabItem.TabPanel tp = TIRightUp.AddTabPanel(FaSolid.Wrench, 1);
-                tp.SelectButton!.FontFamily = "Fa-Solid";
-                SetButtonCursorHand(tp.SelectButton);
-            }
-            if (ld.RU_ItemLoc == true)
-            {
-                TabItem.TabPanel tp = TIRightUp.AddTabPanel(FaSolid.MapMarkerAlt, 2);
-                tp.SelectButton!.FontFamily = "Fa-Solid";
-                SetButtonCursorHand(tp.SelectButton);
-            }
-            if (ld.RU_ItemInv == true)
-            {
-                TabItem.TabPanel tp = TIRightUp.AddTabPanel(FaSolid.Suitcase, 3);
-                tp.SelectButton!.FontFamily = "Fa-Solid";
-                SetButtonCursorHand(tp.SelectButton);
-            }
-            GridRU.Add(TIRightUp);
-
-            if (TIRightUp.Count == RUCount)
-            {
-                TIRightUp.SelectedTabPanel = RUPos;
-                TIRightUp.SyncTabStyles();
-            }
-        }
-
-        GridRD.Children.Clear();
-        if (GetRDActive())
-        {
-            TIRightDown = new TabItem();
-            TIRightDown.AddTabButtonStyleSelected("IDButton");
-            TIRightDown.AddTabButtonStyleUnselected("IDButton_Invers");
-            TIRightDown.AddHeadlineStyle("Grid_BGBG");
-            TIRightDown.AddMainPanelStyle("Grid_Normal");
-
-            if (ld.RD_Order == true)
-            {
-                TabItem.TabPanel tp = TIRightDown.AddTabPanel(FaSolid.Wrench, 1);
-                tp.SelectButton!.FontFamily = "Fa-Solid";
-                SetButtonCursorHand(tp.SelectButton);
-            }
-            if (ld.RD_ItemLoc == true)
-            {
-                TabItem.TabPanel tp = TIRightDown.AddTabPanel(FaSolid.MapMarkerAlt, 2);
-                tp.SelectButton!.FontFamily = "Fa-Solid";
-                SetButtonCursorHand(tp.SelectButton);
-            }
-            if (ld.RD_ItemInv == true)
-            {
-                TabItem.TabPanel tp = TIRightDown.AddTabPanel(FaSolid.Suitcase, 3);
-                tp.SelectButton!.FontFamily = "Fa-Solid";
-                SetButtonCursorHand(tp.SelectButton);
-            }
-            GridRD.Add(TIRightDown);
-
-            if (TIRightDown.Count == RDCount)
-            {
-                TIRightDown.SelectedTabPanel = RDPos;
-                TIRightDown.SyncTabStyles();
-            }
-        }
-
-        TreeView? tvOrder = null;
-        // TreeView? tvItemLoc = null;
-        // TreeView? tvItemInv = null;
-
-        // Hier werden die Inhalte aller Panels im UI zur�ckgesetzt
-        if (TILeftUp != null )
-        {
-            foreach (TabItem.TabPanel tp in TILeftUp.TabPanels)
-            {
-                tp.TabPanelGrid.Clear();
-            }
-        }
-        if (TILeftDown != null)
-        {
-            foreach (TabItem.TabPanel tp in TILeftDown.TabPanels)
-            {
-                tp.TabPanelGrid.Clear();
-            }
-        }
-        if (TIRightUp != null)
-        {
-            foreach (TabItem.TabPanel tp in TIRightUp.TabPanels)
-            {
-                tp.TabPanelGrid.Clear();
-            }
-        }
-        if (TIRightDown != null)
-        {
-            foreach (TabItem.TabPanel tp in TIRightDown.TabPanels)
-            {
-                tp.TabPanelGrid.Clear();
-            }
-        }
-
-        // Und hier werden sie generiert:
-        // Order == 1
-        // Items in Loc == 2
-        // Items in Inv == 3
-        if (TILeftUp != null)
-        {
-            foreach (TabItem.TabPanel tp in TILeftUp.TabPanels)
-            {
-                if (tp.TypeID == 1)
+                if (ld.LD_Order == true)
                 {
-                    tvOrder = CreateOrderTree();
-                    tp.TabPanelGrid.Add(tvOrder);
-                    tvOrder.CalcToggles();
+                    TabItem.TabPanel tp = TILeftDown!.TabPanels[0];
+
+                    tp.SelectButton!.IsVisible = true;
                 }
-                else if (tp.TypeID == 2)
+                else
                 {
-                    tvOrder = CreateItemLocTree();
-                    tp.TabPanelGrid.Add(tvOrder);
-                    tvOrder.CalcToggles();
+                    TabItem.TabPanel tp = TILeftDown!.TabPanels[0];
+                    tp.SelectButton!.IsVisible = false;
                 }
-                else if (tp.TypeID == 3)
+                if (ld.LD_ItemLoc == true)
                 {
-                    tvOrder = CreateItemInvTree();
-                    tp.TabPanelGrid.Add(tvOrder);
-                    tvOrder.CalcToggles();
+                    TabItem.TabPanel tp = TILeftDown!.TabPanels[1];
+
+                    tp.SelectButton!.IsVisible = true;
                 }
+                else
+                {
+                    TabItem.TabPanel tp = TILeftDown!.TabPanels[1];
+
+                    tp.SelectButton!.IsVisible = false;
+                }
+                if (ld.LD_ItemInv == true)
+                {
+                    TabItem.TabPanel tp = TILeftDown!.TabPanels[2];
+
+                    tp.SelectButton!.IsVisible = true;
+                }
+                else
+                {
+                    TabItem.TabPanel tp = TILeftDown!.TabPanels[2];
+
+                    tp.SelectButton!.IsVisible = false;
+                }
+
+                TILeftDown!.SelectedTabPanel = LDPos;
+                TILeftDown!.SyncTabStyles();
             }
-        }
-        if (TIRightUp != null)
-        {
-            foreach (TabItem.TabPanel tp in TIRightUp.TabPanels)
+            else
             {
-                if (tp.TypeID == 1)
+                TILeftDown!.IsVisible = false;
+
+            }
+            if (GetRUActive())
+            {
+                TIRightUp!.IsVisible = true;
+
+                if (ld.RU_Order == true)
                 {
-                    tvOrder = CreateOrderTree();
-                    tp.TabPanelGrid.Add(tvOrder);
-                    tvOrder.CalcToggles();
+                    TabItem.TabPanel tp = TIRightUp!.TabPanels[0];
+
+                    tp.SelectButton!.IsVisible = true;
                 }
-                else if (tp.TypeID == 2)
+                else
                 {
-                    tvOrder = CreateItemLocTree();
-                    tp.TabPanelGrid.Add(tvOrder);
-                    tvOrder.CalcToggles();
+                    TabItem.TabPanel tp = TIRightUp!.TabPanels[0];
+                    tp.SelectButton!.IsVisible = false;
                 }
-                else if (tp.TypeID == 3)
+                if (ld.RU_ItemLoc == true)
                 {
-                    tvOrder = CreateItemInvTree();
-                    tp.TabPanelGrid.Add(tvOrder);
-                    tvOrder.CalcToggles();
+                    TabItem.TabPanel tp = TIRightUp!.TabPanels[1];
+                    tp.SelectButton!.IsVisible = true;
+                }
+                else
+                {
+                    TabItem.TabPanel tp = TIRightUp!.TabPanels[1];
+                    tp.SelectButton!.IsVisible = false;
+                }
+                if (ld.RU_ItemInv == true)
+                {
+                    TabItem.TabPanel tp = TIRightUp!.TabPanels[2];
+                    tp.SelectButton!.IsVisible = true;
+                }
+                else
+                {
+                    TabItem.TabPanel tp = TIRightUp!.TabPanels[2];
+                    tp.SelectButton!.IsVisible = false;
+                }
+
+                TIRightUp!.SelectedTabPanel = RUPos;
+                TIRightUp!.SyncTabStyles();
+            }
+            else
+            {
+                TIRightUp!.IsVisible = false;
+
+            }
+            if (GetRDActive())
+            {
+                TIRightDown!.IsVisible = true;
+
+                if (ld.RD_Order == true)
+                {
+                    TabItem.TabPanel tp = TIRightDown!.TabPanels[0];
+                    tp.SelectButton!.IsVisible = true;
+                    tp.TabPanelSV!.IsVisible = true;
+                }
+                else
+                {
+                    TabItem.TabPanel tp = TIRightDown!.TabPanels[0];
+                    tp.SelectButton!.IsVisible = false;
+                    tp.TabPanelSV!.IsVisible = false;
+                }
+                if (ld.RD_ItemLoc == true)
+                {
+                    TabItem.TabPanel tp = TIRightDown!.TabPanels[1];
+                    tp.SelectButton!.IsVisible = true;
+                    tp.TabPanelSV!.IsVisible = true;
+                }
+                else
+                {
+                    TabItem.TabPanel tp = TIRightDown!.TabPanels[1];
+
+                    tp.SelectButton!.IsVisible = false;
+                    tp.TabPanelSV!.IsVisible = false;
+
+                }
+                if (ld.RD_ItemInv == true)
+                {
+                    TabItem.TabPanel tp = TIRightDown!.TabPanels[2];
+                    tp.SelectButton!.IsVisible = true;
+                    tp.TabPanelSV!.IsVisible = true;
+                }
+                else
+                {
+                    TabItem.TabPanel tp = TIRightDown!.TabPanels[2];
+
+                    tp.SelectButton!.IsVisible = false;
+                    tp.TabPanelSV!.IsVisible = false;
+                }
+
+                TIRightDown!.SelectedTabPanel = RDPos;
+                TIRightDown!.SyncTabStyles();
+            }
+            else
+            {
+                TIRightDown!.IsVisible = false;
+
+            }
+
+
+            TreeView? tvOrder = null;
+            if (TILeftUp!.IsVisible == true)
+            {
+                TabItem.TabPanel tp0 = TILeftUp!.TabPanels[0];
+                TabItem.TabPanel tp1 = TILeftUp!.TabPanels[1];
+                TabItem.TabPanel tp2 = TILeftUp!.TabPanels[2];
+                foreach (TabItem.TabPanel tp in TILeftUp!.TabPanels)
+                {
+
+                    if (tp.TypeID == 1 && tp0.SelectButton!.IsVisible == true && OrderTreeHasChanged == true)
+                    {
+                        tvOrder = CreateOrderTree();
+                        TreeView.EmptyTreeViewItem(tp0.TabPanelGrid!.Children[0]);
+                        tp0.TabPanelGrid!.Children[0] = tvOrder;
+                        tvOrder.CalcToggles();
+                        OrderTreeHasInitialized = true;
+                        // GD!.Adventure!.StoryOutput("Befehle aktualisiert");
+                    }
+                    else if (tp.TypeID == 2 && tp1.SelectButton!.IsVisible == true && ItemLocTreeHasChanged == true)
+                    {
+                        tvOrder = CreateItemLocTree();
+                        TreeView.EmptyTreeViewItem(tp1.TabPanelGrid!.Children[0]);
+
+                        tp1.TabPanelGrid!.Children[0] = tvOrder;
+                        tvOrder.CalcToggles();
+                        ItemLocTreeHasInitialized = true;
+                        // GD.Adventure!.StoryOutput("Item Loc aktualisiert");
+                    }
+                    else if (tp.TypeID == 3 && tp2.SelectButton!.IsVisible == true && ItemInvTreeHasChanged == true)
+                    {
+                        tvOrder = CreateItemInvTree();
+                        TreeView.EmptyTreeViewItem( tp2.TabPanelGrid!.Children[0]);
+                        tp2.TabPanelGrid!.Children[0] = tvOrder;
+                        tvOrder.CalcToggles();
+                        ItemInvTreeHasInitialized = true;
+                        // GD.Adventure!.StoryOutput("Item Inv aktualisiert");
+
+                    }
                 }
             }
-        }
-        if (TILeftDown != null )
-        {
-            foreach (TabItem.TabPanel tp in TILeftDown.TabPanels)
+
+            if (TILeftDown!.IsVisible == true)
             {
-                if (tp.TypeID == 1)
+                TabItem.TabPanel tp0 = TILeftDown!.TabPanels[0];
+                TabItem.TabPanel tp1 = TILeftDown!.TabPanels[1];
+                TabItem.TabPanel tp2 = TILeftDown!.TabPanels[2];
+                foreach (TabItem.TabPanel tp in TILeftDown!.TabPanels)
                 {
-                    tvOrder = CreateOrderTree();
-                    tp.TabPanelGrid.Add(tvOrder);
-                    tvOrder.CalcToggles();
-                }
-                else if (tp.TypeID == 2)
-                {
-                    tvOrder = CreateItemLocTree();
-                    tp.TabPanelGrid.Add(tvOrder);
-                    tvOrder.CalcToggles();
-                }
-                else if (tp.TypeID == 3)
-                {
-                    tvOrder = CreateItemInvTree();
-                    tp.TabPanelGrid.Add(tvOrder);
-                    tvOrder.CalcToggles();
+
+                    if (tp.TypeID == 1 && tp0.SelectButton!.IsVisible == true && OrderTreeHasChanged == true)
+                    {
+                        tvOrder = CreateOrderTree();
+                        TreeView.EmptyTreeViewItem( tp0.TabPanelGrid!.Children[0]);
+                        tp0.TabPanelGrid!.Children[0] = tvOrder;
+                        tvOrder.CalcToggles();
+                        OrderTreeHasInitialized = true;
+                        // GD.Adventure!.StoryOutput("Befehle aktualisiert");
+
+                    }
+                    else if (tp.TypeID == 2 && tp1.SelectButton!.IsVisible == true && ItemLocTreeHasChanged == true)
+                    {
+                        tvOrder = CreateItemLocTree();
+                        TreeView.EmptyTreeViewItem(tp1.TabPanelGrid!.Children[0]);
+                        tp1.TabPanelGrid!.Children[0] = tvOrder;
+                        tvOrder.CalcToggles();
+                        ItemLocTreeHasInitialized = true;
+                        // GD.Adventure!.StoryOutput("Item Loc aktualisiert");
+                    }
+                    else if (tp.TypeID == 3 && tp2.SelectButton!.IsVisible == true && ItemInvTreeHasChanged == true)
+                    {
+                        tvOrder = CreateItemInvTree();
+                        TreeView.EmptyTreeViewItem( tp2.TabPanelGrid!.Children[0]);
+                        tp2.TabPanelGrid!.Children[0] = tvOrder;
+                        tvOrder.CalcToggles();
+                        ItemInvTreeHasInitialized = true;
+                        // GD.Adventure!.StoryOutput("Item Inv aktualisiert");
+                    }
                 }
             }
-        }
-        if (TIRightDown != null)
-        {
-            foreach (TabItem.TabPanel tp in TIRightDown.TabPanels)
+            if (TIRightUp.IsVisible == true)
             {
-                if (tp.TypeID == 1)
+                TabItem.TabPanel tp0 = TIRightUp.TabPanels[0];
+                TabItem.TabPanel tp1 = TIRightUp.TabPanels[1];
+                TabItem.TabPanel tp2 = TIRightUp.TabPanels[2];
+                foreach (TabItem.TabPanel tp in TIRightUp.TabPanels)
                 {
-                    tvOrder = CreateOrderTree();
-                    tp.TabPanelGrid.Add(tvOrder);
-                    tvOrder.CalcToggles();
-                }
-                else if (tp.TypeID == 2)
-                {
-                    tvOrder = CreateItemLocTree();
-                    tp.TabPanelGrid.Add(tvOrder);
-                    tvOrder.CalcToggles();
-                }
-                else if (tp.TypeID == 3)
-                {
-                    tvOrder = CreateItemInvTree();
-                    tp.TabPanelGrid.Add(tvOrder);
-                    tvOrder.CalcToggles();
+
+                    if (tp.TypeID == 1 && tp0.SelectButton!.IsVisible == true && OrderTreeHasChanged == true)
+                    {
+                        tvOrder = CreateOrderTree();
+                        if (tvOrder != null && tp0.TabPanelGrid!.Children.Count > 0)
+                        {
+                            TreeView.EmptyTreeViewItem(tp0.TabPanelGrid!.Children[0]);
+                            tp0.TabPanelGrid!.Children[0] = tvOrder;
+                            tvOrder.CalcToggles();
+                        }
+                        else
+                        {
+
+                        }
+                        OrderTreeHasInitialized = true;
+                        // GD.Adventure!.StoryOutput("Befehle aktualisiert RU");
+                    }
+                    else if (tp.TypeID == 2 && tp1.SelectButton!.IsVisible == true && ItemLocTreeHasChanged == true)
+                    {
+                        tvOrder = CreateItemLocTree();
+                        if (tvOrder != null && tp1.TabPanelGrid!.Children.Count > 0 )
+                        {
+                            // tp1.TabPanelGrid!.Children[0] = null;
+                            TreeView.EmptyTreeViewItem( tp1.TabPanelGrid!.Children[0]);
+                            tp1.TabPanelGrid!.Children[0] = tvOrder;
+                            tvOrder.CalcToggles();
+                        }
+                        else
+                        {
+
+                        }
+                        ItemLocTreeHasInitialized = true;
+                        // GD.Adventure!.StoryOutput("Item Loc aktualisiert RU");
+                    }
+                    else if (tp.TypeID == 3 && tp2.SelectButton!.IsVisible == true && ItemInvTreeHasChanged == true)
+                    {
+                        tvOrder = CreateItemInvTree();
+                        if (tvOrder != null && tp2.TabPanelGrid!.Children.Count > 0)
+                        {
+                            TreeView.EmptyTreeViewItem( tp2.TabPanelGrid!.Children[0]);
+                            tp2.TabPanelGrid!.Children[0] = tvOrder;
+                            tvOrder.CalcToggles();
+                        }
+                        else
+                        {
+
+                        }
+                        ItemInvTreeHasInitialized = true;
+                        // GD.Adventure!.StoryOutput("Item Inv aktualisiert RU");
+                    }
                 }
             }
+
+            if (TIRightDown.IsVisible == true)
+            {
+                TabItem.TabPanel tp0 = TIRightDown.TabPanels[0];
+                TabItem.TabPanel tp1 = TIRightDown.TabPanels[1];
+                TabItem.TabPanel tp2 = TIRightDown.TabPanels[2];
+
+                foreach (TabItem.TabPanel tp in TIRightDown.TabPanels)
+                {
+                    if (tp.TypeID == 1 && tp0.SelectButton!.IsVisible == true && OrderTreeHasChanged == true)
+                    {
+                        tvOrder = CreateOrderTree();
+                        if (tvOrder != null)
+                        {
+                            TreeView.EmptyTreeViewItem( tp0.TabPanelGrid!.Children[0]);
+                            tp0.TabPanelGrid!.Children[0] = tvOrder;
+                            tvOrder.CalcToggles();
+                        }
+                        else
+                        {
+
+                        }
+                        OrderTreeHasInitialized = true;
+                        // GD.Adventure!.StoryOutput("Befehle aktualisiert RD");
+                    }
+                    else if (tp.TypeID == 2 && tp1.SelectButton!.IsVisible == true && ItemLocTreeHasChanged == true)
+                    {
+                        tvOrder = CreateItemLocTree();
+                        if (tvOrder != null)
+                        {
+                            TreeView.EmptyTreeViewItem( tp1.TabPanelGrid!.Children[0]);
+
+                            tp1.TabPanelGrid!.Children[0] = tvOrder;
+                            tvOrder.CalcToggles();
+                        }
+                        else
+                        {
+
+                        }
+                        ItemLocTreeHasInitialized = true;
+                        // GD.Adventure!.StoryOutput("Item Loc aktualisiert RD");
+                    }
+                    else if (tp.TypeID == 3 && tp2.SelectButton!.IsVisible == true && ItemInvTreeHasChanged == true)
+                    {
+                        tvOrder = CreateItemInvTree();
+                        if (tvOrder != null)
+                        {
+                            TreeView.EmptyTreeViewItem( tp2.TabPanelGrid!.Children[0]);
+                            tp2.TabPanelGrid!.Children[0] = tvOrder;
+                            tvOrder.CalcToggles();
+                        }
+                        else
+                        {
+
+                        }
+                        ItemInvTreeHasInitialized = true;
+                        // GD.Adventure!.StoryOutput("Item Inv aktualisiert RD");
+
+                    }
+                }
+            }
+
+            if (GD.LayoutDescription.ScreenMode == IGlobalData.screenMode.portrait)
+            {
+
+                // Column 1
+                if (IsPortraitColVisible(0))
+                {
+                    // TICol1_0!.MainPanel = new();
+
+                    if (ld.PortraitColumns[0, 0] == ILayoutDescription.PortraitColumn.order)
+                    {
+                        tvOrder = CreateOrderTree();
+
+                        if (tvOrder != null)
+                        {
+                            // TICol1_0!.AddTabPanel(FaSolid.Wrench, 1);
+                            // TICol1_0!.TabPanels[ix].TabPanelGrid.Clear();
+                            TreeView.EmptyTreeViewItem( TICol1_0!.TabPanels[0].TabPanelGrid!.Children[0]);
+                            TICol1_0!.TabPanels[0].TabPanelGrid!.Children[0] = tvOrder;
+                            TICol1_0!.TabPanels[0].SelectButton!.IsVisible = true;
+                            TICol1_0!.TabPanels[0].SelectButton!.Text = FaSolid.Wrench;
+                            TICol1_0!.TabPanels[0].SelectButton!.FontFamily = "Fa-Solid";
+                            OrderTreeHasInitialized = true;
+                            tvOrder.CalcToggles();
+                        }
+                        else
+                        {
+                        }
+                    }
+                    else
+                    {
+                        TICol1_0!.TabPanels[0].SelectButton!.IsVisible = false;
+
+                    }
+                    if (ld.PortraitColumns[0, 1] == ILayoutDescription.PortraitColumn.itemloc)
+                    {
+                        tvOrder = CreateItemLocTree();
+                        if (tvOrder != null)
+                        {
+                            // TICol1_0!.AddTabPanel(FaSolid.MapMarkerAlt, 2);
+                            // TICol1_0!.TabPanels[ix].TabPanelGrid.Clear();
+                            TreeView.EmptyTreeViewItem( TICol1_0!.TabPanels[1].TabPanelGrid!.Children[0]);
+                            TICol1_0!.TabPanels[1].TabPanelGrid!.Children[0] = tvOrder;
+                            TICol1_0!.TabPanels[1].SelectButton!.IsVisible = true;
+                            TICol1_0!.TabPanels[1].SelectButton!.Text = FaSolid.MapMarkerAlt;
+                            TICol1_0!.TabPanels[1].SelectButton!.FontFamily = "Fa-Solid";
+                            ItemLocTreeHasInitialized = true;
+                            tvOrder.CalcToggles();
+                        }
+                        else
+                        {
+                        }
+                    }
+                    else
+                    {
+                        TICol1_0!.TabPanels[1].SelectButton!.IsVisible = false;
+
+                    }
+                    if (ld.PortraitColumns[0, 2] == ILayoutDescription.PortraitColumn.iteminv)
+                    {
+                        tvOrder = CreateItemInvTree();
+                        if (tvOrder != null)
+                        {
+                            // TICol1_0!.TabPanels[ix].TabPanelGrid.Clear();
+                            // TICol1_0!.AddTabPanel(FaSolid.Suitcase, 3);
+                            TreeView.EmptyTreeViewItem( TICol1_0!.TabPanels[2].TabPanelGrid!.Children[0]);
+                            TICol1_0!.TabPanels[2].TabPanelGrid!.Children[0] = tvOrder;
+                            TICol1_0!.TabPanels[2].SelectButton!.IsVisible = true;
+                            TICol1_0!.TabPanels[2].SelectButton!.Text = FaSolid.Suitcase;
+                            TICol1_0!.TabPanels[2].SelectButton!.FontFamily = "Fa-Solid";
+                        }
+                        else
+                        {
+
+                        }
+                        ItemInvTreeHasInitialized = true;
+                        tvOrder.CalcToggles();
+
+                    }
+                    else
+                    {
+                        TICol1_0!.TabPanels[2].SelectButton!.IsVisible = false;
+
+                    }
+                    TICol1_0.SyncTabStyles();
+
+                }
+                if (IsPortraitColVisible(1))
+                {
+                    // Column 2
+                    if (ld.PortraitColumns[1, 0] == ILayoutDescription.PortraitColumn.order)
+                    {
+                        tvOrder = CreateOrderTree();
+                        if (tvOrder != null)
+                        {
+
+                            // TICol2_0!.TabPanels[0].TabPanelGrid.Clear();
+                            // TICol2_0!.TabPanels![0].TabPanelGrid!.Clear();
+                            TreeView.EmptyTreeViewItem( TICol2_0!.TabPanels[0].TabPanelGrid!.Children[0]);
+                            TICol2_0!.TabPanels![0].TabPanelGrid!.Children[0] = tvOrder;
+                            TICol2_0!.TabPanels![0].SelectButton!.IsVisible = true;
+                            TICol2_0!.TabPanels![0].SelectButton!.Text = FaSolid.Wrench;
+                            tvOrder.CalcToggles();
+                        }
+                        else
+                        {
+
+                        }
+                        OrderTreeHasInitialized = true;
+
+                    }
+                    else
+                    {
+                        TICol2_0!.TabPanels[0].SelectButton!.IsVisible = false;
+
+                    }
+                    if (ld.PortraitColumns[1, 1] == ILayoutDescription.PortraitColumn.itemloc)
+                    {
+                        tvOrder = CreateItemLocTree();
+                        // TICol2_1!.TabPanels[0].TabPanelGrid.Clear();
+                        // TICol2_1!.TabPanels[0].TabPanelGrid!.Clear();
+                        if (tvOrder != null)
+                        {
+                            TreeView.EmptyTreeViewItem( TICol2_0!.TabPanels[1].TabPanelGrid!.Children[0]);
+                            TICol2_0!.TabPanels[1].TabPanelGrid!.Children[0] = tvOrder;
+                            TICol2_0!.TabPanels[1].SelectButton!.IsVisible = true;
+                            TICol2_0!.TabPanels[1].SelectButton!.Text = FaSolid.MapMarkerAlt;
+                            tvOrder.CalcToggles();
+                        }
+                        else
+                        {
+                        }
+                        ItemLocTreeHasInitialized = true;
+
+                    }
+                    else
+                    {
+                        TICol2_0!.TabPanels[1].SelectButton!.IsVisible = false;
+
+                    }
+                    if (ld.PortraitColumns[1, 2] == ILayoutDescription.PortraitColumn.iteminv)
+                    {
+                        tvOrder = CreateItemInvTree();
+                        if (tvOrder != null)
+                        {
+                            // TICol2_2!.TabPanels[0].TabPanelGrid.Clear();
+                            // TICol2_2!.TabPanels[0].TabPanelGrid!.Clear();
+                            TreeView.EmptyTreeViewItem( TICol2_0!.TabPanels[2].TabPanelGrid!.Children[0]);
+                            TICol2_0!.TabPanels[2].TabPanelGrid.Children[0] = tvOrder;
+                            TICol2_0!.TabPanels[2].SelectButton!.IsVisible = true;
+                            TICol2_0!.TabPanels[2].SelectButton!.Text = FaSolid.Suitcase;
+                            tvOrder.CalcToggles();
+                        }
+                        else
+                        {
+                        }
+                        ItemInvTreeHasInitialized = true;
+
+                    }
+                    else
+                    {
+                        TICol2_0!.TabPanels[2].SelectButton!.IsVisible = false;
+
+                    }
+                    TICol2_0.SyncTabStyles();
+
+                }
+                // Column 3
+                if (IsPortraitColVisible(2))
+                {
+                    if (ld.PortraitColumns[2, 0] == ILayoutDescription.PortraitColumn.order)
+                    {
+                        tvOrder = CreateOrderTree();
+                        if (tvOrder != null)
+                        {
+                            // TICol3_0!.TabPanels[0].TabPanelGrid.Clear();
+                            // TICol3_0!.TabPanels[0].TabPanelGrid!.Clear();
+                            TreeView.EmptyTreeViewItem( TICol3_0!.TabPanels[0].TabPanelGrid!.Children[0]);
+                            TICol3_0!.TabPanels[0].TabPanelGrid.Children[0] = tvOrder;
+                            TICol3_0!.TabPanels[0].SelectButton!.IsVisible = true;
+                            TICol3_0!.TabPanels[0].SelectButton!.Text = FaSolid.Wrench;
+                            tvOrder.CalcToggles();
+                        }
+                        else
+                        {
+                        }
+                        OrderTreeHasInitialized = true;
+
+                    }
+                    else
+                    {
+                        TICol3_0!.TabPanels[0].SelectButton!.IsVisible = false;
+
+                    }
+
+                    if (ld.PortraitColumns[2, 1] == ILayoutDescription.PortraitColumn.itemloc)
+                    {
+                        tvOrder = CreateItemLocTree();
+                        if (tvOrder != null)
+                        {
+                            // TICol3_1!.TabPanels[0].TabPanelGrid.Clear();
+                            // TICol3_1!.TabPanels[0].TabPanelGrid!.Clear();
+                            TreeView.EmptyTreeViewItem( TICol3_0!.TabPanels[1].TabPanelGrid!.Children[0]);
+                            TICol3_0!.TabPanels[1].TabPanelGrid!.Children[0] = tvOrder;
+                            TICol3_0!.TabPanels[1].SelectButton!.IsVisible = true;
+                            TICol3_0!.TabPanels[1].SelectButton!.Text = FaSolid.MapMarkerAlt;
+                            tvOrder.CalcToggles();
+                        }
+                        else
+                        {
+
+                        }
+                        ItemLocTreeHasInitialized = true;
+
+                    }
+                    else
+                    {
+                        TICol3_0!.TabPanels[1].SelectButton!.IsVisible = false;
+
+                    }
+                    if (ld.PortraitColumns[2, 2] == ILayoutDescription.PortraitColumn.iteminv)
+                    {
+                        tvOrder = CreateItemInvTree();
+                        // TICol3_2!.TabPanels[0].TabPanelGrid.Clear();
+                        // TICol3_2!.TabPanels[0].TabPanelGrid!.Clear();
+                        TreeView.EmptyTreeViewItem( TICol3_0!.TabPanels[2].TabPanelGrid!.Children[0]);
+                        TICol3_0!.TabPanels[2].TabPanelGrid!.Children[0] = tvOrder;
+                        TICol3_0!.TabPanels[2].SelectButton!.IsVisible = true;
+                        TICol3_0!.TabPanels[2].SelectButton!.Text = FaSolid.Suitcase;
+                        tvOrder.CalcToggles();
+                        ItemInvTreeHasInitialized = true;
+
+                    }
+                    else
+                    {
+                        TICol3_0!.TabPanels[2].SelectButton!.IsVisible = false;
+
+                    }
+                    TICol3_0.SyncTabStyles();
+
+                }
+            }
+
+            /*
+            if (TIRightUp != null)
+            {
+                foreach (TabItem.TabPanel tp in TIRightUp.TabPanels)
+                {
+                    if (tp.TypeID == 1)
+                    {
+                        tvOrder = CreateOrderTree();
+                        tp.TabPanelGrid.Add(tvOrder);
+                        tvOrder.CalcToggles();
+                    }
+                    else if (tp.TypeID == 2)
+                    {
+                        tvOrder = CreateItemLocTree();
+                        tp.TabPanelGrid.Add(tvOrder);
+                        tvOrder.CalcToggles();
+                    }
+                    else if (tp.TypeID == 3)
+                    {
+                        tvOrder = CreateItemInvTree();
+                        tp.TabPanelGrid.Add(tvOrder);
+                        tvOrder.CalcToggles();
+                    }
+                }
+            }
+            if (TILeftDown != null )
+            {
+                foreach (TabItem.TabPanel tp in TILeftDown.TabPanels)
+                {
+                    if (tp.TypeID == 1)
+                    {
+                        tvOrder = CreateOrderTree();
+                        tp.TabPanelGrid.Add(tvOrder);
+                        tvOrder.CalcToggles();
+                    }
+                    else if (tp.TypeID == 2)
+                    {
+                        tvOrder = CreateItemLocTree();
+                        tp.TabPanelGrid.Add(tvOrder);
+                        tvOrder.CalcToggles();
+                    }
+                    else if (tp.TypeID == 3)
+                    {
+                        tvOrder = CreateItemInvTree();
+                        tp.TabPanelGrid.Add(tvOrder);
+                        tvOrder.CalcToggles();
+                    }
+                }
+            }
+            if (TIRightDown != null)
+            {
+                foreach (TabItem.TabPanel tp in TIRightDown.TabPanels)
+                {
+                    if (tp.TypeID == 1)
+                    {
+                        tvOrder = CreateOrderTree();
+                        tp.TabPanelGrid.Add(tvOrder);
+                        tvOrder.CalcToggles();
+                    }
+                    else if (tp.TypeID == 2)
+                    {
+                        tvOrder = CreateItemLocTree();
+                        tp.TabPanelGrid.Add(tvOrder);
+                        tvOrder.CalcToggles();
+                    }
+                    else if (tp.TypeID == 3)
+                    {
+                        tvOrder = CreateItemInvTree();
+                        tp.TabPanelGrid.Add(tvOrder);
+                        tvOrder.CalcToggles();
+                    }
+                }
+            }
+            */
+
+            /*
+            GridLU.Children.Clear();
+            if( GetLUActive())
+            {
+                TILeftUp = new TabItem();
+                TILeftUp.AddTabButtonStyleSelected("IDButton");
+                TILeftUp.AddTabButtonStyleUnselected("IDButton_Invers");
+                TILeftUp.AddHeadlineStyle("Grid_BGBG");
+                TILeftUp.AddMainPanelStyle("Grid_Normal");
+
+                if (ld.LU_Order == true)
+                {
+                    TabItem.TabPanel tp = TILeftUp.AddTabPanel(FaSolid.Wrench, 1);
+                    tp.SelectButton!.FontFamily = "Fa-Solid";
+                    SetButtonCursorHand(tp.SelectButton);
+                }
+                if (ld.LU_ItemLoc == true)
+                {
+                    TabItem.TabPanel tp = TILeftUp.AddTabPanel(FaSolid.MapMarkerAlt,2 );
+                    tp.SelectButton!.FontFamily = "Fa-Solid";
+                    SetButtonCursorHand(tp.SelectButton);
+                }
+                if (ld.LU_ItemInv == true)
+                {
+                    TabItem.TabPanel tp = TILeftUp.AddTabPanel(FaSolid.Suitcase, 3);
+                    tp.SelectButton!.FontFamily = "Fa-Solid";
+                    SetButtonCursorHand(tp.SelectButton);
+                }
+                GridLU.Add(TILeftUp);
+
+                if (TILeftUp.Count == LUCount)
+                {
+                    TILeftUp.SelectedTabPanel = LUPos;
+                    TILeftUp.SyncTabStyles();
+                }
+            }
+
+            GridLD.Children.Clear();
+            if (GetLDActive())
+            {
+                TILeftDown = new TabItem();
+                TILeftDown.AddTabButtonStyleSelected("IDButton");
+                TILeftDown.AddTabButtonStyleUnselected("IDButton_Invers");
+                TILeftDown.AddHeadlineStyle("Grid_BGBG");
+                TILeftDown.AddMainPanelStyle("Grid_Normal");
+
+                if (ld.LD_Order == true)
+                {
+                    TabItem.TabPanel tp = TILeftDown.AddTabPanel(FaSolid.Wrench, 1);
+                    tp.SelectButton!.FontFamily = "Fa-Solid";
+                    SetButtonCursorHand(tp.SelectButton);
+                }
+                if (ld.LD_ItemLoc == true)
+                {
+                    TabItem.TabPanel tp = TILeftDown.AddTabPanel(FaSolid.MapMarkerAlt, 2);
+                    tp.SelectButton!.FontFamily = "Fa-Solid";
+                    SetButtonCursorHand(tp.SelectButton);
+                }
+                if (ld.LD_ItemInv == true)
+                {
+                    TabItem.TabPanel tp = TILeftDown.AddTabPanel(FaSolid.Suitcase, 3);
+                    tp.SelectButton!.FontFamily = "Fa-Solid";
+                    SetButtonCursorHand(tp.SelectButton);
+                }
+                GridLD.Add(TILeftDown);
+
+                if (TILeftDown.Count == LDCount)
+                {
+                    TILeftDown.SelectedTabPanel = LDPos;
+                    TILeftDown.SyncTabStyles();
+                }
+            }
+
+            GridRU.Children.Clear();
+            if (GetRUActive())
+            {
+                TIRightUp = new TabItem();
+                TIRightUp.AddTabButtonStyleSelected("IDButton");
+                TIRightUp.AddTabButtonStyleUnselected("IDButton_Invers");
+                TIRightUp.AddHeadlineStyle("Grid_BGBG");
+                TIRightUp.AddMainPanelStyle("Grid_Normal");
+
+                if (ld.RU_Order == true)
+                {
+                    TabItem.TabPanel tp = TIRightUp.AddTabPanel(FaSolid.Wrench, 1);
+                    tp.SelectButton!.FontFamily = "Fa-Solid";
+                    SetButtonCursorHand(tp.SelectButton);
+                }
+                if (ld.RU_ItemLoc == true)
+                {
+                    TabItem.TabPanel tp = TIRightUp.AddTabPanel(FaSolid.MapMarkerAlt, 2);
+                    tp.SelectButton!.FontFamily = "Fa-Solid";
+                    SetButtonCursorHand(tp.SelectButton);
+                }
+                if (ld.RU_ItemInv == true)
+                {
+                    TabItem.TabPanel tp = TIRightUp.AddTabPanel(FaSolid.Suitcase, 3);
+                    tp.SelectButton!.FontFamily = "Fa-Solid";
+                    SetButtonCursorHand(tp.SelectButton);
+                }
+                GridRU.Add(TIRightUp);
+
+                if (TIRightUp.Count == RUCount)
+                {
+                    TIRightUp.SelectedTabPanel = RUPos;
+                    TIRightUp.SyncTabStyles();
+                }
+            }
+
+            GridRD.Children.Clear();
+            if (GetRDActive())
+            {
+                TIRightDown = new TabItem();
+                TIRightDown.AddTabButtonStyleSelected("IDButton");
+                TIRightDown.AddTabButtonStyleUnselected("IDButton_Invers");
+                TIRightDown.AddHeadlineStyle("Grid_BGBG");
+                TIRightDown.AddMainPanelStyle("Grid_Normal");
+
+                if (ld.RD_Order == true)
+                {
+                    TabItem.TabPanel tp = TIRightDown.AddTabPanel(FaSolid.Wrench, 1);
+                    tp.SelectButton!.FontFamily = "Fa-Solid";
+                    SetButtonCursorHand(tp.SelectButton);
+                }
+                if (ld.RD_ItemLoc == true)
+                {
+                    TabItem.TabPanel tp = TIRightDown.AddTabPanel(FaSolid.MapMarkerAlt, 2);
+                    tp.SelectButton!.FontFamily = "Fa-Solid";
+                    SetButtonCursorHand(tp.SelectButton);
+                }
+                if (ld.RD_ItemInv == true)
+                {
+                    TabItem.TabPanel tp = TIRightDown.AddTabPanel(FaSolid.Suitcase, 3);
+                    tp.SelectButton!.FontFamily = "Fa-Solid";
+                    SetButtonCursorHand(tp.SelectButton);
+                }
+                GridRD.Add(TIRightDown);
+
+                if (TIRightDown.Count == RDCount)
+                {
+                    TIRightDown.SelectedTabPanel = RDPos;
+                    TIRightDown.SyncTabStyles();
+                }
+            }
+
+            TreeView? tvOrder = null;
+            // TreeView? tvItemLoc = null;
+            // TreeView? tvItemInv = null;
+
+            // Hier werden die Inhalte aller Panels im UI zur�ckgesetzt
+            if (TILeftUp != null )
+            {
+                foreach (TabItem.TabPanel tp in TILeftUp.TabPanels)
+                {
+                    tp.TabPanelGrid.Clear();
+                }
+            }
+            if (TILeftDown != null)
+            {
+                foreach (TabItem.TabPanel tp in TILeftDown.TabPanels)
+                {
+                    tp.TabPanelGrid.Clear();
+                }
+            }
+            if (TIRightUp != null)
+            {
+                foreach (TabItem.TabPanel tp in TIRightUp.TabPanels)
+                {
+                    tp.TabPanelGrid.Clear();
+                }
+            }
+            if (TIRightDown != null)
+            {
+                foreach (TabItem.TabPanel tp in TIRightDown.TabPanels)
+                {
+                    tp.TabPanelGrid.Clear();
+                }
+            }
+
+            // Und hier werden sie generiert:
+            // Order == 1
+            // Items in Loc == 2
+            // Items in Inv == 3
+            if (TILeftUp != null)
+            {
+                foreach (TabItem.TabPanel tp in TILeftUp.TabPanels)
+                {
+                    if (tp.TypeID == 1)
+                    {
+                        tvOrder = CreateOrderTree();
+                        tp.TabPanelGrid.Add(tvOrder);
+                        tvOrder.CalcToggles();
+                    }
+                    else if (tp.TypeID == 2)
+                    {
+                        tvOrder = CreateItemLocTree();
+                        tp.TabPanelGrid.Add(tvOrder);
+                        tvOrder.CalcToggles();
+                    }
+                    else if (tp.TypeID == 3)
+                    {
+                        tvOrder = CreateItemInvTree();
+                        tp.TabPanelGrid.Add(tvOrder);
+                        tvOrder.CalcToggles();
+                    }
+                }
+            }
+            if (TIRightUp != null)
+            {
+                foreach (TabItem.TabPanel tp in TIRightUp.TabPanels)
+                {
+                    if (tp.TypeID == 1)
+                    {
+                        tvOrder = CreateOrderTree();
+                        tp.TabPanelGrid.Add(tvOrder);
+                        tvOrder.CalcToggles();
+                    }
+                    else if (tp.TypeID == 2)
+                    {
+                        tvOrder = CreateItemLocTree();
+                        tp.TabPanelGrid.Add(tvOrder);
+                        tvOrder.CalcToggles();
+                    }
+                    else if (tp.TypeID == 3)
+                    {
+                        tvOrder = CreateItemInvTree();
+                        tp.TabPanelGrid.Add(tvOrder);
+                        tvOrder.CalcToggles();
+                    }
+                }
+            }
+            if (TILeftDown != null )
+            {
+                foreach (TabItem.TabPanel tp in TILeftDown.TabPanels)
+                {
+                    if (tp.TypeID == 1)
+                    {
+                        tvOrder = CreateOrderTree();
+                        tp.TabPanelGrid.Add(tvOrder);
+                        tvOrder.CalcToggles();
+                    }
+                    else if (tp.TypeID == 2)
+                    {
+                        tvOrder = CreateItemLocTree();
+                        tp.TabPanelGrid.Add(tvOrder);
+                        tvOrder.CalcToggles();
+                    }
+                    else if (tp.TypeID == 3)
+                    {
+                        tvOrder = CreateItemInvTree();
+                        tp.TabPanelGrid.Add(tvOrder);
+                        tvOrder.CalcToggles();
+                    }
+                }
+            }
+            if (TIRightDown != null)
+            {
+                foreach (TabItem.TabPanel tp in TIRightDown.TabPanels)
+                {
+                    if (tp.TypeID == 1)
+                    {
+                        tvOrder = CreateOrderTree();
+                        tp.TabPanelGrid.Add(tvOrder);
+                        tvOrder.CalcToggles();
+                    }
+                    else if (tp.TypeID == 2)
+                    {
+                        tvOrder = CreateItemLocTree();
+                        tp.TabPanelGrid.Add(tvOrder);
+                        tvOrder.CalcToggles();
+                    }
+                    else if (tp.TypeID == 3)
+                    {
+                        tvOrder = CreateItemInvTree();
+                        tp.TabPanelGrid.Add(tvOrder);
+                        tvOrder.CalcToggles();
+                    }
+                }
+            }
+            */
+
+
+            if (UIS.MCMVVisible == true)
+            {
+                DoToggleMCMV();
+            }
         }
-        */
-
-
-        if ( UIS.MCMVVisible == true )
+        catch (Exception e)
         {
-            DoToggleMCMV();
         }
+        gplUpdate = false;
         return true;
     }
 
@@ -3845,14 +3988,21 @@ public partial class GamePage : ContentPage, IMenuExtension
                     else
                         tp.SelectButton!.StyleClass = ButtonActiveActive;
 
-                    Object o = tp.TabPanelGrid.Children[0];
-
-                    if (o.GetType() == typeof(TreeView))
+                    if (tp.TabPanelGrid.Children[0] != null)
                     {
-                        TreeView? tv = o as TreeView;
-                        tv!.CallbackAll(DoSetTextActive);
+                        Object o = tp.TabPanelGrid.Children[0];
+
+                        if (o.GetType() == typeof(TreeView))
+                        {
+                            TreeView? tv = o as TreeView;
+                            tv!.CallbackAll(DoSetTextActive);
+                        }
+                        ix++;
                     }
-                    ix++;
+                    else
+                    {
+                        break;
+                    }
                 }
             }
 

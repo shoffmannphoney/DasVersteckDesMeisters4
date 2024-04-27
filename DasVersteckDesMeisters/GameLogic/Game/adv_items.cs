@@ -66,6 +66,7 @@ public partial class Adv: AdvBase
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
 
         CA!.I02_Door = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Tuer! }, new List<Adj> { CA!.Adj_solide! }, Co.SEX_FEMALE, CB!.LocType_Loc, CA!.L02_In_Front_Of_A_Hut, loca.Adv_I02_Door, "Adv_I02_Door", Co.SZ_small, true, false, Nouns, Adjs));
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_GoThroughable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
@@ -79,6 +80,8 @@ public partial class Adv: AdvBase
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
 
         CA!.I03_Door_Outside = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Tuer! }, new List<Adj> { CA!.Adj_solide! }, Co.SEX_FEMALE, CB!.LocType_Loc, CA!.L03_In_The_Parlor, loca.Adv_I03_Door_Solid, "Adv_I03_Door_Solid", Co.SZ_small, true, false, Nouns, Adjs));
+        Items!.Last().SynAdjectives = new List<Adj> { CA!.Adj_schwer! };
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_GoThroughable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
@@ -101,6 +104,7 @@ public partial class Adv: AdvBase
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Readable));
 
         CA!.I03_Door = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Tuer! }, new List<Adj> { CA!.Adj_schaebig! }, Co.SEX_FEMALE, CB!.LocType_Loc, CA!.L03_In_The_Parlor, loca.Adv_I03_Door, "Adv_I03_Door", Co.SZ_small, true, false, Nouns, Adjs));
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_GoThroughable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
@@ -110,6 +114,7 @@ public partial class Adv: AdvBase
 
 
         CA!.I04_Door = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Tuer! }, new List<Adj> { CA!.Adj_schaebig! }, Co.SEX_FEMALE, CB!.LocType_Loc, CA!.L04_Shabby_Little_Chamber, loca.Adv_I04_Door, "Adv_I04_Door", Co.SZ_small, true, false, Nouns, Adjs));
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_GoThroughable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
@@ -187,6 +192,7 @@ public partial class Adv: AdvBase
 
 
         CA!.I05_Library_Door = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Tuer! }, new List<Adj> { CA!.Adj_verziert! }, Co.SEX_FEMALE, CB!.LocType_Loc, CA!.L05_Atrium, loca.Adv_I05_Library_Door, "Adv_I05_Library_Door", Co.SZ_small, true, false, Nouns, Adjs));
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_GoThroughable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
@@ -194,6 +200,7 @@ public partial class Adv: AdvBase
         Items!.Last().IsClosed = true;
 
         CA!.I05_Door = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Tuer! }, new List<Adj> { CA!.Adj_breit! }, Co.SEX_FEMALE, CB!.LocType_Loc, CA!.L05_Atrium, loca.Adv_I05_Door, "Adv_I05_Door", Co.SZ_small, true, false, Nouns, Adjs));
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_GoThroughable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
@@ -207,6 +214,7 @@ public partial class Adv: AdvBase
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_ThrowTarget));
 
         CA!.I06_Door_Wide = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Tuer! }, new List<Adj> { CA!.Adj_breit! }, Co.SEX_FEMALE, CB!.LocType_Loc, CA!.L06_Long_Floor, loca.Adv_I06_Door_Wide, "Adv_I06_Door_Wide", Co.SZ_small, true, false, Nouns, Adjs));
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_GoThroughable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
@@ -216,6 +224,7 @@ public partial class Adv: AdvBase
         CounterDoorInit(CA!.I05_Door, Items!.Last()!.ID);
 
         CA!.I06_Door = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Tuer! }, new List<Adj> { CA!.Adj_wuchtig! }, Co.SEX_FEMALE, CB!.LocType_Loc, CA!.L06_Long_Floor, loca.Adv_I06_Door, "Adv_I06_Door", Co.SZ_small, true, false, Nouns, Adjs));
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_GoThroughable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
@@ -223,6 +232,7 @@ public partial class Adv: AdvBase
         Items!.Last().IsClosed = true;
 
         CA!.I06_Door_Red = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Tuer! }, new List<Adj> { CA!.Adj_rot! }, Co.SEX_FEMALE, CB!.LocType_Loc, CA!.L06_Long_Floor, loca.Adv_I06_Door_Red, "Adv_I06_Door_Red", Co.SZ_small, true, false, Nouns, Adjs));
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_GoThroughable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
@@ -230,6 +240,7 @@ public partial class Adv: AdvBase
         Items!.Last().IsClosed = true;
 
         CA!.I06_Door_White = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Tuer! }, new List<Adj> { CA!.Adj_weiss! }, Co.SEX_FEMALE, CB!.LocType_Loc, CA!.L06_Long_Floor, loca.Adv_I06_Door_White, "Adv_I06_Door_White", Co.SZ_small, true, false, Nouns, Adjs));
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_GoThroughable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
@@ -256,6 +267,7 @@ public partial class Adv: AdvBase
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Readable));
 
         CA!.I07_Door = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Tuer! }, new List<Adj> { CA!.Adj_massiv! }, Co.SEX_FEMALE, CB!.LocType_Loc, CA!.L07_Lower_Floor, loca.Adv_I07_Door, "Adv_I07_Door", Co.SZ_small, true, false, Nouns, Adjs));
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_GoThroughable));
         Items!.Last().SynAdjectives = new List<Adj> { CA!.Adj_schwer! };
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
@@ -265,6 +277,7 @@ public partial class Adv: AdvBase
         LockedDoorInit(CA!.I07_Door);
 
         CA!.I07_Door_Blue = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Tuer! }, new List<Adj> { CA!.Adj_blau! }, Co.SEX_FEMALE, CB!.LocType_Loc, CA!.L07_Lower_Floor, loca.Adv_I07_Door_Blue, "Adv_I07_Door_Blue", Co.SZ_small, true, false, Nouns, Adjs));
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_GoThroughable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
@@ -273,6 +286,7 @@ public partial class Adv: AdvBase
 
 
         CA!.I07_Door_Green = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Tuer! }, new List<Adj> { CA!.Adj_gruen! }, Co.SEX_FEMALE, CB!.LocType_Loc, CA!.L07_Lower_Floor, loca.Adv_I07_Door_Green, "Adv_I07_Door_Green", Co.SZ_small, true, false, Nouns, Adjs));
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_GoThroughable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
@@ -280,6 +294,7 @@ public partial class Adv: AdvBase
         Items!.Last().IsClosed = true;
 
         CA!.I08_Door_Green = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Tuer! }, new List<Adj> { CA!.Adj_blau! }, Co.SEX_FEMALE, CB!.LocType_Loc, CA!.L08_Laundry_Room, loca.Adv_I08_Door_Blue, "Adv_I08_Door_Blue", Co.SZ_small, true, false, Nouns, Adjs));
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_GoThroughable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
@@ -351,6 +366,7 @@ public partial class Adv: AdvBase
         Items!.Last().StorageIn = 0;
 
         CA!.I09_Library_Door = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Tuer! }, new List<Adj> { CA!.Adj_verziert! }, Co.SEX_FEMALE, CB!.LocType_Loc, CA!.L09_Library, loca.Adv_I09_Library_Door, "Adv_I09_Library_Door", Co.SZ_small, true, false, Nouns, Adjs));
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_GoThroughable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
@@ -515,6 +531,7 @@ public partial class Adv: AdvBase
         Items!.Last().StorageIn = 20;
 
         CA!.I10_Labor_Door = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Tuer! }, null, Co.SEX_FEMALE, CB!.LocType_Loc, CA!.L10_Laboratory, loca.Adv_I10_Labor_Door, "Adv_I10_Labor_Door", Co.SZ_small, true, false, Nouns, Adjs));
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_GoThroughable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
@@ -525,6 +542,7 @@ public partial class Adv: AdvBase
 
 
         CA!.I11_Door_Blue = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Tuer! }, new List<Adj> { CA!.Adj_gruen! }, Co.SEX_FEMALE, CB!.LocType_Loc, CA!.L11_Storage_Room, loca.Adv_I11_Door_Green, "Adv_I11_Door_Green", Co.SZ_small, true, false, Nouns, Adjs));
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_GoThroughable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
@@ -556,6 +574,7 @@ public partial class Adv: AdvBase
         Items!.Last().StorageOn = 30;
 
         CA!.I12_Door = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Tuer! }, new List<Adj> { CA!.Adj_wuchtig! }, Co.SEX_FEMALE, CB!.LocType_Loc, CA!.L12_Sleeping_Room, loca.Adv_I12_Door, "Adv_I12_Door", Co.SZ_small, true, false, Nouns, Adjs));
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_GoThroughable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
@@ -630,6 +649,7 @@ public partial class Adv: AdvBase
 
 
         CA!.I13_Door_White = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Tuer! }, new List<Adj> { CA!.Adj_weiss! }, Co.SEX_FEMALE, CB!.LocType_Loc, CA!.L13_Kitchen, loca.Adv_I13_Door_White, "Adv_I13_Door_White", Co.SZ_small, true, false, Nouns, Adjs));
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_GoThroughable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
@@ -639,6 +659,7 @@ public partial class Adv: AdvBase
         CounterDoorInit(CA!.I06_Door_White, Items!.Last()!.ID);
 
         CA!.I14_Door_Red = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Tuer! }, new List<Adj> { CA!.Adj_rot! }, Co.SEX_FEMALE, CB!.LocType_Loc, CA!.L14_Bathroom, loca.Adv_I14_Door_Red, "Adv_I14_Door_Red", Co.SZ_small, true, false, Nouns, Adjs));
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_GoThroughable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));

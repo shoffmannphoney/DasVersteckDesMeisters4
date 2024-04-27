@@ -302,7 +302,27 @@ namespace GameCore
             return success;
         }
 
+        public bool ExamineReflexive(Person PersonID, ParseTokenList PTL)
+        {
 
+            OrderFeedback of = new OrderFeedback();
+            bool success = true;
+            bool handled = true;
+
+            Person person = PTL.GetFirstPerson()!; //  GetItemRef(Adv_PT[1].WordID);
+            Item item = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[1].WordID);
+
+            if( person == CA!.Person_I )
+            {
+                handled = Examine( person, PTL );
+            }
+            else
+            {
+                AdvGame!.FeedbackOutput(PersonID, Helper.Insert(loca.ExamineReflexive_Fail, item));
+                
+            }
+            return handled;
+        }
         public override bool  Examine(Person PersonID, ParseTokenList PTL)
         {
             OrderFeedback of = new OrderFeedback();
@@ -457,6 +477,33 @@ namespace GameCore
             // Post-Actions
             return (handled);
         }
+        public bool WhereIsTopic(Person PersonID, ParseTokenList PTL)
+        {
+            OrderFeedback of = new OrderFeedback();
+            bool success = true;
+            Topic topic1 = PTL.GetFirstTopic();
+
+            if( topic1.ID == CA.TP_Versteck.ID )
+            {
+                if( CA.Person_I.locationID <= CA.L04_Shabby_Little_Chamber )
+                {
+                    AdvGame!.StoryOutput(Helper.Insert(loca.WhereIs_Versteck1));
+
+                }
+                else
+                {
+                    AdvGame!.StoryOutput(Helper.Insert(loca.WhereIs_Versteck2));
+
+                }
+            }
+            else
+            {
+                AdvGame!.StoryOutput(Helper.Insert(loca.WhereIs_Failed, topic1));
+
+            }
+
+            return (success);
+        }
 
         public override bool  location(Person PersonID, ParseTokenList PTL)
         {
@@ -474,6 +521,26 @@ namespace GameCore
             if (success)
             {
             }
+            return (success);
+        }
+
+        public bool locationReflexive(Person PersonID, ParseTokenList PTL)
+        {
+            OrderFeedback of = new OrderFeedback();
+            bool success = true;
+
+            Person person1 = PTL.GetFirstPerson()!; //  GetItemRef(Adv_PT[1].WordID);
+
+            if (person1.ID == CA!.Person_I.ID)
+            {
+                location( PersonID, PTL);
+            }
+            else
+            {
+                AdvGame!.StoryOutput(Helper.Insert(loca.locationReflexive_Fail, person1!));
+
+            }
+
             return (success);
         }
 
@@ -1664,6 +1731,12 @@ namespace GameCore
             Item item1 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[2].WordID);
 
 
+            if( item1.ID == CA.I04_Cupboard.ID && CA.I04_Flap.locationID == CA.I00_Nullbehaelter.ID)
+            {
+                AdvGame.StoryOutput(loca.Examine_Behind_Cupboard);
+                success = false;
+            }
+
             // base
             if (success)
                 success = base.ExamineBehind(PersonID, PTL);
@@ -2262,6 +2335,16 @@ namespace GameCore
                     Persons.TransferPerson(Persons!.Find(CA!.Person_I!)!.ID, CB!.LocType_Loc, A!.ActLoc);
                     locations.ShowlocationFull(A.ActLoc);
                 }
+                handled = true;
+            }
+            else if (item1.ID == CA.I00_Magic_Powder.ID && item2.ID == CA!.I03_Pentagram.ID)
+            {
+                AdvGame!.StoryOutput( loca.Tip_MagicPowder_Pentagramm);
+                handled = true;
+            }
+            else if (item1.ID == CA.I00_Supermagic_Powder.ID && item2.ID == CA!.I05_Pentagram.ID)
+            {
+                AdvGame!.StoryOutput(loca.Tip_MagicPowder_Pentagramm);
                 handled = true;
             }
             else if (item1.ID == CA!.I00_Plastic_Bag.ID && item2.ID == CA!.I08_Clothes.ID)
@@ -4744,6 +4827,25 @@ namespace GameCore
 
                 handled = true;
             }
+            else if (item1.ID == CA.I00_Magic_Powder.ID && item2.ID == CA!.I03_Pentagram.ID)
+            {
+                ParseTokenList PT = new ParseTokenList();
+                PT.AddVerb(CA!.Verb_Tip);
+                PT.AddItem(CA!.I00_Magic_Powder);
+                PT.AddPrep(CB!.Prep_auf);
+                PT.AddItem(CA!.I03_Pentagram);
+
+                handled = true;
+            }
+            else if (item1.ID == CA.I00_Supermagic_Powder.ID && item2.ID == CA!.I05_Pentagram.ID)
+            {
+                ParseTokenList PT = new ParseTokenList();
+                PT.AddVerb(CA!.Verb_Tip);
+                PT.AddItem(CA!.I00_Supermagic_Powder);
+                PT.AddPrep(CB!.Prep_auf);
+                PT.AddItem(CA!.I05_Pentagram);
+                handled = true;
+            }
             else if ((item1.ID == CA!.I03_Pentagram.ID && item2.ID == CA!.I00_Magic_Powder.ID)
                        || (item2.ID == CA!.I03_Pentagram.ID && item1.ID == CA!.I00_Magic_Powder.ID)
                    )
@@ -4832,6 +4934,16 @@ namespace GameCore
                 success = true;
             }
             else if (item1.ID == CA.I00_Supermagic_Powder.ID && item2.ID == CA!.I00_Magic_Candle.ID)
+            {
+                Tip(PersonID, PTL);
+                success = true;
+            }
+            else if (item1.ID == CA.I00_Magic_Powder.ID && item2.ID == CA!.I03_Pentagram.ID)
+            {
+                Tip(PersonID, PTL);
+                success = true;
+            }
+            else if (item1.ID == CA.I00_Supermagic_Powder.ID && item2.ID == CA!.I05_Pentagram.ID)
             {
                 Tip(PersonID, PTL);
                 success = true;

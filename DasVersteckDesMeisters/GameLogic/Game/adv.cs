@@ -131,6 +131,8 @@ namespace GameCore
 
         public int GetCurrentLoc( int locationID)
         {
+            return locationID;
+            /*
             int loc = -1;
 
             int pvliix = 0;
@@ -156,6 +158,7 @@ namespace GameCore
                 pvliix++;
             }
             return (loc );
+            */
 
         }
     }
@@ -2654,6 +2657,7 @@ namespace GameCore
             CA!.Noun_Flamme = Nouns.Add(Noun.NounLoca("Noun_Flamme"));
             CA!.Noun_Juwel = Nouns!.Add(Noun.NounLoca("Noun_Juwel"));
             CA!.Noun_Edelstein = Nouns!.Add(Noun.NounLoca("Noun_Edelstein"));
+            CA!.Noun_Versteck = Nouns!.Add(Noun.NounLoca("Noun_Versteck"));
 
 
 
@@ -4099,6 +4103,7 @@ namespace GameCore
             CA!.Noun_Flamme = Nouns.Add(Noun.NounLocaLoca(loca.Noun_Flamme, "Noun_Flamme"));
             CA!.Noun_Juwel = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Juwel, "Noun_Juwel"));
             CA!.Noun_Edelstein = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Edelstein, "Noun_Edelstein"));
+            CA!.Noun_Versteck = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Versteck, "Noun_Versteck"));
 
             CA!.Noun_Seil = Nouns!.Add(Noun.NounLocaLoca(loca.Adv_InitializeGame_Person_I_3263, "Adv_InitializeGame_Person_I_3263"));
             CA!.Noun_Revolver = Nouns!.Add(Noun.NounLocaLoca(loca.Adv_InitializeGame_Person_I_3264, "Adv_InitializeGame_Person_I_3264"));
@@ -4333,6 +4338,7 @@ namespace GameCore
             CA!.Noun_Zapfhahn = Nouns.Add(Noun.NounLocaLoca(loca.Adv_InitializeGame_Person_I_3484, "Adv_InitializeGame_Person_I_3484"));
             CA!.Noun_Du = Nouns.Add(Noun.NounLocaLoca(loca.Adv_InitializeGame_Person_I_3485, "Adv_InitializeGame_Person_I_3485"));
             Nouns.AddLocaLoca(CA!.Noun_Du!.ID, loca.Adv_InitializeGame_Person_I_3486, "Adv_InitializeGame_Person_I_3486");
+            Nouns.AddLocaLoca(CA!.Noun_Du!.ID, loca.Pronoun_dir, "Pronoun_dir");
             CA!.Noun_Ich = Nouns.Add(Noun.NounLocaLoca(loca.Adv_InitializeGame_Person_I_3487, "Adv_InitializeGame_Person_I_3487"));
             Nouns.AddLocaLoca(CA!.Noun_Ich!.ID, loca.Adv_InitializeGame_Person_I_3488, "Adv_InitializeGame_Person_I_3488");
             CA!.Noun_Handschellen = Nouns.Add(Noun.NounLocaLoca(loca.Adv_InitializeGame_Person_I_3489, "Adv_InitializeGame_Person_I_3489"));
@@ -5695,7 +5701,7 @@ namespace GameCore
             //
             // CA!.TP_Boden = Topics.Add(new Topic(new List<Noun> { CA!.Noun_Boden }, new List<Adj> { CA!.Adj_gewoehnlich }, Co.SEX_MALE, Nouns, Adjs));
             // CA!.TP_Ecke = Topics.Add(new Topic(new List<Noun> { CA!.Noun_Ecke }, null, Co.SEX_FEMALE, Nouns, Adjs));
-
+            CA!.TP_Versteck = Topics!.Add(new Topic(new List<Noun> { CA!.Noun_Versteck }, null, Co.SEX_NEUTER, Nouns, Adjs));
             // TEST
             // Aufgemerkt: Das muss nachher wieder raus, sobald die CAs korrekt verschaltet sind
             if (LoadedInitData == null)
@@ -12881,6 +12887,7 @@ namespace GameCore
         public Noun? Noun_Juwel;
         public Noun? Noun_Edelstein;
         public Noun? Noun_Plastiktuete;
+        public Noun? Noun_Versteck;
 
         // Neue Nouns
         public Noun? Noun_Abdeckung;
@@ -12911,6 +12918,7 @@ namespace GameCore
         public Person? Person_Snake;
         public Person? Person_Magpie;
 
+        public Topic? TP_Versteck;
 
 
         public int PL_Use;

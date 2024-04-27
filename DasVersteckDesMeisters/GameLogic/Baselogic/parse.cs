@@ -2662,11 +2662,16 @@ namespace GameCore
                             }
                         }
 
-                        if( p.Count > 0 )
+                        if (p.Count > 0)
                         {
                             errorText = String.Format(loca.Parse_NotSuitableForPerson, p[0].FullName(Co.CASE_NOM_UNDEF)!);
 
                         }
+                        /*
+                        else if (p.Count == 1)
+                        {
+                        }
+                        */
                         else
                         {
                             genericItems[ctItems]!.Item!.IsCountable = true;
@@ -2923,10 +2928,18 @@ namespace GameCore
             // Schritt 2: Erkennen, welche Worte eingegeben wurden 
             foreach (string element in separatedWords)
             {
+                string element2 = element;
+                // Hinten angehängte Satzzeichen werden entfernt
+                if( element2.EndsWith("?") || element2.EndsWith("!") || element2.EndsWith(".") || element2.EndsWith(",") || element2.EndsWith(";") )
+                {
+                    string element3 = element.Substring(0, element2.Length - 1);
+                    if (element3.Length > 0)
+                        element2 = element3;
+                }
                 found = false;
                 if (!found)
                 {
-                    Noun n = Nouns!.Find(element!)!;
+                    Noun n = Nouns!.Find(element2!)!;
                     if (n != null)
                     {
                         PTL!.AddNoun(n.ID);
@@ -2935,7 +2948,7 @@ namespace GameCore
                 }
                 if (!found)
                 {
-                    Adj a = Adjs!.FindAdj(element)!;
+                    Adj a = Adjs!.FindAdj(element2)!;
                     if (a != null)
                     {
                         PTL!.AddAdj(a.ID);
@@ -2944,7 +2957,7 @@ namespace GameCore
                 }
                 if (!found)
                 {
-                    Verb v = Verbs!.Find(element);
+                    Verb v = Verbs!.Find(element2);
                     if (v != null)
                     {
                         PTL!.AddVerb(v);
@@ -2953,7 +2966,7 @@ namespace GameCore
                 }
                 if (!found)
                 {
-                    Prep p = Preps!.Find(element)!;
+                    Prep p = Preps!.Find(element2)!;
                     if (p != null)
                     {
                         PTL!.AddPrep(p);
@@ -2962,7 +2975,7 @@ namespace GameCore
                 }
                 if (!found)
                 {
-                    Fill f = Fills!.Find(element!)!;
+                    Fill f = Fills!.Find(element2!)!;
                     if (f != null)
                     {
                         PTL!.AddFill(f.ID);
@@ -2971,7 +2984,7 @@ namespace GameCore
                 }
                 if (!found)
                 {
-                    Pronoun pro = Pronouns!.Find(element);
+                    Pronoun pro = Pronouns!.Find(element2);
                     if (pro != null)
                     {
                         PTL!.AddPronoun(pro.ID);
@@ -2980,7 +2993,7 @@ namespace GameCore
                 }
                 if (!found)
                 {
-                    ErrorText = String.Format(loca.Parse_StringToParseTokensNew_16231, element);
+                    ErrorText = String.Format(loca.Parse_StringToParseTokensNew_16231, element2);
                     break;
                 }
             }

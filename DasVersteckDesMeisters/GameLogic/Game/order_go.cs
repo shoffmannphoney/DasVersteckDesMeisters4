@@ -38,6 +38,126 @@ public partial class Order: AbstractOrder
         Item item = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[1].WordID);
 
 
+        if( item == CA!.I02_Door)
+        {
+            GoDir(PersonID, Co.DIR_N);
+            of.Handled = true;
+        }
+        else if(item == CA!.I03_Door_Outside)
+        {
+            GoDir(PersonID, Co.DIR_S);
+            of.Handled = true;
+
+        }
+        else if (item == CA!.I03_Door)
+        {
+            GoDir(PersonID, Co.DIR_E);
+            of.Handled = true;
+
+        }
+        else if (item == CA!.I04_Door)
+        {
+            GoDir(PersonID, Co.DIR_W);
+            of.Handled = true;
+
+        }
+        else if (item == CA!.I05_Library_Door)
+        {
+            GoDir(PersonID, Co.DIR_W);
+            of.Handled = true;
+
+        }
+        else if (item == CA!.I05_Door)
+        {
+            GoDir(PersonID, Co.DIR_S);
+            of.Handled = true;
+
+        }
+        else if (item == CA!.I06_Door_Wide)
+        {
+            GoDir(PersonID, Co.DIR_N);
+            of.Handled = true;
+
+        }
+        else if (item == CA!.I06_Door_White)
+        {
+            GoDir(PersonID, Co.DIR_E);
+            of.Handled = true;
+
+        }
+        else if (item == CA!.I06_Door_Red)
+        {
+            GoDir(PersonID, Co.DIR_W);
+            of.Handled = true;
+
+        }
+        else if (item == CA!.I06_Door)
+        {
+            GoDir(PersonID, Co.DIR_S);
+            of.Handled = true;
+
+        }
+        else if (item == CA!.I07_Door)
+        {
+            GoDir(PersonID, Co.DIR_E);
+            of.Handled = true;
+
+        }
+        else if (item == CA!.I07_Door_Green)
+        {
+            GoDir(PersonID, Co.DIR_W);
+            of.Handled = true;
+
+        }
+        else if (item == CA!.I07_Door_Blue)
+        {
+            GoDir(PersonID, Co.DIR_S);
+            of.Handled = true;
+
+        }
+        else if (item == CA!.I08_Door_Green)
+        {
+            GoDir(PersonID, Co.DIR_E);
+            of.Handled = true;
+
+        }
+        else if (item == CA!.I09_Library_Door)
+        {
+            GoDir(PersonID, Co.DIR_E);
+            of.Handled = true;
+
+        }
+        else if (item == CA!.I10_Labor_Door)
+        {
+            GoDir(PersonID, Co.DIR_W);
+            of.Handled = true;
+
+        }
+        else if (item == CA!.I11_Door_Blue)
+        {
+            GoDir(PersonID, Co.DIR_N);
+            of.Handled = true;
+
+        }
+        else if (item == CA!.I12_Door)
+        {
+            GoDir(PersonID, Co.DIR_N);
+            of.Handled = true;
+
+        }
+        else if (item == CA!.I13_Door_White)
+        {
+            GoDir(PersonID, Co.DIR_W);
+            of.Handled = true;
+
+        }
+        else if (item == CA!.I14_Door_Red)
+        {
+            GoDir(PersonID, Co.DIR_E);
+            of.Handled = true;
+
+        }
+
         if (of.Handled == false)
         {
             AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, PersonID,  Helper.Insert(loca.Order_GoThrough_I2_47_Tuer_13360, item!.ID ));
@@ -382,6 +502,11 @@ public partial class Order: AbstractOrder
         bool success = false;
         Item item1 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[1].WordID);
 
+        if( item1.ID == CA.I02_Shed.ID)
+        {
+            GoDir(PersonID, Co.DIR_N);
+            success = true;
+        }
 
         // Hier Erfolgsoperationen auflisten und Success auf true setzen
         if (!success)
@@ -396,6 +521,7 @@ public partial class Order: AbstractOrder
         bool success = false;
         Item item1 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[1].WordID);
 
+
         // Hier Erfolgsoperationen auflisten und Success auf true setzen
         if (!success)
         {
@@ -407,7 +533,53 @@ public partial class Order: AbstractOrder
     public bool LeaveSolo(Person PersonID, ParseTokenList PTL)
     {
         bool success = false;
-        
+
+        if( CA!.Person_I.locationID == CA.L04_Shabby_Little_Chamber)
+        {
+            GoDir(PersonID, Co.DIR_W);
+            success = true;
+        }
+        else if (CA!.Person_I.locationID == CA.L05_Atrium)
+        {
+            GoDir(PersonID, Co.DIR_S);
+            success = true;
+        }
+        else if (CA!.Person_I.locationID == CA.L09_Library)
+        {
+            GoDir(PersonID, Co.DIR_E);
+            success = true;
+        }
+        else if (CA!.Person_I.locationID == CA.L08_Laundry_Room)
+        {
+            GoDir(PersonID, Co.DIR_E);
+            success = true;
+        }
+        else if (CA!.Person_I.locationID == CA.L10_Laboratory)
+        {
+            GoDir(PersonID, Co.DIR_W);
+            success = true;
+        }
+        else if (CA!.Person_I.locationID == CA.L11_Storage_Room)
+        {
+            GoDir(PersonID, Co.DIR_N);
+            success = true;
+        }
+        else if (CA!.Person_I.locationID == CA.L12_Sleeping_Room)
+        {
+            GoDir(PersonID, Co.DIR_N);
+            success = true;
+        }
+        else if (CA!.Person_I.locationID == CA.L13_Kitchen)
+        {
+            GoDir(PersonID, Co.DIR_W);
+            success = true;
+        }
+        else if (CA!.Person_I.locationID == CA.L14_Bathroom)
+        {
+            GoDir(PersonID, Co.DIR_E);
+            success = true;
+        }
+
         // Hier Erfolgsoperationen auflisten und Success auf true setzen
         if (!success)
         {

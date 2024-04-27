@@ -8,6 +8,7 @@ using Phoney_MAUI.Model;
 using Phoney_MAUI.Platform;
 using CommunityToolkit.Maui.Core.Platform;
 using CommunityToolkit.Maui.Media;
+using CommunityToolkit.Maui.Behaviors;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Collections.Generic;
@@ -187,8 +188,8 @@ public class UIServices : IUIServices
     {
         if( _uiCount > 0 && _reqUICallback != null )
         {
-            _reqUICallback();
             _uiCount = 0;
+            _reqUICallback();
         }
     }
 
@@ -1584,6 +1585,11 @@ public class UIServices : IUIServices
     }
     public async Task<bool> STTInqSpeech()
     {
+        if( MainThread.IsMainThread == false )
+        {
+            return false;
+        }
+
         try
         {
             var isGranted = await SpeechToText.RequestPermissions(CancellationToken.None);
@@ -2084,6 +2090,35 @@ public class MCMenuView
             {
                 dbi(false, 0);
             }
+            // Behaviors löschen
+
+            VerticalStackLayout vsl = (_mcGrid.Children[0] as ScrollView).Content as VerticalStackLayout; 
+
+            foreach (IView iv in vsl.Children)
+            {
+                if( iv.GetType() == typeof( Grid ))
+                {
+
+                    Label l1 = (iv as Grid).Children[0] as Label;
+
+                    while (l1.Behaviors.Count > 0)
+                    {
+                        l1.Behaviors.RemoveAt(0);
+                    }
+
+                    if ((iv as Grid).Children.Count > 1)
+                    {
+                        Label l2 = (iv as Grid).Children[1] as Label;
+
+                        while (l2.Behaviors.Count > 0)
+                        {
+                            l2.Behaviors.RemoveAt(0);
+                        }
+                    }
+                }
+
+            }
+
         }
         UIS!.Scr.CompactToEnd();
         UIS.StoryTextObj!.AdvTextRefresh();
@@ -2519,6 +2554,15 @@ public class MCMenuView
                             tgr.Tapped += DoTapEntry;
                             l.GestureRecognizers.Add(tgr);
                             l.SetCursorHand();
+
+                            var touchBehaviorL = new TouchBehavior
+                            {
+                                // HoveredBackgroundColor = Colors.AliceBlue,
+                                HoveredOpacity = 1.0
+
+                            };
+                            l.Behaviors.Add(touchBehaviorL);
+
                         }
                         else
                         {
@@ -2550,6 +2594,16 @@ public class MCMenuView
                             tgr.Tapped += DoTapEntry;
                             l.GestureRecognizers.Add(tgr);
                             l.SetCursorHand();
+
+                            var touchBehaviorL = new TouchBehavior
+                            {
+                                // HoveredBackgroundColor = Colors.AliceBlue,
+                                HoveredOpacity = 0.7,
+                                PressedOpacity = 0.7
+
+
+                            };
+                            l.Behaviors.Add(touchBehaviorL);
 
                             string? s = null;
 

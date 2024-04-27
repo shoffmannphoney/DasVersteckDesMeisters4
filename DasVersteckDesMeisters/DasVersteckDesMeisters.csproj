@@ -78,40 +78,40 @@
 	  <AndroidSigningStorePass>Lian1234</AndroidSigningStorePass>
 	  <AndroidSigningKeyAlias>mynewkey</AndroidSigningKeyAlias>
 	  <AndroidSigningKeyPass>Lian4321</AndroidSigningKeyPass>
-	  <ApplicationVersion>3</ApplicationVersion>
+	  <ApplicationVersion>4</ApplicationVersion>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-android|x64'">
 	  <AndroidKeyStore>True</AndroidKeyStore>
 	  <AndroidSigningStorePass>Lian1234</AndroidSigningStorePass>
 	  <AndroidSigningKeyAlias>mynewkey</AndroidSigningKeyAlias>
 	  <AndroidSigningKeyPass>Lian4321</AndroidSigningKeyPass>
-	  <ApplicationVersion>3</ApplicationVersion>
+	  <ApplicationVersion>4</ApplicationVersion>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-android|AnyCPU'">
 	  <AndroidKeyStore>True</AndroidKeyStore>
 	  <AndroidSigningStorePass>Lian1234</AndroidSigningStorePass>
 	  <AndroidSigningKeyAlias>mynewkey</AndroidSigningKeyAlias>
 	  <AndroidSigningKeyPass>Lian4321</AndroidSigningKeyPass>
-	  <ApplicationVersion>3</ApplicationVersion>
+	  <ApplicationVersion>4</ApplicationVersion>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-android|x64'">
 	  <AndroidKeyStore>True</AndroidKeyStore>
 	  <AndroidSigningStorePass>Lian1234</AndroidSigningStorePass>
 	  <AndroidSigningKeyAlias>mynewkey</AndroidSigningKeyAlias>
 	  <AndroidSigningKeyPass>Lian4321</AndroidSigningKeyPass>
-	  <ApplicationVersion>3</ApplicationVersion>
+	  <ApplicationVersion>4</ApplicationVersion>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-windows10.0.19041.0|AnyCPU'">
-	  <ApplicationVersion>3</ApplicationVersion>
+	  <ApplicationVersion>4</ApplicationVersion>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-windows10.0.19041.0|x64'">
-	  <ApplicationVersion>3</ApplicationVersion>
+	  <ApplicationVersion>4</ApplicationVersion>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-windows10.0.19041.0|AnyCPU'">
-	  <ApplicationVersion>3</ApplicationVersion>
+	  <ApplicationVersion>4</ApplicationVersion>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-windows10.0.19041.0|x64'">
-	  <ApplicationVersion>3</ApplicationVersion>
+	  <ApplicationVersion>4</ApplicationVersion>
 	</PropertyGroup>
 
 	<ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">
@@ -122,17 +122,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<!-- App Icon -->
+		<!-- App Icon -->	
 		
 		<!-- Splash Screen -->
 		<MauiImage Update="Resources\Images\splash.svg" BaseSize="208,208" />
 
-		<MauiSplashScreen Include="Resources\Images\splash.svg">
-		  <Color>#512BD4</Color>
-		  <BaseSize>128,128</BaseSize>
-		</MauiSplashScreen>
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
+		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#FF0000" TintColor="#FF00FF" BaseSize="256,256" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
@@ -142,19 +138,15 @@
 
 		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
-		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.7" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.14" />
+		  <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.14" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 	</ItemGroup>
 	<ItemGroup>
 		<Folder Include="Core\" />
 		<Folder Include="GameSupport\" />
 		<Folder Include="Pages\" />
-		<Folder Include="Resources\Splash\" />
 		<Folder Include="Resources\Styles\" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <MauiImage Remove="Resources\Images\splash.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -177,7 +169,7 @@
 	  <None Remove="Resources\AppIcon\claw.scale-200.png" />
 	  <None Remove="Resources\AppIcon\claw.scale-400.png" />
 	  <None Remove="Resources\AppIcon\clawmobile.png" />
-	  <None Remove="Resources\Images\splash.svg" />
+	  <None Remove="Resources\Images\onion.png" />
 	  <None Remove="Resources\Raw\Index.html" />
 	</ItemGroup>
 	<ItemGroup>
@@ -190,6 +182,7 @@
 		<MauiCss Remove="GameLogic\Model\**" />
 		<MauiXaml Remove="GameLogic\Model\**" />
 		<None Remove="GameLogic\Model\**" />
+		<AndroidResource Remove="Platforms\Android\Resources\drawable\maui_splash.xml" />
 		<None Remove="PhoneyIslandGame_TemporaryKey.pfx" />
 		<None Remove="Directory.Build.props" />
 		<None Remove="Resources\AppIcon\ballsmaller.png" />
@@ -197,8 +190,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="CommunityToolkit.Maui" Version="7.0.1" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+		<PackageReference Include="CommunityToolkit.Maui" Version="8.0.1" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 		<!-- <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.5.240311000" />  -->
 	</ItemGroup>

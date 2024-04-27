@@ -44,6 +44,7 @@ public static class MauiProgram
             .ConfigureMauiHandlers(handlers =>
             {
                 handlers.AddHandler(typeof(BridgedWebView), typeof(BridgedWebViewHandler));
+
             });
 
 #if DEBUG
@@ -77,3 +78,4 @@ public static class MauiProgram
   //       GlobalSpecs.CurrentGlobalSpecs.AppRunning = IGlobalSpecs.appRunning.running;
 	}
  }
+

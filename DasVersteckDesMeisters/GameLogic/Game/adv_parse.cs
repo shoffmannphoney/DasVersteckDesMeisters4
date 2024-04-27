@@ -311,6 +311,20 @@ public partial class Adv : AdvBase
         PList.AddPrep(CB!.Prep_an);
         PLL.Add(new ParseLine(CB!.PL_Examine, PList, Orders!.Examine));
 
+        // schau dir x an
+        PList = new ParseTokenList();
+        PList.AddVerb(CB!.Verb_Examine);
+        PList.AddPerson();
+        PList.AddItemRange(Co.Range_Visible);
+        PLL.Add(new ParseLine(CB!.PL_Examine, PList, Orders!.ExamineReflexive));
+
+        PList = new ParseTokenList();
+        PList.AddVerb(CB!.Verb_Examine);
+        PList.AddPerson();
+        PList.AddItemRange(Co.Range_Visible);
+        PList.AddPrep(CB!.Prep_an);
+        PLL.Add(new ParseLine(CB!.PL_Examine, PList, Orders!.ExamineReflexive));
+
         // Examine MC
         PList = new ParseTokenList();
         PList.AddVerb(CB!.Verb_Examine);
@@ -464,6 +478,18 @@ public partial class Adv : AdvBase
         PList.AddVerb(CB!.Verb_Examine);
         PList.AddVerb(CB!.Verb_location);
         PLL.Add(new ParseLine(CB!.PL_location, PList, Orders!.location));
+
+        PList = new ParseTokenList();
+        PList.AddVerb(CB!.Verb_location);
+        PList.AddVerb(CA!.Verb_Be);
+        PList.AddPerson();
+        PLL.Add(new ParseLine(CB!.PL_location, PList, Orders!.locationReflexive));
+
+        PList = new ParseTokenList();
+        PList.AddVerb(CB!.Verb_location);
+        PList.AddVerb(CA!.Verb_Be);
+        PList.AddTopic();
+        PLL.Add(new ParseLine(CB!.PL_location, PList, Orders!.WhereIsTopic));
 
         // Drop
         PList = new ParseTokenList();
@@ -1295,6 +1321,12 @@ public partial class Adv : AdvBase
         PList = new ParseTokenList();
         PList.AddVerb(CA!.Verb_Push);
         PList.AddItem();
+        PLL.Add(new ParseLine(CA!.PL_Push, PList, Orders!.Push));
+
+        PList = new ParseTokenList();
+        PList.AddVerb(CA!.Verb_Push);
+        PList.AddItem();
+        PList.AddPrep(CB!.Prep_weg);
         PLL.Add(new ParseLine(CA!.PL_Push, PList, Orders!.Push));
 
         // Schiebe MC
@@ -3402,6 +3434,16 @@ public partial class Adv : AdvBase
 
         PList = new ParseTokenList();
         PList.AddVerb(CA!.Verb_Leave2);
+        PLL.Add(new ParseLine(CA!.PL_Leave, PList, Orders!.LeaveSolo));
+
+        PList = new ParseTokenList();
+        PList.AddVerb(CB!.Verb_Go);
+        PList.AddVerb(CA!.Verb_Leave2);
+        PLL.Add(new ParseLine(CA!.PL_Leave, PList, Orders!.LeaveSolo));
+
+        PList = new ParseTokenList();
+        PList.AddVerb(CB!.Verb_Go);
+        PList.AddVerb(CA!.Verb_Leave);
         PLL.Add(new ParseLine(CA!.PL_Leave, PList, Orders!.LeaveSolo));
 
         // Determine

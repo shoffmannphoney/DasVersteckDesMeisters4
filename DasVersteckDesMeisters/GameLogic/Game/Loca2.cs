@@ -3129,6 +3129,16 @@ public static partial class loca
                 return "Sicher würde es cool aussehen, das magische Pulver auf die Kerze rieseln zu lassen. Aber wenn diese brannte, gäbe es doch deutlich mehr Action.";
         }
     }
+    public static string Tip_MagicPowder_Pentagramm
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Ich hatte zwar in Meister Gunnars Unterricht selten gut aufgepasst, aber ich war mir doch einigermaßen sicher, dass solche magischen Pülverchen einer gewissen Hitzeeinwirkung bedurften, um zu wirken.";
+            else
+                return "Ich hatte zwar in Meister Gunnars Unterricht selten gut aufgepasst, aber ich war mir doch einigermaßen sicher, dass solche magischen Pülverchen einer gewissen Hitzeeinwirkung bedurften, um zu wirken.";
+        }
+    }
     public static string Tip_MagicPowder_MagicCandle_NoMagic
     {
         get
@@ -3228,6 +3238,16 @@ public static partial class loca
                 return "Ich wischte ein wenig an der Rüstung herum. Sonderlich viel Effekt hatte das nicht, also ließ ich es.";
             else
                 return "Ich wischte ein wenig an der Rüstung herum. Sonderlich viel Effekt hatte das nicht, also ließ ich es.";
+        }
+    }
+    public static string Examine_Behind_Cupboard
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Es war zu dunkel, um viel zu erkennen. Aber zeichneten sich an der Wand hinter dem Schrank nicht die Konturen eines Rechtecks ab? ";
+            else
+                return "Es war zu dunkel, um viel zu erkennen. Aber zeichneten sich an der Wand hinter dem Schrank nicht die Konturen eines Rechtecks ab? ";
         }
     }
     public static string Examine_In_Opening
@@ -3893,6 +3913,16 @@ public static partial class loca
                 return "besonder";
             else
                 return "besonder";
+        }
+    }
+    public static string Noun_Versteck
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Versteck";
+            else
+                return "Versteck";
         }
     }
     public static string Noun_Edelstein
@@ -8953,7 +8983,137 @@ public static partial class loca
         }
     }
 
-}
+    public static string Pronoun_dir
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "dir";
+            else
+                return "__you";
+        }
+    }
+    public static string prep_wo
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "wo";
+            else
+                return "wo";
+        }
+    }
+    public static string prep_was
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "was";
+            else
+                return "was";
+        }
+    }
+    public static string Verb_bin
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "bin";
+            else
+                return "bin";
+        }
+    }
+    public static string Verb_sein
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "sein";
+            else
+                return "sein";
+        }
+    }
+    public static string Verb_sind
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "sind";
+            else
+                return "sind";
+        }
+    }
+    public static string Verb_ist
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "ist";
+            else
+                return "ist";
+        }
+    }
+    public static string Verb_war
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "war";
+            else
+                return "war";
+        }
+    }
+    public static string ExamineReflexive_Fail
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Irgendwie war mir nicht im Geringsten klar, wie ich wen mit was anschauen sollte.";
+            else
+                return "Irgendwie war mir nicht im Geringsten klar, wie ich wen mit was anschauen sollte.";
+        }
+    }
+    public static string locationReflexive_Fail
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Ich spürte keinerlei Lust, den Aufenthaltsort von [Pl1,Dat] zu ermitteln.";
+            else
+                return "Ich spürte keinerlei Lust, den Aufenthaltsort von [Pl1,Dat] zu ermitteln.";
+        }
+    }
+    public static string WhereIs_Versteck1
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Wo das Versteck war? Wenn ich das so einfach beantworten könnte, wären wir hier fertig.";
+            else
+                return "Wo das Versteck war? Wenn ich das so einfach beantworten könnte, wären wir hier fertig.";
+        }
+    }
+    public static string WhereIs_Versteck2
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Ich denke, ich befand mich hier genau in diesem Versteck. Oder zumindest gehörte dieser Ort dazu.";
+            else
+                return "Ich denke, ich befand mich hier genau in diesem Versteck. Oder zumindest gehörte dieser Ort dazu.";
+        }
+    }
+    public static string WhereIs_Failed
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Ich hatte keine Ahnung, wo sich [Top1,Nom] befand.";
+            else
+                return "Ich hatte keine Ahnung, wo sich [Top1,Nom] befand.";
+        }
+    }
 
+}
 
 

@@ -11,8 +11,9 @@ using Phoney_MAUI.Platform;
 using Microsoft.Maui.Controls;
 using GameCore;
 using System.Reflection;
-
-
+using CommunityToolkit.Maui.Core.Platform;
+using CommunityToolkit.Maui.Media;
+using CommunityToolkit.Maui.Behaviors;
 
 namespace Phoney_MAUI;
 
@@ -236,6 +237,83 @@ public class TreeView : TreeViewItem
 
     public TreeView() : base()
     {
+    }
+
+    static int destroyed = 0;
+
+    public static void EmptyTreeViewItem(  Microsoft.Maui.IView tv)
+    {
+        try
+        {
+            if (tv is TreeViewItem || tv is Grid)
+            {
+                Grid tv2 = tv as Grid;
+
+                foreach (IView iv in tv2.Children)
+                {
+                    if (iv is TreeViewItem)
+                    {
+                        IView tvi = iv as IView;
+
+                        EmptyTreeViewItem(tvi);
+                    }
+                    else if (iv is Grid)
+                    {
+                        Grid tvi = iv as Grid;
+
+                        EmptyTreeViewItem(tvi);
+                    }
+                    else if (iv is Label)
+                    {
+                        Label l1 = (Label)iv;
+
+                        while( l1.Behaviors.Count > 0 )
+                        {
+                            l1.Behaviors.RemoveAt(0);
+                            destroyed++;
+
+                        }
+                        l1.Behaviors.Clear();
+                    }
+                    else if (iv is Button)
+                    {
+                        Button l1 = (Button)iv;
+
+                        while (l1.Behaviors.Count > 0)
+                        {
+                            l1.Behaviors.RemoveAt(0);
+                            destroyed++;
+
+                        }
+                        l1.Behaviors.Clear();
+                    }
+                    else
+                    {
+
+                    }
+                }
+            }
+            else if (tv is Label)
+            {
+                Label l1 = (Label)tv;
+
+                while (l1.Behaviors.Count > 0)
+                {
+                    l1.Behaviors.RemoveAt(0);
+
+                    destroyed++;
+                }
+                l1.Behaviors.Clear();
+
+            }
+            else
+            {
+            }
+        }
+        catch (Exception ex)
+        {
+            string s = ex.Message;
+        }
     }
 
     public void CloseTreeViewItem(TreeViewItem tvi)
@@ -725,7 +803,17 @@ public class TreeView : TreeViewItem
         ToggleButton = b1;
         g3.Add(b1);
         b1.SetCursorHand();
+        /*
 
+        var touchBehaviorb1 = new TouchBehavior
+        {
+            DefaultAnimationDuration = 250,
+            DefaultAnimationEasing = Easing.CubicInOut,
+            PressedOpacity = 0.6,
+            PressedScale = 0.8
+        };
+        b1.Behaviors.Add(touchBehaviorb1);
+        */
         Label l1 = new();
         l1.Text = "Labeltext";
         List<string> styleClasses = new();
@@ -744,6 +832,17 @@ public class TreeView : TreeViewItem
         TapGestureRecognizer tgr = new();
         tgr.Command = ClickedEventCommand;
         l1.GestureRecognizers.Add(tgr);
+        /*
+        var touchBehavior = new TouchBehavior
+        {
+            DefaultAnimationDuration = 250,
+            DefaultAnimationEasing = Easing.CubicInOut,
+            PressedOpacity = 0.6,
+            PressedScale = 0.8
+        };
+        l1.Behaviors.Add( touchBehavior);
+        */
+        // CommunityToolkit.Maui.Behaviors.
 
         Columns.Clear();
         ColumnDefinition cd3 = new();
@@ -1240,6 +1339,8 @@ public class TreeViewItem : Grid, INotifyPropertyChanged
         g1.SetColumn(b1, 0);
         g1.Add(b1);
 
+
+ 
         /*
         Button l1 = new();
         l1.Text = "Labeltext";
@@ -1272,7 +1373,13 @@ public class TreeViewItem : Grid, INotifyPropertyChanged
         l1.SetCursorHand();
         Thickness margin = new Thickness(0, GlobalSpecs.CurrentGlobalSpecs!.GetClickMarginPixel(), 0, GlobalSpecs.CurrentGlobalSpecs.GetClickMarginPixel());
         l1.Margin = margin;
+        var touchBehaviorB1 = new TouchBehavior
+        {
+            HoveredOpacity = 0.7,
+            PressedOpacity = 0.7
 
+        };
+        l1.Behaviors.Add(touchBehaviorB1);
 
 
         Columns.Clear();
@@ -2495,7 +2602,15 @@ public class TabItem: Grid, INotifyPropertyChanged
         t.SelectButton.Clicked += SelectTabItem;
         // t.SelectButton.Background = Colors.Red;
         t.TypeID = typeID;
+        /*
+        var touchBehaviorT = new TouchBehavior
+        {
+            // HoveredBackgroundColor = "{StaticResource Gray900}",
+            HoveredScale = 1.2
 
+        };
+        t.SelectButton.Behaviors.Add(touchBehaviorT);
+        */
         TabPanels.Add(t);
 
         Headline.ColumnDefinitions.Add(new ColumnDefinition(GridLength.Auto));

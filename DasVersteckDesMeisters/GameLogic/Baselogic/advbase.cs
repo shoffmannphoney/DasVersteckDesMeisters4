@@ -2315,6 +2315,9 @@ namespace GameCore
 
                 CB!.Prep_for = Preps.AddLoca("AdvBase_InitializeGame_prep_for");
                 CB!.Prep_into = Preps.AddLoca("AdvBase_InitializeGame_prep_into");
+
+                CB!.Prep_wo = Preps.AddLoca("prep_wo");
+                CB!.Prep_was = Preps.AddLoca("prep_was");
             }
             else
             {
@@ -3576,6 +3579,10 @@ namespace GameCore
         public Prep? Prep_for;
         public Prep? Prep_into;
         public Prep? Prep_upon;
+
+        public Prep? Prep_wo;
+       public Prep? Prep_was;
+
 
 
         public Pronoun Pronoun_Male = new();

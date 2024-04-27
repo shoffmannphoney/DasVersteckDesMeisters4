@@ -20,6 +20,212 @@ namespace GameCore
         // Phase 1: Wir befinden uns in einer der Anfangs-location
         public void GoMCDialog(MCMenu mcM, List<int> tFollower, List<int> cFollower)
         {
+            mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Order_GoMCDialog_Person_Self_10293", 1, 1 + CB!.MCE_Choice_Off, false));
+            int ix = 100;
+            int cix = 2;
+
+            cFollower.Add(ix);
+            mcM.Add(MCMenuEntry.MCMenuEntryLoca(null, "Order_GoMCDialog_Person_Self_10294", ix, -1, false, true));
+            ix += 1;
+
+            if (A.ActLoc <= CA!.L04_Shabby_Little_Chamber)
+            {
+                AddLoc(CA!.L01_Dark_Forest, mcM, Goto_L01_Dark_Forest, cFollower, ref ix);
+                AddLoc(CA!.L02_In_Front_Of_A_Hut, mcM, Goto_L02_In_Front_Of_A_Hut, cFollower, ref ix);
+                AddLoc(CA!.L03_In_The_Parlor, mcM, Goto_L03_In_The_Parlor, cFollower, ref ix);
+                AddLoc(CA!.L04_Shabby_Little_Chamber, mcM, Goto_L04_Shabby_Little_Chamber, cFollower, ref ix);
+            }
+            else
+            {
+                AddLoc(CA!.L05_Atrium, mcM, Goto_L05_Atrium, cFollower, ref ix);
+                AddLoc(CA!.L06_Long_Floor, mcM, Goto_L06_Long_Floor, cFollower, ref ix);
+                AddLoc(CA!.L07_Lower_Floor, mcM, Goto_L07_Lower_Floor, cFollower, ref ix);
+                AddLoc(CA!.L08_Laundry_Room, mcM, Goto_L08_Laundry_Room, cFollower, ref ix);
+                AddLoc(CA!.L09_Library, mcM, Goto_L09_Library, cFollower, ref ix);
+                AddLoc(CA!.L10_Laboratory, mcM, Goto_L10_Laboratory, cFollower, ref ix);
+                AddLoc(CA!.L11_Storage_Room, mcM, Goto_L11_Storage_Room, cFollower, ref ix);
+                AddLoc(CA!.L12_Sleeping_Room, mcM, Goto_L12_Sleeping_Room, cFollower, ref ix);
+                AddLoc(CA!.L13_Kitchen, mcM, Goto_L13_Kitchen, cFollower, ref ix);
+                AddLoc(CA!.L14_Bathroom, mcM, Goto_L14_Bathroom, cFollower, ref ix);
+
+            }
+            cFollower.Add(ix);
+            mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Order_GoMCDialog_Person_Self_10295", ix, -1, true, true));
+            ix += 1;
+
+
+            // MC-Menü wird gesetzt
+            mcM.Add(new MCMenuEntry(1 + CB!.MCE_Choice_Off, cFollower));
+        }
+        public bool Goto_L14_Bathroom(List<MCMenuEntry>? MCMEntry, bool doRecord = false)
+        {
+
+            DoRoute(CA!.L14_Bathroom, doRecord);
+
+            return true;
+        }
+        public bool Goto_L14_Bathroom(List<MCMenuEntry>? MCMEntry)
+        {
+            return Goto_L14_Bathroom(MCMEntry, false);
+        }
+        public bool Goto_L13_Kitchen(List<MCMenuEntry>? MCMEntry, bool doRecord = false)
+        {
+
+            DoRoute(CA!.L13_Kitchen, doRecord);
+
+            return true;
+        }
+        public bool Goto_L13_Kitchen(List<MCMenuEntry>? MCMEntry)
+        {
+            return Goto_L13_Kitchen(MCMEntry, false);
+        }
+        public bool Goto_L12_Sleeping_Room(List<MCMenuEntry>? MCMEntry, bool doRecord = false)
+        {
+
+            DoRoute(CA!.L12_Sleeping_Room, doRecord);
+
+            return true;
+        }
+        public bool Goto_L12_Sleeping_Room(List<MCMenuEntry>? MCMEntry)
+        {
+            return Goto_L12_Sleeping_Room(MCMEntry, false);
+        }
+        public bool Goto_L11_Storage_Room(List<MCMenuEntry>? MCMEntry, bool doRecord = false)
+        {
+
+            DoRoute(CA!.L11_Storage_Room, doRecord);
+
+            return true;
+        }
+        public bool Goto_L11_Storage_Room(List<MCMenuEntry>? MCMEntry)
+        {
+            return Goto_L11_Storage_Room(MCMEntry, false);
+        }
+        public bool Goto_L10_Laboratory(List<MCMenuEntry>? MCMEntry, bool doRecord = false)
+        {
+
+            DoRoute(CA!.L10_Laboratory, doRecord);
+
+            return true;
+        }
+        public bool Goto_L10_Laboratory(List<MCMenuEntry>? MCMEntry)
+        {
+            return Goto_L10_Laboratory(MCMEntry, false);
+        }
+        public bool Goto_L09_Library(List<MCMenuEntry>? MCMEntry, bool doRecord = false)
+        {
+
+            DoRoute(CA!.L09_Library, doRecord);
+
+            return true;
+        }
+        public bool Goto_L09_Library(List<MCMenuEntry>? MCMEntry)
+        {
+            return Goto_L09_Library(MCMEntry, false);
+        }
+        public bool Goto_L08_Laundry_Room(List<MCMenuEntry>? MCMEntry, bool doRecord = false)
+        {
+
+            DoRoute(CA!.L08_Laundry_Room, doRecord);
+
+            return true;
+        }
+        public bool Goto_L08_Laundry_Room(List<MCMenuEntry>? MCMEntry)
+        {
+            return Goto_L08_Laundry_Room(MCMEntry, false);
+        }
+        public bool Goto_L07_Lower_Floor(List<MCMenuEntry>? MCMEntry, bool doRecord = false)
+        {
+
+            DoRoute(CA!.L07_Lower_Floor, doRecord);
+
+            return true;
+        }
+        public bool Goto_L07_Lower_Floor(List<MCMenuEntry>? MCMEntry)
+        {
+            return Goto_L07_Lower_Floor(MCMEntry, false);
+        }
+        public bool Goto_L06_Long_Floor(List<MCMenuEntry>? MCMEntry, bool doRecord = false)
+        {
+
+            DoRoute(CA!.L06_Long_Floor, doRecord);
+
+            return true;
+        }
+        public bool Goto_L06_Long_Floor(List<MCMenuEntry>? MCMEntry)
+        {
+            return Goto_L06_Long_Floor(MCMEntry, false);
+        }
+        public bool Goto_L05_Atrium(List<MCMenuEntry>? MCMEntry, bool doRecord = false)
+        {
+
+            DoRoute(CA!.L05_Atrium, doRecord);
+
+            return true;
+        }
+        public bool Goto_L05_Atrium(List<MCMenuEntry>? MCMEntry)
+        {
+            return Goto_L05_Atrium(MCMEntry, false);
+        }
+
+
+        public bool Goto_L01_Dark_Forest(List<MCMenuEntry>? MCMEntry, bool doRecord = false)
+        {
+
+            DoRoute(CA!.L01_Dark_Forest, doRecord);
+
+            return true;
+        }
+        public bool Goto_L01_Dark_Forest(List<MCMenuEntry>? MCMEntry)
+        {
+            return Goto_L01_Dark_Forest(MCMEntry, false);
+        }
+
+
+        public bool Goto_L02_In_Front_Of_A_Hut(List<MCMenuEntry>? MCMEntry, bool doRecord = false)
+        {
+
+            DoRoute(CA!.L02_In_Front_Of_A_Hut, doRecord);
+
+            return true;
+        }
+        public bool Goto_L02_In_Front_Of_A_Hut(List<MCMenuEntry>? MCMEntry)
+        {
+            return Goto_L02_In_Front_Of_A_Hut(MCMEntry, false);
+        }
+        public bool Goto_L03_In_The_Parlor(List<MCMenuEntry>? MCMEntry, bool doRecord = false)
+        {
+
+            DoRoute(CA!.L03_In_The_Parlor, doRecord);
+
+            return true;
+        }
+        public bool Goto_L03_In_The_Parlor(List<MCMenuEntry>? MCMEntry)
+        {
+            return Goto_L03_In_The_Parlor(MCMEntry, false);
+        }
+        public bool Goto_L04_Shabby_Little_Chamber(List<MCMenuEntry>? MCMEntry, bool doRecord = false)
+        {
+
+            DoRoute(CA!.L04_Shabby_Little_Chamber, doRecord);
+
+            return true;
+        }
+        public bool Goto_L04_Shabby_Little_Chamber(List<MCMenuEntry>? MCMEntry)
+        {
+            return Goto_L04_Shabby_Little_Chamber(MCMEntry, false);
+        }
+
+        public void AddLoc( int Loc, MCMenu mcM, Phoney_MAUI.Model.DelMCMenuEntry Callback, List<int> cFollower, ref int Ix )
+        {
+            if (locations!.Find(Loc)!.Visited && A!.ActLoc != Loc)
+            {
+                cFollower.Add(Ix);
+                mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, locations!.Find(Loc)!.LocaLocName, Ix, -1, false, true));
+                mcM.Last()!.SetDel(Callback);
+                Ix++;
+            }
+
         }
 
         public void DoRoute(int Dest, bool doRecord = false, bool forceBrief = true)
