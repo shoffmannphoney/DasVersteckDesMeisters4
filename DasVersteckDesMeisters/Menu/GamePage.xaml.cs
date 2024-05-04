@@ -53,75 +53,81 @@ public partial class GamePage : ContentPage, IMenuExtension
     // public GamePage()
     public GamePage(GameViewModel viewModelGame, MainViewModel viewModelMain, GeneralViewModel viewModelGeneral, MenuExtension menuExtension, IUIServices iuis)
     {
-        GD = GlobalData.CurrentGlobalData!;
-        GD.InitProcess = true;
+        try
+        {
+            GD = GlobalData.CurrentGlobalData!;
+            GD.InitProcess = true;
 
 
-        GlobalSpecs.CurrentGlobalSpecs!.InitRunning = IGlobalSpecs.initRunning.started;
-        InitializeComponent();
+            GlobalSpecs.CurrentGlobalSpecs!.InitRunning = IGlobalSpecs.initRunning.started;
+            InitializeComponent();
 
-         BindingContext = _viewModelMain = viewModelMain;
-        _viewModelGeneral = viewModelGeneral;
-        _viewModelGeneral.SetCallbackChangeOrientation((IGlobalData._callbackChangeOrientation)viewModelGame.ChangeOrientation);
-        _viewModelGame = viewModelGame;
-        _menuExtension = menuExtension;
+            BindingContext = _viewModelMain = viewModelMain;
+            _viewModelGeneral = viewModelGeneral;
+            _viewModelGeneral.SetCallbackChangeOrientation((IGlobalData._callbackChangeOrientation)viewModelGame.ChangeOrientation);
+            _viewModelGame = viewModelGame;
+            _menuExtension = menuExtension;
 
-        UIS = iuis;
-        // UIS.GD = GD;
-        UIS.UpdateBrowserBlocked = true;
+            UIS = iuis;
+            // UIS.GD = GD;
+            UIS.UpdateBrowserBlocked = true;
 
 #if WINDOWS
-        SendButton.SetCursorCross();
-        Button_More_Inner.SetCursorHand();
-        MenuButton.SetCursorHand();
+            SendButton.SetCursorCross();
+            Button_More_Inner.SetCursorHand();
+            MenuButton.SetCursorHand();
 
-        // PB1.SetCursorHelp();
-        // PB2.SetCursorHelp();
+            // PB1.SetCursorHelp();
+            // PB2.SetCursorHelp();
 #endif
 
-        // GD!.LayoutDescription.OrderListPos = ILayoutDescription.selectedPosition.leftUp;
-        // GD!.LayoutDescription.ItemsLocListPos = ILayoutDescription.selectedPosition.leftDown;
-        // GD!.LayoutDescription.ItemsInvListPos = ILayoutDescription.selectedPosition.leftUp;
+            // GD!.LayoutDescription.OrderListPos = ILayoutDescription.selectedPosition.leftUp;
+            // GD!.LayoutDescription.ItemsLocListPos = ILayoutDescription.selectedPosition.leftDown;
+            // GD!.LayoutDescription.ItemsInvListPos = ILayoutDescription.selectedPosition.leftUp;
 #if WINDOWS
-        Grid_Input_Sub.ColumnDefinitions[0].Width = new GridLength(0);
-        // Grid_Input_Sub.ColumnDefinitions[1].Width = new GridLength(0);
+            Grid_Input_Sub.ColumnDefinitions[0].Width = new GridLength(0);
+            // Grid_Input_Sub.ColumnDefinitions[1].Width = new GridLength(0);
 #endif
-        SetStarToAbsolute();
-        // SetGamePageLayout();
+            SetStarToAbsolute();
+            // SetGamePageLayout();
 
 
-        UIS.SetSetLanguage(SetLanguage);
-        UIS!.SetScoreMethod(SetScore);
+            UIS.SetSetLanguage(SetLanguage);
+            UIS!.SetScoreMethod(SetScore);
 
-        _menuExtension!.SetMenuExtension(GetMenuGridLeft, GetMenuGridTotal, GetMenuGridMenu, WebView_Grid, Page_Grid, GetMenuButton, GetUIServices, GetAbsoluteLayout, GetMenuTitle, nameof(GamePage));
-        UIS.ExternalGameOut = GameOut;
-        // UIS.ExternalGameOut.Navigating += UIS.WebView1_Navigating;
-        // UIS.ExternalGameOut.Navigated += UIS.WebView1_Navigated;
+            _menuExtension!.SetMenuExtension(GetMenuGridLeft, GetMenuGridTotal, GetMenuGridMenu, WebView_Grid, Page_Grid, GetMenuButton, GetUIServices, GetAbsoluteLayout, GetMenuTitle, nameof(GamePage));
+            UIS.ExternalGameOut = GameOut;
+            // UIS.ExternalGameOut.Navigating += UIS.WebView1_Navigating;
+            // UIS.ExternalGameOut.Navigated += UIS.WebView1_Navigated;
 
-        App.CurrentPage = this;
+            App.CurrentPage = this;
 
-        GD.MenuExtension = (MenuExtension)_menuExtension;
+            GD.MenuExtension = (MenuExtension)_menuExtension;
 
-        UIS.ExternalGameOut = GameOut;
-        UIS.ExternalGameOut.Navigating += UIS.WebView1_Navigating;
+            UIS.ExternalGameOut = GameOut;
+            UIS.ExternalGameOut.Navigating += UIS.WebView1_Navigating;
 
-        WebView n = new();
-        n.Navigating += UIS.WebView1_Navigating;
- 
-        GD.Adventure!.SetScoreOutput();
+            WebView n = new();
+            n.Navigating += UIS.WebView1_Navigating;
 
-        // UIS.UpdateBrowser();
+            GD.Adventure!.SetScoreOutput();
+
+            // UIS.UpdateBrowser();
 
 
-        // GameOutput.Source = new HtmlWebViewSource
-        // {
-        // Html = GlobalData._CurrentGlobalData!.WebViewContent
-        // };
+            // GameOutput.Source = new HtmlWebViewSource
+            // {
+            // Html = GlobalData._CurrentGlobalData!.WebViewContent
+            // };
 
-        // GameOutput.Source = "https://www.gmx.net/";
+            // GameOutput.Source = "https://www.gmx.net/";
 
-        UIS.UpdateBrowserBlocked = false;
-        GlobalSpecs.CurrentGlobalSpecs.InitRunning = IGlobalSpecs.initRunning.finished;
+            UIS.UpdateBrowserBlocked = false;
+            GlobalSpecs.CurrentGlobalSpecs.InitRunning = IGlobalSpecs.initRunning.finished;
+        }
+        catch (Exception e)
+        {
+        }
     }
 
 #if WINDOWS
@@ -138,6 +144,8 @@ public partial class GamePage : ContentPage, IMenuExtension
 
         if( Grid_More.IsVisible == true )
         {
+            GlobalData.AddLog("PageDown by Keyboard", IGlobalData.protMode.crisp);
+
             UIS.Scr.PageDown();
 
             ea.Handled = true;
@@ -1665,7 +1673,9 @@ public partial class GamePage : ContentPage, IMenuExtension
 
                 }
 
-
+                EmptyEmptyTreeViewItem(EmptyTreeOrderOld );
+                EmptyEmptyTreeViewItem(EmptyTreeItemInvOld);
+                EmptyEmptyTreeViewItem(EmptyTreeItemLocOld);
                 EmptyTreeOrderOld = EmptyTreeOrderNew;
                 EmptyTreeItemInvOld = EmptyTreeItemInvNew;
                 EmptyTreeItemLocOld = EmptyTreeItemLocNew;
@@ -2685,6 +2695,56 @@ public partial class GamePage : ContentPage, IMenuExtension
         return true;
     }
 
+
+    public static void EmptyEmptyTreeViewItem(EmptyTreeViewItem tv)
+    {
+        try
+        {
+            if (tv is EmptyTreeViewItem )
+            {
+                EmptyTreeViewItem tv2 = tv as EmptyTreeViewItem;
+
+                foreach (EmptyTreeViewItem iv in tv2.Children)
+                {
+                    if (iv is EmptyTreeViewItem)
+                    {
+                        EmptyTreeViewItem tvi = iv as EmptyTreeViewItem;
+
+                        EmptyEmptyTreeViewItem(tvi);
+
+                        (iv as EmptyTreeViewItem).Children.Clear();
+                    }
+                    else
+                    {
+                        GlobalData.AddLog("Nicht ausgewertet: " + iv.GetType().ToString(), IGlobalData.protMode.crisp);
+
+                    }
+                }
+                tv2.Children.Clear();
+                if (tv is EmptyTreeView)
+                {
+                    EmptyTreeView tv3 = tv as EmptyTreeView;
+                }
+                else if (tv is EmptyTreeViewItem)
+                {
+                    EmptyTreeViewItem tv3 = tv as EmptyTreeViewItem;
+                }
+
+            }
+            else
+            {
+                GlobalData.AddLog("EETVI Nicht ausgewertet: " + tv.GetType().ToString(), IGlobalData.protMode.crisp);
+            }
+        }
+        catch (Exception ex)
+        {
+            string s = ex.Message;
+            GlobalData.AddLog("EmptyEmptyTreeViewItem: " + s, IGlobalData.protMode.crisp);
+
+
+        }
+    }
+
     TreeViewItem AddTreeViewItem( TreeViewItem tv, string? Name, string? CallString )
     {
         TreeViewItem tv1 = new();
@@ -2693,7 +2753,7 @@ public partial class GamePage : ContentPage, IMenuExtension
         tv1.Text = Name!;
         tv.Add(tv1);
         tv1.SetCursorHand();
-        tv1.Clicked += SelectTreeViewItem;
+        tv1.SetClicked(SelectTreeViewItem);
         tv1.HorizontalOptions = LayoutOptions.Start;
         tv1.CascadeInputTransparent = false;
         tv1.InputTransparent = false;
@@ -2714,7 +2774,7 @@ public partial class GamePage : ContentPage, IMenuExtension
         return tv1;
     }
 
-    private class EmptyTreeViewItem
+    public class EmptyTreeViewItem
     {
         public List<EmptyTreeViewItem> Children { get; set; }
         public int ID { get; set; }
@@ -4186,227 +4246,235 @@ public partial class GamePage : ContentPage, IMenuExtension
 
     protected override async void OnNavigatedTo(NavigatedToEventArgs args)
     {
- 
+
+        try
+        {
 #if WINDOWS
-        var nativeView = Inputline.Handler;
-        var pv = nativeView!.PlatformView;
-        (pv as Microsoft.Maui.Platform.MauiPasswordTextBox)!.BorderThickness = new Microsoft.UI.Xaml.Thickness(0);
-        (pv as Microsoft.Maui.Platform.MauiPasswordTextBox)!.FocusVisualPrimaryThickness = new Microsoft.UI.Xaml.Thickness(0);
-        (pv as Microsoft.Maui.Platform.MauiPasswordTextBox)!.FocusVisualSecondaryThickness = new Microsoft.UI.Xaml.Thickness(0);
-        // (pv as Microsoft.Maui.Platform.MauiPasswordTextBox).SelectionHighlightColor = Microsoft.UI.Xaml.Media.SolidColorBrush.ColorProperty("Red;
+            var nativeView = Inputline.Handler;
+            var pv = nativeView!.PlatformView;
+            (pv as Microsoft.Maui.Platform.MauiPasswordTextBox)!.BorderThickness = new Microsoft.UI.Xaml.Thickness(0);
+            (pv as Microsoft.Maui.Platform.MauiPasswordTextBox)!.FocusVisualPrimaryThickness = new Microsoft.UI.Xaml.Thickness(0);
+            (pv as Microsoft.Maui.Platform.MauiPasswordTextBox)!.FocusVisualSecondaryThickness = new Microsoft.UI.Xaml.Thickness(0);
+            // (pv as Microsoft.Maui.Platform.MauiPasswordTextBox).SelectionHighlightColor = Microsoft.UI.Xaml.Media.SolidColorBrush.ColorProperty("Red;
 
 #endif
 
 
-        if (GD.STTMicroState == IGlobalData.microMode.off )
-        {
-            Grid_Input_Sub.ColumnDefinitions[1].Width = new GridLength(0);
-            Grid_MC.ColumnDefinitions[1].Width = new GridLength(0);
-            Grid_More.ColumnDefinitions[1].Width = new GridLength(0);
-            Mike.IsVisible = false;
-            Mike2.IsVisible = false;
-            Mike3.IsVisible = false;
-        }
-        else
-        {
-            Grid_Input_Sub.ColumnDefinitions[1].Width = new GridLength(30);
-            Grid_MC.ColumnDefinitions[1].Width = new GridLength(30);
-            Grid_More.ColumnDefinitions[1].Width = new GridLength(30);
-            Mike.IsVisible = true;
-            Mike2.IsVisible = true;
-            Mike3.IsVisible = true;
-        }
+            if (GD.STTMicroState == IGlobalData.microMode.off)
+            {
+                Grid_Input_Sub.ColumnDefinitions[1].Width = new GridLength(0);
+                Grid_MC.ColumnDefinitions[1].Width = new GridLength(0);
+                Grid_More.ColumnDefinitions[1].Width = new GridLength(0);
+                Mike.IsVisible = false;
+                Mike2.IsVisible = false;
+                Mike3.IsVisible = false;
+            }
+            else
+            {
+                Grid_Input_Sub.ColumnDefinitions[1].Width = new GridLength(30);
+                Grid_MC.ColumnDefinitions[1].Width = new GridLength(30);
+                Grid_More.ColumnDefinitions[1].Width = new GridLength(30);
+                Mike.IsVisible = true;
+                Mike2.IsVisible = true;
+                Mike3.IsVisible = true;
+            }
 
 
-        GlobalSpecs.CurrentGlobalSpecs!.InitRunning = IGlobalSpecs.initRunning.started;
+            GlobalSpecs.CurrentGlobalSpecs!.InitRunning = IGlobalSpecs.initRunning.started;
 
-        UIS.UpdateBrowserBlocked = true;
+            UIS.UpdateBrowserBlocked = true;
 
-        GlobalSpecs.CurrentGlobalSpecs!.SetCurrentPage(CurrentPage);
-        GD.MenuExtension = (MenuExtension)_menuExtension!;
+            GlobalSpecs.CurrentGlobalSpecs!.SetCurrentPage(CurrentPage);
+            GD.MenuExtension = (MenuExtension)_menuExtension!;
 
-        GD.SetDelProvideMCGrid( ProvideMCGrid! );
-        UIS.SetLocalUIUpdate(SetGamePageLayout);
+            GD.SetDelProvideMCGrid(ProvideMCGrid!);
+            UIS.SetLocalUIUpdate(SetGamePageLayout);
 
-        GlobalData.CurrentGlobalData!.UIS = UIS;
+            GlobalData.CurrentGlobalData!.UIS = UIS;
 
-        _viewModelGeneral!.SetCallbackChangeOrientation((IGlobalData._callbackChangeOrientation)ChangeOrientation);
-        _viewModelGeneral!.SetCallbackResize((IGlobalData._callbackResize)DoResize);
-        base.OnNavigatedTo(args);
+            _viewModelGeneral!.SetCallbackChangeOrientation((IGlobalData._callbackChangeOrientation)ChangeOrientation);
+            _viewModelGeneral!.SetCallbackResize((IGlobalData._callbackResize)DoResize);
+            base.OnNavigatedTo(args);
 
-        await _viewModelMain!.Initialize();
+            await _viewModelMain!.Initialize();
 
-        double w = this.Width;
-        double h = this.Height;
+            double w = this.Width;
+            double h = this.Height;
 
 #if ANDROID
         w = DeviceDisplay.MainDisplayInfo.Width;
         h = DeviceDisplay.MainDisplayInfo.Height;
 #endif
 
-        _viewModelGeneral.InitResize(w, h);
+            _viewModelGeneral.InitResize(w, h);
 
-        Inputline.BindingContext = _viewModelGame;
+            Inputline.BindingContext = _viewModelGame;
 
-        GlobalData.CurrentGlobalData!.Inputline = Inputline;
-        GlobalData.CurrentGlobalData!.FocusMethod = SetInputFocus;
+            GlobalData.CurrentGlobalData!.Inputline = Inputline;
+            GlobalData.CurrentGlobalData!.FocusMethod = SetInputFocus;
 
-        val++;
-        GlobalData.CurrentGlobalData!.SetHtmlFromTheme();
-        UIS!.ExternalGameOut = GameOut;
-        ChangeOrientation(GD.LayoutDescription.ScreenMode);
-        /*
-        try
-        {
-            UIS!.ExternalGameOut!.Navigating! -= UIS!.WebView1_Navigating!;
-            UIS!.ExternalGameOut!.Navigated -= UIS!.WebView1_Navigating2!;
+            val++;
+            GlobalData.CurrentGlobalData!.SetHtmlFromTheme();
+            UIS!.ExternalGameOut = GameOut;
+            ChangeOrientation(GD.LayoutDescription.ScreenMode);
+            /*
+            try
+            {
+                UIS!.ExternalGameOut!.Navigating! -= UIS!.WebView1_Navigating!;
+                UIS!.ExternalGameOut!.Navigated -= UIS!.WebView1_Navigating2!;
 
-        }
-        catch 
-        {
-        }
-        */
+            }
+            catch 
+            {
+            }
+            */
 
 
-        UIS.ExternalGameOut.Navigating += UIS.WebView1_Navigating; 
-        UIS.ExternalGameOut.Navigated += UIS.WebView1_Navigating2;
+            UIS.ExternalGameOut.Navigating += UIS.WebView1_Navigating;
+            UIS.ExternalGameOut.Navigated += UIS.WebView1_Navigating2;
 
-        // UIS.ExternalGameOut.Loaded += UIS.WebView1_Navigating3;
+            // UIS.ExternalGameOut.Loaded += UIS.WebView1_Navigating3;
 
-        if (val >= 1)
-        {
-            // HtmlWebViewSource.
-            // GameOutput.Source = new HtmlWebViewSource
-            // {
-            // 
-            // Html = GlobalData.CurrentGlobalData!.WebViewContent,
-            // };
-        }
+            if (val >= 1)
+            {
+                // HtmlWebViewSource.
+                // GameOutput.Source = new HtmlWebViewSource
+                // {
+                // 
+                // Html = GlobalData.CurrentGlobalData!.WebViewContent,
+                // };
+            }
 
-        SetLanguage();
-        UIS!.SetSetLanguage(SetLanguage);
-        UIS!.SetScoreEpisodeMethod(SetScoreEpisode);
-        UIS!.SetScoreMethod(SetScore);
-        UIS!.SetMCMVVisibleCallback(DoToggleMCMV);
-        _menuExtension!.SetLocalMethod(DoGamePageMenu);
-        _menuExtension!.CurrentMenuName = nameof(GamePage);
+            SetLanguage();
+            UIS!.SetSetLanguage(SetLanguage);
+            UIS!.SetScoreEpisodeMethod(SetScoreEpisode);
+            UIS!.SetScoreMethod(SetScore);
+            UIS!.SetMCMVVisibleCallback(DoToggleMCMV);
+            _menuExtension!.SetLocalMethod(DoGamePageMenu);
+            _menuExtension!.CurrentMenuName = nameof(GamePage);
 
-          _menuExtension!.QuitMethod = PressEndLocal;
+            _menuExtension!.QuitMethod = PressEndLocal;
 
-        GD.SetDelProvideMCGrid(ProvideMCGrid!);
-        GD.SetDelProvideMoreGrid(ProvideMoreGrid);
-        GD.SetDelSelectOutput(SelectOutput);
+            GD.SetDelProvideMCGrid(ProvideMCGrid!);
+            GD.SetDelProvideMoreGrid(ProvideMoreGrid);
+            GD.SetDelSelectOutput(SelectOutput);
 
 
 #if WINDOWS
-        SetupKeyboardHandler();
- 
+            SetupKeyboardHandler();
+
 #endif
-        UIS.UpdateBrowserBlocked = true;
-        UIS.STTListenigModeChangeCB = SetMicrophone;
-        UIS.HeadlineLabel = WindowTitle;
+            UIS.UpdateBrowserBlocked = true;
+            UIS.STTListenigModeChangeCB = SetMicrophone;
+            UIS.HeadlineLabel = WindowTitle;
 
-        GD.OrderList!.DisableTempOrderList();
+            GD.OrderList!.DisableTempOrderList();
 
-        if (GD.Adventure == null)
-        {
-            GD.AskForPlayLevel = true;
-            GD.Adventure = new GameCore.Adv( true, true);
-            GD.Adventure!.Orders!.ReadSlotDescription();
-
-            GD.ValidRun = true;
-            GD!.Adventure!.SetScoreOutput();
-            // UIS!.StoryTextObj!.RecalcLatest();
-            // UIS!.StoryTextObj!.TextReFreshman();
-            if (GD.Adventure != null && GD.AskForPlayLevel)
+            if (GD.Adventure == null)
             {
-                GD!.Adventure!.Orders!.GenericDialog(null, GD.Adventure!.Orders!.SetupDialog);
-                GD!.AskForPlayLevel = false;
+                GD.AskForPlayLevel = true;
+                GD.Adventure = new GameCore.Adv(true, true);
+                GD.Adventure!.Orders!.ReadSlotDescription();
 
-                // UIS.StoryTextObj.AdvTextOut();
-            }
-            // UIS.StoryTextObj.AdvTextRefresh(true);
-        }
-        else
-        {
-            // UIS!.StoryTextObj!.RecalcLatest();
-            // UIS!.StoryTextObj!.TextReFreshman();
-
-            if (GD.Adventure != null && GD.AskForPlayLevel)
-            {
-                GD!.Adventure!.Orders!.GenericDialog(null, GD.Adventure!.Orders!.SetupDialog);
-                GD!.AskForPlayLevel = false;
-                // UIS.StoryTextObj.AdvTextOut();
-            }
-            // UIS.StoryTextObj.AdvTextRefresh(true);
-        }
-
-        UIS!.StoryTextObj!.RecalcLatest();
-        UIS!.StoryTextObj!.TextReFreshman();
-        UIS!.StoryTextObj!.AdvTextRefresh(true);
-        GlobalSpecs.CurrentGlobalSpecs.InitRunning = IGlobalSpecs.initRunning.finished;
-
-
-        if( UIS.MCMVVisible == true )
-        {
-            if (UIS.MCM != null)
-            {
-                // RestoreGeneratedDialog( , string FuncName)
-
-                Phoney_MAUI.Model.DelMCMSelection? sel = UIS.MCM.MCS != null ? UIS.MCM.MCS.GetCallbackSelection() : null ;
-
-                UIS.MCM.MCS = UIS.MCM.MenuShow();
-                if (GD.LatestGameDefinition != null)
+                GD.ValidRun = true;
+                GD!.Adventure!.SetScoreOutput();
+                // UIS!.StoryTextObj!.RecalcLatest();
+                // UIS!.StoryTextObj!.TextReFreshman();
+                if (GD.Adventure != null && GD.AskForPlayLevel)
                 {
-                    GD.Adventure!.Orders!.MCCallbackName = GD.LatestGameDefinition.MCCallbackName;
-                    if( sel == null )
-                    {
-                        if( GD.Adventure.Orders.MCCallbackName == "MCSelection" || GD.Adventure.Orders.MCCallbackName == null )
-                        {
-                            sel = UIS.MCM.MCSelection;
-                        }
-                        else
-                        {
+                    GD!.Adventure!.Orders!.GenericDialog(null, GD.Adventure!.Orders!.SetupDialog);
+                    GD!.AskForPlayLevel = false;
 
+                    // UIS.StoryTextObj.AdvTextOut();
+                }
+                // UIS.StoryTextObj.AdvTextRefresh(true);
+            }
+            else
+            {
+                // UIS!.StoryTextObj!.RecalcLatest();
+                // UIS!.StoryTextObj!.TextReFreshman();
+
+                if (GD.AskForPlayLevel)
+                {
+                    GD!.Adventure!.Orders!.GenericDialog(null, GD.Adventure!.Orders!.SetupDialog);
+                    GD!.AskForPlayLevel = false;
+                    // UIS.StoryTextObj.AdvTextOut();
+                }
+                // UIS.StoryTextObj.AdvTextRefresh(true);
+            }
+
+            UIS!.StoryTextObj!.RecalcLatest();
+            UIS!.StoryTextObj!.TextReFreshman();
+            UIS!.StoryTextObj!.AdvTextRefresh(true);
+            GlobalSpecs.CurrentGlobalSpecs.InitRunning = IGlobalSpecs.initRunning.finished;
+
+
+            if (UIS.MCMVVisible == true)
+            {
+                if (UIS.MCM != null)
+                {
+                    // RestoreGeneratedDialog( , string FuncName)
+
+                    Phoney_MAUI.Model.DelMCMSelection? sel = UIS.MCM.MCS != null ? UIS.MCM.MCS.GetCallbackSelection() : null;
+
+                    UIS.MCM.MCS = UIS.MCM.MenuShow();
+                    if (GD.LatestGameDefinition != null)
+                    {
+                        GD.Adventure!.Orders!.MCCallbackName = GD.LatestGameDefinition.MCCallbackName;
+                        if (sel == null)
+                        {
+                            if (GD.Adventure.Orders.MCCallbackName == "MCSelection" || GD.Adventure.Orders.MCCallbackName == null)
+                            {
+                                sel = UIS.MCM.MCSelection;
+                            }
+                            else
+                            {
+
+                            }
                         }
                     }
+
+                    if (sel != null)
+                        UIS.MCM.MCS.SetCallbackSelection(sel);
+                    GD.Adventure!.Orders!.temporaryMCMenu = UIS.MCM;
+                    GD.Adventure!.Orders!.persistentMCMenu = null;
+
+                    bool continued = UIS.MCM.Set(GD.Adventure.Orders.MCID);
+
+                    Person? p = GD.Adventure.Persons!.Find(GD.Adventure.Orders.MCPersonID);
+
+                    if (continued)
+                        UIS.MCM.MCS.MCOutput(UIS.MCM, UIS.MCM.MCS.GetCallbackSelection(), false);
+
+
+                    UIS.Scr.PageToEnd();
                 }
-
-                if ( sel != null )
-                    UIS.MCM.MCS.SetCallbackSelection(sel);
-                GD.Adventure!.Orders!.temporaryMCMenu = UIS.MCM;
-                GD.Adventure!.Orders!.persistentMCMenu = null;
-
-                bool continued = UIS.MCM.Set(GD.Adventure.Orders.MCID);
-
-                Person? p = GD.Adventure.Persons!.Find(GD.Adventure.Orders.MCPersonID);
-
-                if (continued)
-                    UIS.MCM.MCS.MCOutput(UIS.MCM, UIS.MCM.MCS.GetCallbackSelection(), false);
-
-
-                UIS.Scr.PageToEnd();
             }
+            GD.UIS!.RecalcPictures(true);
+
+            SetGamePageLayout();
+
+            // UIS!.Scr.JumpToEndInstantly();
+            // UIS!.InitBrowserUpdate();
+
+            UIS.UpdateBrowserBlocked = false;
+            UIS!.InitBrowserUpdate();
+            _menuExtension.ListCalls.Add(new(DoSpeech, -1));
+
+            UIS!.Scr.YPosMode = Scroller.YPosModes.startwebview;
+
+
+            UIS.SetUICallback(SetGamePageLayout, ExecuteGamePageLayout);
+            GameOut.SetCBFullyLoaded(GD.UIS!.Scr.ResetWait);
+            GameOut.SetProtocol(GlobalData.InitLog, (WebViewInterop.DelVoidStringProtMode) GlobalData.AddLog);
+            UIS!.FinishBrowserUpdate(IUIServices.onBrowserContentLoaded.SetToEnd);
+            GD.InitProcess = false;
         }
-        GD.UIS!.RecalcPictures(true);
+        catch (Exception ex)
+        {
 
-        SetGamePageLayout(  );
-
-        // UIS!.Scr.JumpToEndInstantly();
-        // UIS!.InitBrowserUpdate();
-
-        UIS.UpdateBrowserBlocked = false;
-        UIS!.InitBrowserUpdate();
-        GD.InitProcess = false;
-        _menuExtension.ListCalls.Add( new (DoSpeech, -1)) ;
-
-        UIS!.Scr.YPosMode = Scroller.YPosModes.startwebview;
-
-
-        UIS.SetUICallback(SetGamePageLayout, ExecuteGamePageLayout);
-        GameOut.SetCBFullyLoaded(GD.UIS!.Scr.ResetWait);
-        UIS!.FinishBrowserUpdate(IUIServices.onBrowserContentLoaded.SetToEnd);
-        Thread.Sleep(100);
+        }
+        // Thread.Sleep(100);
     }
 
     public void SetMicrophone(Phoney_MAUI.Model.IUIServices.sttListeningMode mode )
@@ -4426,562 +4494,614 @@ public partial class GamePage : ContentPage, IMenuExtension
         }
     }
 
+
+    int CountDebugLoops = 0;
     public bool DoSpeech()
     {
-        if( GameOut.InqCBFullyLoaded() == false )
+        try
         {
-
-            GameOut.SetCBFullyLoaded(GD.UIS!.Scr.ResetWait);
-        }
-
-        DebugLabel.Text = String.Format("{0} - {1} - {2} - {3} - {4} - {5}", UIS.Scr.HTMLViewYRef, UIS.Scr.HTMLViewYPos, UIS.Scr.HTMLViewMaxYPos, UIS.Scr.HTMLLastSet, UIS.Scr.HTMLLastSet2, UIS.Scr.HTMLLastSet3);
-
-        /*
-        if(Grid_Input.IsVisible == false )
-        {
-            if( PageGrid.IsFocused == false )
-               PageGrid.Focus();
-        }
-        else
-        {
-            if( Inputline.IsFocused == false )
-               Inputline.Focus();
-        }
-        */
-
-        if (GD.SavegameFailed == true)
-        {
-            GD.SavegameFailed = false;
-
-            ShowDialog(loca.MAUI_Infodialog_Savegame_Failed);
-
-        }
-
-
-        if ( UIS.RecordedText != null )
-        {
-            if(UIS.RecordedText.Length > 0 )
+            if (GameOut.InqCBFullyLoaded() == false)
             {
 
+                GameOut.SetProtocol(GlobalData.InitLog, GlobalData.AddLog);
+                GameOut.SetCBFullyLoaded(GD.UIS!.Scr.ResetWait);
             }
-        }
-        if(UIS.NewMikeColor != Colors.Brown)
-        {
-            Mike.TextColor = UIS.NewMikeColor;
-            Mike2.TextColor = UIS.NewMikeColor;
-            Mike3.TextColor = UIS.NewMikeColor;
-            UIS.NewMikeColor = Colors.Brown;
-        }
 
-        if( PageGrid.IsVisible == false )
-        {
-            if( rotateWait > 0 )
+            DebugLabel.Text = String.Format("{0} - {1} - {2} - {3} - {4} - {5}", UIS.Scr.HTMLViewYRef, UIS.Scr.HTMLViewYPos, UIS.Scr.HTMLViewMaxYPos, UIS.Scr.HTMLLastSet, UIS.Scr.HTMLLastSet2, UIS.Scr.HTMLLastSet3);
+
+            /*
+            if(Grid_Input.IsVisible == false )
             {
-                rotateWait--;
+                if( PageGrid.IsFocused == false )
+                   PageGrid.Focus();
             }
             else
             {
-                PageGrid.IsVisible = true;
-                PageGrid.IsEnabled = true;
+                if( Inputline.IsFocused == false )
+                   Inputline.Focus();
             }
-        }
+            */
 
-        UIS.STTTestRunning();
-
-        // if (DeviceDisplay.MainDisplayInfo == null) return true;
-        if (GlobalData.CurrentGlobalData!.Adventure != null && GlobalData.CurrentGlobalData.InitProcess == false)
-        {
-            if(GlobalData.CurrentGlobalData!.UIS!.RecordedText == null )
+            if (GD.SavegameFailed == true)
             {
+                GD.SavegameFailed = false;
+
+                ShowDialog(loca.MAUI_Infodialog_Savegame_Failed);
 
             }
-            else if (GlobalData.CurrentGlobalData.UIS.RecordedText.Length > 0 /* && UIS.STTListeningOn != IUIServices.sttListeningMode.off */ )
+
+
+            if (UIS.RecordedText != null)
             {
-                if (UIS.MCMVVisible == true)
+                if (UIS.RecordedText.Length > 0)
                 {
-                    int key = 0; 
 
-                    if( ( String.Compare(UIS.RecordedText, "eins", StringComparison.OrdinalIgnoreCase) == 0 )
-                        || (String.Compare(UIS.RecordedText, "1", StringComparison.OrdinalIgnoreCase) == 0)
-                        || (String.Compare(UIS.RecordedText, "one", StringComparison.OrdinalIgnoreCase) == 0)
-                        || (String.Compare(UIS.RecordedText, "erstens", StringComparison.OrdinalIgnoreCase) == 0)
-                        || (String.Compare(UIS.RecordedText, "uno", StringComparison.OrdinalIgnoreCase) == 0)
-                        || (String.Compare(UIS.RecordedText, "oans", StringComparison.OrdinalIgnoreCase) == 0)
-                        )
-                    {
-                        key = '1';
-                    }
-                    else 
-                    if ( (String.Compare(UIS.RecordedText, "zwei", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "2", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "two", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "zweitens", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "zwotens", StringComparison.OrdinalIgnoreCase) == 0)
-                   || (String.Compare(UIS.RecordedText, "dos", StringComparison.OrdinalIgnoreCase) == 0)
-                   )
-                    {
-                        key = '2';
-                    }
-                    else 
-                    if ( (String.Compare(UIS.RecordedText, "drei", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "3", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "three", StringComparison.OrdinalIgnoreCase) == 0)
-                   || (String.Compare(UIS.RecordedText, "tres", StringComparison.OrdinalIgnoreCase) == 0)
-                   || (String.Compare(UIS.RecordedText, "drittens", StringComparison.OrdinalIgnoreCase) == 0)
-                    )
-                    {
-                        key = '3';
-                    }
-                    else
-                    if ( (String.Compare(UIS.RecordedText, "vier", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "4", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "four", StringComparison.OrdinalIgnoreCase) == 0)
-                   || (String.Compare(UIS.RecordedText, "viertens", StringComparison.OrdinalIgnoreCase) == 0)
-                   || (String.Compare(UIS.RecordedText, "quatro", StringComparison.OrdinalIgnoreCase) == 0)
-                    )
-                    {
-                        key = '4';
-                    }
-                    else
-                    if ( (String.Compare(UIS.RecordedText, "fünf", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "5", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "five", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "fünftens", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "cinco", StringComparison.OrdinalIgnoreCase) == 0)
-                    )
-                    {
-                        key = '5';
-                    }
-                    else
-                    if ( (String.Compare(UIS.RecordedText, "sechs", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "6", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "six", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "sex", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "seis", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "sechstens", StringComparison.OrdinalIgnoreCase) == 0)
-                    )
-                    {
-                        key = '6';
-                    }
-                    else
-                    if ( (String.Compare(UIS.RecordedText, "sieben", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "7", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "seven", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "siete", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "siebtens", StringComparison.OrdinalIgnoreCase) == 0)
-                    )
-                    {
-                        key = '7';
-                    }
-                    else
-                    if ( (String.Compare(UIS.RecordedText, "acht", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "8", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "eight", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "ocho", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "achtens", StringComparison.OrdinalIgnoreCase) == 0)
-                    )
-                    {
-                        key = '8';
-                    }
-                    else
-                    if ( (String.Compare(UIS.RecordedText, "neun", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "9", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "nine", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "nueve", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "neuntens", StringComparison.OrdinalIgnoreCase) == 0)
-                    )
-                    {
-                        key = '9';
-                    }
-                    else
-                    if ( (String.Compare(UIS.RecordedText, "null", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "0", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "zero", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "nulltens", StringComparison.OrdinalIgnoreCase) == 0)
-                    )
-                    {
-                        key = '0';
-                    }
-                    else
-                    if ( (String.Compare(UIS.RecordedText, "a", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "ah", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Buchstabe a", StringComparison.OrdinalIgnoreCase) == 0)
-                      || (String.Compare(UIS.RecordedText, "Aachen", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Anton", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Alfa", StringComparison.OrdinalIgnoreCase) == 0)
-                     || (String.Compare(UIS.RecordedText, "Alpha", StringComparison.OrdinalIgnoreCase) == 0)
-                     || (String.Compare(UIS.RecordedText, "Albert", StringComparison.OrdinalIgnoreCase) == 0)
-                     || (String.Compare(UIS.RecordedText, "Augsburg", StringComparison.OrdinalIgnoreCase) == 0)
-                 ) 
-                    {
-                        key = 'a';
-                    }
-                    else
-                    if ((String.Compare(UIS.RecordedText, "b", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "be", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Buchstabe b", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Berlin", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Berta", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Bravo", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Bernhard", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Bruno", StringComparison.OrdinalIgnoreCase) == 0)
-                    )
-                    {
-                        key = 'b';
-                    }
-                    else
-                    if ((String.Compare(UIS.RecordedText, "c", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "ce", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Buchstabe c", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Chemnitz", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Cäsar", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Caesar", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Charlie", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Cottbus", StringComparison.OrdinalIgnoreCase) == 0)
-                    )
-                    {
-                        key = 'c';
-                    }
-                    else
-                    if ((String.Compare(UIS.RecordedText, "d", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "de", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Buchstabe d", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Düsseldorf", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Dora", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Delta", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "David", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Dortmund", StringComparison.OrdinalIgnoreCase) == 0)
-                    )
-                    {
-                        key = 'd';
-                    }
-                    else
-                    if ((String.Compare(UIS.RecordedText, "e", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "e", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Buchstabe e", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Essen", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Emil", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Echo", StringComparison.OrdinalIgnoreCase) == 0)
-                    )
-                    {
-                        key = 'e';
-                    }
-                    else
-                    if ((String.Compare(UIS.RecordedText, "f", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "ef", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Buchstabe f", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Frankfurt", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Friedrich", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Foxtrott", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Fritz", StringComparison.OrdinalIgnoreCase) == 0)
-                    )
-                    {
-                        key = 'f';
-                    }
-                    else
-                    if ((String.Compare(UIS.RecordedText, "g", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "g", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Buchstabe g", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Goslar", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Gustav", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Golf", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Görlitz", StringComparison.OrdinalIgnoreCase) == 0)
-                    )
-                    {
-                        key = 'g';
-                    }
-                    else
-                    if ((String.Compare(UIS.RecordedText, "h", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "ha", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Buchstabe h", StringComparison.OrdinalIgnoreCase) == 0)
-                      || (String.Compare(UIS.RecordedText, "Hamburg", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Heinrich", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Hotel", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Heinz", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Hannover", StringComparison.OrdinalIgnoreCase) == 0)
-                  )
-                    {
-                        key = 'h';
-                    }
-                    else
-                    if ((String.Compare(UIS.RecordedText, "i", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "i", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Buchstabe i", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Ingelheim", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Ida", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "India", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Isidor", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Iserlohn", StringComparison.OrdinalIgnoreCase) == 0)
-                    )
-                    {
-                        key = 'i';
-                    }
-                    else
-                    if ((String.Compare(UIS.RecordedText, "j", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "jot", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Buchstabe j", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Jena", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Julius", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Juliett", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Juliette", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Jacob", StringComparison.OrdinalIgnoreCase) == 0)
-                    )
-                    {
-                        key = 'j';
-                    }
-                    else
-                    if ((String.Compare(UIS.RecordedText, "k", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "ka", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Buchstabe k", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Köln", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Kaufmann", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Kilo", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Karl", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Katharina", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Kurfürst", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Konrad", StringComparison.OrdinalIgnoreCase) == 0)
-                    )
-                    {
-                        key = 'k';
-                    }
-                    else
-                    if ((String.Compare(UIS.RecordedText, "l", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "el", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Buchstabe l", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Leipzig", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Ludwig", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Lima", StringComparison.OrdinalIgnoreCase) == 0)
-                    )
-                    {
-                        key = 'l';
-                    }
-                    else
-                    if ((String.Compare(UIS.RecordedText, "m", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "em", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Buchstabe m", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "München", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Martha", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Mike", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Marie", StringComparison.OrdinalIgnoreCase) == 0)
-                    )
-                    {
-                        key = 'm';
-                    }
-                    else
-                    if ((String.Compare(UIS.RecordedText, "n", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "en", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Buchstabe n", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Nürnberg", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Nordpol", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "November", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Nathan", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Norbert", StringComparison.OrdinalIgnoreCase) == 0)
-                    )
-                    {
-                        key = 'n';
-                    }
-                    else
-                    if ((String.Compare(UIS.RecordedText, "o", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "o", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Buchstabe o", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Offenbach", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Otto", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Oscar", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Oldenburg", StringComparison.OrdinalIgnoreCase) == 0)
-                    )
-                    {
-                        key = 'o';
-                    }
-                    else
-                    if ((String.Compare(UIS.RecordedText, "p", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "pe", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Buchstabe p", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Potsdam", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Paula", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Papa", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Paul", StringComparison.OrdinalIgnoreCase) == 0)
-                    )
-                    {
-                        key = 'p';
-                    }
-                    else
-                    if ((String.Compare(UIS.RecordedText, "q", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "kuh", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Buchstabe q", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Quickborn", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Quelle", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Quebec", StringComparison.OrdinalIgnoreCase) == 0)
-                    )
-                    {
-                        key = 'q';
-                    }
-                    else
-                    if ((String.Compare(UIS.RecordedText, "r", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "er", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Buchstabe r", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Rostock", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Richard", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Romeo", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Regensburg", StringComparison.OrdinalIgnoreCase) == 0)
-                    )
-                    {
-                        key = 'r';
-                    }
-                    else
-                    if ((String.Compare(UIS.RecordedText, "s", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "es", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Buchstabe s", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Salzwedel", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Samuel", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Sierra", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Siegfried", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Stuttgart", StringComparison.OrdinalIgnoreCase) == 0)
-                    )
-                    {
-                        key = 's';
-                    }
-                    else
-                    if ((String.Compare(UIS.RecordedText, "t", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "te", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Buchstabe te", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Tübingen", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Theodor", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Tango", StringComparison.OrdinalIgnoreCase) == 0)
-                     || (String.Compare(UIS.RecordedText, "Toni", StringComparison.OrdinalIgnoreCase) == 0)
-                  )
-                    {
-                        key = 't';
-                    }
-                    else
-                    if ((String.Compare(UIS.RecordedText, "u", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "u", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Buchstabe u", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Unna", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Ulrich", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Uniform", StringComparison.OrdinalIgnoreCase) == 0)
-                    )
-                    {
-                        key = 'u';
-                    }
-                    else
-                    if ((String.Compare(UIS.RecordedText, "v", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "vau", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Buchstabe v", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Völklingen", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Viktor", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Victor", StringComparison.OrdinalIgnoreCase) == 0)
-                    )
-                    {
-                        key = 'v';
-                    }
-                    else
-                    if ((String.Compare(UIS.RecordedText, "w", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "weh", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Buchstabe w", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Wuppertal", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Wilhelm", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Whiskey", StringComparison.OrdinalIgnoreCase) == 0)
-                    )
-                    {
-                        key = 'w';
-                    }
-                    else
-                    if ((String.Compare(UIS.RecordedText, "x", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "ix", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Buchstabe x", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Xanten", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Xanthippe", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "X-Ray", StringComparison.OrdinalIgnoreCase) == 0)
-                    )
-                    {
-                        key = 'x';
-                    }
-                    else
-                    if ((String.Compare(UIS.RecordedText, "y", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "ypsilon", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Buchstabe y", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Ypsilon", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Yankee", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Ypern", StringComparison.OrdinalIgnoreCase) == 0)
-                    )
-                    {
-                        key = 'y';
-                    }
-                    else
-                    if ((String.Compare(UIS.RecordedText, "z", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "zett", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Buchstabe z", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Zwickau", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Zacharias", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Zulu", StringComparison.OrdinalIgnoreCase) == 0)
-                    || (String.Compare(UIS.RecordedText, "Zeppelin", StringComparison.OrdinalIgnoreCase) == 0)
-                    )
-                    {
-                        key = 'z';
-                    }
-                    else
-                    {
-
-                    }
-
-                    if (key > 0)
-                    {
-                        int ix = 0;
-                        bool found = false;
-                        for (ix = 0; ix < UIS.MCM!.Current!.Count; ix++)
-                        {
-                            if (UIS.MCM.Current[ix] > 0)
-                            {
-                                MCMenuEntry? me = UIS.MCM.FindID(UIS.MCM.Current[ix]);
-                                if (me!.Keys!.Count > 0)
-                                {
-                                    if (me.Keys[0] == key && me.Hidden == MCMenuEntry.HiddenType.visible)
-                                    {
-                                        UIS.MCMV!.CallBackMCMenuView(me.ID);
-                                        found = true;
-                                    }
-                                }
-
-                            }
-                            if (found)
-                                break;
-                        }
-                    }
-                    UIS.RecordedText = "";
                 }
-                else if (Grid_More.IsVisible == true)
+            }
+            if (UIS.NewMikeColor != Colors.Brown)
+            {
+                Mike.TextColor = UIS.NewMikeColor;
+                Mike2.TextColor = UIS.NewMikeColor;
+                Mike3.TextColor = UIS.NewMikeColor;
+                UIS.NewMikeColor = Colors.Brown;
+            }
+
+            if (PageGrid.IsVisible == false)
+            {
+                if (rotateWait > 0)
                 {
-                    UIS.Scr.PageDown();
-                    UIS.RecordedText = "";
+                    rotateWait--;
                 }
                 else
                 {
-                    UIS.UpdateBrowserCallsPerCycle = 0;
+                    PageGrid.IsVisible = true;
+                    PageGrid.IsEnabled = true;
+                }
+            }
 
-                    GD.OrderList!.DisableTempOrderList();
-                    GD.Adventure!.SetStoryLine = false;
-                    GD.Adventure!.DoGameLoop(UIS.RecordedText!);
-                    UIS!.StoryTextObj!.AdvTextRefresh();
+            UIS.STTTestRunning();
+
+            // if (DeviceDisplay.MainDisplayInfo == null) return true;
+            if (GlobalData.CurrentGlobalData!.Adventure != null && GlobalData.CurrentGlobalData.InitProcess == false)
+            {
+                if (GlobalData.CurrentGlobalData!.UIS!.RecordedText == null)
+                {
+
+                }
+                else if (GlobalData.CurrentGlobalData.UIS.RecordedText.Length > 0 /* && UIS.STTListeningOn != IUIServices.sttListeningMode.off */ )
+                {
+                    if (UIS.MCMVVisible == true)
+                    {
+                        int key = 0;
+
+                        if ((String.Compare(UIS.RecordedText, "eins", StringComparison.OrdinalIgnoreCase) == 0)
+                            || (String.Compare(UIS.RecordedText, "1", StringComparison.OrdinalIgnoreCase) == 0)
+                            || (String.Compare(UIS.RecordedText, "one", StringComparison.OrdinalIgnoreCase) == 0)
+                            || (String.Compare(UIS.RecordedText, "erstens", StringComparison.OrdinalIgnoreCase) == 0)
+                            || (String.Compare(UIS.RecordedText, "uno", StringComparison.OrdinalIgnoreCase) == 0)
+                            || (String.Compare(UIS.RecordedText, "oans", StringComparison.OrdinalIgnoreCase) == 0)
+                            )
+                        {
+                            key = '1';
+                        }
+                        else
+                        if ((String.Compare(UIS.RecordedText, "zwei", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "2", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "two", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "zweitens", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "zwotens", StringComparison.OrdinalIgnoreCase) == 0)
+                       || (String.Compare(UIS.RecordedText, "dos", StringComparison.OrdinalIgnoreCase) == 0)
+                       )
+                        {
+                            key = '2';
+                        }
+                        else
+                        if ((String.Compare(UIS.RecordedText, "drei", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "3", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "three", StringComparison.OrdinalIgnoreCase) == 0)
+                       || (String.Compare(UIS.RecordedText, "tres", StringComparison.OrdinalIgnoreCase) == 0)
+                       || (String.Compare(UIS.RecordedText, "drittens", StringComparison.OrdinalIgnoreCase) == 0)
+                        )
+                        {
+                            key = '3';
+                        }
+                        else
+                        if ((String.Compare(UIS.RecordedText, "vier", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "4", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "four", StringComparison.OrdinalIgnoreCase) == 0)
+                       || (String.Compare(UIS.RecordedText, "viertens", StringComparison.OrdinalIgnoreCase) == 0)
+                       || (String.Compare(UIS.RecordedText, "quatro", StringComparison.OrdinalIgnoreCase) == 0)
+                        )
+                        {
+                            key = '4';
+                        }
+                        else
+                        if ((String.Compare(UIS.RecordedText, "fünf", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "5", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "five", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "fünftens", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "cinco", StringComparison.OrdinalIgnoreCase) == 0)
+                        )
+                        {
+                            key = '5';
+                        }
+                        else
+                        if ((String.Compare(UIS.RecordedText, "sechs", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "6", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "six", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "sex", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "seis", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "sechstens", StringComparison.OrdinalIgnoreCase) == 0)
+                        )
+                        {
+                            key = '6';
+                        }
+                        else
+                        if ((String.Compare(UIS.RecordedText, "sieben", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "7", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "seven", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "siete", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "siebtens", StringComparison.OrdinalIgnoreCase) == 0)
+                        )
+                        {
+                            key = '7';
+                        }
+                        else
+                        if ((String.Compare(UIS.RecordedText, "acht", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "8", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "eight", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "ocho", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "achtens", StringComparison.OrdinalIgnoreCase) == 0)
+                        )
+                        {
+                            key = '8';
+                        }
+                        else
+                        if ((String.Compare(UIS.RecordedText, "neun", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "9", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "nine", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "nueve", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "neuntens", StringComparison.OrdinalIgnoreCase) == 0)
+                        )
+                        {
+                            key = '9';
+                        }
+                        else
+                        if ((String.Compare(UIS.RecordedText, "null", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "0", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "zero", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "nulltens", StringComparison.OrdinalIgnoreCase) == 0)
+                        )
+                        {
+                            key = '0';
+                        }
+                        else
+                        if ((String.Compare(UIS.RecordedText, "a", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "ah", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Buchstabe a", StringComparison.OrdinalIgnoreCase) == 0)
+                          || (String.Compare(UIS.RecordedText, "Aachen", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Anton", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Alfa", StringComparison.OrdinalIgnoreCase) == 0)
+                         || (String.Compare(UIS.RecordedText, "Alpha", StringComparison.OrdinalIgnoreCase) == 0)
+                         || (String.Compare(UIS.RecordedText, "Albert", StringComparison.OrdinalIgnoreCase) == 0)
+                         || (String.Compare(UIS.RecordedText, "Augsburg", StringComparison.OrdinalIgnoreCase) == 0)
+                     )
+                        {
+                            key = 'a';
+                        }
+                        else
+                        if ((String.Compare(UIS.RecordedText, "b", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "be", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Buchstabe b", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Berlin", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Berta", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Bravo", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Bernhard", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Bruno", StringComparison.OrdinalIgnoreCase) == 0)
+                        )
+                        {
+                            key = 'b';
+                        }
+                        else
+                        if ((String.Compare(UIS.RecordedText, "c", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "ce", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Buchstabe c", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Chemnitz", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Cäsar", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Caesar", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Charlie", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Cottbus", StringComparison.OrdinalIgnoreCase) == 0)
+                        )
+                        {
+                            key = 'c';
+                        }
+                        else
+                        if ((String.Compare(UIS.RecordedText, "d", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "de", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Buchstabe d", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Düsseldorf", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Dora", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Delta", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "David", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Dortmund", StringComparison.OrdinalIgnoreCase) == 0)
+                        )
+                        {
+                            key = 'd';
+                        }
+                        else
+                        if ((String.Compare(UIS.RecordedText, "e", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "e", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Buchstabe e", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Essen", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Emil", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Echo", StringComparison.OrdinalIgnoreCase) == 0)
+                        )
+                        {
+                            key = 'e';
+                        }
+                        else
+                        if ((String.Compare(UIS.RecordedText, "f", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "ef", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Buchstabe f", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Frankfurt", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Friedrich", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Foxtrott", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Fritz", StringComparison.OrdinalIgnoreCase) == 0)
+                        )
+                        {
+                            key = 'f';
+                        }
+                        else
+                        if ((String.Compare(UIS.RecordedText, "g", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "g", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Buchstabe g", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Goslar", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Gustav", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Golf", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Görlitz", StringComparison.OrdinalIgnoreCase) == 0)
+                        )
+                        {
+                            key = 'g';
+                        }
+                        else
+                        if ((String.Compare(UIS.RecordedText, "h", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "ha", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Buchstabe h", StringComparison.OrdinalIgnoreCase) == 0)
+                          || (String.Compare(UIS.RecordedText, "Hamburg", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Heinrich", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Hotel", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Heinz", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Hannover", StringComparison.OrdinalIgnoreCase) == 0)
+                      )
+                        {
+                            key = 'h';
+                        }
+                        else
+                        if ((String.Compare(UIS.RecordedText, "i", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "i", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Buchstabe i", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Ingelheim", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Ida", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "India", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Isidor", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Iserlohn", StringComparison.OrdinalIgnoreCase) == 0)
+                        )
+                        {
+                            key = 'i';
+                        }
+                        else
+                        if ((String.Compare(UIS.RecordedText, "j", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "jot", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Buchstabe j", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Jena", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Julius", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Juliett", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Juliette", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Jacob", StringComparison.OrdinalIgnoreCase) == 0)
+                        )
+                        {
+                            key = 'j';
+                        }
+                        else
+                        if ((String.Compare(UIS.RecordedText, "k", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "ka", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Buchstabe k", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Köln", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Kaufmann", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Kilo", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Karl", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Katharina", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Kurfürst", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Konrad", StringComparison.OrdinalIgnoreCase) == 0)
+                        )
+                        {
+                            key = 'k';
+                        }
+                        else
+                        if ((String.Compare(UIS.RecordedText, "l", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "el", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Buchstabe l", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Leipzig", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Ludwig", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Lima", StringComparison.OrdinalIgnoreCase) == 0)
+                        )
+                        {
+                            key = 'l';
+                        }
+                        else
+                        if ((String.Compare(UIS.RecordedText, "m", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "em", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Buchstabe m", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "München", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Martha", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Mike", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Marie", StringComparison.OrdinalIgnoreCase) == 0)
+                        )
+                        {
+                            key = 'm';
+                        }
+                        else
+                        if ((String.Compare(UIS.RecordedText, "n", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "en", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Buchstabe n", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Nürnberg", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Nordpol", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "November", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Nathan", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Norbert", StringComparison.OrdinalIgnoreCase) == 0)
+                        )
+                        {
+                            key = 'n';
+                        }
+                        else
+                        if ((String.Compare(UIS.RecordedText, "o", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "o", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Buchstabe o", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Offenbach", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Otto", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Oscar", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Oldenburg", StringComparison.OrdinalIgnoreCase) == 0)
+                        )
+                        {
+                            key = 'o';
+                        }
+                        else
+                        if ((String.Compare(UIS.RecordedText, "p", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "pe", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Buchstabe p", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Potsdam", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Paula", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Papa", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Paul", StringComparison.OrdinalIgnoreCase) == 0)
+                        )
+                        {
+                            key = 'p';
+                        }
+                        else
+                        if ((String.Compare(UIS.RecordedText, "q", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "kuh", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Buchstabe q", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Quickborn", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Quelle", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Quebec", StringComparison.OrdinalIgnoreCase) == 0)
+                        )
+                        {
+                            key = 'q';
+                        }
+                        else
+                        if ((String.Compare(UIS.RecordedText, "r", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "er", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Buchstabe r", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Rostock", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Richard", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Romeo", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Regensburg", StringComparison.OrdinalIgnoreCase) == 0)
+                        )
+                        {
+                            key = 'r';
+                        }
+                        else
+                        if ((String.Compare(UIS.RecordedText, "s", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "es", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Buchstabe s", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Salzwedel", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Samuel", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Sierra", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Siegfried", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Stuttgart", StringComparison.OrdinalIgnoreCase) == 0)
+                        )
+                        {
+                            key = 's';
+                        }
+                        else
+                        if ((String.Compare(UIS.RecordedText, "t", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "te", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Buchstabe te", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Tübingen", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Theodor", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Tango", StringComparison.OrdinalIgnoreCase) == 0)
+                         || (String.Compare(UIS.RecordedText, "Toni", StringComparison.OrdinalIgnoreCase) == 0)
+                      )
+                        {
+                            key = 't';
+                        }
+                        else
+                        if ((String.Compare(UIS.RecordedText, "u", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "u", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Buchstabe u", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Unna", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Ulrich", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Uniform", StringComparison.OrdinalIgnoreCase) == 0)
+                        )
+                        {
+                            key = 'u';
+                        }
+                        else
+                        if ((String.Compare(UIS.RecordedText, "v", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "vau", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Buchstabe v", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Völklingen", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Viktor", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Victor", StringComparison.OrdinalIgnoreCase) == 0)
+                        )
+                        {
+                            key = 'v';
+                        }
+                        else
+                        if ((String.Compare(UIS.RecordedText, "w", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "weh", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Buchstabe w", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Wuppertal", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Wilhelm", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Whiskey", StringComparison.OrdinalIgnoreCase) == 0)
+                        )
+                        {
+                            key = 'w';
+                        }
+                        else
+                        if ((String.Compare(UIS.RecordedText, "x", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "ix", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Buchstabe x", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Xanten", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Xanthippe", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "X-Ray", StringComparison.OrdinalIgnoreCase) == 0)
+                        )
+                        {
+                            key = 'x';
+                        }
+                        else
+                        if ((String.Compare(UIS.RecordedText, "y", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "ypsilon", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Buchstabe y", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Ypsilon", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Yankee", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Ypern", StringComparison.OrdinalIgnoreCase) == 0)
+                        )
+                        {
+                            key = 'y';
+                        }
+                        else
+                        if ((String.Compare(UIS.RecordedText, "z", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "zett", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Buchstabe z", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Zwickau", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Zacharias", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Zulu", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Zeppelin", StringComparison.OrdinalIgnoreCase) == 0)
+                        )
+                        {
+                            key = 'z';
+                        }
+                        else
+                        {
+
+                        }
+
+                        if (key > 0)
+                        {
+                            int ix = 0;
+                            bool found = false;
+                            for (ix = 0; ix < UIS.MCM!.Current!.Count; ix++)
+                            {
+                                if (UIS.MCM.Current[ix] > 0)
+                                {
+                                    MCMenuEntry? me = UIS.MCM.FindID(UIS.MCM.Current[ix]);
+                                    if (me!.Keys!.Count > 0)
+                                    {
+                                        if (me.Keys[0] == key && me.Hidden == MCMenuEntry.HiddenType.visible)
+                                        {
+                                            UIS.MCMV!.CallBackMCMenuView(me.ID);
+                                            found = true;
+                                        }
+                                    }
+
+                                }
+                                if (found)
+                                    break;
+                            }
+                        }
+                        UIS.RecordedText = "";
+                    }
+                    else if (Grid_More.IsVisible == true)
+                    {
+                        GlobalData.AddLog("PageDown by Voice", IGlobalData.protMode.crisp);
+                        UIS.Scr.PageDown();
+                        UIS.RecordedText = "";
+                    }
+                    else
+                    {
+                        UIS.UpdateBrowserCallsPerCycle = 0;
+
+                        GD.OrderList!.DisableTempOrderList();
+                        GD.Adventure!.SetStoryLine = false;
+                        GD.Adventure!.DoGameLoop(UIS.RecordedText!);
+                        UIS!.StoryTextObj!.AdvTextRefresh();
 #if !NEWSCROLL
 
                     UIS!.Scr.SetScrollerToEnd();
 #endif
-                    SetInputFocus();
-                    UIS.RecordedText = "";
+                        SetInputFocus();
+                        UIS.RecordedText = "";
+                    }
+
+                    // 
+                    if (UIS.STTListeningOn == IUIServices.sttListeningMode.continuous)
+                    {
+                        UIS.STTStopListening(false);
+                        UIS.STTStartListening(IUIServices.sttListeningMode.continuous);
+                    }
+                    else
+                    {
+                        UIS.STTStopListening(false);
+                        // UIS.STTStartListening(IUIServices.sttListeningMode.on);
+                    }
                 }
 
-                // 
-                if (UIS.STTListeningOn == IUIServices.sttListeningMode.continuous)
+            }
+
+
+            if (CountDebugLoops < 250)
+            {
+                CountDebugLoops++;
+                // if (CountDebugLoops % 10 == 0)
                 {
-                    UIS.STTStopListening( false );
-                    UIS.STTStartListening(IUIServices.sttListeningMode.continuous);
-                }
-                else
-                {
-                    UIS.STTStopListening(false);
-                    // UIS.STTStartListening(IUIServices.sttListeningMode.on);
+                    TabItem.TabPanel tp0 = TIRightUp!.TabPanels[0];
+                    TabItem.TabPanel tp1 = TIRightUp!.TabPanels[1];
+                    TabItem.TabPanel tp2 = TIRightUp!.TabPanels[2];
+
+
+                    TreeView? tvOrder = null;
+
+                    tvOrder = CreateOrderTree();
+                    TreeView.EmptyTreeViewItem(tp0.TabPanelGrid!.Children[0]);
+                    tp0.TabPanelGrid!.Children[0] = tvOrder;
+
+                    tvOrder = CreateItemLocTree();
+                    TreeView.EmptyTreeViewItem(tp1.TabPanelGrid!.Children[0]);
+                    tp1.TabPanelGrid!.Children[0] = tvOrder;
+
+                    tvOrder = CreateItemInvTree();
+                    TreeView.EmptyTreeViewItem(tp2.TabPanelGrid!.Children[0]);
+                    tp2.TabPanelGrid!.Children[0] = tvOrder;
+
                 }
             }
+            else if (CountDebugLoops == 250)
+            {
+                TabItem.TabPanel tp0 = TIRightUp!.TabPanels[0];
+                TabItem.TabPanel tp1 = TIRightUp!.TabPanels[1];
+                TabItem.TabPanel tp2 = TIRightUp!.TabPanels[2];
+                TreeView? tvOrder = null;
+
+                TreeView.EmptyTreeViewItem(tp0.TabPanelGrid!.Children[0]);
+                TreeView.EmptyTreeViewItem(tp1.TabPanelGrid!.Children[0]);
+                TreeView.EmptyTreeViewItem(tp2.TabPanelGrid!.Children[0]);
+
+                GC.Collect();
+            }
+        }
+        catch( Exception ex)
+        {
 
         }
         return true;
@@ -5086,19 +5206,30 @@ public partial class GamePage : ContentPage, IMenuExtension
 
     private async void WebView_HandlerChanged(object? sender, EventArgs e)
     {
-
+        try
+        {
 #if WINDOWS
-        await ((sender as WebView)!.Handler!.PlatformView as Microsoft.Maui.Platform.MauiWebView)!.EnsureCoreWebView2Async();
-        ((sender as WebView)!.Handler!.PlatformView as Microsoft.Maui.Platform.MauiWebView)!.CoreWebView2!.SetVirtualHostNameToFolderMapping(
-                "localhost",
-                ApplicationPath,
-                Microsoft.Web.WebView2.Core.CoreWebView2HostResourceAccessKind.Allow);
-        ((sender as WebView)!.Handler!.PlatformView as Microsoft.Maui.Platform.MauiWebView)!.LoadUrl($"https://localhost/empty.html");
+            await ((sender as WebView)!.Handler!.PlatformView as Microsoft.Maui.Platform.MauiWebView)!.EnsureCoreWebView2Async();
+            ((sender as WebView)!.Handler!.PlatformView as Microsoft.Maui.Platform.MauiWebView)!.CoreWebView2!.SetVirtualHostNameToFolderMapping(
+                    "localhost",
+                    ApplicationPath,
+                    Microsoft.Web.WebView2.Core.CoreWebView2HostResourceAccessKind.Allow);
+            ((sender as WebView)!.Handler!.PlatformView as Microsoft.Maui.Platform.MauiWebView)!.LoadUrl($"https://localhost/empty.html");
 #endif
+        }
+        catch (Exception ex)
+        {
+        }
     }
     async void OnLoadHtmlFileClicked(object? sender, EventArgs e)
     {
-        await LoadMauiAsset();
+        try
+        { 
+            await LoadMauiAsset();
+        }
+        catch (Exception ex)
+        {
+        }
     }
 
     async Task LoadMauiAsset()
@@ -5143,91 +5274,120 @@ public partial class GamePage : ContentPage, IMenuExtension
     }
     private void ButtonMoreClicked(object? sender, EventArgs e)
     {
+        GlobalData.AddLog("PageDown by More", IGlobalData.protMode.crisp);
+
         UIS.Scr.PageDown();
          // int a = 5;
     }
     private async void Clicked_Keyboard( object? sender, EventArgs e)
     {
-        if (Inputline.IsSoftKeyboardShowing() == false)
+        try
         {
-            await Inputline.ShowKeyboardAsync(CancellationToken.None);
-            ForceInputFocus();
+            if (Inputline.IsSoftKeyboardShowing() == false)
+            {
+                await Inputline.ShowKeyboardAsync(CancellationToken.None);
+                ForceInputFocus();
+            }
+            else
+                await Inputline.HideKeyboardAsync(CancellationToken.None);
         }
-        else
-            await Inputline.HideKeyboardAsync(CancellationToken.None);
+        catch (Exception ex)
+        {
+        }
     }
 
     private async void Clicked_Microphone(object? sender, EventArgs e)
     {
-        if (UIS.STTListeningOn == IUIServices.sttListeningMode.off)
+        try
         {
-            if (GD.STTMicroState == IGlobalData.microMode.continuous )
+            if (UIS.STTListeningOn == IUIServices.sttListeningMode.off)
             {
-                // Mike.Background = Colors.Red;
-                await UIS.STTStartListening( IUIServices.sttListeningMode.continuous);
-            }
-            else if (GD.STTMicroState == IGlobalData.microMode.once )
-            {
-                // Mike.Background = Colors.Yellow;
-                await UIS.STTStartListening(IUIServices.sttListeningMode.on );
+                if (GD.STTMicroState == IGlobalData.microMode.continuous)
+                {
+                    // Mike.Background = Colors.Red;
+                    await UIS.STTStartListening(IUIServices.sttListeningMode.continuous);
+                }
+                else if (GD.STTMicroState == IGlobalData.microMode.once)
+                {
+                    // Mike.Background = Colors.Yellow;
+                    await UIS.STTStartListening(IUIServices.sttListeningMode.on);
 
+                }
+                // doListening = true;
             }
-            // doListening = true;
+            else
+            {
+                await UIS.STTStopListening();
+                UIS.STTListeningOn = IUIServices.sttListeningMode.off;
+                // Mike.Background = Colors.Transparent;
+            }
         }
-        else
+        catch (Exception ex)
         {
-            await UIS.STTStopListening();
-            UIS.STTListeningOn = IUIServices.sttListeningMode.off;
-            // Mike.Background = Colors.Transparent;
         }
+
     }
     private async void Clicked_Microphone2(object? sender, EventArgs e)
     {
-        if (UIS.STTListeningOn == IUIServices.sttListeningMode.off)
+        try
         {
-            if (GD.STTMicroState == IGlobalData.microMode.continuous)
-                {
-                // Mike.Background = Colors.Red;
-                await UIS.STTStartListening(IUIServices.sttListeningMode.continuous);
-            }
-            else if (GD.STTMicroState == IGlobalData.microMode.once)
+            if (UIS.STTListeningOn == IUIServices.sttListeningMode.off)
             {
-                // Mike.Background = Colors.Yellow;
-                await UIS.STTStartListening(IUIServices.sttListeningMode.on);
+                if (GD.STTMicroState == IGlobalData.microMode.continuous)
+                {
+                    // Mike.Background = Colors.Red;
+                    await UIS.STTStartListening(IUIServices.sttListeningMode.continuous);
+                }
+                else if (GD.STTMicroState == IGlobalData.microMode.once)
+                {
+                    // Mike.Background = Colors.Yellow;
+                    await UIS.STTStartListening(IUIServices.sttListeningMode.on);
 
+                }
+                // doListening = true;
             }
-            // doListening = true;
+            else
+            {
+                await UIS.STTStopListening();
+                UIS.STTListeningOn = IUIServices.sttListeningMode.off;
+                // Mike.Background = Colors.Transparent;
+            }
         }
-        else
+        catch (Exception ex)
         {
-            await UIS.STTStopListening();
-            UIS.STTListeningOn = IUIServices.sttListeningMode.off;
-            // Mike.Background = Colors.Transparent;
         }
+
     }
     private async void Clicked_Microphone3(object? sender, EventArgs e)
     {
-        if (UIS.STTListeningOn == IUIServices.sttListeningMode.off)
+        try
         {
-            if (GD.STTMicroState == IGlobalData.microMode.continuous)
+            if (UIS.STTListeningOn == IUIServices.sttListeningMode.off)
             {
-                // Mike.Background = Colors.Red;
-                await UIS.STTStartListening(IUIServices.sttListeningMode.continuous);
-            }
-            else if (GD.STTMicroState == IGlobalData.microMode.once)
-            {
-                // Mike.Background = Colors.Yellow;
-                await UIS.STTStartListening(IUIServices.sttListeningMode.on);
+                if (GD.STTMicroState == IGlobalData.microMode.continuous)
+                {
+                    // Mike.Background = Colors.Red;
+                    await UIS.STTStartListening(IUIServices.sttListeningMode.continuous);
+                }
+                else if (GD.STTMicroState == IGlobalData.microMode.once)
+                {
+                    // Mike.Background = Colors.Yellow;
+                    await UIS.STTStartListening(IUIServices.sttListeningMode.on);
 
+                }
+                // doListening = true;
             }
-            // doListening = true;
+            else
+            {
+                await UIS.STTStopListening();
+                UIS.STTListeningOn = IUIServices.sttListeningMode.off;
+                // Mike.Background = Colors.Transparent;
+            }
         }
-        else
+        catch (Exception ex)
         {
-            await UIS.STTStopListening();
-            UIS.STTListeningOn = IUIServices.sttListeningMode.off;
-            // Mike.Background = Colors.Transparent;
         }
+
     }
     /*
     string recordedText = "";

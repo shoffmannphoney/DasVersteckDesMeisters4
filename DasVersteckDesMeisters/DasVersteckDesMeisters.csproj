@@ -128,7 +128,7 @@
 		<MauiImage Update="Resources\Images\splash.svg" BaseSize="208,208" />
 
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#FF0000" TintColor="#FF00FF" BaseSize="256,256" />
+		<MauiSplashScreen Include="Resources\Splash\onion.svg" Color="#000000" BaseSize="256,256" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />

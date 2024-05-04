@@ -71,6 +71,9 @@ public interface ILayoutDescription
 
 public interface IGlobalData
 {
+    public enum protMode { off, crisp, medium, extensive };
+
+    public protMode ProtMode { get; set; }
     public double[] DebugVal { get; set; }
 
     public enum picMode { off, small, medium, big };
@@ -95,6 +98,7 @@ public interface IGlobalData
 
     public DelSelectedOutput? SelectOutput { get; set; }
     public picMode PicMode { get; set; }
+    public string? GreetingText { get; set; }
 
     public void SetDelSelectOutput(DelSelectedOutput DoSelectOutput);
     public ILayoutDescription LayoutDescription { get; set; }

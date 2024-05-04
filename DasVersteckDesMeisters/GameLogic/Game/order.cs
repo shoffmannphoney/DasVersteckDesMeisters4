@@ -5118,7 +5118,7 @@ namespace GameCore
             Item item1 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[1].WordID);
             Person person2 = PTL.GetFirstPerson()!; //  GetItemRef(Adv_PT[3].WordID);
 
-            if (person2.ID == CA.Person_Fish.ID && item1.ID == CA.I08_Water.ID && CA.I00_Coin.locationID == CA.I08_Well.ID)
+            if (person2.ID == CA!.Person_Fish!.ID && item1.ID == CA!.I08_Water.ID && CA!.I00_Coin.locationID == CA!.I08_Well.ID)
             {
                 UsePW( PersonID, PTL);
                 success = true;

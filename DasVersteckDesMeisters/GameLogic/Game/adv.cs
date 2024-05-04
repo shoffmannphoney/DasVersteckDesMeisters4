@@ -786,6 +786,87 @@ namespace GameCore
             adv.GD!.ResetLanguageCallbacks();
             adv.GD!.AddLanguageCallback(adv.UIS!.SetFullUIText!);
         }
+
+        public void InitAdvWithoutAutosave( bool LoadAutoSave, bool ZeroLoad )
+        {
+            SerialNumberGenerator.Instance.Count = 1000;
+            LoadedInitData = null;
+#if WINDOWS
+                // LoadInitData();
+#endif
+            stopwatch = new Stopwatch();
+            stopwatch.Start();
+
+            InitializeGeneralGameData(this);
+            timeFinishedGeneral = stopwatch.ElapsedMilliseconds;
+            InitializeGame();
+
+            // Abschließende Verlinkung aller Teile
+            timeFiPreLink = stopwatch.ElapsedMilliseconds;
+            if (LoadedInitData != null)
+                LinkInitData();
+            timeFinished = stopwatch.ElapsedMilliseconds;
+
+            Grammar.Init(A, VerbTenses, Items, Persons);
+
+            A.StartLoc = A.ActLoc = CA.L01_Dark_Forest; // CA!.LX_01_Hausflur;
+                                                        // Persons.Items = Items;
+
+            foreach (var ele in locations!.List.Values)
+            {
+                location l = (location)ele;
+                /*
+                if (l.LocDescRaw != null)
+                {
+                    string s = loca.GetLoca(l.LocDescRaw);
+                }
+                */
+                if (l._locDescRawHandle != null)
+                    l.LocDescription = Helper.Insert(l._locDescRawHandle);
+            }
+
+            ResetParser();
+
+            foreach (ParseLine pl in PLL!.List!)
+            {
+                pl.PTL!.SetParseTokenList(Verbs, Preps, Pronouns, Nouns, Adjs, Fills, ItemQueue);
+            }
+
+            if (LoadedInitData != null)
+            {
+            }
+
+            timeFinishedPost = stopwatch.ElapsedMilliseconds;
+
+            UIS!.SetDelTextSelect(LinkCallback);
+            UIS!.HeadlineOutput(locations!.Find(A!.ActLoc)!.LocName!);
+
+            UIS!.DoUIUpdate();
+
+
+            if (LoadAutoSave == true)
+                GD!.OrderList!.AddOrderList(loca.Adv_Adv_2231);
+
+            GD!.AskForPlayLevel = true;
+
+            if (UIS!.RestartSlot == 0)
+            {
+                SetStoryLine = true;
+
+                UIS!.StoryTextObj!.Slines!.Clear();
+                UIS!.StoryTextObj.RecalcLatest();
+                UIS!.StoryTextObj!.RemoveEmptyDividingLine();
+
+                if (ZeroLoad == false)
+                {
+                    StoryOutput(loca.Adv_Intro0);
+                    StoryOutput(String.Format(loca.Adv_Intro1, GD!.Version.GetVersion(), GD!.Version.GetVersionDate()));
+                }
+
+                SetScoreOutput();
+            }
+
+        }
         public Adv( bool SetAsActiveGame, bool LoadAutoSave, bool ZeroLoad = false ) 
         {
             GC.Collect();
@@ -834,143 +915,8 @@ namespace GameCore
 
             if ((!UIS!.ExistFile("autosave.sav") ) || (LoadAutoSave == false))
             {
-                SerialNumberGenerator.Instance.Count = 1000; 
-                LoadedInitData = null;
-#if WINDOWS
-                // LoadInitData();
-#endif
-                stopwatch = new Stopwatch();
-                stopwatch.Start();
+                InitAdvWithoutAutosave(LoadAutoSave, ZeroLoad);
 
-                InitializeGeneralGameData( this );
-                timeFinishedGeneral = stopwatch.ElapsedMilliseconds;
-                InitializeGame();
-
-                // Abschließende Verlinkung aller Teile
-                timeFiPreLink = stopwatch.ElapsedMilliseconds;
-                if( LoadedInitData != null )
-                    LinkInitData();
-                timeFinished = stopwatch.ElapsedMilliseconds;
-
-                // Helper.ConfigInsert(Persons, Items, locations, Topics, CB, A, this);
-                // InitLoadData() wird hier vollendet: Es werden noch diverse Verlinkungen zu Order restauriert
-                // Orders!.SetAdv(this);
-                // Orders.SetLinksToAdv(this, A, Verbs, Items, Persons, Topics, locations, Stats, Scores, GD!.OrderList, Nouns, Adjs, Preps, Pronouns, Fills, ItemQueue, CB, CA, LI);
-
-                Grammar.Init(A, VerbTenses, Items, Persons);
-
-                // locations.SetAdv(this);
-                // locations.Items = Items;
-                // locations.Persons = Persons;
-                // locations.Stats = Stats;
-                // locations.A = A;
-                // locations.VT = VerbTenses;
-                // locations.Verbs = Verbs;
-                // locations.CB = CB;
-                A.StartLoc = A.ActLoc = CA.L01_Dark_Forest; // CA!.LX_01_Hausflur;
-                // Persons.Items = Items;
-
-                foreach (var ele in locations!.List.Values)
-                {
-                    location l = (location)ele;
-                    /*
-                    if (l.LocDescRaw != null)
-                    {
-                        string s = loca.GetLoca(l.LocDescRaw);
-                    }
-                    */
-                    if (l._locDescRawHandle != null)
-                        l.LocDescription = Helper.Insert(l._locDescRawHandle);
-                }
-
-                ResetParser();
-
-                foreach (ParseLine pl in PLL!.List! )
-                {
-                    pl.PTL!.SetParseTokenList( Verbs, Preps, Pronouns, Nouns, Adjs, Fills, ItemQueue);
-                }
-
-                if (LoadedInitData != null)
-                {
-                }
-
-                // GenerateInitData();
-
-                // Co.AdvGlobal = this;
-                timeFinishedPost = stopwatch.ElapsedMilliseconds;
-
-                UIS!.SetDelTextSelect(LinkCallback);
-                UIS!.HeadlineOutput(locations!.Find(A!.ActLoc)!.LocName!);
-
-                // MW.ResetAllPanels();
-                UIS!.DoUIUpdate();
-
-                // GD!.OrderList.OTL![GD!.OrderList.CurrentOrderListIx].TempPoint = 0;
-
-                if ( LoadAutoSave == true)
-                    GD!.OrderList!.AddOrderList( loca.Adv_Adv_2231);
-
-                GD!.AskForPlayLevel = true;
-
-                // Orders!.FindOrAddOrderList(GD!.OrderList.OTL![GD!.OrderList.CurrentOrderListIx] );
-
-                // Startpunkt 0: Keine Einstellungen
-                if (UIS!.RestartSlot == 0)
-                {
-                    SetStoryLine = true;
-
-                    UIS!.StoryTextObj!.Slines!.Clear();
-                    UIS!.StoryTextObj.RecalcLatest();
-                    UIS!.StoryTextObj!.RemoveEmptyDividingLine();
-
-                    if (ZeroLoad == false)
-                    {
-                        StoryOutput(loca.Adv_Intro0 );
-                        StoryOutput(String.Format(loca.Adv_Intro1, GD!.Version.GetVersion(), GD!.Version.GetVersionDate()));
-                    }
-
-                    /*
-                    StoryOutput(loca.Adv_Intro2);
-                    StoryOutput(loca.Adv_Intro3);
-                    StoryOutput(loca.Adv_Intro4);
-                    */
-                    /*
-                    StoryOutput( loca.Adv_Adv_2234);
-
-                    StoryOutput( loca.Adv_Adv_2235);
-                    StoryOutput( loca.Adv_Adv_2236);
-                    StoryOutput( loca.Adv_Adv_2237);
-                    StoryOutput( loca.Adv_Adv_2238);
-                    StoryOutput( loca.Adv_Adv_2239);
-                    */
-
-                    // A!.ActLoc = CA.L0_03_Thronsaal;
-
-
-                    SetScoreOutput();
-                }
-                /* OLD
-                // Startpunkt 1: Phoneyvision 1 im Schloss erreicht, Schloss kann verlassen werden
-                else if (UIS!.RestartSlot == 1)
-                {
-                    CA!.Status_Phoneyvision!.Val = 2;
-                    Items!.TransferItem(CA!.I00_Schatz!.ID, CB!.LocType_In_Item, CA!.I0_08_Kiste!.ID);
-                    Items!.TransferItem(CA!.I00_Schatz_gigantisch!.ID, CB!.LocType_In_Item, CA!.I1_08_Kiste!.ID);
-                    Items!.TransferItem(CA!.I00_Golfball!.ID, CB!.LocType_Person, CA!.Person_I!.ID);
-                    A!.ActLoc = CA!.L1_05_Zugbruecke;
-                    Persons!.TransferPerson(Persons!.Find(CA!.Person_I)!.ID, CB!.LocType_Loc, A!.ActLoc);
-                    Persons!.TransferPerson(CA!.Person_Scaramango!.ID, CB!.LocType_In_Item, CA!.I0_36_Muellcontainer!.ID);
-                }
-                else if (UIS!.RestartSlot == 9)
-                {
-                    A!.ActLoc = CA!.L0_03_Thronsaal;
-                    CA!.Status_Fotostory!.Val = 1;
-                    Items!.TransferItemPerson(CA!.I00_Kamera!.ID, CA!.Person_I!.ID);
-                    CA!.Status_Kamera!.Val = 1;
-                    Persons!.TransferPerson(Persons!.Find(CA!.Person_I!)!.ID, CB!.LocType_Loc, A!.ActLoc);
-
-                }
-                */
             }
             else
             {
@@ -986,24 +932,33 @@ namespace GameCore
                 // InitializeGame();
                 Orders!.CoreLoad( loca.Adv_Adv_Person_I_2240, this );
 
-                if( UIS.FeedbackTextObj != null )
-                    UIS.FeedbackTextObj.FeedbackModeMC = false;
-                // Persons!.TransferPerson(Persons!.Find(CA!.Person_I), CB!.LocType_Loc, A!.ActLoc);
-                UIS!.SetDelTextSelect(LinkCallback);
-
-                if (locations != null)
+                if (GD.AutoloadFailed == true || GD.SavegameFailed == true || GD.Adventure.Items == null )
                 {
-                    UIS!.HeadlineOutput(locations!.Find(AdvGame!.A!.ActLoc)!.LocName!);
+                    GD.GreetingText = loca.Autosave_Outdated;
+                    InitAdvWithoutAutosave(LoadAutoSave, ZeroLoad);
 
-                    AdvGame!.SetScoreOutput();
                 }
-                UIS!.DoUIUpdate();
+                else
+                {
+                    if (UIS.FeedbackTextObj != null)
+                        UIS.FeedbackTextObj.FeedbackModeMC = false;
+                    // Persons!.TransferPerson(Persons!.Find(CA!.Person_I), CB!.LocType_Loc, A!.ActLoc);
+                    UIS!.SetDelTextSelect(LinkCallback);
+
+                    if (locations != null)
+                    {
+                        UIS!.HeadlineOutput(locations!.Find(AdvGame!.A!.ActLoc)!.LocName!);
+
+                        AdvGame!.SetScoreOutput();
+                    }
+                    UIS!.DoUIUpdate();
 #if !NEWSCROLL
                 UIS.Scr.CompactToEnd();
                 UIS.Scr.JumpToEndInstantly();
 #endif
-                UIS.RefreshShowOrderList();
-                // MW.UpdateOrderList(GD!.OrderList);
+                    UIS.RefreshShowOrderList();
+                    // MW.UpdateOrderList(GD!.OrderList);
+                }
             }
             if (SetAsActiveGame == false)
             {
@@ -5866,447 +5821,489 @@ namespace GameCore
 
         public bool DoRitterruestung(int locationID)
         {
-            if (CA!.Status_Ritterruestung_Klaue.Val > 0)
+            try
             {
-                CA!.Status_Ritterruestung_Klaue.Val--;
-                if (CA!.Status_Ritterruestung_Klaue.Val == 0)
+                if (CA!.Status_Ritterruestung_Klaue.Val > 0)
                 {
-                    StoryOutput(CA!.L06_Long_Floor, CA!.Person_I, loca.DoRR_Finish);
+                    CA!.Status_Ritterruestung_Klaue.Val--;
+                    if (CA!.Status_Ritterruestung_Klaue.Val == 0)
+                    {
+                        StoryOutput(CA!.L06_Long_Floor, CA!.Person_I, loca.DoRR_Finish);
+                    }
+                }
+
+                if (CA!.Person_I.locationID == locationID)
+                {
+                    if (CA.Status_Ritterruestung_Klaue.Val <= 0 && (Items.IsItemInv(CA.I00_Unstable_Pliers_With_Claw) || Items.IsItemInv(CA.I00_Stable_Pliers_With_Claw)))
+                    {
+                        int a = 5;
+                        int val = GD!.RandomNumber(0, 10);
+                        {
+                            if (val < 1)
+                            {
+                                StoryOutput(CA!.L06_Long_Floor, CA!.Person_I, loca.DoRR_Seufzen);
+                            }
+                            else if (val < 2)
+                            {
+                                StoryOutput(CA!.L06_Long_Floor, CA!.Person_I, loca.DoRR_Wispern);
+                            }
+                            else if (val < 3)
+                            {
+                                StoryOutput(CA!.L06_Long_Floor, CA!.Person_I, loca.DoRR_Bewegen);
+                            }
+
+                        }
+                    }
+                    else if (CA!.Status_Ritterruestung_Klaue.Val > 0)
+                    {
+
+                        int val = GD!.RandomNumber(0, 10);
+                        {
+                            if (val < 1)
+                            {
+                                StoryOutput(CA!.L06_Long_Floor, CA!.Person_I, loca.DoRR_Action1);
+                            }
+                            else if (val < 2)
+                            {
+                                StoryOutput(CA!.L06_Long_Floor, CA!.Person_I, loca.DoRR_Action2);
+                            }
+                            else if (val < 3)
+                            {
+                                StoryOutput(CA!.L06_Long_Floor, CA!.Person_I, loca.DoRR_Action3);
+                            }
+                            else if (val < 4)
+                            {
+                                StoryOutput(CA!.L06_Long_Floor, CA!.Person_I, loca.DoRR_Action4);
+                            }
+                            else if (val < 5)
+                            {
+                                StoryOutput(CA!.L06_Long_Floor, CA!.Person_I, loca.DoRR_Action5);
+                            }
+
+                        }
+                    }
                 }
             }
-
-            if (CA!.Person_I.locationID == locationID)
+            catch (Exception ex)
             {
-                if (CA.Status_Ritterruestung_Klaue.Val <= 0 && (Items.IsItemInv(CA.I00_Unstable_Pliers_With_Claw) || Items.IsItemInv(CA.I00_Stable_Pliers_With_Claw)))
-                {
-                    int a = 5;
-                    int val = GD!.RandomNumber(0, 10);  
-                    {
-                        if (val < 1)
-                        {
-                            StoryOutput(CA!.L06_Long_Floor, CA!.Person_I, loca.DoRR_Seufzen);
-                        }
-                        else if (val < 2)
-                        {
-                            StoryOutput(CA!.L06_Long_Floor, CA!.Person_I, loca.DoRR_Wispern);
-                        }
-                        else if (val < 3)
-                        {
-                            StoryOutput(CA!.L06_Long_Floor, CA!.Person_I, loca.DoRR_Bewegen);
-                        }
-
-                    }
-                }
-                else if (CA!.Status_Ritterruestung_Klaue.Val > 0)
-                {
-
-                    int val = GD!.RandomNumber(0, 10);
-                    {
-                        if (val < 1)
-                        {
-                            StoryOutput(CA!.L06_Long_Floor, CA!.Person_I, loca.DoRR_Action1);
-                        }
-                        else if (val < 2)
-                        {
-                            StoryOutput(CA!.L06_Long_Floor, CA!.Person_I, loca.DoRR_Action2);
-                        }
-                        else if (val < 3)
-                        {
-                            StoryOutput(CA!.L06_Long_Floor, CA!.Person_I, loca.DoRR_Action3);
-                        }
-                        else if (val < 4)
-                        {
-                            StoryOutput(CA!.L06_Long_Floor, CA!.Person_I, loca.DoRR_Action4);
-                        }
-                        else if (val < 5)
-                        {
-                            StoryOutput(CA!.L06_Long_Floor, CA!.Person_I, loca.DoRR_Action5);
-                        }
-
-                    }
-                }
             }
             return true;
         }
         public bool DoOwl(int locationID)
         {
-            if (CA!.Status_Eule_Klaue.Val > 0)
+            try
             {
-                CA!.Status_Eule_Klaue.Val--;
-
-                if (CA!.Status_Eule_Klaue.Val == 0)
+                if (CA!.Status_Eule_Klaue.Val > 0)
                 {
-                    StoryOutput(CA!.L05_Atrium, CA!.Person_I, loca.DoOwl_Finish);
+                    CA!.Status_Eule_Klaue.Val--;
+
+                    if (CA!.Status_Eule_Klaue.Val == 0)
+                    {
+                        StoryOutput(CA!.L05_Atrium, CA!.Person_I, loca.DoOwl_Finish);
+                    }
+                }
+                if (CA!.Person_I.locationID == locationID)
+                {
+                    if (CA.Status_Eule_Klaue.Val <= 0 && (Items.IsItemInv(CA.I00_Unstable_Pliers_With_Claw) || Items.IsItemInv(CA.I00_Stable_Pliers_With_Claw)))
+                    {
+                        int a = 5;
+                        int val = GD!.RandomNumber(0, 10);
+                        {
+                            if (val < 1)
+                            {
+                                StoryOutput(CA!.L05_Atrium, CA!.Person_I, loca.DoOwl_Seufzen);
+                            }
+                            else if (val < 2)
+                            {
+                                StoryOutput(CA!.L05_Atrium, CA!.Person_I, loca.DoOwl_Wispern);
+                            }
+                            else if (val < 3)
+                            {
+                                StoryOutput(CA!.L05_Atrium, CA!.Person_I, loca.DoOwl_Bewegen);
+                            }
+
+                        }
+                    }
+                    else if (CA!.Status_Eule_Klaue.Val > 0)
+                    {
+                        int val = GD!.RandomNumber(0, 10);
+                        {
+                            if (val < 1)
+                            {
+                                StoryOutput(CA!.L05_Atrium, CA!.Person_I, loca.DoOwl_Action1);
+                            }
+                            else if (val < 2)
+                            {
+                                StoryOutput(CA!.L05_Atrium, CA!.Person_I, loca.DoOwl_Action2);
+                            }
+                            else if (val < 3)
+                            {
+                                StoryOutput(CA!.L05_Atrium, CA!.Person_I, loca.DoOwl_Action3);
+                            }
+                            else if (val < 4)
+                            {
+                                StoryOutput(CA!.L05_Atrium, CA!.Person_I, loca.DoOwl_Action4);
+                            }
+                            else if (val < 5)
+                            {
+                                StoryOutput(CA!.L05_Atrium, CA!.Person_I, loca.DoOwl_Action5);
+                            }
+
+                        }
+                    }
                 }
             }
-            if (CA!.Person_I.locationID == locationID)
+            catch (Exception ex)
             {
-                if (CA.Status_Eule_Klaue.Val <= 0 && (Items.IsItemInv(CA.I00_Unstable_Pliers_With_Claw) || Items.IsItemInv(CA.I00_Stable_Pliers_With_Claw)))
-                {
-                    int a = 5;
-                    int val = GD!.RandomNumber(0, 10);
-                    {
-                        if (val < 1)
-                        {
-                            StoryOutput(CA!.L05_Atrium, CA!.Person_I, loca.DoOwl_Seufzen);
-                        }
-                        else if (val < 2)
-                        {
-                            StoryOutput(CA!.L05_Atrium, CA!.Person_I, loca.DoOwl_Wispern);
-                        }
-                        else if (val < 3)
-                        {
-                            StoryOutput(CA!.L05_Atrium, CA!.Person_I, loca.DoOwl_Bewegen);
-                        }
-
-                    }
-                }
-                else if (CA!.Status_Eule_Klaue.Val > 0)
-                {
-                    int val = GD!.RandomNumber(0, 10);
-                    {
-                        if (val < 1)
-                        {
-                            StoryOutput(CA!.L05_Atrium, CA!.Person_I, loca.DoOwl_Action1);
-                        }
-                        else if (val < 2)
-                        {
-                            StoryOutput(CA!.L05_Atrium, CA!.Person_I, loca.DoOwl_Action2);
-                        }
-                        else if (val < 3)
-                        {
-                            StoryOutput(CA!.L05_Atrium, CA!.Person_I, loca.DoOwl_Action3);
-                        }
-                        else if (val < 4)
-                        {
-                            StoryOutput(CA!.L05_Atrium, CA!.Person_I, loca.DoOwl_Action4);
-                        }
-                        else if (val < 5)
-                        {
-                            StoryOutput(CA!.L05_Atrium, CA!.Person_I, loca.DoOwl_Action5);
-                        }
-
-                    }
-                }
             }
             return true;
         }
         public bool DoSkeleton(int locationID)
         {
-            if (CA!.Status_Skelett_Klaue.Val > 0)
+            try
             {
-                CA!.Status_Skelett_Klaue.Val--;
-                if (CA!.Status_Skelett_Klaue.Val == 0)
+                if (CA!.Status_Skelett_Klaue.Val > 0)
                 {
-                    StoryOutput(CA!.L09_Library, CA!.Person_I, loca.Do_Skeleton_Finish);
+                    CA!.Status_Skelett_Klaue.Val--;
+                    if (CA!.Status_Skelett_Klaue.Val == 0)
+                    {
+                        StoryOutput(CA!.L09_Library, CA!.Person_I, loca.Do_Skeleton_Finish);
+                    }
+                }
+
+                if (CA!.Person_I.locationID == locationID)
+                {
+                    if (CA.Status_Skelett_Klaue.Val <= 0 && (Items.IsItemInv(CA.I00_Unstable_Pliers_With_Claw) || Items.IsItemInv(CA.I00_Stable_Pliers_With_Claw)))
+                    {
+                        int a = 5;
+                        int val = GD!.RandomNumber(0, 10);
+                        {
+                            if (val < 1)
+                            {
+                                StoryOutput(CA!.L09_Library, CA!.Person_I, loca.DoSkelett_Reaktion1);
+                            }
+                            else if (val < 2)
+                            {
+                                StoryOutput(CA!.L09_Library, CA!.Person_I, loca.DoSkelett_Reaktion2);
+                            }
+                            else if (val < 3)
+                            {
+                                StoryOutput(CA!.L09_Library, CA!.Person_I, loca.DoSkelett_Reaktion3);
+                            }
+
+                        }
+                    }
+                    else if (CA!.Status_Skelett_Klaue.Val > 0)
+                    {
+                        int val = GD!.RandomNumber(0, 10);
+                        {
+                            if (val < 1)
+                            {
+                                StoryOutput(CA!.L09_Library, CA!.Person_I, loca.DoSkelett_Action1);
+                            }
+                            else if (val < 2)
+                            {
+                                StoryOutput(CA!.L09_Library, CA!.Person_I, loca.DoSkelett_Action2);
+                            }
+                            else if (val < 3)
+                            {
+                                StoryOutput(CA!.L09_Library, CA!.Person_I, loca.DoSkelett_Action3);
+                            }
+                            else if (val < 4)
+                            {
+                                StoryOutput(CA!.L09_Library, CA!.Person_I, loca.DoSkelett_Action4);
+                            }
+                            else if (val < 5)
+                            {
+                                StoryOutput(CA!.L09_Library, CA!.Person_I, loca.DoSkelett_Action5);
+                            }
+
+                        }
+                    }
                 }
             }
-
-            if (CA!.Person_I.locationID == locationID)
+            catch (Exception ex)
             {
-                if (CA.Status_Skelett_Klaue.Val <= 0 && (Items.IsItemInv(CA.I00_Unstable_Pliers_With_Claw) || Items.IsItemInv(CA.I00_Stable_Pliers_With_Claw)))
-                {
-                    int a = 5;
-                    int val = GD!.RandomNumber(0, 10);
-                    {
-                        if (val < 1)
-                        {
-                            StoryOutput(CA!.L09_Library, CA!.Person_I, loca.DoSkelett_Reaktion1);
-                        }
-                        else if (val < 2)
-                        {
-                            StoryOutput(CA!.L09_Library, CA!.Person_I, loca.DoSkelett_Reaktion2);
-                        }
-                        else if (val < 3)
-                        {
-                            StoryOutput(CA!.L09_Library, CA!.Person_I, loca.DoSkelett_Reaktion3);
-                        }
-
-                    }
-                }
-                else if (CA!.Status_Skelett_Klaue.Val > 0)
-                {
-                    int val = GD!.RandomNumber(0, 10);
-                    {
-                        if (val < 1)
-                        {
-                            StoryOutput(CA!.L09_Library, CA!.Person_I, loca.DoSkelett_Action1);
-                        }
-                        else if (val < 2)
-                        {
-                            StoryOutput(CA!.L09_Library, CA!.Person_I, loca.DoSkelett_Action2);
-                        }
-                        else if (val < 3)
-                        {
-                            StoryOutput(CA!.L09_Library, CA!.Person_I, loca.DoSkelett_Action3);
-                        }
-                        else if (val < 4)
-                        {
-                            StoryOutput(CA!.L09_Library, CA!.Person_I, loca.DoSkelett_Action4);
-                        }
-                        else if (val < 5)
-                        {
-                            StoryOutput(CA!.L09_Library, CA!.Person_I, loca.DoSkelett_Action5);
-                        }
-
-                    }
-                }
             }
 
             return true;
         }
         public bool DoParrot(int locationID)
         {
-            if (CA!.Status_Papagei_Klaue.Val > 0)
+            try
             {
-                CA!.Status_Papagei_Klaue.Val--;
-                if (CA!.Status_Papagei_Klaue.Val == 0)
+                if (CA!.Status_Papagei_Klaue.Val > 0)
                 {
-                    StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Parrot_Finish);
+                    CA!.Status_Papagei_Klaue.Val--;
+                    if (CA!.Status_Papagei_Klaue.Val == 0)
+                    {
+                        StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Parrot_Finish);
+                    }
+                }
+
+                if (CA!.Person_I.locationID == locationID)
+                {
+                    if (CA.Status_Papagei_Klaue.Val <= 0 && (Items.IsItemInv(CA.I00_Unstable_Pliers_With_Claw) || Items.IsItemInv(CA.I00_Stable_Pliers_With_Claw)))
+                    {
+                        int a = 5;
+                        int val = GD!.RandomNumber(0, 30);
+                        {
+                            if (val < 1)
+                            {
+                                StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Parrot_Reaktion1);
+                            }
+                            else if (val < 2)
+                            {
+                                StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Parrot_Reaktion2);
+                            }
+                            else if (val < 3)
+                            {
+                                StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Parrot_Reaktion3);
+                            }
+
+                        }
+                    }
+                    else if (CA!.Status_Papagei_Klaue.Val > 0)
+                    {
+                        int val = GD!.RandomNumber(0, 30);
+                        {
+                            if (val < 1)
+                            {
+                                StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Parrot_Action1);
+                            }
+                            else if (val < 2)
+                            {
+                                StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Parrot_Action2);
+                            }
+                            else if (val < 3)
+                            {
+                                StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Parrot_Action3);
+                            }
+                            else if (val < 4)
+                            {
+                                StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Parrot_Action4);
+                            }
+                            else if (val < 5)
+                            {
+                                StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Parrot_Action5);
+                            }
+
+                        }
+                    }
                 }
             }
-
-            if (CA!.Person_I.locationID == locationID)
+            catch (Exception ex)
             {
-                if (CA.Status_Papagei_Klaue.Val <= 0 && (Items.IsItemInv(CA.I00_Unstable_Pliers_With_Claw) || Items.IsItemInv(CA.I00_Stable_Pliers_With_Claw)))
-                {
-                    int a = 5;
-                    int val = GD!.RandomNumber(0, 30);
-                    {
-                        if (val < 1)
-                        {
-                            StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Parrot_Reaktion1);
-                        }
-                        else if (val < 2)
-                        {
-                            StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Parrot_Reaktion2);
-                        }
-                        else if (val < 3)
-                        {
-                            StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Parrot_Reaktion3);
-                        }
-
-                    }
-                }
-                else if (CA!.Status_Papagei_Klaue.Val > 0)
-                {
-                    int val = GD!.RandomNumber(0, 30);
-                    {
-                        if (val < 1)
-                        {
-                            StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Parrot_Action1);
-                        }
-                        else if (val < 2)
-                        {
-                            StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Parrot_Action2);
-                        }
-                        else if (val < 3)
-                        {
-                            StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Parrot_Action3);
-                        }
-                        else if (val < 4)
-                        {
-                            StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Parrot_Action4);
-                        }
-                        else if (val < 5)
-                        {
-                            StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Parrot_Action5);
-                        }
-
-                    }
-                }
             }
 
             return true;
         }
         public bool DoMagpie(int locationID)
         {
-            if (CA!.Status_Elster_Klaue.Val > 0)
+            try
             {
-                CA!.Status_Elster_Klaue.Val--;
-                if (CA!.Status_Elster_Klaue.Val == 0)
+                if (CA!.Status_Elster_Klaue.Val > 0)
                 {
-                    StoryOutput(CA!.Person_Magpie.locationID, CA!.Person_I, loca.Do_Magpie_Finish);
+                    CA!.Status_Elster_Klaue.Val--;
+                    if (CA!.Status_Elster_Klaue.Val == 0)
+                    {
+                        StoryOutput(CA!.Person_Magpie.locationID, CA!.Person_I, loca.Do_Magpie_Finish);
+                    }
+                }
+
+                if (CA!.Person_I.locationID == locationID)
+                {
+                    if (CA.Status_Elster_Klaue.Val <= 0 && (Items.IsItemInv(CA.I00_Unstable_Pliers_With_Claw) || Items.IsItemInv(CA.I00_Stable_Pliers_With_Claw)))
+                    {
+                        int a = 5;
+                        int val = GD!.RandomNumber(0, 30);
+                        {
+                            if (val < 1)
+                            {
+                                StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Magpie_Reaktion1);
+                            }
+                            else if (val < 2)
+                            {
+                                StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Magpie_Reaktion2);
+                            }
+                            else if (val < 3)
+                            {
+                                StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Magpie_Reaktion3);
+                            }
+
+                        }
+                    }
+                    else if (CA!.Status_Elster_Klaue.Val > 0)
+                    {
+                        int val = GD!.RandomNumber(0, 30);
+                        {
+                            if (val < 1)
+                            {
+                                StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Magpie_Action1);
+                            }
+                            else if (val < 2)
+                            {
+                                StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Magpie_Action2);
+                            }
+                            else if (val < 3)
+                            {
+                                StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Magpie_Action3);
+                            }
+                            else if (val < 4)
+                            {
+                                StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Magpie_Action4);
+                            }
+                            else if (val < 5)
+                            {
+                                StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Magpie_Action5);
+                            }
+
+                        }
+                    }
                 }
             }
-
-            if (CA!.Person_I.locationID == locationID)
+            catch (Exception ex)
             {
-                if (CA.Status_Elster_Klaue.Val <= 0 && (Items.IsItemInv(CA.I00_Unstable_Pliers_With_Claw) || Items.IsItemInv(CA.I00_Stable_Pliers_With_Claw)))
-                {
-                    int a = 5;
-                    int val = GD!.RandomNumber(0, 30);
-                    {
-                        if (val < 1)
-                        {
-                            StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Magpie_Reaktion1);
-                        }
-                        else if (val < 2)
-                        {
-                            StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Magpie_Reaktion2);
-                        }
-                        else if (val < 3)
-                        {
-                            StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Magpie_Reaktion3);
-                        }
-
-                    }
-                }
-                else if (CA!.Status_Elster_Klaue.Val > 0)
-                {
-                    int val = GD!.RandomNumber(0, 30);
-                    {
-                        if (val < 1)
-                        {
-                            StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Magpie_Action1);
-                        }
-                        else if (val < 2)
-                        {
-                            StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Magpie_Action2);
-                        }
-                        else if (val < 3)
-                        {
-                            StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Magpie_Action3);
-                        }
-                        else if (val < 4)
-                        {
-                            StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Magpie_Action4);
-                        }
-                        else if (val < 5)
-                        {
-                            StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Magpie_Action5);
-                        }
-
-                    }
-                }
             }
 
             return true;
         }
         public bool DoFish(int locationID)
         {
-            if (CA!.Status_Fisch_Klaue.Val > 0)
+            try
             {
-                CA!.Status_Fisch_Klaue.Val--;
-                if (CA!.Status_Fisch_Klaue.Val == 0)
+                if (CA!.Status_Fisch_Klaue.Val > 0)
                 {
-                    StoryOutput(CA!.Person_Fish.locationID, CA!.Person_I, loca.Do_Fish_Finish);
+                    CA!.Status_Fisch_Klaue.Val--;
+                    if (CA!.Status_Fisch_Klaue.Val == 0)
+                    {
+                        StoryOutput(CA!.Person_Fish.locationID, CA!.Person_I, loca.Do_Fish_Finish);
+                    }
+                }
+
+                if (CA!.Person_I.locationID == locationID)
+                {
+                    if (CA.Status_Fisch_Klaue.Val <= 0 && (Items.IsItemInv(CA.I00_Unstable_Pliers_With_Claw) || Items.IsItemInv(CA.I00_Stable_Pliers_With_Claw)))
+                    {
+                        int a = 5;
+                        int val = GD!.RandomNumber(0, 30);
+                        {
+                            if (val < 1)
+                            {
+                                StoryOutput(CA!.Person_Fish.locationID, CA!.Person_I, loca.Do_Fish_Reaktion1);
+                            }
+                            else if (val < 2)
+                            {
+                                StoryOutput(CA!.Person_Fish.locationID, CA!.Person_I, loca.Do_Fish_Reaktion2);
+                            }
+                            else if (val < 3)
+                            {
+                                StoryOutput(CA!.Person_Fish.locationID, CA!.Person_I, loca.Do_Fish_Reaktion3);
+                            }
+
+                        }
+                    }
+                    else if (CA!.Status_Fisch_Klaue.Val > 0)
+                    {
+                        int val = GD!.RandomNumber(0, 30);
+                        {
+                            if (val < 1)
+                            {
+                                StoryOutput(CA!.Person_Fish.locationID, CA!.Person_I, loca.Do_Fish_Action1);
+                            }
+                            else if (val < 2)
+                            {
+                                StoryOutput(CA!.Person_Fish.locationID, CA!.Person_I, loca.Do_Fish_Action2);
+                            }
+                            else if (val < 3)
+                            {
+                                StoryOutput(CA!.Person_Fish.locationID, CA!.Person_I, loca.Do_Fish_Action3);
+                            }
+                            else if (val < 4)
+                            {
+                                StoryOutput(CA!.Person_Fish.locationID, CA!.Person_I, loca.Do_Fish_Action4);
+                            }
+                            else if (val < 5)
+                            {
+                                StoryOutput(CA!.Person_Fish.locationID, CA!.Person_I, loca.Do_Fish_Action5);
+                            }
+
+                        }
+                    }
                 }
             }
-
-            if (CA!.Person_I.locationID == locationID)
+            catch (Exception ex)
             {
-                if (CA.Status_Fisch_Klaue.Val <= 0 && (Items.IsItemInv(CA.I00_Unstable_Pliers_With_Claw) || Items.IsItemInv(CA.I00_Stable_Pliers_With_Claw)))
-                {
-                    int a = 5;
-                    int val = GD!.RandomNumber(0, 30);
-                    {
-                        if (val < 1)
-                        {
-                            StoryOutput(CA!.Person_Fish.locationID, CA!.Person_I, loca.Do_Fish_Reaktion1);
-                        }
-                        else if (val < 2)
-                        {
-                            StoryOutput(CA!.Person_Fish.locationID, CA!.Person_I, loca.Do_Fish_Reaktion2);
-                        }
-                        else if (val < 3)
-                        {
-                            StoryOutput(CA!.Person_Fish.locationID, CA!.Person_I, loca.Do_Fish_Reaktion3);
-                        }
-
-                    }
-                }
-                else if (CA!.Status_Fisch_Klaue.Val > 0)
-                {
-                    int val = GD!.RandomNumber(0, 30);
-                    {
-                        if (val < 1)
-                        {
-                            StoryOutput(CA!.Person_Fish.locationID, CA!.Person_I, loca.Do_Fish_Action1);
-                        }
-                        else if (val < 2)
-                        {
-                            StoryOutput(CA!.Person_Fish.locationID, CA!.Person_I, loca.Do_Fish_Action2);
-                        }
-                        else if (val < 3)
-                        {
-                            StoryOutput(CA!.Person_Fish.locationID, CA!.Person_I, loca.Do_Fish_Action3);
-                        }
-                        else if (val < 4)
-                        {
-                            StoryOutput(CA!.Person_Fish.locationID, CA!.Person_I, loca.Do_Fish_Action4);
-                        }
-                        else if (val < 5)
-                        {
-                            StoryOutput(CA!.Person_Fish.locationID, CA!.Person_I, loca.Do_Fish_Action5);
-                        }
-
-                    }
-                }
             }
 
             return true;
         }
         public bool DoSnake(int locationID)
         {
-            if (CA!.Status_Schlange_Klaue.Val > 0)
+            try
             {
-                CA!.Status_Schlange_Klaue.Val--;
-                if (CA!.Status_Schlange_Klaue.Val == 0)
+                if (CA!.Status_Schlange_Klaue.Val > 0)
                 {
-                    StoryOutput(CA!.Person_Snake.locationID, CA!.Person_I, loca.Do_Snake_Finish);
+                    CA!.Status_Schlange_Klaue.Val--;
+                    if (CA!.Status_Schlange_Klaue.Val == 0)
+                    {
+                        StoryOutput(CA!.Person_Snake.locationID, CA!.Person_I, loca.Do_Snake_Finish);
+                    }
+                }
+
+                if (CA!.Person_I.locationID == locationID)
+                {
+                    if (CA.Status_Schlange_Klaue.Val <= 0 && (Items.IsItemInv(CA.I00_Unstable_Pliers_With_Claw) || Items.IsItemInv(CA.I00_Stable_Pliers_With_Claw)))
+                    {
+                        int a = 5;
+                        int val = GD!.RandomNumber(0, 30);
+                        {
+                            if (val < 1)
+                            {
+                                StoryOutput(CA!.Person_Snake.locationID, CA!.Person_I, loca.Do_Snake_Reaktion1);
+                            }
+                            else if (val < 2)
+                            {
+                                StoryOutput(CA!.Person_Snake.locationID, CA!.Person_I, loca.Do_Snake_Reaktion2);
+                            }
+                            else if (val < 3)
+                            {
+                                StoryOutput(CA!.Person_Snake.locationID, CA!.Person_I, loca.Do_Snake_Reaktion3);
+                            }
+
+                        }
+                    }
+                    else if (CA!.Status_Schlange_Klaue.Val > 0)
+                    {
+                        int val = GD!.RandomNumber(0, 30);
+                        {
+                            if (val < 1)
+                            {
+                                StoryOutput(CA!.Person_Snake.locationID, CA!.Person_I, loca.Do_Snake_Action1);
+                            }
+                            else if (val < 2)
+                            {
+                                StoryOutput(CA!.Person_Snake.locationID, CA!.Person_I, loca.Do_Snake_Action2);
+                            }
+                            else if (val < 3)
+                            {
+                                StoryOutput(CA!.Person_Snake.locationID, CA!.Person_I, loca.Do_Snake_Action3);
+                            }
+                            else if (val < 4)
+                            {
+                                StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Snake_Action4);
+                            }
+                            else if (val < 5)
+                            {
+                                StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Snake_Action5);
+                            }
+
+                        }
+                    }
                 }
             }
-
-            if (CA!.Person_I.locationID == locationID)
+            catch (Exception ex)
             {
-                if (CA.Status_Schlange_Klaue.Val <= 0 && (Items.IsItemInv(CA.I00_Unstable_Pliers_With_Claw) || Items.IsItemInv(CA.I00_Stable_Pliers_With_Claw)))
-                {
-                    int a = 5;
-                    int val = GD!.RandomNumber(0, 30);
-                    {
-                        if (val < 1)
-                        {
-                            StoryOutput(CA!.Person_Snake.locationID, CA!.Person_I, loca.Do_Snake_Reaktion1);
-                        }
-                        else if (val < 2)
-                        {
-                            StoryOutput(CA!.Person_Snake.locationID, CA!.Person_I, loca.Do_Snake_Reaktion2);
-                        }
-                        else if (val < 3)
-                        {
-                            StoryOutput(CA!.Person_Snake.locationID, CA!.Person_I, loca.Do_Snake_Reaktion3);
-                        }
-
-                    }
-                }
-                else if (CA!.Status_Schlange_Klaue.Val > 0)
-                {
-                    int val = GD!.RandomNumber(0, 30);
-                    {
-                        if (val < 1)
-                        {
-                            StoryOutput(CA!.Person_Snake.locationID, CA!.Person_I, loca.Do_Snake_Action1);
-                        }
-                        else if (val < 2)
-                        {
-                            StoryOutput(CA!.Person_Snake.locationID, CA!.Person_I, loca.Do_Snake_Action2);
-                        }
-                        else if (val < 3)
-                        {
-                            StoryOutput(CA!.Person_Snake.locationID, CA!.Person_I, loca.Do_Snake_Action3);
-                        }
-                        else if (val < 4)
-                        {
-                            StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Snake_Action4);
-                        }
-                        else if (val < 5)
-                        {
-                            StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Snake_Action5);
-                        }
-
-                    }
-                }
             }
 
             return true;
@@ -6433,123 +6430,129 @@ namespace GameCore
 
         public void CreateOrderPath(ObservableCollection<OrderTable> otl, int ix)
         {
-            // Wenn für diesen Index schon ein Pfad angelegt wurde, dann raus hier
-            if (ix == _ixLatest )
+            try
             {
-                return;
-            }
-            _ixLatest = ix;
-
-            if (ix == 2)
-            {
-
-             }
-
-            // Wenn CA == null, dann fehlt die Initialisierung -> Abbruch 
-            if (CA == null)
-                return;
-
-            string fullPath;
-            string path1 = loca.Path_Chapter_01;
-            string path2_1 = CurrentEventName!;
-            string path2_2 = loca.ScoreEvent_Finish;
-            string? path2 = null;
-            string? path3 = null;
-            string? path4 = null;
-
-            // während des Pfadaufbaus reicht Abschnitt path2 immer vom CurrentEventName bis "Current"
-            path2 = String.Format(loca.ScoreEvent_Von_Bis, CurrentEventName, loca.ScoreEvent_Finish);
-
-            _otlCurrent = otl;
-            _ixCurrent = ix;
-
-            _actLoc = CA!.Person_I!.locationID;
-
-            // Aktuell werden Aktionen gesammelt
-            if (_actLocCollecting == false)
-            {
-                // _actLoc hat sich geändert? Dann ab hier Locations zählen
-                // if (_lastLoc != _actLoc && _lastLoc != -1)
-                if (_lastLastLoc != _lastLoc && _lastLastLoc != -1)
+                // Wenn für diesen Index schon ein Pfad angelegt wurde, dann raus hier
+                if (ix == _ixLatest)
                 {
-                    _actLocCollecting = true;
-
-                    _actLocEventSeqStart = ix-1;
-                    _actLocEventStartPoint = _lastLastLoc;
-
-                    // Hier wird schon mal die Location x zwischengespeichert fürs später "Gehe von 'x' nach 'y'"
-                    // _lastLocEventStartPoint = _actLocEventStartPoint;
-                    // _actLocEventStartPoint = _actLocEvent;
-
+                    return;
                 }
-                else
+                _ixLatest = ix;
+
+                if (ix == 2)
                 {
 
                 }
-            }
-            // Aktuell werden Gehe-Aktionen gesammelt, aber die letzte Aktion ist keine Gehe-Aktion mehr
-            // wir müssen also die letzten gesammelten Gehe-Aktionen nachbearbeiten
-            else if (_actLocCollecting == true && _lastLoc == _lastLastLoc)
-            {
-                if( ix - _actLocEventSeqStart > 2 && _actLocEventSeqStart >= 2 )
-                {
-                    string pathx = String.Format(loca.ScoreEvent_Gehen_Von_Bis, locations!.Find(_actLocEventStartPoint)!.LocName, locations!.Find(_lastLoc)!.LocName);
 
-                    for ( int ix2 = _actLocEventSeqStart-1; ix2<(ix-2); ix2++)
+                // Wenn CA == null, dann fehlt die Initialisierung -> Abbruch 
+                if (CA == null)
+                    return;
+
+                string fullPath;
+                string path1 = loca.Path_Chapter_01;
+                string path2_1 = CurrentEventName!;
+                string path2_2 = loca.ScoreEvent_Finish;
+                string? path2 = null;
+                string? path3 = null;
+                string? path4 = null;
+
+                // während des Pfadaufbaus reicht Abschnitt path2 immer vom CurrentEventName bis "Current"
+                path2 = String.Format(loca.ScoreEvent_Von_Bis, CurrentEventName, loca.ScoreEvent_Finish);
+
+                _otlCurrent = otl;
+                _ixCurrent = ix;
+
+                _actLoc = CA!.Person_I!.locationID;
+
+                // Aktuell werden Aktionen gesammelt
+                if (_actLocCollecting == false)
+                {
+                    // _actLoc hat sich geändert? Dann ab hier Locations zählen
+                    // if (_lastLoc != _actLoc && _lastLoc != -1)
+                    if (_lastLastLoc != _lastLoc && _lastLastLoc != -1)
                     {
-                        SecureOrderPath(_otlCurrent, ix2);
+                        _actLocCollecting = true;
 
-                        _otlCurrent[ix2].OrderPath = PathInsertSegment(_otlCurrent[ix2].OrderPath!, 2, pathx);
+                        _actLocEventSeqStart = ix - 1;
+                        _actLocEventStartPoint = _lastLastLoc;
+
+                        // Hier wird schon mal die Location x zwischengespeichert fürs später "Gehe von 'x' nach 'y'"
+                        // _lastLocEventStartPoint = _actLocEventStartPoint;
+                        // _actLocEventStartPoint = _actLocEvent;
 
                     }
-
-                }
-                else
-                {
-                    /*
-                    if (AdvGame!.DialogOngoing && Orders.persistentMCMenu != null)
+                    else
                     {
-                        string speaker = loca.ScoreEvent_Talk_Self;
 
-                        if (Orders.persistentMCMenu?.MCSpeakerText.Count > 1)
-                            if (Orders.persistentMCMenu.MCSpeakerText[1].SpeakerID != Orders.persistentMCMenu.MCSpeakerText[0].SpeakerID)
-                                speaker = String.Format(loca.ScoreEvent_Talk_With, Persons.Find(Orders.persistentMCMenu.MCSpeakerText[1].SpeakerID).FullName(Co.CASE_DAT));
-
-                        path3 = speaker;
                     }
-                    */
+                }
+                // Aktuell werden Gehe-Aktionen gesammelt, aber die letzte Aktion ist keine Gehe-Aktion mehr
+                // wir müssen also die letzten gesammelten Gehe-Aktionen nachbearbeiten
+                else if (_actLocCollecting == true && _lastLoc == _lastLastLoc)
+                {
+                    if (ix - _actLocEventSeqStart > 2 && _actLocEventSeqStart >= 2)
+                    {
+                        string pathx = String.Format(loca.ScoreEvent_Gehen_Von_Bis, locations!.Find(_actLocEventStartPoint)!.LocName, locations!.Find(_lastLoc)!.LocName);
+
+                        for (int ix2 = _actLocEventSeqStart - 1; ix2 < (ix - 2); ix2++)
+                        {
+                            SecureOrderPath(_otlCurrent, ix2);
+
+                            _otlCurrent[ix2].OrderPath = PathInsertSegment(_otlCurrent[ix2].OrderPath!, 2, pathx);
+
+                        }
+
+                    }
+                    else
+                    {
+                        /*
+                        if (AdvGame!.DialogOngoing && Orders.persistentMCMenu != null)
+                        {
+                            string speaker = loca.ScoreEvent_Talk_Self;
+
+                            if (Orders.persistentMCMenu?.MCSpeakerText.Count > 1)
+                                if (Orders.persistentMCMenu.MCSpeakerText[1].SpeakerID != Orders.persistentMCMenu.MCSpeakerText[0].SpeakerID)
+                                    speaker = String.Format(loca.ScoreEvent_Talk_With, Persons.Find(Orders.persistentMCMenu.MCSpeakerText[1].SpeakerID).FullName(Co.CASE_DAT));
+
+                            path3 = speaker;
+                        }
+                        */
+                    }
+
+                    _actLocCollecting = false;
+                }
+                if (AdvGame!.DialogOngoing && Orders!.persistentMCMenu != null)
+                {
+                    string speaker = loca.ScoreEvent_Talk_Self;
+
+                    if (Orders.persistentMCMenu?.MCSpeakerText.Count > 1)
+                        if (Orders.persistentMCMenu.MCSpeakerText[1].SpeakerID != Orders.persistentMCMenu.MCSpeakerText[0].SpeakerID)
+                            speaker = String.Format(loca.ScoreEvent_Talk_With, Persons!.Find(Orders.persistentMCMenu.MCSpeakerText[1].SpeakerID)!.FullName(Co.CASE_DAT));
+
+                    path3 = speaker;
                 }
 
-                _actLocCollecting = false;
+                _lastLocEvent = _actLocEvent;
+                _actLocEvent = _actLoc;
+
+
+                fullPath = path1;
+                if (path2 != null)
+                    fullPath += "/" + path2;
+                if (path3 != null)
+                    fullPath += "/" + path3;
+                /*
+                if (path4 != null)
+                    fullPath += "/" + path4;
+                */
+                otl![ix].OrderPath = fullPath;
+
+                _lastLastLoc = _lastLoc;
+                _lastLoc = _actLoc;
             }
-            if (AdvGame!.DialogOngoing && Orders!.persistentMCMenu != null)
+            catch (Exception ex)
             {
-                string speaker = loca.ScoreEvent_Talk_Self;
-
-                if (Orders.persistentMCMenu?.MCSpeakerText.Count > 1)
-                    if (Orders.persistentMCMenu.MCSpeakerText[1].SpeakerID != Orders.persistentMCMenu.MCSpeakerText[0].SpeakerID)
-                        speaker = String.Format(loca.ScoreEvent_Talk_With, Persons!.Find(Orders.persistentMCMenu.MCSpeakerText[1].SpeakerID)!.FullName(Co.CASE_DAT));
-
-                path3 = speaker;
             }
- 
-            _lastLocEvent = _actLocEvent;
-            _actLocEvent = _actLoc;
-
-
-            fullPath = path1;
-            if (path2 != null)
-                fullPath += "/" + path2;
-            if (path3 != null)
-                fullPath += "/" + path3;
-            /*
-            if (path4 != null)
-                fullPath += "/" + path4;
-            */
-            otl![ix].OrderPath = fullPath;
-
-            _lastLastLoc = _lastLoc;
-            _lastLoc = _actLoc;
 
         }
 

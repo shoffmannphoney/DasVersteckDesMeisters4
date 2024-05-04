@@ -241,11 +241,26 @@ public class TreeView : TreeViewItem
 
     static int destroyed = 0;
 
+    public void ResetTreeViewItem()
+    {
+        OTCallback = null;
+        OTClick = null;
+        OrderTableCallback = null;
+
+        base.ResetTreeViewItem();
+    }
+
+
     public static void EmptyTreeViewItem(  Microsoft.Maui.IView tv)
     {
+        // return;
+
+#if ANDROID
+        int grefCount = (int) Java.Lang.Runtime.GetRuntime().TotalMemory();
+#endif
         try
         {
-            if (tv is TreeViewItem || tv is Grid)
+            if (tv is TreeViewItem || tv is Grid || tv is TreeView )
             {
                 Grid tv2 = tv as Grid;
 
@@ -254,14 +269,29 @@ public class TreeView : TreeViewItem
                     if (iv is TreeViewItem)
                     {
                         IView tvi = iv as IView;
+                        (iv as TreeViewItem).DisableToggleButton();
 
                         EmptyTreeViewItem(tvi);
+
+                        (iv as TreeViewItem).Children.Clear();
+                        (iv as TreeViewItem).Parent = null;
+                        (iv as TreeViewItem).Handler = null;
+
+                        if ((iv as TreeViewItem).StyleClass != null)
+                            (iv as TreeViewItem).StyleClass.Clear();
                     }
                     else if (iv is Grid)
                     {
                         Grid tvi = iv as Grid;
 
                         EmptyTreeViewItem(tvi);
+
+                        tvi.Children.Clear();
+                        tvi.Parent = null;
+                        tvi.Handler = null;
+
+                        if ((iv as Grid).StyleClass != null)
+                            (iv as Grid).StyleClass.Clear();
                     }
                     else if (iv is Label)
                     {
@@ -274,6 +304,20 @@ public class TreeView : TreeViewItem
 
                         }
                         l1.Behaviors.Clear();
+
+                        while (l1.GestureRecognizers.Count > 0)
+                        {
+                            ( l1.GestureRecognizers[0] as TapGestureRecognizer).Command = null;
+                            l1.GestureRecognizers.RemoveAt(0);
+                            destroyed++;
+
+                        }
+                        l1.Text = null;
+                        l1.GestureRecognizers.Clear();
+                        l1.Parent = null;
+                        l1.Handler = null; 
+                        if (l1.StyleClass != null)
+                            l1.StyleClass.Clear();
                     }
                     else if (iv is Button)
                     {
@@ -286,12 +330,109 @@ public class TreeView : TreeViewItem
 
                         }
                         l1.Behaviors.Clear();
+                        while (l1.GestureRecognizers.Count > 0)
+                        {
+                            (l1.GestureRecognizers[0] as TapGestureRecognizer).Command = null;
+                            l1.GestureRecognizers.RemoveAt(0);
+                            destroyed++;
+
+                        }
+                        l1.GestureRecognizers.Clear();
+                        l1.Text = null;
+                        l1.Parent = null;
+                        l1.Handler = null;
+                        if (l1.StyleClass != null)
+                            l1.StyleClass.Clear();
                     }
                     else
                     {
+                        GlobalData.AddLog("Nicht ausgewertet: " + iv.GetType().ToString(), IGlobalData.protMode.crisp);
 
                     }
                 }
+                tv2.Children.Clear();
+                while (tv2.Behaviors.Count > 0)
+                {
+                    GlobalData.AddLog("Ausgewertet: " + tv2.GetType().ToString(), IGlobalData.protMode.crisp);
+                    tv2.Behaviors.RemoveAt(0);
+                    destroyed++;
+
+                }
+                tv2.Behaviors.Clear();
+                while (tv2.GestureRecognizers.Count > 0)
+                {
+                    (tv2.GestureRecognizers[0] as TapGestureRecognizer).Command = null;
+                    tv2.GestureRecognizers.RemoveAt(0);
+                    destroyed++;
+
+                }
+                tv2.GestureRecognizers.Clear();
+                if (tv2.StyleClass != null)
+                    tv2.StyleClass.Clear();
+
+                if (tv is TreeView)
+                {
+                    TreeView tv3 = tv as TreeView;
+                    tv3.DisableToggleButton();
+                    tv3.OrderListTable = null;
+                    tv3.OrderTable = null;
+                    tv3.CurrentOrderListTable = null;
+                    tv3.UserDefinedObject = null;
+                    tv3.Text = null;
+                    tv3.Parent = null;
+                    tv3.ResetTreeViewItem();
+                    tv3.ColumnDefinitions.Clear();
+                    tv3.RowDefinitions.Clear();
+                    tv3.ClickedEventCommand = null;
+                    tv3.TextButton = null;
+                    tv3.TextLabel = null;
+                    tv3.Handler = null;
+                    if (tv3.StyleClass != null)
+                        tv3.StyleClass.Clear();
+
+
+                    tv3.OTCallback = null;
+                    tv3.OTClick = null;
+                    tv3.OrderTableCallback = null;
+
+                }
+                else if (tv is TreeViewItem)
+                {
+                    TreeViewItem tv3 = tv as TreeViewItem;
+                    tv3.DisableToggleButton();
+                    tv3.OrderListTable = null;
+                    tv3.OrderTable = null;
+                    tv3.CurrentOrderListTable = null;
+                    tv3.UserDefinedObject = null;
+                    tv3.Text = null;
+                    tv3.Parent = null;
+                    tv3.ResetTreeViewItem();
+                    tv3.ColumnDefinitions.Clear();
+                    tv3.RowDefinitions.Clear();
+                    tv3.TextButton = null;
+                    tv3.TextLabel = null;
+                    tv3.Handler = null;
+                    if (tv3.StyleClass != null)
+                        tv3.StyleClass.Clear();
+                }
+                else if (tv is Grid)
+                {
+                    Grid g3 = tv as Grid;
+                    g3.ColumnDefinitions.Clear();
+                    g3.RowDefinitions.Clear();
+                    g3.Parent = null;
+                    g3.Handler = null;
+                    if (g3.StyleClass != null)
+                        g3.StyleClass.Clear();
+
+                }
+                else
+                {
+                    GlobalData.AddLog("Nicht ausgewertet: " + tv.GetType().ToString(), IGlobalData.protMode.crisp);
+
+                }
+
+
             }
             else if (tv is Label)
             {
@@ -305,17 +446,39 @@ public class TreeView : TreeViewItem
                 }
                 l1.Behaviors.Clear();
 
+                while (l1.GestureRecognizers.Count > 0)
+                {
+                    (l1.GestureRecognizers[0] as TapGestureRecognizer).Command = null;
+                    l1.GestureRecognizers.RemoveAt(0);
+                    destroyed++;
+
+                }
+                if( l1.StyleClass != null)
+                    l1.StyleClass.Clear();
+                l1.GestureRecognizers.Clear();
+                l1.Parent = null;
+                l1.Text = null;
             }
             else
             {
+                GlobalData.AddLog( "Nicht ausgewertet: " + tv.GetType().ToString(), IGlobalData.protMode.crisp);
             }
-        }
+         }
         catch (Exception ex)
         {
             string s = ex.Message;
-        }
-    }
+            GlobalData.AddLog("EmptyTreeViewItem: " + s, IGlobalData.protMode.crisp);
 
+
+        }
+
+#if ANDROID
+        grefCount -= (int)  Java.Lang.Runtime.GetRuntime().TotalMemory();
+
+        if( grefCount > 0 )
+            GlobalData.AddLog("EmptyTreeViewItem freed: " + grefCount.ToString() + " von " + grefCount.ToString(), IGlobalData.protMode.crisp);
+#endif
+    }
     public void CloseTreeViewItem(TreeViewItem tvi)
     {
         if (tvi.SubTree != null)
@@ -750,6 +913,14 @@ public class TreeView : TreeViewItem
         }
 
     }
+
+    /*
+    public void DisableToggleButton()
+    {
+        ToggleButton.Clicked -= ToggleTreeView;
+
+    }
+    */
     public void SetupTreeView() 
     {
         RowDefinitionCollection Rows = new();
@@ -897,7 +1068,7 @@ public class OrderTableEventArgs: EventArgs
     public int No { get; set; }
 }
 
-public class TreeViewItem : Grid, INotifyPropertyChanged
+public class TreeViewItem : Grid, INotifyPropertyChanged, IDisposable
 {
     new public event PropertyChangedEventHandler? PropertyChanged;
     new public void OnPropertyChanged([CallerMemberName] string? name = null)
@@ -915,9 +1086,19 @@ public class TreeViewItem : Grid, INotifyPropertyChanged
     public Label? TextLabel;
     public Button? ToggleButton;
     // double TreeHeight = 25;
-    protected Grid? ParentSubTree = null;
+    public Grid? ParentSubTree = null;
     public Grid? SubTree = null;
-    public event TreeCallback? Clicked; 
+    public event TreeCallback? Clicked;
+    public TreeCallback TreeCallback { get; set; }
+
+    public ICommand? ClickedEvent { get; private set; }
+    public ICommand? ClickedData { get; private set; }
+
+
+    public TreeState? _currentTreeState = TreeState.closed;
+    bool _disposed = false;
+
+
     public ObservableCollection<OrderListTable>? OrderListTable
     {
         get;
@@ -933,6 +1114,15 @@ public class TreeViewItem : Grid, INotifyPropertyChanged
     private Object? _userDefinedObject;
     private ObservableCollection<OrderTable>? _orderTable;
     public Label? TextButton;
+    public void ResetTreeViewItem()
+    {
+        TextLabel = null;
+        ToggleButton = null;
+        ParentSubTree = null;
+        SubTree = null;
+    }
+
+
     public Object? UserDefinedObject
     {
         get
@@ -955,11 +1145,31 @@ public class TreeViewItem : Grid, INotifyPropertyChanged
             OnPropertyChanged();
         }
     }
-    public ICommand? ClickedEvent{ get; private set; }
-    public ICommand? ClickedData { get; private set; }
+    public void Dispose()
+    {
+        // Dispose of unmanaged resources.
+        Dispose( true );
+        // Suppress finalization.
+        // GC.SuppressFinalize(this);
+    }
 
+    protected virtual void Dispose(bool disposing)
+    {
+        if (_disposed)
+        {
+            return;
+        }
 
-    public TreeState? _currentTreeState = TreeState.closed;
+        if (disposing)
+        {
+            // TODO: dispose managed state (managed objects).
+        }
+
+        // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
+        // TODO: set large fields to null.
+
+        _disposed = true;
+    }
     public TreeState? CurrentTreeState
     {
         get => _currentTreeState;
@@ -1006,7 +1216,7 @@ public class TreeViewItem : Grid, INotifyPropertyChanged
         }
     } 
 
-    public string Text
+    public string? Text
     {
         get => TextLabel!.Text;
         set
@@ -1025,6 +1235,12 @@ public class TreeViewItem : Grid, INotifyPropertyChanged
     double CalcFontSize( double FontSize )
     {
         return FontSize * 1.4;
+    }
+
+    public void DisableToggleButton()
+    {
+        ToggleButton.Clicked -= ToggleTreeView;
+        Clicked -= TreeCallback;
     }
 
     public void AddCallback( )
@@ -1282,6 +1498,12 @@ public class TreeViewItem : Grid, INotifyPropertyChanged
 
     }
 
+
+    public void SetClicked(TreeCallback eh)
+    {
+        this.Clicked += eh;
+        this.TreeCallback = eh;
+    }
     public void SetupTreeViewItem()
     { 
         // ClickedDataCommand = new Command( OnClickedData );

@@ -169,126 +169,133 @@ public class GeneralViewModel : BaseViewModel, INotifyPropertyChanged
 
     public void InitZerogame()
     {
-        // bool foundZero = UIS!.ExistFile("zerogame.sav");
-
-        // Prüfen: Kann das Zerogame bleiben und wird es überhaupt noch gebraucht?
-        bool foundZero = false;
-
-
-        if ( !foundZero )
+        try
         {
-            SerialNumberGenerator.Instance.Count = 1000;
+            // bool foundZero = UIS!.ExistFile("zerogame.sav");
 
-            GameCore.Adv? adventure;
-            // Nuggu();
-            adventure = new Adv(true, false, true); // Adv.CreateAdventure());
-            GD!.Adventure!.Orders!.ReadSlotDescription();
+            // Prüfen: Kann das Zerogame bleiben und wird es überhaupt noch gebraucht?
+            bool foundZero = false;
 
-            UIS!.StoryTextObj!.Slines = new List<string?>();
-            for (int i = 0; i < 20; i++)
+
+            if (!foundZero)
             {
-                UIS.StoryTextObj.Slines.Add("<br/>");
-            }
-            UIS.StoryTextObj.Slines.Add(" ");
+                SerialNumberGenerator.Instance.Count = 1000;
 
+                GameCore.Adv? adventure;
+                // Nuggu();
+                adventure = new Adv(true, false, true); // Adv.CreateAdventure());
+                GD!.Adventure!.Orders!.ReadSlotDescription();
 
-            GD!.StartStatus = new();
-            GD!.StartStatus.jsonOrderListTable = adventure!.GD!.OrderList!.OTL![adventure!.GD!.OrderList!.CurrentOrderListIx];
-            GD!.StartStatus.jsonVersion = adventure!.GD!.Version;
-            GD!.StartStatus.jsonItems = adventure!.Items;
-            GD!.StartStatus.jsonPersons = adventure!.Persons;
-            GD!.StartStatus.jsonlocations = adventure!.locations;
-            GD!.StartStatus.jsonStats = adventure!.Stats;
-            GD!.StartStatus.jsonScores = adventure!.Scores;
-            GD!.StartStatus.jsonLanguage = adventure!.GD!.Language;
-            GD!.StartStatus.jsonLI = adventure!.LI;
-            GD!.StartStatus.jsonTopics = adventure!.Topics;
-            GD!.StartStatus.jsonItemQueue = adventure!.ItemQueue;
-            GD!.StartStatus.jsonStoryText = adventure!.STE;
-            GD!.StartStatus.jsonFeedbackText = adventure!.FBE;
-            GD!.StartStatus.jsonA = adventure!.A;
-            GD!.StartStatus.jsonPV = adventure!.PV;
-
-            // Nicht betroffen von Savegames
-            GD!.StartStatus.jsonAdjs = adventure!.Adjs;
-            GD!.StartStatus.jsonNouns = adventure!.Nouns;
-            GD!.StartStatus.jsonPreps = adventure!.Preps;
-            GD!.StartStatus.jsonPronouns = adventure!.Pronouns;
-            GD!.StartStatus.jsonFills = adventure!.Fills;
-            GD!.StartStatus.jsonVerbTenses = adventure!.VerbTenses;
-            GD!.StartStatus.jsonCA = adventure!.CA;
-            GD!.StartStatus.jsonCB = adventure!.CB;
-            // GD.StartStatus.jsonParser = Adventure!.Parser;
-            GD!.StartStatus.jsonVerbs = adventure!.Verbs;
-            GD!.StartStatus.JsonGameDefinitions = adventure!.Orders!.GenerateGameDefinitions(false);
-
-            GD!.Adventure = adventure;
-
-            // Helper.ConfigInsert(adventure.Persons, adventure.Items, adventure.locations, adventure.Topics, adventure.CB, adventure.A, adventure );
-
-            GD!.Language = IGlobalData.language.english;
-            GD!.Language = IGlobalData.language.german;
-
-            // adventure!.UIS!.CoreSaveToFile(GD!.StartStatus, "zerogame.sav");
-            /*
-            MemoryStream stream = new MemoryStream();
-            var writer = new BinaryWriter(stream, Encoding.UTF8, false);
-
-            byte[] buf = UIServices.ObjectToByteArray(GD.StartStatus);
-            writer.Write(buf);
-            writer.Close();
-            GD.StartStatusSerialized = stream.GetBuffer();
-            */
-            /*
-            using (var stream = File.Open(fileName, FileMode.Create))
-            {
-                using (var writer = new BinaryWriter(stream, Encoding.UTF8, false))
+                UIS!.StoryTextObj!.Slines = new List<string?>();
+                for (int i = 0; i < 20; i++)
                 {
-                    writer.Write(1.250F);
-                    writer.Write(@"c:\Temp");
-                    writer.Write(10);
-                    writer.Write(true);
+                    UIS.StoryTextObj.Slines.Add("<br/>");
                 }
-            }
-            */
-
-            /* TEST: Wird ersetzt durch neuen Lademechanismus
-            MemoryStream stream = new MemoryStream();
-            IFormatter formatter = new BinaryFormatter();
-            formatter.Serialize(stream, GD.StartStatus);
-            GD.StartStatusSerialized = stream.GetBuffer();
-            SerialNumberGenerator.Instance.Count = 1000;
-            */
-
-            // GD.Adventure.GenerateInitData();
-        }
-        else
-        {
+                UIS.StoryTextObj.Slines.Add(" ");
 
 
-            GD!.StartStatus = UIS!.CoreLoadFromFile("zerogame.sav");
-            /*
-            MemoryStream stream = new MemoryStream();
-            var writer = new BinaryWriter(stream, Encoding.UTF8, false);
-            byte[] buf = UIServices.ObjectToByteArray(GD.StartStatus);
-            writer.Write(buf);
-            writer.Close();
-            GD.StartStatusSerialized = stream.GetBuffer();
-            */
-            /* TEST: Wird ersetzt durch neuen Lademechanismus
-            IFormatter formatter = new BinaryFormatter();
-            MemoryStream stream = new MemoryStream();
-            try
-            { 
+                GD!.StartStatus = new();
+                GD!.StartStatus.jsonOrderListTable = adventure!.GD!.OrderList!.OTL![adventure!.GD!.OrderList!.CurrentOrderListIx];
+                GD!.StartStatus.jsonVersion = adventure!.GD!.Version;
+                GD!.StartStatus.jsonItems = adventure!.Items;
+                GD!.StartStatus.jsonPersons = adventure!.Persons;
+                GD!.StartStatus.jsonlocations = adventure!.locations;
+                GD!.StartStatus.jsonStats = adventure!.Stats;
+                GD!.StartStatus.jsonScores = adventure!.Scores;
+                GD!.StartStatus.jsonLanguage = adventure!.GD!.Language;
+                GD!.StartStatus.jsonLI = adventure!.LI;
+                GD!.StartStatus.jsonTopics = adventure!.Topics;
+                GD!.StartStatus.jsonItemQueue = adventure!.ItemQueue;
+                GD!.StartStatus.jsonStoryText = adventure!.STE;
+                GD!.StartStatus.jsonFeedbackText = adventure!.FBE;
+                GD!.StartStatus.jsonA = adventure!.A;
+                GD!.StartStatus.jsonPV = adventure!.PV;
+
+                // Nicht betroffen von Savegames
+                GD!.StartStatus.jsonAdjs = adventure!.Adjs;
+                GD!.StartStatus.jsonNouns = adventure!.Nouns;
+                GD!.StartStatus.jsonPreps = adventure!.Preps;
+                GD!.StartStatus.jsonPronouns = adventure!.Pronouns;
+                GD!.StartStatus.jsonFills = adventure!.Fills;
+                GD!.StartStatus.jsonVerbTenses = adventure!.VerbTenses;
+                GD!.StartStatus.jsonCA = adventure!.CA;
+                GD!.StartStatus.jsonCB = adventure!.CB;
+                // GD.StartStatus.jsonParser = Adventure!.Parser;
+                GD!.StartStatus.jsonVerbs = adventure!.Verbs;
+                GD!.StartStatus.JsonGameDefinitions = adventure!.Orders!.GenerateGameDefinitions(false);
+
+                GD!.Adventure = adventure;
+
+                // Helper.ConfigInsert(adventure.Persons, adventure.Items, adventure.locations, adventure.Topics, adventure.CB, adventure.A, adventure );
+
+                GD!.Language = IGlobalData.language.english;
+                GD!.Language = IGlobalData.language.german;
+
+                // adventure!.UIS!.CoreSaveToFile(GD!.StartStatus, "zerogame.sav");
+                /*
+                MemoryStream stream = new MemoryStream();
+                var writer = new BinaryWriter(stream, Encoding.UTF8, false);
+
+                byte[] buf = UIServices.ObjectToByteArray(GD.StartStatus);
+                writer.Write(buf);
+                writer.Close();
+                GD.StartStatusSerialized = stream.GetBuffer();
+                */
+                /*
+                using (var stream = File.Open(fileName, FileMode.Create))
+                {
+                    using (var writer = new BinaryWriter(stream, Encoding.UTF8, false))
+                    {
+                        writer.Write(1.250F);
+                        writer.Write(@"c:\Temp");
+                        writer.Write(10);
+                        writer.Write(true);
+                    }
+                }
+                */
+
+                /* TEST: Wird ersetzt durch neuen Lademechanismus
+                MemoryStream stream = new MemoryStream();
+                IFormatter formatter = new BinaryFormatter();
                 formatter.Serialize(stream, GD.StartStatus);
-            }
-            catch( Exception e)
-            {
-                int a;
-            }
-            GD.StartStatusSerialized = stream.GetBuffer();
-            */
-        }
+                GD.StartStatusSerialized = stream.GetBuffer();
+                SerialNumberGenerator.Instance.Count = 1000;
+                */
 
+                // GD.Adventure.GenerateInitData();
+            }
+            else
+            {
+
+
+                GD!.StartStatus = UIS!.CoreLoadFromFile("zerogame.sav");
+                /*
+                MemoryStream stream = new MemoryStream();
+                var writer = new BinaryWriter(stream, Encoding.UTF8, false);
+                byte[] buf = UIServices.ObjectToByteArray(GD.StartStatus);
+                writer.Write(buf);
+                writer.Close();
+                GD.StartStatusSerialized = stream.GetBuffer();
+                */
+                /* TEST: Wird ersetzt durch neuen Lademechanismus
+                IFormatter formatter = new BinaryFormatter();
+                MemoryStream stream = new MemoryStream();
+                try
+                { 
+                    formatter.Serialize(stream, GD.StartStatus);
+                }
+                catch( Exception e)
+                {
+                    int a;
+                }
+                GD.StartStatusSerialized = stream.GetBuffer();
+                */
+            }
+
+        }
+        catch (Exception e)
+        {
+            // int a;
+        }
     }
 }

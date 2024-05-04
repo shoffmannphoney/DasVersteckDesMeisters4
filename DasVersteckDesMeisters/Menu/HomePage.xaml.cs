@@ -210,6 +210,11 @@ public partial class HomePage : ContentPage, IMenuExtension
             ShowDialog(loca.MAUI_Infodialog_Autosave_Failed);
 
         }
+        else if (GD.GreetingText != null)
+        {
+            ShowDialog(GD.GreetingText);
+            GD.GreetingText = null;
+        }
         return true;
     }
 

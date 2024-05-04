@@ -1251,7 +1251,7 @@ public class MenuExtension
 
     private async void MenuRescaler()
     {
-        if (!rescalerRunning)
+        if (!rescalerRunning && GlobalData.CurrentGlobalData.InitProcess == false)
         {
             rescalerRunning = true;
             MenuRescalerMT();

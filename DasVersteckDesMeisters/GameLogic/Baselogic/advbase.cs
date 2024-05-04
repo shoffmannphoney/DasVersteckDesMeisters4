@@ -2724,19 +2724,29 @@ namespace GameCore
             double score = 0;
             double totalscore = 0;
 
-            if (AdvGame == null) return;
-
-            foreach (Score sc in Scores!.Scores!)
+            if (AdvGame != null)
             {
-
-                if (sc.Chapter != scoreChapter.no_chapter)
+                if( AdvGame.Scores != null )
                 {
-                    totalscore += sc.Val;
+                    foreach (Score sc in Scores!.Scores!)
+                    {
 
-                    if (sc.Active)
-                        score += sc.Val;
+                        if (sc.Chapter != scoreChapter.no_chapter)
+                        {
+                            totalscore += sc.Val;
+
+                            if (sc.Active)
+                                score += sc.Val;
+                        }
+
+                    }
                 }
+            }
 
+            if( totalscore == 0 )
+            {
+                totalscore = 1000;
+                ctotalscore = 1000;
             }
 
             int val = 0;

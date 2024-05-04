@@ -52,6 +52,9 @@ public partial class Bridge
 
     public async void SetYPosImplementation(int yPos)
     {
+#if ANDROID
+        AddLog( "SetYPosIn", protMode.extensive);
+#endif
         await MainThread.InvokeOnMainThreadAsync(async () =>
         {
 
@@ -59,6 +62,9 @@ public partial class Bridge
 
             // await Application.Current.MainPage.DisplayAlert("Stefan Information", message.ToString(), "Oha");
         });
+#if ANDROID
+        AddLog( "SetYPosOut", protMode.extensive);
+#endif
     }
 
     public void CaptureSignatureImplementation(string options)

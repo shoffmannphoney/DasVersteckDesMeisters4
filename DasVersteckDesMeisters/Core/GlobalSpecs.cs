@@ -571,6 +571,8 @@ public class GlobalData : IGlobalData
 {
  //    public enum language { german, english }
 
+    public IGlobalData.protMode ProtMode { get; set; }
+
     IGlobalData.globalMenu _globalMenu;
 
     IGlobalData.localMenu _localMenu;
@@ -604,6 +606,7 @@ public class GlobalData : IGlobalData
     public double[] DebugVal { get; set; } = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0 };
 
     public IGlobalData.picMode PicMode { get; set; }
+    public string? GreetingText { get; set; }
     public bool AutoloadFailed { get; set; }
     public bool SavegameFailed { get; set; }
 
@@ -1103,16 +1106,51 @@ public class GlobalData : IGlobalData
     }
 
 
+    public static void InitLog( string s1)
+    {
+        if (GlobalData.CurrentGlobalData.ProtMode != IGlobalData.protMode.off)
+        {
+            string path = CurrentPath() + "/versteck.txt";
 
+            File.WriteAllText(path, s1 + "\n");
+        }
+    }
+
+    public static void AddLog(string s1, WebViewInterop.protMode PM)
+    {
+        IGlobalData.protMode PM2 = (IGlobalData.protMode) PM;
+        AddLog(s1, PM2);
+
+    }
+
+    public static void AddLog(string s1, IGlobalData.protMode PM)
+    {
+        if ( PM != IGlobalData.protMode.off && PM <= GlobalData.CurrentGlobalData.ProtMode)
+        {
+            string path = CurrentPath() + "/versteck.txt";
+
+            File.AppendAllText(path, s1 + "\n");
+
+        }
+    }
     public GlobalData(  )
     {
         _currentGlobalData = this;
+
+        ProtMode = IGlobalData.protMode.off;
+#if DEBUG
+        ProtMode = IGlobalData.protMode.extensive;
+#endif
+
+ 
+
         STTMicroState = IGlobalData.microMode.off;
 
         LatestGameDefinition = null;
         LocalMenu = IGlobalData.localMenu.home;
         GameCore.loca.GD = this;
         PicMode = IGlobalData.picMode.off;
+        GreetingText = null;
         STTMicroState = IGlobalData.microMode.once;
         AutoloadFailed = false;
 

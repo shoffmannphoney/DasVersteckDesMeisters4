@@ -782,230 +782,268 @@ namespace GameCore
         public bool Set( int pID)
         {
             bool leave = false;
+            MCMenuEntry? tMCME = null;
 
-            if (pID == 0 && AdvGame!.GD!.SilentMode == true && TextOutput == false)
+            try
             {
-                OrderTable otTemp;
-                otTemp = AdvGame!.GD!.OrderList!.GetCurrentOrderTable();
-                otTemp.OrderActive = false;
-                AdvGame!.FeedbackOutput(AdvGame!.CA!.Person_Everyone!, loca.MCMenu_Set_Person_Everyone_16163);
-                /*
-                if( MCS.visible)
+                if (pID == 0 && AdvGame!.GD!.SilentMode == true && TextOutput == false)
                 {
-                    for (int i = 0; i < MCSpeakerText.Count; i++)
+                    OrderTable otTemp;
+                    otTemp = AdvGame!.GD!.OrderList!.GetCurrentOrderTable();
+                    otTemp.OrderActive = false;
+                    AdvGame!.FeedbackOutput(AdvGame!.CA!.Person_Everyone!, loca.MCMenu_Set_Person_Everyone_16163);
+                    /*
+                    if( MCS.visible)
                     {
-                        Persons!.Find(MCSpeakerText[i].SpeakerID).ActivityBlocked = false;
-                    }
-                    MCS.Close();
-                    AdvGame!.DialogOngoing = false;
-                }
-                */
-                return false;
-            }
-            else if( AdvGame!.GD!.SilentMode == true)
-            {
-               //  int a = 5;
-            }
-
-            AdvGame!.DialogOngoing = true;
-
-            MCMenuEntry? tMCME = FindID( pID);
-
-            while ( ( tMCME != null) && (!leave ) && AdvGame!.GD!.ValidRun )
-            {
-                /*
-                if (tMCME.Del != null)
-                {
-                    List<MCMenuEntry> tMCME2 = new List<MCMenuEntry>() { tMCME };
-                    tMCME.Del(tMCME2);
-                }
-                */
-
-                if ( tMCME.Type == CB!.MCE_Status )
-                {
-                    Status? tST = tMCME.Status; // FindID(tMCME.Status).Status;
-
-                    tST!.Val = tMCME.Val;
-                    SetCallBack(tMCME);
-                    tMCME = FindID(tMCME.GetFollower());
-                }
-                else if (tMCME.Type == CB!.MCE_Follower)
-                {
-                    FindID(tMCME!.Status!.ID)!.Follower![0] = tMCME!.Val!;
-                    // Status tST = Stats.Find(tMCME.Status); // FindID(tMCME.Status).Status;
-
-                    // tST.Val = tMCME.Val;
-                    SetCallBack(tMCME);
-                    tMCME = FindID(tMCME.GetFollower());
-                }
-                else if ( tMCME.Type == CB!.MCE_Flag_Hidden)
-                {
-                    MCMenuEntry tMCME2 = FindID(tMCME!.FlagID)!;
-
-                    if (tMCME2 != null)
-                    {
-                        if (tMCME!.Val == 0)
+                        for (int i = 0; i < MCSpeakerText.Count; i++)
                         {
-                            tMCME2.Hidden = MCMenuEntry.HiddenType.visible;
+                            Persons!.Find(MCSpeakerText[i].SpeakerID).ActivityBlocked = false;
                         }
-                        else
-                        {
-                            tMCME2.Hidden = MCMenuEntry.HiddenType.hidden;
-                        }
+                        MCS.Close();
+                        AdvGame!.DialogOngoing = false;
                     }
-                    SetCallBack(tMCME);
-                    tMCME = FindID(tMCME!.GetFollower());
+                    */
+                    return false;
                 }
-                else if( tMCME!.Type == CB!.MCE_Flag_Deactivate)
+                else if (AdvGame!.GD!.SilentMode == true)
                 {
-                    MCMenuEntry tMCME2 = FindID(tMCME!.FlagID)!;
-
-                    if (tMCME2 != null)
-                    {
-                        if (tMCME.Val == 0)
-                        {
-                            tMCME2.DeactivateAfterSelect = false;
-                        }
-                        else
-                        {
-                            tMCME2.DeactivateAfterSelect = true;
-                        }
-                    }
-                    SetCallBack(tMCME);
-                    tMCME = FindID(tMCME!.GetFollower());
+                    //  int a = 5;
                 }
-                else if ( tMCME!.Type == CB!.MCE_Choice)
+
+                AdvGame!.DialogOngoing = true;
+
+                tMCME = FindID(pID);
+
+                while ((tMCME != null) && (!leave) && AdvGame!.GD!.ValidRun)
                 {
-                    // AdvGame!.StoryDividingLine();
-                    ResetCurrent();
-
-                    for (int i = 0; i < tMCME!.Follower!.Count; i++)
+                    /*
+                    if (tMCME.Del != null)
                     {
-                        if ( FindID( tMCME!.Follower[i] )!.Hidden == MCMenuEntry.HiddenType.visible )
-                            AddCurrent(tMCME!.Follower[i]);
+                        List<MCMenuEntry> tMCME2 = new List<MCMenuEntry>() { tMCME };
+                        tMCME.Del(tMCME2);
                     }
+                    */
 
-                    if( AdvGame!.GD!.SilentMode == false )
+                    if (tMCME.Type == CB!.MCE_Status)
                     {
-                        leave = true;
+                        Status? tST = tMCME.Status; // FindID(tMCME.Status).Status;
+
+                        tST!.Val = tMCME.Val;
+                        SetCallBack(tMCME);
+                        tMCME = FindID(tMCME.GetFollower());
                     }
-                    else
+                    else if (tMCME.Type == CB!.MCE_Follower)
                     {
-                        OrderTable otTemp;
-                        
-                        otTemp = AdvGame!.GD!.OrderList!.GetNextOrderTable()!;
-                        // otTemp = AdvGame!.GD!.OrderList!.GetNextOrderTable()!;
+                        FindID(tMCME!.Status!.ID)!.Follower![0] = tMCME!.Val!;
+                        // Status tST = Stats.Find(tMCME.Status); // FindID(tMCME.Status).Status;
 
-                        if ( otTemp.OrderType == orderType.mcChoice && AdvGame!.GD!.OrderList.CheckIndexStillValid( AdvGame!.GD!.OrderListFinalIx) )
+                        // tST.Val = tMCME.Val;
+                        SetCallBack(tMCME);
+                        tMCME = FindID(tMCME.GetFollower());
+                    }
+                    else if (tMCME.Type == CB!.MCE_Flag_Hidden)
+                    {
+                        MCMenuEntry tMCME2 = FindID(tMCME!.FlagID)!;
+
+                        if (tMCME2 != null)
                         {
-                            // DividingLine
-                            // AdvGame!.UIS!.StoryTextObj!.DividingLine();
-
-                            int? nextID = otTemp.OrderChoice;
-                            if( nextID != null )
+                            if (tMCME!.Val == 0)
                             {
-                                tMCME = FindID( (int) nextID);
-                                if( tMCME == null )
-                                {
-                                    AdvGame!.GD!.ValidRun = false;
-                                }
-                                else if( tMCME.Hidden != MCMenuEntry.HiddenType.visible )
-                                {
-                                    AdvGame!.GD!.ValidRun = false;
-
-                                }
-                                /*
-                                else if ( tMCME.Type == CB!.MCE_Choice)
-                                {
-                                    AdvGame!.StoryOutput(" ");
-
-                                }
-                                */
+                                tMCME2.Hidden = MCMenuEntry.HiddenType.visible;
                             }
                             else
-                                AdvGame!.GD!.ValidRun = false;
-
-                            if ( AdvGame!.GD!.ValidRun )
                             {
-                                // Ignores: 001
-                                otTemp.OrderText = loca.MCMenu_Set_Person_Everyone_16164 +Helper.ShrinkQuotationMark( tMCME!.Text );
-                                // Ignores: 001
-                                AdvGame!.GD!.OrderList.AddOrderCurrentRun(orderType.mcChoice, loca.MCMenu_Set_Person_Everyone_16165+Helper.ShrinkQuotationMark(tMCME.Text), otTemp.OrderChoice, otTemp.oLG, null, null);
-                                if (tMCME != null)
+                                tMCME2.Hidden = MCMenuEntry.HiddenType.hidden;
+                            }
+                        }
+                        SetCallBack(tMCME);
+                        tMCME = FindID(tMCME!.GetFollower());
+                    }
+                    else if (tMCME!.Type == CB!.MCE_Flag_Deactivate)
+                    {
+                        MCMenuEntry tMCME2 = FindID(tMCME!.FlagID)!;
+
+                        if (tMCME2 != null)
+                        {
+                            if (tMCME.Val == 0)
+                            {
+                                tMCME2.DeactivateAfterSelect = false;
+                            }
+                            else
+                            {
+                                tMCME2.DeactivateAfterSelect = true;
+                            }
+                        }
+                        SetCallBack(tMCME);
+                        tMCME = FindID(tMCME!.GetFollower());
+                    }
+                    else if (tMCME!.Type == CB!.MCE_Choice)
+                    {
+                        // AdvGame!.StoryDividingLine();
+                        ResetCurrent();
+
+                        for (int i = 0; i < tMCME!.Follower!.Count; i++)
+                        {
+                            if (FindID(tMCME!.Follower[i])!.Hidden == MCMenuEntry.HiddenType.visible)
+                                AddCurrent(tMCME!.Follower[i]);
+                        }
+
+                        if (AdvGame!.GD!.SilentMode == false)
+                        {
+                            leave = true;
+                        }
+                        else
+                        {
+                            OrderTable otTemp;
+
+                            otTemp = AdvGame!.GD!.OrderList!.GetNextOrderTable()!;
+                            // otTemp = AdvGame!.GD!.OrderList!.GetNextOrderTable()!;
+
+                            if (otTemp.OrderType == orderType.mcChoice && AdvGame!.GD!.OrderList.CheckIndexStillValid(AdvGame!.GD!.OrderListFinalIx))
+                            {
+                                // DividingLine
+                                // AdvGame!.UIS!.StoryTextObj!.DividingLine();
+
+                                int? nextID = otTemp.OrderChoice;
+                                if (nextID != null)
                                 {
-                                     if (tMCME!.Hidden != MCMenuEntry.HiddenType.visible)
+                                    tMCME = FindID((int)nextID);
+                                    if (tMCME == null)
                                     {
-                                        // int a = 5;
+                                        AdvGame!.GD!.ValidRun = false;
+                                    }
+                                    else if (tMCME.Hidden != MCMenuEntry.HiddenType.visible)
+                                    {
+                                        AdvGame!.GD!.ValidRun = false;
+
+                                    }
+                                    /*
+                                    else if ( tMCME.Type == CB!.MCE_Choice)
+                                    {
+                                        AdvGame!.StoryOutput(" ");
+
+                                    }
+                                    */
+                                }
+                                else
+                                    AdvGame!.GD!.ValidRun = false;
+
+                                if (AdvGame!.GD!.ValidRun)
+                                {
+                                    // Ignores: 001
+                                    otTemp.OrderText = loca.MCMenu_Set_Person_Everyone_16164 + Helper.ShrinkQuotationMark(tMCME!.Text);
+                                    // Ignores: 001
+                                    AdvGame!.GD!.OrderList.AddOrderCurrentRun(orderType.mcChoice, loca.MCMenu_Set_Person_Everyone_16165 + Helper.ShrinkQuotationMark(tMCME.Text), otTemp.OrderChoice, otTemp.oLG, null, null);
+                                    if (tMCME != null)
+                                    {
+                                        if (tMCME!.Hidden != MCMenuEntry.HiddenType.visible)
+                                        {
+                                            // int a = 5;
+                                        }
+
+                                        if (tMCME.DeactivateAfterSelect)
+                                            tMCME.Hidden = MCMenuEntry.HiddenType.outdated;
+                                        if (Persons!.Find(tMCME.Speaker!) != null && tMCME.StoryRelevant)
+                                        {
+                                            // 31.03.2024
+                                            // AdvGame!.StoryDividingLine();
+                                            AdvGame!.StoryOutput(Persons!.Find(tMCME!.Speaker!)!.locationID, A!.Adventure!.CA!.Person_Everyone, "---");
+                                        }
                                     }
 
-                                    if (tMCME.DeactivateAfterSelect)
-                                        tMCME.Hidden = MCMenuEntry.HiddenType.outdated;
-                                    if (Persons!.Find(tMCME.Speaker!) != null && tMCME.StoryRelevant)
+                                }
+
+                            }
+                            else if (AdvGame!.Orders!.persistentMCMenu!.DoRecording == true)
+                            {
+                                AdvGame!.GD!.InterruptedDialog = true;
+                                AdvGame!.GD!.InteruptedDialogID = tMCME.ID;
+                                AdvGame!.GD!.InterruptedDialogCanBeInterruped = AdvGame!.UIS!.MCCanBeInterrupted;
+                                // AdvGame!.GD!.InterruptedDialogMCMSelection = AdvGame!.MW.DelMCMSelection;
+                                AdvGame!.GD!.InterruptedDialogMCM = AdvGame!.Orders.persistentMCMenu;
+                                AdvGame!.GD!.InterruptedDialogMCMSelection = AdvGame!.Orders.persistentMCMenu.MCSelection;
+                                AdvGame!.GD!.ValidRun = false;
+                            }
+                            else
+                            {
+                                // int a = 5;
+                            }
+                        }
+                    }
+                    else if (tMCME.Type == CB!.MCE_Text)
+                    {
+                        // Wenn TextOutput aktiviert ist, wird der Text oben im Fenster ausgegeben und NICHT unten im FeedbackWindow. Entsprechend muss man ihn auch nicht wegklicken
+                        if (TextOutput)
+                        {
+                            // Wenn SpeakVerb und ggf. SpeakAdverb gesetzt sind
+                            if (tMCME.SpeakVerb > 0 && tMCME.Speaker != 0 && tMCME.SpeakVerb != AdvGame!.CB!.VT_nothing)
+                            {
+                                string speakertext = Persons!.Find(tMCME.Speaker)!.FullName(Co.CASE_AKK, true) + " " + Grammar.GetVerbDeclination(tMCME.SpeakVerb, Persons.Find(tMCME.Speaker), A!.Tense);
+                                string? empty = null;
+                                if (tMCME.SpeakAdverb != null)
+                                    // Ignores: 001
+                                    speakertext += " " + tMCME.SpeakAdverb.AdverbName;
+
+                                speakertext += loca.MCMenu_Set_Person_Everyone_16166;
+                                speakertext = Helper.FirstUpper(speakertext!)!;
+
+
+                                if (_addEmptyLine)
+                                {
+                                    AdvGame!.StoryDividingLine();
+                                    // empty = " <br> </br>";
+                                    _addEmptyLine = false;
+                                }
+
+                                if (tMCME.StoryRelevant)
+                                {
+                                    if (empty != null)
                                     {
                                         // 31.03.2024
                                         // AdvGame!.StoryDividingLine();
-                                        AdvGame!.StoryOutput(Persons!.Find(tMCME!.Speaker!)!.locationID, A!.Adventure!.CA!.Person_Everyone, "---");
+                                        AdvGame!.StoryOutput(0, A!.Adventure!.CA!.Person_Everyone, empty);
+                                    }
+                                    if (speakertext != "")
+                                    {
+                                        // Ignores: 001
+                                        // 31.03.2024
+                                        // AdvGame!.StoryDividingLine();
+                                        AdvGame!.StoryOutput(0, A!.Adventure!.CA!.Person_Everyone, speakertext + loca.MCMenu_Set_Person_Everyone_16167 + Helper.ShrinkQuotationMark(tMCME.Text!) + loca.MCMenu_Set_Person_Everyone_16168);
+                                    }
+                                    else
+                                    {
+                                        // 31.03.2024
+                                        // AdvGame!.StoryDividingLine();
+                                        AdvGame!.StoryOutput(0, A!.Adventure!.CA!.Person_Everyone, tMCME.Text);
                                     }
                                 }
 
+                                SetCallBack(tMCME);
+                                tMCME = FindID(tMCME.GetFollower());
                             }
-
-                        }
-                        else if ( AdvGame!.Orders!.persistentMCMenu!.DoRecording == true )
-                        {
-                            AdvGame!.GD!.InterruptedDialog = true;
-                            AdvGame!.GD!.InteruptedDialogID = tMCME.ID;
-                            AdvGame!.GD!.InterruptedDialogCanBeInterruped = AdvGame!.UIS!.MCCanBeInterrupted;
-                            // AdvGame!.GD!.InterruptedDialogMCMSelection = AdvGame!.MW.DelMCMSelection;
-                            AdvGame!.GD!.InterruptedDialogMCM = AdvGame!.Orders.persistentMCMenu;
-                            AdvGame!.GD!.InterruptedDialogMCMSelection = AdvGame!.Orders.persistentMCMenu.MCSelection;
-                            AdvGame!.GD!.ValidRun = false;
-                        }
-                        else
-                        {
-                            // int a = 5;
-                        }
-                    }
-                }
-                else if( tMCME.Type == CB!.MCE_Text )
-                {
-                    // Wenn TextOutput aktiviert ist, wird der Text oben im Fenster ausgegeben und NICHT unten im FeedbackWindow. Entsprechend muss man ihn auch nicht wegklicken
-                    if (TextOutput)
-                    {
-                        // Wenn SpeakVerb und ggf. SpeakAdverb gesetzt sind
-                        if( tMCME.SpeakVerb > 0 && tMCME.Speaker != 0 && tMCME.SpeakVerb != AdvGame!.CB!.VT_nothing )
-                        {
-                            string speakertext = Persons!.Find( tMCME.Speaker )!.FullName(Co.CASE_AKK, true) + " " + Grammar.GetVerbDeclination(tMCME.SpeakVerb, Persons.Find(tMCME.Speaker), A!.Tense);
-                            string? empty = null;
-                            if (tMCME.SpeakAdverb != null)
-                                // Ignores: 001
-                                speakertext += " " +tMCME.SpeakAdverb.AdverbName;
-
-                            speakertext += loca.MCMenu_Set_Person_Everyone_16166;
-                            speakertext = Helper.FirstUpper(speakertext!)!;
-
-
-                            if( _addEmptyLine )
+                            // Wenn ein Sprecher vorhanden ist...
+                            else if ((tMCME.Speaker != 0) && (tMCME.StoryRelevant) && tMCME.SpeakVerb != AdvGame!.CB!.VT_nothing)
                             {
-                                AdvGame!.StoryDividingLine();
-                                // empty = " <br> </br>";
-                                _addEmptyLine = false;
-                            }
-
-                            if( tMCME.StoryRelevant)
-                            {
-                                if( empty != null )
+                                string speakertext = GetSpeakerText(Persons!.Find(tMCME.Speaker));
+                                string? empty = null;
+                                // ... und wenn dann auch wirklich ein Speakertext gesetzt wird, dann wird der Text in Anführungszeichen gesetzt, und NUR dann.
+                                if (_addEmptyLine)
                                 {
-                                    // 31.03.2024
-                                    // AdvGame!.StoryDividingLine();
-                                    AdvGame!.StoryOutput(0, A!.Adventure!.CA!.Person_Everyone, empty);
+                                    empty = " <br> </br>";
+                                    _addEmptyLine = false;
                                 }
+
+                                if (empty != null)
+                                {
+                                    // AdvGame!.StoryOutput(0, A!.Adventure!.CA!.Person_Everyone, empty);
+                                }
+
                                 if (speakertext != "")
                                 {
                                     // Ignores: 001
                                     // 31.03.2024
                                     // AdvGame!.StoryDividingLine();
-                                    AdvGame!.StoryOutput(0, A!.Adventure!.CA!.Person_Everyone, speakertext + loca.MCMenu_Set_Person_Everyone_16167 + Helper.ShrinkQuotationMark(tMCME.Text!) + loca.MCMenu_Set_Person_Everyone_16168);
+                                    AdvGame!.StoryOutput(0, A!.Adventure!.CA!.Person_Everyone, speakertext + loca.MCMenu_Set_Person_Everyone_16169 + Helper.ShrinkQuotationMark(tMCME.Text) + loca.MCMenu_Set_Person_Everyone_16170);
                                 }
                                 else
                                 {
@@ -1013,155 +1051,124 @@ namespace GameCore
                                     // AdvGame!.StoryDividingLine();
                                     AdvGame!.StoryOutput(0, A!.Adventure!.CA!.Person_Everyone, tMCME.Text);
                                 }
+                                SetCallBack(tMCME);
+                                tMCME = FindID(tMCME.GetFollower());
                             }
-
-                            SetCallBack(tMCME);
-                            tMCME = FindID(tMCME.GetFollower());
-                        }
-                        // Wenn ein Sprecher vorhanden ist...
-                        else if ((tMCME.Speaker != 0 ) && (tMCME.StoryRelevant) && tMCME.SpeakVerb != AdvGame!.CB!.VT_nothing )
-                        {
-                            string speakertext = GetSpeakerText(Persons!.Find(tMCME.Speaker));
-                            string? empty = null;
-                            // ... und wenn dann auch wirklich ein Speakertext gesetzt wird, dann wird der Text in Anführungszeichen gesetzt, und NUR dann.
-                            if (_addEmptyLine)
+                            else if (tMCME.StoryRelevant && (tMCME.Speaker == 0 || tMCME.SpeakVerb == AdvGame!.CB!.VT_nothing))
                             {
-                                empty = " <br> </br>";
-                                _addEmptyLine = false;
+                                string? empty = null;
+                                if (_addEmptyLine)
+                                {
+                                    empty = " <br> </br>";
+                                    _addEmptyLine = false;
+                                }
+                                if (empty != null)
+                                {
+                                    // 31.03.2024
+                                    // AdvGame!.StoryDividingLine();
+                                    AdvGame!.StoryOutput(0, A!.Adventure!.CA!.Person_Everyone, empty);
+                                    AdvGame!.StoryOutput(0, A!.Adventure!.CA!.Person_Everyone, tMCME.Text);
+                                }
+                                else
+                                {
+                                    // AdvGame!.StoryDividingLine();
+                                    AdvGame!.StoryOutput(0, A!.Adventure!.CA!.Person_Everyone, tMCME.Text);
+
+                                }
+
+                                SetCallBack(tMCME);
+                                tMCME = FindID(tMCME.GetFollower());
+
                             }
-
-                            if (empty != null)
+                            else if (tMCME.Speaker != 0)
                             {
-                                // AdvGame!.StoryOutput(0, A!.Adventure!.CA!.Person_Everyone, empty);
+                                SetCallBack(tMCME);
+                                tMCME = FindID(tMCME.GetFollower());
                             }
-
-                            if (speakertext != "")
+                            else if (tMCME.ID == 0)
                             {
-                                // Ignores: 001
-                                // 31.03.2024
-                                // AdvGame!.StoryDividingLine();
-                                AdvGame!.StoryOutput(0, A!.Adventure!.CA!.Person_Everyone, speakertext + loca.MCMenu_Set_Person_Everyone_16169 + Helper.ShrinkQuotationMark(tMCME.Text) + loca.MCMenu_Set_Person_Everyone_16170);
+                                SetCallBack(tMCME);
+                                tMCME = FindID(tMCME.GetFollower());
                             }
                             else
                             {
-                                // 31.03.2024
-                                // AdvGame!.StoryDividingLine();
-                                AdvGame!.StoryOutput(0, A!.Adventure!.CA!.Person_Everyone, tMCME.Text);
+                                tMCME = FindID(tMCME.GetFollower());
                             }
-                            SetCallBack(tMCME);
-                            tMCME = FindID(tMCME.GetFollower());
                         }
-                        else if ( tMCME.StoryRelevant && ( tMCME.Speaker == 0 || tMCME.SpeakVerb == AdvGame!.CB!.VT_nothing ) )
+                        else
                         {
-                            string? empty = null;
-                            if (_addEmptyLine)
+                            MCMenuEntry tMCME2 = FindID(tMCME.GetFollower()!)!;
+
+                            if ((tMCME2 != null)
+                                && (tMCME2.Type == CB!.MCE_Text)
+                              )
                             {
-                                empty = " <br> </br>";
-                                _addEmptyLine = false;
-                            }
-                            if (empty != null)
-                            {
-                                // 31.03.2024
-                                // AdvGame!.StoryDividingLine();
-                                AdvGame!.StoryOutput(0, A!.Adventure!.CA!.Person_Everyone, empty);
-                                AdvGame!.StoryOutput(0, A!.Adventure!.CA!.Person_Everyone, tMCME.Text);
+                                ResetCurrent();
+                                AddCurrent(tMCME.GetFollower());
+                                leave = true;
                             }
                             else
                             {
-                                // AdvGame!.StoryDividingLine();
-                                AdvGame!.StoryOutput(0, A!.Adventure!.CA!.Person_Everyone, tMCME.Text);
-
+                                SetCallBack(tMCME);
+                                tMCME = FindID(tMCME.GetFollower());
                             }
-
-                            SetCallBack(tMCME);
-                            tMCME = FindID(tMCME.GetFollower());
-
-                        }
-                        else if (tMCME.Speaker != 0)
-                        {
-                            SetCallBack(tMCME);
-                            tMCME = FindID(tMCME.GetFollower());
-                        }
-                        else if (tMCME.ID == 0)
-                        {
-                            SetCallBack(tMCME);
-                            tMCME = FindID(tMCME.GetFollower());
-                        }
-                        else
-                        {
-                            tMCME = FindID(tMCME.GetFollower());
-                        }
-                    }
-                    else
-                    {
-                        MCMenuEntry tMCME2 = FindID(tMCME.GetFollower()!)!;
-
-                        if (     ( tMCME2 != null)
-                            &&  ( tMCME2.Type == CB!.MCE_Text) 
-                          )
-                        {
-                            ResetCurrent();
-                            AddCurrent(tMCME.GetFollower());
-                            leave = true;
-                        }
-                        else
-                        {
-                            SetCallBack(tMCME);
-                            tMCME = FindID(tMCME.GetFollower());
                         }
                     }
                 }
-            }
-            // Testweise wird hier MCSelection nicht gesetzt, da dies ggf. andere Delegates überschreiben würde
-            // MCS.MCOutput(this, MCSelection, false);
+                // Testweise wird hier MCSelection nicht gesetzt, da dies ggf. andere Delegates überschreiben würde
+                // MCS.MCOutput(this, MCSelection, false);
 
-            // Im Silent-Modus wird das MultipleChoice-Menü weder aktiviert noch deaktiviert.
-            if (AdvGame!.GD!.SilentMode == false)
-            {
-                // Remark: Experimentell (aber erfolgreich)
-                // this.MCSelection statt Null übergeben. Unklar, wofür hier jemals null übergeben wurde, das verhindert callbacks
-                // als Reaktion auf Input
-                // MCS!.MCOutput(this, this.MCSelection!, false);
-                MCS!.MCOutput(this, null, false);
-                // AdvGame!.UIS!.StoryTextObj!.AdvTextRefresh();
-                // AdvGame!.UIS!.Scr.SetScrollerToEnd();
+                // Im Silent-Modus wird das MultipleChoice-Menü weder aktiviert noch deaktiviert.
+                if (AdvGame!.GD!.SilentMode == false)
+                {
+                    // Remark: Experimentell (aber erfolgreich)
+                    // this.MCSelection statt Null übergeben. Unklar, wofür hier jemals null übergeben wurde, das verhindert callbacks
+                    // als Reaktion auf Input
+                    // MCS!.MCOutput(this, this.MCSelection!, false);
+                    MCS!.MCOutput(this, null, false);
+                    // AdvGame!.UIS!.StoryTextObj!.AdvTextRefresh();
+                    // AdvGame!.UIS!.Scr.SetScrollerToEnd();
 
-                // wenn wir irgendwann auf einen leeren Follower gestoßen sind, dann ist der vermutliche Grund dafür, dass der Dialog einfach zu Ende ist.
-                if ( ((tMCME == null) && (!leave)) )
+                    // wenn wir irgendwann auf einen leeren Follower gestoßen sind, dann ist der vermutliche Grund dafür, dass der Dialog einfach zu Ende ist.
+                    if (((tMCME == null) && (!leave)))
+                    {
+                        for (int i = 0; i < MCSpeakerText.Count; i++)
+                        {
+                            Persons!.Find(MCSpeakerText[i].SpeakerID)!.ActivityBlocked = false;
+                        }
+
+                        MCS.Close();
+                        AdvGame!.DialogOngoing = false;
+                        AdvGame!.SkipAfterDialog = true;
+                        // AdvGame!.UIS!.StoryTextObj!.AdvTextRefresh();
+                        // AdvGame!.UIS!.Scr.SetScrollerToEnd();
+                    }
+                    else
+                    {
+                        AdvGame!.UIS!.StoryTextObj!.AdvTextRefresh();
+#if !NEWSCROLL
+                    AdvGame!.UIS!.Scr.SetScrollerToEnd();
+#endif
+                    }
+                }
+                else
                 {
                     for (int i = 0; i < MCSpeakerText.Count; i++)
                     {
                         Persons!.Find(MCSpeakerText[i].SpeakerID)!.ActivityBlocked = false;
                     }
-
-                    MCS.Close();
+                    MCS!.Close();
                     AdvGame!.DialogOngoing = false;
                     AdvGame!.SkipAfterDialog = true;
-                    // AdvGame!.UIS!.StoryTextObj!.AdvTextRefresh();
-                    // AdvGame!.UIS!.Scr.SetScrollerToEnd();
                 }
-                else
-                {
-                    AdvGame!.UIS!.StoryTextObj!.AdvTextRefresh();
-#if !NEWSCROLL
-                    AdvGame!.UIS!.Scr.SetScrollerToEnd();
-#endif
-                }
-            }
-            else 
-            {
-                for (int i = 0; i < MCSpeakerText.Count; i++)
-                {
-                    Persons!.Find(MCSpeakerText[i].SpeakerID)!.ActivityBlocked = false;
-                }
-                MCS!.Close();
-                AdvGame!.DialogOngoing = false;
-                AdvGame!.SkipAfterDialog = true;
-            }
 
-            if( tMCME != null )
+                if (tMCME != null)
+                {
+                    AdvGame!.Orders!.MCID = tMCME.ID;
+                }
+            }
+            catch (Exception e)
             {
-                AdvGame!.Orders!.MCID = tMCME.ID;
             }
 
             if (tMCME == null || AdvGame!.GD!.ValidRun == false )

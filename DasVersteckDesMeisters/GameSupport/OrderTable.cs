@@ -1405,32 +1405,39 @@ public class OrderList : IOrderList
     }
     public bool AddOrderList(string? Name, bool baseEntry = true, IGlobalData.language lang = IGlobalData.language.german)
     {
-        if (Name == null)
+        try
         {
-            Name = String.Format(loca.OrderList_AddOrderList_16219, SetOrderListInfo!.listNr);
-            SetOrderListInfo.listNr++;
+            if (Name == null)
+            {
+                Name = String.Format(loca.OrderList_AddOrderList_16219, SetOrderListInfo!.listNr);
+                SetOrderListInfo.listNr++;
+            }
+
+            if (OTL == null)
+            {
+                OTL = new List<OrderListTable>();
+            }
+
+            Name = UniqueOrderListName(Name);
+
+            OTL!.Add(new OrderListTable(Name!, GD!));
+            SyncOrderList();
+            SaveOrderTable();
+            CurrentOrderListIx = OTL!.Count - 1;
+
+            if (baseEntry)
+            {
+                int val = 0;
+                if (loca.GD!.Language == IGlobalData.language.english)
+                    AddOrderAllTabs(orderType.orderText, loca.OrderList_AddOrderList_16220e, null, CurrentOrderListIx, lang, null, null, ref val);
+                else
+                    AddOrderAllTabs(orderType.orderText, loca.OrderList_AddOrderList_16220, null, CurrentOrderListIx, lang, null, null, ref val);
+            }
+        }
+        catch (Exception ex)
+        {
         }
 
-        if (OTL == null)
-        {
-            OTL = new List<OrderListTable>();
-        }
-
-        Name = UniqueOrderListName(Name);
-
-        OTL!.Add(new OrderListTable(Name!, GD!));
-        SyncOrderList();
-        SaveOrderTable();
-        CurrentOrderListIx = OTL!.Count - 1;
-
-        if (baseEntry)
-        {
-            int val = 0;
-            if (loca.GD!.Language == IGlobalData.language.english)
-                AddOrderAllTabs(orderType.orderText, loca.OrderList_AddOrderList_16220e, null, CurrentOrderListIx, lang, null, null, ref val);
-            else
-                AddOrderAllTabs(orderType.orderText, loca.OrderList_AddOrderList_16220, null, CurrentOrderListIx, lang, null, null, ref val);
-        }
         return (true);
     }
     public void AddOrderFeedbackCurrentRun(string? context, string? text, bool sysComment = false)

@@ -9,6 +9,8 @@ public partial class Bridge : IWebViewBridge
 {
     public static int BridgeAvail = 0;
     public DelVoid? _cbFullyLoaded = null;
+    public DelString? _initProtocol = null;
+    public DelStringProtMode? _addProtocol = null;
 
     private string? _currentStartupId;
 

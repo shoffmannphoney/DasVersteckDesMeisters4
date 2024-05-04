@@ -8,6 +8,8 @@ public partial class Bridge : Java.Lang.Object
 {
     public static int BridgeAvail = 0;
     public  DelVoid? _cbFullyLoaded = null;
+    public static DelVoidString? _initProtocol = null;
+    public static DelVoidStringProtMode? _addProtocol = null;
     private class StringCallback : Java.Lang.Object, IValueCallback
      {
         private TaskCompletionSource<string> source;
@@ -23,12 +25,12 @@ public partial class Bridge : Java.Lang.Object
         {
             try
             {
-            var jstr = value.ToString(); ;
-            source.SetResult(jstr.Trim('"'));
+                var jstr = value.ToString(); ;
+                source.SetResult(jstr.Trim('"'));
             }
             catch (Exception ex)
             {
-            source.SetException(ex);
+                AddLog(ex.Message, protMode.crisp);
             }
         }
      }
@@ -42,29 +44,37 @@ public partial class Bridge : Java.Lang.Object
 
   public void Connect(Android.Webkit.WebView webView)
   {
-        _webView = webView;
+        try
+        {
+            _webView = webView;
+            Context.RunOnUiThread(() =>
+            {
+                webView.AddJavascriptInterface(this, BRIDGE_NAME);
+            });
+            BridgeAvail = 1;
+        }
+        catch (Exception ex)
+        {
+            AddLog(ex.Message, protMode.crisp);
+
+        }
+    }
+
+    public void Disconnect(Android.Webkit.WebView webView)
+    {
         Context.RunOnUiThread(() =>
         {
-          webView.AddJavascriptInterface(this, BRIDGE_NAME);
+            webView.RemoveJavascriptInterface(BRIDGE_NAME);
         });
-        BridgeAvail = 1;
-  }
+        _webView = null;
+    }
 
-  public void Disconnect(Android.Webkit.WebView webView)
-  {
-    Context.RunOnUiThread(() =>
+    [JavascriptInterface]
+    [Export("alert")]
+    public void Alert(Java.Lang.String message)
     {
-      webView.RemoveJavascriptInterface(BRIDGE_NAME);
-    });
-    _webView = null;
-  }
-
-  [JavascriptInterface]
-  [Export("alert")]
-  public void Alert(Java.Lang.String message)
-  {
-    AlertImplementation(message.ToString());
-  }
+        AlertImplementation(message.ToString());
+    }
 
     [JavascriptInterface]
     [Export("alertStefan")]
@@ -76,14 +86,20 @@ public partial class Bridge : Java.Lang.Object
     [Export("cbFullyLoaded")]
     public void cbFullyLoaded(Java.Lang.String message)
     {
+        AddLog( "FullyLoadedIn", protMode.crisp);
         cbFullyLoadedImplementation(message.ToString());
+        AddLog("FullyLoadedOut", protMode.crisp);
     }
     [JavascriptInterface]
     [Export("setYPos")]
     public void SetYPos(Java.Lang.String? yPos)
     {
+        AddLog("SetYPos in", protMode.crisp);
+
         int yPosInt = Int32.Parse((string)yPos!);
         SetYPosImplementation(yPosInt);
+
+        AddLog("SetYPos ou", protMode.crisp);
     }
 
     [JavascriptInterface]
@@ -93,30 +109,76 @@ public partial class Bridge : Java.Lang.Object
     CaptureSignatureImplementation(options.ToString());
   }
 
-  public async Task<string> EvaluateJavascriptAsync(string script)
-  {
-        var javascriptResult = new StringCallback();
-
-        Context!.RunOnUiThread(() =>
+    public async Task<string> EvaluateJavascriptAsync(string script)
+    {
+        try
         {
-            _webView!.EvaluateJavascript(script, javascriptResult);
-        });
+            int len = script.Length;
+            if (len > 100)
+                len = 100;
 
-        var result = await javascriptResult.Task;
-        return result;
-  }
+            AddLog( script.Substring(0, len), protMode.crisp);
+            var javascriptResult = new StringCallback();
+
+            Context!.RunOnUiThread(() =>
+            {
+                _webView!.EvaluateJavascript(script, javascriptResult);
+            });
+
+            var result = await javascriptResult.Task;
+            return result;
+        }
+        catch (Exception ex)
+        {
+            AddLog(ex.Message, protMode.crisp);
+            return null;
+        }
+
+    }
     public void NavigateToString(string htmlPage)
     {
-        Context!.RunOnUiThread(() =>
+        try
         {
-            _webView!.LoadDataWithBaseURL("file:///android_res/", htmlPage, "text/html; charset=utf-8", "UTF-8", null);
-        });
-    }
+            Context!.RunOnUiThread(() =>
+            {
+                _webView!.LoadDataWithBaseURL("file:///android_res/", htmlPage, "text/html; charset=utf-8", "UTF-8", null);
+            });
+        }
+        catch (Exception ex)
+        {
+            AddLog(ex.Message, protMode.crisp);
+
+        }
+    }   
     public void SetCBFullyLoaded(DelVoid cbFullyLoaded)
     {
         Context!.RunOnUiThread(() =>
         {
             _cbFullyLoaded = cbFullyLoaded;
+        });
+    }
+
+    public void AddLogNonstatic( string s1, protMode pm = protMode.crisp )
+    {
+        AddLog(s1, pm);
+    }
+
+    public static void AddLog( string s1, protMode pm = protMode.crisp )
+    {
+        if( _addProtocol != null )
+            _addProtocol(s1, pm );   
+    }
+    public static void InitLog( string s1)
+        {
+        if( !_initProtocol.Equals( null ) )
+            _initProtocol(s1);
+    }
+    public void SetProtocol(DelVoidString initProtocol, DelVoidStringProtMode addProtocol)
+    {
+        Context!.RunOnUiThread(() =>
+        {
+            _initProtocol = initProtocol;
+            _addProtocol = addProtocol;
         });
     }
     public bool InqCBFullyLoaded()

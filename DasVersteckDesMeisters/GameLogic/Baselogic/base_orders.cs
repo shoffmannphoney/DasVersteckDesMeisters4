@@ -4900,56 +4900,64 @@ namespace GameCore
         }
         public SaveObj LoadGame( string fileName, ref IGlobalData.language lang )
         {
-            string? input = AdvGame!.UIS!.CoreLoadStringFromFile( fileName );
-
-            SaveObj so = SetupSaveObject();
-            /*
-            so.jsonItems = Phoney_MAUI.Core.UIServices.ObjectCopier.Clone<ItemList>(so_source!.jsonItems!)!;
-            so.jsonPersons = Phoney_MAUI.Core.UIServices.ObjectCopier.Clone<PersonList>(so_source!.jsonPersons!)!;
-            so.jsonlocations= Phoney_MAUI.Core.UIServices.ObjectCopier.Clone<locationList>(so_source!.jsonlocations!)!;
-            so.jsonStats = Phoney_MAUI.Core.UIServices.ObjectCopier.Clone<StatusList>(so_source!.jsonStats!)!;
-            so.jsonScores = Phoney_MAUI.Core.UIServices.ObjectCopier.Clone<ScoreList>(so_source!.jsonScores!)!;
-            so.jsonLanguage = Phoney_MAUI.Core.UIServices.ObjectCopier.Clone<IGlobalData.language>(so_source!.jsonLanguage!)!;
-            so.jsonLI= Phoney_MAUI.Core.UIServices.ObjectCopier.Clone<List<LatestInput>>(so_source!.jsonLI!)!;
-            so.jsonItemQueue = Phoney_MAUI.Core.UIServices.ObjectCopier.Clone<ItemQueue>(so_source!.jsonItemQueue!)!;
-            so.jsonStoryText = Phoney_MAUI.Core.UIServices.ObjectCopier.Clone<Phoney_MAUI.Core.StoryText>(so_source!.jsonStoryText!)!;
-            so.jsonFeedbackText = Phoney_MAUI.Core.UIServices.ObjectCopier.Clone<Phoney_MAUI.Core.FeedbackText>(so_source!.jsonFeedbackText!)!;
-            so.jsonA = Phoney_MAUI.Core.UIServices.ObjectCopier.Clone<AdvData>(so_source!.jsonA!)!;
-            so.jsonPV = Phoney_MAUI.Core.UIServices.ObjectCopier.Clone<PhoneyVision>(so_source!.jsonPV!)!;
-            so.jsonOrderListTable = Phoney_MAUI.Core.UIServices.ObjectCopier.Clone<OrderListTable>(so_source!.jsonOrderListTable!)!;
-
-            // Ab hier unveränderliche Objekte, die aber natürlich trotzdem aus dem Zerogame gezogen werden müssen
-            so!.jsonAdjs = Phoney_MAUI.Core.UIServices.ObjectCopier.Clone<AdjList>(so_source!.jsonAdjs!)!;
-            so!.jsonNouns = Phoney_MAUI.Core.UIServices.ObjectCopier.Clone<NounList>(so_source!.jsonNouns!)!;
-            so!.jsonVerbs = Phoney_MAUI.Core.UIServices.ObjectCopier.Clone<VerbList>(so_source!.jsonVerbs!)!;
-            so!.jsonPreps = Phoney_MAUI.Core.UIServices.ObjectCopier.Clone<PrepList>(so_source!.jsonPreps!)!;
-            so!.jsonPronouns = Phoney_MAUI.Core.UIServices.ObjectCopier.Clone<PronounList>(so_source!.jsonPronouns!)!;
-            so!.jsonFills = Phoney_MAUI.Core.UIServices.ObjectCopier.Clone<FillList>(so_source!.jsonFills!)!;
-            so!.jsonTopics = Phoney_MAUI.Core.UIServices.ObjectCopier.Clone<TopicList>(so_source!.jsonTopics!)!;
-            so!.jsonCA = Phoney_MAUI.Core.UIServices.ObjectCopier.Clone<CoAdv>(so_source!.jsonCA!)!;
-            so!.jsonCB = Phoney_MAUI.Core.UIServices.ObjectCopier.Clone<CoBase>(so_source!.jsonCB!)!;
-            so!.jsonVerbTenses = Phoney_MAUI.Core.UIServices.ObjectCopier.Clone<VTList>(so_source!.jsonVerbTenses!)!;
-            so!.jsonParser = Phoney_MAUI.Core.UIServices.ObjectCopier.Clone<Parse>(so_source!.jsonParser!)!;
-            so!.jsonVersion = Phoney_MAUI.Core.UIServices.ObjectCopier.Clone<Phoney_MAUI.Core.Version>(so_source!.jsonVersion !)!;
-            // so!.jsonSlines = Phoney_MAUI.Core.UIServices.ObjectCopier.Clone<List<string>>(so_source!.jsonSlines!)!;
-            so!.JsonGameDefinitions = Phoney_MAUI.Core.UIServices.ObjectCopier.Clone<GameDefinitions>(so_source!.JsonGameDefinitions!)!;
-            */
-
-            // so!.jsonStoryText.Slines = so.jsonSlines;
-
-            if (ParseInput(so, input!, ref lang) == true)
+            SaveObj? so = null;
+            try
             {
-                RestoreReflection(so);
-
-            }
-            else
-            {
-                if( fileName == "autosave.sav")
-                    AdvGame.GD.AutoloadFailed = true;
-                else
-                    AdvGame.GD.SavegameFailed = true;
+                string? input = AdvGame!.UIS!.CoreLoadStringFromFile(fileName);
 
                 so = SetupSaveObject();
+                /*
+                so.jsonItems = Phoney_MAUI.Core.UIServices.ObjectCopier.Clone<ItemList>(so_source!.jsonItems!)!;
+                so.jsonPersons = Phoney_MAUI.Core.UIServices.ObjectCopier.Clone<PersonList>(so_source!.jsonPersons!)!;
+                so.jsonlocations= Phoney_MAUI.Core.UIServices.ObjectCopier.Clone<locationList>(so_source!.jsonlocations!)!;
+                so.jsonStats = Phoney_MAUI.Core.UIServices.ObjectCopier.Clone<StatusList>(so_source!.jsonStats!)!;
+                so.jsonScores = Phoney_MAUI.Core.UIServices.ObjectCopier.Clone<ScoreList>(so_source!.jsonScores!)!;
+                so.jsonLanguage = Phoney_MAUI.Core.UIServices.ObjectCopier.Clone<IGlobalData.language>(so_source!.jsonLanguage!)!;
+                so.jsonLI= Phoney_MAUI.Core.UIServices.ObjectCopier.Clone<List<LatestInput>>(so_source!.jsonLI!)!;
+                so.jsonItemQueue = Phoney_MAUI.Core.UIServices.ObjectCopier.Clone<ItemQueue>(so_source!.jsonItemQueue!)!;
+                so.jsonStoryText = Phoney_MAUI.Core.UIServices.ObjectCopier.Clone<Phoney_MAUI.Core.StoryText>(so_source!.jsonStoryText!)!;
+                so.jsonFeedbackText = Phoney_MAUI.Core.UIServices.ObjectCopier.Clone<Phoney_MAUI.Core.FeedbackText>(so_source!.jsonFeedbackText!)!;
+                so.jsonA = Phoney_MAUI.Core.UIServices.ObjectCopier.Clone<AdvData>(so_source!.jsonA!)!;
+                so.jsonPV = Phoney_MAUI.Core.UIServices.ObjectCopier.Clone<PhoneyVision>(so_source!.jsonPV!)!;
+                so.jsonOrderListTable = Phoney_MAUI.Core.UIServices.ObjectCopier.Clone<OrderListTable>(so_source!.jsonOrderListTable!)!;
+
+                // Ab hier unveränderliche Objekte, die aber natürlich trotzdem aus dem Zerogame gezogen werden müssen
+                so!.jsonAdjs = Phoney_MAUI.Core.UIServices.ObjectCopier.Clone<AdjList>(so_source!.jsonAdjs!)!;
+                so!.jsonNouns = Phoney_MAUI.Core.UIServices.ObjectCopier.Clone<NounList>(so_source!.jsonNouns!)!;
+                so!.jsonVerbs = Phoney_MAUI.Core.UIServices.ObjectCopier.Clone<VerbList>(so_source!.jsonVerbs!)!;
+                so!.jsonPreps = Phoney_MAUI.Core.UIServices.ObjectCopier.Clone<PrepList>(so_source!.jsonPreps!)!;
+                so!.jsonPronouns = Phoney_MAUI.Core.UIServices.ObjectCopier.Clone<PronounList>(so_source!.jsonPronouns!)!;
+                so!.jsonFills = Phoney_MAUI.Core.UIServices.ObjectCopier.Clone<FillList>(so_source!.jsonFills!)!;
+                so!.jsonTopics = Phoney_MAUI.Core.UIServices.ObjectCopier.Clone<TopicList>(so_source!.jsonTopics!)!;
+                so!.jsonCA = Phoney_MAUI.Core.UIServices.ObjectCopier.Clone<CoAdv>(so_source!.jsonCA!)!;
+                so!.jsonCB = Phoney_MAUI.Core.UIServices.ObjectCopier.Clone<CoBase>(so_source!.jsonCB!)!;
+                so!.jsonVerbTenses = Phoney_MAUI.Core.UIServices.ObjectCopier.Clone<VTList>(so_source!.jsonVerbTenses!)!;
+                so!.jsonParser = Phoney_MAUI.Core.UIServices.ObjectCopier.Clone<Parse>(so_source!.jsonParser!)!;
+                so!.jsonVersion = Phoney_MAUI.Core.UIServices.ObjectCopier.Clone<Phoney_MAUI.Core.Version>(so_source!.jsonVersion !)!;
+                // so!.jsonSlines = Phoney_MAUI.Core.UIServices.ObjectCopier.Clone<List<string>>(so_source!.jsonSlines!)!;
+                so!.JsonGameDefinitions = Phoney_MAUI.Core.UIServices.ObjectCopier.Clone<GameDefinitions>(so_source!.JsonGameDefinitions!)!;
+                */
+
+                // so!.jsonStoryText.Slines = so.jsonSlines;
+
+                if (ParseInput(so, input!, ref lang) == true)
+                {
+                    RestoreReflection(so);
+
+                }
+                else
+                {
+                    if (fileName == "autosave.sav")
+                        AdvGame.GD.AutoloadFailed = true;
+                    else
+                        AdvGame.GD.SavegameFailed = true;
+
+                    so = SetupSaveObject();
+                }
+            }
+            catch( Exception ex)
+            {
+
             }
             return so;
             // SaveOrderTable(ref output);
@@ -6655,224 +6663,231 @@ namespace GameCore
 
         public void CoreLoad( string fileName, Adv? AdvTest = null )
         {
- 
-            GC.Collect();
-            long mem = GC.GetTotalMemory(true);
-            long mem3 = 0;
-            long mem4 = 0;
-            long mem5 = 0;
-            long mem6 = 0;
-            long mem7 = 0;
-            long mem8 = 0;
-            long mem9 = 0;
-            long mem10 = 0;
-            long mem11 = 0;
-            long mem12 = 0;
-            long mem13 = 0;
-            long mem14 = 0;
-            long mem15 = 0;
-            long mem16 = 0;
-            long mem17 = 0;
-
-            Phoney_MAUI.Model.IStoryText? STEBack = AdvGame.STE.Clone();
-
-            SaveObj? SO=null;
-            IGlobalData.language targetlanguage = IGlobalData.language.german; 
-            SO = LoadGame(fileName, ref targetlanguage);
-
-            // GD.SavegameFailed = true;
-
-            if (GD.SavegameFailed == true)
-            {
-                SO = null;
-                AdvGame.STE = (Phoney_MAUI.Core.StoryText) STEBack;
-                AdvGame.STE.RecalcLatest();
-            }
-
-            mem14 = GC.GetTotalMemory(true);
-            GC.Collect();
-
-            mem15 = GC.GetTotalMemory(true);
-            if( SO == null )
+            try
             {
 
-            }
-            else if ( (AdvGame != null ) && ( AdvGame!.GD!.Version.CheckVersion(SO!.jsonVersion!) == false ) )
-            {
-                AdvGame!.StoryOutput( String.Format( loca.OrderFeedback_CoreLoad_14062, fileName ));
+                GC.Collect();
+                long mem = GC.GetTotalMemory(true);
+                long mem3 = 0;
+                long mem4 = 0;
+                long mem5 = 0;
+                long mem6 = 0;
+                long mem7 = 0;
+                long mem8 = 0;
+                long mem9 = 0;
+                long mem10 = 0;
+                long mem11 = 0;
+                long mem12 = 0;
+                long mem13 = 0;
+                long mem14 = 0;
+                long mem15 = 0;
+                long mem16 = 0;
+                long mem17 = 0;
 
-            }
-            else 
-            {
-                mem16 = GC.GetTotalMemory(true);
+                Phoney_MAUI.Model.IStoryText? STEBack = AdvGame.STE.Clone();
 
-                // wenn die Liste nicht 1:1 gefunden wird: 
-                // Es wird eine neue Liste angelegt unter dem alten Namen plus ".loaded" hinten dran 
-                OrderListTable tempOTL = SO.jsonOrderListTable!;
-                FindOrAddOrderList(tempOTL);
+                SaveObj? SO = null;
+                IGlobalData.language targetlanguage = IGlobalData.language.german;
+                SO = LoadGame(fileName, ref targetlanguage);
 
-                mem17 = GC.GetTotalMemory(true);
+                // GD.SavegameFailed = true;
 
-                IGlobalData.language lengua = SO!.jsonLanguage;
-
-                AdvGame!.Items = SO!.jsonItems;
-                AdvGame!.Persons = SO!.jsonPersons;
-                AdvGame!.locations = SO!.jsonlocations!;
-                AdvGame!.Adjs = SO!.jsonAdjs;
-                // SO.jsonA!.Adventure = AdvGame!;
-                AdvGame!.A =  SO!.jsonA!;
-                AdvGame!.Nouns = SO!.jsonNouns;
-                AdvGame!.Verbs = SO!.jsonVerbs;
-                AdvGame!.Preps = SO!.jsonPreps;
-                AdvGame!.Pronouns = SO!.jsonPronouns;
-                AdvGame!.Fills = SO!.jsonFills;
-                AdvGame!.Stats = SO!.jsonStats;
-                AdvGame!.ItemQueue = SO!.jsonItemQueue;
-                AdvGame!.Scores = SO!.jsonScores;
-                AdvGame!.LI = SO!.jsonLI!;
-                AdvGame!.Topics = SO!.jsonTopics;
-                // Testweise reingenommen: Müssen CA und CB hier aktualisiert werden?
-                AdvGame!.CA = SO!.jsonCA!;
-                AdvGame!.CB = SO!.jsonCB!;
-
-                // Von STE werden nur die wichtigen Buffer übertragen
-                AdvGame.STE = new( (Phoney_MAUI.Core.UIServices) AdvGame!.UIS! );
-                AdvGame.STE.Slines = SO!.jsonStoryText!.Slines;
-                AdvGame.STE.SlinesBuffer = SO!.jsonStoryText!.SlinesBuffer;
-
-
-                AdvGame!.FBE = SO!.jsonFeedbackText!;
-                AdvGame!.VerbTenses = SO!.jsonVerbTenses!;
-                AdvGame!.PV = SO!.jsonPV!;
-                // AdvGame!.SetCallbacks();
-                mem3 = GC.GetTotalMemory(true);
-                locations!.SetAdv(AdvGame);
-                mem4 = GC.GetTotalMemory(true);
-                Persons!.SetAdv(AdvGame);
-                mem4 = GC.GetTotalMemory(true);
-                 mem5 = GC.GetTotalMemory(true);
-                SetAdventureGame(AdvGame);
-                mem6 = GC.GetTotalMemory(true);
-                AdvGame!.SetObjectReferences(Items!, Persons!, locations!, Nouns!, Adjs!, Verbs!, Preps!, Fills!, Stats!, LI!, Topics!, CA!, CB!);
-                mem7 = GC.GetTotalMemory(true);
-                // AdvGame!.A!.Adventure = AdvGame;
-                AdvGame!.ResetParser();
-                AdvGame!.Parser!.SetObjectReferences(Items!, Persons!, Nouns!, Adjs!, Verbs!, Preps!, Fills!, Topics!, AdvGame!.PLL!);
-                AdvGame!.InitPLL();
-                mem8 = GC.GetTotalMemory(true);
-                AdvGame!.Parser!.SetObjectReferences(Items!, Persons!, Nouns!, Adjs!, Verbs!, Preps!, Fills!, Topics!, AdvGame!.PLL!);
-                mem9 = GC.GetTotalMemory(true);
-                AdvGame!.ResetParser();
-                mem10 = GC.GetTotalMemory(true);
-                AdvGame!.ResetStoryText();
-                mem11 = GC.GetTotalMemory(true);
-                AdvGame!.ResetFeedbackText();
-                mem12 = GC.GetTotalMemory(true);
-                // Helper.ConfigInsert(Persons, Items, locations, Topics!, CB, A, AdvGame);
-                // AdvGame.locations.A = SO.jsonA;
-                // AdvGame.locations.Persons = SO.jsonPersons!;
-                // AdvGame.Persons.A = SO.jsonA;
-                // AdvGame.Items!.A = SO.jsonA;
-                Grammar.Init(AdvGame!.A, AdvGame!.VerbTenses, Items, Persons);
-                AdvGame.A.ActPerson = SO!.jsonCA!.Person_I!.ID;
-                AdvGame.SetAdv( AdvGame );
-
-                if( SO!.JsonGameDefinitions!.MCVisible != IGameDefinitions.mcvMode.none)
+                if (GD.SavegameFailed == true)
                 {
-                    AdvGame.Orders!.MCPersonID = SO.JsonGameDefinitions.MCPersonID;
-                    AdvGame.Orders.MCID = SO.JsonGameDefinitions.MCID;
-                    AdvGame.Orders.MCMenuFunc = SO.JsonGameDefinitions.MCVFuncName;
-
-                    if (SO!.JsonGameDefinitions.MCVisible == IGameDefinitions.mcvMode.persistent)
-                    {
-                        AdvGame.UIS!.MCMV = new Phoney_MAUI.Core.MCMenuView();
-                        AdvGame.Orders.RestoreGeneratedDialog(SO.JsonGameDefinitions.MCPersonID,
-                            SO.JsonGameDefinitions.MCVFuncName!);
-                    }
-                    else
-                    {
-                        AdvGame.UIS!.MCMV = new Phoney_MAUI.Core.MCMenuView();
-                        AdvGame.Orders.RestoreTemporaryDialog( SO!.JsonGameDefinitions.MCMenuTemp, SO!.JsonGameDefinitions.MCCallbackName!);
-                        // temporary dialogs
-                    }
-                }
-                AdvGame._currentEventName = SO.JsonGameDefinitions.CurrentEventName;
-                AdvGame._ixCurrent = SO.JsonGameDefinitions.IxCurrent;
-                AdvGame._actLocEvent = SO.JsonGameDefinitions.ActLocEvent;
-                AdvGame._actLocEventSeqStart = SO.JsonGameDefinitions.ActLocEventSeqStart;
-                AdvGame._actLocEventStartPoint = SO.JsonGameDefinitions.ActLocEventStartPoint;
-                AdvGame._lastLocEventStartPoint = SO.JsonGameDefinitions.LastLocEventStartPoint;
-                AdvGame._actLocCollecting = SO.JsonGameDefinitions.ActLocCollecting;
-                AdvGame._lastLoc = SO.JsonGameDefinitions.LastLoc;
-                AdvGame._actLoc = SO.JsonGameDefinitions.ActLoc;
-
-                AdvGame.GD!.PicMode = SO.JsonGameDefinitions.PicMode;
-
-                AdvGame.Orders!.MCCallbackName = SO.JsonGameDefinitions.MCCallbackName;
-                AdvGame.Orders.MCID = SO.JsonGameDefinitions.MCID;
-                AdvGame.Orders.MCPersonID = SO.JsonGameDefinitions.MCPersonID;
-
-
-                mem13 = GC.GetTotalMemory(true);
-
-                AdvGame.STE.RecalcLatest();
-
-                // AdvGame!.GD!.Language = targetlanguage;
-
-                foreach (Person p in Persons!.List!.Values!)
-                {
-                    foreach (DialogList dl in p.DialogList!)
-                    {
-                        if (dl.LatestDialog != null)
-                        {
-                            // dl.LatestDialog.AdvGame = AdvGame;
-                            dl.LatestDialog.MCS = null;
-                        }
-                    }
+                    SO = null;
+                    AdvGame.STE = (Phoney_MAUI.Core.StoryText)STEBack;
+                    AdvGame.STE.RecalcLatest();
                 }
 
                 mem14 = GC.GetTotalMemory(true);
+                GC.Collect();
 
-                loca.GD!.ResetLanguageCallbacks();
-                loca.GD!.AddLanguageCallback(AdvGame!.UIS!.SetFullUIText!);
-                loca.GD!.AddLanguageCallback(AdvGame!.Verbs!.RestoreVerbs!);
-                loca.GD!.AddLanguageCallback(AdvGame!.Adjs!.RestoreAdjectives!);
-                loca.GD!.AddLanguageCallback(AdvGame!.Nouns!.RestoreNouns!);
-                loca.GD!.AddLanguageCallback(AdvGame!.Fills!.RestoreFill!);
-                loca.GD!.AddLanguageCallback(AdvGame!.Preps!.RestorePrep !);
-                loca.GD!.AddLanguageCallback(AdvGame!.Pronouns!.RestorePronouns!);
-                loca.GD!.AddLanguageCallback(AdvGame!.VerbTenses!.RestoreVTList!);
-                loca.GD!.AddLanguageCallback(AdvGame!.Categories!.RestoreCategoryRelList!);
-                loca.GD!.AddLanguageCallback(AdvGame!.Items!.RestoreItems!);
-                loca.GD!.AddLanguageCallback(AdvGame!.Persons!.RestorePersons!);
-                loca.GD!.AddLanguageCallback(AdvGame!.Topics!.RestoreTopics!);
-                loca.GD!.AddLanguageCallback(AdvGame!.Adjs!.RestoreAdjectives!);
-                loca.GD!.AddLanguageCallback(AdvGame!.locations!.RestoreLocations!);
-                loca.GD!.AddLanguageCallback(AdvGame!.RestoreLocationName!);
-                loca.GD!.AddLanguageCallback(AdvGame!.InitPLL!);
+                mem15 = GC.GetTotalMemory(true);
+                if (SO == null)
+                {
+
+                }
+                else if ((AdvGame != null) && (AdvGame!.GD!.Version.CheckVersion(SO!.jsonVersion!) == false))
+                {
+                    AdvGame!.StoryOutput(String.Format(loca.OrderFeedback_CoreLoad_14062, fileName));
+
+                }
+                else
+                {
+                    mem16 = GC.GetTotalMemory(true);
+
+                    // wenn die Liste nicht 1:1 gefunden wird: 
+                    // Es wird eine neue Liste angelegt unter dem alten Namen plus ".loaded" hinten dran 
+                    OrderListTable tempOTL = SO.jsonOrderListTable!;
+                    FindOrAddOrderList(tempOTL);
+
+                    mem17 = GC.GetTotalMemory(true);
+
+                    IGlobalData.language lengua = SO!.jsonLanguage;
+
+                    AdvGame!.Items = SO!.jsonItems;
+                    AdvGame!.Persons = SO!.jsonPersons;
+                    AdvGame!.locations = SO!.jsonlocations!;
+                    AdvGame!.Adjs = SO!.jsonAdjs;
+                    // SO.jsonA!.Adventure = AdvGame!;
+                    AdvGame!.A = SO!.jsonA!;
+                    AdvGame!.Nouns = SO!.jsonNouns;
+                    AdvGame!.Verbs = SO!.jsonVerbs;
+                    AdvGame!.Preps = SO!.jsonPreps;
+                    AdvGame!.Pronouns = SO!.jsonPronouns;
+                    AdvGame!.Fills = SO!.jsonFills;
+                    AdvGame!.Stats = SO!.jsonStats;
+                    AdvGame!.ItemQueue = SO!.jsonItemQueue;
+                    AdvGame!.Scores = SO!.jsonScores;
+                    AdvGame!.LI = SO!.jsonLI!;
+                    AdvGame!.Topics = SO!.jsonTopics;
+                    // Testweise reingenommen: Müssen CA und CB hier aktualisiert werden?
+                    AdvGame!.CA = SO!.jsonCA!;
+                    AdvGame!.CB = SO!.jsonCB!;
+
+                    // Von STE werden nur die wichtigen Buffer übertragen
+                    AdvGame.STE = new((Phoney_MAUI.Core.UIServices)AdvGame!.UIS!);
+                    AdvGame.STE.Slines = SO!.jsonStoryText!.Slines;
+                    AdvGame.STE.SlinesBuffer = SO!.jsonStoryText!.SlinesBuffer;
+
+
+                    AdvGame!.FBE = SO!.jsonFeedbackText!;
+                    AdvGame!.VerbTenses = SO!.jsonVerbTenses!;
+                    AdvGame!.PV = SO!.jsonPV!;
+                    // AdvGame!.SetCallbacks();
+                    mem3 = GC.GetTotalMemory(true);
+                    locations!.SetAdv(AdvGame);
+                    mem4 = GC.GetTotalMemory(true);
+                    Persons!.SetAdv(AdvGame);
+                    mem4 = GC.GetTotalMemory(true);
+                    mem5 = GC.GetTotalMemory(true);
+                    SetAdventureGame(AdvGame);
+                    mem6 = GC.GetTotalMemory(true);
+                    AdvGame!.SetObjectReferences(Items!, Persons!, locations!, Nouns!, Adjs!, Verbs!, Preps!, Fills!, Stats!, LI!, Topics!, CA!, CB!);
+                    mem7 = GC.GetTotalMemory(true);
+                    // AdvGame!.A!.Adventure = AdvGame;
+                    AdvGame!.ResetParser();
+                    AdvGame!.Parser!.SetObjectReferences(Items!, Persons!, Nouns!, Adjs!, Verbs!, Preps!, Fills!, Topics!, AdvGame!.PLL!);
+                    AdvGame!.InitPLL();
+                    mem8 = GC.GetTotalMemory(true);
+                    AdvGame!.Parser!.SetObjectReferences(Items!, Persons!, Nouns!, Adjs!, Verbs!, Preps!, Fills!, Topics!, AdvGame!.PLL!);
+                    mem9 = GC.GetTotalMemory(true);
+                    AdvGame!.ResetParser();
+                    mem10 = GC.GetTotalMemory(true);
+                    AdvGame!.ResetStoryText();
+                    mem11 = GC.GetTotalMemory(true);
+                    AdvGame!.ResetFeedbackText();
+                    mem12 = GC.GetTotalMemory(true);
+                    // Helper.ConfigInsert(Persons, Items, locations, Topics!, CB, A, AdvGame);
+                    // AdvGame.locations.A = SO.jsonA;
+                    // AdvGame.locations.Persons = SO.jsonPersons!;
+                    // AdvGame.Persons.A = SO.jsonA;
+                    // AdvGame.Items!.A = SO.jsonA;
+                    Grammar.Init(AdvGame!.A, AdvGame!.VerbTenses, Items, Persons);
+                    AdvGame.A.ActPerson = SO!.jsonCA!.Person_I!.ID;
+                    AdvGame.SetAdv(AdvGame);
+
+                    if (SO!.JsonGameDefinitions!.MCVisible != IGameDefinitions.mcvMode.none)
+                    {
+                        AdvGame.Orders!.MCPersonID = SO.JsonGameDefinitions.MCPersonID;
+                        AdvGame.Orders.MCID = SO.JsonGameDefinitions.MCID;
+                        AdvGame.Orders.MCMenuFunc = SO.JsonGameDefinitions.MCVFuncName;
+
+                        if (SO!.JsonGameDefinitions.MCVisible == IGameDefinitions.mcvMode.persistent)
+                        {
+                            AdvGame.UIS!.MCMV = new Phoney_MAUI.Core.MCMenuView();
+                            AdvGame.Orders.RestoreGeneratedDialog(SO.JsonGameDefinitions.MCPersonID,
+                                SO.JsonGameDefinitions.MCVFuncName!);
+                        }
+                        else
+                        {
+                            AdvGame.UIS!.MCMV = new Phoney_MAUI.Core.MCMenuView();
+                            AdvGame.Orders.RestoreTemporaryDialog(SO!.JsonGameDefinitions.MCMenuTemp, SO!.JsonGameDefinitions.MCCallbackName!);
+                            // temporary dialogs
+                        }
+                    }
+                    AdvGame._currentEventName = SO.JsonGameDefinitions.CurrentEventName;
+                    AdvGame._ixCurrent = SO.JsonGameDefinitions.IxCurrent;
+                    AdvGame._actLocEvent = SO.JsonGameDefinitions.ActLocEvent;
+                    AdvGame._actLocEventSeqStart = SO.JsonGameDefinitions.ActLocEventSeqStart;
+                    AdvGame._actLocEventStartPoint = SO.JsonGameDefinitions.ActLocEventStartPoint;
+                    AdvGame._lastLocEventStartPoint = SO.JsonGameDefinitions.LastLocEventStartPoint;
+                    AdvGame._actLocCollecting = SO.JsonGameDefinitions.ActLocCollecting;
+                    AdvGame._lastLoc = SO.JsonGameDefinitions.LastLoc;
+                    AdvGame._actLoc = SO.JsonGameDefinitions.ActLoc;
+
+                    AdvGame.GD!.PicMode = SO.JsonGameDefinitions.PicMode;
+
+                    AdvGame.Orders!.MCCallbackName = SO.JsonGameDefinitions.MCCallbackName;
+                    AdvGame.Orders.MCID = SO.JsonGameDefinitions.MCID;
+                    AdvGame.Orders.MCPersonID = SO.JsonGameDefinitions.MCPersonID;
+
+
+                    mem13 = GC.GetTotalMemory(true);
+
+                    AdvGame.STE.RecalcLatest();
+
+                    // AdvGame!.GD!.Language = targetlanguage;
+
+                    foreach (Person p in Persons!.List!.Values!)
+                    {
+                        foreach (DialogList dl in p.DialogList!)
+                        {
+                            if (dl.LatestDialog != null)
+                            {
+                                // dl.LatestDialog.AdvGame = AdvGame;
+                                dl.LatestDialog.MCS = null;
+                            }
+                        }
+                    }
+
+                    mem14 = GC.GetTotalMemory(true);
+
+                    loca.GD!.ResetLanguageCallbacks();
+                    loca.GD!.AddLanguageCallback(AdvGame!.UIS!.SetFullUIText!);
+                    loca.GD!.AddLanguageCallback(AdvGame!.Verbs!.RestoreVerbs!);
+                    loca.GD!.AddLanguageCallback(AdvGame!.Adjs!.RestoreAdjectives!);
+                    loca.GD!.AddLanguageCallback(AdvGame!.Nouns!.RestoreNouns!);
+                    loca.GD!.AddLanguageCallback(AdvGame!.Fills!.RestoreFill!);
+                    loca.GD!.AddLanguageCallback(AdvGame!.Preps!.RestorePrep!);
+                    loca.GD!.AddLanguageCallback(AdvGame!.Pronouns!.RestorePronouns!);
+                    loca.GD!.AddLanguageCallback(AdvGame!.VerbTenses!.RestoreVTList!);
+                    loca.GD!.AddLanguageCallback(AdvGame!.Categories!.RestoreCategoryRelList!);
+                    loca.GD!.AddLanguageCallback(AdvGame!.Items!.RestoreItems!);
+                    loca.GD!.AddLanguageCallback(AdvGame!.Persons!.RestorePersons!);
+                    loca.GD!.AddLanguageCallback(AdvGame!.Topics!.RestoreTopics!);
+                    loca.GD!.AddLanguageCallback(AdvGame!.Adjs!.RestoreAdjectives!);
+                    loca.GD!.AddLanguageCallback(AdvGame!.locations!.RestoreLocations!);
+                    loca.GD!.AddLanguageCallback(AdvGame!.RestoreLocationName!);
+                    loca.GD!.AddLanguageCallback(AdvGame!.InitPLL!);
 #if MAUI
-                loca.GD!.AddLanguageCallback(AdvGame!.UIS.SetLanguage);
+                    loca.GD!.AddLanguageCallback(AdvGame!.UIS.SetLanguage);
 #endif
 
-                loca.GD!.Language = targetlanguage;
-                GD!.LatestGameDefinition = SO.JsonGameDefinitions;
-                LayoutRefresh();
-                loca.GD.UIS!.RecalcPictures();
-                // locations.Showlocation(A!.ActLoc);
+                    loca.GD!.Language = targetlanguage;
+                    GD!.LatestGameDefinition = SO.JsonGameDefinitions;
+                    LayoutRefresh();
+                    loca.GD.UIS!.RecalcPictures();
+                    // locations.Showlocation(A!.ActLoc);
 
-                /*
-                AdvGame!.GD!.OrderList.OTL![0] = new OrderListTable(SO.jsonOrderListTable.Name);
-                AdvGame!.GD!.OrderList.OTL![0].OT = SO.jsonOrderListTable.OT;
-                AdvGame!.GD!.OrderList.OTL![0].Point = SO.jsonOrderListTable.Point;
-                AdvGame!.GD!.OrderList.OTL![0].TempPoint = SO.jsonOrderListTable.TempPoint;
-                */
-                // AdvGame!.GD!.OrderList.SetShowChanges = AdvGame!.MW.UpdateOrderList;
-                // AdvGame!.MW.UpdateOrderList(AdvGame!.GD!.OrderList);
-                // SetAdventureGame(AdvGame);
+                    /*
+                    AdvGame!.GD!.OrderList.OTL![0] = new OrderListTable(SO.jsonOrderListTable.Name);
+                    AdvGame!.GD!.OrderList.OTL![0].OT = SO.jsonOrderListTable.OT;
+                    AdvGame!.GD!.OrderList.OTL![0].Point = SO.jsonOrderListTable.Point;
+                    AdvGame!.GD!.OrderList.OTL![0].TempPoint = SO.jsonOrderListTable.TempPoint;
+                    */
+                    // AdvGame!.GD!.OrderList.SetShowChanges = AdvGame!.MW.UpdateOrderList;
+                    // AdvGame!.MW.UpdateOrderList(AdvGame!.GD!.OrderList);
+                    // SetAdventureGame(AdvGame);
+                }
+
+                SO = null;
+                long mem2 = GC.GetTotalMemory(true);
             }
-
-            SO = null;
-            long mem2 = GC.GetTotalMemory(true);
+            catch (Exception e)
+            {
+                GD.SavegameFailed = true;
+            }
         }
 
         public virtual bool  Load(Person PersonID, ParseTokenList PTL )

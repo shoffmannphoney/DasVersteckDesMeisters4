@@ -9113,6 +9113,16 @@ public static partial class loca
                 return "Ich hatte keine Ahnung, wo sich [Top1,Nom] befand.";
         }
     }
+    public static string Autosave_Outdated
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Das Autosavegame ist veraltet. Das Spiel startet von vorne.";
+            else
+                return "Das Autosavegame ist veraltet. Das Spiel startet von vorne.";
+        }
+    }
 
 }
 

@@ -230,6 +230,12 @@
                         <Setter Property="BorderWidth" Value="0"/>
                         <Setter Property="CornerRadius" Value="0"/>
                     </Style>
+                    <Style TargetType="Button" Class="Button_NoBackground_NoBorder_Android">
+                        <Setter Property="TextColor" Value="{DynamicResource FG}"/>
+                        <Setter Property="FontSize" Value="{DynamicResource Medium}"/>
+                        <Setter Property="BorderWidth" Value="0"/>
+                        <Setter Property="CornerRadius" Value="0"/>
+                    </Style>
                     <Style TargetType="Button" Class="Button_Normal_Large">
                         <Setter Property="BackgroundColor" Value="{DynamicResource BG}"/>
                         <Setter Property="TextColor" Value="{DynamicResource FG}"/>

@@ -625,7 +625,12 @@ public class UIServices : IUIServices
 
         string? jsonDest = JsonConvert.SerializeObject(GD.LayoutDescription, Newtonsoft.Json.Formatting.Indented);
         File.WriteAllText(pathfileName, jsonDest);
-        GD!.Adventure!.Autosave(true);
+
+        if (GlobalSpecs.CurrentGlobalSpecs!.InitRunning == IGlobalSpecs.initRunning.started)
+        {
+            GD!.Adventure!.Autosave(true);
+
+        }
 
         return true;
     }
@@ -1234,7 +1239,7 @@ public class UIServices : IUIServices
             string result2 = await ExternalGameOut.EvaluateJavaScriptAsync("Promise.resolve('gna')");
         }
         // Wenn das Warten auf Fertigstellung nicht klappt: Tja, dann flackerts halt
-        catch
+        catch (Exception ex)
         {
 
         }
@@ -1772,7 +1777,7 @@ public class UIServices : IUIServices
                 */
             }
         }
-        catch // (Exception e)
+        catch (Exception e)
         {
 
         }
@@ -1805,7 +1810,7 @@ public class UIServices : IUIServices
 
             }
         }
-        catch // (Exception e)
+        catch (Exception e)
         {
 
         }
@@ -1837,7 +1842,7 @@ public class UIServices : IUIServices
             // args.RecognitionResult = "";
 #endif
         }
-        catch // (Exception e)
+        catch (Exception e)
         {
 
         }
@@ -1861,7 +1866,7 @@ public class UIServices : IUIServices
             recordingBuffer = "";
             */
         }
-        catch // (Exception e)
+        catch (Exception e)
         {
 
         }
@@ -2788,25 +2793,35 @@ public class Scroller : IScroller
 
     public void DoOnBrowserContentLoad()
     {
-        if( UIS!.OnBrowserContentLoaded == IUIServices.onBrowserContentLoaded.nothing )
-            return;
-
-        if (HTMLViewMaxYPos > 0)
+        try
         {
-            if (UIS!.OnBrowserContentLoaded == IUIServices.onBrowserContentLoaded.PageDown)
-            {
-                PageDown();
-            }
-            else if (UIS.OnBrowserContentLoaded == IUIServices.onBrowserContentLoaded.ScrollToEnd)
-            {
-                ScrollToEnd();
-            }
-            else if (UIS.OnBrowserContentLoaded == IUIServices.onBrowserContentLoaded.SetToEnd)
-            {
-                SetToEnd();
-            }
+            GlobalData.AddLog("DoOnBrowserContentLoad in", IGlobalData.protMode.crisp);
+            if (UIS!.OnBrowserContentLoaded == IUIServices.onBrowserContentLoaded.nothing)
+                return;
 
-            UIS.OnBrowserContentLoaded = IUIServices.onBrowserContentLoaded.nothing;
+            if (HTMLViewMaxYPos > 0)
+            {
+                if (UIS!.OnBrowserContentLoaded == IUIServices.onBrowserContentLoaded.PageDown)
+                {
+                    GlobalData.AddLog("PageDown by OnBrowserContentLoad", IGlobalData.protMode.crisp);
+                    PageDown();
+                }
+                else if (UIS.OnBrowserContentLoaded == IUIServices.onBrowserContentLoaded.ScrollToEnd)
+                {
+                    ScrollToEnd();
+                }
+                else if (UIS.OnBrowserContentLoaded == IUIServices.onBrowserContentLoaded.SetToEnd)
+                {
+                    SetToEnd();
+                }
+
+                UIS.OnBrowserContentLoaded = IUIServices.onBrowserContentLoaded.nothing;
+            }
+            GlobalData.AddLog("DoOnBrowserContentLoad out", IGlobalData.protMode.crisp);
+        }
+        catch( Exception e)
+        {
+            GlobalData.AddLog("DoOnBrowserContentLoad: " + e.Message, IGlobalData.protMode.crisp);
         }
     }
 
@@ -2874,7 +2889,7 @@ public class Scroller : IScroller
 
                 }
             }
-            catch
+            catch (Exception e)
             {
             }
         }
@@ -2897,6 +2912,8 @@ public class Scroller : IScroller
     {
         int yPos = (int)HTMLViewMaxYPos;
 
+        GlobalData.AddLog( "Endscroller: " + "window.scrollTo({ top: " + yPos + ", behavior: 'smooth' }", IGlobalData.protMode.crisp );
+
         string s1 = "window.scrollTo({ top: " + yPos + ", behavior: 'smooth' });";
 
         StartScrollOrder(s1).GetAwaiter();
@@ -2905,6 +2922,8 @@ public class Scroller : IScroller
     public void SetToEnd()
     {
         int yPos = (int)HTMLViewMaxYPos;
+
+        GlobalData.AddLog("Endjumper: " + "window.scrollTo({ top: " + yPos + ", behavior: 'smooth' }", IGlobalData.protMode.crisp);
 
         string s1 = "window.scrollTo({ top: " + yPos + " });";
 
@@ -2943,6 +2962,7 @@ public class Scroller : IScroller
         {
 
         }
+        GlobalData.AddLog("PageDowner: " + "window.scrollTo({ top: " + y + ", behavior: 'smooth' }", IGlobalData.protMode.crisp);
         string s1 = "window.scrollTo({ top: " + y + ", behavior: 'smooth' });";
 
         StartScrollOrder(s1).GetAwaiter();
@@ -3039,6 +3059,11 @@ public class Scroller : IScroller
         {
             while (jsCallbacks.Count > 0)
             {
+                int len = 100;
+                if(jsCallbacks[0].Length < 100 )
+                    len = jsCallbacks[0].Length;
+
+                GlobalData.AddLog( "Flushed: " + jsCallbacks[0].Substring( 0, len), IGlobalData.protMode.crisp);
                 UIS!.ExternalGameOut!.EvaluateJavaScriptAsync(jsCallbacks[0]!);
                 jsCallbacks.RemoveAt(0);
             }
@@ -3225,35 +3250,41 @@ public class Scroller : IScroller
 
         async void OnWebViewNavigating(object? sender, WebNavigatingEventArgs e)
         {
-            // Prüfe, ob die Navigation zu einer anderen URL erfolgt
-            if (e.Url != webView.Source.ToString())
+            try
             {
-                // Unterdrücke die Navigation, indem du die Source-Eigenschaft auf die aktuelle URL setzt
-                webView.Source = webView.Source;
-
-                // Definiere eine JavaScript-Funktion, die die document.readyState-Eigenschaft zurückgibt
-                string jsFunction = "function getDocumentReadyState() { return document.readyState; }";
-
-                // Füge die JavaScript-Funktion der Webseite hinzu
-                await webView.EvaluateJavaScriptAsync(jsFunction);
-
-                // Warte, bis die neue Webseite geladen ist
-                string result = await webView.EvaluateJavaScriptAsync("new Promise((resolve, reject) => { var interval = setInterval(() => { var state = getDocumentReadyState(); if (state == 'complete') { clearInterval(interval); resolve(state); } }, 100); });");
-
-                // Prüfe, ob die Webseite vollständig geladen ist
-                if (result == "complete")
+                // Prüfe, ob die Navigation zu einer anderen URL erfolgt
+                if (e.Url != webView.Source.ToString())
                 {
-                    // Setze die Source-Eigenschaft auf die neue URL, um die Aktualisierung der Website durchzuführen
-                    webView.Source = e.Url;
+                    // Unterdrücke die Navigation, indem du die Source-Eigenschaft auf die aktuelle URL setzt
+                    webView.Source = webView.Source;
+
+                    // Definiere eine JavaScript-Funktion, die die document.readyState-Eigenschaft zurückgibt
+                    string jsFunction = "function getDocumentReadyState() { return document.readyState; }";
+
+                    // Füge die JavaScript-Funktion der Webseite hinzu
+                    await webView.EvaluateJavaScriptAsync(jsFunction);
+
+                    // Warte, bis die neue Webseite geladen ist
+                    string result = await webView.EvaluateJavaScriptAsync("new Promise((resolve, reject) => { var interval = setInterval(() => { var state = getDocumentReadyState(); if (state == 'complete') { clearInterval(interval); resolve(state); } }, 100); });");
+
+                    // Prüfe, ob die Webseite vollständig geladen ist
+                    if (result == "complete")
+                    {
+                        // Setze die Source-Eigenschaft auf die neue URL, um die Aktualisierung der Website durchzuführen
+                        webView.Source = e.Url;
+                    }
                 }
             }
-        }
+            catch (Exception ex)
+            {
+            }
     }
+}
 
     public async Task<bool> InqScrollingAreaAsync()
     {
-        if ( UIS!.BrowserRefreshOngoing)
-          return false;
+        if (UIS!.BrowserRefreshOngoing)
+            return false;
 
         if (UIS!.ExternalGameOut == null)
             return false;
@@ -3265,20 +3296,61 @@ public class Scroller : IScroller
 
         try
         {
-             IFormatProvider ifp = CultureInfo.CreateSpecificCulture("en-EN");
+            IFormatProvider ifp = CultureInfo.CreateSpecificCulture("en-EN");
             string s2 = await UIS!.ExternalGameOut.EvaluateJavaScriptAsync($"window.pageYOffset");
-            double ypos = Double.Parse(s2, ifp);
-            // if (        UIS.Scr.ScrollStep != IScroller.scrollStep.
-            //          ||  UIS.Scr.ScrollStep == IScroller.scrollStep.settingSource 
-            //    )
+
+            while (s2 == null)
+            {
+                Thread.Sleep(100);
+                s2 = await UIS!.ExternalGameOut.EvaluateJavaScriptAsync($"window.pageYOffset");
+            }
+            if (s2 == null)
+            {
+
+            }
+            double ypos;
+            if (Double.TryParse(s2, ifp, out ypos) == true)
             {
                 UIS!.Scr.HTMLViewYPos = ypos;
             }
+            else
+            {
+                if (s2 == null) s2 = "(leer)";
+                GlobalData.AddLog("Nicht parsebar: " + s2, IGlobalData.protMode.crisp);
+
+            }
+            //  ypos = Double.Parse(s2, ifp);
+            // if (        UIS.Scr.ScrollStep != IScroller.scrollStep.
+            //          ||  UIS.Scr.ScrollStep == IScroller.scrollStep.settingSource 
+            //    )
             s = await UIS!.ExternalGameOut.EvaluateJavaScriptAsync($"window.innerHeight");
             if (s != null)
             {
-                double viewHeight = Double.Parse(s, ifp);
-                UIS!.Scr.HTMLViewHeight = viewHeight;
+                while (s == null)
+                {
+                    Thread.Sleep(100);
+                    s = await UIS!.ExternalGameOut.EvaluateJavaScriptAsync($"window.innerHeight");
+                }
+                if (s == null)
+                {
+
+                }
+
+                double viewHeight;
+                if (Double.TryParse(s, ifp, out viewHeight) == true)
+                {
+                    UIS!.Scr.HTMLViewHeight = ypos;
+                }
+                else
+                {
+                    if (s == null)
+                    {
+                        s = "(leer)";
+                    }
+                    GlobalData.AddLog("Nicht parsebare HTMLViewHeight: " + s, IGlobalData.protMode.crisp);
+
+                }
+
             }
             else
             {
@@ -3286,15 +3358,37 @@ public class Scroller : IScroller
             }
 
             s = await UIS!.ExternalGameOut.EvaluateJavaScriptAsync($"document.body.scrollHeight");
+            while (s == null)
+            {
+                Thread.Sleep(100);
+                s = await UIS!.ExternalGameOut.EvaluateJavaScriptAsync($"document.body.scrollHeight");
+            }
             if (s != null)
             {
-                double maxYPos = Double.Parse(s, ifp);
+                if (s == null)
+                {
+
+                }
+
+
+                double maxYPos;
+                if (Double.TryParse(s, ifp, out maxYPos) == true)
+                {
+                    UIS!.Scr.HTMLViewMaxYPos = maxYPos;
+                }
+                else
+                {
+                    if (s == null) s = "(leer)";
+                    GlobalData.AddLog("Nicht parsebare HTMLViewMaxYPos: " + s, IGlobalData.protMode.crisp);
+
+                }
+
 
                 if (maxYPos < UIS!.Scr.HTMLViewMaxYPos)
                 {
 
                 }
-                if( maxYPos > 0)
+                if (maxYPos > 0)
                 {
 
                 }
@@ -3311,7 +3405,7 @@ public class Scroller : IScroller
             }
             DoOnBrowserContentLoad();
         }
-        catch // ( Exception e )
+        catch (Exception e)
         {
         }
 
@@ -3706,7 +3800,7 @@ public class ScrollerOld : IScroller
             }
             */
         }
-        catch // ( Exception E )
+        catch  ( Exception E )
         {
             //  int a = 5;
         }
@@ -3891,7 +3985,7 @@ public class ScrollerOld : IScroller
             }
 #endif
         }
-        catch // (Exception e)
+        catch (Exception e)
         {
             // int a = 5;
             // callAll = false;
@@ -3951,7 +4045,7 @@ public class ScrollerOld : IScroller
 
 #endif
         }
-        catch // (Exception e)
+        catch (Exception e)
         {
             // int a = 5;
             // callAll = false;
@@ -4242,7 +4336,7 @@ public class StoryText : IStoryText
 
 
         }
-        catch // (Exception ex)
+        catch (Exception ex)
         {
             // int a = 5;
         }
