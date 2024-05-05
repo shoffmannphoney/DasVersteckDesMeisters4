@@ -809,7 +809,7 @@ namespace GameCore
 
             Grammar.Init(A, VerbTenses, Items, Persons);
 
-            A.StartLoc = A.ActLoc = CA.L01_Dark_Forest; // CA!.LX_01_Hausflur;
+            A.StartLoc = A.ActLoc = CA!.L01_Dark_Forest; // CA!.LX_01_Hausflur;
                                                         // Persons.Items = Items;
 
             foreach (var ele in locations!.List.Values)
@@ -5438,7 +5438,7 @@ namespace GameCore
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Throwable));
 
             CA!.Person_Parrot = Persons!.Add(Person.PersonLoca(new List<Noun> { CA!.Noun_Papagei! }, new List<Adj> { CA!.Adj_ausgestopft! }, Co.SEX_MALE, CB!.LocType_On_Item, CA!.I11_Left_Shelf.ID, "Adv_Person_Parrot", Co.SZ_medium, true, DoParrot, Nouns, Adjs));
-            CA!.Person_Parrot.CanBeTaken = true;
+            CA!.Person_Parrot!.CanBeTaken = true;
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Takeable), relTypes.r_essential);
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Talkable), relTypes.r_essential);
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_GiveTarget));
@@ -5490,7 +5490,7 @@ namespace GameCore
             A.Tense = CB!.Tense_Past;
             CA!.Person_Self = CA!.Person_I;
             A!.ActLoc = A.StartLoc;
-            // A!.ActPerson = CA!.Person_I.ID;
+            // A!.ActPerson = CA!.Person_I!.ID;
             A!.ActScore = 0;
             A.MaxScore = 33;
             // A.Adventure = this;
@@ -5832,7 +5832,7 @@ namespace GameCore
                     }
                 }
 
-                if (CA!.Person_I.locationID == locationID)
+                if (CA!.Person_I!.locationID == locationID)
                 {
                     if (CA.Status_Ritterruestung_Klaue.Val <= 0 && (Items.IsItemInv(CA.I00_Unstable_Pliers_With_Claw) || Items.IsItemInv(CA.I00_Stable_Pliers_With_Claw)))
                     {
@@ -5893,18 +5893,18 @@ namespace GameCore
         {
             try
             {
-                if (CA!.Status_Eule_Klaue.Val > 0)
+                if (CA!.Status_Eule_Klaue!.Val > 0)
                 {
-                    CA!.Status_Eule_Klaue.Val--;
+                    CA!.Status_Eule_Klaue!.Val--;
 
-                    if (CA!.Status_Eule_Klaue.Val == 0)
+                    if (CA!.Status_Eule_Klaue!.Val == 0)
                     {
                         StoryOutput(CA!.L05_Atrium, CA!.Person_I, loca.DoOwl_Finish);
                     }
                 }
-                if (CA!.Person_I.locationID == locationID)
+                if (CA!.Person_I!.locationID == locationID)
                 {
-                    if (CA.Status_Eule_Klaue.Val <= 0 && (Items.IsItemInv(CA.I00_Unstable_Pliers_With_Claw) || Items.IsItemInv(CA.I00_Stable_Pliers_With_Claw)))
+                    if (CA.Status_Eule_Klaue!.Val <= 0 && (Items.IsItemInv(CA.I00_Unstable_Pliers_With_Claw) || Items.IsItemInv(CA.I00_Stable_Pliers_With_Claw)))
                     {
                         int a = 5;
                         int val = GD!.RandomNumber(0, 10);
@@ -5971,9 +5971,9 @@ namespace GameCore
                     }
                 }
 
-                if (CA!.Person_I.locationID == locationID)
+                if (CA!.Person_I!.locationID == locationID)
                 {
-                    if (CA.Status_Skelett_Klaue.Val <= 0 && (Items.IsItemInv(CA.I00_Unstable_Pliers_With_Claw) || Items.IsItemInv(CA.I00_Stable_Pliers_With_Claw)))
+                    if (CA.Status_Skelett_Klaue.Val <= 0 && (Items!.IsItemInv(CA.I00_Unstable_Pliers_With_Claw) || Items.IsItemInv(CA.I00_Stable_Pliers_With_Claw)))
                     {
                         int a = 5;
                         int val = GD!.RandomNumber(0, 10);
@@ -6037,28 +6037,28 @@ namespace GameCore
                     CA!.Status_Papagei_Klaue.Val--;
                     if (CA!.Status_Papagei_Klaue.Val == 0)
                     {
-                        StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Parrot_Finish);
+                        StoryOutput(CA!.Person_Parrot!.locationID, CA!.Person_I, loca.Do_Parrot_Finish);
                     }
                 }
 
-                if (CA!.Person_I.locationID == locationID)
+                if (CA!.Person_I!.locationID == locationID)
                 {
-                    if (CA.Status_Papagei_Klaue.Val <= 0 && (Items.IsItemInv(CA.I00_Unstable_Pliers_With_Claw) || Items.IsItemInv(CA.I00_Stable_Pliers_With_Claw)))
+                    if (CA.Status_Papagei_Klaue.Val <= 0 && (Items!.IsItemInv(CA.I00_Unstable_Pliers_With_Claw) || Items.IsItemInv(CA.I00_Stable_Pliers_With_Claw)))
                     {
                         int a = 5;
                         int val = GD!.RandomNumber(0, 30);
                         {
                             if (val < 1)
                             {
-                                StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Parrot_Reaktion1);
+                                StoryOutput(CA!.Person_Parrot!.locationID, CA!.Person_I, loca.Do_Parrot_Reaktion1);
                             }
                             else if (val < 2)
                             {
-                                StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Parrot_Reaktion2);
+                                StoryOutput(CA!.Person_Parrot!.locationID, CA!.Person_I, loca.Do_Parrot_Reaktion2);
                             }
                             else if (val < 3)
                             {
-                                StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Parrot_Reaktion3);
+                                StoryOutput(CA!.Person_Parrot!.locationID, CA!.Person_I, loca.Do_Parrot_Reaktion3);
                             }
 
                         }
@@ -6069,23 +6069,23 @@ namespace GameCore
                         {
                             if (val < 1)
                             {
-                                StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Parrot_Action1);
+                                StoryOutput(CA!.Person_Parrot!.locationID, CA!.Person_I, loca.Do_Parrot_Action1);
                             }
                             else if (val < 2)
                             {
-                                StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Parrot_Action2);
+                                StoryOutput(CA!.Person_Parrot!.locationID, CA!.Person_I, loca.Do_Parrot_Action2);
                             }
                             else if (val < 3)
                             {
-                                StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Parrot_Action3);
+                                StoryOutput(CA!.Person_Parrot!.locationID, CA!.Person_I, loca.Do_Parrot_Action3);
                             }
                             else if (val < 4)
                             {
-                                StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Parrot_Action4);
+                                StoryOutput(CA!.Person_Parrot!.locationID, CA!.Person_I, loca.Do_Parrot_Action4);
                             }
                             else if (val < 5)
                             {
-                                StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Parrot_Action5);
+                                StoryOutput(CA!.Person_Parrot!.locationID, CA!.Person_I, loca.Do_Parrot_Action5);
                             }
 
                         }
@@ -6111,7 +6111,7 @@ namespace GameCore
                     }
                 }
 
-                if (CA!.Person_I.locationID == locationID)
+                if (CA!.Person_I!.locationID == locationID)
                 {
                     if (CA.Status_Elster_Klaue.Val <= 0 && (Items.IsItemInv(CA.I00_Unstable_Pliers_With_Claw) || Items.IsItemInv(CA.I00_Stable_Pliers_With_Claw)))
                     {
@@ -6120,15 +6120,15 @@ namespace GameCore
                         {
                             if (val < 1)
                             {
-                                StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Magpie_Reaktion1);
+                                StoryOutput(CA!.Person_Parrot!.locationID, CA!.Person_I, loca.Do_Magpie_Reaktion1);
                             }
                             else if (val < 2)
                             {
-                                StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Magpie_Reaktion2);
+                                StoryOutput(CA!.Person_Parrot!.locationID, CA!.Person_I, loca.Do_Magpie_Reaktion2);
                             }
                             else if (val < 3)
                             {
-                                StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Magpie_Reaktion3);
+                                StoryOutput(CA!.Person_Parrot!.locationID, CA!.Person_I, loca.Do_Magpie_Reaktion3);
                             }
 
                         }
@@ -6139,23 +6139,23 @@ namespace GameCore
                         {
                             if (val < 1)
                             {
-                                StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Magpie_Action1);
+                                StoryOutput(CA!.Person_Parrot!.locationID, CA!.Person_I, loca.Do_Magpie_Action1);
                             }
                             else if (val < 2)
                             {
-                                StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Magpie_Action2);
+                                StoryOutput(CA!.Person_Parrot!.locationID, CA!.Person_I, loca.Do_Magpie_Action2);
                             }
                             else if (val < 3)
                             {
-                                StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Magpie_Action3);
+                                StoryOutput(CA!.Person_Parrot!.locationID, CA!.Person_I, loca.Do_Magpie_Action3);
                             }
                             else if (val < 4)
                             {
-                                StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Magpie_Action4);
+                                StoryOutput(CA!.Person_Parrot!.locationID, CA!.Person_I, loca.Do_Magpie_Action4);
                             }
                             else if (val < 5)
                             {
-                                StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Magpie_Action5);
+                                StoryOutput(CA!.Person_Parrot!.locationID, CA!.Person_I, loca.Do_Magpie_Action5);
                             }
 
                         }
@@ -6181,7 +6181,7 @@ namespace GameCore
                     }
                 }
 
-                if (CA!.Person_I.locationID == locationID)
+                if (CA!.Person_I!.locationID == locationID)
                 {
                     if (CA.Status_Fisch_Klaue.Val <= 0 && (Items.IsItemInv(CA.I00_Unstable_Pliers_With_Claw) || Items.IsItemInv(CA.I00_Stable_Pliers_With_Claw)))
                     {
@@ -6251,7 +6251,7 @@ namespace GameCore
                     }
                 }
 
-                if (CA!.Person_I.locationID == locationID)
+                if (CA!.Person_I!.locationID == locationID)
                 {
                     if (CA.Status_Schlange_Klaue.Val <= 0 && (Items.IsItemInv(CA.I00_Unstable_Pliers_With_Claw) || Items.IsItemInv(CA.I00_Stable_Pliers_With_Claw)))
                     {
@@ -6291,11 +6291,11 @@ namespace GameCore
                             }
                             else if (val < 4)
                             {
-                                StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Snake_Action4);
+                                StoryOutput(CA!.Person_Parrot!.locationID, CA!.Person_I, loca.Do_Snake_Action4);
                             }
                             else if (val < 5)
                             {
-                                StoryOutput(CA!.Person_Parrot.locationID, CA!.Person_I, loca.Do_Snake_Action5);
+                                StoryOutput(CA!.Person_Parrot!.locationID, CA!.Person_I, loca.Do_Snake_Action5);
                             }
 
                         }

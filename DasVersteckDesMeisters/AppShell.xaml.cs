@@ -228,6 +228,314 @@ public class PIMenuFlyoutItem : MenuFlyoutItem
         set { SetValue(FontFamilyProperty, value); }
     }
 }
+
+
+public static class UIElement
+{
+    public static List<Grid> listGrid= new();
+    public static List<TreeViewItem> listTreeViewItem= new ();
+    public static List<TreeView> listTreeView = new ();
+    public static List<IDButton> listIDButton = new();
+    public static List<IDLabel> listIDLabel = new();
+    public static List<Button> listButton = new();
+    public static List<Label> listLabel = new();
+
+
+    public static void StoreGrid(Grid g)
+    {
+        if (listGrid.Count > 1000)
+        {
+        }
+
+        g.ClearValue(Grid.BackgroundColorProperty);
+        g.ClearValue(Grid.BackgroundProperty);
+        // g.ClearValue(Grid.BehaviorsProperty);
+        g.ClearValue(Grid.BindingContextProperty);
+        g.ClearValue(Grid.ColumnDefinitionsProperty);
+        // g.ClearValue(Grid.HeightProperty);
+        g.ClearValue(Grid.HeightRequestProperty);
+        g.ClearValue(Grid.IsVisibleProperty);
+        // g.ClearValue(Grid.IsFocusedProperty);
+        g.ClearValue(Grid.MarginProperty);
+        g.ClearValue(Grid.OpacityProperty);
+        g.ClearValue(Grid.PaddingProperty);
+        g.ClearValue(Grid.RowDefinitionsProperty);
+        g.ClearValue(Grid.StyleProperty);
+        // g.ClearValue(Grid.WidthProperty);
+        g.ClearValue(Grid.WidthRequestProperty);
+
+        listGrid.Add(g);
+    }
+    public static void StoreTreeViewItem(TreeViewItem tvi )
+    {
+        if( tvi == null )
+        {
+
+        }
+
+        tvi.ClearValue(TreeViewItem.BackgroundColorProperty);
+        tvi.ClearValue(TreeViewItem.BackgroundProperty);
+        // g.ClearValue(Grid.BehaviorsProperty);
+        tvi.ClearValue(TreeViewItem.BindingContextProperty);
+        tvi.ClearValue(TreeViewItem.ColumnDefinitionsProperty);
+        // g.ClearValue(Grid.HeightProperty);
+        tvi.ClearValue(TreeViewItem.HeightRequestProperty);
+        tvi.ClearValue(TreeViewItem.IsVisibleProperty);
+        // g.ClearValue(Grid.IsFocusedProperty);
+        tvi.ClearValue(TreeViewItem.MarginProperty);
+        tvi.ClearValue(TreeViewItem.OpacityProperty);
+        tvi.ClearValue(TreeViewItem.PaddingProperty);
+        tvi.ClearValue(TreeViewItem.RowDefinitionsProperty);
+        tvi.ClearValue(TreeViewItem.StyleProperty);
+        // g.ClearValue(Grid.WidthProperty);
+        tvi.ClearValue(TreeViewItem.WidthRequestProperty);
+
+        listTreeViewItem.Add(tvi);
+    }
+    public static void StoreTreeView(TreeView tv)
+    {
+        tv.ClearValue(TreeView.BackgroundColorProperty);
+        tv.ClearValue(TreeView.BackgroundProperty);
+        // g.ClearValue(Grid.BehaviorsProperty);
+        tv.ClearValue(TreeView.BindingContextProperty);
+        tv.ClearValue(TreeView.ColumnDefinitionsProperty);
+        // g.ClearValue(Grid.HeightProperty);
+        tv.ClearValue(TreeView.HeightRequestProperty);
+        tv.ClearValue(TreeView.IsVisibleProperty);
+        // g.ClearValue(Grid.IsFocusedProperty);
+        tv.ClearValue(TreeView.MarginProperty);
+        tv.ClearValue(TreeView.OpacityProperty);
+        tv.ClearValue(TreeView.PaddingProperty);
+        tv.ClearValue(TreeView.RowDefinitionsProperty);
+        tv.ClearValue(TreeView.StyleProperty);
+        // g.ClearValue(Grid.WidthProperty);
+        tv.ClearValue(TreeView.WidthRequestProperty);
+        listTreeView.Add(tv);
+    }
+    public static void StoreIDButton(IDButton b)
+    {
+        b.ClearValue(IDButton.BackgroundColorProperty);
+        b.ClearValue(IDButton.BackgroundProperty);
+        // g.ClearValue(Grid.BehaviorsProperty);
+        b.ClearValue(IDButton.BindingContextProperty);
+        // g.ClearValue(Grid.HeightProperty);
+        b.ClearValue(IDButton.HeightRequestProperty);
+        b.ClearValue(IDButton.IsVisibleProperty);
+        // g.ClearValue(Grid.IsFocusedProperty);
+        b.ClearValue(IDButton.MarginProperty);
+        b.ClearValue(IDButton.OpacityProperty);
+        b.ClearValue(IDButton.PaddingProperty);
+        b.ClearValue(IDButton.StyleProperty);
+        // g.ClearValue(Grid.WidthProperty);
+        b.ClearValue(IDButton.WidthRequestProperty);
+        b.ClearValue(IDButton.TextColorProperty);
+
+        listIDButton.Add(b);
+    }
+    public static void StoreIDLabel(IDLabel l)
+    {
+        l.ClearValue(IDLabel.BackgroundColorProperty);
+        l.ClearValue(IDLabel.BackgroundProperty);
+        // g.ClearValue(Grid.BehaviorsProperty);
+        l.ClearValue(IDLabel.BindingContextProperty);
+        // g.ClearValue(Grid.HeightProperty);
+        l.ClearValue(IDLabel.HeightRequestProperty);
+        l.ClearValue(IDLabel.IsVisibleProperty);
+        // g.ClearValue(Grid.IsFocusedProperty);
+        l.ClearValue(IDLabel.MarginProperty);
+        l.ClearValue(IDLabel.OpacityProperty);
+        l.ClearValue(IDLabel.PaddingProperty);
+        l.ClearValue(IDLabel.StyleProperty);
+        // g.ClearValue(Grid.WidthProperty);
+        l.ClearValue(IDLabel.WidthRequestProperty);
+        l.ClearValue(IDLabel.TextColorProperty);
+
+        listIDLabel.Add(l);
+    }
+    public static void StoreButton(Button b)
+    {
+        b.ClearValue(Button.BackgroundColorProperty);
+        b.ClearValue(Button.BackgroundProperty);
+        // g.ClearValue(Grid.BehaviorsProperty);
+        b.ClearValue(Button.BindingContextProperty);
+        // g.ClearValue(Grid.HeightProperty);
+        b.ClearValue(Button.HeightRequestProperty);
+        b.ClearValue(Button.IsVisibleProperty);
+        // g.ClearValue(Grid.IsFocusedProperty);
+        b.ClearValue(Button.MarginProperty);
+        b.ClearValue(Button.OpacityProperty);
+        b.ClearValue(Button.PaddingProperty);
+        b.ClearValue(Button.StyleProperty);
+        // g.ClearValue(Grid.WidthProperty);
+        b.ClearValue(Button.WidthRequestProperty);
+        b.ClearValue(Button.TextColorProperty);
+
+        listButton.Add(b);
+    }
+    public static void StoreLabel(Label l)
+    {
+        l.ClearValue(Label.BackgroundColorProperty);
+        l.ClearValue(Label.BackgroundProperty);
+        // g.ClearValue(Grid.BehaviorsProperty);
+        l.ClearValue(Label.BindingContextProperty);
+        // g.ClearValue(Grid.HeightProperty);
+        l.ClearValue(Label.HeightRequestProperty);
+        l.ClearValue(Label.IsVisibleProperty);
+        // g.ClearValue(Grid.IsFocusedProperty);
+        l.ClearValue(Label.MarginProperty);
+        l.ClearValue(Label.OpacityProperty);
+        l.ClearValue(Label.PaddingProperty);
+        l.ClearValue(Label.StyleProperty);
+        // g.ClearValue(Grid.WidthProperty);
+        l.ClearValue(Label.WidthRequestProperty);
+        l.ClearValue(Label.TextColorProperty);
+
+
+        listLabel.Add(l);
+    }
+    public static Grid NewGrid()
+    {
+        if (listGrid.Count  > 1000)
+        {
+        }
+
+        if ( listGrid.Count > 0)
+        {
+            Grid g2 = listGrid[0];
+            listGrid.RemoveAt(0);
+            g2.IsVisible = true;
+            g2.WidthRequest = -1;
+            return g2;
+        }
+        Grid g = new();
+        return g;
+    }
+    public static TreeView NewTreeView()
+    {
+        if( listTreeView.Count > 0)
+        {
+            TreeView tv2 = listTreeView[0];
+            listTreeView.RemoveAt(0);
+            tv2.IsVisible = true;
+            return tv2;
+        }
+        TreeView tv = new();
+        return tv;
+    }
+    public static TreeViewItem NewTreeViewItem()
+    {
+        if( listTreeViewItem.Count > 0)
+        {
+            TreeViewItem tvi2 = listTreeViewItem[0];
+            listTreeViewItem.RemoveAt(0);
+            tvi2.IsVisible = true;
+            return tvi2;
+        }
+        TreeViewItem tvi = new();
+        return tvi;
+    }
+    public static IDButton NewIDButton()
+    {
+        if( listIDButton.Count > 0)
+        {
+            IDButton b2 = listIDButton[0];
+            if (b2 == null)
+            {
+
+            }
+            listIDButton.RemoveAt(0);
+            b2.IsVisible = true;
+            b2.Opacity = 1;
+
+            return b2;
+        }
+        IDButton b = new();
+        return b;
+    }
+    public static Button NewButton()
+    {
+        if (listButton.Count > 0)
+        {
+            Button b2 = listButton[0];
+            if (b2 == null)
+            {
+
+            }
+            listButton.RemoveAt(0);
+            b2.IsVisible = true;
+            b2.Opacity = 1;
+            b2.BackgroundColor = Colors.Transparent;
+
+            // (b2.Background as Microsoft.Maui.Controls.ImmutableBrush).Color = null;
+            b2.TextColor = Colors.White;
+            b2.StyleClass = null;
+            return b2;
+        }
+        Button b = new();
+        return b;
+    }
+    public static IDLabel NewIDLabel()
+    {
+        if( listIDLabel.Count > 0)
+        {
+            IDLabel l2 = listIDLabel[0];
+            listIDLabel.RemoveAt(0);
+            l2.IsVisible = true;
+            l2.Opacity = 1;
+            return l2;
+        }
+        IDLabel l = new();
+        return l;
+    }
+    public static Label NewLabel()
+    {
+        if (listLabel.Count > 0)
+        {
+            Label l2 = listLabel[0];
+            listLabel.RemoveAt(0);
+            l2.IsVisible = true;
+            l2.Opacity = 1;
+            return l2;
+        }
+        Label l = new();
+        return l;
+    }
+
+    private static List<string> Button_NoBackground_NoBorder = null;
+    private static List<string> Label_Normal = null;
+    private static List<string> Label_Normal_Inactive = null;
+
+    public static List<string> Get_Button_NoBackground_NoBorder()
+    {
+        if (Button_NoBackground_NoBorder == null)
+        {
+            List<string> s1 = new();
+            s1.Add("Button_NoBackground_NoBorder");
+            Button_NoBackground_NoBorder = s1; 
+        }
+        return Button_NoBackground_NoBorder;
+    }
+    public static List<string> Get_Label_Normal()
+    {
+        if (Label_Normal == null)
+        {
+            List<string> s1 = new();
+            s1.Add("Label_Normal");
+            Label_Normal = s1;
+        }
+        return Label_Normal;
+    }
+    public static List<string> Get_Label_Normal_Inactive()
+    {
+        if (Label_Normal_Inactive == null)
+        {
+            List<string> s1 = new();
+            s1.Add("Label_Normal_Inactive");
+            Label_Normal_Inactive = s1;
+        }
+        return Label_Normal_Inactive;
+    }
+}
 public class TreeView : TreeViewItem
 {
     public OrderTableCallback? OTCallback { get; set; }
@@ -256,29 +564,31 @@ public class TreeView : TreeViewItem
         // return;
 
 #if ANDROID
-        int grefCount = (int) Java.Lang.Runtime.GetRuntime().TotalMemory();
+        int grefCount = (int) Java.Lang.Runtime.GetRuntime()!.TotalMemory();
 #endif
         try
         {
             if (tv is TreeViewItem || tv is Grid || tv is TreeView )
             {
-                Grid tv2 = tv as Grid;
+                Grid? tv2 = tv as Grid;
 
-                foreach (IView iv in tv2.Children)
+                foreach (IView iv in tv2!.Children)
                 {
                     if (iv is TreeViewItem)
                     {
-                        IView tvi = iv as IView;
-                        (iv as TreeViewItem).DisableToggleButton();
+                        IView? tvi = iv as IView;
+                        (iv as TreeViewItem)!.DisableToggleButton();
 
                         EmptyTreeViewItem(tvi);
 
-                        (iv as TreeViewItem).Children.Clear();
-                        (iv as TreeViewItem).Parent = null;
-                        (iv as TreeViewItem).Handler = null;
+                        (iv as TreeViewItem)!.Children.Clear();
+                        (iv as TreeViewItem)!.Parent = null;
+                        (iv as TreeViewItem)!.Handler = null;
 
-                        if ((iv as TreeViewItem).StyleClass != null)
-                            (iv as TreeViewItem).StyleClass.Clear();
+                        if ((iv as TreeViewItem)!.StyleClass != null)
+                            (iv as TreeViewItem)!.StyleClass.Clear();
+
+                        (iv as TreeViewItem).Clear();
                     }
                     else if (iv is Grid)
                     {
@@ -291,9 +601,11 @@ public class TreeView : TreeViewItem
                         tvi.Handler = null;
 
                         if ((iv as Grid).StyleClass != null)
-                            (iv as Grid).StyleClass.Clear();
+                            (iv as Grid)!.StyleClass.Clear();
+
+                        (iv as Grid).Clear();
                     }
-                    else if (iv is Label)
+                    else if ( iv is Label )
                     {
                         Label l1 = (Label)iv;
 
@@ -307,7 +619,22 @@ public class TreeView : TreeViewItem
 
                         while (l1.GestureRecognizers.Count > 0)
                         {
-                            ( l1.GestureRecognizers[0] as TapGestureRecognizer).Command = null;
+                            if (l1.GestureRecognizers[0] is TapGestureRecognizer)
+                            {
+                                (l1.GestureRecognizers[0] as TapGestureRecognizer).Command = null;
+                            }
+                            else if (l1.GestureRecognizers[0] is PointerGestureRecognizer)
+                            {
+                                /*
+                                foreach (var handler in (l1.GestureRecognizers[0] as PointerGestureRecognizer).PointerEntered)
+                                {
+                                }
+                                */
+                                // (l1.GestureRecognizers[0] as PointerGestureRecognizer).PointerEntered.Clear();
+                                // (l1.GestureRecognizers[0] as PointerGestureRecognizer).PointerExited.Clear();
+                            }
+                            else
+                                destroyed += 0;
                             l1.GestureRecognizers.RemoveAt(0);
                             destroyed++;
 
@@ -315,11 +642,14 @@ public class TreeView : TreeViewItem
                         l1.Text = null;
                         l1.GestureRecognizers.Clear();
                         l1.Parent = null;
-                        l1.Handler = null; 
                         if (l1.StyleClass != null)
                             l1.StyleClass.Clear();
+
+                        // l1.Clear();
+
+                        UIElement.StoreLabel(l1 as Label);
                     }
-                    else if (iv is Button)
+                    else if (iv is Button )
                     {
                         Button l1 = (Button)iv;
 
@@ -332,7 +662,23 @@ public class TreeView : TreeViewItem
                         l1.Behaviors.Clear();
                         while (l1.GestureRecognizers.Count > 0)
                         {
-                            (l1.GestureRecognizers[0] as TapGestureRecognizer).Command = null;
+                            if (l1.GestureRecognizers[0] is TapGestureRecognizer)
+                            {
+                                (l1.GestureRecognizers[0] as TapGestureRecognizer).Command = null;
+                            }
+                            else if (l1.GestureRecognizers[0] is PointerGestureRecognizer)
+                            {
+                                /*
+                                foreach (var handler in (l1.GestureRecognizers[0] as PointerGestureRecognizer).PointerEntered)
+                                {
+                                }
+                                */
+                                // (l1.GestureRecognizers[0] as PointerGestureRecognizer).PointerEntered.Clear();
+                                // (l1.GestureRecognizers[0] as PointerGestureRecognizer).PointerExited.Clear();
+                            }
+                            else
+                                destroyed += 0;
+
                             l1.GestureRecognizers.RemoveAt(0);
                             destroyed++;
 
@@ -340,9 +686,11 @@ public class TreeView : TreeViewItem
                         l1.GestureRecognizers.Clear();
                         l1.Text = null;
                         l1.Parent = null;
-                        l1.Handler = null;
                         if (l1.StyleClass != null)
                             l1.StyleClass.Clear();
+
+                        // l1.Clear();
+                        UIElement.StoreButton(l1 as Button);
                     }
                     else
                     {
@@ -361,7 +709,23 @@ public class TreeView : TreeViewItem
                 tv2.Behaviors.Clear();
                 while (tv2.GestureRecognizers.Count > 0)
                 {
-                    (tv2.GestureRecognizers[0] as TapGestureRecognizer).Command = null;
+                    if (tv2.GestureRecognizers[0] is TapGestureRecognizer)
+                    {
+                        (tv2.GestureRecognizers[0] as TapGestureRecognizer).Command = null;
+                    }
+                    else if (tv2.GestureRecognizers[0] is PointerGestureRecognizer)
+                    {
+                        /*
+                        foreach (var handler in (l1.GestureRecognizers[0] as PointerGestureRecognizer).PointerEntered)
+                        {
+                        }
+                        */
+                        // (l1.GestureRecognizers[0] as PointerGestureRecognizer).PointerEntered.Clear();
+                        // (l1.GestureRecognizers[0] as PointerGestureRecognizer).PointerExited.Clear();
+                    }
+                    else
+                        destroyed += 0;
+
                     tv2.GestureRecognizers.RemoveAt(0);
                     destroyed++;
 
@@ -372,48 +736,69 @@ public class TreeView : TreeViewItem
 
                 if (tv is TreeView)
                 {
-                    TreeView tv3 = tv as TreeView;
-                    tv3.DisableToggleButton();
-                    tv3.OrderListTable = null;
-                    tv3.OrderTable = null;
-                    tv3.CurrentOrderListTable = null;
-                    tv3.UserDefinedObject = null;
-                    tv3.Text = null;
-                    tv3.Parent = null;
-                    tv3.ResetTreeViewItem();
-                    tv3.ColumnDefinitions.Clear();
-                    tv3.RowDefinitions.Clear();
-                    tv3.ClickedEventCommand = null;
-                    tv3.TextButton = null;
-                    tv3.TextLabel = null;
-                    tv3.Handler = null;
-                    if (tv3.StyleClass != null)
-                        tv3.StyleClass.Clear();
+                    TreeView? tv3 = tv as TreeView;
+                    try
+                    {
+                        tv3.DisableToggleButton();
+                        tv3.OrderListTable = null;
+                        tv3.OrderTable = null;
+                        tv3.CurrentOrderListTable = null;
+                        tv3.UserDefinedObject = null;
+                        tv3.Text = null;
+                        tv3.Parent = null;
+                        tv3.ResetTreeViewItem();
+                        tv3.ColumnDefinitions.Clear();
+                        tv3.RowDefinitions.Clear();
+                        tv3.ClickedEventCommand = null;
+                        tv3.TextButton = null;
+                        tv3.TextLabel = null;
+                        tv3.Handler = null;
+                        if (tv3.StyleClass != null)
+                            tv3.StyleClass.Clear();
 
 
-                    tv3.OTCallback = null;
-                    tv3.OTClick = null;
-                    tv3.OrderTableCallback = null;
+                        tv3.OTCallback = null;
+                        tv3.OTClick = null;
+                        tv3.OrderTableCallback = null;
 
+                        tv3.Clear();
+                        UIElement.StoreTreeView(tv3);
+                    }
+                    catch (Exception ex)
+                    {
+                        string s = ex.Message;
+                        GlobalData.AddLog("EmptyTreeViewItem: " + s, IGlobalData.protMode.crisp);
+                    }
                 }
                 else if (tv is TreeViewItem)
                 {
                     TreeViewItem tv3 = tv as TreeViewItem;
-                    tv3.DisableToggleButton();
-                    tv3.OrderListTable = null;
-                    tv3.OrderTable = null;
-                    tv3.CurrentOrderListTable = null;
-                    tv3.UserDefinedObject = null;
-                    tv3.Text = null;
-                    tv3.Parent = null;
-                    tv3.ResetTreeViewItem();
-                    tv3.ColumnDefinitions.Clear();
-                    tv3.RowDefinitions.Clear();
-                    tv3.TextButton = null;
-                    tv3.TextLabel = null;
-                    tv3.Handler = null;
-                    if (tv3.StyleClass != null)
-                        tv3.StyleClass.Clear();
+                    try
+                    {
+                        tv3.DisableToggleButton();
+                        tv3.OrderListTable = null;
+                        tv3.OrderTable = null;
+                        tv3.CurrentOrderListTable = null;
+                        tv3.UserDefinedObject = null;
+                        tv3.Text = null;
+                        tv3.Parent = null;
+                        tv3.ResetTreeViewItem();
+                        tv3.ColumnDefinitions.Clear();
+                        tv3.RowDefinitions.Clear();
+                        tv3.TextButton = null;
+                        tv3.TextLabel = null;
+                        tv3.Handler = null;
+                        if (tv3.StyleClass != null)
+                            tv3.StyleClass.Clear();
+
+                        tv3.Clear();
+                        UIElement.StoreTreeViewItem(tv3);
+                    }
+                    catch (Exception ex)
+                    {
+                        string s = ex.Message;
+                        GlobalData.AddLog("EmptyTreeViewItem: " + s, IGlobalData.protMode.crisp);
+                    }
                 }
                 else if (tv is Grid)
                 {
@@ -425,6 +810,8 @@ public class TreeView : TreeViewItem
                     if (g3.StyleClass != null)
                         g3.StyleClass.Clear();
 
+                    g3.Clear();
+                    UIElement.StoreGrid(g3);
                 }
                 else
                 {
@@ -448,7 +835,23 @@ public class TreeView : TreeViewItem
 
                 while (l1.GestureRecognizers.Count > 0)
                 {
-                    (l1.GestureRecognizers[0] as TapGestureRecognizer).Command = null;
+                    if (l1.GestureRecognizers[0] is TapGestureRecognizer)
+                    {
+                        (l1.GestureRecognizers[0] as TapGestureRecognizer).Command = null;
+                    }
+                    else if (l1.GestureRecognizers[0] is PointerGestureRecognizer)
+                    {
+                        /*
+                        foreach (var handler in (l1.GestureRecognizers[0] as PointerGestureRecognizer).PointerEntered)
+                        {
+                        }
+                        */
+                        // (l1.GestureRecognizers[0] as PointerGestureRecognizer).PointerEntered.Clear();
+                        // (l1.GestureRecognizers[0] as PointerGestureRecognizer).PointerExited.Clear();
+                    }
+                    else
+                        destroyed += 0;
+
                     l1.GestureRecognizers.RemoveAt(0);
                     destroyed++;
 
@@ -458,6 +861,7 @@ public class TreeView : TreeViewItem
                 l1.GestureRecognizers.Clear();
                 l1.Parent = null;
                 l1.Text = null;
+                // l1.Clear();
             }
             else
             {
@@ -923,117 +1327,128 @@ public class TreeView : TreeViewItem
     */
     public void SetupTreeView() 
     {
-        RowDefinitionCollection Rows = new();
-        RowDefinition rd1 = new();
-        // rd1.Height = new GridLength(TreeHeight, GridUnitType.Absolute);
-        rd1.Height = GridLength.Auto;
-        Rows.Add(rd1);
-        RowDefinition rd2 = new();
-        // rd2.Height = new GridLength(200, GridUnitType.Absolute);
-        rd2.Height = GridLength.Auto;
-        Rows.Add(rd2);
-        this.RowDefinitions = Rows;
-
-        Grid g1 = new();
-        this.Add(g1);
-        this.SetRow(g1, 0);
-        g1.IsVisible = false;
-
-        Grid g2 = new();
-        this.Add(g2);
-        this.SetRow(g2, 1);
-
-        ColumnDefinitionCollection Columns = new();
-
-        ColumnDefinition cd1 = new();
-        cd1.Width = new GridLength(0, GridUnitType.Absolute);
-        Columns.Add(cd1);
-        ColumnDefinition cd2 = new();
-        cd2.Width = GridLength.Auto;
-        Columns.Add(cd2);
-        g1.ColumnDefinitions = Columns;
-        g1.VerticalOptions = LayoutOptions.Start;
-
-        Grid g3 = new();
-        g3.WidthRequest = 20;
-        g1.Add(g3);
-        g1.SetColumn(g3, 0);
-
-        Grid g4 = new();
-        g1.Add(g4);
-        g1.SetColumn(g4, 1);
-
-        Button b1 = new();
-        List<string> s1 = new();
-        s1.Add("Button_NoBackground_NoBorder");
-        b1.StyleClass = s1;
-        b1.Text = FaSolid.CaretRight;
-        b1.FontFamily = "Fa-Solid";
-        b1.Clicked += ToggleTreeView;
-        b1.WidthRequest = 20;
-        ToggleButton = b1;
-        g3.Add(b1);
-        b1.SetCursorHand();
-        /*
-
-        var touchBehaviorb1 = new TouchBehavior
+        try
         {
-            DefaultAnimationDuration = 250,
-            DefaultAnimationEasing = Easing.CubicInOut,
-            PressedOpacity = 0.6,
-            PressedScale = 0.8
-        };
-        b1.Behaviors.Add(touchBehaviorb1);
-        */
-        Label l1 = new();
-        l1.Text = "Labeltext";
-        List<string> styleClasses = new();
-        styleClasses.Add("Label_Normal");
-        l1.StyleClass = styleClasses;
-        l1.VerticalOptions = LayoutOptions.Start;
-        l1.HorizontalOptions = LayoutOptions.Start;
-        l1.HorizontalTextAlignment = TextAlignment.Start;
-        l1.LineBreakMode = LineBreakMode.NoWrap;
-        // l1.Command = ClickedEventCommand;
-        l1.SetCursorHand();
-        Thickness m = new(0, GlobalSpecs.CurrentGlobalSpecs!.GetClickMarginPixel(), 0, GlobalSpecs.CurrentGlobalSpecs.GetClickMarginPixel());
-        l1.Margin = m;
-        g4.Add(l1);
-        TextLabel = l1;
-        TapGestureRecognizer tgr = new();
-        tgr.Command = ClickedEventCommand;
-        l1.GestureRecognizers.Add(tgr);
-        /*
-        var touchBehavior = new TouchBehavior
+            RowDefinitionCollection Rows = new();
+            RowDefinition rd1 = new();
+            // rd1.Height = new GridLength(TreeHeight, GridUnitType.Absolute);
+            rd1.Height = GridLength.Auto;
+            Rows.Add(rd1);
+            RowDefinition rd2 = new();
+            // rd2.Height = new GridLength(200, GridUnitType.Absolute);
+            rd2.Height = GridLength.Auto;
+            Rows.Add(rd2);
+            this.RowDefinitions = Rows;
+
+            Grid g1 = UIElement.NewGrid();
+            this.Add(g1);
+            this.SetRow(g1, 0);
+            g1.IsVisible = false;
+
+            Grid g2 = UIElement.NewGrid();
+            this.Add(g2);
+            this.SetRow(g2, 1);
+
+            ColumnDefinitionCollection Columns = new();
+
+            ColumnDefinition cd1 = new();
+            cd1.Width = new GridLength(0, GridUnitType.Absolute);
+            Columns.Add(cd1);
+            ColumnDefinition cd2 = new();
+            cd2.Width = GridLength.Auto;
+            Columns.Add(cd2);
+            g1.ColumnDefinitions = Columns;
+            g1.VerticalOptions = LayoutOptions.Start;
+
+            Grid g3 = UIElement.NewGrid();
+            g3.WidthRequest = 20;
+            g1.Add(g3);
+            g1.SetColumn(g3, 0);
+
+            Grid g4 = UIElement.NewGrid();
+            g1.Add(g4);
+            g1.SetColumn(g4, 1);
+
+            Button b1 = UIElement.NewButton();
+            b1.BackgroundColor = Colors.Green;
+            b1.StyleClass = UIElement.Get_Button_NoBackground_NoBorder();  
+            b1.BackgroundColor = Colors.Red;
+            b1.Text = FaSolid.CaretRight;
+            b1.FontFamily = "Fa-Solid";
+            b1.Clicked += ToggleTreeView;
+            b1.WidthRequest = 20;
+            ToggleButton = b1;
+            g3.Add(b1);
+            b1.SetCursorHand();
+            b1.Opacity = 1;
+            b1.BorderWidth = 0;
+            /*
+
+            var touchBehaviorb1 = new TouchBehavior
+            {
+                DefaultAnimationDuration = 250,
+                DefaultAnimationEasing = Easing.CubicInOut,
+                PressedOpacity = 0.6,
+                PressedScale = 0.8
+            };
+            b1.Behaviors.Add(touchBehaviorb1);
+            */
+            Label l1 = UIElement.NewLabel();
+            l1.Text = "Labeltext";
+            l1.StyleClass = UIElement.Get_Label_Normal(); 
+            l1.VerticalOptions = LayoutOptions.Start;
+            l1.HorizontalOptions = LayoutOptions.Start;
+            l1.HorizontalTextAlignment = TextAlignment.Start;
+            l1.LineBreakMode = LineBreakMode.NoWrap;
+            // l1.Command = ClickedEventCommand;
+            l1.SetCursorHand();
+            Thickness m = new(0, GlobalSpecs.CurrentGlobalSpecs!.GetClickMarginPixel(), 0, GlobalSpecs.CurrentGlobalSpecs.GetClickMarginPixel());
+            l1.Margin = m;
+            g4.Add(l1);
+            TextLabel = l1;
+            TapGestureRecognizer tgr = new();
+            tgr.Command = ClickedEventCommand;
+            l1.GestureRecognizers.Add(tgr);
+            l1.Opacity = 1;
+            l1.SetValue(Label.OpacityProperty, 1.0f);
+            l1.TextColor = GlobalSpecs.CurrentGlobalSpecs.GetCurrentTheme().Col_FG;
+
+            /*
+            var touchBehavior = new TouchBehavior
+            {
+                DefaultAnimationDuration = 250,
+                DefaultAnimationEasing = Easing.CubicInOut,
+                PressedOpacity = 0.6,
+                PressedScale = 0.8
+            };
+            l1.Behaviors.Add( touchBehavior);
+            */
+            // CommunityToolkit.Maui.Behaviors.
+
+            Columns.Clear();
+            ColumnDefinition cd3 = new();
+            cd3.Width = new GridLength(20, GridUnitType.Absolute);
+            Columns.Add(cd3);
+
+            ColumnDefinition cd4 = new();
+            cd4.Width = new GridLength(5, GridUnitType.Star);
+            Columns.Add(cd4);
+            g2.ColumnDefinitions = Columns;
+
+            Grid g5 = UIElement.NewGrid();
+            g2.Add(g5);
+            g2.SetColumn(g5, 1);
+
+            // CalcToggles();
+
+            ParentSubTree = g2;
+            SubTree = g5;
+        }
+        catch (Exception ex)
         {
-            DefaultAnimationDuration = 250,
-            DefaultAnimationEasing = Easing.CubicInOut,
-            PressedOpacity = 0.6,
-            PressedScale = 0.8
-        };
-        l1.Behaviors.Add( touchBehavior);
-        */
-        // CommunityToolkit.Maui.Behaviors.
-
-        Columns.Clear();
-        ColumnDefinition cd3 = new();
-        cd3.Width = new GridLength(20, GridUnitType.Absolute);
-        Columns.Add(cd3);
-
-        ColumnDefinition cd4 = new();
-        cd4.Width = new GridLength(5, GridUnitType.Star);
-        Columns.Add(cd4);
-        g2.ColumnDefinitions = Columns;
-
-        Grid g5 = new();
-        g2.Add(g5);
-        g2.SetColumn(g5, 1);
-
-        // CalcToggles();
-
-        ParentSubTree = g2;
-        SubTree = g5;
-
+            string s = ex.Message;
+            GlobalData.AddLog("SetupTreeView: " + s, IGlobalData.protMode.crisp);
+        }
         /*
         // RowDefinitions[0].Height = 0f;
         // RowDefinitions[1].Height = GridLength.Auto;
@@ -1133,7 +1548,8 @@ public class TreeViewItem : Grid, INotifyPropertyChanged, IDisposable
         {
             _userDefinedObject = value;
             OnPropertyChanged();
-            ( ClickedEventCommand as Command)!.ChangeCanExecute();
+            if(ClickedEventCommand != null )
+                ( ClickedEventCommand as Command)!.ChangeCanExecute();
         }
     }
     public ObservableCollection<OrderTable>? OrderTable
@@ -1519,11 +1935,11 @@ public class TreeViewItem : Grid, INotifyPropertyChanged, IDisposable
         Rows.Add(rd2);
         this.RowDefinitions = Rows;
 
-        Grid g1 = new();
+        Grid g1 = UIElement.NewGrid();
         this.Add(g1);
         this.SetRow(g1, 0);
 
-        Grid g2 = new();
+        Grid g2 = UIElement.NewGrid();
         this.Add(g2);
         this.SetRow(g2, 1);
 
@@ -1548,10 +1964,8 @@ public class TreeViewItem : Grid, INotifyPropertyChanged, IDisposable
         g1.SetColumn(g4, 1);
         */
 
-        Button b1 = new();
-        List<string> s1 = new();
-        s1.Add("Button_NoBackground_NoBorder");
-        b1.StyleClass = s1;
+        Button b1 = UIElement.NewButton();
+        b1.StyleClass = UIElement.Get_Button_NoBackground_NoBorder(); 
         b1.Text = FaSolid.CaretRight;
         b1.FontFamily = "Fa-Solid";
         b1.Clicked += ToggleTreeView;
@@ -1560,9 +1974,11 @@ public class TreeViewItem : Grid, INotifyPropertyChanged, IDisposable
         ToggleButton = b1;
         g1.SetColumn(b1, 0);
         g1.Add(b1);
+        b1.Opacity = 1;
+        b1.BorderWidth = 0;
 
 
- 
+
         /*
         Button l1 = new();
         l1.Text = "Labeltext";
@@ -1576,11 +1992,9 @@ public class TreeViewItem : Grid, INotifyPropertyChanged, IDisposable
         g1.Add(l1);
         TextLabel = l1;
         */
-        Label l1 = new();
+        Label l1 = UIElement.NewLabel();
         l1.Text = "Labeltext";
-        List<string> styleClasses = new();
-        styleClasses.Add("Label_Normal");
-        l1.StyleClass = styleClasses;
+        l1.StyleClass = UIElement.Get_Label_Normal();
         l1.VerticalOptions = LayoutOptions.Start;
         l1.HorizontalOptions = LayoutOptions.Start;
         l1.HorizontalTextAlignment = TextAlignment.Start;
@@ -1595,6 +2009,10 @@ public class TreeViewItem : Grid, INotifyPropertyChanged, IDisposable
         l1.SetCursorHand();
         Thickness margin = new Thickness(0, GlobalSpecs.CurrentGlobalSpecs!.GetClickMarginPixel(), 0, GlobalSpecs.CurrentGlobalSpecs.GetClickMarginPixel());
         l1.Margin = margin;
+        l1.Opacity = 1;
+        l1.SetValue( Label.OpacityProperty, 1.0f );
+        l1.TextColor = GlobalSpecs.CurrentGlobalSpecs.GetCurrentTheme().Col_FG;
+
         var touchBehaviorB1 = new TouchBehavior
         {
             HoveredOpacity = 0.7,
@@ -1602,8 +2020,7 @@ public class TreeViewItem : Grid, INotifyPropertyChanged, IDisposable
 
         };
         l1.Behaviors.Add(touchBehaviorB1);
-
-
+        
         Columns.Clear();
         ColumnDefinition cd3 = new();
         cd3.Width = new GridLength(20, GridUnitType.Absolute);
@@ -1614,7 +2031,7 @@ public class TreeViewItem : Grid, INotifyPropertyChanged, IDisposable
         Columns.Add(cd4);
         g2.ColumnDefinitions = Columns;
 
-        Grid g5 = new();
+        Grid g5 = UIElement.NewGrid();
         g2.Add(g5);
         g2.SetColumn(g5, 1);
 
@@ -1696,9 +2113,7 @@ public class TreeViewItem : Grid, INotifyPropertyChanged, IDisposable
         g1.ColumnDefinitions = Columns;
 
         Button b1 = new();
-        List<string> s1 = new();
-        s1.Add("Button_NoBackground_NoBorder");
-        b1.StyleClass = s1;
+        b1.StyleClass = UIElement.Get_Button_NoBackground_NoBorder();
         b1.Text = FaSolid.CaretRight;
         b1.FontFamily = "Fa-Solid";
         b1.Clicked += ToggleTreeView;
@@ -1710,9 +2125,7 @@ public class TreeViewItem : Grid, INotifyPropertyChanged, IDisposable
 
         Label l1 = new();
         l1.Text = ott.Name;
-        List<string> styleClasses = new();
-        styleClasses.Add("Label_Normal");
-        l1.StyleClass = styleClasses;
+        l1.StyleClass = UIElement.Get_Label_Normal();
         l1.VerticalOptions = LayoutOptions.Start;
         l1.HorizontalOptions = LayoutOptions.Start;
         l1.HorizontalTextAlignment = TextAlignment.Start;
@@ -2061,7 +2474,6 @@ public class OrderListView : TreeViewItem, INotifyPropertyChanged
     public void CreateOrderListEntry( OrderTable ot, TreeView tv0, TreeCallback? clickedTree = null, OrderTableCallback? clickedOrderTable = null, object? obj = null)
     {
         Grid g1;
-
         _orderTable = ot;
 
         UserDefinedObject = obj!;

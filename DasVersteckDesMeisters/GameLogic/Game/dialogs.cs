@@ -668,7 +668,7 @@ namespace GameCore
         public bool MagpieDialog_Swap( List<MCMenuEntry> MCMEntry)
         {
             Items.TransferItem(CA.I00_Cheese.ID, CB!.LocType_In_Item, CA.I00_Nullbehaelter2.ID);
-            Items.TransferItem(CA!.I00_Polished_Stone.ID, CB!.LocType_Person, CA.Person_I.ID);
+            Items.TransferItem(CA!.I00_Polished_Stone.ID, CB!.LocType_Person, CA.Person_I!.ID);
             AdvGame!.SetScoreToken(CA!.Score_Polierter_Stein);
             return true;
         }
@@ -760,7 +760,7 @@ namespace GameCore
         }
         public bool ParrotDialog_Fliegen(List<MCMenuEntry> MCMEntry)
         {
-            Items.TransferItem(CA.I00_Lightless_Stone.ID, CB!.LocType_Person, CA.Person_Parrot.ID);
+            Items.TransferItem(CA.I00_Lightless_Stone.ID, CB!.LocType_Person, CA.Person_Parrot!.ID);
 
             return true;
         }

@@ -1897,6 +1897,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                     {
                         tvOrder = CreateOrderTree();
                         TreeView.EmptyTreeViewItem(tp0.TabPanelGrid!.Children[0]);
+                        // tp0.TabPanelGrid!.Children[0] = null;
                         tp0.TabPanelGrid!.Children[0] = tvOrder;
                         tvOrder.CalcToggles();
                         OrderTreeHasInitialized = true;
@@ -1907,6 +1908,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                         tvOrder = CreateItemLocTree();
                         TreeView.EmptyTreeViewItem(tp1.TabPanelGrid!.Children[0]);
 
+                        // tp1.TabPanelGrid!.Children[0] = null;
                         tp1.TabPanelGrid!.Children[0] = tvOrder;
                         tvOrder.CalcToggles();
                         ItemLocTreeHasInitialized = true;
@@ -1916,6 +1918,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                     {
                         tvOrder = CreateItemInvTree();
                         TreeView.EmptyTreeViewItem( tp2.TabPanelGrid!.Children[0]);
+                        // tp2.TabPanelGrid!.Children[0] = null;
                         tp2.TabPanelGrid!.Children[0] = tvOrder;
                         tvOrder.CalcToggles();
                         ItemInvTreeHasInitialized = true;
@@ -1937,6 +1940,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                     {
                         tvOrder = CreateOrderTree();
                         TreeView.EmptyTreeViewItem( tp0.TabPanelGrid!.Children[0]);
+                        // tp0.TabPanelGrid!.Children[0] = null;
                         tp0.TabPanelGrid!.Children[0] = tvOrder;
                         tvOrder.CalcToggles();
                         OrderTreeHasInitialized = true;
@@ -1947,6 +1951,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                     {
                         tvOrder = CreateItemLocTree();
                         TreeView.EmptyTreeViewItem(tp1.TabPanelGrid!.Children[0]);
+                        // tp1.TabPanelGrid!.Children[0] = null;
                         tp1.TabPanelGrid!.Children[0] = tvOrder;
                         tvOrder.CalcToggles();
                         ItemLocTreeHasInitialized = true;
@@ -1956,6 +1961,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                     {
                         tvOrder = CreateItemInvTree();
                         TreeView.EmptyTreeViewItem( tp2.TabPanelGrid!.Children[0]);
+                        // tp2.TabPanelGrid!.Children[0] = null;
                         tp2.TabPanelGrid!.Children[0] = tvOrder;
                         tvOrder.CalcToggles();
                         ItemInvTreeHasInitialized = true;
@@ -1977,6 +1983,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                         if (tvOrder != null && tp0.TabPanelGrid!.Children.Count > 0)
                         {
                             TreeView.EmptyTreeViewItem(tp0.TabPanelGrid!.Children[0]);
+                            // tp0.TabPanelGrid!.Children[0] = null;
                             tp0.TabPanelGrid!.Children[0] = tvOrder;
                             tvOrder.CalcToggles();
                         }
@@ -1994,6 +2001,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                         {
                             // tp1.TabPanelGrid!.Children[0] = null;
                             TreeView.EmptyTreeViewItem( tp1.TabPanelGrid!.Children[0]);
+                            // tp1.TabPanelGrid!.Children[0] = null;
                             tp1.TabPanelGrid!.Children[0] = tvOrder;
                             tvOrder.CalcToggles();
                         }
@@ -2010,6 +2018,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                         if (tvOrder != null && tp2.TabPanelGrid!.Children.Count > 0)
                         {
                             TreeView.EmptyTreeViewItem( tp2.TabPanelGrid!.Children[0]);
+                            // tp2.TabPanelGrid!.Children[0] = null;
                             tp2.TabPanelGrid!.Children[0] = tvOrder;
                             tvOrder.CalcToggles();
                         }
@@ -2037,6 +2046,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                         if (tvOrder != null)
                         {
                             TreeView.EmptyTreeViewItem( tp0.TabPanelGrid!.Children[0]);
+                            // tp0.TabPanelGrid!.Children[0] = null;
                             tp0.TabPanelGrid!.Children[0] = tvOrder;
                             tvOrder.CalcToggles();
                         }
@@ -2054,6 +2064,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                         {
                             TreeView.EmptyTreeViewItem( tp1.TabPanelGrid!.Children[0]);
 
+                            // tp1.TabPanelGrid!.Children[0] = null;
                             tp1.TabPanelGrid!.Children[0] = tvOrder;
                             tvOrder.CalcToggles();
                         }
@@ -2070,6 +2081,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                         if (tvOrder != null)
                         {
                             TreeView.EmptyTreeViewItem( tp2.TabPanelGrid!.Children[0]);
+                            // tp2.TabPanelGrid!.Children[0] = null;
                             tp2.TabPanelGrid!.Children[0] = tvOrder;
                             tvOrder.CalcToggles();
                         }
@@ -2698,6 +2710,8 @@ public partial class GamePage : ContentPage, IMenuExtension
 
     public static void EmptyEmptyTreeViewItem(EmptyTreeViewItem tv)
     {
+        if (tv == null) return;
+
         try
         {
             if (tv is EmptyTreeViewItem )
@@ -2747,7 +2761,7 @@ public partial class GamePage : ContentPage, IMenuExtension
 
     TreeViewItem AddTreeViewItem( TreeViewItem tv, string? Name, string? CallString )
     {
-        TreeViewItem tv1 = new();
+        TreeViewItem tv1 = UIElement.NewTreeViewItem();
         tv1.SetupTreeViewItem();
         tv1.UserDefinedObject = CallString!;
         tv1.Text = Name!;
@@ -2790,7 +2804,7 @@ public partial class GamePage : ContentPage, IMenuExtension
   
     TreeView CreateItemLocTree()
     {
-        TreeView tv = new();
+        TreeView tv = UIElement.NewTreeView();
         tv.SetupTreeView();
         tv.CurrentTreeState = TreeViewItem.TreeState.open;
 
@@ -2827,7 +2841,7 @@ public partial class GamePage : ContentPage, IMenuExtension
 
         
         // Die Background-Items werden alle nachgelagert addiert
-        TreeViewItem BackgroundChild = new TreeViewItem();
+        TreeViewItem BackgroundChild = UIElement.NewTreeViewItem();
         BackgroundChild.SetupTreeViewItem();
 
         foreach (Item item in GD.Adventure!.Items!.List.Values)
@@ -2915,7 +2929,7 @@ public partial class GamePage : ContentPage, IMenuExtension
 
     TreeView CreateItemInvTree()
     {
-        TreeView tv = new();
+        TreeView tv = UIElement.NewTreeView();
         tv.SetupTreeView();
         tv.CurrentTreeState = TreeViewItem.TreeState.open;
 
@@ -2980,7 +2994,7 @@ public partial class GamePage : ContentPage, IMenuExtension
         {
             if ((item.CanPutIn || item.ListInsideItems) && ((item.CanBeClosed == false) || (item.IsClosed == false)) && (item.IsHidden == false) && (item.Active == true) && (item.InvisibleIn == false))
             {
-                TreeViewItem PutInChild = new TreeViewItem();
+                TreeViewItem PutInChild = UIElement.NewTreeViewItem();
                 PutInChild.SetupTreeViewItem();
                 int sysChildren = PutInChild.Children.Count;
 
@@ -3011,7 +3025,7 @@ public partial class GamePage : ContentPage, IMenuExtension
             }
             if ((item.CanPutOn) && (item.InvisibleOn == false))
             {
-                TreeViewItem PutInChild = new TreeViewItem();
+                TreeViewItem PutInChild = UIElement.NewTreeViewItem();
                 PutInChild.SetupTreeViewItem();
                 int sysChildren = PutInChild.Children.Count;
 
@@ -3042,7 +3056,7 @@ public partial class GamePage : ContentPage, IMenuExtension
            }
             if ((item.CanPutBehind) && (item.InvisibleBehind == false))
             {
-                TreeViewItem PutInChild = new TreeViewItem();
+                TreeViewItem PutInChild = UIElement.NewTreeViewItem();
                 PutInChild.SetupTreeViewItem();
                 int sysChildren = PutInChild.Children.Count;
 
@@ -3072,7 +3086,7 @@ public partial class GamePage : ContentPage, IMenuExtension
             }
             if ((item.CanPutBelow) && (item.InvisibleBelow == false))
             {
-                TreeViewItem PutInChild = new TreeViewItem();
+                TreeViewItem PutInChild = UIElement.NewTreeViewItem();
                 PutInChild.SetupTreeViewItem();
                 int sysChildren = PutInChild.Children.Count;
 
@@ -3106,7 +3120,7 @@ public partial class GamePage : ContentPage, IMenuExtension
         }
         if ((item!.CanPutBeside) && (item!.InvisibleBeside == false))
         {
-            TreeViewItem PutInChild = new TreeViewItem();
+            TreeViewItem PutInChild = UIElement.NewTreeViewItem();
             PutInChild.SetupTreeViewItem();
             int sysChildren = PutInChild.Children.Count;
 
@@ -3142,7 +3156,7 @@ public partial class GamePage : ContentPage, IMenuExtension
         {
             if ((person.CanPutIn) && ((person.CanBeClosed == false) || (person.IsClosed == false)) && (person.Active == true))
             {
-                TreeViewItem PutInChild = new TreeViewItem();
+                TreeViewItem PutInChild = UIElement.NewTreeViewItem();
                 PutInChild.SetupTreeViewItem();
 
                 foreach (Item item2 in GD.Adventure!.Items!.List!.Values)
@@ -3360,7 +3374,7 @@ public partial class GamePage : ContentPage, IMenuExtension
 
     TreeView CreateOrderTree()
     {
-        TreeView tv = new();
+        TreeView tv = UIElement.NewTreeView();
         tv.SetupTreeView();
         tv.CurrentTreeState = TreeViewItem.TreeState.open;
 
@@ -4227,9 +4241,7 @@ public partial class GamePage : ContentPage, IMenuExtension
         TreeViewItem? tvi = o as TreeViewItem;
         Label? l1 = tvi!.TextLabel;
 
-        List<string> LabelClass = new();
-        LabelClass.Add("Label_Normal_Inactive");
-        l1!.StyleClass = LabelClass;
+        l1!.StyleClass = UIElement.Get_Label_Normal_Inactive();
    }
 
     public void DoSetTextActive(object? o)
@@ -4237,9 +4249,8 @@ public partial class GamePage : ContentPage, IMenuExtension
          TreeViewItem? tvi = (o as TreeViewItem)!;
         Label? l1 = tvi!.TextLabel;
 
-        List<string> LabelClass = new();
-        LabelClass.Add("Label_Normal");
-        l1!.StyleClass = LabelClass;
+        l1!.StyleClass = UIElement.Get_Label_Normal();
+
     }
 
 
@@ -5059,7 +5070,7 @@ public partial class GamePage : ContentPage, IMenuExtension
 
             }
 
-
+            /*
             if (CountDebugLoops < 250)
             {
                 CountDebugLoops++;
@@ -5099,6 +5110,7 @@ public partial class GamePage : ContentPage, IMenuExtension
 
                 GC.Collect();
             }
+            */
         }
         catch( Exception ex)
         {

@@ -1021,8 +1021,8 @@ public class GlobalData : IGlobalData
         // if (FeedbackTextObj.FeedbackModeMC == false && FlushText == false)
         if (true)
         {
-            // if (GD.Highlighting)
-            if (true)
+            if (GlobalData.CurrentGlobalData.Highlighting)
+            // if (true)
             {
                 colorAccentStory = ti.Webcol_FGAccent1;
                 colorAccentLoc = ti.Webcol_FGAccent1;
@@ -1031,7 +1031,6 @@ public class GlobalData : IGlobalData
                 textColorStory = ti.Webcol_FG;
                 textColorLoc = ti.Webcol_FG;
             }
-            /*
             else
             {
                 colorAccentStory = ti.Webcol_FG;
@@ -1041,13 +1040,12 @@ public class GlobalData : IGlobalData
                 textColorStory = ti.Webcol_FG;
                 textColorLoc = ti.Webcol_FG;
             }
-            */
     }
     /* Auskommentiert weil unerreichbar mit obigem if(true)
     else
     {
-        // if (GD.Highlighting)
-        if (true)
+        if (GD.Highlighting)
+        // if (true)
         {
             colorAccentStory = ti.Webcol_FGAccent1;
             colorAccent2Story = ti.Webcol_FGAccent2;

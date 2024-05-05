@@ -534,47 +534,47 @@ public partial class Order: AbstractOrder
     {
         bool success = false;
 
-        if( CA!.Person_I.locationID == CA.L04_Shabby_Little_Chamber)
+        if( CA!.Person_I!.locationID == CA.L04_Shabby_Little_Chamber)
         {
             GoDir(PersonID, Co.DIR_W);
             success = true;
         }
-        else if (CA!.Person_I.locationID == CA.L05_Atrium)
+        else if (CA!.Person_I!.locationID == CA.L05_Atrium)
         {
             GoDir(PersonID, Co.DIR_S);
             success = true;
         }
-        else if (CA!.Person_I.locationID == CA.L09_Library)
+        else if (CA!.Person_I!.locationID == CA.L09_Library)
         {
             GoDir(PersonID, Co.DIR_E);
             success = true;
         }
-        else if (CA!.Person_I.locationID == CA.L08_Laundry_Room)
+        else if (CA!.Person_I!.locationID == CA.L08_Laundry_Room)
         {
             GoDir(PersonID, Co.DIR_E);
             success = true;
         }
-        else if (CA!.Person_I.locationID == CA.L10_Laboratory)
+        else if (CA!.Person_I!.locationID == CA.L10_Laboratory)
         {
             GoDir(PersonID, Co.DIR_W);
             success = true;
         }
-        else if (CA!.Person_I.locationID == CA.L11_Storage_Room)
+        else if (CA!.Person_I!.locationID == CA.L11_Storage_Room)
         {
             GoDir(PersonID, Co.DIR_N);
             success = true;
         }
-        else if (CA!.Person_I.locationID == CA.L12_Sleeping_Room)
+        else if (CA!.Person_I!.locationID == CA.L12_Sleeping_Room)
         {
             GoDir(PersonID, Co.DIR_N);
             success = true;
         }
-        else if (CA!.Person_I.locationID == CA.L13_Kitchen)
+        else if (CA!.Person_I!.locationID == CA.L13_Kitchen)
         {
             GoDir(PersonID, Co.DIR_W);
             success = true;
         }
-        else if (CA!.Person_I.locationID == CA.L14_Bathroom)
+        else if (CA!.Person_I!.locationID == CA.L14_Bathroom)
         {
             GoDir(PersonID, Co.DIR_E);
             success = true;

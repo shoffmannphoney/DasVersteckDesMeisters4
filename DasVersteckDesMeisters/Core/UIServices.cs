@@ -2097,7 +2097,7 @@ public class MCMenuView
             }
             // Behaviors löschen
 
-            VerticalStackLayout vsl = (_mcGrid.Children[0] as ScrollView).Content as VerticalStackLayout; 
+            VerticalStackLayout? vsl = (_mcGrid.Children[0] as ScrollView).Content as VerticalStackLayout; 
 
             foreach (IView iv in vsl.Children)
             {
@@ -2113,7 +2113,7 @@ public class MCMenuView
 
                     if ((iv as Grid).Children.Count > 1)
                     {
-                        Label l2 = (iv as Grid).Children[1] as Label;
+                        Label? l2 = (iv as Grid).Children[1] as Label;
 
                         while (l2.Behaviors.Count > 0)
                         {
@@ -2825,8 +2825,10 @@ public class Scroller : IScroller
         }
     }
 
+    int CountFlushes = 0;
     public bool ResetWait()
     {
+        CountFlushes = 0;
         UIS!.BrowserRefreshOngoing = false;
         FlushJavaScript();
         InqScrollingAreaAsync().GetAwaiter();
@@ -3053,22 +3055,49 @@ public class Scroller : IScroller
         ctInqScrollArea = 19;
     }
 
+    int FlushJS = 0;
     public void FlushJavaScript()
     {
-        if (UIS!.BrowserRefreshOngoing == false)
+        if( FlushJS > 0)
+        // if (MainThread.IsMainThread == false)
         {
-            while (jsCallbacks.Count > 0)
-            {
-                int len = 100;
-                if(jsCallbacks[0].Length < 100 )
-                    len = jsCallbacks[0].Length;
-
-                GlobalData.AddLog( "Flushed: " + jsCallbacks[0].Substring( 0, len), IGlobalData.protMode.crisp);
-                UIS!.ExternalGameOut!.EvaluateJavaScriptAsync(jsCallbacks[0]!);
-                jsCallbacks.RemoveAt(0);
-            }
+            return;
         }
 
+        FlushJS++;
+
+
+        try
+        {
+            if (UIS!.BrowserRefreshOngoing == false)
+            {
+                if (jsCallbacks.Count > 1)
+                {
+                }
+
+                while (jsCallbacks.Count > 0)
+                {
+                    int len = 100;
+                    if (jsCallbacks[0].Length < 100)
+                        len = jsCallbacks[0].Length;
+
+                    GlobalData.AddLog("Flushed: " + jsCallbacks[0].Substring(0, len), IGlobalData.protMode.crisp);
+
+                    string s1 = (string) jsCallbacks[0].Clone();
+                    var task = Task.Run(async () => await UIS!.ExternalGameOut!.EvaluateJavaScriptAsync(s1!));
+                    // task.Wait();
+                    // UIS!.ExternalGameOut!.EvaluateJavaScriptAsync(jsCallbacks[0]!);
+                    GlobalData.AddLog("Remove JS Ein", IGlobalData.protMode.crisp);
+                    jsCallbacks.RemoveAt(0);
+                    GlobalData.AddLog("Remove JS Aus", IGlobalData.protMode.crisp);
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            GlobalData.AddLog("FlushJavaScript: " + e.Message, IGlobalData.protMode.crisp);
+        }
+        FlushJS--;
     }
 
     List<string> jsCallbacks = null;
@@ -3339,7 +3368,7 @@ public class Scroller : IScroller
                 double viewHeight;
                 if (Double.TryParse(s, ifp, out viewHeight) == true)
                 {
-                    UIS!.Scr.HTMLViewHeight = ypos;
+                    UIS!.Scr.HTMLViewHeight = viewHeight;
                 }
                 else
                 {

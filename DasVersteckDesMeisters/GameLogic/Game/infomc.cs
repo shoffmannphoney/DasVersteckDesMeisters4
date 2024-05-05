@@ -390,7 +390,7 @@ namespace GameCore
                 cFollower.Add(ix);
                 mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Neues_Pulver_Wozu, ix, CB!.MCE_Choice1, true, true));
             }
-            if (CA.Person_I.locationID == CA.L15_Nowhere )
+            if (CA.Person_I!.locationID == CA.L15_Nowhere )
             {
                 ix = CalcIx(CA.imc_Ende );
                 cFollower.Add(ix);
