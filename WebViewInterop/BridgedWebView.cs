@@ -21,6 +21,8 @@ public delegate bool DelInt(int val);
 
 public class BridgedWebView : View, IBridgedWebView
 {
+    public static DelVoidString? _initProtocol = null;
+    public static DelVoidStringProtMode? _addProtocol = null;
     public string? LatestString { get; set; } = null;
 
     /*
@@ -35,25 +37,31 @@ public class BridgedWebView : View, IBridgedWebView
         
     }
     */
-    public async Task<string> EvaluateJavaScriptAsync(string script)
+      public async Task<string?> EvaluateJavaScriptAsync(string script)
     {
-        var handler =  this.Handler;
-        try
+        string? result = null;
+        await MainThread.InvokeOnMainThreadAsync( async () =>
         {
-            while( handler == null )
+            var handler = this.Handler;
+            try
             {
-                await Task.Delay(100);
-                handler = this.Handler;
-            }
-            var result = await (handler as BridgedWebViewHandler)!.GetBridge()!.EvaluateJavascriptAsync(script);
+                while (handler == null)
+                {
+                    await Task.Delay(100);
+                    handler = this.Handler;
+                }
+                result = await (handler as BridgedWebViewHandler)!.GetBridge()!.EvaluateJavascriptAsync(script);
 
-            return result;
-        }
-        catch (Exception ex)
-        {
-            
-        }
-        return null;
+                // return result;
+            }
+            catch (Exception ex)
+            {
+                if( _addProtocol != null )
+                     _addProtocol("Execution JS failed: " + ex.Message.ToString(), protMode.crisp);
+
+            }
+        });
+        return result;
     }
 
     public void NavigateToString(string htmlPage)
@@ -77,6 +85,8 @@ public class BridgedWebView : View, IBridgedWebView
         catch (Exception ex)
         {
 
+            if (_addProtocol != null)
+                _addProtocol("NavigateToString failed: " + ex.Message.ToString(), protMode.crisp);
         }
     }
 
@@ -101,6 +111,8 @@ public class BridgedWebView : View, IBridgedWebView
         }
         catch (Exception ex)
         {
+            if (_addProtocol != null)
+                _addProtocol("InqCBFullyLoaded failed: " + ex.Message.ToString(), protMode.crisp);
             return false;
         }
     }
@@ -110,6 +122,9 @@ public class BridgedWebView : View, IBridgedWebView
 
         try
         {
+            _initProtocol = ds1;
+            _addProtocol = dspm1;
+
 #if ANDROID
             Platform.CurrentActivity!.RunOnUiThread(() =>
             {
@@ -150,6 +165,8 @@ public class BridgedWebView : View, IBridgedWebView
         catch (Exception ex)
         {
 
+            if (_addProtocol != null)
+                _addProtocol("SetCBFullyLoaded failed: " + ex.Message.ToString(), protMode.crisp);
         }
     }
     public EventHandler<WebNavigatingEventArgs>? Navigating { get; set; }
@@ -171,6 +188,8 @@ public class BridgedWebView : View, IBridgedWebView
         catch (Exception ex)
         {
 
+            if (_addProtocol != null)
+                _addProtocol("OnNavigating failed: " + ex.Message.ToString(), protMode.crisp);
         }
     }
     protected virtual void OnNavigated(WebNavigatedEventArgs e)
@@ -187,6 +206,8 @@ public class BridgedWebView : View, IBridgedWebView
         }
         catch (Exception ex)
         {
+            if (_addProtocol != null)
+                _addProtocol("OnNavigated failed: " + ex.Message.ToString(), protMode.crisp);
 
         }
     }

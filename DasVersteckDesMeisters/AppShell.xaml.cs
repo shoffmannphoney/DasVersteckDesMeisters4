@@ -592,7 +592,7 @@ public class TreeView : TreeViewItem
                     }
                     else if (iv is Grid)
                     {
-                        Grid tvi = iv as Grid;
+                        Grid? tvi = iv as Grid;
 
                         EmptyTreeViewItem(tvi);
 

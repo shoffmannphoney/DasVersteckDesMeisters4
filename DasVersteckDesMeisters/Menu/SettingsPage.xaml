@@ -67,7 +67,7 @@
                                     <RowDefinition Height="90"/>
                                     <RowDefinition Height="240"/>
                                     <RowDefinition Height="90"/>
-                                    <RowDefinition Height="560"/>
+                                    <RowDefinition Height="620"/>
                                     <RowDefinition Height="90"/>
                                     <RowDefinition Height="420"/>
                                     <RowDefinition Height="90"/>

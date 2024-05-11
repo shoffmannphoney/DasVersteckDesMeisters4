@@ -1074,6 +1074,12 @@ public partial class Adv : AdvBase
         PList.AddItem();
         PLL.Add(new ParseLine(CA!.PL_Throw, PList, Orders!.Throw));
 
+        // Wirf P solo
+        PList = new ParseTokenList();
+        PList.AddVerb(CA!.Verb_Throw);
+        PList.AddPerson();
+        PLL.Add(new ParseLine(CA!.PL_Throw, PList, Orders!.ThrowPSolo));
+
         // Wirf P in
         PList = new ParseTokenList();
         PList.AddVerb(CA!.Verb_Throw);
@@ -5418,6 +5424,12 @@ public partial class Adv : AdvBase
         PList = new ParseTokenList();
         PList.AddVerb(CB!.Verb_ProtOff);
         PLLEng.Add(new ParseLine(CB!.PL_Prot_Off, PList, Orders!.ProtOff));
+
+        // Wirf P solo
+        PList = new ParseTokenList();
+        PList.AddVerb(CA!.Verb_Throw);
+        PList.AddPerson();
+        PLLEng.Add(new ParseLine(CA!.PL_Throw, PList, Orders!.ThrowPSolo));
 
         // Wirf P in
         PList = new ParseTokenList();

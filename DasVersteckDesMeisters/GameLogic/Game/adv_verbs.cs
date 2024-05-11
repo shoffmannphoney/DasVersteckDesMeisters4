@@ -607,6 +607,7 @@ public partial class Adv: AdvBase
         Verbs.AddLocaLoca( loca.AdvBase_InitializeGame_14157, CB!.Verb_U.ID, "AdvBase_InitializeGame_14157");
         Verbs.AddLocaLoca( loca.AdvBase_InitializeGame_14158, CB!.Verb_U.ID, "AdvBase_InitializeGame_14158");
         Verbs.AddLocaLoca( loca.AdvBase_InitializeGame_14159, CB!.Verb_U.ID, "AdvBase_InitializeGame_14159");
+        Verbs.AddLocaLoca(loca.Verb_Up, CB!.Verb_U.ID, "Verb_Up");
 
         CB!.Verb_D = Verbs.AddLocaLoca( loca.AdvBase_InitializeGame_14160, "AdvBase_InitializeGame_14160");
         Verbs.AddLocaLoca( loca.AdvBase_InitializeGame_14161, CB!.Verb_D.ID, "AdvBase_InitializeGame_14161");

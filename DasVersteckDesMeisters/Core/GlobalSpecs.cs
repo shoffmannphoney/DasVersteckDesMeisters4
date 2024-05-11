@@ -1679,6 +1679,26 @@ public class GlobalSpecs : IGlobalSpecs
                                     Webcol_FGAccent2 = "darkgreen",
                                     Webcol_BGInputline = "#aacae5"
                                   },
+                    new ThemeInfo { Id = 9, Name = "Theme I",
+                                    Col_BG = BrushFromString( "#f2ede1" )!,
+                                    Col_FG = BrushFromString( "#00000a" )!,
+                                    Col_BGBG = BrushFromString( "#fffff4" )!,
+
+                                    Col_BGMC = BrushFromString( "#fffff4" )!,
+                                    Col_FGMC = BrushFromString( "#00000a" )!,
+                                    Col_BGInactive = BrushFromString( "#dad5cb" )!,
+                                    Col_FGInactive = BrushFromString( "#00000a" )!,
+                                    Col_BGInputline= BrushFromString( "#fffff4" )!,
+
+                                    Webcol_BGBG = "#fffff4",
+                                    Webcol_BG = "#f2ede1",
+                                    Webcol_FG = "#00000a",
+                                    Webcol_BGInactive = "#dad5cb",
+                                    Webcol_FGInactive = "#00000a",
+                                    Webcol_FGAccent1 = "#797771",
+                                    Webcol_FGAccent2 = "#797771",
+                                    Webcol_BGInputline = "#fffff4"
+                                  },
           };
         foreach (ThemeInfo ti in _themeInfo)
         {

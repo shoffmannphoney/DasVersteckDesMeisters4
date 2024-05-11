@@ -2737,11 +2737,11 @@ public partial class GamePage : ContentPage, IMenuExtension
                 tv2.Children.Clear();
                 if (tv is EmptyTreeView)
                 {
-                    EmptyTreeView tv3 = tv as EmptyTreeView;
+                    EmptyTreeView? tv3 = tv as EmptyTreeView;
                 }
                 else if (tv is EmptyTreeViewItem)
                 {
-                    EmptyTreeViewItem tv3 = tv as EmptyTreeViewItem;
+                    EmptyTreeViewItem? tv3 = tv as EmptyTreeViewItem;
                 }
 
             }

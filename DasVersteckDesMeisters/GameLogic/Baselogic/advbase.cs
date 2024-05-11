@@ -716,6 +716,53 @@ namespace GameCore
                             if (found) break;
                         }
                     }
+                    else if (SubString(Description, i, 8) == "<Person:")
+                    {
+                        int l;
+                        for (l = i + 8; l < Description.Length; l++)
+                        {
+                            if (Description[l] == '>')
+                                break;
+                        }
+                        int personID = Int32.Parse(Description.Substring(i + 8, l - i - 8));
+                        for (k = l + 1; k < Description.Length; k++)
+                        {
+                            if ((Description[k] == '<') && (Description[k + 1] == '/') && (Description[k + 2] == 'P'))
+                            {
+                                // string ItemName = GetLocName(Description.Substring(i + 12, k - i - 12));
+                                string PersonName = GetConvertedText(Description.Substring(l + 1, k - l - 1));
+
+                                i = k + 8;
+                                // Ignores: 001
+                                // zwString.Append( "<a style=\"cursor:pointer\" class=\"class1\" onclick=\"Test22(1)\">" + ItemName + "</a>");
+#if CHROMIUM
+                                // Noloca: 002
+                                string scr = System.Web.HttpUtility.HtmlEncode("boundAsync.JSCallback(\"Item: " + $"{itemID:00000}\");");
+                                // Ignores: 004
+                                // Noloca: 004
+                                zwString.Append("<a style='cursor:pointer' class='class1' onclick='" + scr + "'>" + ItemName + "</a>");
+                                // zwString.Append( "<a style=\"cursor:pointer\" class=\"class1\" onclick=\"boundAsync.JSCallback(\"Item: " + $"{itemID:00000}" + "\");\">" + ItemName + "</a>");
+#elif MAUI
+                                // Noloca: 002
+                                string scr = System.Web.HttpUtility.HtmlEncode("window.location.href = 'https://defineobject.Person/" + $"{personID:00000}';");
+                                // Ignores: 004
+                                // Noloca: 004
+                                zwString.Append("<a style='cursor:pointer' class='class1' onclick='" + scr + "'>" + PersonName + "</a>");
+                                // zwString.Append( "<a style=\"cursor:pointer\" class=\"class1\" onclick=\"boundAsync.JSCallback(\"Item: " + $"{itemID:00000}" + "\");\">" + ItemName + "</a>");
+#else
+                                // Noloca: 002
+                               zwString.Append( "<a style=\"cursor:pointer\" class=\"class1\" onclick=\"window.external.JSCallback('Item: " + $"{personID:00000}');\"></a>");
+#endif
+                                // CEFTEST
+                                // zwString.Append( "<a style=\"cursor:pointer\" class=\"class1\" onclick=\"alert('Huhu', 'Schubidu');\">" + ItemName + "</a>");
+                                // zwString = zwString + "<a style=\"cursor:pointer\" class=\"class1\" onclick=\"window.external.JSCallback('Item: " + $"{itemID:00000}" + "');\">" + ItemName + "</a>";
+                                // zwString = zwString + "<a href=\"https:www.spiegel.de\" class=\"class1\">Link</a>";
+                                // ZwString = ZwString + "<a href=\"#\" onclick=\"window.clipboardData.setData( 'Text', 'Item: " + $"{itemID:00000}" + "' );\">" + ItemName + "</a>";
+                                found = true;
+                            }
+                            if (found) break;
+                        }
+                    }
                     // Noloca: 001
                     else if (SubString(Description, i, 5) == "<Dir:")
                     {
@@ -1485,8 +1532,11 @@ namespace GameCore
                 {
                     string s = UIS!.StoryTextObj.BufferedInput;
                     UIS!.StoryTextObj.BufferedInput = null;
+
+
                     StoryOutput(locationID, PersonID, s);
                 }
+                Text = Helper.Insert(Text);
 
                 GD!.OrderList!.AddOrderText(Helper.StripHTML(Text!));
                 UIS!.TextOutput(A!.GetConvertedText(Text!)!);

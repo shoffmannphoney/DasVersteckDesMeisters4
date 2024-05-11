@@ -73,7 +73,10 @@ public class MainViewModel : BaseViewModel
             rd = new Resources.Styles.ThemeG();
         else if (ti.Id == 8)
             rd = new Resources.Styles.ThemeH();
- 
+        else if (ti.Id == 9)
+            rd = new Resources.Styles.ThemeI();
+
+
         AppShell._mainAppShell!.ChangeTheme(rd);
 
         SelectedTheme = rd;

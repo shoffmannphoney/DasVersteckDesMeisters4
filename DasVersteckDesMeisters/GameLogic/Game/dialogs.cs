@@ -101,7 +101,7 @@ namespace GameCore
         {
             persistentMCMenu!.SetNewStart(11);
 
-            if(persistentMCMenu!.FindID(104)!.Hidden != MCMenuEntry.HiddenType.hidden && CA.Status_Tuer_Schlafkammer_angeschaut.Val > 0 && CA.Status_Tuer_Schlafkammer.Val == 0 )
+            if(persistentMCMenu!.FindID(104)!.Hidden != MCMenuEntry.HiddenType.hidden && CA!.Status_Tuer_Schlafkammer_angeschaut!.Val > 0 && CA.Status_Tuer_Schlafkammer.Val == 0 )
             {
                 persistentMCMenu!.FindID(105)!.Hidden = MCMenuEntry.HiddenType.visible;
 

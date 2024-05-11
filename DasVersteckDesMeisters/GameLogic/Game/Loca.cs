@@ -11069,9 +11069,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Wie sollte [Il1,Akk] mit [Pl2,Nom] benutzt werden?";
+                return "Wie sollte [Il1,Akk] mit [Pl2,Dat] benutzt werden?";
             else
-                return "How should [Il1,Akk] be used with [Pl2,Nom]?";
+                return "How should [Il1,Akk] be used with [Pl2,Dat]?";
         }
     }
     public static string UsePW_Fail
@@ -11289,9 +11289,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Nach reiflicher Überlegung fiel [RP:1,Dat] doch kein guter Grund ein, [Il2,Nom] nach [Il3,Dat] zu werfen.";
+                return "Nach reiflicher Überlegung fiel [RP:1,Dat] doch kein guter Grund ein, [Il2,Nom] nach [Il3,Akk] zu werfen.";
             else
-                return "After careful consideration, [RP:1,Dat] could not think of a good reason to throw [Il2,Nom] at [Il3,Dat] after all.";
+                return "After careful consideration, [RP:1,Dat] could not think of a good reason to throw [Il2,Nom] at [Il3,Akk] after all.";
         }
     }
     public static string Order_ThrowP_I00_Golfball_1552
@@ -61236,9 +61236,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "[Plv1,bitten,Akk] [Pl2,Nom] um [Il3,Dat].";
+                return "[Plv1,bitten,Akk] [Pl2,Nom] um [Il3,Akk].";
             else
-                return "[Plv1,bitten,Akk] [Pl2,Nom] for [Il3,Dat].";
+                return "[Plv1,bitten,Akk] [Pl2,Nom] for [Il3,Akk].";
         }
     }
     public static string Order_PleaFromP_Person_Everyone_13759
@@ -61276,9 +61276,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "[Plv1,fordern,Akk] von [Pl2,Nom] [Il3,Dat].";
+                return "[Plv1,fordern,Akk] von [Pl2,Nom] [Il3,Akk].";
             else
-                return "[Plv1,fordern,Akk] from [Pl2,Nom] [Il3,Dat].";
+                return "[Plv1,fordern,Akk] from [Pl2,Nom] [Il3,Akk].";
         }
     }
     public static string Order_DemandFromP_Person_Everyone_13763
@@ -63286,9 +63286,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "<i>[Plv1,legen,Akk] [Il2,Nom] unter [Il3,Dat].</i>";
+                return "<i>[Plv1,legen,Akk] [Il2,Nom] unter [Il3,Akk].</i>";
             else
-                return "<i>[Plv1,legen,Akk] [Il2,Nom] under [Il3,Dat].</i>";
+                return "<i>[Plv1,legen,Akk] [Il2,Nom] under [Il3,Akk].</i>";
         }
     }
     public static string OrderFeedback_PlaceUnder_Person_Everyone_13959
@@ -63466,9 +63466,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "<i>[Plv1,legen,Akk] [Il2,Nom] hinter [Il3,Dat] ab.</i>";
+                return "<i>[Plv1,legen,Akk] [Il2,Nom] hinter [Il3,Akk] ab.</i>";
             else
-                return "<i>[Plv1,legen,Akk] [Il2,Nom] after [Il3,Dat] ab.</i>";
+                return "<i>[Plv1,legen,Akk] [Il2,Nom] after [Il3,Akk] ab.</i>";
         }
     }
     public static string OrderFeedback_PlaceBehind_Person_Everyone_13977
@@ -63506,9 +63506,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "<i>[Plv1,legen,Akk] [Il2,Nom] neben [Il3,Dat] ab.</i>";
+                return "<i>[Plv1,legen,Akk] [Il2,Nom] neben [Il3,Akk] ab.</i>";
             else
-                return "<i>[Plv1,legen,Akk] [Il2,Nom] next to [Il3,Dat] ab.</i>";
+                return "<i>[Plv1,legen,Akk] [Il2,Nom] next to [Il3,Akk] ab.</i>";
         }
     }
     public static string OrderFeedback_PlaceBeside_Person_Everyone_13981

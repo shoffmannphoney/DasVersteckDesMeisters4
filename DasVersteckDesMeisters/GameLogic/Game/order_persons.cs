@@ -49,62 +49,62 @@ public partial class Order: AbstractOrder
             GenericDialog(CA!.Person_Knights_Armor, KnightsArmorDialog);
             handled = true;
         }
-        else if (person == CA.Person_Owl && CA.Status_Eule_Klaue.Val >= 1)
+        else if (person == CA.Person_Owl && CA!.Status_Eule_Klaue!.Val >= 1)
         {
             AdvGame!.SetScoreToken(CA!.Score_Erstes_Gespraech);
             GenericDialog(CA!.Person_Owl, OwlDialog);
             handled = true;
         }
-        if (person == CA.Person_Librarian && CA.Status_Skelett_Klaue.Val <= 0)
+        if (person == CA.Person_Librarian && CA!.Status_Skelett_Klaue!.Val <= 0)
         {
             AdvGame!.StoryOutput(loca.Talk_Skeleton_Dead);
             handled = true;
         }
-        else if (person == CA.Person_Librarian && CA.Status_Skelett_Klaue.Val >= 1)
+        else if (person == CA.Person_Librarian && CA!.Status_Skelett_Klaue!.Val >= 1)
         {
             AdvGame!.SetScoreToken(CA!.Score_Erstes_Gespraech);
             GenericDialog(CA!.Person_Librarian, LibrarianDialog);
             handled = true;
         }
-        if (person == CA.Person_Fish && CA.Status_Fisch_Klaue.Val <= 0)
+        if (person == CA.Person_Fish && CA!.Status_Fisch_Klaue!.Val <= 0)
         {
             AdvGame!.StoryOutput(loca.Talk_Fish_Dead);
             handled = true;
         }
-        else if (person == CA.Person_Fish && CA.Status_Fisch_Klaue.Val >= 1)
+        else if (person == CA.Person_Fish && CA!.Status_Fisch_Klaue!.Val >= 1)
         {
             AdvGame!.SetScoreToken(CA!.Score_Erstes_Gespraech);
             GenericDialog(CA!.Person_Fish, FishDialog);
             handled = true;
         }
-        if (person == CA.Person_Parrot && CA.Status_Papagei_Klaue.Val <= 0)
+        if (person == CA.Person_Parrot && CA!.Status_Papagei_Klaue!.Val <= 0)
         {
             AdvGame!.StoryOutput(loca.Talk_Parrot_Dead);
             handled = true;
         }
-        if (person == CA.Person_Magpie && CA.Status_Elster_Klaue.Val <= 0)
+        if (person == CA.Person_Magpie && CA!.Status_Elster_Klaue!.Val <= 0)
         {
             AdvGame!.StoryOutput(loca.Talk_Magpie_Dead);
             handled = true;
         }
-        else if (person == CA.Person_Magpie && CA.Status_Elster_Klaue.Val >= 1)
+        else if (person == CA.Person_Magpie && CA!.Status_Elster_Klaue!.Val >= 1)
         {
             AdvGame!.SetScoreToken(CA!.Score_Erstes_Gespraech);
             GenericDialog(CA!.Person_Magpie, MagpieDialog);
             handled = true;
         }
-        if (person == CA.Person_Parrot && CA.Status_Papagei_Klaue.Val >= 1)
+        if (person == CA.Person_Parrot && CA!.Status_Papagei_Klaue!.Val >= 1)
         {
             AdvGame!.SetScoreToken(CA!.Score_Erstes_Gespraech);
             GenericDialog(CA!.Person_Parrot, ParrotDialog);
             handled = true;
         }
-        if (person == CA.Person_Snake && CA.Status_Schlange_Klaue.Val <= 0)
+        if (person == CA.Person_Snake && CA!.Status_Schlange_Klaue!.Val <= 0)
         {
             AdvGame!.StoryOutput(loca.Talk_Snake_Dead);
             handled = true;
         }
-        else if (person == CA.Person_Snake && CA.Status_Schlange_Klaue.Val >= 1)
+        else if (person == CA.Person_Snake && CA!.Status_Schlange_Klaue!.Val >= 1)
         {
             AdvGame!.SetScoreToken(CA!.Score_Erstes_Gespraech);
             GenericDialog(CA!.Person_Snake, SnakeDialog);

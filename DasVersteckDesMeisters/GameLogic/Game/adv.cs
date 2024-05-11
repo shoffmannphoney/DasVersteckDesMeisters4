@@ -2533,6 +2533,7 @@ namespace GameCore
             }
 
             // Neue Nouns
+            CA!.Noun_Spuren = Nouns!.Add(Noun.NounLoca("Noun_Spuren"));
             CA!.Noun_Abdeckung = Nouns!.Add(Noun.NounLoca("Noun_Abdeckung"));
             CA!.Noun_Deckel = Nouns!.Add(Noun.NounLoca("Noun_Deckel"));
             CA!.Noun_Verbandskasten = Nouns!.Add(Noun.NounLoca("Noun_Verbandskasten"));
@@ -2575,6 +2576,7 @@ namespace GameCore
             CA!.Noun_Siegel = Nouns!.Add(Noun.NounLoca("Noun_Pentagramm"));
             CA!.Noun_Waescheleine = Nouns!.Add(Noun.NounLoca("Noun_Pentagramm"));
             CA!.Noun_Unterhose = Nouns!.Add(Noun.NounLoca("Noun_Pentagramm"));
+            CA!.Noun_Unterwaesche = Nouns!.Add(Noun.NounLoca("Noun_Unterwaesche"));
             CA!.Noun_Holzabdeckung = Nouns!.Add(Noun.NounLoca("Noun_Pentagramm"));
             CA!.Noun_Waschmaschine = Nouns!.Add(Noun.NounLoca("Noun_Pentagramm"));
             CA!.Noun_Waescheaufhaengmaschine = Nouns!.Add(Noun.NounLoca("Noun_Pentagramm"));
@@ -3877,6 +3879,7 @@ namespace GameCore
             CA!.Noun_Ende = Nouns.Add(Noun.NounLoca("Noun_Ende"));
             CA!.Noun_Fahndung = Nouns.Add(Noun.NounLoca("Noun_Fahndung"));
             CA!.Noun_Himmel = Nouns.Add(Noun.NounLoca("Noun_Himmel"));
+            CA!.Noun_Heaven = Nouns.Add(Noun.NounLoca("Noun_Heaven"));
             CA!.Noun_Kommunikation = Nouns.Add(Noun.NounLoca("Noun_Kommunikation"));
             CA!.Noun_Lade = Nouns.Add(Noun.NounLoca("Noun_Lade"));
             CA!.Noun_Logistik = Nouns.Add(Noun.NounLoca("Noun_Logistik"));
@@ -3979,6 +3982,7 @@ namespace GameCore
             string s = loca.Adv_InitializeGame_Person_I_3263;
 
             // Neue Nouns
+            CA!.Noun_Spuren = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Spuren, "Noun_Spuren"));
             CA!.Noun_Abdeckung = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Abdeckung, "Noun_Abdeckung"));
             CA!.Noun_Deckel = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Deckel, "Noun_Deckel"));
             CA!.Noun_Verbandskasten = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Verbandskasten, "Noun_Verbandskasten"));
@@ -4022,6 +4026,7 @@ namespace GameCore
             CA!.Noun_Siegel = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Siegel, "Noun_Siegel"));
             CA!.Noun_Waescheleine = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Waescheleine, "Noun_Waescheleine"));
             CA!.Noun_Unterhose = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Unterhose, "Noun_Unterhose"));
+            CA!.Noun_Unterwaesche = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Unterwaesche, "Noun_Unterwaesche"));
             CA!.Noun_Holzabdeckung = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Holzabdeckung, "Noun_Holzabdeckung"));
             CA!.Noun_Waschmaschine = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Waschmaschine, "Noun_Waschmaschine"));
             CA!.Noun_Waescheaufhaengmaschine = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Waescheaufhaengmaschine, "Noun_Waescheaufhaengmaschine"));
@@ -5314,6 +5319,7 @@ namespace GameCore
             CA!.Noun_Ende = Nouns.Add(Noun.NounLocaLoca(loca.Noun_Ende, "Noun_Ende"));
             CA!.Noun_Fahndung = Nouns.Add(Noun.NounLocaLoca(loca.Noun_Fahndung, "Noun_Fahndung"));
             CA!.Noun_Himmel = Nouns.Add(Noun.NounLocaLoca(loca.Noun_Himmel, "Noun_Himmel"));
+            CA!.Noun_Heaven = Nouns.Add(Noun.NounLocaLoca(loca.Noun_Heaven, "Noun_Heaven"));
             CA!.Noun_Kommunikation = Nouns.Add(Noun.NounLocaLoca(loca.Noun_Kommunikation, "Noun_Kommunikation"));
             CA!.Noun_Lade = Nouns.Add(Noun.NounLocaLoca(loca.Noun_Lade, "Noun_Lade"));
             CA!.Noun_Logistik = Nouns.Add(Noun.NounLocaLoca(loca.Noun_Logistik, "Noun_Logistik"));
@@ -7037,7 +7043,7 @@ namespace GameCore
             if ((Category == A.CounterCat_TakeFromBesideable) && (item.CanPutBeside)) return (true);
             */
 
-            if (Categories!.List!.ContainsKey(Category))
+            if (item.Categories!.List!.ContainsKey(Category))
             {
                 CategoryRel c = Categories.List[Category];
                 if ((!AdvGame!.GD!.SimpleMC || c.Relevance == relTypes.r_essential))
@@ -7303,7 +7309,7 @@ namespace GameCore
 
                     cfollower.Add(idCt);
 
-                    string s5 = Helper.Insert(loca.Adv_DoMCItem_Person_I_4612, itemID);
+                    string? s5 = Helper.Insert(loca.Adv_DoMCItem_Person_I_4612, itemID);
 
                     s5 = null;
 
@@ -12740,6 +12746,7 @@ namespace GameCore
         public Noun? Noun_Ende;
         public Noun? Noun_Fahndung;
         public Noun? Noun_Himmel;
+        public Noun? Noun_Heaven;
         public Noun? Noun_Kommunikation;
         public Noun? Noun_Lade;
         public Noun? Noun_Logistik;
@@ -12854,6 +12861,7 @@ namespace GameCore
         public Noun? Noun_Siegel;
         public Noun? Noun_Waescheleine;
         public Noun? Noun_Unterhose;
+        public Noun? Noun_Unterwaesche;
         public Noun? Noun_Holzabdeckung;
         public Noun? Noun_Waschmaschine;
         public Noun? Noun_Waescheaufhaengmaschine;
@@ -12893,6 +12901,7 @@ namespace GameCore
         public Noun? Noun_Versteck;
 
         // Neue Nouns
+        public Noun? Noun_Spuren;
         public Noun? Noun_Abdeckung;
         public Noun? Noun_Deckel;
         public Noun? Noun_Verbandskasten;
@@ -12903,23 +12912,23 @@ namespace GameCore
         public Noun? Noun_Schwamm;
 
 
-        public Person? Person_Everyone;
+        public Person? Person_Everyone { get; set; }
 
-        public Person? Person_Self;
+        public Person? Person_Self { get; set; }
 
-        public Person? Person_You;
+        public Person? Person_You { get; set; }
 
-        public Person? Person_I;
+        public Person? Person_I { get; set; }
 
-        public Person? Person_3rdperson;
+        public Person? Person_3rdperson { get; set; }
 
-        public Person? Person_Knights_Armor;
-        public Person? Person_Owl;
-        public Person? Person_Librarian;
-        public Person? Person_Fish;
-        public Person? Person_Parrot;
-        public Person? Person_Snake;
-        public Person? Person_Magpie;
+        public Person? Person_Knights_Armor { get; set; }
+        public Person? Person_Owl { get; set; }
+        public Person? Person_Librarian { get; set; }
+        public Person? Person_Fish { get; set; }
+        public Person? Person_Parrot { get; set; }
+        public Person? Person_Snake { get; set; }
+        public Person? Person_Magpie { get; set; }
 
         public Topic? TP_Versteck;
 
@@ -13597,6 +13606,7 @@ namespace GameCore
         public Item? I04_Shelf { get; set; }
         public Item? I04_Cupboard { get; set; }
         public Item? I04_Wall { get; set; }
+        public Item? I04_Floor { get; set; }
         public Item? I04_Flap { get; set; }
         public Item? I04_Opening { get; set; }
         public Item? I04_Door { get; set; }
@@ -13608,6 +13618,7 @@ namespace GameCore
         public Item? I05_Library_Door { get; set; }
         public Item? I05_Door { get; set; }
         public Item? I05_Moon { get; set; }
+        public Item? I05_Heaven { get; set; }
 
         public Item? I06_Door { get; set; }
         public Item? I06_Seal { get; set; }

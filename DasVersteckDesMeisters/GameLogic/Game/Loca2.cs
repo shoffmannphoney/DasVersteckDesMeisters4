@@ -1247,9 +1247,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ich klopfte an [Pl1,Nom]. Nichts weiter geschah.";
+                return "Ich klopfte an [S1]. Nichts weiter geschah.";
             else
-                return "Ich klopfte an [Pl1,Nom]. Nothing else happened.";
+                return "Ich klopfte an [S1]. Nothing else happened.";
         }
     }
     public static string KnockOn_Armor
@@ -1257,9 +1257,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ich klopfte an die Ritterrüstung. Es schepperte, ansonsten geschah wenig.";
+                return "Ich klopfte an [P:Person_Knights_Armor]die Ritterrüstung[/P]. Es schepperte, ansonsten geschah wenig.";
             else
-                return "Ich klopfte an die Ritterrüstung. Es schepperte, ansonsten geschah wenig.";
+                return "Ich klopfte an [P:Person_Knights_Armor]die Ritterrüstung[/P]. Es schepperte, ansonsten geschah wenig.";
         }
     }
     public static string Order_Score_891
@@ -1338,9 +1338,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Wozu sollte ich der Elster meinen schönen Kä#se anbieten? Vielleicht sollte ich erst mal mit ihr reden.";
+                return "Wozu sollte ich [P:Person_Magpie]der Elster[/P] meinen [I:I00_Cheese]schönen Käse[/I] anbieten? Vielleicht sollte ich erst mal mit ihr reden.";
             else
-                return "Wozu sollte ich der Elster meinen schönen Kä#se anbieten? Vielleicht sollte ich erst mal mit ihr reden.";
+                return "Wozu sollte ich [P:Person_Magpie]der Elster[/P] meinen [I:I00_Cheese]schönen Käse[/I] anbieten? Vielleicht sollte ich erst mal mit ihr reden.";
         }
     }
     public static string Grab_In_Fail
@@ -1368,7 +1368,7 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Das Beutelchen behielt ich bei mir. Wer weiß, ob ich es nochmal brauchte.";
+                return "Das [I:I00_Pouch]Beutelchen[/I] behielt ich bei mir. Wer weiß, ob ich es nochmal brauchte.";
             else
                 return "Das Beutelchen behielt ich bei mir. Wer weiß, ob ich es nochmal brauchte.";
         }
@@ -1496,9 +1496,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ich befestigte die Schale an der Halterung.";
+                return "Ich befestigte [I:I10_Metall_Tray]die Schale[/I] an [I:I10_Bracket]der Halterung[/I].";
             else
-                return "Ich befestigte die Schale an der Halterung.";
+                return "Ich befestigte [I:I10_Metall_Tray]die Schale[/I] an [I:I10_Bracket]der Halterung[/I].";
         }
     }
     public static string Heat_NoFire
@@ -1506,9 +1506,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Der Kerzenhalter war ausgeschaltet.";
+                return "[I:I00_Magic_Candle]Der Kerzenhalter[/I] war ausgeschaltet.";
             else
-                return "Der Kerzenhalter war ausgeschaltet.";
+                return "[I:I00_Magic_Candle]Der Kerzenhalter[/I] war ausgeschaltet.";
         }
     }
     public static string Heat_NoTray
@@ -1516,9 +1516,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Die Metallschale war nicht vernünftig befestigt.";
+                return "[I:I10_Metall_Tray]Die Metallschale[/I] war nicht vernünftig befestigt.";
             else
-                return "Die Metallschale war nicht vernünftig befestigt.";
+                return "[I:I10_Metall_Tray]Die Metallschale[/I] war nicht vernünftig befestigt.";
         }
     }
     public static string Heat_NoIngredients
@@ -1536,9 +1536,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ich erhitzte die Metallschale mit den Zutaten darin, und konnte mitansehen, wie sie zu Schlacke verschmolzen.";
+                return "Ich erhitzte [I:I10_Metall_Tray]die Metallschale[/I] mit den Zutaten darin, und konnte mit ansehen, wie sie zu [I:I00_Slag]Schlacke[/I] verschmolzen.";
             else
-                return "Ich erhitzte die Metallschale mit den Zutaten darin, und konnte mitansehen, wie sie zu Schlacke verschmolzen.";
+                return "Ich erhitzte [I:I10_Metall_Tray]die Metallschale[/I] mit den Zutaten darin, und konnte mit ansehen, wie sie zu [I:I00_Slag]Schlacke[/I] verschmolzen.";
         }
     }
     public static string Eat_Forest_Gras
@@ -1546,9 +1546,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ich überlegte einen Sekundenbruchteil lang, mich gierig auf das Waldgras zu stürzen und es in mich hinein zu schlingen. Dann fiel mir wieder ein, dass ich vorhin gut gegessen und daher überhaupt keinen Hunger hatte.";
+                return "Ich überlegte einen Sekundenbruchteil lang, mich gierig auf [I:I01_Forest_Gras]das Waldgras[/I] zu stürzen und es in mich hinein zu schlingen. Dann fiel mir wieder ein, dass ich vorhin gut gegessen und daher überhaupt keinen Hunger hatte.";
             else
-                return "Ich überlegte einen Sekundenbruchteil lang, mich gierig auf das Waldgras zu stürzen und es in mich hinein zu schlingen. Dann fiel mir wieder ein, dass ich vorhin gut gegessen und daher überhaupt keinen Hunger hatte.";
+                return "Ich überlegte einen Sekundenbruchteil lang, mich gierig auf [I:I01_Forest_Gras]das Waldgras[/I] zu stürzen und es in mich hinein zu schlingen. Dann fiel mir wieder ein, dass ich vorhin gut gegessen und daher überhaupt keinen Hunger hatte.";
         }
     }
     public static string Eat_Cheese
@@ -1556,9 +1556,19 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Das Käsestück war knochenhart, das konnte ich wirklich nicht essen.";
+                return "[I:I00_Cheese]Das Käsestück[/I] war knochenhart, das konnte ich wirklich nicht essen.";
             else
-                return "Das Käsestück war knochenhart, das konnte ich wirklich nicht essen.";
+                return "[I:I00_Cheese]Das Käsestück[/I] war knochenhart, das konnte ich wirklich nicht essen.";
+        }
+    }
+    public static string Smell_L04_Tree
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "[I:I01_Trees]Die Bäume[/I] rochen nach Feuchtigkeit und moosüberwucherter Rinde.";
+            else
+                return "Die Bäume rochen nach Feuchtigkeit und moosüberwucherter Rinde.";
         }
     }
     public static string Smell_Forest_Grass
@@ -1566,9 +1576,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Das Waldgras roch wie Waldgras, das sich vollends mit Feuchtigkeit vollgesogen hatte.";
+                return "[I:I01_Forest_Gras]Das Waldgras[/I] roch wie Waldgras, das sich vollends mit Feuchtigkeit vollgesogen hatte.";
             else
-                return "Das Waldgras roch wie Waldgras, das sich vollends mit Feuchtigkeit vollgesogen hatte.";
+                return "[I:I01_Forest_Gras]Das Waldgras[/I] roch wie Waldgras, das sich vollends mit Feuchtigkeit vollgesogen hatte.";
         }
     }
     public static string Smell_I02_Doormat
@@ -1576,9 +1586,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Die Türmatte roch feucht und muffig.";
+                return "[I:I02_Doormat]Die Türmatte[/I] roch feucht und muffig.";
             else
-                return "Die Türmatte roch feucht und muffig.";
+                return "[I:I02_Doormat]Die Türmatte[/I] roch feucht und muffig.";
         }
     }
     public static string Smell_I04_Cupboard
@@ -1586,9 +1596,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Der Schrank roch nach altem, wurmstichigen Holz.";
+                return "[I:I04_Cupboard]Der Schrank[/I] roch nach altem, wurmstichigen Holz.";
             else
-                return "Der Schrank roch nach altem, wurmstichigen Holz.";
+                return "[I:I04_Cupboard]Der Schrank[/I] roch nach altem, wurmstichigen Holz.";
         }
     }
     public static string Smell_I04_Shelf
@@ -1596,9 +1606,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Das Regal roch nach altem, wurmstichigen Holz.";
+                return "[I:I04_Shelf]Das Regal[/I] roch nach altem, wurmstichigen Holz.";
             else
-                return "Das Regal roch nach altem, wurmstichigen Holz.";
+                return "[I:I04_Shelf]Das Regal[/I] roch nach altem, wurmstichigen Holz.";
         }
     }
     public static string Smell_I03_Pentagram
@@ -1606,9 +1616,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Das Pentagramm roch ein wenig nach alter Farbe.";
+                return "[I:I03_Pentagram]Das Pentagramm[/I] roch ein wenig nach alter Farbe.";
             else
-                return "Das Pentagramm roch ein wenig nach alter Farbe.";
+                return "[I:I03_Pentagram]Das Pentagramm[/I] roch ein wenig nach alter Farbe.";
         }
     }
     public static string Smell_I05_Pentagram
@@ -1616,9 +1626,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Das Pentagramm roch ein wenig nach alter Farbe.";
+                return "[I:I05_Pentagram]Das Pentagramm[/I] roch ein wenig nach alter Farbe.";
             else
-                return "Das Pentagramm roch ein wenig nach alter Farbe.";
+                return "[I:I05_Pentagram]Das Pentagramm[/I] roch ein wenig nach alter Farbe.";
         }
     }
     public static string Smell_I06_Seal
@@ -1636,9 +1646,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Die Tür roch ein wenig nach allen möglichen magischen Zutaten. Meister Gunnar sollte sich mal öfters die Hände waschen, wenn er hier rumlief.";
+                return "[I:I07_Door]Die Tür[/I] roch ein wenig nach allen möglichen magischen Zutaten. Meister Gunnar sollte sich mal öfters die Hände waschen, wenn er hier rumlief.";
             else
-                return "Die Tür roch ein wenig nach allen möglichen magischen Zutaten. Meister Gunnar sollte sich mal öfters die Hände waschen, wenn er hier rumlief.";
+                return "[I:I07_Door]Die Tür[/I] roch ein wenig nach allen möglichen magischen Zutaten. Meister Gunnar sollte sich mal öfters die Hände waschen, wenn er hier rumlief.";
         }
     }
     public static string Smell_I08_Clothes
@@ -1646,9 +1656,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Die Wäsche roch so muffig, wie Wäsche eben riecht, wenn sie ewig nass in der Waschmaschine gelegen hat.";
+                return "[I:I08_Clothes]Die Wäsche[/I] roch so muffig, wie Wäsche eben riecht, wenn sie ewig nass in [I:I08_Washing_Machine]der Waschmaschine[/I] gelegen hat.";
             else
-                return "Die Wäsche roch so muffig, wie Wäsche eben riecht, wenn sie ewig nass in der Waschmaschine gelegen hat.";
+                return "[I:I08_Clothes]Die Wäsche[/I] roch so muffig, wie Wäsche eben riecht, wenn sie ewig nass in [I:I08_Washing_Machine]der Waschmaschine[/I] gelegen hat.";
         }
     }
     public static string Smell_I09_Books_Master
@@ -1656,9 +1666,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Die Bücher verbreiteten den verheißungsvollen Duft druckfrischer Bücher. Schade, dass der Buchinhalt da nicht mithalten konnte.";
+                return "[I:I09_Books_Master]Die Bücher[/I] verbreiteten den verheißungsvollen Duft druckfrischer Bücher. Schade, dass der Buchinhalt da nicht mithalten konnte.";
             else
-                return "Die Bücher verbreiteten den verheißungsvollen Duft druckfrischer Bücher. Schade, dass der Buchinhalt da nicht mithalten konnte.";
+                return "[I:I09_Books_Master]Die Bücher[/I] verbreiteten den verheißungsvollen Duft druckfrischer Bücher. Schade, dass der Buchinhalt da nicht mithalten konnte.";
         }
     }
     public static string Smell_I10_Giant_Mortar
@@ -1666,9 +1676,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Im Mörser roch es nach allerlei zerstößelten Magiepülverchen.";
+                return "[I:I10_Giant_Mortar]Im Mörser[/I] roch es nach allerlei zerstößelten Magiepülverchen.";
             else
-                return "Im Mörser roch es nach allerlei zerstößelten Magiepülverchen.";
+                return "[I:I10_Giant_Mortar]Im Mörser[/I] roch es nach allerlei zerstößelten Magiepülverchen.";
         }
     }
     public static string Smell_I10_Metal_Tray
@@ -1676,9 +1686,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Die Schale roch nach alten Verbrennungsrückständen.";
+                return "[I:I10_Metall_Tray]Die Schale[/I] roch nach alten Verbrennungsrückständen.";
             else
-                return "Die Schale roch nach alten Verbrennungsrückständen.";
+                return "[I:I10_Metall_Tray]Die Schale[/I] roch nach alten Verbrennungsrückständen.";
         }
     }
     public static string Smell_I12_Matress
@@ -1686,9 +1696,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Die Matratze roch nach einem fragwürdigen Duftspray. Wozu war diese Aktion wohl notwendig geworden?";
+                return "[I:I12_Matress]Die Matratze[/I] roch nach einem fragwürdigen Duftspray. Wozu war diese Aktion wohl notwendig geworden?";
             else
-                return "Die Matratze roch nach einem fragwürdigen Duftspray. Wozu war diese Aktion wohl notwendig geworden?";
+                return "[I:I12_Matress]Die Matratze[/I] roch nach einem fragwürdigen Duftspray. Wozu war diese Aktion wohl notwendig geworden?";
         }
     }
     public static string Smell_I13_Cupboard
@@ -1696,9 +1706,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Der Küchenschrank roch nur noch wenig nach Holz.";
+                return "[I:I13_Cupboard]Der Küchenschrank[/I] roch nur noch wenig nach Holz.";
             else
-                return "Der Küchenschrank roch nur noch wenig nach Holz.";
+                return "[I:I13_Cupboard]Der Küchenschrank[/I] roch nur noch wenig nach Holz.";
         }
     }
     public static string Smell_I14_Bathtub
@@ -1716,9 +1726,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Die Toilette roch nun auch nicht viel anders als viele andere Toiletten, die ich gesehen hatte.";
+                return "[I:I14_Toilet]Die Toilette[/I] roch nun auch nicht viel anders als viele andere Toiletten, die ich gesehen hatte.";
             else
-                return "Die Toilette roch nun auch nicht viel anders als viele andere Toiletten, die ich gesehen hatte.";
+                return "[I:I14_Toilet]Die Toilette[/I] roch nun auch nicht viel anders als viele andere Toiletten, die ich gesehen hatte.";
         }
     }
     public static string Smell_I14_Flushing
@@ -1726,9 +1736,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Die Spülung roch nach nichts weiter.";
+                return "[I:I14_Flushing]Die Spülung[/I] roch nach nichts weiter.";
             else
-                return "Die Spülung roch nach nichts weiter.";
+                return "[I:I14_Flushing]Die Spülung[/I] roch nach nichts weiter.";
         }
     }
     public static string Smell_I00_Book_Master
@@ -1736,9 +1746,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Das Buch verströmte den hoffnungsfrohen Geruch eines frischgedruckten Exemplars.";
+                return "[I:I00_Book_Master]Das Buch[/I] verströmte den hoffnungsfrohen Geruch eines frischgedruckten Exemplars.";
             else
-                return "Das Buch verströmte den hoffnungsfrohen Geruch eines frischgedruckten Exemplars.";
+                return "[I:I00_Book_Master]Das Buch[/I] verströmte den hoffnungsfrohen Geruch eines frischgedruckten Exemplars.";
         }
     }
     public static string Smell_I00_Cheese
@@ -1746,9 +1756,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Der Käse roch ein wenig säuerlich, verströmte aber sehr wenig Geruch.";
+                return "[I:I00_Cheese]Der Käse[/I] roch ein wenig säuerlich, verströmte aber sehr wenig Geruch.";
             else
-                return "Der Käse roch ein wenig säuerlich, verströmte aber sehr wenig Geruch.";
+                return "[I:I00_Cheese]Der Käse[/I] roch ein wenig säuerlich, verströmte aber sehr wenig Geruch.";
         }
     }
     public static string Smell_I00_Magic_Candle
@@ -1756,9 +1766,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Die magische Kerze verströmte ein wenig Geruch von magischem Kerzenwachs.";
+                return "[I:I00_Magic_Candle]Die magische Kerze[/I] verströmte ein wenig Geruch von magischem Kerzenwachs.";
             else
-                return "Die magische Kerze verströmte ein wenig Geruch von magischem Kerzenwachs.";
+                return "[I:I00_Magic_Candle]Die magische Kerze[/I] verströmte ein wenig Geruch von magischem Kerzenwachs.";
         }
     }
     public static string Smell_I00_Magic_Powder
@@ -1766,9 +1776,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ich ging besser nicht zu nah an das Pulver mit der Nase, sonst zog ich mir noch versehentlich eine Line von dem Zeug.";
+                return "Ich ging besser nicht zu nah an [I:I00_Magic_Powder]das Pulver[/I] mit der Nase, sonst zog ich mir noch versehentlich eine Line von dem Zeug.";
             else
-                return "Ich ging besser nicht zu nah an das Pulver mit der Nase, sonst zog ich mir noch versehentlich eine Line von dem Zeug.";
+                return "Ich ging besser nicht zu nah an [I:I00_Magic_Powder]das Pulver[/I] mit der Nase, sonst zog ich mir noch versehentlich eine Line von dem Zeug.";
         }
     }
     public static string Smell_I00_Supermagic_Powder
@@ -1776,9 +1786,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ich ging besser nicht zu nah an das Pulver mit der Nase, sonst zog ich mir noch versehentlich eine Line von dem Zeug.";
+                return "Ich ging besser nicht zu nah an [I:I00_Supermagic_Powder]das Pulver[/I] mit der Nase, sonst zog ich mir noch versehentlich eine Line von dem Zeug.";
             else
-                return "Ich ging besser nicht zu nah an das Pulver mit der Nase, sonst zog ich mir noch versehentlich eine Line von dem Zeug.";
+                return "Ich ging besser nicht zu nah an [I:I00_Supermagic_Powder]das Pulver[/I] mit der Nase, sonst zog ich mir noch versehentlich eine Line von dem Zeug.";
         }
     }
     public static string Smell_I00_Paper_Sheets
@@ -1786,9 +1796,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Die Papierbögen rochen leicht muffig.";
+                return "[I:I00_Paper_Sheets]Die Papierbögen[/I] rochen leicht muffig.";
             else
-                return "Die Papierbögen rochen leicht muffig.";
+                return "[I:I00_Paper_Sheets]Die Papierbögen[/I] rochen leicht muffig.";
         }
     }
     public static string Smell_I00_Plastic_Bag
@@ -1796,9 +1806,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Der Plastikbeutel mit den Sporen roch nach feuchtem Erdboden.";
+                return "[I:I00_Plastic_Bag]Der Plastikbeutel[/I] mit den Sporen roch nach feuchtem Erdboden.";
             else
-                return "Der Plastikbeutel mit den Sporen roch nach feuchtem Erdboden.";
+                return "[I:I00_Plastic_Bag]Der Plastikbeutel[/I] mit den Sporen roch nach feuchtem Erdboden.";
         }
     }
     public static string Smell_I00_Polishing_Rag
@@ -1806,9 +1816,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Der Polierlappen verströmte genau den muffigen Geruch, den man solchen Lappen immer nachsagte.";
+                return "[I:I00_Polishing_Rag]Der Polierlappen[/I] verströmte genau den muffigen Geruch, den man solchen Lappen immer nachsagte.";
             else
-                return "Der Polierlappen verströmte genau den muffigen Geruch, den man solchen Lappen immer nachsagte.";
+                return "[I:I00_Polishing_Rag]Der Polierlappen[/I] verströmte genau den muffigen Geruch, den man solchen Lappen immer nachsagte.";
         }
     }
     public static string Smell_I00_Pouch
@@ -1816,9 +1826,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Das Beutelchen roch nach altem Leder.";
+                return "[I:I00_Pouch]Das Beutelchen[/I] roch nach altem Leder.";
             else
-                return "Das Beutelchen roch nach altem Leder.";
+                return "[I:I00_Pouch]Das Beutelchen[/I] roch nach altem Leder.";
         }
     }
     public static string Smell_I00_Roll_Plaster
@@ -1826,9 +1836,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Das Pflaster roch ein wenig nach Klebstoff.";
+                return "[I:I00_Roll_Plaster]Das Pflaster[/I] roch ein wenig nach Klebstoff.";
             else
-                return "Das Pflaster roch ein wenig nach Klebstoff.";
+                return "[I:I00_Roll_Plaster]Das Pflaster[/I] roch ein wenig nach Klebstoff.";
         }
     }
     public static string Smell_I00_Slag
@@ -1836,9 +1846,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Die Schlacke roch verkohlt.";
+                return "[I:I00_Slag]Die Schlacke[/I] roch verkohlt.";
             else
-                return "Die Schlacke roch verkohlt.";
+                return "[I:I00_Slag]Die Schlacke[/I] roch verkohlt.";
         }
     }
     public static string Smell_I00_Wonder_Wart_Sponge
@@ -1846,9 +1856,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Der Wunderwarzenschwamm verströmte einen herrlichen und unverwechselbaren wunderwarzenschwammartigen Geruch.";
+                return "[I:I00_Wonder_Wart_Sponge]Der Wunderwarzenschwamm[/I] verströmte einen herrlichen und unverwechselbaren wunderwarzenschwammartigen Geruch.";
             else
-                return "Der Wunderwarzenschwamm verströmte einen herrlichen und unverwechselbaren wunderwarzenschwammartigen Geruch.";
+                return "[I:I00_Wonder_Wart_Sponge]Der Wunderwarzenschwamm[/I] verströmte einen herrlichen und unverwechselbaren wunderwarzenschwammartigen Geruch.";
         }
     }
     public static string Smell_Person_Fish
@@ -1856,9 +1866,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Der Fisch roch unangenehm nach nassem Sägemehl.";
+                return "[P:Person_Fish]Der Fisch[/P] roch unangenehm nach nassem Sägemehl.";
             else
-                return "Der Fisch roch unangenehm nach nassem Sägemehl.";
+                return "[P:Person_Fish]Der Fisch[/P] roch unangenehm nach nassem Sägemehl.";
         }
     }
     public static string Smell_Person_Owl
@@ -1866,9 +1876,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Die Eule roch etwas muffig.";
+                return "[P:Person_Owl]Die Eule[/P] roch etwas muffig.";
             else
-                return "Die Eule roch etwas muffig.";
+                return "[P:Person_Owl]Die Eule[/P] roch etwas muffig.";
         }
     }
     public static string Smell_Person_Magpie
@@ -1876,9 +1886,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Die Elster roch wie ein ungewaschener Rabenvogel.";
+                return "[P:Person_Magpie]Die Elster[/P] roch wie ein ungewaschener Rabenvogel.";
             else
-                return "Die Elster roch wie ein ungewaschener Rabenvogel.";
+                return "[P:Person_Magpie]Die Elster[/P] roch wie ein ungewaschener Rabenvogel.";
         }
     }
     public static string Smell_Knights_Armor
@@ -1886,9 +1896,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Die Ritterrüstung roch leicht nach Poliermittel.";
+                return "[P:Person_Knights_Armor]Die Ritterrüstung[/P] roch leicht nach Poliermittel.";
             else
-                return "Die Ritterrüstung roch leicht nach Poliermittel.";
+                return "[P:Person_Knights_Armor]Die Ritterrüstung[/P] roch leicht nach Poliermittel.";
         }
     }
     public static string Smell_Person_Parrot
@@ -1896,9 +1906,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Der Papagei roch einfach nach nichts.";
+                return "[P:Person_Parrot]Der Papagei[/P] roch einfach nach nichts.";
             else
-                return "Der Papagei roch einfach nach nichts.";
+                return "[P:Person_Parrot]Der Papagei[/P] roch einfach nach nichts.";
         }
     }
     public static string Take_Eule
@@ -1906,9 +1916,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Die Eule war auf dem Sims festgeklebt. Vermutlich ein Klimaschützer.";
+                return "[P:Person_Owl]Die Eule[/P] war auf dem Sims festgeklebt. Vermutlich ein Klimaschützer.";
             else
-                return "Die Eule war auf dem Sims festgeklebt. Vermutlich ein Klimaschützer.";
+                return "[P:Person_Owl]Die Eule[/P] war auf dem Sims festgeklebt. Vermutlich ein Klimaschützer.";
         }
     }
     public static string Take_Elster
@@ -1916,9 +1926,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Die Elster war magisch festgekettet. Die würde ich wohl nicht hier wegbekommen.";
+                return "[P:Person_Magpie]Die Elster[/P] war magisch festgekettet. Die würde ich wohl nicht hier wegbekommen.";
             else
-                return "Die Elster war magisch festgekettet. Die würde ich wohl nicht hier wegbekommen.";
+                return "[P:Person_Magpie]Die Elster[/P] war magisch festgekettet. Die würde ich wohl nicht hier wegbekommen.";
         }
     }
     public static string Take_Schale
@@ -1926,9 +1936,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Die Schale war super dort, wo sie jetzt war.";
+                return "[I:I10_Metall_Tray]Die Schale[/I] war super dort, wo sie jetzt war.";
             else
-                return "Die Schale war super dort, wo sie jetzt war.";
+                return "[I:I10_Metall_Tray]Die Schale[/I] war super dort, wo sie jetzt war.";
         }
     }
 
@@ -1967,9 +1977,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ich griff nach dem hasserfüllten Buch, und es schnappte zähnefletschend nach mir.";
+                return "Ich griff nach [I:I09_Angry_Book]dem hasserfüllten Buch[/I], und es schnappte zähnefletschend nach mir.";
             else
-                return "Ich griff nach dem hasserfüllten Buch, und es schnappte zähnefletschend nach mir.";
+                return "Ich griff nach [I:I09_Angry_Book]dem hasserfüllten Buch[/I], und es schnappte zähnefletschend nach mir.";
         }
     }
     public static string Touch_Crazy_Book
@@ -1977,9 +1987,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ich griff nach dem verrückten Buch. Das verrückte Gekicher, das daraus dring, ließ mich inne halten.";
+                return "Ich griff nach [I:I09_Cray_Book]dem verrückten Buch[/I]. Das verrückte Gekicher, das daraus dring, ließ mich inne halten.";
             else
-                return "Ich griff nach dem verrückten Buch. Das verrückte Gekicher, das daraus dring, ließ mich inne halten.";
+                return "Ich griff nach [I:I09_Cray_Book]dem verrückten Buch[/I]. Das verrückte Gekicher, das daraus dring, ließ mich inne halten.";
         }
     }
     public static string Touch_Weird_Book
@@ -1987,9 +1997,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ich griff nach dem seltsamen Buch. Das wirre Geflüster und das Rascheln der Buchseiten schreckten mich ab davor, es zu berühren.";
+                return "Ich griff nach [I:I09_Weird_Book]dem seltsamen Buch[/I]. Das wirre Geflüster und das Rascheln der Buchseiten schreckten mich ab davor, es zu berühren.";
             else
-                return "Ich griff nach dem seltsamen Buch. Das wirre Geflüster und das Rascheln der Buchseiten schreckten mich ab davor, es zu berühren.";
+                return "Ich griff nach [I:I09_Weird_Book]dem seltsamen Buch[/I]. Das wirre Geflüster und das Rascheln der Buchseiten schreckten mich ab davor, es zu berühren.";
         }
     }
     public static string Touch_Demonic_Book
@@ -1997,9 +2007,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ich griff nach dem dämonischen Buch. Die glutroten Augen auf dem Einband richteten sich erwartungsvoll auf mich. Rasch ließ ich von meinem Vorhaben ab.";
+                return "Ich griff nach [I:I09_Demonic_Book]dem dämonischen Buch[/I]. Die glutroten Augen auf dem Einband richteten sich erwartungsvoll auf mich. Rasch ließ ich von meinem Vorhaben ab.";
             else
-                return "Ich griff nach dem dämonischen Buch. Die glutroten Augen auf dem Einband richteten sich erwartungsvoll auf mich. Rasch ließ ich von meinem Vorhaben ab.";
+                return "Ich griff nach [I:I09_Demonic_Book]dem dämonischen Buch[/I]. Die glutroten Augen auf dem Einband richteten sich erwartungsvoll auf mich. Rasch ließ ich von meinem Vorhaben ab.";
         }
     }
     public static string Touch_Satanic_Book
@@ -2007,9 +2017,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ich griff nach dem satanischen Buch. Die Seiten raschelten erwartungsvoll, als wollten sie mich auf der Stelle verschlingen. Rasch ließ ich von meinem Vorhaben ab.";
+                return "Ich griff nach [I:I09_Satanic_Book]dem satanischen Buch[/I]. Die Seiten raschelten erwartungsvoll, als wollten sie mich auf der Stelle verschlingen. Rasch ließ ich von meinem Vorhaben ab.";
             else
-                return "Ich griff nach dem satanischen Buch. Die Seiten raschelten erwartungsvoll, als wollten sie mich auf der Stelle verschlingen. Rasch ließ ich von meinem Vorhaben ab.";
+                return "Ich griff nach [I:I09_Satanic_Book]dem satanischen Buch[/I]. Die Seiten raschelten erwartungsvoll, als wollten sie mich auf der Stelle verschlingen. Rasch ließ ich von meinem Vorhaben ab.";
         }
     }
     public static string SpreadOn_Fail
@@ -2027,7 +2037,7 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ich sollte die Wäsche erst mal aus der Waschmaschine holen, ehe ich irgendwelche Experimente damit machte.";
+                return "Ich sollte [I:I08_Clothes]die Wäsche[/I] erst mal aus [I:I08_Washing_Machine]der Waschmaschine[/I] holen, ehe ich irgendwelche Experimente damit machte.";
             else
                 return "Ich sollte die Wäsche erst mal aus der Waschmaschine holen, ehe ich irgendwelche Experimente damit machte.";
         }
@@ -2037,9 +2047,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ich streute den Inhalt des Beutels auf die feuchte Wäsche. In atemberaubender Geschwindigkeit wuchs darauf ein riesiger Wunderwarzenschwamm, der gar eklig anzusehen war..";
+                return "Ich streute den Inhalt des Beutels auf [I:I08_Clothes]die feuchte Wäsche[/I]. In atemberaubender Geschwindigkeit wuchs darauf [I:I00_Wonder_Wart_Sponge]ein riesiger Wunderwarzenschwamm[/I], der gar eklig anzusehen war..";
             else
-                return "Ich streute den Inhalt des Beutels auf die feuchte Wäsche. In atemberaubender Geschwindigkeit wuchs darauf ein riesiger Wunderwarzenschwamm, der gar eklig anzusehen war..";
+                return "Ich streute den Inhalt des Beutels auf [I:I08_Clothes]die feuchte Wäsche[/I]. In atemberaubender Geschwindigkeit wuchs darauf [I:I00_Wonder_Wart_Sponge]ein riesiger Wunderwarzenschwamm[/I], der gar eklig anzusehen war..";
         }
     }
     public static string Enlight_Fail
@@ -2057,7 +2067,7 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ich leuchtete in das Wasser, aber fand nichts weiter neues.";
+                return "Ich leuchtete in [I:I08_Water]das Wasser[/I], aber fand nichts weiter neues.";
             else
                 return "Ich leuchtete in das Wasser, aber fand nichts weiter neues.";
         }
@@ -2067,9 +2077,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ich leuchtete mit dem Kerzenhalter in das Wasser, aber das hätte wirklich deutlich besser funktioniert, wenn die Kerze an gewesen wäre.";
+                return "Ich leuchtete mit [I:I00_Magic_Candle]dem Kerzenhalter[/I] in [I:I08_Water]das Wasser[/I], aber das hätte wirklich deutlich besser funktioniert, wenn die Kerze an gewesen wäre.";
             else
-                return "Ich leuchtete mit dem Kerzenhalter in das Wasser, aber das hätte wirklich deutlich besser funktioniert, wenn die Kerze an gewesen wäre.";
+                return "Ich leuchtete mit [I:I00_Magic_Candle]dem Kerzenhalter[/I] in [I:I08_Water]das Wasser[/I], aber das hätte wirklich deutlich besser funktioniert, wenn die Kerze an gewesen wäre.";
         }
     }
     public static string Enlight_Find_Coin
@@ -2077,9 +2087,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ich leuchtete mit dem Kerzenhalter in das Wasser. Irgendwo tief auf dem Grund blitzte etwas helles, metallenes auf. Wie eine Münze.";
+                return "Ich leuchtete mit [I:I00_Magic_Candle]dem Kerzenhalter[/I] in [I:I08_Water]das Wasser[/I]. Irgendwo tief auf dem Grund blitzte etwas helles, metallenes auf. Wie [I:I00_Coin]eine Münze[/I].";
             else
-                return "Ich leuchtete mit dem Kerzenhalter in das Wasser. Irgendwo tief auf dem Grund blitzte etwas helles, metallenes auf. Wie eine Münze.";
+                return "Ich leuchtete mit [I:I00_Magic_Candle]dem Kerzenhalter[/I] in [I:I08_Water]das Wasser[/I]. Irgendwo tief auf dem Grund blitzte etwas helles, metallenes auf. Wie [I:I00_Coin]eine Münze[/I].";
         }
     }
 
@@ -2120,9 +2130,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Mit einem leichten Ächzen wich alles \"Leben\" aus der Ritterrüstung.";
+                return "Mit einem leichten Ächzen wich alles \"Leben\" aus [P:Person_Knights_Armor]der Ritterrüstung[/P].";
             else
-                return "Mit einem leichten Ächzen wich alles \"Leben\" aus der Ritterrüstung.";
+                return "Mit einem leichten Ächzen wich alles \"Leben\" aus [P:Person_Knights_Armor]der Ritterrüstung[/P].";
         }
     }
 
@@ -2131,9 +2141,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Aus der Richtung der Ritterrüstung dran ein leises Seufzen an mein Ohr.";
+                return "Aus der Richtung [P:Person_Knights_Armor]der Ritterrüstung[/P] dran ein leises Seufzen an mein Ohr.";
             else
-                return "Aus der Richtung der Ritterrüstung dran ein leises Seufzen an mein Ohr.";
+                return "Aus der Richtung [P:Person_Knights_Armor]der Ritterrüstung[/P] dran ein leises Seufzen an mein Ohr.";
         }
     }
     public static string DoRR_Bewegen
@@ -2141,9 +2151,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Aus den Augenwinkeln bemerkte ich etwas. Hatte sich die Ritterrüstung etwa bewegt?";
+                return "Aus den Augenwinkeln bemerkte ich etwas. Hatte sich [P:Person_Knights_Armor]die Ritterrüstung[/P] etwa bewegt?";
             else
-                return "Aus den Augenwinkeln bemerkte ich etwas. Hatte sich die Ritterrüstung etwa bewegt?";
+                return "Aus den Augenwinkeln bemerkte ich etwas. Hatte sich [P:Person_Knights_Armor]die Ritterrüstung[/P] etwa bewegt?";
         }
     }
     public static string DoRR_Wispern
@@ -2151,9 +2161,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Eine fast unhörbare Stimme drang an mein Ohr: \"Die Klaue! Die Klaue ist hier!\" Hatte da etwa die Ritterrüstung gesprochen?";
+                return "Eine fast unhörbare Stimme drang an mein Ohr: \"Die Klaue! Die Klaue ist hier!\" Hatte da etwa [P:Person_Knights_Armor]die Ritterrüstung[/P] gesprochen?";
             else
-                return "Eine fast unhörbare Stimme drang an mein Ohr: \"Die Klaue! Die Klaue ist hier!\" Hatte da etwa die Ritterrüstung gesprochen?";
+                return "Eine fast unhörbare Stimme drang an mein Ohr: \"Die Klaue! Die Klaue ist hier!\" Hatte da etwa [P:Person_Knights_Armor]die Ritterrüstung[/P] gesprochen?";
         }
     }
 
@@ -2162,9 +2172,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Die Ritterrüstung klapperte vor sich hin.";
+                return "[P:Person_Knights_Armor]Die Ritterrüstung[/P] klapperte vor sich hin.";
             else
-                return "Die Ritterrüstung klapperte vor sich hin.";
+                return "[P:Person_Knights_Armor]Die Ritterrüstung[/P] klapperte vor sich hin.";
         }
     }
     public static string DoRR_Action2
@@ -2172,9 +2182,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Die Ritterrüstung grölte: \"Einer, einer geht noch rein!\"";
+                return "[P:Person_Knights_Armor]Die Ritterrüstung[/P] grölte: \"Einer, einer geht noch rein!\"";
             else
-                return "Die Ritterrüstung grölte: \"Einer, einer geht noch rein!\"";
+                return "[P:Person_Knights_Armor]Die Ritterrüstung[/P] grölte: \"Einer, einer geht noch rein!\"";
         }
     }
     public static string DoRR_Action3
@@ -2182,9 +2192,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Die Ritterrüstung führte ein kleines Tänzchen auf.";
+                return "[P:Person_Knights_Armor]Die Ritterrüstung[/P] führte ein kleines Tänzchen auf.";
             else
-                return "Die Ritterrüstung führte ein kleines Tänzchen auf.";
+                return "[P:Person_Knights_Armor]Die Ritterrüstung[/P] führte ein kleines Tänzchen auf.";
         }
     }
     public static string DoRR_Action4
@@ -2192,9 +2202,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Die Ritterrüstung schaute in meine Richtung. \"Ihre Papiere bitte!\" ";
+                return "[P:Person_Knights_Armor]Die Ritterrüstung[/P] schaute in meine Richtung. \"Ihre Papiere bitte!\" ";
             else
-                return "Die Ritterrüstung schaute in meine Richtung. \"Ihre Papiere bitte!\" ";
+                return "[P:Person_Knights_Armor]Die Ritterrüstung[/P] schaute in meine Richtung. \"Ihre Papiere bitte!\" ";
         }
     }
     public static string DoRR_Action5
@@ -2202,9 +2212,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Die Ritterrüstung drehte quietschend ihren Kopf hin und her.";
+                return "[P:Person_Knights_Armor]Die Ritterrüstung[/P] drehte quietschend ihren Kopf hin und her.";
             else
-                return "Die Ritterrüstung drehte quietschend ihren Kopf hin und her.";
+                return "[P:Person_Knights_Armor]Die Ritterrüstung[/P] drehte quietschend ihren Kopf hin und her.";
         }
     }
     public static string Do_Fish_Finish
@@ -2212,7 +2222,7 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Mit einem letzten \"Blub\" wich alles \"Leben\" aus dem Fisch.";
+                return "Mit einem letzten \"Blub\" wich alles \"Leben\" aus [P:Person_Fish]dem Fisch[/P].";
             else
                 return "Mit einem letzten \"Blub\" wich alles \"Leben\" aus dem Fisch.";
         }
@@ -2252,9 +2262,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Der ausgestopfte Fisch blubberte vor sich hin.";
+                return "[P:Person_Fish]Der ausgestopfte Fisch[/P] blubberte vor sich hin.";
             else
-                return "Der ausgestopfte Fisch blubberte vor sich hin.";
+                return "[P:Person_Fish]Der ausgestopfte Fisch[/P] blubberte vor sich hin.";
         }
     }
     public static string Do_Fish_Action2
@@ -2262,9 +2272,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Der ausgestopfte Fisch spuckte eine Staubfontäne aus.";
+                return "[P:Person_Fish]Der ausgestopfte Fisch[/P] spuckte eine Staubfontäne aus.";
             else
-                return "Der ausgestopfte Fisch spuckte eine Staubfontäne aus.";
+                return "[P:Person_Fish]Der ausgestopfte Fisch[/P] spuckte eine Staubfontäne aus.";
         }
     }
     public static string Do_Fish_Action3
@@ -2272,9 +2282,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Der ausgestopfte Fisch sah mich an und sagte \"Blub\".";
+                return "[P:Person_Fish]Der ausgestopfte Fisch[/P] sah mich an und sagte \"Blub\".";
             else
-                return "Der ausgestopfte Fisch sah mich an und sagte \"Blub\".";
+                return "[P:Person_Fish]Der ausgestopfte Fisch[/P] sah mich an und sagte \"Blub\".";
         }
     }
     public static string Do_Fish_Action4
@@ -2282,9 +2292,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Der ausgestopfte Fisch zappelte fröhlich vor sich hin.";
+                return "[P:Person_Fish]Der ausgestopfte Fisch[/P] zappelte fröhlich vor sich hin.";
             else
-                return "Der ausgestopfte Fisch zappelte fröhlich vor sich hin.";
+                return "[P:Person_Fish]Der ausgestopfte Fisch[/P] zappelte fröhlich vor sich hin.";
         }
     }
     public static string Do_Fish_Action5
@@ -2292,9 +2302,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Der ausgestopfte Fisch versuchte, davon zu schwimmen, was ohne Wasser nur mäßig gut gelang.";
+                return "[P:Person_Fish]Der ausgestopfte Fisch[/P] versuchte, davon zu schwimmen, was ohne Wasser nur mäßig gut gelang.";
             else
-                return "Der ausgestopfte Fisch versuchte, davon zu schwimmen, was ohne Wasser nur mäßig gut gelang.";
+                return "[P:Person_Fish]Der ausgestopfte Fisch[/P] versuchte, davon zu schwimmen, was ohne Wasser nur mäßig gut gelang.";
         }
     }
     public static string Do_Magpie_Finish
@@ -2302,9 +2312,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Die Elster krächzte noch einmal kurz, dann wurde sie wieder leblos.";
+                return "[P:Person_Magpie]Die Elster[/P] krächzte noch einmal kurz, dann wurde sie wieder leblos.";
             else
-                return "Die Elster krächzte noch einmal kurz, dann wurde sie wieder leblos.";
+                return "[P:Person_Magpie]Die Elster[/P] krächzte noch einmal kurz, dann wurde sie wieder leblos.";
         }
     }
     public static string Do_Parrot_Finish
@@ -2312,9 +2322,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Mit einem leisen Krächzen verwandelte sich der Papagei wieder in seine eigentliche, ausgestopfte Version zurück.";
+                return "Mit einem leisen Krächzen verwandelte sich [P:Person_Parrot]der Papagei[/P] wieder in seine eigentliche, ausgestopfte Version zurück.";
             else
-                return "Mit einem leisen Krächzen verwandelte sich der Papagei wieder in seine eigentliche, ausgestopfte Version zurück.";
+                return "Mit einem leisen Krächzen verwandelte sich [P:Person_Parrot]der Papagei[/P] wieder in seine eigentliche, ausgestopfte Version zurück.";
         }
     }
     public static string Do_Parrot_Reaktion1
@@ -2332,9 +2342,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Der ausgestopfte Papagei schien mich auffordernd anzustarren.";
+                return "[P:Person_Parrot]Der ausgestopfte Papagei[/P] schien mich auffordernd anzustarren.";
             else
-                return "Der ausgestopfte Papagei schien mich auffordernd anzustarren.";
+                return "[P:Person_Parrot]Der ausgestopfte Papagei[/P] schien mich auffordernd anzustarren.";
         }
     }
     public static string Do_Parrot_Reaktion3
@@ -2342,9 +2352,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Der ausgestopfte Papagei schien langsam sein Gefieder zu plustern. Äh, ich musste mir das einbilden...";
+                return "[P:Person_Parrot]Der ausgestopfte Papagei[/P] schien langsam sein Gefieder zu plustern. Äh, ich musste mir das einbilden...";
             else
-                return "Der ausgestopfte Papagei schien langsam sein Gefieder zu plustern. Äh, ich musste mir das einbilden...";
+                return "[P:Person_Parrot]Der ausgestopfte Papagei[/P] schien langsam sein Gefieder zu plustern. Äh, ich musste mir das einbilden...";
         }
     }
     public static string Do_Parrot_Action1
@@ -2352,9 +2362,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Der ausgestopfte Papagei musterte mich unverhohlen. \"Fürwahr, fürwahr, man kann sich seinen Besuch nicht immer aussuchen.\" ";
+                return "[P:Person_Parrot]Der ausgestopfte Papagei[/P] musterte mich unverhohlen. \"Fürwahr, fürwahr, man kann sich seinen Besuch nicht immer aussuchen.\" ";
             else
-                return "Der ausgestopfte Papagei musterte mich unverhohlen. \"Fürwahr, fürwahr, man kann sich seinen Besuch nicht immer aussuchen.\" ";
+                return "[P:Person_Parrot]Der ausgestopfte Papagei[/P] musterte mich unverhohlen. \"Fürwahr, fürwahr, man kann sich seinen Besuch nicht immer aussuchen.\" ";
         }
     }
     public static string Do_Parrot_Action2
@@ -2362,9 +2372,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Der ausgestopfte Papagei musterte mich unverchämt. \"Hat dir schon mal jemand gesagt, dass du sehr viel besser aussähest, wenn du dein Gesicht mit Nougatcreme einriebest?\" ";
+                return "[P:Person_Parrot]Der ausgestopfte Papagei[/P] musterte mich unverschämt. \"Hat dir schon mal jemand gesagt, dass du sehr viel besser aussähest, wenn du dein Gesicht mit Nougatcreme einriebest?\" ";
             else
-                return "Der ausgestopfte Papagei musterte mich unverchämt. \"Hat dir schon mal jemand gesagt, dass du sehr viel besser aussähest, wenn du dein Gesicht mit Nougatcreme einriebest?\" ";
+                return "[P:Person_Parrot]Der ausgestopfte Papagei[/P] musterte mich unverschämt. \"Hat dir schon mal jemand gesagt, dass du sehr viel besser aussähest, wenn du dein Gesicht mit Nougatcreme einriebest?\" ";
         }
     }
     public static string Do_Parrot_Action3
@@ -2372,9 +2382,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Der ausgestopfte Papagei gähnte genervt. ";
+                return "[P:Person_Parrot]Der ausgestopfte Papagei[/P] gähnte genervt. ";
             else
-                return "Der ausgestopfte Papagei gähnte genervt. ";
+                return "[P:Person_Parrot]Der ausgestopfte Papagei[/P] gähnte genervt. ";
         }
     }
     public static string Do_Parrot_Action4
@@ -2382,9 +2392,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Der ausgestopfte Papagei plusterte sein Gefieder auf. ";
+                return "[P:Person_Parrot]Der ausgestopfte Papagei[/P] plusterte sein Gefieder auf. ";
             else
-                return "Der ausgestopfte Papagei plusterte sein Gefieder auf. ";
+                return "[P:Person_Parrot]Der ausgestopfte Papagei[/P] plusterte sein Gefieder auf. ";
         }
     }
     public static string Do_Parrot_Action5
@@ -2392,9 +2402,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Der ausgestopfte Papagei musterte mich herablassend.";
+                return "[P:Person_Parrot]Der ausgestopfte Papagei[/P] musterte mich herablassend.";
             else
-                return "Der ausgestopfte Papagei musterte mich herablassend.";
+                return "[P:Person_Parrot]Der ausgestopfte Papagei[/P] musterte mich herablassend.";
         }
     }
 
@@ -2403,9 +2413,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Hatte ich da eben aus der Richtung der Elster ein leises Krächzen gehört?";
+                return "Hatte ich da eben aus der Richtung [P:Person_Magpie]der Elster[/P] ein leises Krächzen gehört?";
             else
-                return "Hatte ich da eben aus der Richtung der Elster ein leises Krächzen gehört?";
+                return "Hatte ich da eben aus der Richtung [P:Person_Magpie]der Elster[/P] ein leises Krächzen gehört?";
         }
     }
     public static string Do_Magpie_Reaktion2
@@ -2413,9 +2423,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Diese dämliche Elster schien mich ausgesprochen unverschämterweise anzustarren.";
+                return "[P:Person_Magpie]Diese dämliche Elster[/P] schien mich ausgesprochen unverschämterweise anzustarren.";
             else
-                return "Diese dämliche Elster schien mich ausgesprochen unverschämterweise anzustarren.";
+                return "[P:Person_Magpie]Diese dämliche Elster[/P] schien mich ausgesprochen unverschämterweise anzustarren.";
         }
     }
     public static string Do_Magpie_Reaktion3
@@ -2423,9 +2433,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Aus den Augenwinkeln heraus nahm ich wahr, dass die Elster sich bewegt hatte. Nur einen Millimeter, aber ich war mir sicher!";
+                return "Aus den Augenwinkeln heraus nahm ich wahr, dass [P:Person_Magpie]die Elster[/P] sich bewegt hatte. Nur einen Millimeter, aber ich war mir sicher!";
             else
-                return "Aus den Augenwinkeln heraus nahm ich wahr, dass die Elster sich bewegt hatte. Nur einen Millimeter, aber ich war mir sicher!";
+                return "Aus den Augenwinkeln heraus nahm ich wahr, dass [P:Person_Magpie]die Elster[/P] sich bewegt hatte. Nur einen Millimeter, aber ich war mir sicher!";
         }
     }
     public static string Do_Magpie_Action1
@@ -2433,9 +2443,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Die Elster schimpfte mit derartig schrecklichen Schimpfworten vor sich hin, dass ich ganz rot wurde.";
+                return "[P:Person_Magpie]Die Elster[/P] schimpfte mit derartig schrecklichen Schimpfworten vor sich hin, dass ich ganz rot wurde.";
             else
-                return "Die Elster schimpfte mit derartig schrecklichen Schimpfworten vor sich hin, dass ich ganz rot wurde.";
+                return "[P:Person_Magpie]Die Elster[/P] schimpfte mit derartig schrecklichen Schimpfworten vor sich hin, dass ich ganz rot wurde.";
         }
     }
     public static string Do_Magpie_Action2
@@ -2443,9 +2453,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Die Elster schnappte nach mir. Zum Glück war ich schneller.";
+                return "[P:Person_Magpie]Die Elster[/P] schnappte nach mir. Zum Glück war ich schneller.";
             else
-                return "Die Elster schnappte nach mir. Zum Glück war ich schneller.";
+                return "[P:Person_Magpie]Die Elster[/P] schnappte nach mir. Zum Glück war ich schneller.";
         }
     }
     public static string Do_Magpie_Action3
@@ -2453,9 +2463,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Die Elster pickte nach meiner Hand. Zum Glück war ich schneller.";
+                return "[P:Person_Magpie]Die Elster[/P] pickte nach meiner Hand. Zum Glück war ich schneller.";
             else
-                return "Die Elster pickte nach meiner Hand. Zum Glück war ich schneller.";
+                return "[P:Person_Magpie]Die Elster[/P] pickte nach meiner Hand. Zum Glück war ich schneller.";
         }
     }
     public static string Do_Magpie_Action4
@@ -2463,9 +2473,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Die Elster krächzte eine schiere Schimpfkanonade auf mich los.";
+                return "[P:Person_Magpie]Die Elster[/P] krächzte eine schiere Schimpfkanonade auf mich los.";
             else
-                return "Die Elster krächzte eine schiere Schimpfkanonade auf mich los.";
+                return "[P:Person_Magpie]Die Elster[/P] krächzte eine schiere Schimpfkanonade auf mich los.";
         }
     }
     public static string Do_Magpie_Action5
@@ -2473,9 +2483,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Die Elster schaute mich wüte4nd an.";
+                return "[P:Person_Magpie]Die Elster[/P] schaute mich wütend an.";
             else
-                return "Die Elster schaute mich wüte4nd an.";
+                return "[P:Person_Magpie]Die Elster[/P] schaute mich wütend an.";
         }
     }
     public static string Do_Skeleton_Finish
@@ -2483,9 +2493,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Die Knochen des Skeletts klapperten noch einmal vor sich hin, dann war wieder Stille.";
+                return "Die Knochen [P:Person_Librarian]des Skeletts[/P] klapperten noch einmal vor sich hin, dann war wieder Stille.";
             else
-                return "Die Knochen des Skeletts klapperten noch einmal vor sich hin, dann war wieder Stille.";
+                return "Die Knochen [P:Person_Librarian]des Skeletts[/P] klapperten noch einmal vor sich hin, dann war wieder Stille.";
         }
     }
     public static string DoSkelett_Reaktion1
@@ -2493,9 +2503,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Die Knochen des Skeletts klapperten leise vor sich hin.";
+                return "Die Knochen [P:Person_Librarian]des Skeletts[/P] klapperten leise vor sich hin.";
             else
-                return "Die Knochen des Skeletts klapperten leise vor sich hin.";
+                return "Die Knochen [P:Person_Librarian]des Skeletts[/P] klapperten leise vor sich hin.";
         }
     }
     public static string DoSkelett_Reaktion2
@@ -2503,9 +2513,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Das Skelett schien mich durchdringend anzustarren.";
+                return "[P:Person_Librarian]Das Skelett[/P] schien mich durchdringend anzustarren.";
             else
-                return "Das Skelett schien mich durchdringend anzustarren.";
+                return "[P:Person_Librarian]Das Skelett[/P] schien mich durchdringend anzustarren.";
         }
     }
     public static string DoSkelett_Reaktion3
@@ -2513,9 +2523,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Das Skelett schien irgendwas zu wispern und die Hand nach mir zu recken.";
+                return "[P:Person_Librarian]Das Skelett[/P] schien irgendwas zu wispern und die Hand nach mir zu recken.";
             else
-                return "Das Skelett schien irgendwas zu wispern und die Hand nach mir zu recken.";
+                return "[P:Person_Librarian]Das Skelett[/P] schien irgendwas zu wispern und die Hand nach mir zu recken.";
         }
     }
     public static string DoSkelett_Action1
@@ -2523,9 +2533,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Das Skelett nahm ein Buch vom Stapel, drückte einen Stempel auf ein Einlegeblatt, und legte es dann auf den nächsten Stapel.";
+                return "[P:Person_Librarian]Das Skelett[/P] nahm ein Buch vom Stapel, drückte einen Stempel auf ein Einlegeblatt, und legte es dann auf den nächsten Stapel.";
             else
-                return "Das Skelett nahm ein Buch vom Stapel, drückte einen Stempel auf ein Einlegeblatt, und legte es dann auf den nächsten Stapel.";
+                return "[P:Person_Librarian]Das Skelett[/P] nahm ein Buch vom Stapel, drückte einen Stempel auf ein Einlegeblatt, und legte es dann auf den nächsten Stapel.";
         }
     }
     public static string DoSkelett_Action2
@@ -2533,9 +2543,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Das Skelett sah mich durchdringend an. \"Keine Eselsohren in die Bücher machen!\" ";
+                return "[P:Person_Librarian]Das Skelett[/P] sah mich durchdringend an. \"Keine Eselsohren in die Bücher machen!\" ";
             else
-                return "Das Skelett sah mich durchdringend an. \"Keine Eselsohren in die Bücher machen!\" ";
+                return "[P:Person_Librarian]Das Skelett[/P] sah mich durchdringend an. \"Keine Eselsohren in die Bücher machen!\" ";
         }
     }
     public static string DoSkelett_Action3
@@ -2543,9 +2553,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Das Skelett stützte den Kopf auf die Hände und stöhnte: \"Das wird mir alles zuviel...\" ";
+                return "[P:Person_Librarian]Das Skelett[/P] stützte den Kopf auf die Hände und stöhnte: \"Das wird mir alles zuviel...\" ";
             else
-                return "Das Skelett stützte den Kopf auf die Hände und stöhnte: \"Das wird mir alles zuviel...\" ";
+                return "[P:Person_Librarian]Das Skelett[/P] stützte den Kopf auf die Hände und stöhnte: \"Das wird mir alles zuviel...\" ";
         }
     }
     public static string DoSkelett_Action4
@@ -2553,9 +2563,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Das Skelett musterte mich skeptisch. \"Die Bücher in den Regalen bitte nicht anfassen. Sonst endest du wie ich.\" ";
+                return "[P:Person_Librarian]Das Skelett[/P] musterte mich skeptisch. \"Die Bücher in den Regalen bitte nicht anfassen. Sonst endest du wie ich.\" ";
             else
-                return "Das Skelett musterte mich skeptisch. \"Die Bücher in den Regalen bitte nicht anfassen. Sonst endest du wie ich.\" ";
+                return "[P:Person_Librarian]Das Skelett[/P] musterte mich skeptisch. \"Die Bücher in den Regalen bitte nicht anfassen. Sonst endest du wie ich.\" ";
         }
     }
     public static string DoSkelett_Action5
@@ -2563,9 +2573,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Das Skelett summte leise vor sich hin.";
+                return "[P:Person_Librarian]Das Skelett[/P] summte leise vor sich hin.";
             else
-                return "Das Skelett summte leise vor sich hin.";
+                return "[P:Person_Librarian]Das Skelett[/P] summte leise vor sich hin.";
         }
     }
     public static string Do_Snake_Finish
@@ -2573,9 +2583,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ein letztes Zischeln, dann wurde die Snake wieder steif und leblos.";
+                return "Ein letztes Zischeln, dann wurde [P:Person_Snake]die Schlange[/P] wieder steif und leblos.";
             else
-                return "Ein letztes Zischeln, dann wurde die Snake wieder steif und leblos.";
+                return "Ein letztes Zischeln, dann wurde [P:Person_Snake]die Schlange[/P] wieder steif und leblos.";
         }
     }
     public static string Do_Snake_Reaktion1
@@ -2613,9 +2623,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Die Schlange zischelte wütend.";
+                return "[P:Person_Snake]Die Schlange[/P] zischelte wütend.";
             else
-                return "Die Schlange zischelte wütend.";
+                return "[P:Person_Snake]Die Schlange[/P] zischelte wütend.";
         }
     }
     public static string Do_Snake_Action2
@@ -2623,9 +2633,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Die Schlange zischelte fröhlich.";
+                return "[P:Person_Snake]Die Schlange[/P] zischelte fröhlich.";
             else
-                return "Die Schlange zischelte fröhlich.";
+                return "[P:Person_Snake]Die Schlange[/P] zischelte fröhlich.";
         }
     }
     public static string Do_Snake_Action3
@@ -2633,9 +2643,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Die Schlange zischelte zischelnd.";
+                return "[P:Person_Snake]Die Schlange[/P] zischelte zischelnd.";
             else
-                return "Die Schlange zischelte zischelnd.";
+                return "[P:Person_Snake]Die Schlange[/P] zischelte zischelnd.";
         }
     }
     public static string Do_Snake_Action4
@@ -2643,9 +2653,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Die Schlange schlängelte sich.";
+                return "[P:Person_Snake]Die Schlange[/P] schlängelte sich.";
             else
-                return "Die Schlange schlängelte sich.";
+                return "[P:Person_Snake]Die Schlange[/P] schlängelte sich.";
         }
     }
     public static string Do_Snake_Action5
@@ -2653,9 +2663,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Die Schlange bleckte mit ihrer langen Zunge um sich.";
+                return "[P:Person_Snake]Die Schlange[/P] bleckte mit ihrer langen Zunge um sich.";
             else
-                return "Die Schlange bleckte mit ihrer langen Zunge um sich.";
+                return "[P:Person_Snake]Die Schlange[/P] bleckte mit ihrer langen Zunge um sich.";
         }
     }
 
@@ -2664,9 +2674,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Mit einem leichten \"Uhuuuh\" wich alles \"Leben\" aus der Eule.";
+                return "Mit einem leichten \"Uhuuuh\" wich alles \"Leben\" aus [P:Person_Owl]der Eule[/P].";
             else
-                return "Mit einem leichten \"Uhuuuh\" wich alles \"Leben\" aus der Eule.";
+                return "Mit einem leichten \"Uhuuuh\" wich alles \"Leben\" aus [P:Person_Owl]der Eule[/P].";
         }
     }
 
@@ -2675,9 +2685,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Aus der Richtung der Eule dran ein leiser Eulenruf an mein Ohr.";
+                return "Aus der Richtung [P:Person_Owl]der Eule[/P] dran ein leiser Eulenruf an mein Ohr.";
             else
-                return "Aus der Richtung der Eule dran ein leiser Eulenruf an mein Ohr.";
+                return "Aus der Richtung [P:Person_Owl]der Eule[/P] dran ein leiser Eulenruf an mein Ohr.";
         }
     }
     public static string DoOwl_Bewegen
@@ -2685,9 +2695,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Aus den Augenwinkeln bemerkte ich etwas. Hatte sich die ausgestopfte Eule etwa bewegt?";
+                return "Aus den Augenwinkeln bemerkte ich etwas. Hatte sich [P:Person_Owl]die ausgestopfte Eule[/P] etwa bewegt?";
             else
-                return "Aus den Augenwinkeln bemerkte ich etwas. Hatte sich die ausgestopfte Eule etwa bewegt?";
+                return "Aus den Augenwinkeln bemerkte ich etwas. Hatte sich [P:Person_Owl]die ausgestopfte Eule[/P] etwa bewegt?";
         }
     }
     public static string DoOwl_Wispern
@@ -2706,9 +2716,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Die Eule stieß leise Rufe aus.";
+                return "[P:Person_Owl]Die Eule[/P] stieß leise Rufe aus.";
             else
-                return "Die Eule stieß leise Rufe aus.";
+                return "[P:Person_Owl]Die Eule[/P] stieß leise Rufe aus.";
         }
     }
     public static string DoOwl_Action2
@@ -2716,9 +2726,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Die Eule putzte sich unter dem linken Flügel.";
+                return "[P:Person_Owl]Die Eule[/P] putzte sich unter dem linken Flügel.";
             else
-                return "Die Eule putzte sich unter dem linken Flügel.";
+                return "[P:Person_Owl]Die Eule[/P] putzte sich unter dem linken Flügel.";
         }
     }
     public static string DoOwl_Action3
@@ -2726,9 +2736,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Die Eule putzte sich unter dem rechten Flügel.";
+                return "[P:Person_Owl]Die Eule[/P] putzte sich unter dem rechten Flügel.";
             else
-                return "Die Eule putzte sich unter dem rechten Flügel.";
+                return "[P:Person_Owl]Die Eule[/P] putzte sich unter dem rechten Flügel.";
         }
     }
     public static string DoOwl_Action4
@@ -2736,9 +2746,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Die Eule musterte mich voller Weisheit und Güte.";
+                return "[P:Person_Owl]Die Eule[/P] musterte mich voller Weisheit und Güte.";
             else
-                return "Die Eule musterte mich voller Weisheit und Güte.";
+                return "[P:Person_Owl]Die Eule[/P] musterte mich voller Weisheit und Güte.";
         }
     }
     public static string DoOwl_Action5
@@ -2746,9 +2756,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Die Eule musterte mich ungeduldig.";
+                return "[P:Person_Owl]Die Eule[/P] musterte mich ungeduldig.";
             else
-                return "Die Eule musterte mich ungeduldig.";
+                return "[P:Person_Owl]Die Eule[/P] musterte mich ungeduldig.";
         }
     }
 
@@ -2777,9 +2787,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Das Skelett ruhte recht entspannt auf einem Bürostuhl hinter dem Bibliothekstresen.";
+                return "Das Skelett ruhte recht entspannt auf einem Bürostuhl hinter [I:I09_Librarians_Desk]dem Bibliothekstresen[/I].";
             else
-                return "Das Skelett ruhte recht entspannt auf einem Bürostuhl hinter dem Bibliothekstresen.";
+                return "Das Skelett ruhte recht entspannt auf einem Bürostuhl hinter [I:I09_Librarians_Desk]dem Bibliothekstresen[/I].";
         }
     }
     public static string Adv_Person_Fish
@@ -2827,9 +2837,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ich ließ die Unterhose liegen, wo sie war. Wenn Meister Gunnar seiner Wäsche bedurfte, dann sollte er selbst drauf achten.";
+                return "Ich ließ [I:I08_Underpants]die Unterhose[/I] liegen, wo sie war. Wenn Meister Gunnar seiner Wäsche bedurfte, dann sollte er selbst drauf achten.";
             else
-                return "Ich ließ die Unterhose liegen, wo sie war. Wenn Meister Gunnar seiner Wäsche bedurfte, dann sollte er selbst drauf achten.";
+                return "Ich ließ [I:I08_Underpants]die Unterhose[/I] liegen, wo sie war. Wenn Meister Gunnar seiner Wäsche bedurfte, dann sollte er selbst drauf achten.";
         }
     }
     public static string Take_Coin
@@ -2837,9 +2847,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Die Münze schimmerte tief unten im Brunnen. Ich konnte sie mit der Hand nicht erreichen und in das eiskalte Wasser eintauchen konnte ich auch nicht.";
+                return "[I:I00_Coin]Die Münze[/I] schimmerte tief unten [I:I08_Well]im Brunnen[/I]. Ich konnte sie mit der Hand nicht erreichen und in [I:I08_Water]das eiskalte Wasser[/I] eintauchen konnte ich auch nicht.";
             else
-                return "Die Münze schimmerte tief unten im Brunnen. Ich konnte sie mit der Hand nicht erreichen und in das eiskalte Wasser eintauchen konnte ich auch nicht.";
+                return "[I:I00_Coin]Die Münze[/I] schimmerte tief unten [I:I08_Well]im Brunnen[/I]. Ich konnte sie mit der Hand nicht erreichen und in [I:I08_Water]das eiskalte Wasser[/I] eintauchen konnte ich auch nicht.";
         }
     }
     public static string Take_Supermagic_Powder
@@ -2847,9 +2857,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ich füllte das magische Pülverchen in mein kleines Lederbeutelchen.";
+                return "Ich füllte [I:I00_Supermagic_Powder]das magische Pülverchen[/I] in mein [I:I00_Pouch]kleines Lederbeutelchen[/I].";
             else
-                return "Ich füllte das magische Pülverchen in mein kleines Lederbeutelchen.";
+                return "Ich füllte [I:I00_Supermagic_Powder]das magische Pülverchen[/I] in mein [I:I00_Pouch]kleines Lederbeutelchen[/I].";
         }
     }
     public static string Take_Supermagic_Powder_NoPouch
@@ -2857,9 +2867,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ich füllte das magische Pülverchen in mein kleines Lederbeutelchen.";
+                return "Ich wollte [I:I00_Supermagic_Powder]das magische Pülverchen[/I] in mein [I:I00_Pouch]kleines Lederbeutelchen[/I] füllen, stellte aber fest, dass ich dieses gar nicht dabei hatte..";
             else
-                return "Ich füllte das magische Pülverchen in mein kleines Lederbeutelchen.";
+                return "Ich wollte [I:I00_Supermagic_Powder]das magische Pülverchen[/I] in mein [I:I00_Pouch]kleines Lederbeutelchen[/I] füllen, stellte aber fest, dass ich dieses gar nicht dabei hatte..";
         }
     }
     public static string Take_Clothes
@@ -2867,9 +2877,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Angewidert zog ich die Stinkewäsche aus der Waschmaschine. Ich schaffte es gerade noch, sie in den Wäschekorb zu befördern, bevor mir redlich schlecht wurde.";
+                return "Angewidert zog ich [I:I08_Clothes]die Stinkewäsche[/I] aus [I:I08_Washing_Machine]der Waschmaschine[/I]. Ich schaffte es gerade noch, sie in [I:I08_Laundry_Basket]den Wäschekorb[/I] zu befördern, bevor mir redlich schlecht wurde.";
             else
-                return "Angewidert zog ich die Stinkewäsche aus der Waschmaschine. Ich schaffte es gerade noch, sie in den Wäschekorb zu befördern, bevor mir redlich schlecht wurde.";
+                return "Angewidert zog ich [I:I08_Clothes]die Stinkewäsche[/I] aus [I:I08_Washing_Machine]der Waschmaschine[/I]. Ich schaffte es gerade noch, sie in [I:I08_Laundry_Basket]den Wäschekorb[/I] zu befördern, bevor mir redlich schlecht wurde.";
         }
     }
     public static string Take_Tuermatte
@@ -2877,9 +2887,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ich griff nach der Türmatte, ließ sie aber dann doch liegen. Was wollte ich mit dem ollen Ding?";
+                return "Ich griff nach [I:I02_Doormat]der Türmatte[/I], ließ sie aber dann doch liegen. Was wollte ich mit dem ollen Ding?";
             else
-                return "Ich griff nach der Türmatte, ließ sie aber dann doch liegen. Was wollte ich mit dem ollen Ding?";
+                return "Ich griff nach [I:I02_Doormat]der Türmatte[/I], ließ sie aber dann doch liegen. Was wollte ich mit dem ollen Ding?";
         }
     }
 
@@ -3295,9 +3305,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Gierig griff ich nach der Klaue. Mein, endlich war sie mein!<br>Aus den Augenwinkeln heraus nahm ich das am Podest befindliche Warnschild war und hielt erst mal inne.";
+                return "Gierig griff ich nach der Klaue. Mein, endlich war sie mein!<br>Aus den Augenwinkeln heraus nahm ich das am Podest befindliche Warnschild wahr und hielt erst mal inne.";
             else
-                return "Gierig griff ich nach der Klaue. Mein, endlich war sie mein!<br>Aus den Augenwinkeln heraus nahm ich das am Podest befindliche Warnschild war und hielt erst mal inne.";
+                return "Gierig griff ich nach der Klaue. Mein, endlich war sie mein!<br>Aus den Augenwinkeln heraus nahm ich das am Podest befindliche Warnschild wahr und hielt erst mal inne.";
         }
     }
     public static string Talk_Owl_Dead
@@ -3381,6 +3391,17 @@ public static partial class loca
                 return "Die Klappe schob sich wieder vor die Öffnung.";
         }
     }
+    public static string Open_Knights_Armor
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Ich öffnete das Visier der Rüstung und schaute hinein. Wie erwartet, war die Rüstung leer. Zum Glück. Ich ließ das Visier wieder herunter.";
+            else
+                return "Ich öffnete das Visier der Rüstung und schaute hinein. Wie erwartet, war die Rüstung leer. Zum Glück. Ich ließ das Visier wieder herunter.";
+        }
+    }
+    
     public static string Open_L04_Flap
     {
         get
@@ -3436,9 +3457,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Unter der Fußmatte entdeckte ich ein kleines Beutelchen.";
+                return "Unter [I:I02_Doormat]der Fußmatte[/I] entdeckte ich [I:I00_Pouch]ein kleines Beutelchen[/I].";
             else
-                return "Unter der Fußmatte entdeckte ich ein kleines Beutelchen.";
+                return "Unter [I:I02_Doormat]der Fußmatte[/I] entdeckte ich [I:I00_Pouch]ein kleines Beutelchen[/I].";
         }
     }
     public static string Push_L04_Cupboard
@@ -3446,9 +3467,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ich rückte den Schrank ein Stück von der Wand ab. Dahinter kam eine kleine Klappe zum Vorschein.";
+                return "Ich rückte [I:I04_Cupboard]den Schrank[/I] ein Stück von der Wand ab. Dahinter kam [I:I04_Flap]eine kleine Klappe[/I] zum Vorschein.";
             else
-                return "Ich rückte den Schrank ein Stück von der Wand ab. Dahinter kam eine kleine Klappe zum Vorschein.";
+                return "Ich rückte [I:I04_Cupboard]den Schrank[/I] ein Stück von der Wand ab. Dahinter kam [I:I04_Flap]eine kleine Klappe[/I] zum Vorschein.";
         }
     }
     public static string Push_L08_Wooden_Cover
@@ -3506,9 +3527,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Die Tür war verriegelt und verrammelt.";
+                return "Die breite Tür in der südlichen Wand war verriegelt und verrammelt.";
             else
-                return "Die Tür war verriegelt und verrammelt.";
+                return "Die breite Tür in der südlichen Wand war verriegelt und verrammelt.";
         }
     }
     public static string Open_Laboratory_Door_Locked
@@ -4527,6 +4548,16 @@ public static partial class loca
                 return "Unterhose";
         }
     }
+    public static string Noun_Unterwaesche
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Unterwäsche";
+            else
+                return "Unterwäsche";
+        }
+    }
     public static string Noun_Holzabdeckung
     {
         get
@@ -4759,6 +4790,16 @@ public static partial class loca
                 return "Ich stand vor [I:I02_Shed]einer verfallenen Hütte[/I] im [I:I02_Forest]Wald[/I]. Eigentlich sah ich wenig mehr als die Silhouette [I:I02_Shed]eines niedrigen Gebäudes[/I], das sich [I:I02_Mist]aus dem dichten Nebel[/I] hervorhob.<br>Das sollte das edle Domizil von Meister Gunnar sein? Schwer zu glauben, dass er sein fettes Uni-Salär nicht für etwas besseres hätte aufwenden können, eine schicke Stadtvilla zum Beispiel. Also gut, er wohnte wohl freiwillig in dieser Bruchbude. Ganz sicher hatte diese Immobilie noch ein Geheimnis, das sie preiszugeben hatte.<br>[I:I02_Shed]Die Hütte[/I] war aus grobem Stein gemauert und hatte [I:I02_Door]eine solide Eingangstür[/I]. Dass davor ordentlich drapiert [I:I02_Doormat]eine Fußmatte[/I] lag, verbesserte den Gesamteindruck nicht wesentlich. [L:L03_In_The_Parlor]Der Eingang zur Hütte lag nördlich[/L]. [L:L01_Dark_Forest]Alle anderen Wege führten zurück in den Wald[/L].";
         }
     }
+    public static string Adv_L02_In_Front_Of_A_Hut_Lang2
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Ich stand vor [I:I02_Shed]einer verfallenen Hütte[/I] im [I:I02_Forest]Wald[/I]. Eigentlich sah ich wenig mehr als die Silhouette [I:I02_Shed]eines niedrigen Gebäudes[/I], das sich [I:I02_Mist]aus dem dichten Nebel[/I] hervorhob.<br>Wie das edle Domizil eines Meistermagiers wirkte die ranzige Bude eher nicht. Aber sicher hatte diese Immobilie noch ein Geheimnis, das sie preiszugeben hatte.<br>[I:I02_Shed]Die Hütte[/I] war aus grobem Stein gemauert und hatte [I:I02_Door]eine solide Eingangstür[/I]. Dass davor ordentlich drapiert [I:I02_Doormat]eine Fußmatte[/I] lag, verbesserte den Gesamteindruck nicht wesentlich. [L:L03_In_The_Parlor]Der Eingang zur Hütte lag nördlich[/L]. [L:L01_Dark_Forest]Alle anderen Wege führten zurück in den Wald[/L].";
+            else
+                return "Ich stand vor [I:I02_Shed]einer verfallenen Hütte[/I] im [I:I02_Forest]Wald[/I]. Eigentlich sah ich wenig mehr als die Silhouette [I:I02_Shed]eines niedrigen Gebäudes[/I], das sich [I:I02_Mist]aus dem dichten Nebel[/I] hervorhob.<br>Wie das edle Domizil eines Meistermagiers wirkte die ranzige Bude eher nicht. Aber sicher hatte diese Immobilie noch ein Geheimnis, das sie preiszugeben hatte.<br>[I:I02_Shed]Die Hütte[/I] war aus grobem Stein gemauert und hatte [I:I02_Door]eine solide Eingangstür[/I]. Dass davor ordentlich drapiert [I:I02_Doormat]eine Fußmatte[/I] lag, verbesserte den Gesamteindruck nicht wesentlich. [L:L03_In_The_Parlor]Der Eingang zur Hütte lag nördlich[/L]. [L:L01_Dark_Forest]Alle anderen Wege führten zurück in den Wald[/L].";
+        }
+    }
 
     public static string Adv_L03_In_The_Parlor
     {
@@ -4776,6 +4817,16 @@ public static partial class loca
         {
             if (_gd!.Language == IGlobalData.language.german)
                 return "Das hier konnte ja wohl nicht die Stube sein, in der der Meister lebte! Ich stand nämlich in einem komplett leeren, kalten Raum. Immerhin kündete [I:I03_Pentagram]in rot geschmiertes Pentagramm[/I] auf dem Boden davon, dass hier irgendwer irgendwas mit Zauberkräften am Hut hatte. Auch [I:I03_Runes]die Runen an der Wand hinterließen eine einigermaßen klare Botschaft.<br>Also gut, das war definitiv nicht das Wohngemach des Meisters. Aber vielleicht war dieser Ort ja der Eingang zu seinem eigentlichen Domizil. Das läge zumindest nahe.<br>In [L:L04_Shabby_Little_Chamber]östlicher Richtung[/L] befand sich [I:I03_Door]eine schäbige kleine Tür[/I]. [L:L02_In_Front_Of_A_Hut]Nach Süden[/L] gings [I:I03_Door_Outside]durch eine schwere Tür[/I] wieder nach draußen.";
+            else
+                return "Das hier konnte ja wohl nicht die Stube sein, in der der Meister lebte! Ich stand nämlich in einem komplett leeren, kalten Raum. Immerhin kündete [I:I03_Pentagram]in rot geschmiertes Pentagramm[/I] auf dem Boden davon, dass hier irgendwer irgendwas mit Zauberkräften am Hut hatte. Auch [I:I03_Runes]die Runen an der Wand hinterließen eine einigermaßen klare Botschaft.<br>Also gut, das war definitiv nicht das Wohngemach des Meisters. Aber vielleicht war dieser Ort ja der Eingang zu seinem eigentlichen Domizil. Das läge zumindest nahe.<br>In [L:L04_Shabby_Little_Chamber]östlicher Richtung[/L] befand sich [I:I03_Door]eine schäbige kleine Tür[/I]. [L:L02_In_Front_Of_A_Hut]Nach Süden[/L] gings [I:I03_Door_Outside]durch eine schwere Tür[/I] wieder nach draußen.";
+        }
+    }
+    public static string Adv_L03_In_The_Parlor_Lang2
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Ich stand in einem komplett leeren, kalten Raum. Immerhin kündete [I:I03_Pentagram]in rot geschmiertes Pentagramm[/I] auf dem Boden davon, dass hier irgendwer irgendwas mit Zauberkräften am Hut hatte. Auch [I:I03_Runes]die Runen an der Wand hinterließen eine einigermaßen klare Botschaft.<br>Also gut, das war definitiv nicht das Wohngemach des Meisters. Aber vielleicht war dieser Ort ja der Eingang zu seinem eigentlichen Domizil. Das läge zumindest nahe.<br>In [L:L04_Shabby_Little_Chamber]östlicher Richtung[/L] befand sich [I:I03_Door]eine schäbige kleine Tür[/I]. [L:L02_In_Front_Of_A_Hut]Nach Süden[/L] gings [I:I03_Door_Outside]durch eine schwere Tür[/I] wieder nach draußen.";
             else
                 return "Das hier konnte ja wohl nicht die Stube sein, in der der Meister lebte! Ich stand nämlich in einem komplett leeren, kalten Raum. Immerhin kündete [I:I03_Pentagram]in rot geschmiertes Pentagramm[/I] auf dem Boden davon, dass hier irgendwer irgendwas mit Zauberkräften am Hut hatte. Auch [I:I03_Runes]die Runen an der Wand hinterließen eine einigermaßen klare Botschaft.<br>Also gut, das war definitiv nicht das Wohngemach des Meisters. Aber vielleicht war dieser Ort ja der Eingang zu seinem eigentlichen Domizil. Das läge zumindest nahe.<br>In [L:L04_Shabby_Little_Chamber]östlicher Richtung[/L] befand sich [I:I03_Door]eine schäbige kleine Tür[/I]. [L:L02_In_Front_Of_A_Hut]Nach Süden[/L] gings [I:I03_Door_Outside]durch eine schwere Tür[/I] wieder nach draußen.";
         }
@@ -4802,6 +4853,16 @@ public static partial class loca
                 return "Ich stand in einer schäbigen kleinen Kammer, in der sich neben [I:I04_Cupboard]einem großen Schrank[/I] und [I:I04_Shelf]einem Regal[/I] eigentlich nur vollkommen desolates Gerümpel befand. Wenigstens lag auch keine halb verweste Matratze in der Ecke. Ich hatte also schon mal nicht das Schlafzimmer des Meisters gefunden. Zum Glück.<br>Durch eine [L:L03_In_The_Parlor]westlich[/L] gelegene [I:I04_Door]Tür[/I] gelangte man [L:L03_In_The_Parlor]zurück in die Stube[/L].";
         }
     }
+    public static string Adv_L04_Shabby_Little_Chamber_Lang2
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Ich stand in einer schäbigen kleinen Kammer, in der sich neben [I:I04_Cupboard]einem großen Schrank[/I] und [I:I04_Shelf]einem Regal[/I] eigentlich nur vollkommen desolates Gerümpel befand. <br>Durch eine [L:L03_In_The_Parlor]westlich[/L] gelegene [I:I04_Door]Tür[/I] gelangte man [L:L03_In_The_Parlor]zurück in die Stube[/L].";
+            else
+                return "Ich stand in einer schäbigen kleinen Kammer, in der sich neben [I:I04_Cupboard]einem großen Schrank[/I] und [I:I04_Shelf]einem Regal[/I] eigentlich nur vollkommen desolates Gerümpel befand. <br>Durch eine [L:L03_In_The_Parlor]westlich[/L] gelegene [I:I04_Door]Tür[/I] gelangte man [L:L03_In_The_Parlor]zurück in die Stube[/L].";
+        }
+    }
 
     public static string Adv_L05_Atrium
     {
@@ -4819,6 +4880,16 @@ public static partial class loca
         {
             if (_gd!.Language == IGlobalData.language.german)
                 return "Ich stand im Atrium des geheimen Domizils von Meister Gunnar. Das sah schon eher nach einer standesgemäßen Butze für einen angeblichen Meistermagier aus. Der große Raum war von fast quadratischer Form. Durch das offene Dach konnte ich hinausblicken in eine endlose, sternenklare Nacht mit [I:I05_Moon]einem riesigen Vollmond[/I]. Darüber hinaus gab es keinerlei Hinweis darauf, in welcher seltsamen Dimension ich mich hier befand. Immerhin: Hier gab es keinen Nebel.<br>[I:I05_Library_Door]Eine breite, verzierte Tür[/I] in der [L:L09_Library]westlichen Wand[/L] mit der Aufschrift \"Bibliothek\" weckte meine Aufmerksamkeit. Daneben befand sich [I:I05_Sill]ein schmales Sims[/I], auf dem eine ausgestopfte Eule saß.<br>Genau im Zentrum des Atriums stand [I:I05_Pedestal]ein hohes, mit Gold verziertes Podest[/I]. In einer Ecke war [I:I05_Pentagram]ein großes, rotes Pentagramm[/I] auf den Boden gemalt. [I:I05_Door]Eine weitere Tür[/I] führte [L:L06_Long_Floor]nach Süden[/L].";
+            else
+                return "Ich stand im Atrium des geheimen Domizils von Meister Gunnar. Das sah schon eher nach einer standesgemäßen Butze für einen angeblichen Meistermagier aus. Der große Raum war von fast quadratischer Form. Durch das offene Dach konnte ich hinausblicken in eine endlose, sternenklare Nacht mit [I:I05_Moon]einem riesigen Vollmond[/I]. Darüber hinaus gab es keinerlei Hinweis darauf, in welcher seltsamen Dimension ich mich hier befand. Immerhin: Hier gab es keinen Nebel.<br>[I:I05_Library_Door]Eine breite, verzierte Tür[/I] in der [L:L09_Library]westlichen Wand[/L] mit der Aufschrift \"Bibliothek\" weckte meine Aufmerksamkeit. Daneben befand sich [I:I05_Sill]ein schmales Sims[/I], auf dem eine ausgestopfte Eule saß.<br>Genau im Zentrum des Atriums stand [I:I05_Pedestal]ein hohes, mit Gold verziertes Podest[/I]. In einer Ecke war [I:I05_Pentagram]ein großes, rotes Pentagramm[/I] auf den Boden gemalt. [I:I05_Door]Eine weitere Tür[/I] führte [L:L06_Long_Floor]nach Süden[/L].";
+        }
+    }
+    public static string Adv_L05_Atrium_Lang2
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Ich stand im Atrium des geheimen - und durchaus opulenten - Domizils von Meister Gunnar. Der große Raum war von fast quadratischer Form. Durch das offene Dach konnte ich hinausblicken in eine endlose, sternenklare Nacht mit [I:I05_Moon]einem riesigen Vollmond[/I]. Darüber hinaus gab es keinerlei Hinweis darauf, in welcher seltsamen Dimension ich mich hier befand.<br>[I:I05_Library_Door]Eine breite, verzierte Tür[/I] mit der Aufschrift \"Bibliothek\" befand sich in der [L:L09_Library]westlichen Wand[/L].Daneben befand sich [I:I05_Sill]ein schmales Sims[/I], auf dem eine ausgestopfte Eule saß.<br>Genau im Zentrum des Atriums stand [I:I05_Pedestal]ein hohes, mit Gold verziertes Podest[/I]. In einer Ecke war [I:I05_Pentagram]ein großes, rotes Pentagramm[/I] auf den Boden gemalt. [I:I05_Door]Eine weitere Tür[/I] führte [L:L06_Long_Floor]nach Süden[/L].";
             else
                 return "Ich stand im Atrium des geheimen Domizils von Meister Gunnar. Das sah schon eher nach einer standesgemäßen Butze für einen angeblichen Meistermagier aus. Der große Raum war von fast quadratischer Form. Durch das offene Dach konnte ich hinausblicken in eine endlose, sternenklare Nacht mit [I:I05_Moon]einem riesigen Vollmond[/I]. Darüber hinaus gab es keinerlei Hinweis darauf, in welcher seltsamen Dimension ich mich hier befand. Immerhin: Hier gab es keinen Nebel.<br>[I:I05_Library_Door]Eine breite, verzierte Tür[/I] in der [L:L09_Library]westlichen Wand[/L] mit der Aufschrift \"Bibliothek\" weckte meine Aufmerksamkeit. Daneben befand sich [I:I05_Sill]ein schmales Sims[/I], auf dem eine ausgestopfte Eule saß.<br>Genau im Zentrum des Atriums stand [I:I05_Pedestal]ein hohes, mit Gold verziertes Podest[/I]. In einer Ecke war [I:I05_Pentagram]ein großes, rotes Pentagramm[/I] auf den Boden gemalt. [I:I05_Door]Eine weitere Tür[/I] führte [L:L06_Long_Floor]nach Süden[/L].";
         }
@@ -4886,6 +4957,16 @@ public static partial class loca
                 return "Ich befand mich in der Waschküche des Meisters. Sofort ins Auge stach mir die brandneue magische Waschmaschine \"Magic 2000\", vor der außerdem ein großer Wäschekorb stand. In einer Ecke befand sich ein gemauerter Brunnen. Unter der Decke hingen lauter Wäscheleinenschnüre. Der einzige Ausgang führte durch eine Tür in der östlichen Wand.";
         }
     }
+    public static string Adv_L08_Laundry_Room_Lang2
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Ich befand mich in der Waschküche des Meisters. In einer Ecke stand die brandneue [I:I08_Washing_Machine]magische Waschmaschine[/I] \"Magic 2000\", vor der außerdem [I:I08_Laundry_Basket]ein großer Wäschekorb[/I] stand. In einer Ecke befand sich [I:I08_Well]ein gemauerter Brunnen[/I]. Unter der Decke hingen [I:I08_Clothes_Line]lauter Wäscheleinen[/I]. Der einzige Ausgang führte durch [I:I08_Door_Green]eine grüne Tür[/I] in der [L:L07_Lower_Floor]östlichen Wand[/L].";
+            else
+                return "Ich befand mich in der Waschküche des Meisters. Sofort ins Auge stach mir die brandneue magische Waschmaschine \"Magic 2000\", vor der außerdem ein großer Wäschekorb stand. In einer Ecke befand sich ein gemauerter Brunnen. Unter der Decke hingen lauter Wäscheleinenschnüre. Der einzige Ausgang führte durch eine Tür in der östlichen Wand.";
+        }
+    }
     public static string Adv_L09_Library
     {
         get
@@ -4927,6 +5008,16 @@ public static partial class loca
                 return "Dies also war das großartige Privatlabor des Meisters. Als mir mein Studium noch wichtig war, wäre ich vor Ehrfurcht erstarrt. Vor mir lag [I:I10_Labor_Table]der große Labortisch[/I] des Meisters mit allerlei Hilfsmitteln darauf. Im Tisch befand sich [I:I10_Drawer]eine Schublade[/I]. Neben dem Tisch erkannte ich [I:I10_Darkness_Machine]eine der berühmten Dunkelheitsmaschinen[/I], die angeblich Meister Gunnar selbst erfunden hatte. An der Wand hing vorbildlicherweise [I:I10_First_Aid_Kit]ein großer Erste-Hilfe-Kasten[/I]. In [L:L07_Lower_Floor]der westlichen Wand[/L] führte [I:I10_Labor_Door]eine Tür[/I] zurück zum Flur.";
         }
     }
+    public static string Adv_L10_Laboratory_Lang2
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Ich stand im Privatlabor von Meister Gunnar. Vor mir lag [I:I10_Labor_Table]der große Labortisch[/I] des Meisters mit allerlei Hilfsmitteln darauf. Im Tisch befand sich [I:I10_Drawer]eine Schublade[/I]. Neben dem Tisch erkannte ich [I:I10_Darkness_Machine]eine der berühmten Dunkelheitsmaschinen[/I], die angeblich Meister Gunnar selbst erfunden hatte. An der Wand hing vorbildlicherweise [I:I10_First_Aid_Kit]ein großer Erste-Hilfe-Kasten[/I]. In [L:L07_Lower_Floor]der westlichen Wand[/L] führte [I:I10_Labor_Door]eine Tür[/I] zurück zum Flur.";
+            else
+                return "Dies also war das großartige Privatlabor des Meisters. Als mir mein Studium noch wichtig war, wäre ich vor Ehrfurcht erstarrt. Vor mir lag [I:I10_Labor_Table]der große Labortisch[/I] des Meisters mit allerlei Hilfsmitteln darauf. Im Tisch befand sich [I:I10_Drawer]eine Schublade[/I]. Neben dem Tisch erkannte ich [I:I10_Darkness_Machine]eine der berühmten Dunkelheitsmaschinen[/I], die angeblich Meister Gunnar selbst erfunden hatte. An der Wand hing vorbildlicherweise [I:I10_First_Aid_Kit]ein großer Erste-Hilfe-Kasten[/I]. In [L:L07_Lower_Floor]der westlichen Wand[/L] führte [I:I10_Labor_Door]eine Tür[/I] zurück zum Flur.";
+        }
+    }
     public static string Adv_L11_Storage_Room
     {
         get
@@ -4942,9 +5033,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ich befand mich in einem niedrigen, aber sehr lang gezoenen Lagerraum. Hier befand sich in endlosen Regalen der Krempel von Meister Gunnar. Besondere Aufmerksamkeit weckten dabei bei mir [I:I11_Left_Shelf]das linke Regal[/I] und [I:I11_Right_Shelf]das rechte Regal[/I] direkt vor mir, sowie [I:I11_Bird_Stand]ein Vogelständer[/I]. [I:I11_Door_Blue]Eine blaue Tür[/I] [L:L07_Lower_Floor]in der Nordwand führte nach draußen[/L].";
+                return "Ich befand mich in einem niedrigen, aber sehr lang gezogenen Lagerraum. Hier befand sich in endlosen Regalen der Krempel von Meister Gunnar. Besonders ins Auge fielen mir dabei [I:I11_Left_Shelf]das linke Regal[/I] und [I:I11_Right_Shelf]das rechte Regal[/I] direkt vor mir, sowie [I:I11_Bird_Stand]ein Vogelständer[/I]. [I:I11_Door_Blue]Eine blaue Tür[/I] [L:L07_Lower_Floor]in der Nordwand führte nach draußen[/L].";
             else
-                return "Ich befand mich in einem niedrigen, aber sehr lang gezoenen Lagerraum. Hier befand sich in endlosen Regalen der Krempel von Meister Gunnar. Besondere Aufmerksamkeit weckten dabei bei mir [I:I11_Left_Shelf]das linke Regal[/I] und [I:I11_Right_Shelf]das rechte Regal[/I] direkt vor mir, sowie [I:I11_Bird_Stand]ein Vogelständer[/I]. [I:I11_Door_Blue]Eine blaue Tür[/I] [L:L07_Lower_Floor]in der Nordwand führte nach draußen[/L].";
+                return "Ich befand mich in einem niedrigen, aber sehr lang gezogenen Lagerraum. Hier befand sich in endlosen Regalen der Krempel von Meister Gunnar. Besonders ins Auge fielen mir dabei [I:I11_Left_Shelf]das linke Regal[/I] und [I:I11_Right_Shelf]das rechte Regal[/I] direkt vor mir, sowie [I:I11_Bird_Stand]ein Vogelständer[/I]. [I:I11_Door_Blue]Eine blaue Tür[/I] [L:L07_Lower_Floor]in der Nordwand führte nach draußen[/L].";
         }
     }
     public static string Adv_L12_Sleeping_Room
@@ -5502,6 +5593,26 @@ public static partial class loca
                 return "Der wurmstichige Schrank stand nutzlos im Weg.";
         }
     }
+    public static string Adv_I04_Cupboard_Add
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Der Schrank war ein Stückweit von der Wand abgerückt.";
+            else
+                return "Der Schrank war ein Stückweit von der Wand abgerückt.";
+        }
+    }
+    public static string Adv_I04_Cupboard_Add2
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Auf dem Boden vor dem Schrank befanden sich Abschürfungen auf dem Boden, als wäre der Schrank öfters abgerückt worden.";
+            else
+                return "Auf dem Boden vor dem Schrank befanden sich Abschürfungen auf dem Boden, als wäre der Schrank öfters abgerückt worden.";
+        }
+    }
     public static string Adv_I04_Wall
     {
         get
@@ -5510,6 +5621,16 @@ public static partial class loca
                 return "Die steinerne Wand war grob gemauert und ganz schön schief.";
             else
                 return "Die steinerne Wand war grob gemauert und ganz schön schief.";
+        }
+    }
+    public static string Adv_I04_Floor
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Morscher Dielenboden, auf dem sich jede Menge Schrammen befanden, insbesondere vor dem Schrank.";
+            else
+                return "Morscher Dielenboden, auf dem sich jede Menge Schrammen befanden, insbesondere vor dem Schrank.";
         }
     }
     public static string Adv_I04_Flap
@@ -5570,6 +5691,16 @@ public static partial class loca
                 return "Über dem Atrium stand ein riesiger, heller Vollmond, fast zum Greifen nah.";
             else
                 return "Über dem Atrium stand ein riesiger, heller Vollmond, fast zum Greifen nah.";
+        }
+    }
+    public static string Adv_I05_Heaven
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Über dem Atrium war ein sternenklarer Nachthimmel zu sehen, voller heller Sterne und mit einem prächtigen Vollmond.";
+            else
+                return "Über dem Atrium war ein sternenklarer Nachthimmel zu sehen, voller heller Sterne und mit einem prächtigen Vollmond.";
         }
     }
     public static string Adv_I05_Pedestal
@@ -5810,9 +5941,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Das Wasser füllte den Brunnen fast bis zum Rand. Es reichte hinab bin in dunkle Tiefen.";
+                return "Das Wasser füllte den Brunnen fast bis zum Rand. Es reichte hinab bis in dunkle Tiefen.";
             else
-                return "Das Wasser füllte den Brunnen fast bis zum Rand. Es reichte hinab bin in dunkle Tiefen.";
+                return "Das Wasser füllte den Brunnen fast bis zum Rand. Es reichte hinab bis in dunkle Tiefen.";
         }
     }
     public static string Adv_I08_Washing_Machine
@@ -6080,9 +6211,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Unter der Klapep an der Dunkelheitsmaschine lag eine kleine Öffnung.";
+                return "Unter der Klappe an der Dunkelheitsmaschine lag eine kleine Öffnung.";
             else
-                return "Unter der Klapep an der Dunkelheitsmaschine lag eine kleine Öffnung.";
+                return "Unter der Klappe an der Dunkelheitsmaschine lag eine kleine Öffnung.";
         }
     }
     public static string Adv_I10_Switch
@@ -6240,9 +6371,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ein gewöhnlicher Badezimmerspielge, bis auf den Umstand, dass jemand etwas mit einem Permanentmarker auf den Spiegel geschrieben hatte.";
+                return "Ein gewöhnlicher Badezimmerspiegel, bis auf den Umstand, dass jemand etwas mit einem Permanentmarker einen Schriftzug auf den Spiegel hinterlassen hatte.";
             else
-                return "Ein gewöhnlicher Badezimmerspielge, bis auf den Umstand, dass jemand etwas mit einem Permanentmarker auf den Spiegel geschrieben hatte.";
+                return "Ein gewöhnlicher Badezimmerspiegel, bis auf den Umstand, dass jemand etwas mit einem Permanentmarker einen Schriftzug auf den Spiegel hinterlassen hatte.";
         }
     }
     public static string Adv_I14_Door_Red
@@ -7591,6 +7722,16 @@ public static partial class loca
                 return "Ich warf den Papageien in den Himmel. Er flog hoch hinauf und verschwand bald ganz aus meinem Blick.<br>Ich wartete und wartete, aber der Papagei kam nicht zurück.<br>Doch da, plötzlich, sah ich ihn herabsinken, in seinem Schnabel einen glimmenden Stein. Ein Mondstein! Er hatte es tatsächlich geschafft. Er sank herab und landete auf meinem Arm. Bereitwillig ließ er den Mondstein in meine offene Hand fallen.<br>\"Das war fürwahr eine wundervolle Reise. So nah war ich dem Mond noch nie\" seufzte der Papagei, mal ganz ohne Mikroagressionen.";
             else
                 return "Ich warf den Papageien in den Himmel. Er flog hoch hinauf und verschwand bald ganz aus meinem Blick.<br>Ich wartete und wartete, aber der Papagei kam nicht zurück.<br>Doch da, plötzlich, sah ich ihn herabsinken, in seinem Schnabel einen glimmenden Stein. Ein Mondstein! Er hatte es tatsächlich geschafft. Er sank herab und landete auf meinem Arm. Bereitwillig ließ er den Mondstein in meine offene Hand fallen.<br>\"Das war fürwahr eine wundervolle Reise. So nah war ich dem Mond noch nie\" seufzte der Papagei, mal ganz ohne Mikroagressionen.";
+        }
+    }
+    public static string Throw_Parrot_Moon
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Ich sollte den Papageien nicht grundlos durch die Gegend werfen. Auch wenn ihm ein paar Flugübungen sicherlich gut tun würden.";
+            else
+                return "Ich sollte den Papageien nicht grundlos durch die Gegend werfen. Auch wenn ihm ein paar Flugübungen sicherlich gut tun würden.";
         }
     }
 
@@ -9123,7 +9264,66 @@ public static partial class loca
                 return "Das Autosavegame ist veraltet. Das Spiel startet von vorne.";
         }
     }
-
+    public static string Use_Toilet
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Ich benutzte die Toilette. Sogleich fühlte ich mich besser.";
+            else
+                return "Ich benutzte die Toilette. Sogleich fühlte ich mich besser.";
+        }
+    }
+    public static string Use_Flushing
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Ich betätigte die Spülung. Sie funktionierte reibungslos.";
+            else
+                return "Ich betätigte die Spülung. Sie funktionierte reibungslos.";
+        }
+    }
+    public static string Verb_Up
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "rauf";
+            else
+                return "__up";
+        }
+    }
+    public static string Throw_Person_Solo
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Wohin sollte ich [Pl1,Nom] werfen?";
+            else
+                return "Wohin sollte ich [Pl1,Nom] werfen?";
+        }
+    }
+    public static string Noun_Heaven
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Heaven";
+            else
+                return "heaven";
+        }
+    }
+    public static string Noun_Spuren
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Spuren";
+            else
+                return "trails";
+        }
+    }
 }
 
 

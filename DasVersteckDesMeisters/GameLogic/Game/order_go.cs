@@ -409,6 +409,7 @@ public partial class Order: AbstractOrder
         // Nachträglich kann auch noch was ausgegeben werden, sogar abhängig vom Rückgabewert
         if (success)
         {
+            SetLocDescriptions();
         }
 
         // return of.Action;

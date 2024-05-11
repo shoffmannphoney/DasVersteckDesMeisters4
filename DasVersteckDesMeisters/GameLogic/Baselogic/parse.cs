@@ -2664,7 +2664,7 @@ namespace GameCore
 
                         if (p.Count > 0)
                         {
-                            errorText = String.Format(loca.Parse_NotSuitableForPerson, p[0].FullName(Co.CASE_NOM_UNDEF)!);
+                            errorText = String.Format(loca.Parse_NotSuitableForPerson, p[0].FullName(Co.CASE_DAT_UNDEF)!);
 
                         }
                         /*

@@ -175,7 +175,7 @@ public partial class Bridge : Java.Lang.Object
     }
     public void SetProtocol(DelVoidString initProtocol, DelVoidStringProtMode addProtocol)
     {
-        Context!.RunOnUiThread(() =>
+        Context!.RunOnUiThread( () =>
         {
             _initProtocol = initProtocol;
             _addProtocol = addProtocol;

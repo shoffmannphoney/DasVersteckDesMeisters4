@@ -332,6 +332,10 @@ namespace GameCore
                         {
                             lenSeq = 4;
                         }
+                        else if (s.Substring(ix, 4) == "[/P]")
+                        {
+                            lenSeq = 4;
+                        }
                         else if (s.Substring(ix, 4) == "[/L]")
                         {
                             lenSeq = 4;
@@ -357,6 +361,31 @@ namespace GameCore
                                 {
                                     string pString2 = s.Substring(ix, pos2);
                                     snew += "<Item:" + itemID.ToString("00000.##") + ">" + pString2 + "</Item>";
+                                    lenSeq = pos2;
+                                    // ix += pos2;
+                                }
+                            }
+                            else
+                                lenSeq = 1;
+                            //  ix += 1;
+                        }
+                        else if (s.Substring(ix, 3) == "[P:")
+                        {
+                            int pos = s.Substring(ix + 3).IndexOf(']');
+                            if (pos != -1)
+                            {
+                                string pString3 = s.Substring(ix + 3, pos);
+                                itemID = SearchItemID(pString3);
+                                // Link
+                                // sOut += itemID.ToString();
+
+                                ix += 4 + pos;
+
+                                int pos2 = s.Substring(ix).IndexOf('[');
+                                if (pos2 != -1)
+                                {
+                                    string pString2 = s.Substring(ix, pos2);
+                                    snew += "<Person:" + itemID.ToString("00000.##") + ">" + pString2 + "</Person>";
                                     lenSeq = pos2;
                                     // ix += pos2;
                                 }
@@ -1073,9 +1102,11 @@ namespace GameCore
                             Item? iVP = null;
                             Topic? t = null;
                             string? pString = null;
+                            string? insertString = null;
                             int aocase = Co.CASE_AKK;
                             int verbID = -1;
                             int itemID = 0;
+                            int personID = 0;
                             int locationID = 0;
                             int dirID = 0;
 
@@ -1087,6 +1118,10 @@ namespace GameCore
                             {
                                 lenSeq = 4;
                             }
+                            else if (FindString(s, ix, "[/P]"))
+                            {
+                                lenSeq = 4;
+                            }
                             else if (FindString(s, ix, "[/L]"))
                             {
                                 lenSeq = 4;
@@ -1095,6 +1130,42 @@ namespace GameCore
                             else if (FindString(s, ix, "[/D]"))
                             {
                                 lenSeq = 4;
+                            }
+                            else if ( FindString(s,ix, "[S1]"))
+                            {
+                                lenSeq = 4;
+                                insertString = (string)obj[0];
+                                snew.Append(insertString);
+                            }
+                            else if (FindString(s, ix, "[S2]"))
+                            {
+                                lenSeq = 4;
+                                insertString = (string)obj[1];
+                                snew.Append(insertString);
+                            }
+                            else if (FindString(s, ix, "[S3]"))
+                            {
+                                lenSeq = 4;
+                                insertString = (string)obj[2];
+                                snew.Append(insertString);
+                            }
+                            else if (FindString(s, ix, "[S4]"))
+                            {
+                                lenSeq = 4;
+                                insertString = (string)obj[3];
+                                snew.Append(insertString);
+                            }
+                            else if (FindString(s, ix, "[S5]"))
+                            {
+                                lenSeq = 4;
+                                insertString = (string)obj[4];
+                                snew.Append(insertString);
+                            }
+                            else if (FindString(s, ix, "[S6]"))
+                            {
+                                lenSeq = 4;
+                                insertString = (string)obj[5];
+                                snew.Append(insertString);
                             }
                             // else if ( s3.Equals( "[I:") )
                             else if (FindString(s, ix, "[I:"))
@@ -1121,6 +1192,38 @@ namespace GameCore
                                         snew.Append(">");
                                         snew.Append(pString2);
                                         snew.Append("</Item>");
+                                        lenSeq = pos2;
+                                        // ix += pos2;
+                                    }
+                                }
+                                else
+                                    lenSeq = 1;
+                                //  ix += 1;
+                            }
+                            else if (FindString(s, ix, "[P:"))
+                            {
+                                int pos = s.IndexOf(']', ix + 3);
+                                // int pos = s.Substring(ix + 3).IndexOf(']');
+                                if (pos != -1)
+                                {
+                                    pos -= ix + 3;
+                                    string pString3 = s.Substring(ix + 3, pos);
+                                    personID = SearchPersonID(pString3);
+                                    // Link
+                                    // sOut += itemID.ToString();
+
+                                    ix += 4 + pos;
+
+                                    int pos2 = s.Substring(ix).IndexOf('[');
+                                    if (pos2 != -1)
+                                    {
+                                        string pString2 = s.Substring(ix, pos2);
+                                        // snew.Append( "<Item:" + itemID.ToString("00000.##") + ">" + pString2 + "</Item>" );
+                                        snew.Append("<Person:");
+                                        snew.Append(personID.ToString("00000.##"));
+                                        snew.Append(">");
+                                        snew.Append(pString2);
+                                        snew.Append("</Person>");
                                         lenSeq = pos2;
                                         // ix += pos2;
                                     }
@@ -1864,6 +1967,10 @@ namespace GameCore
                         {
                             lenSeq = 4;
                         }
+                        else if (s4 == "[/P]")
+                        {
+                            lenSeq = 4;
+                        }
                         else if (s4 == "[/L]")
                         {
                             lenSeq = 4;
@@ -2600,6 +2707,17 @@ namespace GameCore
             object o = pi!.GetValue(_advGame!.CA!, null)!;
 
             return ((o as Item)!.ID)!;
+
+        }
+        static int SearchPersonID(string s)
+        {
+            // s = "VT_" + s;
+            // Noloca: 001
+            System.Reflection.PropertyInfo? pi = typeof(CoAdv).GetProperty(s, BindingFlags.Public | BindingFlags.Instance);
+
+            object o = pi!.GetValue(_advGame!.CA!, null)!;
+
+            return ((o as Person)!.ID)!;
 
         }
         static int SearchlocationID(string s)

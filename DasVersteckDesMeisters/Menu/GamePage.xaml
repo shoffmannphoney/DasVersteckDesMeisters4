@@ -166,7 +166,7 @@
                                                     <Button x:Name="Mike" VerticalOptions="Center" FontSize="25" StyleClass="Button_Normal_NoBorder_Big" Clicked="Clicked_Microphone" HorizontalOptions="Center" FontFamily="Fa-Solid" Text="{x:Static core:FaSolid.Microphone}"/>
                                                 </Grid>
                                                 <Grid Grid.Column="2" StyleClass="Grid_BGInputline" Margin="0,4,0,3">
-                                                    <Label StyleClass="Label_Normal" HorizontalOptions="Center" Margin="0" Padding="0,5,0,0" VerticalOptions="Start" Text=">"/>
+                                                    <Label StyleClass="Label_Normal" HorizontalOptions="Center" Margin="0" Padding="0,5,0,0" VerticalOptions="Center" Text=">"/>
                                                 </Grid>
                                                 <Grid Grid.Column="3" StyleClass="Grid_BGInputline" Margin="0,4,0,3" >
                                                     <Entry x:Name="Inputline" StyleClass="Entry_Normal" Completed="UpdateMessage" Margin="-1,0,0,0" Text=""/>

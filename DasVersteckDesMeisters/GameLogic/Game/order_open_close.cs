@@ -130,6 +130,11 @@ public partial class Order: AbstractOrder
         Person person = PTL.GetFirstPerson()!; //  GetPersonRef(Adv_PT[1].WordID);
 
 
+        if( person.ID == CA.Person_Knights_Armor.ID )
+        {
+            AdvGame.StoryOutput(loca.Open_Knights_Armor);
+
+        }
         // Pre
         // Base
         if (success)

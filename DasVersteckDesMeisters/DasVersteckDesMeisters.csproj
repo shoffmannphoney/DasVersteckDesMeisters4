@@ -146,7 +146,6 @@
 		<Folder Include="Core\" />
 		<Folder Include="GameSupport\" />
 		<Folder Include="Pages\" />
-		<Folder Include="Resources\Styles\" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -273,6 +272,16 @@
 	  <EmbeddedResource Include="Resources\Raw\HTMLPage4.html" />
 	  <EmbeddedResource Include="Resources\Raw\HTMLPage5.html" />
 	  <EmbeddedResource Include="Resources\Raw\HTMLPage6.html" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Compile Update="Resources\Styles\ThemeI.xaml.cs">
+	    <DependentUpon>ThemeI.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+	<ItemGroup>
+	  <MauiXaml Update="Resources\Styles\ThemeI.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadGenericExceptionInfoBarDasVersteckDesMeistersHideInfoBar="True" /></VisualStudio></ProjectExtensions>
 

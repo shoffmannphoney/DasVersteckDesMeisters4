@@ -203,17 +203,19 @@ public partial class HomePage : ContentPage, IMenuExtension
             return false;
 
 
-        if (GD.AutoloadFailed == true)
+        
+        if (GD.GreetingText != null)
+        {
+            ShowDialog(GD.GreetingText);
+            GD.GreetingText = null;
+            GD.AutoloadFailed = false;
+        }
+        else if (GD.AutoloadFailed == true)
         {
             GD.AutoloadFailed = false;
 
             ShowDialog(loca.MAUI_Infodialog_Autosave_Failed);
 
-        }
-        else if (GD.GreetingText != null)
-        {
-            ShowDialog(GD.GreetingText);
-            GD.GreetingText = null;
         }
         return true;
     }

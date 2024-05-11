@@ -2838,12 +2838,13 @@ namespace GameCore
  
 
                         var it2CatList = it2.Categories!.List.GetEnumerator();
+                        it2CatList.MoveNext();
 
                         foreach ( CategoryRel cr in it.Categories!.List.Values)
                         {
                             if (it2CatList.Current.Value != null)
                             {
-                                if ((cr.CategoryID == it2CatList.Current.Value.CategoryID)
+                                if ((cr.CategoryID != it2CatList.Current.Value.CategoryID)
                                         || (cr.CounterCategoryID != it2CatList.Current.Value.CounterCategoryID)
                                   )
                                     listCategoryRel = true;
@@ -3373,12 +3374,13 @@ namespace GameCore
 
 
                     var pe2CatList = pe2.Categories!.List.GetEnumerator();
+                    pe2CatList.MoveNext();
 
                     foreach (CategoryRel cr in pe.Categories!.List.Values)
                     {
                         if (pe2CatList.Current.Value != null)
                         {
-                            if ((cr.CategoryID == pe2CatList.Current.Value.CategoryID)
+                            if ((cr.CategoryID != pe2CatList.Current.Value.CategoryID)
                                     || (cr.CounterCategoryID != pe2CatList.Current.Value.CounterCategoryID)
                               )
                                 listCategoryRel = true;
@@ -6353,6 +6355,7 @@ namespace GameCore
             }
             catch (Exception e)
             {
+                GlobalData.AddLog("Load Savegame failed: " + e.Message.ToString(), IGlobalData.protMode.crisp);
                 success = false;
             }
             return success;
