@@ -28,6 +28,11 @@ public partial class Adv : AdvBase
         PList.AddVerb(CA!.Verb_Story);
         PLL.Add(new ParseLine(CB!.PL_Story, PList, Orders!.WriteStory));
 
+        // Script
+        PList = new ParseTokenList();
+        PList.AddVerb(CA!.Verb_Script);
+        PLL.Add(new ParseLine(CB!.PL_Story, PList, Orders!.Script));
+
         // Englisch
         PList = new ParseTokenList();
         PList.AddVerb(CB!.Verb_English);
@@ -473,6 +478,12 @@ public partial class Adv : AdvBase
         PList = new ParseTokenList();
         PList.AddVerb(CB!.Verb_location);
         PLL.Add(new ParseLine(CB!.PL_location, PList, Orders!.location));
+
+        PList = new ParseTokenList();
+        PList.AddVerb(CB!.Verb_Examine);
+        PList.AddPerson();
+        PList.AddPrep(CB!.Prep_um);
+        PLL.Add(new ParseLine(CB!.PL_location, PList, Orders!.locationP));
 
         PList = new ParseTokenList();
         PList.AddVerb(CB!.Verb_Examine);
@@ -4307,6 +4318,11 @@ public partial class Adv : AdvBase
         PList = new ParseTokenList();
         PList.AddVerb(CA!.Verb_Story);
         PLLEng.Add(new ParseLine(CB!.PL_Story, PList, Orders!.WriteStory));
+
+        // Script
+        PList = new ParseTokenList();
+        PList.AddVerb(CA!.Verb_Script);
+        PLLEng.Add(new ParseLine(CB!.PL_Story, PList, Orders!.Script));
 
         // Deutsch
         PList = new ParseTokenList();

@@ -55268,6 +55268,16 @@ public static partial class loca
                 return "scatter";
         }
     }
+    public static string Verb_streu
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "streu";
+            else
+                return "_scatter";
+        }
+    }
     public static string Adv_13086
     {
         get

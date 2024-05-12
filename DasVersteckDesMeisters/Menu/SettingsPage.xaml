@@ -67,7 +67,7 @@
                                     <RowDefinition Height="90"/>
                                     <RowDefinition Height="240"/>
                                     <RowDefinition Height="90"/>
-                                    <RowDefinition Height="620"/>
+                                    <RowDefinition Height="540"/>
                                     <RowDefinition Height="90"/>
                                     <RowDefinition Height="420"/>
                                     <RowDefinition Height="90"/>
@@ -206,15 +206,15 @@
                                 <Label x:Name="ThemesLabel" Grid.Row="20" StyleClass="Label_Normal" HorizontalOptions="Center" VerticalOptions="End" Margin="0,0,0,15" FontSize="Large"  Text="Themes"/>
                                 <Grid x:Name="ThemesElement" Grid.Row="21" WidthRequest="300">
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="640"/>
+                                        <RowDefinition Height="540"/>
                                     </Grid.RowDefinitions>
                                     <CollectionView x:Name="ThemesCV" Grid.Row="0" ItemsSource="{Binding Themes}" SelectionMode="Single" SelectedItem="{Binding SelectedTheme}" SelectionChanged="OnCollectionViewSelectionChanged" Margin="0,0,0,0">
                                         <CollectionView.ItemTemplate>
                                             <DataTemplate x:DataType="core:ThemeInfo">
-                                                <Border StrokeThickness="1" BackgroundColor="Black" WidthRequest="300" HeightRequest="70" Stroke="White">
+                                                <Border StrokeThickness="1" BackgroundColor="Black" WidthRequest="300" HeightRequest="60" Stroke="White">
                                                     <Grid Padding="1" RowDefinitions="Auto" WidthRequest="296" ColumnDefinitions="*" RowSpacing="6" ColumnSpacing="6">
-                                                        <Border StrokeThickness="0" HeightRequest="66" WidthRequest="296" Grid.Column="0" HorizontalOptions="Center" BackgroundColor="{Binding Col_BGBG}">
-                                                            <Border StrokeThickness="0" WidthRequest="276" HeightRequest="46" Margin="10" Padding ="2" HorizontalOptions="Center" BackgroundColor="{Binding Col_BG}">
+                                                        <Border StrokeThickness="0" HeightRequest="56" WidthRequest="296" Grid.Column="0" HorizontalOptions="Center" BackgroundColor="{Binding Col_BGBG}">
+                                                            <Border StrokeThickness="0" WidthRequest="276" HeightRequest="36" Margin="10" Padding ="2" HorizontalOptions="Center" BackgroundColor="{Binding Col_BG}">
                                                                 <Label StyleClass="Label_Title" Text="{Binding ViewName}" Padding="2" VerticalOptions="Center" HorizontalOptions="Center" TextColor="{Binding Col_FG}"/>
                                                             </Border>
                                                         </Border>

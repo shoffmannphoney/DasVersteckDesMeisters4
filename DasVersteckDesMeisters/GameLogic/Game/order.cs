@@ -550,7 +550,24 @@ namespace GameCore
             }
 
         }
+        public bool locationP(Person PersonID, ParseTokenList PTL)
+        {
+            OrderFeedback of = new OrderFeedback();
+            bool success = true;
 
+            Person person1 = PTL.GetFirstPerson()!; //  GetItemRef(Adv_PT[1].WordID);
+
+            if (person1.ID == CA!.Person_I!.ID)
+            {
+                location(PersonID, PTL);
+            }
+            else
+            {
+                AdvGame!.StoryOutput(Helper.Insert(loca.locationReflexive_Fail, person1!));
+
+            }
+            return (success);
+        }
         public override bool  location(Person PersonID, ParseTokenList PTL)
         {
             OrderFeedback of = new OrderFeedback();
@@ -1797,6 +1814,11 @@ namespace GameCore
             Item item1 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[2].WordID);
 
             // Pre
+            if( item1.ID == CA.I10_Darkness_Machine.ID)
+            {
+                Examine(PersonID, PTL);
+                success = true;
+            }
 
             // base
             if (success)
@@ -2146,7 +2168,7 @@ namespace GameCore
                 Persons.TransferPerson( CA!.Person_Fish.ID, CB.LocType_Person, CA.Person_I!.ID);
                 Persons.TransferPerson(CA!.Person_Parrot.ID, CB.LocType_Person, CA.Person_I!.ID);
 
-                A.ActLoc = CA.L05_Atrium;
+                A.ActLoc = CA.L10_Laboratory;
                 Persons.TransferPerson(CA.Person_I!.ID, CB.LocType_Person, A.ActLoc);
                 locations.ShowlocationFull(A.ActLoc);
                 success = true;
@@ -5262,6 +5284,11 @@ namespace GameCore
                 TouchPW(PersonID, PTL);
                 success = true;
             }
+            if (person2.ID == CA.Person_Knights_Armor.ID && item1.ID == CA!.I00_Polishing_Rag.ID)
+            {
+                CleanPW(PersonID, PTL);
+                success = true;
+            }
 
             if (!success)
             {
@@ -6372,6 +6399,27 @@ namespace GameCore
 
             Item item1 = PTL.GetFirstItem()!;
 
+            if( item1.ID == CA.I10_Labor_Table.ID )
+            {
+                Examine( PersonID, PTL);
+                success = true;
+            }
+            else if (item1.ID == CA.I10_Darkness_Machine.ID)
+            {
+                Examine(PersonID, PTL);
+                success = true;
+            }
+            else if (item1.ID == CA.I04_Opening.ID)
+            {
+                ExamineIn(PersonID, PTL);
+                success = true;
+            }
+            else if (item1.ID == CA.I14_Opening.ID)
+            {
+                ExamineIn(PersonID, PTL);
+                success = true;
+            }
+
             if (!success)
             {
                 AdvGame!.StoryOutput(  Helper.Insert(loca.Order_Search_I0_49_Strohballen_1864, item1!.ID ));
@@ -7393,6 +7441,13 @@ namespace GameCore
         {
             if( AdvGame!.UIS!.WriteStory() )
                 AdvGame!.StoryOutput(loca.Order_Story_Info);
+
+            return false;
+        }
+
+        public bool Script(Person PersonID, ParseTokenList PTL)
+        {
+            AdvGame!.StoryOutput(loca.Order_Save_2223);
 
             return false;
         }

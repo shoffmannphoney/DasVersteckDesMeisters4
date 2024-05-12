@@ -29,7 +29,7 @@ public partial class Adv: AdvBase
         CA!.Verb_Spread = Verbs!.AddLoca( "Verb_streue");
 
         CA!.Verb_Story = Verbs!.AddLoca("Order_Story");
-        Verbs.AddLoca(CA!.Verb_Story.ID, "Verb_Script");
+        CA!.Verb_Script = Verbs.AddLoca("Verb_Script");
 
         CA!.Verb_Undo = Verbs!.AddLoca("Verb_Undo");
 
@@ -796,9 +796,14 @@ public partial class Adv: AdvBase
         Verbs.AddLocaLoca(loca.Verb_erhelle, CA!.Verb_Enlight.ID, "Verb_erhelle");
 
         CA!.Verb_Spread = Verbs!.AddLocaLoca(loca.Verb_streue, "Verb_streue");
+        Verbs.AddLocaLoca(loca.Verb_streu, CA!.Verb_Spread.ID, "Verb_streu");
 
         CA!.Verb_Story = Verbs!.AddLocaLoca( loca.Order_Story, "Order_Story");
-        Verbs.AddLocaLoca( loca.Verb_Script, CA!.Verb_Story.ID, "Verb_Script");
+
+        CA!.Verb_Script = Verbs.AddLocaLoca( loca.Verb_Script, "Verb_Script");
+        Verbs.AddLocaLoca(loca.Verb_Skript, CA!.Verb_Script.ID, "Verb_Skript");
+        Verbs.AddLocaLoca(loca.Verb_Transkript, CA!.Verb_Script.ID, "Verb_Transkript");
+        Verbs.AddLocaLoca(loca.Verb_Transcript, CA!.Verb_Script.ID, "Verb_Transcript");
 
         CA!.Verb_Undo = Verbs!.AddLocaLoca( loca.Verb_Undo, "Verb_Undo");
 

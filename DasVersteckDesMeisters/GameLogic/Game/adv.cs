@@ -8823,6 +8823,7 @@ namespace GameCore
         public Verb? Verb_Spread;
 
         public Verb? Verb_Story;
+        public Verb? Verb_Script;
         public Verb? Verb_Undo;
         public Verb? Verb_Verb_W;
 

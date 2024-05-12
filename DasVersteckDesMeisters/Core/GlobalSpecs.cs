@@ -1978,9 +1978,9 @@ public class Version
     public Version()
     {
         this.Version1 = 1;
-        this.Version2 = 2;
+        this.Version2 = 3;
         this.Version3 = 0;
-        this.VersionDate = new DateTime(2024, 04, 28);
+        this.VersionDate = new DateTime(2024, 05, 12);
     }
 
     public int Version1

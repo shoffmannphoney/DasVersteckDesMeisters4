@@ -460,6 +460,7 @@ public partial class Adv: AdvBase
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Readable));
 
         CA!.I10_Labor_Table = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Labortisch! }, new List<Adj> { CA!.Adj_stabil! }, Co.SEX_MALE, CB!.LocType_Loc, CA!.L10_Laboratory, loca.Adv_I10_Labor_Table, "Adv_I10_Labor_Table", Co.SZ_small, true, false, Nouns, Adjs));
+        Items!.Last().SynNames = new List<Noun> { CA!.Noun_Tisch };
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
@@ -701,7 +702,7 @@ public partial class Adv: AdvBase
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Readable));
 
-        CA!.I14_Tiles = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Wand! }, new List<Adj> { CA!.Adj_gekachelt}, Co.SEX_FEMALE_PL, CB!.LocType_Loc, CA!.L14_Bathroom, loca.Adv_I14_Kacheln, "Adv_I14_Kacheln", Co.SZ_small, true, false, Nouns, Adjs));
+        CA!.I14_Tiles = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Wand! }, new List<Adj> { CA!.Adj_gekachelt}, Co.SEX_FEMALE, CB!.LocType_Loc, CA!.L14_Bathroom, loca.Adv_I14_Kacheln, "Adv_I14_Kacheln", Co.SZ_small, true, false, Nouns, Adjs));
         Items!.Last().SynNames = new List<Noun> { CA!.Noun_Kachel, CA!.Noun_Kacheln };
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
