@@ -2533,6 +2533,8 @@ namespace GameCore
             }
 
             // Neue Nouns
+            CA!.Noun_Krempel = Nouns!.Add(Noun.NounLoca("Noun_Krempel"));
+
             CA!.Noun_Spuren = Nouns!.Add(Noun.NounLoca("Noun_Spuren"));
             CA!.Noun_Abdeckung = Nouns!.Add(Noun.NounLoca("Noun_Abdeckung"));
             CA!.Noun_Deckel = Nouns!.Add(Noun.NounLoca("Noun_Deckel"));
@@ -3982,6 +3984,7 @@ namespace GameCore
             string s = loca.Adv_InitializeGame_Person_I_3263;
 
             // Neue Nouns
+            CA!.Noun_Krempel = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Krempel, "Noun_Krempel"));
             CA!.Noun_Spuren = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Spuren, "Noun_Spuren"));
             CA!.Noun_Abdeckung = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Abdeckung, "Noun_Abdeckung"));
             CA!.Noun_Deckel = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Deckel, "Noun_Deckel"));
@@ -9019,6 +9022,8 @@ namespace GameCore
         public Verb? Verb_Accede;
 
         public Verb? Verb_Be;
+        public Verb? Verb_Swim;
+        public Verb? Verb_Kick;
 
         public Verb? Verb_Repair;
 
@@ -12902,6 +12907,7 @@ namespace GameCore
         public Noun? Noun_Versteck;
 
         // Neue Nouns
+        public Noun? Noun_Krempel;
         public Noun? Noun_Spuren;
         public Noun? Noun_Abdeckung;
         public Noun? Noun_Deckel;
@@ -13610,6 +13616,7 @@ namespace GameCore
         public Item? I04_Floor { get; set; }
         public Item? I04_Flap { get; set; }
         public Item? I04_Opening { get; set; }
+        public Item? I04_Clutter { get; set; }
         public Item? I04_Door { get; set; }
 
         public Item? I05_Pentagram { get; set; }
@@ -13677,6 +13684,7 @@ namespace GameCore
         public Item? I11_Right_Shelf { get; set; }
         public Item? I11_Bird_Stand { get; set; }
         public Item? I11_Door_Blue { get; set; }
+        public Item? I11_Clutter { get; set; }
 
         public Item? I12_Matress { get; set; }
         public Item? I12_Door{ get; set; }
@@ -13689,6 +13697,7 @@ namespace GameCore
         public Item? I13_Fridge { get; set; }
         public Item? I13_Freezer { get; set; }
         public Item? I13_Door_White { get; set; }
+        public Item? I13_Sideboard { get; set; }
 
         public Item? I14_Mirror { get; set; }
         public Item? I14_Writing { get; set; }

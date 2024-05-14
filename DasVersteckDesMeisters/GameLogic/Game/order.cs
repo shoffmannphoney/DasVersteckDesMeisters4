@@ -1489,6 +1489,18 @@ namespace GameCore
             Item item1 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[1].WordID);
             Item item2 = PTL.GetSecondItem()!; //  GetItemRef(Adv_PT[3].WordID);
 
+            if (        ( item1 == CA.I00_Magic_Candle && item2 == CA.I10_Metall_Tray)
+                    || (item1 == CA.I00_Magic_Candle && item2 == CA.I10_Bracket && CA.Status_Schale_Befestigt.Val > 0 )
+               )
+            {
+                ParseTokenList PT = new ParseTokenList();
+                PT.AddVerb(CA!.Verb_Heat);
+                PT.AddItem(CA!.I10_Metall_Tray);
+                PT.AddPrep(CB!.Prep_mit);
+                PT.AddItem(CA!.I00_Magic_Candle);
+                Heat(PersonID, PT);
+                handled = true;
+            }
             // Pre
 
             if (!handled)
@@ -2397,6 +2409,50 @@ namespace GameCore
             }
             return (handled);
         }
+        public bool SwimIn(Person PersonID, ParseTokenList PTL)
+        {
+            bool handled = false;
+            Item item1 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[1].WordID);
+
+            if (item1 == CA.I08_Water)
+            {
+                AdvGame!.StoryOutput(loca.Swim_In_Well);
+                handled = true;
+            }
+            if (!handled)
+            {
+                AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.Swim_In_Fail, item1!.ID));
+            }
+            return (handled);
+        }
+        public bool Kick(Person PersonID, ParseTokenList PTL)
+        {
+            bool handled = false;
+            Item item1 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[1].WordID);
+
+            if (!handled)
+            {
+                AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.Kick_Fail, item1!.ID));
+            }
+            return (handled);
+        }
+        public bool DipIn(Person PersonID, ParseTokenList PTL)
+        {
+            bool handled = false;
+            Item item1 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[1].WordID);
+
+            if( item1 == CA.I08_Water )
+            {
+                AdvGame!.StoryOutput(loca.Dive_In_Well);
+                handled = true;
+            }
+            if (!handled)
+            {
+                AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.Dive_In_Fail, item1!.ID));
+            }
+            return (handled);
+        }
+
 
         public bool Dip(Person PersonID, ParseTokenList PTL)
         {
@@ -4989,6 +5045,7 @@ namespace GameCore
                 PT.AddItem(CA!.I00_Supermagic_Powder);
                 PT.AddPrep(CB!.Prep_auf);
                 PT.AddItem(CA!.I05_Pentagram);
+                Tip(PersonID, PT);
                 handled = true;
             }
             else if ((item1.ID == CA!.I03_Pentagram.ID && item2.ID == CA!.I00_Magic_Powder.ID)
@@ -4997,6 +5054,19 @@ namespace GameCore
             {
 
                 AdvGame!.StoryOutput(loca.UseW_Pentagram_Powder);
+                handled = true;
+            }
+            else if ((item1.ID == CA!.I00_Magic_Candle.ID && item2.ID == CA!.I10_Metall_Tray.ID)
+                       || (item2.ID == CA!.I00_Magic_Candle.ID && item1.ID == CA!.I10_Metall_Tray.ID)
+                   )
+            {
+
+                ParseTokenList PT = new ParseTokenList();
+                PT.AddVerb(CA!.Verb_Heat);
+                PT.AddItem(CA!.I10_Metall_Tray);
+                PT.AddPrep(CB!.Prep_mit);
+                PT.AddItem(CA!.I00_Magic_Candle);
+                Heat(PersonID, PT);
                 handled = true;
             }
             if (!handled)
@@ -5537,6 +5607,11 @@ namespace GameCore
                 Push( PersonID, PTL);
                 handled = true;
             }
+            if (item1.ID == CA.I14_Flushing.ID)
+            {
+                Push(PersonID, PTL);
+                handled = true;
+            }
 
             // Hier Erfolgsoperationen auflisten und Success auf true setzen
             if (!handled)
@@ -5615,6 +5690,11 @@ namespace GameCore
             else if (item1.ID == CA!.I01_Mist.ID || item1.ID == CA!.I02_Mist.ID)
             {
                 AdvGame.StoryOutput(loca.Push_Mist);
+                handled = true;
+            }
+            else if (item1.ID == CA.I14_Flushing.ID)
+            {
+                Push(PersonID, PTL);
                 handled = true;
             }
 
@@ -7447,7 +7527,7 @@ namespace GameCore
 
         public bool Script(Person PersonID, ParseTokenList PTL)
         {
-            AdvGame!.StoryOutput(loca.Order_Save_2223);
+            AdvGame!.StoryOutput(loca.Info_Script);
 
             return false;
         }

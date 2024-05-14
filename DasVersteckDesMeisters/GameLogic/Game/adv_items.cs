@@ -170,6 +170,12 @@ public partial class Adv: AdvBase
         Items!.Last().CanPutIn = true;
         Items!.Last().StorageIn = 20;
 
+        CA!.I04_Clutter = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Geruempel! }, null, Co.SEX_NEUTER, CB!.LocType_Loc, CA!.L04_Shabby_Little_Chamber, loca.Adv_I04_Clutter, "Adv_I04_Clutter", Co.SZ_small, true, false, Nouns, Adjs));
+        Items!.Last().SynNames = new List<Noun> { CA!.Noun_Krempel };
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
+        Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
+
         CA!.I05_Pentagram = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Pentagramm! }, null, Co.SEX_NEUTER, CB!.LocType_Loc, CA!.L05_Atrium, loca.Adv_I05_Pentagram, "Adv_I05_Pentagram", Co.SZ_small, true, false, Nouns, Adjs));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
@@ -589,6 +595,12 @@ public partial class Adv: AdvBase
         Items!.Last().CanPutOn = true;
         Items!.Last().StorageOn = 30;
 
+        CA!.I11_Clutter = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Krempel! }, null, Co.SEX_MALE, CB!.LocType_Loc, CA!.L11_Storage_Room, loca.Adv_I11_Clutter, "Adv_I11_Clutter", Co.SZ_small, true, false, Nouns, Adjs));
+        Items!.Last().SynNames = new List<Noun> { CA!.Noun_Geruempel };
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
+        Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
+
         CA!.I12_Door = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Tuer! }, new List<Adj> { CA!.Adj_wuchtig! }, Co.SEX_FEMALE, CB!.LocType_Loc, CA!.L12_Sleeping_Room, loca.Adv_I12_Door, "Adv_I12_Door", Co.SZ_small, true, false, Nouns, Adjs));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_GoThroughable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
@@ -673,6 +685,11 @@ public partial class Adv: AdvBase
         Items!.Last().IsClosed = true;
         CounterDoorInit(Items!.Last(), CA!.I06_Door_White!.ID);
         CounterDoorInit(CA!.I06_Door_White, Items!.Last()!.ID);
+
+        CA!.I13_Sideboard = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Anrichte! }, null, Co.SEX_FEMALE, CB!.LocType_Loc, CA!.L13_Kitchen, loca.Adv_I13_Sideboard, "Adv_I13_Sideboard", Co.SZ_small, true, false, Nouns, Adjs));
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
+        Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
+        Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
 
         CA!.I14_Door_Red = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Tuer! }, new List<Adj> { CA!.Adj_rot! }, Co.SEX_FEMALE, CB!.LocType_Loc, CA!.L14_Bathroom, loca.Adv_I14_Door_Red, "Adv_I14_Door_Red", Co.SZ_small, true, false, Nouns, Adjs));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_GoThroughable));

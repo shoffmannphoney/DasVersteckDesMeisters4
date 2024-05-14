@@ -5,7 +5,7 @@
     x:Class="Phoney_MAUI.Resources.Styles.ThemeI">
     <x:String x:Key="Type">Theme</x:String>
     <Color x:Key="BGBG">#fffff4</Color>
-    <Color x:Key="BG">#f2ede1</Color>
+    <Color x:Key="BG">#F2ede1</Color>
     <Color x:Key="FG">#00000a</Color>
     <Color x:Key="BGMC">#fffff4</Color>
     <Color x:Key="FGMC">#00000a</Color>

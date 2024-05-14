@@ -22,6 +22,12 @@ public partial class Adv: AdvBase
         Verbs.AddLoca(CA!.Verb_Be.ID, "Verb_ist");
         Verbs.AddLoca(CA!.Verb_Be.ID, "Verb_war");
 
+        CA!.Verb_Swim = Verbs!.AddLoca("Verb_Schwimme");
+        Verbs.AddLoca(CA!.Verb_Swim.ID, "Verb_Schwimm");
+
+        CA!.Verb_Kick = Verbs!.AddLoca("Verb_Trete");
+        Verbs.AddLoca(CA!.Verb_Kick.ID, "Verb_Tritt");
+
         CA!.Verb_Enlight = Verbs!.AddLoca("Verb_beleuchte");
         Verbs.AddLoca(CA!.Verb_Enlight.ID, "Verb_bescheine");
         Verbs.AddLoca(CA!.Verb_Enlight.ID, "Verb_erhelle");
@@ -791,6 +797,12 @@ public partial class Adv: AdvBase
     }
     public void InitVerbsPart2Fast(int size = -1)
     {
+        CA!.Verb_Swim = Verbs!.AddLocaLoca(loca.Verb_Schwimme, "Verb_Schwimme");
+        Verbs.AddLocaLoca(loca.Verb_Schwimm, CA!.Verb_Swim.ID, "Verb_Schwimm");
+
+        CA!.Verb_Kick = Verbs!.AddLocaLoca(loca.Verb_Trete, "Verb_Trete");
+        Verbs.AddLocaLoca(loca.Verb_Tritt, CA!.Verb_Kick.ID, "Verb_Tritt");
+
         CA!.Verb_Enlight = Verbs!.AddLocaLoca(loca.Verb_beleuchte, "Verb_beleuchte");
         Verbs.AddLocaLoca(loca.Verb_bescheine, CA!.Verb_Enlight.ID, "Verb_bescheine");
         Verbs.AddLocaLoca(loca.Verb_erhelle, CA!.Verb_Enlight.ID, "Verb_erhelle");

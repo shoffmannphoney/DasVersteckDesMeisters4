@@ -1691,7 +1691,7 @@ public class GlobalSpecs : IGlobalSpecs
                                     Col_BGInputline= BrushFromString( "#fffff4" )!,
 
                                     Webcol_BGBG = "#fffff4",
-                                    Webcol_BG = "#f2ede1",
+                                    Webcol_BG = "#f4ede1",
                                     Webcol_FG = "#00000a",
                                     Webcol_BGInactive = "#dad5cb",
                                     Webcol_FGInactive = "#00000a",

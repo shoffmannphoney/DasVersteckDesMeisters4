@@ -23,6 +23,42 @@ public partial class Adv : AdvBase
 
         PLL = new ParseLineList();
 
+        // Tauche in
+        PList = new ParseTokenList();
+        PList.AddVerb(CA!.Verb_Dip);
+        PList.AddItem();
+        PLL.Add(new ParseLine(CB!.PL_Story, PList, Orders!.DipIn));
+
+        PList = new ParseTokenList();
+        PList.AddVerb(CA!.Verb_Dip);
+        PList.AddPrep(CB!.Prep_in);
+        PList.AddItem();
+        PLL.Add(new ParseLine(CB!.PL_Story, PList, Orders!.DipIn));
+
+        // Swim in
+        PList = new ParseTokenList();
+        PList.AddVerb(CA!.Verb_Swim);
+        PList.AddItem();
+        PLL.Add(new ParseLine(CB!.PL_Story, PList, Orders!.SwimIn));
+
+        PList = new ParseTokenList();
+        PList.AddVerb(CA!.Verb_Swim);
+        PList.AddPrep(CB!.Prep_in);
+        PList.AddItem();
+        PLL.Add(new ParseLine(CB!.PL_Story, PList, Orders!.SwimIn));
+
+        // Tritt gegen
+        PList = new ParseTokenList();
+        PList.AddVerb(CA!.Verb_Kick);
+        PList.AddItem();
+        PLL.Add(new ParseLine(CB!.PL_Story, PList, Orders!.Kick));
+
+        PList = new ParseTokenList();
+        PList.AddVerb(CA!.Verb_Swim);
+        PList.AddPrep(CB!.Prep_gegen);
+        PList.AddItem();
+        PLL.Add(new ParseLine(CB!.PL_Story, PList, Orders!.Kick));
+
         // Story
         PList = new ParseTokenList();
         PList.AddVerb(CA!.Verb_Story);
@@ -4313,6 +4349,42 @@ public partial class Adv : AdvBase
 
 
         PLLEng = new ParseLineList();
+
+        // Tauche in
+        PList = new ParseTokenList();
+        PList.AddVerb(CA!.Verb_Dip);
+        PList.AddItem();
+        PLLEng.Add(new ParseLine(CB!.PL_Story, PList, Orders!.DipIn));
+
+        PList = new ParseTokenList();
+        PList.AddVerb(CA!.Verb_Dip);
+        PList.AddPrep(CB!.Prep_in);
+        PList.AddItem();
+        PLLEng.Add(new ParseLine(CB!.PL_Story, PList, Orders!.DipIn));
+
+        // Swim in
+        PList = new ParseTokenList();
+        PList.AddVerb(CA!.Verb_Swim);
+        PList.AddItem();
+        PLLEng.Add(new ParseLine(CB!.PL_Story, PList, Orders!.SwimIn));
+
+        PList = new ParseTokenList();
+        PList.AddVerb(CA!.Verb_Swim);
+        PList.AddPrep(CB!.Prep_in);
+        PList.AddItem();
+        PLLEng.Add(new ParseLine(CB!.PL_Story, PList, Orders!.SwimIn));
+
+        // Tritt gegen
+        PList = new ParseTokenList();
+        PList.AddVerb(CA!.Verb_Kick);
+        PList.AddItem();
+        PLLEng.Add(new ParseLine(CB!.PL_Story, PList, Orders!.Kick));
+
+        PList = new ParseTokenList();
+        PList.AddVerb(CA!.Verb_Swim);
+        PList.AddPrep(CB!.Prep_gegen);
+        PList.AddItem();
+        PLLEng.Add(new ParseLine(CB!.PL_Story, PList, Orders!.Kick));
 
         // Story
         PList = new ParseTokenList();

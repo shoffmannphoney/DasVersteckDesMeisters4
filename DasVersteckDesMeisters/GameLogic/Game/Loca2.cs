@@ -3946,6 +3946,16 @@ public static partial class loca
                 return "Versteck";
         }
     }
+    public static string Noun_Krempel
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Krempel";
+            else
+                return "clutter";
+        }
+    }
     public static string Noun_Edelstein
     {
         get
@@ -5593,6 +5603,16 @@ public static partial class loca
                 return "Der wurmstichige Schrank stand nutzlos im Weg.";
         }
     }
+    public static string Adv_I04_Clutter
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Selten hatte ich so trostlosen Krempel gesehen.";
+            else
+                return "Selten hatte ich so trostlosen Krempel gesehen.";
+        }
+    }
     public static string Adv_I04_Cupboard_Add
     {
         get
@@ -6136,6 +6156,16 @@ public static partial class loca
                 return "Die grüne Tür in der Nordwand führte nach draußen.";
         }
     }
+    public static string Adv_I11_Clutter
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Schwer zu sagen, warum dieses Zeug nicht längst entsorgt worden war.";
+            else
+                return "Schwer zu sagen, warum dieses Zeug nicht längst entsorgt worden war.";
+        }
+    }
     public static string Adv_I10_First_Aid_Kit
     {
         get
@@ -6354,6 +6384,16 @@ public static partial class loca
                 return "Ein sehr moderner magischer Kühlschrank, wie dafür gemacht, köstliche Leckereien lange frisch zu halten.";
             else
                 return "Ein sehr moderner magischer Kühlschrank, wie dafür gemacht, köstliche Leckereien lange frisch zu halten.";
+        }
+    }
+    public static string Adv_I13_Sideboard
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Auf der Anrichte stand allerlei Zeug rum, dass mich absolut null interessierte.";
+            else
+                return "Auf der Anrichte stand allerlei Zeug rum, dass mich absolut null interessierte.";
         }
     }
     public static string Adv_I13_Freezer
@@ -9374,6 +9414,46 @@ public static partial class loca
                 return "transcript";
         }
     }
+    public static string Verb_Schwimme
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "schwimme";
+            else
+                return "swim";
+        }
+    }
+    public static string Verb_Schwimm
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "schwimm";
+            else
+                return "_swim";
+        }
+    }
+    public static string Verb_Trete
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "trete";
+            else
+                return "kick";
+        }
+    }
+    public static string Verb_Tritt
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "tritt";
+            else
+                return "_kick";
+        }
+    }
     public static string Info_Script
     {
         get
@@ -9385,7 +9465,56 @@ public static partial class loca
         }
     }
 
-
+    public static string Dive_In_Well
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Ich hatte keine Lust, in den Brunnen zu springen. Das Wasser war viel zu kalt.";
+            else
+                return "Ich hatte keine Lust, in den Brunnen zu springen. Das Wasser war viel zu kalt.";
+        }
+    }
+    public static string Dive_In_Fail
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Warum sollte ich in [Il1,Nom] tauchen?";
+            else
+                return "Warum sollte ich in [Il1,Nom] tauchen?";
+        }
+    }
+    public static string Swim_In_Well
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Ich hatte keine Lust, in dem Brunnen zu schwimmen. Das Wasser war viel zu kalt.";
+            else
+                return "Ich hatte keine Lust, in dem Brunnen zu schwimmen. Das Wasser war viel zu kalt.";
+        }
+    }
+    public static string Swim_In_Fail
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Wie sollte ich in [Il1,Dat] schwimmen?";
+            else
+                return "Wie sollte ich in [Il1,Dat] schwimmen?";
+        }
+    }
+    public static string Kick_Fail
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Ich trat fest gegen [Il1,Dat]. Ah, das tat gut.";
+            else
+                return "Ich trat fest gegen [Il1,Dat]. Ah, das tat gut.";
+        }
+    }
 }
 
 
