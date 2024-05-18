@@ -414,25 +414,25 @@ public partial class Adv: AdvBase
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
 
-        CA!.I09_Angry_Book = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Buch! }, new List<Adj> { CA!.Adj_hasserfuellt! }, Co.SEX_NEUTER, CB!.LocType_On_Item, CA!.I09_Green_Shelf.ID, loca.Adv_I09_Angry_Book, "Adv_I09_Angry_Book", Co.SZ_small, true, false, Nouns, Adjs));
+        CA!.I09_Angry_Book = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Buch! }, new List<Adj> { CA!.Adj_hasserfuellt! }, Co.SEX_NEUTER, CB!.LocType_On_Item, CA!.I09_Green_Shelf.ID, loca.Adv_I09_Angry_Book, "Adv_I09_Angry_Book", Co.SZ_small, false, false, Nouns, Adjs));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Readable));
 
-        CA!.I09_Crazy_Book = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Buch! }, new List<Adj> { CA!.Adj_verrueckt! }, Co.SEX_NEUTER, CB!.LocType_On_Item, CA!.I09_Green_Shelf.ID, loca.Adv_I09_Crazy_Book, "Adv_I09_Crazy_Book", Co.SZ_small, true, false, Nouns, Adjs));
+        CA!.I09_Crazy_Book = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Buch! }, new List<Adj> { CA!.Adj_verrueckt! }, Co.SEX_NEUTER, CB!.LocType_On_Item, CA!.I09_Green_Shelf.ID, loca.Adv_I09_Crazy_Book, "Adv_I09_Crazy_Book", Co.SZ_small, false, false, Nouns, Adjs));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Readable));
 
-        CA!.I09_Demonic_Book = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Buch! }, new List<Adj> { CA!.Adj_daemonisch! }, Co.SEX_NEUTER, CB!.LocType_On_Item, CA!.I09_Red_Shelf.ID, loca.Adv_I09_Demonic_Book, "Adv_I09_Demonic_Book", Co.SZ_small, true, false, Nouns, Adjs));
+        CA!.I09_Demonic_Book = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Buch! }, new List<Adj> { CA!.Adj_daemonisch! }, Co.SEX_NEUTER, CB!.LocType_On_Item, CA!.I09_Red_Shelf.ID, loca.Adv_I09_Demonic_Book, "Adv_I09_Demonic_Book", Co.SZ_small, false, false, Nouns, Adjs));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Readable));
 
-        CA!.I09_Satanic_Book = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Buch! }, new List<Adj> { CA!.Adj_satanisch! }, Co.SEX_NEUTER, CB!.LocType_On_Item, CA!.I09_Red_Shelf.ID, loca.Adv_I09_Satanic_Book, "Adv_I09_Satanic_Book", Co.SZ_small, true, false, Nouns, Adjs));
+        CA!.I09_Satanic_Book = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Buch! }, new List<Adj> { CA!.Adj_satanisch! }, Co.SEX_NEUTER, CB!.LocType_On_Item, CA!.I09_Red_Shelf.ID, loca.Adv_I09_Satanic_Book, "Adv_I09_Satanic_Book", Co.SZ_small, false, false, Nouns, Adjs));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));

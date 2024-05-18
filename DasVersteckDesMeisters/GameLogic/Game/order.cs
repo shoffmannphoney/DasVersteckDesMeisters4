@@ -1786,7 +1786,7 @@ namespace GameCore
 
         }
 
-        public override bool ExamineIn(Person PersonID, ParseTokenList PTL )
+        public bool ExamineIn(Person PersonID, ParseTokenList PTL )
         {
             bool success = true;
             bool handled = false;
@@ -1798,6 +1798,7 @@ namespace GameCore
                 AdvGame.StoryOutput(loca.Examine_In_Opening);
 
                 CA!.I14_Opening!.InvisibleIn = false;
+                handled = true;
 
             }
             else if (item1.ID == CA!.I08_Water!.ID )
@@ -1809,7 +1810,7 @@ namespace GameCore
 
             // base
             if (success && !handled)
-                success = base.ExamineIn(PersonID, PTL);
+                success = base.ExamineInBase(PersonID, PTL);
 
        
 
@@ -2180,7 +2181,7 @@ namespace GameCore
                 Persons.TransferPerson( CA!.Person_Fish.ID, CB.LocType_Person, CA.Person_I!.ID);
                 Persons.TransferPerson(CA!.Person_Parrot.ID, CB.LocType_Person, CA.Person_I!.ID);
 
-                A.ActLoc = CA.L10_Laboratory;
+                A.ActLoc = CA.L05_Atrium;
                 Persons.TransferPerson(CA.Person_I!.ID, CB.LocType_Person, A.ActLoc);
                 locations.ShowlocationFull(A.ActLoc);
                 success = true;
@@ -6499,6 +6500,12 @@ namespace GameCore
                 ExamineIn(PersonID, PTL);
                 success = true;
             }
+            else if (item1.ID == CA.I14_Special_Tile.ID)
+            {
+                ExamineIn(PersonID, PTL);
+                success = true;
+            }
+
 
             if (!success)
             {

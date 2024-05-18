@@ -64285,16 +64285,6 @@ public static partial class loca
                 return "- [Il1,Akk]";
         }
     }
-    public static string OrderFeedback_ListItemsPersons_Person_Everyone_14069_App
-    {
-        get
-        {
-            if (_gd!.Language == IGlobalData.language.german)
-                return "- [Ila1,Akk]";
-            else
-                return "- [Ila1,Akk]";
-        }
-    }
     public static string OrderFeedback_ListItemsPersons_Person_Everyone_14070
     {
         get

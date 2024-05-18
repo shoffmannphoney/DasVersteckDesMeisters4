@@ -405,6 +405,24 @@ public static class UIElement
             listGrid.RemoveAt(0);
             g2.IsVisible = true;
             g2.WidthRequest = -1;
+
+            g2.ColumnDefinitions.Clear();
+            g2.RowDefinitions.Clear();
+            g2.SetValue(Grid.ColumnDefinitionsProperty, new ColumnDefinitionCollection() );
+            g2.SetValue(Grid.RowDefinitionsProperty, new RowDefinitionCollection() );
+
+            g2.SetValue(TreeView.BackgroundColorProperty, Colors.Transparent);
+            g2.BackgroundColor = Colors.Transparent;
+            g2.SetValue(TreeView.BackgroundProperty, Colors.Transparent);
+            g2.Background = Colors.Transparent;
+            g2.WidthRequest = -1;
+            g2.SetValue(Grid.WidthRequestProperty, -1);
+            LayoutOptions lo = LayoutOptions.Fill;
+            g2.VerticalOptions = lo;
+            g2.SetValue(Grid.VerticalOptionsProperty, lo);
+            g2.HorizontalOptions = lo;
+            g2.SetValue(Grid.HorizontalOptionsProperty, lo);
+
             return g2;
         }
         Grid g = new();
@@ -414,9 +432,30 @@ public static class UIElement
     {
         if( listTreeView.Count > 0)
         {
+            TreeView tvx = new();
+
             TreeView tv2 = listTreeView[0];
             listTreeView.RemoveAt(0);
             tv2.IsVisible = true;
+            tv2.IsEnabled = true;
+            tv2._currentTreeState = TreeViewItem.TreeState.closed;
+
+            tv2.SetValue(TreeView.BackgroundColorProperty, Colors.Transparent);
+            tv2.BackgroundColor = Colors.Transparent;
+            tv2.SetValue(TreeView.BackgroundProperty, Colors.Transparent);
+            tv2.Background = Colors.Transparent;
+            tv2.ColumnDefinitions.Clear();
+            tv2.RowDefinitions.Clear();
+            tv2.SetValue(Grid.ColumnDefinitionsProperty, new ColumnDefinitionCollection());
+            tv2.SetValue(Grid.RowDefinitionsProperty, new RowDefinitionCollection());
+
+            tv2.WidthRequest = -1;
+            tv2.SetValue(Grid.WidthRequestProperty, -1);
+            LayoutOptions lo = LayoutOptions.Fill;
+            tv2.VerticalOptions = lo;
+            tv2.SetValue(Grid.VerticalOptionsProperty, lo);
+            tv2.HorizontalOptions = lo;
+            tv2.SetValue(Grid.HorizontalOptionsProperty, lo);
             return tv2;
         }
         TreeView tv = new();
@@ -426,9 +465,31 @@ public static class UIElement
     {
         if( listTreeViewItem.Count > 0)
         {
+            TreeView tvx = new();
+
             TreeViewItem tvi2 = listTreeViewItem[0];
             listTreeViewItem.RemoveAt(0);
             tvi2.IsVisible = true;
+            tvi2.IsEnabled = true;
+            tvi2._currentTreeState = TreeViewItem.TreeState.closed;
+
+            tvi2.SetValue(TreeView.BackgroundColorProperty, Colors.Transparent);
+            tvi2.BackgroundColor = Colors.Transparent;
+            tvi2.SetValue(TreeView.BackgroundProperty, Colors.Transparent);
+            tvi2.Background = Colors.Transparent;
+            tvi2.ColumnDefinitions.Clear();
+            tvi2.RowDefinitions.Clear();
+            tvi2.SetValue(Grid.ColumnDefinitionsProperty, new ColumnDefinitionCollection());
+            tvi2.SetValue(Grid.RowDefinitionsProperty, new RowDefinitionCollection());
+
+            tvi2.WidthRequest = -1;
+            tvi2.SetValue(Grid.WidthRequestProperty, -1);
+            LayoutOptions lo = LayoutOptions.Fill;
+            tvi2.VerticalOptions = lo;
+            tvi2.SetValue(Grid.VerticalOptionsProperty, lo);
+            tvi2.HorizontalOptions = lo;
+            tvi2.SetValue(Grid.HorizontalOptionsProperty, lo);
+
             return tvi2;
         }
         TreeViewItem tvi = new();
@@ -446,6 +507,22 @@ public static class UIElement
             listIDButton.RemoveAt(0);
             b2.IsVisible = true;
             b2.Opacity = 1;
+            b2.SetValue( Button.OpacityProperty, 1.0);
+            b2.SetValue(Button.BackgroundColorProperty, Colors.Transparent);
+            b2.BackgroundColor = Colors.Transparent;
+            b2.SetValue(Button.BackgroundProperty, Colors.Transparent);
+            b2.Background = Colors.Transparent;
+            b2.FontFamily = null;
+            b2.SetValue( Button.FontFamilyProperty, null );
+
+            b2.WidthRequest = -1;
+            b2.SetValue(Grid.WidthRequestProperty, -1);
+            LayoutOptions lo = LayoutOptions.Fill;
+            b2.VerticalOptions = lo;
+            b2.SetValue(Grid.VerticalOptionsProperty, lo);
+            b2.HorizontalOptions = lo;
+            b2.SetValue(Grid.HorizontalOptionsProperty, lo);
+            b2.SetValue(Label.MaximumWidthRequestProperty, Double.PositiveInfinity);
 
             return b2;
         }
@@ -464,7 +541,21 @@ public static class UIElement
             listButton.RemoveAt(0);
             b2.IsVisible = true;
             b2.Opacity = 1;
+            b2.SetValue( Button.BackgroundColorProperty, Colors.Transparent);
             b2.BackgroundColor = Colors.Transparent;
+            b2.SetValue(Button.BackgroundProperty, Colors.Transparent);
+            b2.Background = Colors.Transparent;
+            b2.FontFamily = null;
+            b2.SetValue(Button.FontFamilyProperty, null);
+
+            b2.WidthRequest = -1;
+            b2.SetValue(Grid.WidthRequestProperty, -1);
+            LayoutOptions lo = LayoutOptions.Fill;
+            b2.VerticalOptions = lo;
+            b2.SetValue(Grid.VerticalOptionsProperty, lo);
+            b2.HorizontalOptions = lo;
+            b2.SetValue(Grid.HorizontalOptionsProperty, lo);
+            b2.SetValue(Label.MaximumWidthRequestProperty, Double.PositiveInfinity);
 
             // (b2.Background as Microsoft.Maui.Controls.ImmutableBrush).Color = null;
             b2.TextColor = Colors.White;
@@ -482,6 +573,23 @@ public static class UIElement
             listIDLabel.RemoveAt(0);
             l2.IsVisible = true;
             l2.Opacity = 1;
+
+            l2.SetValue(Label.BackgroundColorProperty, Colors.Transparent);
+            l2.BackgroundColor = Colors.Transparent;
+            l2.SetValue(Label.BackgroundProperty, Colors.Transparent);
+            l2.Background = Colors.Transparent;
+            l2.FontFamily = null;
+            l2.SetValue(Label.FontFamilyProperty, null);
+
+            l2.WidthRequest = -1;
+            l2.SetValue(Grid.WidthRequestProperty, -1);
+            LayoutOptions lo = LayoutOptions.Fill;
+            l2.VerticalOptions = lo;
+            l2.SetValue(Grid.VerticalOptionsProperty, lo);
+            l2.HorizontalOptions = lo;
+            l2.SetValue(Grid.HorizontalOptionsProperty, lo);
+            l2.SetValue(Label.MaximumWidthRequestProperty, Double.PositiveInfinity);
+
             return l2;
         }
         IDLabel l = new();
@@ -495,6 +603,24 @@ public static class UIElement
             listLabel.RemoveAt(0);
             l2.IsVisible = true;
             l2.Opacity = 1;
+
+            l2.SetValue(Label.BackgroundColorProperty, Colors.Transparent);
+            l2.BackgroundColor = Colors.Transparent;
+            l2.SetValue(Label.BackgroundProperty, Colors.Transparent);
+            l2.Background = Colors.Transparent;
+            l2.FontFamily = null;
+            l2.SetValue(Label.FontFamilyProperty, null);
+
+            l2.WidthRequest = -1;
+            l2.SetValue(Grid.WidthRequestProperty, -1);
+            LayoutOptions lo = LayoutOptions.Fill;
+            l2.VerticalOptions = lo;
+            l2.SetValue(Grid.VerticalOptionsProperty, lo);
+            l2.HorizontalOptions = lo;
+            l2.SetValue(Grid.HorizontalOptionsProperty, lo);
+
+            l2.SetValue(Label.MaximumWidthRequestProperty, Double.PositiveInfinity);
+
             return l2;
         }
         Label l = new();
@@ -568,13 +694,31 @@ public class TreeView : TreeViewItem
 #endif
         try
         {
-            if (tv is TreeViewItem || tv is Grid || tv is TreeView )
+            if (tv is TreeViewItem || tv is Grid || tv is TreeView || tv is OrderListView)
             {
                 Grid? tv2 = tv as Grid;
 
                 foreach (IView iv in tv2!.Children)
                 {
-                    if (iv is TreeViewItem)
+                    if( iv is OrderListView )
+                    {
+                        IView? tvi = iv as IView;
+                        (iv as OrderListView)!.DisableToggleButton();
+
+                        EmptyTreeViewItem(tvi);
+
+                        (iv as OrderListView)!.Children.Clear();
+                        (iv as OrderListView)!.Parent = null;
+                        (iv as OrderListView)!.Handler = null;
+                        (iv as OrderListView)!.OrderListTable = null;
+
+                        if ((iv as OrderListView)!.StyleClass != null)
+                            (iv as OrderListView)!.StyleClass.Clear();
+
+                        (iv as OrderListView).Clear();
+
+                    }
+                    else if (iv is TreeViewItem)
                     {
                         IView? tvi = iv as IView;
                         (iv as TreeViewItem)!.DisableToggleButton();
@@ -584,11 +728,14 @@ public class TreeView : TreeViewItem
                         (iv as TreeViewItem)!.Children.Clear();
                         (iv as TreeViewItem)!.Parent = null;
                         (iv as TreeViewItem)!.Handler = null;
+                        (iv as TreeViewItem)!.OrderListTable = null;
 
                         if ((iv as TreeViewItem)!.StyleClass != null)
                             (iv as TreeViewItem)!.StyleClass.Clear();
 
                         (iv as TreeViewItem).Clear();
+
+
                     }
                     else if (iv is Grid)
                     {
@@ -734,7 +881,38 @@ public class TreeView : TreeViewItem
                 if (tv2.StyleClass != null)
                     tv2.StyleClass.Clear();
 
-                if (tv is TreeView)
+                if( tv is OrderListView)
+                {
+                    OrderListView? tv3 = tv as OrderListView;
+                    try
+                    {
+                        tv3.DisableToggleButton();
+                        tv3.OrderListTable = null;
+                        tv3.OrderTable = null;
+                        tv3.CurrentOrderListTable = null;
+                        tv3.UserDefinedObject = null;
+                        tv3.Text = null;
+                        tv3.Parent = null;
+                        tv3.ResetTreeViewItem();
+                        tv3.ColumnDefinitions.Clear();
+                        tv3.RowDefinitions.Clear();
+                        tv3.ClickedEventCommand = null;
+                        tv3.TextButton = null;
+                        tv3.TextLabel = null;
+                        tv3.Handler = null;
+                        if (tv3.StyleClass != null)
+                            tv3.StyleClass.Clear();
+
+                        tv3.Clear();
+                    }
+                    catch (Exception ex)
+                    {
+                        string s = ex.Message;
+                        GlobalData.AddLog("EmptyTreeViewItem: " + s, IGlobalData.protMode.crisp);
+                    }
+
+                }
+                else if (tv is TreeView)
                 {
                     TreeView? tv3 = tv as TreeView;
                     try
@@ -1364,10 +1542,12 @@ public class TreeView : TreeViewItem
             g3.WidthRequest = 20;
             g1.Add(g3);
             g1.SetColumn(g3, 0);
+            g3.SetValue(Label.BackgroundColorProperty, Colors.Blue);
 
             Grid g4 = UIElement.NewGrid();
             g1.Add(g4);
             g1.SetColumn(g4, 1);
+            g4.SetValue(Label.BackgroundColorProperty, Colors.Yellow);
 
             Button b1 = UIElement.NewButton();
             b1.BackgroundColor = Colors.Green;
@@ -1382,6 +1562,8 @@ public class TreeView : TreeViewItem
             b1.SetCursorHand();
             b1.Opacity = 1;
             b1.BorderWidth = 0;
+
+            b1.SetValue(Label.BackgroundColorProperty, Colors.Green);
             /*
 
             var touchBehaviorb1 = new TouchBehavior
@@ -1413,6 +1595,11 @@ public class TreeView : TreeViewItem
             l1.SetValue(Label.OpacityProperty, 1.0f);
             l1.TextColor = GlobalSpecs.CurrentGlobalSpecs.GetCurrentTheme().Col_FG;
 
+            // Debug
+            l1.BackgroundColor = Colors.Red;
+            l1.Background = Colors.Red;
+            l1.SetValue( Label.BackgroundColorProperty, Colors.Red);
+
             /*
             var touchBehavior = new TouchBehavior
             {
@@ -1438,6 +1625,8 @@ public class TreeView : TreeViewItem
             Grid g5 = UIElement.NewGrid();
             g2.Add(g5);
             g2.SetColumn(g5, 1);
+            // g5.SetValue(Label.BackgroundColorProperty, Colors.Cyan);
+            // g5.BackgroundColor = Colors.Cyan;
 
             // CalcToggles();
 
@@ -1525,7 +1714,7 @@ public class TreeViewItem : Grid, INotifyPropertyChanged, IDisposable
         set;
     }
 
-    public ICommand? ClickedEventCommand { get; protected set; }
+    public ICommand? ClickedEventCommand { get; set; }
     private Object? _userDefinedObject;
     private ObservableCollection<OrderTable>? _orderTable;
     public Label? TextButton;
@@ -1610,7 +1799,8 @@ public class TreeViewItem : Grid, INotifyPropertyChanged, IDisposable
                 }
                 else if (value == TreeState.closed)
                 {
-                    ParentSubTree!.IsVisible = false;
+                    if(ParentSubTree != null)
+                        ParentSubTree!.IsVisible = false;
                     if (OrderTable != null)
                     {
                         DeleteOrderListView(SubTree!);
@@ -1938,6 +2128,8 @@ public class TreeViewItem : Grid, INotifyPropertyChanged, IDisposable
         Grid g1 = UIElement.NewGrid();
         this.Add(g1);
         this.SetRow(g1, 0);
+        // this.SetValue(Label.BackgroundProperty, Colors.Purple);
+
 
         Grid g2 = UIElement.NewGrid();
         this.Add(g2);
@@ -2012,6 +2204,10 @@ public class TreeViewItem : Grid, INotifyPropertyChanged, IDisposable
         l1.Opacity = 1;
         l1.SetValue( Label.OpacityProperty, 1.0f );
         l1.TextColor = GlobalSpecs.CurrentGlobalSpecs.GetCurrentTheme().Col_FG;
+        // l1.BackgroundColor = Colors.Red;
+        // l1.Background = Colors.Green;
+        // l1.SetValue(Label.BackgroundColorProperty, Colors.Blue);
+        // l1.SetValue(Label.BackgroundProperty, Colors.Yellow);
 
         var touchBehaviorB1 = new TouchBehavior
         {
@@ -2112,7 +2308,7 @@ public class TreeViewItem : Grid, INotifyPropertyChanged, IDisposable
         Columns.Add(cd2);
         g1.ColumnDefinitions = Columns;
 
-        Button b1 = new();
+        Button b1 = UIElement.NewButton();
         b1.StyleClass = UIElement.Get_Button_NoBackground_NoBorder();
         b1.Text = FaSolid.CaretRight;
         b1.FontFamily = "Fa-Solid";
@@ -2122,14 +2318,20 @@ public class TreeViewItem : Grid, INotifyPropertyChanged, IDisposable
         ToggleButton = b1;
         g1.SetColumn(b1, 0);
         g1.Add(b1);
+        b1.Opacity = 1;
+        b1.SetValue(Label.OpacityProperty, 1.0f);
+        b1.BorderWidth = 0;
 
-        Label l1 = new();
+        Label l1 = UIElement.NewLabel();
         l1.Text = ott.Name;
+        l1.TextColor = GlobalSpecs.CurrentGlobalSpecs.GetCurrentTheme().Col_FG;
         l1.StyleClass = UIElement.Get_Label_Normal();
         l1.VerticalOptions = LayoutOptions.Start;
         l1.HorizontalOptions = LayoutOptions.Start;
         l1.HorizontalTextAlignment = TextAlignment.Start;
         l1.LineBreakMode = LineBreakMode.NoWrap;
+        l1.Opacity = 1;
+        l1.SetValue(Label.OpacityProperty, 1.0f);
         // l1.Command = ClickedEventCommand;
         g1.SetColumn(l1, 1);
         g1.Add(l1);
@@ -2329,7 +2531,7 @@ public class OrderListView : TreeViewItem, INotifyPropertyChanged
             TextLabel!.Text = loca.OrderList_AddOrderList_16220a;
         }
         StepLabel!.Text = _orderTable!.No + ":";
-        ResponseLabel!.Text = _orderTable!.OrderResult;
+        ResponseLabel!.Text = _orderTable!.OrderResult + _orderTable!.OrderFeedback;
         SetStepType();
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
@@ -2344,13 +2546,21 @@ public class OrderListView : TreeViewItem, INotifyPropertyChanged
     {
         ClickedTableEntryCommand= new Command<EventArgs>((e) =>
         {
-            if ((GetRootTree(ParentSubTree!) as TreeView)!.OTCallback != null)
+            if (ParentSubTree != null)
             {
+                if ((GetRootTree(ParentSubTree!) as TreeView)!.OTCallback != null)
+                {
 
-                OrderTableEventArgs otva = new();
-                otva.No = this.CurrentOrderTable!.No!;
+                    OrderTableEventArgs otva = new();
+                    otva.No = this.CurrentOrderTable!.No!;
 
-                (GetRootTree(ParentSubTree!) as TreeView)!.OTCallback!(this, otva);
+                    (GetRootTree(ParentSubTree!) as TreeView)!.OTCallback!(this, otva);
+                }
+            }
+            else
+            {
+                GlobalData.AddLog("ClickedTableEntryCommand ohne ParentSubTree", IGlobalData.protMode.crisp );
+
             }
         });
         ClickedEventCommand = new Command<EventArgs>((e) =>
@@ -2390,24 +2600,37 @@ public class OrderListView : TreeViewItem, INotifyPropertyChanged
         _orderTable = ot;
     }
 
- 
+
     public void ToggleOrderlistView(object? sender, EventArgs e)
     {
-        if (CurrentTreeState == TreeState.open)
+        if( this.ParentSubTree == null )
+            return;
+
+        try
         {
-            this.RowDefinitions[1].Height = new GridLength(0);
-            CurrentTreeState = TreeState.closed;
-            ToggleButton!.Text = "+";
-            ParentSubTree!.IsVisible = false;
-            (GetRootTree(ParentSubTree) as TreeView)!.CalcToggles();
+
+            if (CurrentTreeState == TreeState.open)
+            {
+                this.RowDefinitions[1].Height = new GridLength(0);
+                CurrentTreeState = TreeState.closed;
+                ToggleButton!.Text = "+";
+                ParentSubTree!.IsVisible = false;
+                (GetRootTree(ParentSubTree) as TreeView)!.CalcToggles();
+            }
+            else
+            {
+                this.RowDefinitions[1].Height = GridLength.Auto;
+                CurrentTreeState = TreeState.open;
+                ToggleButton!.Text = "-";
+                ParentSubTree!.IsVisible = true;
+                (GetRootTree(ParentSubTree) as TreeView)!.CalcToggles();
+            }
         }
-        else
+        catch( Exception ex )
         {
-            this.RowDefinitions[1].Height = GridLength.Auto;
-            CurrentTreeState = TreeState.open;
-            ToggleButton!.Text = "-";
-            ParentSubTree!.IsVisible = true;
-            (GetRootTree(ParentSubTree) as TreeView)!.CalcToggles();
+            string s = ex.Message;
+            GlobalData.AddLog("ToggleOrderlistView: " + s, IGlobalData.protMode.crisp);
+
         }
     }
     public void Switch_OnToggled(object? sender, TappedEventArgs e)
@@ -2615,6 +2838,7 @@ public class OrderListView : TreeViewItem, INotifyPropertyChanged
         Label l2 = new();
         l2.StyleClass = s2;
         l2.VerticalOptions = LayoutOptions.Center;
+        l2.MaximumWidthRequest = 80;
         l2.Text = "";
         g1.Add(l2);
         g1.SetColumn(l2, 2);
@@ -2672,6 +2896,7 @@ public class OrderListView : TreeViewItem, INotifyPropertyChanged
         {
             b2.Text = loca.OrderList_AddOrderList_16220a;
         }
+        b2.VerticalOptions = LayoutOptions.Center;
 
         Label lsw1 = new();
         lsw1.StyleClass = styleClasses;
@@ -2720,10 +2945,15 @@ public class OrderListView : TreeViewItem, INotifyPropertyChanged
         b3.Command = ClickedTableEntryCommand;
         b3.SetCursorHand();
 
+        string? s100 = ot.OrderResult;
+        if( ot.OrderFeedback != null && ot.OrderFeedback != "" )
+        {
+            s100 = s100 + ot.OrderFeedback;
+        }
         Label l3 = new();
         l3.StyleClass = s2;
         l3.LineBreakMode = LineBreakMode.WordWrap;
-        l3.Text = ot.OrderResult;
+        l3.Text = s100;
         g2.Add(l3);
         g2.SetColumn(g2, 0);
         _response = l3;

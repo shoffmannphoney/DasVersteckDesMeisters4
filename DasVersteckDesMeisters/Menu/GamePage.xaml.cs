@@ -336,28 +336,14 @@ public partial class GamePage : ContentPage, IMenuExtension
                         code = 122;
                         break;
                     }
-            }
-
-            int ix = 0;
-            bool found = false;
-            for( ix = 0; ix < UIS.MCM!.Current!.Count; ix++)
-            {
-                if(UIS.MCM.Current[ix] > 0)
-                {
-                    MCMenuEntry? me = UIS.MCM.FindID(UIS.MCM.Current[ix]);
-                    if (me!.Keys!.Count > 0)
+                case Windows.System.VirtualKey.Escape:
                     {
-                        if (me.Keys[0] == (int)code && me.Hidden == MCMenuEntry.HiddenType.visible)
-                        {
-                            UIS.MCMV!.CallBackMCMenuView(me.ID);
-                            found = true;
-                        }
+                        code = 27;
+                        break;
                     }
-
-                }
-                if( found )
-                    break;
             }
+
+            CallMCByKey(code);
 
             /*
             foreach (MCMenuEntry me in UIS.MCM!List)
@@ -437,6 +423,64 @@ public partial class GamePage : ContentPage, IMenuExtension
         keyUpRequest = true;
     }
 
+
+    public void CallMCByKey( int code )
+    {
+        if (code == 27)
+        {
+            int ix = 0;
+            bool found = false;
+
+            for (ix = UIS.MCM!.Current!.Count - 1; ix >= 0 ; ix++)
+            {
+                if (UIS.MCM.Current[ix] > 0)
+                {
+                    MCMenuEntry? me = UIS.MCM.FindID(UIS.MCM.Current[ix]);
+
+                    if (me!.Keys!.Count > 0)
+                    {
+                        if (        ( me!.Follower.Count == 1 && me!.Follower[0] == -1 && me.Hidden == MCMenuEntry.HiddenType.visible)
+                                || ( me!.DefaultBreak == true )
+                             ) 
+                        {
+                            UIS.MCMV!.CallBackMCMenuView(me.ID);
+                            found = true;
+                        }
+                    }
+
+                }
+                if (found)
+                    break;
+            }
+
+        }
+        else if( code >0 )
+        {
+            int ix = 0;
+            bool found = false;
+            for (ix = 0; ix < UIS.MCM!.Current!.Count; ix++)
+            {
+                if (UIS.MCM.Current[ix] > 0)
+                {
+                    MCMenuEntry? me = UIS.MCM.FindID(UIS.MCM.Current[ix]);
+
+
+                    if (me!.Keys!.Count > 0)
+                    {
+                        if (me.Keys[0] == (int)code && me.Hidden == MCMenuEntry.HiddenType.visible)
+                        {
+                            UIS.MCMV!.CallBackMCMenuView(me.ID);
+                            found = true;
+                        }
+                    }
+
+                }
+                if (found)
+                    break;
+            }
+        }
+
+    }
     public void ResetKeyboardHandler()
     {
         var handler = CurrentPage.Handler;
@@ -3374,6 +3418,7 @@ public partial class GamePage : ContentPage, IMenuExtension
 
     TreeView CreateOrderTree()
     {
+        TreeViewItem tv1;
         TreeView tv = UIElement.NewTreeView();
         tv.SetupTreeView();
         tv.CurrentTreeState = TreeViewItem.TreeState.open;
@@ -3419,21 +3464,7 @@ public partial class GamePage : ContentPage, IMenuExtension
 
 
 
-        TreeViewItem tv1 = AddTreeViewItem(tv, loca.MAUI_UI_Menu_Manual, null);
-        tv1.CurrentTreeState = TreeViewItem.TreeState.open;
-        AddTreeViewItem(tv1, loca.MAUI_UI_Menu_Info, loca.MAUI_UI_Menu_Order_Info);
-        AddTreeViewItem(tv1, loca.MAUI_UI_Menu_Manual, loca.MAUI_UI_Menu_Order_Manual);
-        AddTreeViewItem(tv1, loca.MAUI_UI_Menu_Help, loca.MAUI_UI_Menu_Order_Help);
-        AddTreeViewItem(tv1, loca.MAUI_UI_Menu_Score, loca.MAUI_UI_Menu_Order_Score);
-        // AddTreeViewItem(tv1, loca.MAUI_UI_Menu_Info, loca.MAUI_UI_Menu_Order_Info);
 
-        tv1 = AddTreeViewItem(tv, loca.MAUI_UI_Menu_General, null);
-        tv1.CurrentTreeState = TreeViewItem.TreeState.open;
-        AddTreeViewItem(tv1, loca.MAUI_UI_Menu_Load, loca.MAUI_UI_Menu_Order_Load);
-        AddTreeViewItem(tv1, loca.MAUI_UI_Menu_Save, loca.MAUI_UI_Menu_Order_Save);
-        AddTreeViewItem(tv1, loca.MAUI_UI_Menu_Inv, loca.MAUI_UI_Menu_Order_Inv);
-        AddTreeViewItem(tv1, loca.MAUI_UI_Menu_Loc, loca.MAUI_UI_Menu_Order_Loc);
-        AddTreeViewItem(tv1, loca.MAUI_UI_Menu_Wait, loca.MAUI_UI_Menu_Order_Wait);
 
         tv1 = AddTreeViewItem(tv, loca.MAUI_UI_Menu_Movement, null);
         tv1.CurrentTreeState = TreeViewItem.TreeState.open;
@@ -3471,6 +3502,23 @@ public partial class GamePage : ContentPage, IMenuExtension
             AddTreeViewItem(tv1, loca.MAUI_UI_Menu_GoThrough, loca.MAUI_UI_Menu_Order_GoThrough);
         if (gotoable)
             AddTreeViewItem(tv1, loca.MAUI_UI_Menu_GoTo, loca.MAUI_UI_Menu_Order_GoTo);
+
+        tv1 = AddTreeViewItem(tv, loca.MAUI_UI_Menu_Manual, null);
+        tv1.CurrentTreeState = TreeViewItem.TreeState.open;
+        AddTreeViewItem(tv1, loca.MAUI_UI_Menu_Info, loca.MAUI_UI_Menu_Order_Info);
+        AddTreeViewItem(tv1, loca.MAUI_UI_Menu_Manual, loca.MAUI_UI_Menu_Order_Manual);
+        AddTreeViewItem(tv1, loca.MAUI_UI_Menu_Help, loca.MAUI_UI_Menu_Order_Help);
+        AddTreeViewItem(tv1, loca.MAUI_UI_Menu_Score, loca.MAUI_UI_Menu_Order_Score);
+        // AddTreeViewItem(tv1, loca.MAUI_UI_Menu_Info, loca.MAUI_UI_Menu_Order_Info);
+
+        tv1 = AddTreeViewItem(tv, loca.MAUI_UI_Menu_General, null);
+        tv1.CurrentTreeState = TreeViewItem.TreeState.open;
+        AddTreeViewItem(tv1, loca.MAUI_UI_Menu_Inv, loca.MAUI_UI_Menu_Order_Inv);
+        AddTreeViewItem(tv1, loca.MAUI_UI_Menu_Loc, loca.MAUI_UI_Menu_Order_Loc);
+        AddTreeViewItem(tv1, loca.MAUI_UI_Menu_Wait, loca.MAUI_UI_Menu_Order_Wait);
+        AddTreeViewItem(tv1, loca.MAUI_UI_Menu_Load, loca.MAUI_UI_Menu_Order_Load);
+        AddTreeViewItem(tv1, loca.MAUI_UI_Menu_Save, loca.MAUI_UI_Menu_Order_Save);
+        AddTreeViewItem(tv1, loca.MAUI_UI_Menu_Restart, loca.MAUI_UI_Menu_Order_Restart);
 
         // (TreeView.GetRootTree(tv) as TreeView)?.CalcToggles();
 
@@ -5004,33 +5052,19 @@ public partial class GamePage : ContentPage, IMenuExtension
                             key = 'z';
                         }
                         else
+                        if ((String.Compare(UIS.RecordedText, "Abbruch", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Escape", StringComparison.OrdinalIgnoreCase) == 0)
+                        || (String.Compare(UIS.RecordedText, "Ende", StringComparison.OrdinalIgnoreCase) == 0)
+                        )
+                        {
+                            key = 27;
+                        }
+                        else
                         {
 
                         }
 
-                        if (key > 0)
-                        {
-                            int ix = 0;
-                            bool found = false;
-                            for (ix = 0; ix < UIS.MCM!.Current!.Count; ix++)
-                            {
-                                if (UIS.MCM.Current[ix] > 0)
-                                {
-                                    MCMenuEntry? me = UIS.MCM.FindID(UIS.MCM.Current[ix]);
-                                    if (me!.Keys!.Count > 0)
-                                    {
-                                        if (me.Keys[0] == key && me.Hidden == MCMenuEntry.HiddenType.visible)
-                                        {
-                                            UIS.MCMV!.CallBackMCMenuView(me.ID);
-                                            found = true;
-                                        }
-                                    }
-
-                                }
-                                if (found)
-                                    break;
-                            }
-                        }
+                        CallMCByKey(key);
                         UIS.RecordedText = "";
                     }
                     else if (Grid_More.IsVisible == true)

@@ -576,16 +576,29 @@ namespace GameCore
 
         public int GetItemLoc( int ItemID )
         {
-            int loc;
-
-            if(this.Find(ItemID)!.locationType != Co.CB!.LocType_Loc )
+            int loc = -1;
+            try
             {
-                loc = GetItemLoc( this.Find(ItemID)!.locationID );
+
+                if (this.Find(ItemID) != null && this.Find(ItemID)!.locationType != Co.CB!.LocType_Loc)
+                {
+                    loc = GetItemLoc(this.Find(ItemID)!.locationID);
+
+                }
+                else if (this.Find(ItemID) != null)
+                {
+                    loc = this.Find(ItemID)!.locationID;
+                }
+                else
+                {
+                    loc = -1;
+                }
+            }
+            catch( Exception e)
+            {
+                GlobalData.AddLog("GetItemLoc: " + ItemID.ToString(), IGlobalData.protMode.crisp);
 
             }
-            else
-                loc = this.Find(ItemID)!.locationID;
-
             return loc;
         }
 

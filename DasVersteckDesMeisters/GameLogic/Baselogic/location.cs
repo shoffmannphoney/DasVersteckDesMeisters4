@@ -656,7 +656,7 @@ namespace GameCore
         {
             foreach (Person tPerson in Persons!.List!.Values)
             {
-                if (tPerson.locationType == LocType && tPerson.locationID == LocID && tPerson.ID != A!.ActPerson)
+                if (tPerson.locationType == LocType && tPerson.locationID == LocID && tPerson.ID != A!.ActPerson && tPerson.IsBackground == false)
                 {
                     if ((tPerson.HereText != "") && (tPerson.HereText != null))
                         AdvGame!.StoryOutput( LocID, null, Persons!.GetPersonNameLink(tPerson.HereText, tPerson));

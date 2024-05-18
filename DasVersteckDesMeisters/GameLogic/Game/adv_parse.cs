@@ -369,7 +369,7 @@ public partial class Adv : AdvBase
         // Examine MC
         PList = new ParseTokenList();
         PList.AddVerb(CB!.Verb_Examine);
-        PLL.Add(new ParseLine(CB!.PL_Examine, PList, Orders!.ExamineMC, false));
+        PLL.Add(new ParseLine(CB!.PL_Examine, PList, Orders!.location));
 
         // U Item
         PList = new ParseTokenList();

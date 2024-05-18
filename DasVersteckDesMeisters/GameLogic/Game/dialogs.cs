@@ -915,23 +915,23 @@ namespace GameCore
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(null, "Book_Dialog_Start", 1, 1 + CB!.MCE_Choice_Off, true));
 
             cFollower.Add(100);
-            mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Book_Dialog_Gunnar", 100, 200, true, false));
+            mcM.Add(MCMenuEntry.MCMenuEntryLoca(null, "Book_Dialog_Gunnar", 100, 200, false, false));
             mcM.Last()!.SetSpeaker(CB!.VT_sagen);
 
             cFollower.Add(101);
-            mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Book_Dialog_Teleports", 101, 210, true, false));
+            mcM.Add(MCMenuEntry.MCMenuEntryLoca(null, "Book_Dialog_Teleports", 101, 210, false, false));
             mcM.Last()!.SetSpeaker(CB!.VT_sagen);
 
             cFollower.Add(102);
-            mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Book_Dialog_Sextips", 102, 220, true, false));
+            mcM.Add(MCMenuEntry.MCMenuEntryLoca(null, "Book_Dialog_Sextips", 102, 220, false, false));
             mcM.Last()!.SetSpeaker(CB!.VT_sagen);
 
             cFollower.Add(103);
-            mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Book_Dialog_Mondsteine", 103, 230, true, false));
+            mcM.Add(MCMenuEntry.MCMenuEntryLoca(null, "Book_Dialog_Mondsteine", 103, 230, false, false));
             mcM.Last()!.SetSpeaker(CB!.VT_sagen);
 
             cFollower.Add(199);
-            mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Book_Dialog_Ende", 199, -1, true, false));
+            mcM.Add(MCMenuEntry.MCMenuEntryLoca(null, "Book_Dialog_Ende", 199, -1, false, false));
             mcM.Last()!.SetSpeaker(CB!.VT_sagen);
 
             mcM.Add(new MCMenuEntry(1 + CB!.MCE_Choice_Off, cFollower));

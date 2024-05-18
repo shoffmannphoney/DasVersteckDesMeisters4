@@ -626,8 +626,9 @@ public class UIServices : IUIServices
         string? jsonDest = JsonConvert.SerializeObject(GD.LayoutDescription, Newtonsoft.Json.Formatting.Indented);
         File.WriteAllText(pathfileName, jsonDest);
 
-        if (GlobalSpecs.CurrentGlobalSpecs!.InitRunning == IGlobalSpecs.initRunning.started)
+        if (GlobalSpecs.CurrentGlobalSpecs!.InitRunning == IGlobalSpecs.initRunning.started || GlobalSpecs.CurrentGlobalSpecs!.InitRunning == IGlobalSpecs.initRunning.finished)
         {
+            GD!.OrderList.SaveOrderTable();
             GD!.Adventure!.Autosave(true);
 
         }
@@ -2795,15 +2796,17 @@ public class Scroller : IScroller
     {
         try
         {
-            GlobalData.AddLog("DoOnBrowserContentLoad in", IGlobalData.protMode.crisp);
+            GlobalData.AddLog("DoOnBrowserContentLoad in", IGlobalData.protMode.extensive);
             if (UIS!.OnBrowserContentLoaded == IUIServices.onBrowserContentLoaded.nothing)
+            {
+                GlobalData.AddLog("DoOnBrowserContentLoad nothing", IGlobalData.protMode.extensive);
                 return;
-
-            if (HTMLViewMaxYPos > 0)
+            }
+             if (HTMLViewMaxYPos > 0)
             {
                 if (UIS!.OnBrowserContentLoaded == IUIServices.onBrowserContentLoaded.PageDown)
                 {
-                    GlobalData.AddLog("PageDown by OnBrowserContentLoad", IGlobalData.protMode.crisp);
+                    GlobalData.AddLog("PageDown by OnBrowserContentLoad", IGlobalData.protMode.extensive);
                     PageDown();
                 }
                 else if (UIS.OnBrowserContentLoaded == IUIServices.onBrowserContentLoaded.ScrollToEnd)
@@ -2817,7 +2820,7 @@ public class Scroller : IScroller
 
                 UIS.OnBrowserContentLoaded = IUIServices.onBrowserContentLoaded.nothing;
             }
-            GlobalData.AddLog("DoOnBrowserContentLoad out", IGlobalData.protMode.crisp);
+            GlobalData.AddLog("DoOnBrowserContentLoad out", IGlobalData.protMode.extensive);
         }
         catch( Exception e)
         {

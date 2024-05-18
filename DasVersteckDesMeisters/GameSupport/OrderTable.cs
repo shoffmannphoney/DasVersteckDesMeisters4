@@ -1161,9 +1161,10 @@ public class OrderList : IOrderList
 
             }
         }
-        catch 
+        catch ( Exception ex)
         {
             // int a = 5;
+            GlobalData.AddLog("InitHierarchy: " + ex.Message, IGlobalData.protMode.crisp);
         }
         return olt2;
     }
@@ -1436,6 +1437,7 @@ public class OrderList : IOrderList
         }
         catch (Exception ex)
         {
+            GlobalData.AddLog("AddOrderList: " + ex.Message, IGlobalData.protMode.crisp);
         }
 
         return (true);

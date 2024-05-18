@@ -949,7 +949,7 @@ namespace GameCore
                 if (PTL.ConvenienceActionNotExamineAfter == false && item.CanPutIn )
                 {
                     PTL.ConvenienceActionNotOpenFirst = true;
-                    ExamineIn(PersonID, PTL);
+                    ExamineInBase(PersonID, PTL, false);
                     PTL.ConvenienceActionNotOpenFirst = false;
                 }
             }
@@ -1920,7 +1920,7 @@ namespace GameCore
         }
 
 
-        public virtual bool ExamineIn(Person PersonID, ParseTokenList PTL)
+        public bool ExamineInBase(Person PersonID, ParseTokenList PTL, bool AlwaysOutput = true )
         {
             bool handled = false;
             bool success = true;
@@ -1928,16 +1928,19 @@ namespace GameCore
 
             Item item1 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[2].WordID);
 
-            if (item1.CanPutIn == false)
+            if (item1.CanPutIn == false )
             {
-                AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_ExamineIn_13999, item1!.ID));
+                if( AlwaysOutput == true )
+                    AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_ExamineIn_13999, item1!.ID));
                 handled = true;
             }
             else if (item1.CanBeClosed && item1.IsClosed)
             {
                 if (item1.CanBeLocked && item1.IsLocked)
                 {
-                    AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_ExamineIn_14000, item1!.ID, item1));
+                    if (AlwaysOutput == true)
+                        AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_ExamineIn_14000, item1!.ID, item1));
+
                     handled = true;
                     success = false;
                     of.FeedbackOutput = true;
@@ -1961,9 +1964,16 @@ namespace GameCore
             }
             if (!handled && success)
             {
-                AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_ExamineIn_Person_Everyone_14001, PersonID, item1!.ID));
-                // ListItems( Helper.Insert(loca.OrderFeedback_ExamineIn_Person_Everyone_14002, PersonID ), PersonID, CB!.LocType_In_Item, item1!.ID, true, false, Co.CASE_NOM_UNDEF, null, loca.OrderFeedback_ExamineIn_Person_Everyone_14003 );
-                ListItemsPersons(Helper.Insert(loca.OrderFeedback_ExamineIn_Person_Everyone_14002, PersonID), PersonID, CB!.LocType_In_Item, item1!.ID, true, false, Co.CASE_NOM_UNDEF);
+                if (AlwaysOutput == true)
+                {
+                    AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_ExamineIn_Person_Everyone_14001, PersonID, item1!.ID));
+                    // ListItems( Helper.Insert(loca.OrderFeedback_ExamineIn_Person_Everyone_14002, PersonID ), PersonID, CB!.LocType_In_Item, item1!.ID, true, false, Co.CASE_NOM_UNDEF, null, loca.OrderFeedback_ExamineIn_Person_Everyone_14003 );
+                    ListItemsPersons(Helper.Insert(loca.ListItems_Basetext, PersonID), PersonID, CB!.LocType_In_Item, item1!.ID, true, false, Co.CASE_AKK_UNDEF);
+                }
+                else
+                {
+                    ListItemsPersons(Helper.Insert(loca.ListItems_Basetext, PersonID), PersonID, CB!.LocType_In_Item, item1!.ID, true, true, Co.CASE_AKK_UNDEF);
+                }
                 of.StoryOutput = true;
                 of.Handled = true;
                 of.Action = true;

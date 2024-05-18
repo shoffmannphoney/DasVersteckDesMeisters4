@@ -372,7 +372,6 @@ namespace GameCore
 
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(null, "Order_ManualDialog_Person_Self_10318", 1300, CB!.MCE_Choice1, true, false));
 
-
             cFollower = new();
             ix = 200;
 
@@ -402,6 +401,7 @@ namespace GameCore
 
             cFollower.Add(ix);
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Order_ManualDialog_Person_Self_10325", ix, CB!.MCE_Choice1, false, false));
+            mcM.Last().DefaultBreak = true;
             ix += 1;
 
 

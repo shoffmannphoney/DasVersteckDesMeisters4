@@ -374,13 +374,21 @@ public partial class ReplayPage : ContentPage, IMenuExtension
     public void RefreshHierarchie( int DestPos )
     {
         int ix = GD!.OrderList!.CurrentViewOrderListIx; // FindOrderList("Stefan complete");
+
+
+        foreach ( IView iv in ReplayTable.Children )
+        {
+            TreeView.EmptyTreeViewItem( iv );
+
+        }
+        ReplayTable.Children.Clear();
+
         OrderListTable ot = GD!.OrderList!.InitHierarchy(ix);
 
-        ReplayTable.Children.Clear();
 
         ReplayList = _viewModelMain.ReplayList;
 
-        _treeViewRoot = new();
+        _treeViewRoot = UIElement.NewTreeView();
         _treeViewRoot.SetupTreeView();
         _treeViewRoot.OrderListTable = new();
         _treeViewRoot.OTClick = DoClickReplay;
@@ -892,7 +900,7 @@ public partial class ReplayPage : ContentPage, IMenuExtension
 
 
         Label e5 = new();
-        e5.Text = ot.OrderResult;
+        e5.Text = ot.OrderResult + ot.OrderFeedback;
         e5.StyleClass = LabelStyle2;
          e5.LineBreakMode = LineBreakMode.WordWrap;
         e5.VerticalOptions = LayoutOptions.Center;

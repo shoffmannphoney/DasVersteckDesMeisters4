@@ -572,6 +572,7 @@ public class GlobalData : IGlobalData
  //    public enum language { german, english }
 
     public IGlobalData.protMode ProtMode { get; set; }
+    public string ProtFile { get; set; }
 
     IGlobalData.globalMenu _globalMenu;
 
@@ -1108,14 +1109,17 @@ public class GlobalData : IGlobalData
     {
         if (GlobalData.CurrentGlobalData.ProtMode != IGlobalData.protMode.off)
         {
-            string path = CurrentPath() + "/versteck.txt";
 
-            File.WriteAllText(path, s1 + "\n");
+            string path = CurrentPath() + String.Format( "/versteck {0}.{1}.{2} {3}.{4}.{5}.txt", DateTime.Now.Day, DateTime.Now.Month, DateTime.Now.Year, DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second );
+
+            GlobalData.CurrentGlobalData.ProtFile = path;
         }
     }
 
     public static void AddLog(string s1, WebViewInterop.protMode PM)
     {
+
+
         IGlobalData.protMode PM2 = (IGlobalData.protMode) PM;
         AddLog(s1, PM2);
 
@@ -1123,11 +1127,20 @@ public class GlobalData : IGlobalData
 
     public static void AddLog(string s1, IGlobalData.protMode PM)
     {
+
         if ( PM != IGlobalData.protMode.off && PM <= GlobalData.CurrentGlobalData.ProtMode)
         {
-            string path = CurrentPath() + "/versteck.txt";
+            string s2 = String.Format("[{0}.{1}.{2} {3}.{4}.{5}] {6} ", DateTime.Now.Day, DateTime.Now.Month, DateTime.Now.Year, DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second, s1);
+            if (File.Exists(GlobalData.CurrentGlobalData.ProtFile) == false)
+            {
+                File.WriteAllText(GlobalData.CurrentGlobalData.ProtFile, "=== Start Log ==="+ "\n");
 
-            File.AppendAllText(path, s1 + "\n");
+            }
+
+
+            string path = GlobalData.CurrentGlobalData.ProtFile;
+
+            File.AppendAllText(path, s2  + "\n");
 
         }
     }
@@ -1135,7 +1148,7 @@ public class GlobalData : IGlobalData
     {
         _currentGlobalData = this;
 
-        ProtMode = IGlobalData.protMode.off;
+        ProtMode = IGlobalData.protMode.crisp;
 #if DEBUG
         ProtMode = IGlobalData.protMode.extensive;
 #endif
@@ -1980,7 +1993,7 @@ public class Version
         this.Version1 = 1;
         this.Version2 = 3;
         this.Version3 = 0;
-        this.VersionDate = new DateTime(2024, 05, 12);
+        this.VersionDate = new DateTime(2024, 05, 20);
     }
 
     public int Version1

@@ -3235,9 +3235,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ich klebte einen langen Klebestreifen um die Zuckerzange mit der Klaue darin. Der Klebestreifen hielt die Zuckerzange so fest zusammen, dass die Klaue sicher befestgt war.<br>Das Rollpflaster war alle, also warf ich die leere Rolle weg.<br><br>Perfekt, ich hatte also [I:I00_Stable_Pliers_With_Claw]ie Klaue[/I] an mich genommen. Wie aber kam ich jetzt aus diesem seltsamen Domizil wieder heraus? Einen Ausgang hatte ich bisher nicht gefunden. Dafür gab es ja sicherlich auch einen Grund.";
+                return "Ich klebte einen langen Klebestreifen um die Zuckerzange mit der Klaue darin. Der Klebestreifen hielt die Zuckerzange so fest zusammen, dass die Klaue sicher befestgt war.<br>Das Rollpflaster war alle, also warf ich die leere Rolle weg.<br><br>Perfekt, ich hatte also [I:I00_Stable_Pliers_With_Claw]die Klaue[/I] an mich genommen. Wie aber kam ich jetzt aus diesem seltsamen Domizil wieder heraus? Einen Ausgang hatte ich bisher nicht gefunden. Dafür gab es ja sicherlich auch einen Grund.";
             else
-                return "Ich klebte einen langen Klebestreifen um die Zuckerzange mit der Klaue darin. Der Klebestreifen hielt die Zuckerzange so fest zusammen, dass die Klaue sicher befestgt war.<br>Das Rollpflaster war alle, also warf ich die leere Rolle weg.<br><br>Perfekt, ich hatte also [I:I00_Stable_Pliers_With_Claw]ie Klaue[/I] an mich genommen. Wie aber kam ich jetzt aus diesem seltsamen Domizil wieder heraus? Einen Ausgang hatte ich bisher nicht gefunden. Dafür gab es ja sicherlich auch einen Grund.";
+                return "Ich klebte einen langen Klebestreifen um die Zuckerzange mit der Klaue darin. Der Klebestreifen hielt die Zuckerzange so fest zusammen, dass die Klaue sicher befestgt war.<br>Das Rollpflaster war alle, also warf ich die leere Rolle weg.<br><br>Perfekt, ich hatte also [I:I00_Stable_Pliers_With_Claw]die Klaue[/I] an mich genommen. Wie aber kam ich jetzt aus diesem seltsamen Domizil wieder heraus? Einen Ausgang hatte ich bisher nicht gefunden. Dafür gab es ja sicherlich auch einen Grund.";
         }
     }
     public static string Wipe_KnightsArmor
@@ -3265,9 +3265,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ich schaute in [I:I14_Opening]die dunkle Öffnung[/I]. [I:I00_Key]Ein rostiger Schlüssel[/I] kam zum Vorschein.";
+                return "Ich schaute in [I:I14_Opening]die dunkle Öffnung[/I]. [I:I00_Key]Ein verzierter Schlüssel[/I] kam zum Vorschein.";
             else
-                return "Ich schaute in [I:I14_Opening]die dunkle Öffnung[/I]. Ein rostiger Schlüssel kam zum Vorschein.";
+                return "Ich schaute in [I:I14_Opening]die dunkle Öffnung[/I]. [I:I00_Key]Ein verzierter Schlüssel[/I] kam zum Vorschein.";
         }
     }
     public static string Unlock_Labor_Door
@@ -9108,9 +9108,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Feedback willkommen insbesondere zum User Interface von \"Das Versteck des Meisters\". Das System lässt sich auf vielfältige Weisen bedienen: Texteingabe, Multiple Choice, Spracheingabe, und gerne auch eine Kombination aus allen dreien.\nSo richtig perfekt ist keiner der Input-Modi, fehlerfrei erst recht nicht. Ich freue mich sehr auf eure Rückmeldung, um die Oberfläche nun mal richtig rund zu schleifen.\nWer Lust hat, etwas zu experimentieren, der findet in den Settings jede Menge fragwürdiger Optionen.\n\n\n\n";
+                return "Feedback willkommen insbesondere zum User Interface von \"Das Versteck des Meisters\". Das System lässt sich auf vielfältige Weisen bedienen: Texteingabe, Multiple Choice, Spracheingabe, oder auch eine Kombination aus allen dreien. Ich freue mich sehr auf eure Rückmeldung.\nWer Lust hat, etwas zu experimentieren, der findet in den Settings jede Menge UI-Optionen.\n\n\n\n";
             else
-                return "Feedback willkommen insbesondere zum User Interface von \"Das Versteck des Meisters\". Das System lässt sich auf vielfältige Weisen bedienen: Texteingabe, Multiple Choice, Spracheingabe, und gerne auch eine Kombination aus allen dreien.\nSo richtig perfekt ist keiner der Input-Modi, fehlerfrei erst recht nicht. Ich freue mich sehr auf eure Rückmeldung, um die Oberfläche nun mal richtig rund zu schleifen.\nWer Lust hat, etwas zu experimentieren, der findet in den Settings jede Menge fragwürdiger Optionen.\n\n\n\n";
+                return "Feedback willkommen insbesondere zum User Interface von \"Das Versteck des Meisters\". Das System lässt sich auf vielfältige Weisen bedienen: Texteingabe, Multiple Choice, Spracheingabe, oder auch eine Kombination aus allen dreien. Ich freue mich sehr auf eure Rückmeldung.\nWer Lust hat, etwas zu experimentieren, der findet in den Settings jede Menge UI-Optionen.\n\n\n\n";
         }
     }
     public static string Verb_speichern
@@ -9513,6 +9513,46 @@ public static partial class loca
                 return "Ich trat fest gegen [Il1,Dat]. Ah, das tat gut.";
             else
                 return "Ich trat fest gegen [Il1,Dat]. Ah, das tat gut.";
+        }
+    }
+    public static string MAUI_UI_Menu_Restart
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Neustart";
+            else
+                return "Restart";
+        }
+    }
+    public static string MAUI_UI_Menu_Order_Restart
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Neustart";
+            else
+                return "Restart";
+        }
+    }
+    public static string ListItems_Basetext
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "[Plv1,sehen,Akk] darin: ";
+            else
+                return "[Plv1,sehen,Akk] darin: ";
+        }
+    }
+    public static string OrderFeedback_ListItemsPersons_Person_Everyone_14069_App
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "- [Ila1,Nom]";
+            else
+                return "- [Ila1,Nom]";
         }
     }
 }

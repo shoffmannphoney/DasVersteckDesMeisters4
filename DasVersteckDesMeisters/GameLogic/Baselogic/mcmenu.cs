@@ -129,12 +129,12 @@ namespace GameCore
         public bool StoryRelevant { get; set; }
 
         public HiddenType Hidden { get; set; }
+        public bool DefaultBreak { get; set; }
 
         public string? ParseString { get; set; }
 
         public int FlagID { get; set; }
 
-        public bool Default { get; set; }
 
         [JsonConstructor]
         public MCMenuEntry()
