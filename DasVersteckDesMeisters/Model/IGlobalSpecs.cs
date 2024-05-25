@@ -67,6 +67,10 @@ public interface ILayoutDescription
     public enum eClickMargin { very_low, low, medium, high, very_high }
 
     public eClickMargin ClickMargin { get; set; }
+    public IGlobalData.picMode PicMode { get; set; }
+    public bool SimpleMC { get; set; }
+    public bool Highlighting { get; set; }
+    public IGlobalData.microMode STTMicroState { get; set; }
 }
 
 public interface IGlobalData
@@ -94,10 +98,8 @@ public interface IGlobalData
     public void SetCallbackResize(_callbackResize callbackResize);
     public void SetCallbackChangeOrientation(_callbackChangeOrientation callbackChangeOrientation);
     public void DoResize(double width, double height);
-    public IGlobalData.microMode STTMicroState { get; set; }
 
     public DelSelectedOutput? SelectOutput { get; set; }
-    public picMode PicMode { get; set; }
     public string? GreetingText { get; set; }
 
     public void SetDelSelectOutput(DelSelectedOutput DoSelectOutput);
@@ -127,8 +129,6 @@ public interface IGlobalData
     public byte[]? StartStatusSerialized { get; set; }
     public int OrderListFinalIx { get; set; }
     public bool UseMoreBuffer { get; set; }
-    public bool SimpleMC { get; set; }
-    public bool Highlighting { get; set; }
     public bool DebugMode { get; set; }
     public int DebugCount { get; set; }
 
@@ -181,7 +181,6 @@ public interface IGlobalData
     public IUIServices? UIS { get; set; }
     public Phoney_MAUI.Menu.MenuExtension? MenuExtension { get; set; }
     public List<Phoney_MAUI.Model.DelVoid>? _languageCallbacks { get; set; }
-
 }
 public interface IGlobalSpecs
 {

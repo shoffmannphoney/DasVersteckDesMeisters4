@@ -77,12 +77,41 @@ class HttpServer
 
         return newName;
     }
+
+    public static Assembly GetAssemblyForResource(string resourceName)
+    {
+        foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+        {
+            if (assembly.GetManifestResourceStream(resourceName) != null)
+            {
+                return assembly;
+            }
+        }
+
+        throw new ArgumentException($"Resource {resourceName} not found in any assembly.");
+
+    }
+
+    public static Assembly GetAssemblyByName(string name)
+    {
+        foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+        {
+            if (assembly.GetName().Name == name)
+            {
+                return assembly;
+            }
+        }
+
+        throw new ArgumentException($"Assembly {name} not found.");
+    }
     public static Stream GetResourceFile(string rscName)
     {
         if( rscName.StartsWith("/"))
         {
             rscName = rscName.Substring(1, rscName.Length - 1);
         }
+
+        // Assembly a = GetAssemblyByName("Phoney_MAUI");
         // Erhalten Sie den Assembly-Namen
         string? assemblyName = GetRealAssemblyName(Assembly.GetExecutingAssembly().GetName().Name!);
 
@@ -144,6 +173,8 @@ class HttpServer
             if (req.RawUrl!.EndsWith(".jpg"))
             {
                 Stream s = GetResourceFile(req.RawUrl);
+                if (s != null)
+                {
 
 #if IOS || ANDROID || MACCATALYST
                 // PlatformImage wird derzeit nicht auf Windows unterstützt.
@@ -151,39 +182,40 @@ class HttpServer
                   string disableSubmit = !runServer ? "disabled" : "";
               data = Encoding.UTF8.GetBytes(String.Format(pageData, pageViews, disableSubmit));
 #elif WINDOWS
-                using (MemoryStream ms = new MemoryStream())
-                {
-                    s.CopyTo(ms);
-                    data = ms.ToArray();
-                }
-                // data = StreamToByteArray(s);
-                // IImage i = PlatformImage.FromStream(s);
+                    using (MemoryStream ms = new MemoryStream())
+                    {
+                        s.CopyTo(ms);
+                        data = ms.ToArray();
+                    }
+                    // data = StreamToByteArray(s);
+                    // IImage i = PlatformImage.FromStream(s);
 
-                // string disableSubmit = !runServer ? "disabled" : "";
-                // data = Encoding.UTF8.GetBytes(String.Format(pageData, pageViews, disableSubmit));
+                    // string disableSubmit = !runServer ? "disabled" : "";
+                    // data = Encoding.UTF8.GetBytes(String.Format(pageData, pageViews, disableSubmit));
 #endif
-                if (s != null)
+                    if (s != null)
+                    {
+                        // data = Encoding
+                        resp.ContentType = "image/jpeg";
+                        resp.ContentEncoding = Encoding.Default;
+                        resp.ContentLength64 = data.LongLength;
+                    }
+                    s!.Close();
+                    s!.Dispose();
+                }
+                else
                 {
-                    // data = Encoding
-                    resp.ContentType = "image/jpeg";
-                    resp.ContentEncoding = Encoding.Default;
+                    // Write the response info
+                    string disableSubmit = !runServer ? "disabled" : "";
+                    data = Encoding.UTF8.GetBytes(String.Format(pageData, pageViews, disableSubmit));
+                    resp.ContentType = "text/html";
+                    resp.ContentEncoding = Encoding.UTF8;
                     resp.ContentLength64 = data.LongLength;
                 }
-                s!.Close();
-                s!.Dispose();
+                // Write out to the response stream (asynchronously), then close it
+                await resp.OutputStream.WriteAsync(data, 0, data.Length);
+                resp.Close();
             }
-            else
-            {
-                // Write the response info
-                string disableSubmit = !runServer ? "disabled" : "";
-                data = Encoding.UTF8.GetBytes(String.Format(pageData, pageViews, disableSubmit));
-                resp.ContentType = "text/html";
-                resp.ContentEncoding = Encoding.UTF8;
-                resp.ContentLength64 = data.LongLength;
-            }
-            // Write out to the response stream (asynchronously), then close it
-            await resp.OutputStream.WriteAsync(data, 0, data.Length);
-            resp.Close();
         }
     }
 
@@ -542,6 +574,10 @@ public class LayoutDescription : ILayoutDescription
     public List<int> PTOrder { get; set; } = new();
 
     public ILayoutDescription.eClickMargin ClickMargin { get; set; }
+    public IGlobalData.picMode PicMode { get; set; }
+    public IGlobalData.microMode STTMicroState { get; set; }
+    public bool Highlighting { get; set; }
+    public bool SimpleMC { get; set; }
 
     public LayoutDescription()
     {
@@ -563,6 +599,9 @@ public class LayoutDescription : ILayoutDescription
 #endif
 
         ParagraphClusterMode = ILayoutDescription.ParagraphClusters.none;
+        
+        STTMicroState = IGlobalData.microMode.once;
+        PicMode = IGlobalData.picMode.off;
     }
 }
 
@@ -586,7 +625,7 @@ public class GlobalData : IGlobalData
     IGlobalData._setLocalMenuState? SetLocalMenuState = null;
     [JsonIgnore][NonSerialized] Random GDRandom;
 
-    public IGlobalData.microMode STTMicroState { get; set; }
+
     public static Page? MainPage;
     private static GlobalData? _currentGlobalData = null;
     private string? _htmlMainPage;
@@ -606,7 +645,6 @@ public class GlobalData : IGlobalData
     public GameDefinitions? LatestGameDefinition { get; set; }
     public double[] DebugVal { get; set; } = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0 };
 
-    public IGlobalData.picMode PicMode { get; set; }
     public string? GreetingText { get; set; }
     public bool AutoloadFailed { get; set; }
     public bool SavegameFailed { get; set; }
@@ -748,14 +786,16 @@ public class GlobalData : IGlobalData
                 if (val < 0)
                     val = 0;
 
-                if( val == 30 )
+                if ( val != UIS.Scr.HTMLViewYRef )
                 {
-
+                    GlobalData.AddLog("WebViewContent" + val + " " + UIS.Scr.HTMLViewYRef, IGlobalData.protMode.extensive);
+                     
                 }
-                return (HTMLPage!.Replace("[Body]", CurrentContent)).Replace("[YPOS]", (val).ToString());
+
+                return (HTMLPage!.Replace("[Body]", CurrentContent)).Replace("[YPOS]", (val).ToString()).Replace("[YPOSOLD]", UIS.Scr.HTMLViewYPos.ToString());
             }
             else
-                return (HTMLPage!.Replace("[Body]", CurrentContent)).Replace("[YPOS]", 0.ToString());
+                return (HTMLPage!.Replace("[Body]", CurrentContent)).Replace("[YPOS]", 0.ToString()).Replace("[YPOSOLD]", UIS.Scr.HTMLViewYPos.ToString());
 
         }
     }
@@ -820,6 +860,7 @@ public class GlobalData : IGlobalData
         return newName;
     }
 
+
     public Stream GetResourceFile(string rscName)
     {
 
@@ -827,7 +868,7 @@ public class GlobalData : IGlobalData
         string? assemblyName = GetRealAssemblyName(Assembly.GetExecutingAssembly().GetName().Name!);
 
         // ToDo: Namen richtig zuordnen. Für hier und heute reichts einfach
-        assemblyName = "Phoney_MAUI";
+        // assemblyName = "Phoney_MAUI";
 
         // Erstellen Sie den vollständigen Ressourcennamen
         string? resourceName = $"{assemblyName}.{rscName}";
@@ -1022,7 +1063,7 @@ public class GlobalData : IGlobalData
         // if (FeedbackTextObj.FeedbackModeMC == false && FlushText == false)
         if (true)
         {
-            if (GlobalData.CurrentGlobalData.Highlighting)
+            if (GlobalData.CurrentGlobalData.LayoutDescription.Highlighting)
             // if (true)
             {
                 colorAccentStory = ti.Webcol_FGAccent1;
@@ -1110,7 +1151,7 @@ public class GlobalData : IGlobalData
         if (GlobalData.CurrentGlobalData.ProtMode != IGlobalData.protMode.off)
         {
 
-            string path = CurrentPath() + String.Format( "/versteck {0}.{1}.{2} {3}.{4}.{5}.txt", DateTime.Now.Day, DateTime.Now.Month, DateTime.Now.Year, DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second );
+            string path = CurrentPath() + String.Format("/versteck {0}.{1}.{2} {3:D2}.{4:D2}.{5:D2}.txt", DateTime.Now.Day, DateTime.Now.Month, DateTime.Now.Year, DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second );
 
             GlobalData.CurrentGlobalData.ProtFile = path;
         }
@@ -1127,42 +1168,51 @@ public class GlobalData : IGlobalData
 
     public static void AddLog(string s1, IGlobalData.protMode PM)
     {
-
-        if ( PM != IGlobalData.protMode.off && PM <= GlobalData.CurrentGlobalData.ProtMode)
+        try
         {
-            string s2 = String.Format("[{0}.{1}.{2} {3}.{4}.{5}] {6} ", DateTime.Now.Day, DateTime.Now.Month, DateTime.Now.Year, DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second, s1);
-            if (File.Exists(GlobalData.CurrentGlobalData.ProtFile) == false)
+            // Wenn das ganze System noch nicht initialisiert wurde, dann gibts auch keine Errorlogs. Sollte natürlich nie passieren
+            if (GlobalData.CurrentGlobalData == null)
+                return;
+
+            if (PM != IGlobalData.protMode.off && PM <= GlobalData.CurrentGlobalData.ProtMode)
             {
-                File.WriteAllText(GlobalData.CurrentGlobalData.ProtFile, "=== Start Log ==="+ "\n");
+                string s2 = String.Format("[{0}.{1}.{2} {3}.{4}.{5}] {6} ", DateTime.Now.Day, DateTime.Now.Month, DateTime.Now.Year, DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second, s1);
+                if (File.Exists(GlobalData.CurrentGlobalData.ProtFile) == false)
+                {
+                    File.WriteAllText(GlobalData.CurrentGlobalData.ProtFile, "=== Start Log ===" + "\n");
+
+                }
+
+
+                string path = GlobalData.CurrentGlobalData.ProtFile;
+
+                File.AppendAllText(path, s2 + "\n");
 
             }
-
-
-            string path = GlobalData.CurrentGlobalData.ProtFile;
-
-            File.AppendAllText(path, s2  + "\n");
-
+        }
+        catch( Exception e)
+        {
+            string s2 = e.Message;
         }
     }
     public GlobalData(  )
     {
         _currentGlobalData = this;
-
+ 
         ProtMode = IGlobalData.protMode.crisp;
 #if DEBUG
         ProtMode = IGlobalData.protMode.extensive;
 #endif
 
- 
+        GlobalData.InitLog("Hello");
+        GlobalData.AddLog("GlobalData Init", IGlobalData.protMode.crisp);
 
-        STTMicroState = IGlobalData.microMode.off;
+
 
         LatestGameDefinition = null;
         LocalMenu = IGlobalData.localMenu.home;
         GameCore.loca.GD = this;
-        PicMode = IGlobalData.picMode.off;
         GreetingText = null;
-        STTMicroState = IGlobalData.microMode.once;
         AutoloadFailed = false;
 
         LayoutDescription = UIServices.ReadConfig()!;
@@ -1345,8 +1395,6 @@ public class GlobalData : IGlobalData
     public byte[]? StartStatusSerialized { get; set; }
     public int OrderListFinalIx { get; set; }
     public bool UseMoreBuffer { get; set; }
-    public bool SimpleMC { get; set; }
-    public bool Highlighting { get; set; }
 
     public bool Brief { get; set; }
 
@@ -1726,7 +1774,7 @@ public class GlobalSpecs : IGlobalSpecs
            {
                 new FontInfo { Id = 1, Name = "Open Sans Regular", Font ="OpenSansRegular", HTMLName = "\'Open Sans\'"},
                 new FontInfo { Id = 2, Name = "Verdana", Font ="Verdana", HTMLName = "Verdana"},
-                new FontInfo { Id = 3, Name = "Raleway", Font ="Raleway", HTMLName = "Raleway"},
+                new FontInfo { Id = 3, Name = "Raleway", Font ="Raleway", HTMLName = "'Raleway"},
                 new FontInfo { Id = 4, Name = "Times New Roman", Font ="TimesNewRoman", HTMLName = "\"Times New Roman\""},
                 // new FontInfo { Id = 5, Name = "Italianno", Font ="Italianno"},
                 new FontInfo { Id = 5, Name = "Brush Script MT", Font ="Brush Script MT", HTMLName = "\"Brush Script MT\""},

@@ -669,20 +669,20 @@ namespace GameCore
         }
 
 
-        public void Showlocation( int locationID )
+        public void ShowLocation( int locationID, bool fullShow = false )
         {
-            if (this.Find(locationID)!.Visited && AdvGame!.GD!.Brief)
+            if (this.Find(locationID)!.Visited && AdvGame!.GD!.Brief && fullShow == false)
             {
-                ShowlocationShort(locationID);
+                ShowLocationShort(locationID);
             }
             else
             {
-                ShowlocationFull(locationID);
+                ShowLocationFull(locationID);
                 this.Find(locationID)!.Visited = true;
             }
         }
 
-        public void ShowlocationFull( int locationID )
+        public void ShowLocationFull( int locationID )
         {
             List<Item> itemShowOn = new();
             List<Item> itemShowIn = new();
@@ -843,7 +843,7 @@ namespace GameCore
             this.Find(locationID)!.Visited = true;
         }
 
-        public void ShowlocationShort(int locationID)
+        public void ShowLocationShort(int locationID)
         {
 
             int anzahlGefunden = 0;

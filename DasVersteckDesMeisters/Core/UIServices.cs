@@ -56,6 +56,7 @@ public class UIServices : IUIServices
     // public MCMenu? MCM { get; set; }
     private DelVoid? LocalUIUpdate;
     private DelVoid? _setScoreEpisodeMethod;
+    private DelVoid? _setMCFocusMethod;
     private Del4Double? _setScoreMethod;
     private Phoney_MAUI.Core.MCMenuView? _mcmv;
     public string? _MCCallbackName { get; set; }
@@ -168,6 +169,10 @@ public class UIServices : IUIServices
     {
         this._setLanguage = SetLanguage;
     }
+    public void SetMCFocusMethod( DelVoid method )
+    {
+        _setMCFocusMethod = method;
+    }
 
 
     private DelVoid? _uiCallback;
@@ -254,8 +259,8 @@ public class UIServices : IUIServices
                 int pHeight = Int32.Parse(StoryTextObj.Slines?[Line]?.Substring(pos, posEnd - pos)!);
 
                 int perCent = 20;
-                if (GD.PicMode == IGlobalData.picMode.medium) perCent = 40;
-                if (GD.PicMode == IGlobalData.picMode.big) perCent = 60;
+                if (GD.LayoutDescription.PicMode == IGlobalData.picMode.medium) perCent = 40;
+                if (GD.LayoutDescription.PicMode == IGlobalData.picMode.big) perCent = 60;
 
 
                 int pWidthNew = (int)( (ExternalGameOut.Width * perCent) / 100 );
@@ -277,7 +282,7 @@ public class UIServices : IUIServices
     }
     public void LoadPicToHtml(string? picName)
     {
-        if ( GD.PicMode != IGlobalData.picMode.off && picName != null)
+        if ( GD.LayoutDescription.PicMode != IGlobalData.picMode.off && picName != null)
         {
             if (ExternalGameOut != null)
             {
@@ -285,13 +290,13 @@ public class UIServices : IUIServices
                 // string size = "100";
                 pWidth = (int)((ExternalGameOut.Width * 20) / 100);
                 pHeight = (int)((pWidth * 9) / 16);
-                if (GD.PicMode == IGlobalData.picMode.medium)
+                if (GD.LayoutDescription.PicMode == IGlobalData.picMode.medium)
                 {
                     // size = "400";
                     pWidth = (int)((ExternalGameOut.Width * 40) / 100);
                     pHeight = (int)((pWidth * 9) / 16);
                 }
-                if (GD.PicMode == IGlobalData.picMode.big)
+                if (GD.LayoutDescription.PicMode == IGlobalData.picMode.big)
                 {
                     // size = "800";
                     pWidth = (int)((ExternalGameOut.Width * 60) / 100);
@@ -309,10 +314,13 @@ public class UIServices : IUIServices
                 string s = string.Format("<center><img src=\"http://localhost:8000/{0}\" width=\"{1}\" height=\"{2}\"  align=\"middle\" /> </center>", s1, pWidth, pHeight);
                 // string s = string.Format("<center><img src=\"http://localhost:8000/{0}\" width=\"{1}\" height=\"{1}\" align=\"middle\" /> </center>", s1, size);
 #elif ANDROID
-            //         CurrentContent += "<img src=\"l012.jpg\" width=\"50%\" height=\"50%\"/img>";
+                //         CurrentContent += "<img src=\"l012.jpg\" width=\"50%\" height=\"50%\"/img>";
 
-            string s = string.Format("<center><img src='drawable/{0}' width=\"{1}\" height=\"{2}\" align=\"middle\" /img></center>", s1, pWidth, pHeight);
+                // string s = string.Format("<center><img src='drawable/{0}' width=\"{1}\" height=\"{2}\" align=\"middle\" /img></center>", s1, pWidth, pHeight);
+
+                string s = string.Format("<center><img src='file:///" + Phoney_MAUI.Platform.DeviceData._deviceData!.GetSavePath() + "/{0}' width=\"{1}\" height=\"{2}\" align=\"middle\" /img></center>", s1, pWidth, pHeight);
 #else
+
             string s = "Fick dich";
 #endif
                 // <img src=\"l012.jpg\" width=\"50%\" height=\"50%\"/img>
@@ -324,13 +332,13 @@ public class UIServices : IUIServices
                 string size = "20%";
                 pWidth = (int)((100 * 20) / 100);
                 pHeight = (int)((pWidth * 9) / 16);
-                if (GD.PicMode == IGlobalData.picMode.medium)
+                if (GD.LayoutDescription.PicMode == IGlobalData.picMode.medium)
                 {
                     size = "40%";
                     pWidth = (int)((100 * 40) / 100);
                     pHeight = (int)((pWidth * 9) / 16);
                 }
-                if (GD.PicMode == IGlobalData.picMode.big)
+                if (GD.LayoutDescription.PicMode == IGlobalData.picMode.big)
                 {
                     size = "60%";
                     pWidth = (int)((100 * 60) / 100);
@@ -361,6 +369,27 @@ public class UIServices : IUIServices
 
     }
 
+    public bool CacheResources(List<string> resources)
+    {
+        var assembly = Assembly.GetExecutingAssembly();
+
+        bool loaded = true;
+
+        foreach (string rscName in resources)
+        {
+            using var stream = assembly.GetManifestResourceStream("DasVersteckDesMeisters.Resources.Raw." + rscName);
+            var filePath = Path.Combine(Phoney_MAUI.Platform.DeviceData._deviceData!.GetSavePath(), rscName);
+            if (File.Exists(filePath) == true)
+                return false;
+
+            using var fileStream = File.Create(filePath);
+            stream.CopyTo(fileStream);
+            stream.Close();
+            fileStream.Close();
+
+        }
+        return loaded;
+    }
 
     public bool DoUIUpdate()
     {
@@ -540,7 +569,7 @@ public class UIServices : IUIServices
 
     public void SetSimpleMC()
     {
-        GD.SimpleMC = true;
+        GD.LayoutDescription.SimpleMC = true;
 
         GD!.LayoutDescription.OrderListPos = ILayoutDescription.selectedPosition.rightUp;
         GD!.LayoutDescription.ItemsInvListPos = ILayoutDescription.selectedPosition.rightUp;
@@ -569,7 +598,7 @@ public class UIServices : IUIServices
 
     public void SetComplexMC()
     {
-        GD.SimpleMC = false;
+        GD.LayoutDescription.SimpleMC = false;
 
         // Hier noch die Menüs aktualisieren
         GD!.LayoutDescription.OrderListPos = ILayoutDescription.selectedPosition.rightUp;
@@ -647,13 +676,21 @@ public class UIServices : IUIServices
     public static LayoutDescription? ReadConfig()
     {
         LayoutDescription? ld = null;
-        string? pathfileName = DeviceData.GetSavePathStatic()! + "/config.inf";
-        if (File.Exists(pathfileName))
+
+        try
         {
-            string? jsonSource = File.ReadAllText(pathfileName);
+            string? pathfileName = DeviceData.GetSavePathStatic()! + "/config.inf";
+            if (File.Exists(pathfileName))
+            {
+                string? jsonSource = File.ReadAllText(pathfileName);
 
 
-            ld = JsonConvert.DeserializeObject<LayoutDescription>(jsonSource);
+                ld = JsonConvert.DeserializeObject<LayoutDescription>(jsonSource);
+            }
+        }
+        catch( Exception e)
+        {
+            GlobalData.AddLog("ReadConfig: " + e.Message, IGlobalData.protMode.crisp);
         }
 
         return ld;
@@ -1335,82 +1372,90 @@ public class UIServices : IUIServices
         }
         else if (urlParts[0].ToLower().Equals("https://defineobject"))
         {
-            bool skip = false;
-
-            LatestNaviStrings = new();
-            LatestNaviStrings.Add(urlParts[0]);
-            lnsPt = 1;
-
-            // Dieser Mechanismus ist darauf ausgelegt, dass auf einen Klick insgesamt 3 Messages folgen, von denen 2 tunlichst 
-            // verschluckt werden sollten. Das ist aus irgendeinem Grund nun nicht mehr nötig, bzw. dadurch ist es halt jetzt falsch
-
-            /*
-            bool skip = true;
-            
-            if( LatestNaviStrings == null )
+            // Wenn e.Cancel schon gesetzt, dann wurde der Link schon verarbeitet
+            if (e.Cancel == false)
             {
+                bool skip = false;
+
                 LatestNaviStrings = new();
                 LatestNaviStrings.Add(urlParts[0]);
                 lnsPt = 1;
-                skip = false;
-            }
-            else if (urlParts[0] == LatestNaviStrings[ lnsPt - 1])
-            {
-                LatestNaviStrings.Add(urlParts[0]);
-                lnsPt++;
-                if( lnsPt >= 3)
-                {
-                    LatestNaviStrings = null;
-                }
-            }
-            */
 
-            if (!skip)
-            {
-                string? s = null;
+                // Dieser Mechanismus ist darauf ausgelegt, dass auf einen Klick insgesamt 3 Messages folgen, von denen 2 tunlichst 
+                // verschluckt werden sollten. Das ist aus irgendeinem Grund nun nicht mehr nötig, bzw. dadurch ist es halt jetzt falsch
 
-                var funcToCall = urlParts[1].Split("/");
+                /*
+                bool skip = true;
 
-                if (funcToCall[0] == "item")
+                if( LatestNaviStrings == null )
                 {
-                    s = "Item: " + funcToCall[1];
+                    LatestNaviStrings = new();
+                    LatestNaviStrings.Add(urlParts[0]);
+                    lnsPt = 1;
+                    skip = false;
                 }
-                else if (funcToCall[0] == "dir")
+                else if (urlParts[0] == LatestNaviStrings[ lnsPt - 1])
                 {
-                    s = "Dir: " + funcToCall[1];
+                    LatestNaviStrings.Add(urlParts[0]);
+                    lnsPt++;
+                    if( lnsPt >= 3)
+                    {
+                        LatestNaviStrings = null;
+                    }
                 }
-                else if (funcToCall[0] == "loc")
-                {
-                    s = "Loc: " + funcToCall[1];
-                }
-                else if (funcToCall[0] == "actloc")
-                {
-                    s = "ActLoc";
-                }
-                else if (funcToCall[0] == "actperson")
-                {
-                    s = "ActPerson";
-                }
-                else if (funcToCall[0] == "person")
-                {
-                    s = "Person: " + funcToCall[1];
-                }
+                */
 
-                if (s != null)
+                if (!skip)
                 {
-                    InitBrowserUpdate();
-                    // UpdateBrowserCallsPerCycle = 0;
-                    GlobalData.CurrentGlobalData!.Adventure!.LinkCallback(s);
-                    DoUIUpdate();
-                    StoryTextObj!.AdvTextRefresh(true);
-                    FinishBrowserUpdate( IUIServices.onBrowserContentLoaded.PageDown);
+                    string? s = null;
+
+                    var funcToCall = urlParts[1].Split("/");
+
+                    if (funcToCall[0] == "item")
+                    {
+                        s = "Item: " + funcToCall[1];
+                    }
+                    else if (funcToCall[0] == "dir")
+                    {
+                        s = "Dir: " + funcToCall[1];
+                    }
+                    else if (funcToCall[0] == "loc")
+                    {
+                        s = "Loc: " + funcToCall[1];
+                    }
+                    else if (funcToCall[0] == "actloc")
+                    {
+                        s = "ActLoc";
+                    }
+                    else if (funcToCall[0] == "actperson")
+                    {
+                        s = "ActPerson";
+                    }
+                    else if (funcToCall[0] == "person")
+                    {
+                        s = "Person: " + funcToCall[1];
+                    }
+
+                    if (s != null)
+                    {
+                        InitBrowserUpdate();
+                        // UpdateBrowserCallsPerCycle = 0;
+                        GlobalData.CurrentGlobalData!.Adventure!.LinkCallback(s);
+                        DoUIUpdate();
+                        StoryTextObj!.AdvTextRefresh(true);
+                        FinishBrowserUpdate(IUIServices.onBrowserContentLoaded.PageDown);
+                        if (_setMCFocusMethod != null)
+                        {
+                            _setMCFocusMethod();
+                        }
 #if !NEWSCROLL
                     Scr!.ScrollPageFinal();
                     Scr!.SetNext = true;
 #endif
+                    }
                 }
+                e.Cancel = true;
             }
-            e.Cancel = true;
         }
         else
         {
@@ -1475,8 +1520,13 @@ public class UIServices : IUIServices
                         int ct = 0;
                         do
                         {
-                            if( doAfterLoad != IUIServices.onBrowserContentLoaded.unchanged)
+                            if (doAfterLoad != IUIServices.onBrowserContentLoaded.unchanged)
+                            {
                                 OnBrowserContentLoaded = doAfterLoad;
+                            }
+
+                            
+
                             insertedFine = true;
                             // Bridge
                             _browserRefreshOngoing = true;
@@ -1508,8 +1558,8 @@ public class UIServices : IUIServices
                                 var value = res.GetAwaiter().GetResult();
 
                             }
-                            ct++;
                             */
+                            ct++;
                         } while (insertedFine == false && ct < 20);
 
                         GD.UIS!.FlushUICycle();
@@ -1694,7 +1744,7 @@ public class UIServices : IUIServices
         }
         catch (Exception e)
         {
-            GD.STTMicroState = IGlobalData.microMode.off;
+            GD.LayoutDescription.STTMicroState = IGlobalData.microMode.off;
         }
     }
 
@@ -2911,6 +2961,18 @@ public class Scroller : IScroller
         // SetToPos( (int) From );
         _scrollMode = IScroller.scrollMode.delayScroll;
         _scrollModeCountDown = 30;
+    }
+    public void ScrollEnd()
+    {
+        // SetToPos( (int) From );
+        _scrollMode = IScroller.scrollMode.delayScroll;
+        _scrollModeCountDown = 30;
+    }
+    public void ScrollEndWait( int wait)
+    {
+        // SetToPos( (int) From );
+        _scrollMode = IScroller.scrollMode.delayScroll;
+        _scrollModeCountDown = wait;
     }
 
     public void ScrollToEnd()

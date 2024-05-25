@@ -151,6 +151,7 @@ public interface IUIServices
     public void SetSetLanguage(DelVoid SetLanguage);
     public void SetScoreEpisodeMethod(DelVoid method);
     public void SetScoreMethod(Del4Double method);
+    public void SetMCFocusMethod(DelVoid method);
     public void InitBrowserUpdate();
 
     public void SetUICallback(DelVoid UICallback, DelVoid ReqUICallback);
@@ -177,6 +178,7 @@ public interface IUIServices
     public Task STTStartListening(sttListeningMode slm, string callerName = "" );
     public Task STTStopListening(bool restartMode = false);
     public DelListeningMode? STTListenigModeChangeCB { get; set; }
+    public bool CacheResources(List<string> resources);
     public interface MCMenuView
     {
 

@@ -81,6 +81,11 @@ namespace GameCore
             get => GD!.Adventure!.Persons!;
             // set => GD!.Adventure!.Persons = value;
         }
+        public Order? Orders
+        {
+            get => GD!.Adventure!.Orders!;
+            // set => GD!.Adventure!.Persons = value;
+        }
         [JsonIgnore]
         public StatusList? Stats
         {
@@ -605,7 +610,7 @@ namespace GameCore
             }
             if ((item.CanPutOn) && (!item.InvisibleOn))
             {
-                Persons?.ListPersons(AdvGame!.CB!.LocType_On_Item, item!.ID, (int)(Persons?.Find(PersonID)!.locationID!));
+                // Persons?.ListPersons(AdvGame!.CB!.LocType_On_Item, item!.ID, (int)(Persons?.Find(PersonID)!.locationID!));
                 ListItems(Helper.Insert(loca.OrderFeedback_Examine_Person_3rdperson_13906, item!.ID, CA!.Person_3rdperson!), PersonID, CB!.LocType_On_Item, item!.ID, false, true, Co.CASE_AKK_UNDEF);
                 item.InvisibleOn = false;
             }
@@ -641,12 +646,13 @@ namespace GameCore
             AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, loca.Order_Switch_German);
             loca.GD!.Language = IGlobalData.language.german;
             LayoutRefresh();
-            locations!.Showlocation(A!.ActLoc);
+            AdvGame.Orders.Location( null, A!.ActLoc);
             return true;
         }
         public virtual bool English(Person PersonID, ParseTokenList PTL)
         {
             AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, loca.Order_Switch_English_Fail);
+            AdvGame.Orders.Location(null, A!.ActLoc);
             // loca.GD!.Language = IGlobalData.language.english;
             // LayoutRefresh();
             // locations!.Showlocation(A!.ActLoc);
@@ -797,17 +803,20 @@ namespace GameCore
             return (true);
         }
 
-        public virtual bool location(Person PersonID, ParseTokenList PTL)
+        public virtual bool Location(Person PersonID, ParseTokenList PTL)
         {
+            AdvGame.Orders.Location(PersonID, Persons!.LocOnly(PersonID));
+            /*
             OrderFeedback of = new OrderFeedback();
 
             AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_location_Person_Everyone_13922, PersonID, PersonID));
-            locations!.ShowlocationFull(Persons!.LocOnly(PersonID));
+            locations!.ShowLocationFull(Persons!.LocOnly(PersonID));
 
             of.StoryOutput = true;
             of.Success = true;
             of.Handled = true;
             of.Action = true;
+            */
             return (true);
         }
 
@@ -834,7 +843,7 @@ namespace GameCore
                 if (PersonID!.ID == A!.ActPerson)
                 {
                     A!.ActLoc = Persons!.Find(PersonID)!.locationID;
-                    locations!.Showlocation(A!.ActLoc);
+                    AdvGame.Orders.Location(null, A!.ActLoc);
                 }
                 if ((PersonID!.ID != A!.ActPerson) && (Persons!.Find(PersonID)!.locationID == Persons!.Find(A!.ActPerson)!.locationID))
                 {
@@ -4422,7 +4431,7 @@ namespace GameCore
             gdi.MCID = MCID;
             gdi.MCPersonID = MCPersonID;
 
-            gdi.PicMode = AdvGame!.GD!.PicMode;
+            gdi.PicMode = AdvGame!.GD!.LayoutDescription.PicMode;
 
             gdi.CurrentEventName = AdvGame._currentEventName;
             gdi.IxCurrent = AdvGame._ixCurrent;
@@ -4969,6 +4978,7 @@ namespace GameCore
             }
             catch( Exception ex)
             {
+                GlobalData.AddLog("LoadGame: " + ex.Message, IGlobalData.protMode.crisp);
 
             }
             return so;
@@ -6742,6 +6752,7 @@ namespace GameCore
                     AdvGame!.Persons = SO!.jsonPersons;
                     AdvGame!.locations = SO!.jsonlocations!;
                     AdvGame!.Adjs = SO!.jsonAdjs;
+                    AdvGame!.Orders = Orders;
                     // SO.jsonA!.Adventure = AdvGame!;
                     AdvGame!.A = SO!.jsonA!;
                     AdvGame!.Nouns = SO!.jsonNouns;
@@ -6829,11 +6840,12 @@ namespace GameCore
                     AdvGame._lastLoc = SO.JsonGameDefinitions.LastLoc;
                     AdvGame._actLoc = SO.JsonGameDefinitions.ActLoc;
 
-                    AdvGame.GD!.PicMode = SO.JsonGameDefinitions.PicMode;
+                    AdvGame.GD!.LayoutDescription.PicMode = SO.JsonGameDefinitions.PicMode;
 
                     AdvGame.Orders!.MCCallbackName = SO.JsonGameDefinitions.MCCallbackName;
                     AdvGame.Orders.MCID = SO.JsonGameDefinitions.MCID;
                     AdvGame.Orders.MCPersonID = SO.JsonGameDefinitions.MCPersonID;
+                    AdvGame.GD!.OrderList!.CBCreateOrderPath = AdvGame.CreateOrderPath;
 
 
                     mem13 = GC.GetTotalMemory(true);
@@ -6897,8 +6909,10 @@ namespace GameCore
                 SO = null;
                 long mem2 = GC.GetTotalMemory(true);
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
+                GlobalData.AddLog("CoreLoad: " + ex.Message, IGlobalData.protMode.crisp);
+
                 GD.SavegameFailed = true;
             }
         }
@@ -7058,7 +7072,12 @@ namespace GameCore
                 if (grammar == Co.CASE_NOM)
                 {
                     insertBase = loca.OrderFeedback_ListItems_Nom;
-                    insertBaseP = loca.OrderFeedback_ListPersons_Nom;
+                    insertBaseP = loca.OrderFeedback_ListIPersons_clickable;
+                }
+                else if (grammar == Co.CASE_AKK_UNDEF)
+                {
+                    insertBase = loca.OrderFeedback_ListItems_Akku;
+                    insertBaseP = loca.OrderFeedback_ListIPersons_clickable_Akku;
                 }
 
                 AdvGame!.StoryOutput(Persons!.Find(PersonID!)!.locationID, CA!.Person_Everyone, InitText);
@@ -7069,6 +7088,7 @@ namespace GameCore
                     if ((item.locationType == LocType) && (item.locationID == LocID) && (item.IsBackground == false) && ((item.IsHidden == false) || (ShowHidden == true)))
                     {
                         // MW.TextOutput( "- <a href=\"https:www.spiegel.de\" onclick=\"var myMenu = new Menu(); myMenu.addMenuItem(\"my menu item A\"); myMenu.addMenuItem(\"my menu item B\"); myMenu.addMenuItem(\"my menu item C\"); myMenu.addMenuItem(\"my menu item D\"); myMenu.writeMenus();\">"+ Items!.GetItemNameLink(IT[j]!.ID, Co.CASE_NOM_UNDEF)+"</a>");
+                        string sx = Helper.Insert(insertBase, item!.ID);
                         AdvGame!.StoryOutput(Persons!.Find(PersonID!)!.locationID, CA!.Person_Everyone,  Helper.Insert(insertBase, item!.ID ));
                         // Items!.List[j].IsHidden = false;
                         Found++;
@@ -7094,6 +7114,7 @@ namespace GameCore
                 {
                     if ((person.locationType == LocType) && (person.locationID == LocID) && (person.IsBackground == false) && ((person.IsHidden == false) || (ShowHidden == true)))
                     {
+                        string sx = Helper.Insert(insertBaseP, person);
                         // MW.TextOutput( "- <a href=\"https:www.spiegel.de\" onclick=\"var myMenu = new Menu(); myMenu.addMenuItem(\"my menu item A\"); myMenu.addMenuItem(\"my menu item B\"); myMenu.addMenuItem(\"my menu item C\"); myMenu.addMenuItem(\"my menu item D\"); myMenu.writeMenus();\">"+ Items!.GetItemNameLink(IT[j]!.ID, Co.CASE_NOM_UNDEF)+"</a>");
                         AdvGame!.StoryOutput(Persons!.Find(PersonID!)!.locationID, CA!.Person_Everyone, Helper.Insert(insertBaseP, person!));
                         // Items!.List[j].IsHidden = false;

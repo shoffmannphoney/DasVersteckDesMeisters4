@@ -952,11 +952,6 @@ public class OrderList : IOrderList
                 // bool pathGetDeeper = false;
                 bool decreaseIx = false;
 
-                if (olt.OT[ix].No == 18 )
-                {
-
-                }
-
                 if (ix == 0)
                 {
                     initTempPath = true;

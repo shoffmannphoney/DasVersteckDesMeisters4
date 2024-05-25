@@ -78,6 +78,8 @@
                                     <RowDefinition Height="180"/>
                                     <RowDefinition Height="90"/>
                                     <RowDefinition Height="180"/>
+                                    <RowDefinition Height="90"/>
+                                    <RowDefinition Height="240"/>
                                 </Grid.RowDefinitions>
                                 <Label x:Name="LanguageLabel" Grid.Row="0" StyleClass="Label_Normal" HorizontalOptions="Center" VerticalOptions="End" Margin="0,0,0,15" FontSize="Large"  Text="Sprache"/>
                                 <Grid x:Name="LanguageGrid" Grid.Row="1" WidthRequest="300">
@@ -88,18 +90,18 @@
                                     <Button x:Name="LanguageButton_Deutsch" Clicked="OnClickGerman" StyleClass="Button_Settings" CornerRadius="1" Text="Deutsch"/>
                                     <Button x:Name="LanguageButton_English" Clicked="OnClickEnglish" Grid.Row="1" StyleClass="Button_Settings" CornerRadius="1" Text="Englisch"/>
                                 </Grid>
-                                <Label x:Name="IllustrationLabel" Grid.Row="2" StyleClass="Label_Normal" HorizontalOptions="Center" VerticalOptions="End" Margin="0,0,0,15" FontSize="Large"  Text="Illustration"/>
-                                <Grid x:Name="IllustrationGrid" Grid.Row="3" WidthRequest="300">
+                                <Label x:Name="IllustrationLabel_old" Grid.Row="2" StyleClass="Label_Normal" HorizontalOptions="Center" VerticalOptions="End" Margin="0,0,0,15" FontSize="Large"  Text="Illustration"/>
+                                <Grid x:Name="IllustrationGrid_old" Grid.Row="3" WidthRequest="300">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="60"/>
                                         <RowDefinition Height="60"/>
                                         <RowDefinition Height="60"/>
                                         <RowDefinition Height="60"/>
                                     </Grid.RowDefinitions>
-                                    <Button CornerRadius="1" x:Name="IllustrationButton_Off" Clicked="OnClickIlluOff" StyleClass="Button_Settings" Text="Aus"/>
-                                    <Button CornerRadius="1" x:Name="IllustrationButton_Small" Clicked="OnClickIlluSmall" Grid.Row="1" StyleClass="Button_Settings" Text="Klein"/>
-                                    <Button CornerRadius="1" x:Name="IllustrationButton_Medium" Clicked="OnClickIlluMedium" Grid.Row="2" StyleClass="Button_Settings" Text="Mittel"/>
-                                    <Button CornerRadius="1" x:Name="IllustrationButton_Big" Clicked="OnClickIlluBig" Grid.Row="3" StyleClass="Button_Settings" Text="Groß"/>
+                                    <Button CornerRadius="1" x:Name="IllustrationButton_Off_old" Clicked="OnClickIlluOff" StyleClass="Button_Settings" Text="Aus"/>
+                                    <Button CornerRadius="1" x:Name="IllustrationButton_Small_old" Clicked="OnClickIlluSmall" Grid.Row="1" StyleClass="Button_Settings" Text="Klein"/>
+                                    <Button CornerRadius="1" x:Name="IllustrationButton_Medium_old" Clicked="OnClickIlluMedium" Grid.Row="2" StyleClass="Button_Settings" Text="Mittel"/>
+                                    <Button CornerRadius="1" x:Name="IllustrationButton_Big_old" Clicked="OnClickIlluBig" Grid.Row="3" StyleClass="Button_Settings" Text="Groß"/>
                                 </Grid>
                                 <Label x:Name="SimpleMCLabel" Grid.Row="4" StyleClass="Label_Normal" HorizontalOptions="Center" VerticalOptions="End" Margin="0,0,0,15" FontSize="Large"  Text="Simples Multiple Choice"/>
                                 <Grid Grid.Row="5" WidthRequest="300">
@@ -309,6 +311,19 @@
                                     <Button CornerRadius="1" x:Name="ParagraphMode_Off" Clicked="OnParagraphMode_None" StyleClass="Button_Settings" Text="xxx Aus"/>
                                     <Button CornerRadius="1" x:Name="ParagraphMode_Last" Clicked="OnParagraphMode_Latest" Grid.Row="1" StyleClass="Button_Settings" Text="xxx Last"/>
                                     <Button CornerRadius="1" x:Name="ParagraphMode_Full" Clicked="OnParagraphMode_Full" Grid.Row="2" StyleClass="Button_Settings" Text="xxx Alle"/>
+                                </Grid>
+                                <Label x:Name="IllustrationLabel" Grid.Row="32" StyleClass="Label_Normal" HorizontalOptions="Center" VerticalOptions="End" Margin="0,0,0,15" FontSize="Large"  Text="Illustration"/>
+                                <Grid x:Name="IllustrationGrid" Grid.Row="33" WidthRequest="300">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="60"/>
+                                        <RowDefinition Height="60"/>
+                                        <RowDefinition Height="60"/>
+                                        <RowDefinition Height="60"/>
+                                    </Grid.RowDefinitions>
+                                    <Button CornerRadius="1" x:Name="IllustrationButton_Off" Clicked="OnClickIlluOff" StyleClass="Button_Settings" Text="Aus"/>
+                                    <Button CornerRadius="1" x:Name="IllustrationButton_Small" Clicked="OnClickIlluSmall" Grid.Row="1" StyleClass="Button_Settings" Text="Klein"/>
+                                    <Button CornerRadius="1" x:Name="IllustrationButton_Medium" Clicked="OnClickIlluMedium" Grid.Row="2" StyleClass="Button_Settings" Text="Mittel"/>
+                                    <Button CornerRadius="1" x:Name="IllustrationButton_Big" Clicked="OnClickIlluBig" Grid.Row="3" StyleClass="Button_Settings" Text="Groß"/>
                                 </Grid>
                             </Grid>
                         </ScrollView>

@@ -860,6 +860,7 @@ namespace GameCore
                 if (ZeroLoad == false)
                 {
                     StoryOutput(loca.Adv_Intro0);
+                    UIS.LoadPicToHtml("ver_title.jpg");
                     StoryOutput(String.Format(loca.Adv_Intro1, GD!.Version.GetVersion(), GD!.Version.GetVersionDate()));
                 }
 
@@ -870,6 +871,7 @@ namespace GameCore
         public Adv( bool SetAsActiveGame, bool LoadAutoSave, bool ZeroLoad = false ) 
         {
             GC.Collect();
+
 
             Adv? advStore1;
 #if MAUI
@@ -899,6 +901,31 @@ namespace GameCore
             }
             GD!.InitRandom(43);
             GD!.OrderList!.CBCreateOrderPath = CreateOrderPath;
+#if ANDROID
+            {
+                List<string> s = new();
+                s.Add("ver_title.jpg");
+                s.Add("ver_l01.jpg");
+                s.Add("ver_l02.jpg");
+                s.Add("ver_l03.jpg");
+
+                s.Add("ver_l04.jpg");
+                s.Add("ver_l05.jpg");
+                s.Add("ver_l06.jpg");
+                s.Add("ver_l07.jpg");
+                s.Add("ver_l08.jpg");
+
+                s.Add("ver_l09.jpg");
+                s.Add("ver_l10.jpg");
+                s.Add("ver_l11.jpg");
+                s.Add("ver_l12.jpg");
+                s.Add("ver_l13.jpg");
+                s.Add("ver_l14.jpg");
+                s.Add("ver_l15.jpg");
+
+                GD!.UIS.CacheResources(s);
+            }
+#endif
 
 
             loca.GD?.AddLanguageCallback(RestoreLocationName);
@@ -6504,7 +6531,8 @@ namespace GameCore
                     {
                         string pathx = String.Format(loca.ScoreEvent_Gehen_Von_Bis, locations!.Find(_actLocEventStartPoint)!.LocName, locations!.Find(_lastLoc)!.LocName);
 
-                        for (int ix2 = _actLocEventSeqStart - 1; ix2 < (ix - 2); ix2++)
+                        // for (int ix2 = _actLocEventSeqStart - 1; ix2 < (ix - 2); ix2++)
+                        for (int ix2 = _actLocEventSeqStart; ix2 < (ix - 1); ix2++)
                         {
                             SecureOrderPath(_otlCurrent, ix2);
 
@@ -6531,13 +6559,19 @@ namespace GameCore
 
                     _actLocCollecting = false;
                 }
-                if (AdvGame!.DialogOngoing && Orders!.persistentMCMenu != null)
+
+                if( AdvGame.Orders != Orders )
+                {
+
+                }
+
+                if (AdvGame!.DialogOngoing && AdvGame!.Orders!.persistentMCMenu != null)
                 {
                     string speaker = loca.ScoreEvent_Talk_Self;
 
-                    if (Orders.persistentMCMenu?.MCSpeakerText.Count > 1)
-                        if (Orders.persistentMCMenu.MCSpeakerText[1].SpeakerID != Orders.persistentMCMenu.MCSpeakerText[0].SpeakerID)
-                            speaker = String.Format(loca.ScoreEvent_Talk_With, Persons!.Find(Orders.persistentMCMenu.MCSpeakerText[1].SpeakerID)!.FullName(Co.CASE_DAT));
+                    if (AdvGame!.Orders.persistentMCMenu?.MCSpeakerText.Count > 1)
+                        if (AdvGame!.Orders.persistentMCMenu.MCSpeakerText[1].SpeakerID != AdvGame!.Orders.persistentMCMenu.MCSpeakerText[0].SpeakerID)
+                            speaker = String.Format(loca.ScoreEvent_Talk_With, AdvGame!.Persons!.Find(AdvGame!.Orders.persistentMCMenu.MCSpeakerText[1].SpeakerID)!.FullName(Co.CASE_DAT));
 
                     path3 = speaker;
                 }
@@ -6562,6 +6596,7 @@ namespace GameCore
             }
             catch (Exception ex)
             {
+                Phoney_MAUI.Core.GlobalData.AddLog("CreateOrderPath: " + ex.Message, IGlobalData.protMode.crisp);
             }
 
         }
@@ -6728,13 +6763,13 @@ namespace GameCore
             {
                 path3 = String.Format(loca.ScoreEvent_Aktionen, locations!.Find(_actLoc)!.LocName);
             }
-            if( AdvGame!.DialogOngoing && Orders!.persistentMCMenu != null )
+            if( AdvGame!.DialogOngoing && AdvGame!.Orders!.persistentMCMenu != null )
             {
                 string speaker = loca.ScoreEvent_Talk_Self; 
 
-                if (Orders.persistentMCMenu?.MCSpeakerText.Count > 1)
-                    if (Orders.persistentMCMenu.MCSpeakerText[1].SpeakerID != Orders.persistentMCMenu.MCSpeakerText[0].SpeakerID)
-                        speaker = String.Format( loca.ScoreEvent_Talk_With, Persons!.Find( Orders.persistentMCMenu.MCSpeakerText[1].SpeakerID )!.FullName(Co.CASE_DAT) );
+                if (AdvGame!.Orders.persistentMCMenu?.MCSpeakerText.Count > 1)
+                    if (AdvGame!.Orders.persistentMCMenu.MCSpeakerText[1].SpeakerID != AdvGame!.Orders.persistentMCMenu.MCSpeakerText[0].SpeakerID)
+                        speaker = String.Format( loca.ScoreEvent_Talk_With, AdvGame!.Persons!.Find(AdvGame!.Orders.persistentMCMenu.MCSpeakerText[1].SpeakerID )!.FullName(Co.CASE_DAT) );
 
                 path4 = speaker;
             }
@@ -7050,7 +7085,7 @@ namespace GameCore
             if (item.Categories!.List!.ContainsKey(Category))
             {
                 CategoryRel c = Categories.List[Category];
-                if ((!AdvGame!.GD!.SimpleMC || c.Relevance == relTypes.r_essential))
+                if ((!AdvGame!.GD!.LayoutDescription.SimpleMC || c.Relevance == relTypes.r_essential))
                     found = true;
             }
             /*
@@ -7248,7 +7283,7 @@ namespace GameCore
                 cfollower.Add(idCt);
                 mcM.Add(new MCMenuEntry(CB!.MCE_Text, CA!.Person_I,  Helper.Insert(loca.Adv_DoMCItem_Person_I_4593, itemID ), idCt++, follower, null, 0, false, false, false, null,  Helper.Insert(loca.Adv_DoMCItem_Person_I_4594, itemID )));
             }
-            if ((item.locationType == CB!.LocType_Person) && (item.locationID == A!.ActPerson) && (!AdvGame!.GD!.SimpleMC))
+            if ((item.locationType == CB!.LocType_Person) && (item.locationID == A!.ActPerson) && (!AdvGame!.GD!.LayoutDescription.SimpleMC))
             {
                 cfollower.Add(idCt);
                 mcM.Add(new MCMenuEntry(CB!.MCE_Text, CA!.Person_I,  Helper.Insert(loca.Adv_DoMCItem_Person_I_4595, itemID ), idCt++, follower, null, 0, false, false, false, null,  Helper.Insert(loca.Adv_DoMCItem_Person_I_4596, itemID )));
@@ -7485,9 +7520,9 @@ namespace GameCore
                     if (cr.CategoryID == A.Cat_CuttableWith)
                         CountCounter = 0;
 
-                    if (cr.CategoryID < 1000 && (cr.Relevance == relTypes.r_essential || !AdvGame!.GD!.SimpleMC))
+                    if (cr.CategoryID < 1000 && (cr.Relevance == relTypes.r_essential || !AdvGame!.GD!.LayoutDescription.SimpleMC))
                     {
-                        if (cr.CounterCategoryID != -1 && (cr.Relevance == relTypes.r_essential || !AdvGame!.GD!.SimpleMC))
+                        if (cr.CounterCategoryID != -1 && (cr.Relevance == relTypes.r_essential || !AdvGame!.GD!.LayoutDescription.SimpleMC))
                         {
                             foreach (Item? it2 in Items!.List!.Values)
                             {
@@ -7499,7 +7534,7 @@ namespace GameCore
                                         {
                                             // int a = 1;
  
-                                            if (c.Relevance == relTypes.r_essential || !AdvGame!.GD!.SimpleMC)
+                                            if (c.Relevance == relTypes.r_essential || !AdvGame!.GD!.LayoutDescription.SimpleMC)
                                             {
                                                 if ((c.Category!.CategoryID == cr.CounterCategoryID) && (Items!.IsItemHere(it2, Co.Range_Visible) == true))
                                                     CountCounter++;
@@ -7515,7 +7550,7 @@ namespace GameCore
                                 {
                                     if (c != null)
                                     {
-                                        if (c.Relevance == relTypes.r_essential || !AdvGame!.GD!.SimpleMC)
+                                        if (c.Relevance == relTypes.r_essential || !AdvGame!.GD!.LayoutDescription.SimpleMC)
                                         {
                                             if ((c.Category!.CategoryID == cr.CounterCategoryID) && (Persons!.IsPersonHere(pe2, Co.Range_Visible) == true))
                                                 CountCounter++;
@@ -7558,7 +7593,7 @@ namespace GameCore
                                     {
                                         if (c != null)
                                         {
-                                            if (c.Relevance == relTypes.r_essential || !AdvGame!.GD!.SimpleMC)
+                                            if (c.Relevance == relTypes.r_essential || !AdvGame!.GD!.LayoutDescription.SimpleMC)
                                             {
                                                 if ((c.Category!.CategoryID == cr.CounterCategoryID) && (Items!.IsItemHere(it2, Co.Range_Visible) == true))
                                                 {
@@ -7586,7 +7621,7 @@ namespace GameCore
                                 {
                                     if (c != null)
                                     {
-                                        if (c.Relevance == relTypes.r_essential || !AdvGame!.GD!.SimpleMC)
+                                        if (c.Relevance == relTypes.r_essential || !AdvGame!.GD!.LayoutDescription.SimpleMC)
                                         {
                                             if ((c.Category!.CategoryID == cr.CounterCategoryID) && (Persons!.IsPersonHere(pe2, Co.Range_Visible) == true))
                                             {
@@ -8026,6 +8061,7 @@ namespace GameCore
                 // mcM.AddCurrent(1);
                 mcM.MCS.MCOutput(mcM, MCSelectionParser, false);
 
+                Phoney_MAUI.App.CurrentPage!.Focus();
 
                 return true;
             }
@@ -8485,7 +8521,8 @@ namespace GameCore
                 {
                     if (tMCME.ParseString != null)
                     {
-                        UIS!.FeedbackTextObj.FeedbackTextOutput(tMCME.ParseString);
+                        // Diese Meethode macht nix
+                        // UIS!.FeedbackTextObj.FeedbackTextOutput(tMCME.ParseString);
                         DoGameLoop(tMCME.ParseString);
                         UIS.SetInputline("");
                     }
@@ -8825,6 +8862,7 @@ namespace GameCore
 
         public Verb? Verb_Enlight;
         public Verb? Verb_Spread;
+        public Verb? Verb_Fixate;
 
         public Verb? Verb_Story;
         public Verb? Verb_Script;

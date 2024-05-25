@@ -369,7 +369,7 @@ public partial class Adv : AdvBase
         // Examine MC
         PList = new ParseTokenList();
         PList.AddVerb(CB!.Verb_Examine);
-        PLL.Add(new ParseLine(CB!.PL_Examine, PList, Orders!.location));
+        PLL.Add(new ParseLine(CB!.PL_Examine, PList, Orders!.Location));
 
         // U Item
         PList = new ParseTokenList();
@@ -513,24 +513,24 @@ public partial class Adv : AdvBase
         // location
         PList = new ParseTokenList();
         PList.AddVerb(CB!.Verb_location);
-        PLL.Add(new ParseLine(CB!.PL_location, PList, Orders!.location));
+        PLL.Add(new ParseLine(CB!.PL_location, PList, Orders!.Location));
 
         PList = new ParseTokenList();
         PList.AddVerb(CB!.Verb_Examine);
         PList.AddPerson();
         PList.AddPrep(CB!.Prep_um);
-        PLL.Add(new ParseLine(CB!.PL_location, PList, Orders!.locationP));
+        PLL.Add(new ParseLine(CB!.PL_location, PList, Orders!.LocationP));
 
         PList = new ParseTokenList();
         PList.AddVerb(CB!.Verb_Examine);
         PList.AddVerb(CB!.Verb_location);
-        PLL.Add(new ParseLine(CB!.PL_location, PList, Orders!.location));
+        PLL.Add(new ParseLine(CB!.PL_location, PList, Orders!.Location));
 
         PList = new ParseTokenList();
         PList.AddVerb(CB!.Verb_location);
         PList.AddVerb(CA!.Verb_Be);
         PList.AddPerson();
-        PLL.Add(new ParseLine(CB!.PL_location, PList, Orders!.locationReflexive));
+        PLL.Add(new ParseLine(CB!.PL_location, PList, Orders!.LocationReflexive));
 
         PList = new ParseTokenList();
         PList.AddVerb(CB!.Verb_location);
@@ -725,6 +725,31 @@ public partial class Adv : AdvBase
         PList.AddItem();
         PList.AddPrep(CB!.Prep_ab);
         PLL.Add(new ParseLine(CB!.PL_Place_On, PList, Orders!.PlaceOn));
+
+        // Lege Person auf
+        PList = new ParseTokenList();
+        PList.AddVerb(CB!.Verb_Place);
+        PList.AddPerson();
+        PList.AddPrep(CB!.Prep_auf);
+        PList.AddItem();
+        PLL.Add(new ParseLine(CB!.PL_Place_On, PList, Orders!.PlacePOn));
+
+        PList = new ParseTokenList();
+        PList.AddVerb(CB!.Verb_Place);
+        PList.AddPerson();
+        PList.AddPrep(CB!.Prep_auf);
+        PList.AddItem();
+        PList.AddPrep(CB!.Prep_ab);
+        PLL.Add(new ParseLine(CB!.PL_Place_On, PList, Orders!.PlacePOn));
+
+        PList = new ParseTokenList();
+        PList.AddVerb(CB!.Verb_Place);
+        PList.AddPerson();
+        PList.AddPrep(CB!.Prep_an);
+        PList.AddItem();
+        PList.AddPrep(CB!.Prep_ab);
+        PLL.Add(new ParseLine(CB!.PL_Place_On, PList, Orders!.PlacePOn));
+
 
         // Lege auf MC
         PList = new ParseTokenList();
@@ -2288,6 +2313,12 @@ public partial class Adv : AdvBase
         PList.AddItem();
         PLL.Add(new ParseLine(CA!.PL_EnlightW, PList, Orders!.EnlightenW));
 
+        // Beleuchte
+        PList = new ParseTokenList();
+        PList.AddVerb(CA!.Verb_Enlight);
+        PList.AddItem();
+        PLL.Add(new ParseLine(CA!.PL_EnlightW, PList, Orders!.Enlighten));
+
         // entzünde
         PList = new ParseTokenList();
         PList.AddVerb(CA!.Verb_Light);
@@ -3409,6 +3440,14 @@ public partial class Adv : AdvBase
         PList.AddItem();
         PLL.Add(new ParseLine(CA!.PL_BeatW, PList, Orders!.BeatW));
 
+        // Fixate W
+        PList = new ParseTokenList();
+        PList.AddVerb(CA!.Verb_Fixate);
+        PList.AddItem();
+        PList.AddPrep(CB!.Prep_mit);
+        PList.AddItem();
+        PLL.Add(new ParseLine(CA!.PL_BeatW, PList, Orders!.FixateW));
+
         // Aufschlagen
         PList = new ParseTokenList();
         PList.AddVerb(CA!.Verb_Schlage);
@@ -3878,6 +3917,13 @@ public partial class Adv : AdvBase
         PList.AddVerb(CA!.Verb_Exits);
         PLL.Add(new ParseLine(CA!.PL_Exits, PList, Orders!.Exits));
         // 
+        // bestehlen
+        PList = new ParseTokenList();
+        PList.AddVerb(CA!.Verb_Steal);
+        PList.AddItem();
+        PLL.Add(new ParseLine(CA!.PL_StealP, PList, Orders!.Steal));
+
+
         // bestehlen
         PList = new ParseTokenList();
         PList.AddVerb(CA!.Verb_Steal);
@@ -4850,12 +4896,12 @@ public partial class Adv : AdvBase
         // location
         PList = new ParseTokenList();
         PList.AddVerb(CB!.Verb_location);
-        PLLEng.Add(new ParseLine(CB!.PL_location, PList, Orders!.location));
+        PLLEng.Add(new ParseLine(CB!.PL_location, PList, Orders!.Location));
 
         PList = new ParseTokenList();
         PList.AddVerb(CB!.Verb_Examine);
         PList.AddVerb(CB!.Verb_location);
-        PLLEng.Add(new ParseLine(CB!.PL_location, PList, Orders!.location));
+        PLLEng.Add(new ParseLine(CB!.PL_location, PList, Orders!.Location));
 
         // Drop
         PList = new ParseTokenList();
@@ -6681,6 +6727,12 @@ public partial class Adv : AdvBase
         PList.AddItem();
         PLLEng.Add(new ParseLine(CA!.PL_LightW, PList, Orders!.EnlightenW));
 
+        // Beleuchte
+        PList = new ParseTokenList();
+        PList.AddVerb(CA!.Verb_Enlight);
+        PList.AddItem();
+        PLLEng.Add(new ParseLine(CA!.PL_EnlightW, PList, Orders!.Enlighten));
+
         // entzünde
         PList = new ParseTokenList();
         PList.AddVerb(CA!.Verb_Light);
@@ -7955,6 +8007,14 @@ public partial class Adv : AdvBase
         PList.AddItem();
         PLLEng.Add(new ParseLine(CA!.PL_BeatW, PList, Orders!.BeatW));
 
+        // Fixate W
+        PList = new ParseTokenList();
+        PList.AddVerb(CA!.Verb_Fixate);
+        PList.AddItem();
+        PList.AddPrep(CB!.Prep_with);
+        PList.AddItem();
+        PLLEng.Add(new ParseLine(CA!.PL_BeatW, PList, Orders!.FixateW));
+
         // Pet
         PList = new ParseTokenList();
         PList.AddVerb(CA!.Verb_Streichle);
@@ -8432,6 +8492,18 @@ public partial class Adv : AdvBase
         PList.AddVerb(CA!.Verb_Exits);
         PLLEng.Add(new ParseLine(CA!.PL_Exits, PList, Orders!.Exits));
         // 
+
+        // bestehlen
+        PList = new ParseTokenList();
+        PList.AddVerb(CA!.Verb_Steal);
+        PList.AddItem();
+        PLL.Add(new ParseLine(CA!.PL_StealP, PList, Orders!.Steal));
+
+        PList = new ParseTokenList();
+        PList.AddNoun(CA!.Noun_Klaue.ID);
+        PList.AddItem();
+        PLL.Add(new ParseLine(CA!.PL_StealP, PList, Orders!.Steal));
+
         // bestehlen
         PList = new ParseTokenList();
         PList.AddVerb(CA!.Verb_Steal);

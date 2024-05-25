@@ -162,16 +162,16 @@
                                                     <Button x:Name="Keyboard" VerticalOptions="Center" StyleClass="Button_Normal_NoBorder" FontSize="25" HorizontalOptions="Center" FontFamily="Fa-Solid" Clicked="Clicked_Keyboard" Text="{x:Static core:FaSolid.Keyboard}"/>
 
                                                 </Grid>
-                                                <Grid Grid.Column="1" >
+                                                <Grid Grid.Column="1" HeightRequest="40">
                                                     <Button x:Name="Mike" VerticalOptions="Center" FontSize="25" StyleClass="Button_Normal_NoBorder_Big" Clicked="Clicked_Microphone" HorizontalOptions="Center" FontFamily="Fa-Solid" Text="{x:Static core:FaSolid.Microphone}"/>
                                                 </Grid>
-                                                <Grid Grid.Column="2" StyleClass="Grid_BGInputline" Margin="0,4,0,3">
-                                                    <Label StyleClass="Label_Normal" HorizontalOptions="Center" Margin="0" Padding="0,5,0,0" VerticalOptions="Center" Text=">"/>
+                                                <Grid Grid.Column="2" StyleClass="Grid_BGInputline" HeightRequest="40" Margin="0,4,0,3">
+                                                    <Label StyleClass="Label_Normal" HorizontalOptions="Center" Margin="0" Padding="0,5,0,15" VerticalOptions="Center" Text=">"/>
                                                 </Grid>
-                                                <Grid Grid.Column="3" StyleClass="Grid_BGInputline" Margin="0,4,0,3" >
+                                                <Grid Grid.Column="3" StyleClass="Grid_BGInputline" HeightRequest="40" Margin="0,4,0,3" >
                                                     <Entry x:Name="Inputline" StyleClass="Entry_Normal" Completed="UpdateMessage" Margin="-1,0,0,0" Text=""/>
                                                 </Grid>
-                                                <Button x:Name="SendButton" Grid.Column="4" StyleClass="Button_Normal" Clicked="UpdateMessage"  Text="Send" Margin="10,5,5,5" Padding="0"></Button>
+                                                <Button x:Name="SendButton" Grid.Column="4" StyleClass="Button_Normal" HeightRequest="40" Clicked="UpdateMessage"  Text="Send" Margin="10,5,5,5" Padding="0"></Button>
                                             </Grid>
                                         </Grid>
                                         <Grid x:Name="Grid_MC" StyleClass="Grid_BGBG" Margin="2,0,7,0" IsVisible="false" >

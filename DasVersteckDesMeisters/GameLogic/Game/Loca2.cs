@@ -115,9 +115,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Von hier aus konnte ich nirgends mehr hingehen.";
+                return "Ich wusste nicht, wie ich dorthin kommen sollte.";
             else
-                return "I had nowhere to go from here.";
+                return "Ich wusste nicht, wie ich dorthin kommen sollte.";
         }
     }
     public static string Verb_putze
@@ -2057,9 +2057,29 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Wie soll [Il1,Akk] mit [Il2,Nom] erleuchtet werden?";
+                return "Wie sollte [Il1,Akk] mit [Il2,Nom] beleuchtet werden?";
             else
-                return "Wie soll [Il1,Akk] mit [Il2,Nom] erleuchtet werden?";
+                return "Wie sollte [Il1,Akk] mit [Il2,Nom] beleuchtet werden?";
+        }
+    }
+    public static string Enlight_Stone_Fail
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Ich hielt den Stein in den Himmel, so nah wie möglich an den Mond heran. Leider passierte nichts weiter.";
+            else
+                return "Ich hielt den Stein in den Himmel, so nah wie möglich an den Mond heran. Leider passierte nichts weiter.";
+        }
+    }
+    public static string Enlight_Solo_Fail
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Womit sollte [Il1,Akk] beleuchtet werden?";
+            else
+                return "Womit sollte [Il1,Akk] beleuchtet werden?";
         }
     }
     public static string Enlight_Fail_NoCoin
@@ -2121,6 +2141,26 @@ public static partial class loca
                 return "bescheine";
             else
                 return "bescheine";
+        }
+    }
+    public static string Verb_fixiere
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "fixiere";
+            else
+                return "fixiere";
+        }
+    }
+    public static string Verb_fixier
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "fixier";
+            else
+                return "fixier";
         }
     }
 
@@ -2898,9 +2938,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ich wollte den Fisch mit der Klaue berühren. Aber ich hatte Angst, das mir diese instabile Konstruktion um die Ohren flog und die Klaue auf den Boden purzelte. Ich musste meinen Klauenhalter irgendwie stabilisieren.";
+                return "Ich wollte [P:Person_Fish]den Fisch[/P] mit [I:I00_Claw]der Klaue[/I] berühren. Aber ich hatte Angst, das mir diese instabile Konstruktion um die Ohren flog und die Klaue auf den Boden purzelte. Ich musste meinen Klauenhalter irgendwie stabilisieren.";
             else
-                return "Ich wollte den Fisch mit der Klaue berühren. Aber ich hatte Angst, das mir diese instabile Konstruktion um die Ohren flog und die Klaue auf den Boden purzelte. Ich musste meinen Klauenhalter irgendwie stabilisieren.";
+                return "Ich wollte [P:Person_Fish]den Fisch[/P] mit [I:I00_Claw]der Klaue[/I] berühren. Aber ich hatte Angst, das mir diese instabile Konstruktion um die Ohren flog und die Klaue auf den Boden purzelte. Ich musste meinen Klauenhalter irgendwie stabilisieren.";
         }
     }
     public static string Touch_Fish_StableClaw_Wake
@@ -2908,9 +2948,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ich berührte den Fisch mit der Klaue. Sofort belebte sich der Fisch und zappelte wie verrückt. Hm, ich musste wohl keine Angst haben, dass er außerhalb des Wasser erstickte...";
+                return "Ich berührte [P:Person_Fish]den Fisch[/P] mit [I:I00_Claw]der Klaue[/I]. Sofort belebte sich der Fisch und zappelte wie verrückt. Hm, ich musste wohl keine Angst haben, dass er außerhalb des Wasser erstickte...";
             else
-                return "Ich berührte den Fisch mit der Klaue. Sofort belebte sich der Fisch und zappelte wie verrückt. Hm, ich musste wohl keine Angst haben, dass er außerhalb des Wasser erstickte...";
+                return "Ich berührte [P:Person_Fish]den Fisch[/P] mit [I:I00_Claw]der Klaue[/I]. Sofort belebte sich der Fisch und zappelte wie verrückt. Hm, ich musste wohl keine Angst haben, dass er außerhalb des Wasser erstickte...";
         }
     }
     public static string Touch_Fish_StableClaw_WakeAgain
@@ -2918,7 +2958,7 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ich berührte den Fisch mit der Klaue. Da der Fisch schon wach war, hielt sich der Effekt in Grenzen.";
+                return "Ich berührte [P:Person_Fish]den Fisch[/P] mit [I:I00_Claw]der Klaue[/I]. Da der Fisch schon wach war, hielt sich der Effekt in Grenzen.";
             else
                 return "Ich berührte den Fisch mit der Klaue. Da der Fisch schon wach war, hielt sich der Effekt in Grenzen.";
         }
@@ -3072,9 +3112,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ich wollte die Eule mit der Klaue berühren. Aber ich hatte Angst, das mir diese instabile Konstruktion um die Ohren flog und die Klaue auf den Boden purzelte. Ich musste meinen Klauenhalter irgendwie stabilisieren.";
+                return "Ich wollte [P:Person_Owl]die Eule[/P] mit der Klaue berühren. Aber ich hatte Angst, das mir diese instabile Konstruktion um die Ohren flog und die Klaue auf den Boden purzelte. Ich musste meinen Klauenhalter irgendwie stabilisieren.";
             else
-                return "Ich wollte die Eule mit der Klaue berühren. Aber ich hatte Angst, das mir diese instabile Konstruktion um die Ohren flog und die Klaue auf den Boden purzelte. Ich musste meinen Klauenhalter irgendwie stabilisieren.";
+                return "Ich wollte [P:Person_Owl]die Eule[/P] mit der Klaue berühren. Aber ich hatte Angst, das mir diese instabile Konstruktion um die Ohren flog und die Klaue auf den Boden purzelte. Ich musste meinen Klauenhalter irgendwie stabilisieren.";
         }
     }
     public static string Touch_KnightsArmour_UnstableClaw
@@ -3092,9 +3132,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ich berührte die ausgestopfte Eule mit der Klaue. Sofort öffneten sich die Augen der Eule und schauten mich verschlafen an. \"Ich hoffe, es ist wichtig.\"<br>War das eigentlich normal, dass Eulen gähnen?";
+                return "Ich berührte [P:Person_Owl]die ausgestopfte Eule[/P] mit der Klaue. Sofort öffneten sich die Augen der Eule und schauten mich verschlafen an. \"Ich hoffe, es ist wichtig.\"<br>War das eigentlich normal, dass Eulen gähnen?";
             else
-                return "Ich berührte die ausgestopfte Eule mit der Klaue. Sofort öffneten sich die Augen der Eule und schauten mich verschlafen an. \"Ich hoffe, es ist wichtig.\"<br>War das eigentlich normal, dass Eulen gähnen?";
+                return "Ich berührte [P:Person_Owl]die ausgestopfte Eule[/P] mit der Klaue. Sofort öffneten sich die Augen der Eule und schauten mich verschlafen an. \"Ich hoffe, es ist wichtig.\"<br>War das eigentlich normal, dass Eulen gähnen?";
         }
     }
     public static string Touch_Owl_StableClaw_WakeAgain
@@ -3102,9 +3142,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ich berührte die ausgestopfte Eule mit der Klaue. Da die Eule schon wach war, musterte sie mich nur etwas verwirrt.";
+                return "Ich berührte [P:Person_Owl]die ausgestopfte Eule[/P] mit der Klaue. Da die Eule schon wach war, musterte sie mich nur etwas verwirrt.";
             else
-                return "Ich berührte die ausgestopfte Eule mit der Klaue. Da die Eule schon wach war, musterte sie mich nur etwas verwirrt.";
+                return "Ich berührte [P:Person_Owl]die ausgestopfte Eule[/P] mit der Klaue. Da die Eule schon wach war, musterte sie mich nur etwas verwirrt.";
         }
     }
     public static string Touch_KnightsArmour_StableClaw_Wake
@@ -3258,6 +3298,16 @@ public static partial class loca
                 return "Es war zu dunkel, um viel zu erkennen. Aber zeichneten sich an der Wand hinter [I:I04_Cupboard]dem Schrank[/I] nicht die Konturen eines Rechtecks ab? ";
             else
                 return "Es war zu dunkel, um viel zu erkennen. Aber zeichneten sich an der Wand hinter [I:I04_Cupboard]dem Schrank[/I] nicht die Konturen eines Rechtecks ab? ";
+        }
+    }
+    public static string Examine_Behind_Cupboard2
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Hinter [I:I04_Cupboard]dem abgerückten Schrank[/I] war [I:I04_Flap]eine Klappe[/I] in der Wand zu sehen.";
+            else
+                return "Hinter [I:I04_Cupboard]dem abgerückten Schrank[/I] war [I:I04_Flap]eine Klappe[/I] in der Wand zu sehen.";
         }
     }
     public static string Examine_In_Opening
@@ -3537,9 +3587,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "[I:I07_Door]Die schwere Tür, auf der groß und breit \"Labor\" stand, war fest verriegelt.";
+                return "[I:I07_Door]Die massive Tür, auf der groß und breit \"Labor\" stand, war fest verriegelt.";
             else
-                return "[I:I07_Door]Die schwere Tür, auf der groß und breit \"Labor\" stand, war fest verriegelt.";
+                return "[I:I07_Door]Die massive Tür, auf der groß und breit \"Labor\" stand, war fest verriegelt.";
         }
     }
     public static string Order_SetupDialog_10144
@@ -4826,9 +4876,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Das hier konnte ja wohl nicht die Stube sein, in der der Meister lebte! Ich stand nämlich in einem komplett leeren, kalten Raum. Immerhin kündete ein [I:I03_Pentagram]in rot geschmiertes Pentagramm[/I] auf dem Boden davon, dass hier irgendwer irgendwas mit Zauberkräften am Hut hatte. Auch [I:I03_Runes]die Runen an der Wand hinterließen eine einigermaßen klare Botschaft.<br>Also gut, das war definitiv nicht das Wohngemach des Meisters. Aber vielleicht war dieser Ort ja der Eingang zu seinem eigentlichen Domizil. Das läge zumindest nahe.<br>In [L:L04_Shabby_Little_Chamber]östlicher Richtung[/L] befand sich [I:I03_Door]eine schäbige kleine Tür[/I]. [L:L02_In_Front_Of_A_Hut]Nach Süden[/L] gings [I:I03_Door_Outside]durch eine schwere Tür[/I] wieder nach draußen.";
+                return "Das hier konnte ja wohl nicht die Stube sein, in der der Meister lebte! Ich stand nämlich in einem komplett leeren, kalten Raum. Immerhin kündete ein [I:I03_Pentagram]in rot geschmiertes Pentagramm[/I] auf dem Boden davon, dass hier irgendwer irgendwas mit Zauberkräften am Hut hatte. Auch [I:I03_Runes]die Runen an der Wand[/I] hinterließen eine einigermaßen klare Botschaft.<br>Also gut, das war definitiv nicht das Wohngemach des Meisters. Aber vielleicht war dieser Ort ja der Eingang zu seinem eigentlichen Domizil. Das läge zumindest nahe.<br>In [L:L04_Shabby_Little_Chamber]östlicher Richtung[/L] befand sich [I:I03_Door]eine schäbige kleine Tür[/I]. [L:L02_In_Front_Of_A_Hut]Nach Süden[/L] gings [I:I03_Door_Outside]durch eine schwere Tür[/I] wieder nach draußen.";
             else
-                return "Das hier konnte ja wohl nicht die Stube sein, in der der Meister lebte! Ich stand nämlich in einem komplett leeren, kalten Raum. Immerhin kündete ein [I:I03_Pentagram]in rot geschmiertes Pentagramm[/I] auf dem Boden davon, dass hier irgendwer irgendwas mit Zauberkräften am Hut hatte. Auch [I:I03_Runes]die Runen an der Wand hinterließen eine einigermaßen klare Botschaft.<br>Also gut, das war definitiv nicht das Wohngemach des Meisters. Aber vielleicht war dieser Ort ja der Eingang zu seinem eigentlichen Domizil. Das läge zumindest nahe.<br>In [L:L04_Shabby_Little_Chamber]östlicher Richtung[/L] befand sich [I:I03_Door]eine schäbige kleine Tür[/I]. [L:L02_In_Front_Of_A_Hut]Nach Süden[/L] gings [I:I03_Door_Outside]durch eine schwere Tür[/I] wieder nach draußen.";
+                return "Das hier konnte ja wohl nicht die Stube sein, in der der Meister lebte! Ich stand nämlich in einem komplett leeren, kalten Raum. Immerhin kündete ein [I:I03_Pentagram]in rot geschmiertes Pentagramm[/I] auf dem Boden davon, dass hier irgendwer irgendwas mit Zauberkräften am Hut hatte. Auch [I:I03_Runes]die Runen an der Wand[/I] hinterließen eine einigermaßen klare Botschaft.<br>Also gut, das war definitiv nicht das Wohngemach des Meisters. Aber vielleicht war dieser Ort ja der Eingang zu seinem eigentlichen Domizil. Das läge zumindest nahe.<br>In [L:L04_Shabby_Little_Chamber]östlicher Richtung[/L] befand sich [I:I03_Door]eine schäbige kleine Tür[/I]. [L:L02_In_Front_Of_A_Hut]Nach Süden[/L] gings [I:I03_Door_Outside]durch eine schwere Tür[/I] wieder nach draußen.";
         }
     }
     public static string Adv_L03_In_The_Parlor_Lang2
@@ -4889,9 +4939,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ich stand im Atrium des geheimen Domizils von Meister Gunnar. Das sah schon eher nach einer standesgemäßen Butze für einen angeblichen Meistermagier aus. Der große Raum war von fast quadratischer Form. Durch das offene Dach konnte ich hinausblicken in eine endlose, sternenklare Nacht mit [I:I05_Moon]einem riesigen Vollmond[/I]. Darüber hinaus gab es keinerlei Hinweis darauf, in welcher seltsamen Dimension ich mich hier befand. Immerhin: Hier gab es keinen Nebel.<br>[I:I05_Library_Door]Eine breite, verzierte Tür[/I] in der [L:L09_Library]westlichen Wand[/L] mit der Aufschrift \"Bibliothek\" weckte meine Aufmerksamkeit. Daneben befand sich [I:I05_Sill]ein schmales Sims[/I], auf dem eine ausgestopfte Eule saß.<br>Genau im Zentrum des Atriums stand [I:I05_Pedestal]ein hohes, mit Gold verziertes Podest[/I]. In einer Ecke war [I:I05_Pentagram]ein großes, rotes Pentagramm[/I] auf den Boden gemalt. [I:I05_Door]Eine weitere Tür[/I] führte [L:L06_Long_Floor]nach Süden[/L].";
+                return "Ich stand im Atrium des geheimen Domizils von Meister Gunnar. Das sah schon eher nach einer standesgemäßen Butze für einen angeblichen Meistermagier aus. Der große Raum war von fast quadratischer Form. Durch das offene Dach konnte ich hinausblicken in eine endlose, sternenklare Nacht mit [I:I05_Moon]einem riesigen Vollmond[/I]. Darüber hinaus gab es keinerlei Hinweis darauf, in welcher seltsamen Dimension ich mich hier befand. Immerhin: Hier gab es keinen Nebel.<br>[I:I05_Library_Door]Eine breite, verzierte Tür[/I] in der [L:L09_Library]westlichen Wand[/L] mit der Aufschrift \"Bibliothek\" weckte meine Aufmerksamkeit. Daneben befand sich [I:I05_Sill]ein schmales Sims[/I], auf dem [P:Person_Owl]eine ausgestopfte Eule[/P] saß.<br>In einer Ecke war [I:I05_Pentagram]ein großes, rotes Pentagramm[/I] auf den Boden gemalt. [I:I05_Door]Eine weitere Tür[/I] führte [L:L06_Long_Floor]nach Süden[/L]. Genau im Zentrum des Atriums stand [I:I05_Pedestal]ein hohes, mit Gold verziertes Podest[/I].";
             else
-                return "Ich stand im Atrium des geheimen Domizils von Meister Gunnar. Das sah schon eher nach einer standesgemäßen Butze für einen angeblichen Meistermagier aus. Der große Raum war von fast quadratischer Form. Durch das offene Dach konnte ich hinausblicken in eine endlose, sternenklare Nacht mit [I:I05_Moon]einem riesigen Vollmond[/I]. Darüber hinaus gab es keinerlei Hinweis darauf, in welcher seltsamen Dimension ich mich hier befand. Immerhin: Hier gab es keinen Nebel.<br>[I:I05_Library_Door]Eine breite, verzierte Tür[/I] in der [L:L09_Library]westlichen Wand[/L] mit der Aufschrift \"Bibliothek\" weckte meine Aufmerksamkeit. Daneben befand sich [I:I05_Sill]ein schmales Sims[/I], auf dem eine ausgestopfte Eule saß.<br>Genau im Zentrum des Atriums stand [I:I05_Pedestal]ein hohes, mit Gold verziertes Podest[/I]. In einer Ecke war [I:I05_Pentagram]ein großes, rotes Pentagramm[/I] auf den Boden gemalt. [I:I05_Door]Eine weitere Tür[/I] führte [L:L06_Long_Floor]nach Süden[/L].";
+                return "Ich stand im Atrium des geheimen Domizils von Meister Gunnar. Das sah schon eher nach einer standesgemäßen Butze für einen angeblichen Meistermagier aus. Der große Raum war von fast quadratischer Form. Durch das offene Dach konnte ich hinausblicken in eine endlose, sternenklare Nacht mit [I:I05_Moon]einem riesigen Vollmond[/I]. Darüber hinaus gab es keinerlei Hinweis darauf, in welcher seltsamen Dimension ich mich hier befand. Immerhin: Hier gab es keinen Nebel.<br>[I:I05_Library_Door]Eine breite, verzierte Tür[/I] in der [L:L09_Library]westlichen Wand[/L] mit der Aufschrift \"Bibliothek\" weckte meine Aufmerksamkeit. Daneben befand sich [I:I05_Sill]ein schmales Sims[/I], auf dem [P:Person_Owl]eine ausgestopfte Eule[/P] saß.<br>In einer Ecke war [I:I05_Pentagram]ein großes, rotes Pentagramm[/I] auf den Boden gemalt. [I:I05_Door]Eine weitere Tür[/I] führte [L:L06_Long_Floor]nach Süden[/L]. Genau im Zentrum des Atriums stand [I:I05_Pedestal]ein hohes, mit Gold verziertes Podest[/I].";
         }
     }
     public static string Adv_L05_Atrium_Lang2
@@ -4899,9 +4949,70 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ich stand im Atrium des geheimen - und durchaus opulenten - Domizils von Meister Gunnar. Der große Raum war von fast quadratischer Form. Durch das offene Dach konnte ich hinausblicken in eine endlose, sternenklare Nacht mit [I:I05_Moon]einem riesigen Vollmond[/I]. Darüber hinaus gab es keinerlei Hinweis darauf, in welcher seltsamen Dimension ich mich hier befand.<br>[I:I05_Library_Door]Eine breite, verzierte Tür[/I] mit der Aufschrift \"Bibliothek\" befand sich in der [L:L09_Library]westlichen Wand[/L].Daneben befand sich [I:I05_Sill]ein schmales Sims[/I], auf dem eine ausgestopfte Eule saß.<br>Genau im Zentrum des Atriums stand [I:I05_Pedestal]ein hohes, mit Gold verziertes Podest[/I]. In einer Ecke war [I:I05_Pentagram]ein großes, rotes Pentagramm[/I] auf den Boden gemalt. [I:I05_Door]Eine weitere Tür[/I] führte [L:L06_Long_Floor]nach Süden[/L].";
+                return "Ich stand im Atrium des geheimen - und durchaus opulenten - Domizils von Meister Gunnar. Der große Raum war von fast quadratischer Form. Durch das offene Dach konnte ich hinausblicken in eine endlose, sternenklare Nacht mit [I:I05_Moon]einem riesigen Vollmond[/I]. Darüber hinaus gab es keinerlei Hinweis darauf, in welcher seltsamen Dimension ich mich hier befand.<br>[I:I05_Library_Door]Eine breite, verzierte Tür[/I] mit der Aufschrift \"Bibliothek\" befand sich in der [L:L09_Library]westlichen Wand[/L].Daneben befand sich [I:I05_Sill]ein schmales Sims[/I], auf dem [P:Person_Owl]eine ausgestopfte Eule[/P] saß.<br>In einer Ecke war [I:I05_Pentagram]ein großes, rotes Pentagramm[/I] auf den Boden gemalt. [I:I05_Door]Eine weitere Tür[/I] führte [L:L06_Long_Floor]nach Süden[/L]. Genau im Zentrum des Atriums stand [I:I05_Pedestal]ein hohes, mit Gold verziertes Podest[/I].";
             else
-                return "Ich stand im Atrium des geheimen Domizils von Meister Gunnar. Das sah schon eher nach einer standesgemäßen Butze für einen angeblichen Meistermagier aus. Der große Raum war von fast quadratischer Form. Durch das offene Dach konnte ich hinausblicken in eine endlose, sternenklare Nacht mit [I:I05_Moon]einem riesigen Vollmond[/I]. Darüber hinaus gab es keinerlei Hinweis darauf, in welcher seltsamen Dimension ich mich hier befand. Immerhin: Hier gab es keinen Nebel.<br>[I:I05_Library_Door]Eine breite, verzierte Tür[/I] in der [L:L09_Library]westlichen Wand[/L] mit der Aufschrift \"Bibliothek\" weckte meine Aufmerksamkeit. Daneben befand sich [I:I05_Sill]ein schmales Sims[/I], auf dem eine ausgestopfte Eule saß.<br>Genau im Zentrum des Atriums stand [I:I05_Pedestal]ein hohes, mit Gold verziertes Podest[/I]. In einer Ecke war [I:I05_Pentagram]ein großes, rotes Pentagramm[/I] auf den Boden gemalt. [I:I05_Door]Eine weitere Tür[/I] führte [L:L06_Long_Floor]nach Süden[/L].";
+                return "Ich stand im Atrium des geheimen - und durchaus opulenten - Domizils von Meister Gunnar. Der große Raum war von fast quadratischer Form. Durch das offene Dach konnte ich hinausblicken in eine endlose, sternenklare Nacht mit [I:I05_Moon]einem riesigen Vollmond[/I]. Darüber hinaus gab es keinerlei Hinweis darauf, in welcher seltsamen Dimension ich mich hier befand.<br>[I:I05_Library_Door]Eine breite, verzierte Tür[/I] mit der Aufschrift \"Bibliothek\" befand sich in der [L:L09_Library]westlichen Wand[/L].Daneben befand sich [I:I05_Sill]ein schmales Sims[/I], auf dem [P:Person_Owl]eine ausgestopfte Eule[/P] saß.<br>In einer Ecke war [I:I05_Pentagram]ein großes, rotes Pentagramm[/I] auf den Boden gemalt. [I:I05_Door]Eine weitere Tür[/I] führte [L:L06_Long_Floor]nach Süden[/L]. Genau im Zentrum des Atriums stand [I:I05_Pedestal]ein hohes, mit Gold verziertes Podest[/I].";
+        }
+    }
+
+    public static string Adv_L05_Atrium_Klaue
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Auf dem Podest funkelte [I:I00_Claw]die prächtige, riesenhafte Klaue[/I], das Objekt meiner Begierde.";
+            else
+                return "Auf dem Podest funkelte [I:I00_Claw]die prächtige, riesenhafte Klaue[/I], das Objekt meiner Begierde.";
+        }
+    }
+    public static string Adv_L06_Floor_Letters
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "An der Ritterrüstung befanden sich einige durch eifriges Polieren [I:I06_Letters] freigelegte Buchstaben[/I].";
+            else
+                return "An der Ritterrüstung befanden sich einige durch eifriges Polieren [I:I06_Letters] freigelegte Buchstaben[/I].";
+        }
+    }
+    public static string Adv_L08_Schwamm
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Im Wäschekorb wucherte [I:I00_Wonder_Wart_Sponge] ein riesenhafter Wunderwarzenschwamm[/I] auf [I:I08_Clothes]einem Haufen nasser Wäsche[/I].";
+            else
+                return "Im Wäschekorb wucherte [I:I00_Wonder_Wart_Sponge] ein riesenhafter Wunderwarzenschwamm[/I] auf [I:I08_Clothes]einem Haufen nasser Wäsche[/I].";
+        }
+    }
+    public static string Adv_L08_Waesche
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Im Wäschekorb lag [I:I08_Clothing]ein Haufen nasser Wäsche[/I].";
+            else
+                return "Im Wäschekorb lag [I:I08_Clothing]ein Haufen nasser Wäsche[/I].";
+        }
+    }
+    public static string Adv_L08_Abdeckung_drauf
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Auf dem Brunnen befand sich [I:I08_Wooden_Cover]eine hölzerne Abdeckung[/I].";
+            else
+                return "Auf dem Brunnen befand sich [I:I08_Wooden_Cover]eine hölzerne Abdeckung[/I].";
+        }
+    }
+    public static string Adv_L08_Abdeckung_runter
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "[I:I08_Wooden_Cover]Die Abdeckung des Brunnens[/I] lehnte zur Seite geschoben am Brunnen.";
+            else
+                return "[I:I08_Wooden_Cover]Die Abdeckung des Brunnens[/I] lehnte zur Seite geschoben am Brunnen.";
         }
     }
 
@@ -4922,9 +5033,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ich stand auf einem langen Flur, der offensichtlich mehrere wichtige Räume des Meisterverstecks miteinander verband. [L:L05_Atrium]Nördlich[/L] führte [I:I06_Door_Wide]eine breite Tür[/I] zurück ins Atrium. [L:L12_Sleeping_Room]Direkt gegenüber an der Südwand[/L] befand sich [I:I06_Door]eine schwere Tür[/I] mit [I:I06_Sign]Schild[/I] \"Privat\" darauf. [L:L13_Kitchen]In der östlichen Wand[/L] befand sich [I:I06_Door_White]eine weiße Tür[/I], [L:L14_Bathroom]in der westlichen Wand[/L] [I:I06_Door_Red]eine rote Tür[/I]. Eine gewendelte Treppe führte [L:L07_Lower_Floor]nach unten[/L].";
+                return "Ich stand auf einem langen Flur, der offensichtlich mehrere wichtige Räume des Meisterverstecks miteinander verband. [L:L05_Atrium]Nördlich[/L] führte [I:I06_Door_Wide]eine breite Tür[/I] zurück ins Atrium. [L:L12_Sleeping_Room]Direkt gegenüber an der Südwand[/L] befand sich [I:I06_Door]eine wuchtig Tür[/I] mit [I:I06_Sign]Schild[/I] \"Privat\" darauf. [L:L13_Kitchen]In der östlichen Wand[/L] befand sich [I:I06_Door_White]eine weiße Tür[/I], [L:L14_Bathroom]in der westlichen Wand[/L] [I:I06_Door_Red]eine rote Tür[/I]. Eine gewendelte Treppe führte [L:L07_Lower_Floor]nach unten[/L].";
             else
-                return "Ich stand auf einem langen Flur, der offensichtlich mehrere wichtige Räume des Meisterverstecks miteinander verband. [L:L05_Atrium]Nördlich[/L] führte [I:I06_Door_Wide]eine breite Tür[/I] zurück ins Atrium. [L:L12_Sleeping_Room]Direkt gegenüber an der Südwand[/L] befand sich [I:I06_Door]eine schwere Tür[/I] mit [I:I06_Sign]Schild[/I] \"Privat\" darauf. [L:L13_Kitchen]In der östlichen Wand[/L] befand sich [I:I06_Door_White]eine weiße Tür[/I], [L:L14_Bathroom]in der westlichen Wand[/L] [I:I06_Door_Red]eine rote Tür[/I]. Eine gewendelte Treppe führte [L:L07_Lower_Floor]nach unten[/L].";
+                return "Ich stand auf einem langen Flur, der offensichtlich mehrere wichtige Räume des Meisterverstecks miteinander verband. [L:L05_Atrium]Nördlich[/L] führte [I:I06_Door_Wide]eine breite Tür[/I] zurück ins Atrium. [L:L12_Sleeping_Room]Direkt gegenüber an der Südwand[/L] befand sich [I:I06_Door]eine wuchtig Tür[/I] mit [I:I06_Sign]Schild[/I] \"Privat\" darauf. [L:L13_Kitchen]In der östlichen Wand[/L] befand sich [I:I06_Door_White]eine weiße Tür[/I], [L:L14_Bathroom]in der westlichen Wand[/L] [I:I06_Door_Red]eine rote Tür[/I]. Eine gewendelte Treppe führte [L:L07_Lower_Floor]nach unten[/L].";
         }
     }
     public static string Adv_L07_Lower_Floor
@@ -5748,9 +5859,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Neben [I:I05_Library_Door]der Tür[/I] in der westlichen Wand befand sich ein hohes Sims.";
+                return "Neben [I:I05_Library_Door]der Tür[/I] in der westlichen Wand befand sich ein hohes Sims. Darauf war eine [P:Person_Owl]ausgestopfte Eule[/P] platziert.";
             else
-                return "Neben [I:I05_Library_Door]der Tür[/I] in der westlichen Wand befand sich ein hohes Sims.";
+                return "Neben [I:I05_Library_Door]der Tür[/I] in der westlichen Wand befand sich ein hohes Sims. Darauf war eine [P:Person_Owl]ausgestopfte Eule[/P] platziert.";
         }
     }
 
@@ -7060,9 +7171,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Die wichtigsten Hardfacts über Kurzstreckenteleports!<br>Man benötigt 3 Zutaten, erhitze diese, bis sie zu Schlacke verbrennen, zerreibe diese dann zu Pulver und entzünde dies. Und dann: \"Kabumm!\"<br>Die Zutaten sind:<br>- Ein Mondstein<br>- eine goldene Münze<br>- ein Wunderwarzenschwamm<br>Na, das klang ja fast machbar. War das mein Ticket aus diesem vermaledeiten Versteck?";
+                return "'Die wichtigsten Hardfacts über Kurzstreckenteleports!<br>Man benötigt 3 Zutaten, erhitze diese, bis sie zu Schlacke verbrennen, zerreibe diese dann zu Pulver und entzünde dies. Und dann: \"Kabumm!\"<br>Die Zutaten sind:<br>- Ein Mondstein<br>- eine goldene Münze<br>- ein Wunderwarzenschwamm<br>Na, das klang ja fast machbar. War das mein Ticket aus diesem vermaledeiten Versteck?'";
             else
-                return "Die wichtigsten Hardfacts über Kurzstreckenteleports!<br>Man benötigt 3 Zutaten, erhitze diese, bis sie zu Schlacke verbrennen, zerreibe diese dann zu Pulver und entzünde dies. Und dann: \"Kabumm!\"<br>Die Zutaten sind:<br>- Ein Mondstein<br>- eine goldene Münze<br>- ein Wunderwarzenschwamm<br>Na, das klang ja fast machbar. War das mein Ticket aus diesem vermaledeiten Versteck?";
+                return "'Die wichtigsten Hardfacts über Kurzstreckenteleports!<br>Man benötigt 3 Zutaten, erhitze diese, bis sie zu Schlacke verbrennen, zerreibe diese dann zu Pulver und entzünde dies. Und dann: \"Kabumm!\"<br>Die Zutaten sind:<br>- Ein Mondstein<br>- eine goldene Münze<br>- ein Wunderwarzenschwamm<br>Na, das klang ja fast machbar. War das mein Ticket aus diesem vermaledeiten Versteck?'";
         }
     }
     public static string Book_Dialog_Sextips
@@ -7101,9 +7212,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Die Herstellung von Mondsteinen ist dank meiner Erfindung der Dunkelheitsmaschine fast ein Kinderspiel geworden. Man nehme einen gewöhnlichen Kiesel und entziehe ihm mit meiner neuartigen Erfindung jegliches Licht. Zurück bleibt ein Stein, der vollkommen lichtlos ist und der unfassbare Schwärze ausstrahlt. Das einzige, was ihn nun dazu bewegen kann, sich noch einmal mit Licht anzureichern, ist helles, konzentriertes Mondlicht. Dazu muss man allerdings möglichst nah an den Mond heran. Für dieses Problem habe ich noch keine gute Lösung gefunden, aber Ihnen fällt schon was ein! Wie man hört, können manche Vögel sehr hoch fliegen. Vielleicht reicht das ja schon, um den Stein ausreichend nah ans Mondlicht heran zu bringen.";
+                return "'Die Herstellung von Mondsteinen ist dank meiner Erfindung der Dunkelheitsmaschine fast ein Kinderspiel geworden. Man nehme einen gewöhnlichen Kiesel und entziehe ihm mit meiner neuartigen Erfindung jegliches Licht. Zurück bleibt ein Stein, der vollkommen lichtlos ist und der unfassbare Schwärze ausstrahlt. Das einzige, was ihn nun dazu bewegen kann, sich noch einmal mit Licht anzureichern, ist helles, konzentriertes Mondlicht. Dazu muss man allerdings möglichst nah an den Mond heran. Für dieses Problem habe ich noch keine gute Lösung gefunden, aber Ihnen fällt schon was ein! Wie man hört, können manche Vögel sehr hoch fliegen. Vielleicht reicht das ja schon, um den Stein ausreichend nah ans Mondlicht heran zu bringen.'";
             else
-                return "Die Herstellung von Mondsteinen ist dank meiner Erfindung der Dunkelheitsmaschine fast ein Kinderspiel geworden. Man nehme einen gewöhnlichen Kiesel und entziehe ihm mit meiner neuartigen Erfindung jegliches Licht. Zurück bleibt ein Stein, der vollkommen lichtlos ist und der unfassbare Schwärze ausstrahlt. Das einzige, was ihn nun dazu bewegen kann, sich noch einmal mit Licht anzureichern, ist helles, konzentriertes Mondlicht. Dazu muss man allerdings möglichst nah an den Mond heran. Für dieses Problem habe ich noch keine gute Lösung gefunden, aber Ihnen fällt schon was ein! Wie man hört, können manche Vögel sehr hoch fliegen. Vielleicht reicht das ja schon, um den Stein ausreichend nah ans Mondlicht heran zu bringen.";
+                return "'Die Herstellung von Mondsteinen ist dank meiner Erfindung der Dunkelheitsmaschine fast ein Kinderspiel geworden. Man nehme einen gewöhnlichen Kiesel und entziehe ihm mit meiner neuartigen Erfindung jegliches Licht. Zurück bleibt ein Stein, der vollkommen lichtlos ist und der unfassbare Schwärze ausstrahlt. Das einzige, was ihn nun dazu bewegen kann, sich noch einmal mit Licht anzureichern, ist helles, konzentriertes Mondlicht. Dazu muss man allerdings möglichst nah an den Mond heran. Für dieses Problem habe ich noch keine gute Lösung gefunden, aber Ihnen fällt schon was ein! Wie man hört, können manche Vögel sehr hoch fliegen. Vielleicht reicht das ja schon, um den Stein ausreichend nah ans Mondlicht heran zu bringen.'";
         }
     }
 
@@ -9097,9 +9208,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ein besonderer Dank geht an die - freiwilligen und weniger freiwilligen - Tester: Wiebke Scholz, StJohn Limbo, Olaf Nowacki, Jan Lachnit, Ike, Bilbo<br>Icon von macrovector on Freepik";
+                return "Ein besonderer Dank geht an die - freiwilligen und weniger freiwilligen - Tester: Wiebke Scholz, StJohn Limbo, Olaf Nowacki, Jan Lachnit, IkeC, Bilbo und auch an den grantelnden Herrn Oehm<br>Icon von macrovector on Freepik";
             else
-                return "Ein besonderer Dank geht an die - freiwilligen und weniger freiwilligen - Tester: Wiebke Scholz, StJohn Limbo, Olaf Nowacki, Jan Lachnit, Ike, Bilbo<br>Icon von macrovector on Freepik";
+                return "Ein besonderer Dank geht an die - freiwilligen und weniger freiwilligen - Tester: Wiebke Scholz, StJohn Limbo, Olaf Nowacki, Jan Lachnit, IkeC, Bilbo und auch an den grantelnden Herrn Oehm<br>Icon von macrovector on Freepik";
         }
     }
 
@@ -9374,6 +9485,26 @@ public static partial class loca
                 return "- [Pl1,Akk]";
         }
     }
+    public static string OrderFeedback_ListIPersons_clickable
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "- [Pla1,Akk]";
+            else
+                return "- [Pla1,Akk]";
+        }
+    }
+    public static string OrderFeedback_ListIPersons_clickable_Akku
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "- [Pla1,Akku]";
+            else
+                return "- [Pla1,Akku]";
+        }
+    }
     public static string OrderFeedback_ListPersons_Nom
     {
         get
@@ -9553,6 +9684,126 @@ public static partial class loca
                 return "- [Ila1,Nom]";
             else
                 return "- [Ila1,Nom]";
+        }
+    }
+    public static string Order_Fixate_Fail
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Auch nach reiflicher Überlegung fiel mir nicht ein, wie ich [Il1,Nom] mit [Il2,Dat] fixieren konnte.";
+            else
+                return "Auch nach reiflicher Überlegung fiel mir nicht ein, wie ich [Il1,Nom] mit [Il2,Dat] fixieren konnte.";
+        }
+    }
+    public static string Adv_L11_Magpie
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Auf dem Ständer befand sich [P:Person_Magpie]eine ausgestopfte Elster[/P].";
+            else
+                return "Auf dem Ständer befand sich [P:Person_Magpie]eine ausgestopfte Elster[/P].";
+        }
+    }
+    public static string Adv_L11_Animals
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Auf den Regalen tummelten sich allerlei ausgestopfte Viecher.";
+            else
+                return "Auf den Regalen tummelten sich allerlei ausgestopfte Viecher.";
+        }
+    }
+    public static string Adv_L11_Animal
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Auf den Regalen lag nur noch ein einzelnes ausgestopftes Viech.";
+            else
+                return "Auf den Regalen lag nur noch ein einzelnes ausgestopftes Viech.";
+        }
+    }
+    public static string Verb_Restore
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Restore";
+            else
+                return "Restore";
+        }
+    }
+    public static string Order_Place_No_Animal
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "[Pla1,Nom] wollte ich nirgends ablegen.";
+            else
+                return "[Pla1,Nom] wollte ich nirgends ablegen.";
+        }
+    }
+    public static string Order_Place_In_No_Animal
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "[Pla1,Nom] wollte ich nirgends hineinlegen.";
+            else
+                return "[Pla1,Nom] wollte ich nirgends hineinlegen.";
+        }
+    }
+    public static string Order_Place_Self_On_Fail
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Auf [Il1,Nom] wollte ich mich beim besten Willen nicht legen.";
+            else
+                return "Auf [Il1,Nom] wollte ich mich beim besten Willen nicht legen.";
+        }
+    }
+    public static string Order_PlaceP_On_Fail
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "[Pla1,Nom] wollte ich keineswegs auf [Ila2,Dat] ablegen.";
+            else
+                return "[Pla1,Nom] wollte ich keineswegs auf [Ila2,Dat] ablegen.";
+        }
+    }
+    public static string Order_Steal_Failed
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Ich verzichtete darauf, [Ila1,Nom] zu stehlen.";
+            else
+                return "Ich verzichtete darauf, [Ila1,Nom] zu stehlen.";
+        }
+    }
+    public static string Order_Steal_Failed_Klaue
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Zu diesem Mörder-Wortspiel konnte ich mich wirklich nur noch beglückwünschen.";
+            else
+                return "Zu diesem Mörder-Wortspiel konnte ich mich wirklich nur noch beglückwünschen.";
+        }
+    }
+    public static string Order_WrapAround_Not
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Nach reiflicher Überlegung fiel mir doch kein guter Grund ein, [Il1,Nom] um [Il2,AKK] zu wickeln.";
+            else
+                return "After careful consideration, I couldn't think of a good reason to wrap [Il1,Nom] around [Il2,Dat] after all.";
         }
     }
 }

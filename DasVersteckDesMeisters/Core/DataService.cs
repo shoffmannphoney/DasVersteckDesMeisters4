@@ -43,9 +43,7 @@ namespace Phoney_MAUI.Core
                 Directory.CreateDirectory(currentPath!);
 
             }
-            GlobalData.InitLog("Hello");
-            GlobalData.AddLog("GlobalData Init", IGlobalData.protMode.crisp);
-        }
+         }
 
         public bool WriteJsonIndex(OrderListInfo oli)
         {

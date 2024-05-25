@@ -29,6 +29,7 @@ public partial class GamePage : ContentPage, IMenuExtension
     private const double _inputGridHeight = 60;
     private const double _headlineHeight = 50;
     private const double _paddingWidth = 20;
+    private double _mcSpeed = 5;
 
     private readonly GameViewModel? _viewModelGame;
     private readonly MainViewModel? _viewModelMain;
@@ -94,6 +95,7 @@ public partial class GamePage : ContentPage, IMenuExtension
 
             UIS.SetSetLanguage(SetLanguage);
             UIS!.SetScoreMethod(SetScore);
+            UIS!.SetMCFocusMethod(SetMCFocus);
 
             _menuExtension!.SetMenuExtension(GetMenuGridLeft, GetMenuGridTotal, GetMenuGridMenu, WebView_Grid, Page_Grid, GetMenuButton, GetUIServices, GetAbsoluteLayout, GetMenuTitle, nameof(GamePage));
             UIS.ExternalGameOut = GameOut;
@@ -424,63 +426,6 @@ public partial class GamePage : ContentPage, IMenuExtension
     }
 
 
-    public void CallMCByKey( int code )
-    {
-        if (code == 27)
-        {
-            int ix = 0;
-            bool found = false;
-
-            for (ix = UIS.MCM!.Current!.Count - 1; ix >= 0 ; ix++)
-            {
-                if (UIS.MCM.Current[ix] > 0)
-                {
-                    MCMenuEntry? me = UIS.MCM.FindID(UIS.MCM.Current[ix]);
-
-                    if (me!.Keys!.Count > 0)
-                    {
-                        if (        ( me!.Follower.Count == 1 && me!.Follower[0] == -1 && me.Hidden == MCMenuEntry.HiddenType.visible)
-                                || ( me!.DefaultBreak == true )
-                             ) 
-                        {
-                            UIS.MCMV!.CallBackMCMenuView(me.ID);
-                            found = true;
-                        }
-                    }
-
-                }
-                if (found)
-                    break;
-            }
-
-        }
-        else if( code >0 )
-        {
-            int ix = 0;
-            bool found = false;
-            for (ix = 0; ix < UIS.MCM!.Current!.Count; ix++)
-            {
-                if (UIS.MCM.Current[ix] > 0)
-                {
-                    MCMenuEntry? me = UIS.MCM.FindID(UIS.MCM.Current[ix]);
-
-
-                    if (me!.Keys!.Count > 0)
-                    {
-                        if (me.Keys[0] == (int)code && me.Hidden == MCMenuEntry.HiddenType.visible)
-                        {
-                            UIS.MCMV!.CallBackMCMenuView(me.ID);
-                            found = true;
-                        }
-                    }
-
-                }
-                if (found)
-                    break;
-            }
-        }
-
-    }
     public void ResetKeyboardHandler()
     {
         var handler = CurrentPage.Handler;
@@ -549,7 +494,71 @@ public partial class GamePage : ContentPage, IMenuExtension
         */
     }
 #endif
+    public void CallMCByKey(int code)
+    {
+        if (code == 27)
+        {
+            int ix = 0;
+            bool found = false;
 
+            for (ix = UIS.MCM!.Current!.Count - 1; ix >= 0; ix++)
+            {
+                if (UIS.MCM.Current[ix] > 0)
+                {
+                    MCMenuEntry? me = UIS.MCM.FindID(UIS.MCM.Current[ix]);
+
+                    if (me!.Keys!.Count > 0)
+                    {
+                        if ((me!.Follower.Count == 1 && me!.Follower[0] == -1 && me.Hidden == MCMenuEntry.HiddenType.visible)
+                                || (me!.DefaultBreak == true)
+                             )
+                        {
+                            UIS.MCMV!.CallBackMCMenuView(me.ID);
+                            found = true;
+                        }
+                    }
+
+                }
+                if (found)
+                    break;
+            }
+
+        }
+        else if (code > 0)
+        {
+            int ix = 0;
+            bool found = false;
+            for (ix = 0; ix < UIS.MCM!.Current!.Count; ix++)
+            {
+                if (UIS.MCM.Current[ix] > 0)
+                {
+                    MCMenuEntry? me = UIS.MCM.FindID(UIS.MCM.Current[ix]);
+
+
+                    if (me!.Keys!.Count > 0)
+                    {
+                        if (me.Keys[0] == (int)code && me.Hidden == MCMenuEntry.HiddenType.visible)
+                        {
+                            UIS.MCMV!.CallBackMCMenuView(me.ID);
+                            found = true;
+                        }
+                    }
+
+                }
+                if (found)
+                    break;
+            }
+        }
+
+    }
+
+    public bool SetMCFocus()
+    {
+#if WINDOWS
+        Grid_MC.Focus();
+#endif
+        return true;
+    }
     public bool SetInputFocus()
     {
 #if WINDOWS
@@ -611,10 +620,98 @@ public partial class GamePage : ContentPage, IMenuExtension
         }
         */
     }
+    public bool SetMCHeight()
+    {
+        RowDefinitionCollection rdc = Grid_Output.RowDefinitions;
+
+        double target = _mcGridHeight;
+        if( Grid_MC.IsVisible == false )
+            target = _inputGridHeight;
+
+
+        if (rdc[2].Height.Value < target)
+        {
+            if (_mcSpeed < 0)
+                _mcSpeed = 0;
+
+            _mcSpeed += 5;
+            double maxSpeed = (target - rdc[2].Height.Value) / 5;
+            if (maxSpeed < 5)
+                maxSpeed = 5;
+
+            if( _mcSpeed > maxSpeed )
+                _mcSpeed = maxSpeed;
+
+
+            if (_mcSpeed + rdc[2].Height.Value > target)
+                _mcSpeed = target - rdc[2].Height.Value;
+        }
+        else
+        {
+            if (_mcSpeed > 0)
+                _mcSpeed = 0;
+
+            _mcSpeed -= 1;
+            double maxSpeed = (target - rdc[2].Height.Value) / 5;
+            if (maxSpeed > -1)
+                maxSpeed = -1;
+
+            if (_mcSpeed < maxSpeed)
+                _mcSpeed = maxSpeed;
+
+
+            if ( rdc[2].Height.Value - _mcSpeed < target)
+                _mcSpeed = rdc[2].Height.Value - target;
+        }
+
+
+        // _mcGridHeight = new GridLength( 300 );
+
+        /*
+        rdc[0].Height = new GridLength(Grid_Output.Height - _mcGridHeight);
+        rdc[2].Height = new GridLength(_mcGridHeight);
+        */
+        rdc[0].Height = new GridLength(rdc[0].Height.Value - _mcSpeed);
+        rdc[2].Height = new GridLength(rdc[2].Height.Value + _mcSpeed);
+
+        AdaptGridHeights();
+
+        if (rdc[2].Height.Value == target)
+        {
+            UIS.Scr.ScrollEndWait(2);
+            _menuExtension!.RemoveListCall(SetMCHeight);
+        }
+        /*
+          bool stopExpansion = false;
+
+          RowDefinitionCollection rdc = Grid_Output.RowDefinitions;
+
+          double ylen = 10;
+
+          if(rdc[2].Height.Value + ylen > _mcGridHeight)
+          {
+              ylen = _mcGridHeight - rdc[2].Height.Value;
+              stopExpansion = true;
+          }
+          rdc[0].Height = new GridLength(rdc[0].Height.Value - ylen);
+          rdc[2].Height = new GridLength(rdc[2].Height.Value + ylen);
+
+          if( stopExpansion)
+          {
+              _menuExtension.RemoveListCall(SetMCOnHeight);
+          }
+          */
+        /*
+        Device.BeginInvokeOnMainThread(SetMCOnHeightMT);
+        */
+        return true;
+    }
     public bool SetMCOnHeight()
     {
         RowDefinitionCollection rdc = Grid_Output.RowDefinitions;
-        double ylen = _mcGridHeight - rdc[2].Height.Value;
+        double ylen = _inputGridHeight - rdc[2].Height.Value;
+
+
 
         // _mcGridHeight = new GridLength( 300 );
 
@@ -628,6 +725,7 @@ public partial class GamePage : ContentPage, IMenuExtension
         AdaptGridHeights();
 
         _menuExtension!.RemoveListCall(SetMCOnHeight);
+
         /*
           bool stopExpansion = false;
 
@@ -680,7 +778,7 @@ public partial class GamePage : ContentPage, IMenuExtension
             if (rdc[0].Height.IsAbsolute)
             {
 
-                _menuExtension!.ListCalls.Add( new ListCall( SetMCOnHeight, -1 ) );
+                _menuExtension!.ListCalls.Add( new ListCall( SetMCHeight, -1 ) );
                 // Test: Grid
 
                 // double xlen = 200 - rdc[2].Height.Value;
@@ -698,7 +796,7 @@ public partial class GamePage : ContentPage, IMenuExtension
 
             if (rdc[0].Height.IsAbsolute)
             {
-                _menuExtension!.ListCalls.Add(new ListCall(SetMCOffHeight, 0) );
+                _menuExtension!.ListCalls.Add(new ListCall(SetMCHeight, -1) );
                 // Test: Grid
 
             }
@@ -2746,6 +2844,9 @@ public partial class GamePage : ContentPage, IMenuExtension
         }
         catch (Exception e)
         {
+            // public bool ExecuteGamePageLayout()
+            GlobalData.AddLog("ExecuteGamePageLayout: " + e.Message, IGlobalData.protMode.crisp);
+
         }
         gplUpdate = false;
         return true;
@@ -2862,7 +2963,7 @@ public partial class GamePage : ContentPage, IMenuExtension
         {
             if ((item.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_Loc, GD.Adventure!.A!.ActLoc)) && (item.IsHidden == false) && (item.Active == true))
             {
-                if (item.IsMentionable == true && (!item.IsLessImportant || GD.SimpleMC == false))
+                if (item.IsMentionable == true && (!item.IsLessImportant || GD.LayoutDescription.SimpleMC == false))
                 {
                     TreeViewItem newChild = AddTreeViewItem(tv, item.FullName(Case: Co.CASE_AKK, ShowAppendix: true), item.FullName(Case: Co.CASE_AKK));
                     AddSiblings(newChild, item);
@@ -2892,7 +2993,7 @@ public partial class GamePage : ContentPage, IMenuExtension
         {
             if ((item.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_Loc, GD.Adventure!.A!.ActLoc)) && (item.IsHidden == false) && (item.Active == true))
             {
-                if (item.IsMentionable == false && (!item.IsLessImportant || GD.SimpleMC == false))
+                if (item.IsMentionable == false && (!item.IsLessImportant || GD.LayoutDescription.SimpleMC == false))
                 {
                     TreeViewItem newChild = AddTreeViewItem(BackgroundChild, item.FullName(Case: Co.CASE_AKK, ShowAppendix: true), item.FullName(Case: Co.CASE_AKK));
                     AddSiblings(newChild, item);
@@ -2922,7 +3023,7 @@ public partial class GamePage : ContentPage, IMenuExtension
         {
             if ((item.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_Loc, GD.Adventure!.A!.ActLoc)) && (item.IsHidden == false) && (item.Active == true))
             {
-                if (item.IsMentionable == true && (!item.IsLessImportant || GD.SimpleMC == false))
+                if (item.IsMentionable == true && (!item.IsLessImportant || GD.LayoutDescription.SimpleMC == false))
                 {
                     EmptyTreeViewItem newChild = new();
                     tv.Children.Add(newChild);
@@ -2953,7 +3054,7 @@ public partial class GamePage : ContentPage, IMenuExtension
         {
             if ((item.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_Loc, GD.Adventure!.A!.ActLoc)) && (item.IsHidden == false) && (item.Active == true))
             {
-                if (item.IsMentionable == false && (!item.IsLessImportant || GD.SimpleMC == false))
+                if (item.IsMentionable == false && (!item.IsLessImportant || GD.LayoutDescription.SimpleMC == false))
                 {
                     EmptyTreeViewItem newChild = new();
                     BackgroundChild.Children.Add(newChild);
@@ -3440,7 +3541,7 @@ public partial class GamePage : ContentPage, IMenuExtension
         bool gothroughable = false;
         bool gotoable = false;
 
-        if (GD.SimpleMC == false)
+        if (GD.LayoutDescription.SimpleMC == false)
         {
             foreach (Item i in GD.Adventure!.Items!.List!.Values)
             {
@@ -3547,7 +3648,7 @@ public partial class GamePage : ContentPage, IMenuExtension
             bool gothroughable = false;
             bool gotoable = false;
 
-            if (GD.SimpleMC == false)
+            if (GD.LayoutDescription.SimpleMC == false)
             {
                 foreach (Item i in GD.Adventure!.Items!.List!.Values)
                 {
@@ -3871,8 +3972,9 @@ public partial class GamePage : ContentPage, IMenuExtension
             if( lastGrid_OutputRowHeight2.Equals( gl1 ) == false )
             // if (lastGrid_OutputRowHeight2 != gl1)
             {
-                Grid_Output.RowDefinitions[2].Height = gl1;
-                lastGrid_OutputRowHeight2 = gl1;
+
+                // Grid_Output.RowDefinitions[2].Height = gl1;
+                // lastGrid_OutputRowHeight2 = gl1;
                 AdaptGridHeights();
             }
 
@@ -3880,8 +3982,8 @@ public partial class GamePage : ContentPage, IMenuExtension
             if (lastGrid_OutputRowHeight0.Equals(gl2) == false ) 
             // if (lastGrid_OutputRowHeight0 != gl2)
             {
-                Grid_Output.RowDefinitions[0].Height = gl2;
-                lastGrid_OutputRowHeight0 = gl2;
+                // Grid_Output.RowDefinitions[0].Height = gl2;
+                // lastGrid_OutputRowHeight0 = gl2;
                 AdaptGridHeights();
             }
 
@@ -4319,7 +4421,7 @@ public partial class GamePage : ContentPage, IMenuExtension
 #endif
 
 
-            if (GD.STTMicroState == IGlobalData.microMode.off)
+            if (GD.LayoutDescription.STTMicroState == IGlobalData.microMode.off)
             {
                 Grid_Input_Sub.ColumnDefinitions[1].Width = new GridLength(0);
                 Grid_MC.ColumnDefinitions[1].Width = new GridLength(0);
@@ -5148,6 +5250,7 @@ public partial class GamePage : ContentPage, IMenuExtension
         }
         catch( Exception ex)
         {
+            GlobalData.AddLog("DoSpeech: " + ex.Message, IGlobalData.protMode.crisp);
 
         }
         return true;
@@ -5348,12 +5451,12 @@ public partial class GamePage : ContentPage, IMenuExtension
         {
             if (UIS.STTListeningOn == IUIServices.sttListeningMode.off)
             {
-                if (GD.STTMicroState == IGlobalData.microMode.continuous)
+                if (GD.LayoutDescription.STTMicroState == IGlobalData.microMode.continuous)
                 {
                     // Mike.Background = Colors.Red;
                     await UIS.STTStartListening(IUIServices.sttListeningMode.continuous);
                 }
-                else if (GD.STTMicroState == IGlobalData.microMode.once)
+                else if (GD.LayoutDescription.STTMicroState == IGlobalData.microMode.once)
                 {
                     // Mike.Background = Colors.Yellow;
                     await UIS.STTStartListening(IUIServices.sttListeningMode.on);
@@ -5379,12 +5482,12 @@ public partial class GamePage : ContentPage, IMenuExtension
         {
             if (UIS.STTListeningOn == IUIServices.sttListeningMode.off)
             {
-                if (GD.STTMicroState == IGlobalData.microMode.continuous)
+                if (GD.LayoutDescription.STTMicroState == IGlobalData.microMode.continuous)
                 {
                     // Mike.Background = Colors.Red;
                     await UIS.STTStartListening(IUIServices.sttListeningMode.continuous);
                 }
-                else if (GD.STTMicroState == IGlobalData.microMode.once)
+                else if (GD.LayoutDescription.STTMicroState == IGlobalData.microMode.once)
                 {
                     // Mike.Background = Colors.Yellow;
                     await UIS.STTStartListening(IUIServices.sttListeningMode.on);
@@ -5410,12 +5513,12 @@ public partial class GamePage : ContentPage, IMenuExtension
         {
             if (UIS.STTListeningOn == IUIServices.sttListeningMode.off)
             {
-                if (GD.STTMicroState == IGlobalData.microMode.continuous)
+                if (GD.LayoutDescription.STTMicroState == IGlobalData.microMode.continuous)
                 {
                     // Mike.Background = Colors.Red;
                     await UIS.STTStartListening(IUIServices.sttListeningMode.continuous);
                 }
-                else if (GD.STTMicroState == IGlobalData.microMode.once)
+                else if (GD.LayoutDescription.STTMicroState == IGlobalData.microMode.once)
                 {
                     // Mike.Background = Colors.Yellow;
                     await UIS.STTStartListening(IUIServices.sttListeningMode.on);

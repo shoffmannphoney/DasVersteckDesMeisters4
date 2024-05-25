@@ -749,7 +749,10 @@ namespace GameCore
                 }
                 else
                 {
-                    if (Persons!.Find(MCME.Speaker) != null)
+                    if (Persons == null)
+                    {
+                    }
+                    else if (Persons!.Find(MCME.Speaker) != null)
                     {
                         _addEmptyLine = true;
                         // AdvGame!.StoryOutput(Persons!.Find(MCME.Speaker)!.locationID, A!.Adventure!.CA!.Person_Everyone, "");

@@ -1,19 +1,14 @@
-﻿using Phoney_MAUI.Game;
-using Phoney_MAUI.Menu;
+﻿using CommunityToolkit.Maui.Behaviors;
+using GameCore;
 using Phoney_MAUI.Core;
-using System.Collections.ObjectModel;
+using Phoney_MAUI.Menu;
 using Phoney_MAUI.Model;
+using Phoney_MAUI.Platform;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
-using Phoney_MAUI.Game.General;
-using Phoney_MAUI.Platform;
-using Microsoft.Maui.Controls;
-using GameCore;
-using System.Reflection;
-using CommunityToolkit.Maui.Core.Platform;
-using CommunityToolkit.Maui.Media;
-using CommunityToolkit.Maui.Behaviors;
 
 namespace Phoney_MAUI;
 
@@ -243,7 +238,7 @@ public static class UIElement
 
     public static void StoreGrid(Grid g)
     {
-        if (listGrid.Count > 1000)
+        if (listGrid.Count > 2000)
         {
         }
 
@@ -310,6 +305,8 @@ public static class UIElement
         tv.ClearValue(TreeView.StyleProperty);
         // g.ClearValue(Grid.WidthProperty);
         tv.ClearValue(TreeView.WidthRequestProperty);
+
+        
         listTreeView.Add(tv);
     }
     public static void StoreIDButton(IDButton b)
@@ -330,7 +327,7 @@ public static class UIElement
         b.ClearValue(IDButton.WidthRequestProperty);
         b.ClearValue(IDButton.TextColorProperty);
 
-        listIDButton.Add(b);
+        // listIDButton.Add(b);
     }
     public static void StoreIDLabel(IDLabel l)
     {
@@ -350,7 +347,7 @@ public static class UIElement
         l.ClearValue(IDLabel.WidthRequestProperty);
         l.ClearValue(IDLabel.TextColorProperty);
 
-        listIDLabel.Add(l);
+        // listIDLabel.Add(l);
     }
     public static void StoreButton(Button b)
     {
@@ -370,10 +367,18 @@ public static class UIElement
         b.ClearValue(Button.WidthRequestProperty);
         b.ClearValue(Button.TextColorProperty);
 
-        listButton.Add(b);
+        // listButton.Add(b);
     }
     public static void StoreLabel(Label l)
     {
+        if (l.FontSize != 14)
+        {
+        }
+         else if (l.Height != 17.5)
+        {
+        }
+
+ 
         l.ClearValue(Label.BackgroundColorProperty);
         l.ClearValue(Label.BackgroundProperty);
         // g.ClearValue(Grid.BehaviorsProperty);
@@ -389,13 +394,15 @@ public static class UIElement
         // g.ClearValue(Grid.WidthProperty);
         l.ClearValue(Label.WidthRequestProperty);
         l.ClearValue(Label.TextColorProperty);
+        l.HeightRequest = -1;
 
 
-        listLabel.Add(l);
+        
+        // listLabel.Add(l);
     }
     public static Grid NewGrid()
     {
-        if (listGrid.Count  > 1000)
+        if (listGrid.Count  > 2000)
         {
         }
 
@@ -408,20 +415,24 @@ public static class UIElement
 
             g2.ColumnDefinitions.Clear();
             g2.RowDefinitions.Clear();
-            g2.SetValue(Grid.ColumnDefinitionsProperty, new ColumnDefinitionCollection() );
-            g2.SetValue(Grid.RowDefinitionsProperty, new RowDefinitionCollection() );
+            g2.ClearValue(Grid.ColumnDefinitionsProperty);
+            g2.ClearValue(Grid.RowDefinitionsProperty );
 
-            g2.SetValue(TreeView.BackgroundColorProperty, Colors.Transparent);
+            g2.ClearValue(TreeView.BackgroundColorProperty);
             g2.BackgroundColor = Colors.Transparent;
-            g2.SetValue(TreeView.BackgroundProperty, Colors.Transparent);
+            g2.ClearValue(TreeView.BackgroundProperty);
             g2.Background = Colors.Transparent;
-            g2.WidthRequest = -1;
-            g2.SetValue(Grid.WidthRequestProperty, -1);
             LayoutOptions lo = LayoutOptions.Fill;
             g2.VerticalOptions = lo;
-            g2.SetValue(Grid.VerticalOptionsProperty, lo);
+            g2.ClearValue(Grid.VerticalOptionsProperty);
             g2.HorizontalOptions = lo;
-            g2.SetValue(Grid.HorizontalOptionsProperty, lo);
+            g2.ClearValue(Grid.HorizontalOptionsProperty);
+            g2.HeightRequest = -1;
+            g2.WidthRequest = -1;
+            g2.ClearValue(Grid.WidthRequestProperty);
+            g2.ClearValue(Grid.HeightRequestProperty);
+
+            g2.Clear();
 
             return g2;
         }
@@ -440,22 +451,27 @@ public static class UIElement
             tv2.IsEnabled = true;
             tv2._currentTreeState = TreeViewItem.TreeState.closed;
 
-            tv2.SetValue(TreeView.BackgroundColorProperty, Colors.Transparent);
+            tv2.ClearValue(TreeView.BackgroundColorProperty);
             tv2.BackgroundColor = Colors.Transparent;
-            tv2.SetValue(TreeView.BackgroundProperty, Colors.Transparent);
+            tv2.ClearValue(TreeView.BackgroundProperty);
             tv2.Background = Colors.Transparent;
             tv2.ColumnDefinitions.Clear();
             tv2.RowDefinitions.Clear();
-            tv2.SetValue(Grid.ColumnDefinitionsProperty, new ColumnDefinitionCollection());
-            tv2.SetValue(Grid.RowDefinitionsProperty, new RowDefinitionCollection());
+            tv2.ClearValue(Grid.ColumnDefinitionsProperty);
+            tv2.ClearValue(Grid.RowDefinitionsProperty);
 
-            tv2.WidthRequest = -1;
-            tv2.SetValue(Grid.WidthRequestProperty, -1);
             LayoutOptions lo = LayoutOptions.Fill;
             tv2.VerticalOptions = lo;
-            tv2.SetValue(Grid.VerticalOptionsProperty, lo);
+            tv2.ClearValue(Grid.VerticalOptionsProperty);
             tv2.HorizontalOptions = lo;
-            tv2.SetValue(Grid.HorizontalOptionsProperty, lo);
+            tv2.ClearValue(Grid.HorizontalOptionsProperty);
+
+            tv2.HeightRequest = -1;
+            tv2.WidthRequest = -1;
+            tv2.ClearValue(Grid.WidthRequestProperty);
+            tv2.ClearValue(Grid.HeightRequestProperty);
+
+            tv2.Clear();
             return tv2;
         }
         TreeView tv = new();
@@ -473,22 +489,27 @@ public static class UIElement
             tvi2.IsEnabled = true;
             tvi2._currentTreeState = TreeViewItem.TreeState.closed;
 
-            tvi2.SetValue(TreeView.BackgroundColorProperty, Colors.Transparent);
+            tvi2.ClearValue(TreeView.BackgroundColorProperty);
             tvi2.BackgroundColor = Colors.Transparent;
-            tvi2.SetValue(TreeView.BackgroundProperty, Colors.Transparent);
+            tvi2.ClearValue(TreeView.BackgroundProperty);
             tvi2.Background = Colors.Transparent;
             tvi2.ColumnDefinitions.Clear();
             tvi2.RowDefinitions.Clear();
-            tvi2.SetValue(Grid.ColumnDefinitionsProperty, new ColumnDefinitionCollection());
-            tvi2.SetValue(Grid.RowDefinitionsProperty, new RowDefinitionCollection());
+            tvi2.ClearValue(Grid.ColumnDefinitionsProperty);
+            tvi2.ClearValue(Grid.RowDefinitionsProperty);
 
-            tvi2.WidthRequest = -1;
-            tvi2.SetValue(Grid.WidthRequestProperty, -1);
             LayoutOptions lo = LayoutOptions.Fill;
             tvi2.VerticalOptions = lo;
-            tvi2.SetValue(Grid.VerticalOptionsProperty, lo);
+            tvi2.ClearValue(Grid.VerticalOptionsProperty);
             tvi2.HorizontalOptions = lo;
-            tvi2.SetValue(Grid.HorizontalOptionsProperty, lo);
+            tvi2.ClearValue(Grid.HorizontalOptionsProperty);
+
+            tvi2.HeightRequest = -1;
+            tvi2.WidthRequest = -1;
+            tvi2.ClearValue(Grid.WidthRequestProperty);
+            tvi2.ClearValue(Grid.HeightRequestProperty);
+
+            tvi2.Clear();
 
             return tvi2;
         }
@@ -507,22 +528,32 @@ public static class UIElement
             listIDButton.RemoveAt(0);
             b2.IsVisible = true;
             b2.Opacity = 1;
-            b2.SetValue( Button.OpacityProperty, 1.0);
-            b2.SetValue(Button.BackgroundColorProperty, Colors.Transparent);
+            b2.ClearValue( Button.OpacityProperty);
+            b2.ClearValue(Button.BackgroundColorProperty);
             b2.BackgroundColor = Colors.Transparent;
-            b2.SetValue(Button.BackgroundProperty, Colors.Transparent);
+            b2.ClearValue(Button.BackgroundProperty);
             b2.Background = Colors.Transparent;
             b2.FontFamily = null;
-            b2.SetValue( Button.FontFamilyProperty, null );
+            b2.ClearValue( Button.FontFamilyProperty);
 
-            b2.WidthRequest = -1;
-            b2.SetValue(Grid.WidthRequestProperty, -1);
             LayoutOptions lo = LayoutOptions.Fill;
             b2.VerticalOptions = lo;
-            b2.SetValue(Grid.VerticalOptionsProperty, lo);
+            b2.ClearValue(Grid.VerticalOptionsProperty);
             b2.HorizontalOptions = lo;
-            b2.SetValue(Grid.HorizontalOptionsProperty, lo);
-            b2.SetValue(Label.MaximumWidthRequestProperty, Double.PositiveInfinity);
+            b2.ClearValue(Grid.HorizontalOptionsProperty);
+            b2.ClearValue(Label.MaximumWidthRequestProperty);
+
+            b2.ClearValue(Label.MarginProperty);
+            b2.ClearValue(Label.PaddingProperty);
+            b2.FontSize = Device.GetNamedSize(NamedSize.Default, typeof(Button));
+            b2.ClearValue(Label.FontSizeProperty);
+            b2.ClearValue(Label.StyleProperty);
+            b2.ClearValue(Label.ClassIdProperty);
+
+            b2.HeightRequest = -1;
+            b2.WidthRequest = -1;
+            b2.ClearValue(Grid.WidthRequestProperty);
+            b2.ClearValue(Grid.HeightRequestProperty);
 
             return b2;
         }
@@ -541,25 +572,36 @@ public static class UIElement
             listButton.RemoveAt(0);
             b2.IsVisible = true;
             b2.Opacity = 1;
-            b2.SetValue( Button.BackgroundColorProperty, Colors.Transparent);
+            b2.ClearValue( Button.BackgroundColorProperty);
             b2.BackgroundColor = Colors.Transparent;
-            b2.SetValue(Button.BackgroundProperty, Colors.Transparent);
+            b2.ClearValue(Button.BackgroundProperty);
             b2.Background = Colors.Transparent;
             b2.FontFamily = null;
-            b2.SetValue(Button.FontFamilyProperty, null);
+            b2.ClearValue(Button.FontFamilyProperty);
 
-            b2.WidthRequest = -1;
-            b2.SetValue(Grid.WidthRequestProperty, -1);
             LayoutOptions lo = LayoutOptions.Fill;
             b2.VerticalOptions = lo;
-            b2.SetValue(Grid.VerticalOptionsProperty, lo);
+            b2.ClearValue(Grid.VerticalOptionsProperty);
             b2.HorizontalOptions = lo;
-            b2.SetValue(Grid.HorizontalOptionsProperty, lo);
-            b2.SetValue(Label.MaximumWidthRequestProperty, Double.PositiveInfinity);
+            b2.ClearValue(Grid.HorizontalOptionsProperty);
+            b2.ClearValue(Label.MaximumWidthRequestProperty );
+
+            b2.ClearValue(Label.MarginProperty);
+            b2.ClearValue(Label.PaddingProperty);
+            b2.ClearValue(Label.FontSizeProperty);
+            b2.FontSize = Device.GetNamedSize(NamedSize.Default, typeof(Button));
+            b2.ClearValue(Label.StyleProperty);
+            b2.ClearValue(Label.ClassIdProperty);
+
+            b2.HeightRequest = -1;
+            b2.WidthRequest = -1;
+            b2.ClearValue(Grid.WidthRequestProperty);
+            b2.ClearValue(Grid.HeightRequestProperty);
 
             // (b2.Background as Microsoft.Maui.Controls.ImmutableBrush).Color = null;
             b2.TextColor = Colors.White;
             b2.StyleClass = null;
+
             return b2;
         }
         Button b = new();
@@ -574,21 +616,31 @@ public static class UIElement
             l2.IsVisible = true;
             l2.Opacity = 1;
 
-            l2.SetValue(Label.BackgroundColorProperty, Colors.Transparent);
+            l2.ClearValue(Label.BackgroundColorProperty);
             l2.BackgroundColor = Colors.Transparent;
-            l2.SetValue(Label.BackgroundProperty, Colors.Transparent);
+            l2.ClearValue(Label.BackgroundProperty);
             l2.Background = Colors.Transparent;
             l2.FontFamily = null;
-            l2.SetValue(Label.FontFamilyProperty, null);
+            l2.ClearValue(Label.FontFamilyProperty);
 
-            l2.WidthRequest = -1;
-            l2.SetValue(Grid.WidthRequestProperty, -1);
             LayoutOptions lo = LayoutOptions.Fill;
             l2.VerticalOptions = lo;
-            l2.SetValue(Grid.VerticalOptionsProperty, lo);
+            l2.ClearValue(Grid.VerticalOptionsProperty);
             l2.HorizontalOptions = lo;
-            l2.SetValue(Grid.HorizontalOptionsProperty, lo);
-            l2.SetValue(Label.MaximumWidthRequestProperty, Double.PositiveInfinity);
+            l2.ClearValue(Grid.HorizontalOptionsProperty);
+            l2.ClearValue(Label.MaximumWidthRequestProperty);
+
+            l2.ClearValue(Label.MarginProperty);
+            l2.ClearValue(Label.PaddingProperty);
+            l2.ClearValue(Label.FontSizeProperty);
+            l2.FontSize = Device.GetNamedSize(NamedSize.Default, typeof(Label));
+            l2.ClearValue(Label.StyleProperty);
+            l2.ClearValue(Label.ClassIdProperty);
+
+            l2.HeightRequest = -1;
+            l2.WidthRequest = -1;
+            l2.ClearValue(Grid.WidthRequestProperty);
+            l2.ClearValue(Grid.HeightRequestProperty);
 
             return l2;
         }
@@ -604,22 +656,32 @@ public static class UIElement
             l2.IsVisible = true;
             l2.Opacity = 1;
 
-            l2.SetValue(Label.BackgroundColorProperty, Colors.Transparent);
+            l2.ClearValue(Label.BackgroundColorProperty);
             l2.BackgroundColor = Colors.Transparent;
-            l2.SetValue(Label.BackgroundProperty, Colors.Transparent);
+            l2.ClearValue(Label.BackgroundProperty);
             l2.Background = Colors.Transparent;
             l2.FontFamily = null;
-            l2.SetValue(Label.FontFamilyProperty, null);
+            l2.ClearValue(Label.FontFamilyProperty);
 
-            l2.WidthRequest = -1;
-            l2.SetValue(Grid.WidthRequestProperty, -1);
             LayoutOptions lo = LayoutOptions.Fill;
             l2.VerticalOptions = lo;
-            l2.SetValue(Grid.VerticalOptionsProperty, lo);
+            l2.ClearValue(Grid.VerticalOptionsProperty);
             l2.HorizontalOptions = lo;
-            l2.SetValue(Grid.HorizontalOptionsProperty, lo);
+            l2.ClearValue(Grid.HorizontalOptionsProperty);
 
-            l2.SetValue(Label.MaximumWidthRequestProperty, Double.PositiveInfinity);
+            l2.ClearValue(Label.MaximumWidthRequestProperty);
+
+            l2.ClearValue(Label.MarginProperty);
+            l2.ClearValue(Label.PaddingProperty);
+            l2.ClearValue(Label.FontSizeProperty);
+            l2.FontSize = Device.GetNamedSize(NamedSize.Default, typeof(Label));
+            l2.ClearValue(Label.StyleProperty);
+            l2.ClearValue(Label.ClassIdProperty);
+
+            l2.HeightRequest = -1;
+            l2.WidthRequest = -1;
+            l2.ClearValue(Grid.WidthRequestProperty);
+            l2.ClearValue(Grid.HeightRequestProperty);
 
             return l2;
         }
@@ -1560,9 +1622,13 @@ public class TreeView : TreeViewItem
             ToggleButton = b1;
             g3.Add(b1);
             b1.SetCursorHand();
+            b1.SetValue( Button.OpacityProperty, 1.0f);
             b1.Opacity = 1;
             b1.BorderWidth = 0;
-
+            b1.Background = Colors.Transparent;
+            b1.HeightRequest = -1;
+            b1.ClearValue(Button.HeightRequestProperty);
+            b1.TextColor = Colors.Cyan;
             b1.SetValue(Label.BackgroundColorProperty, Colors.Green);
             /*
 
@@ -1586,6 +1652,8 @@ public class TreeView : TreeViewItem
             l1.SetCursorHand();
             Thickness m = new(0, GlobalSpecs.CurrentGlobalSpecs!.GetClickMarginPixel(), 0, GlobalSpecs.CurrentGlobalSpecs.GetClickMarginPixel());
             l1.Margin = m;
+            l1.HeightRequest = -1;
+            l1.WidthRequest = -1;
             g4.Add(l1);
             TextLabel = l1;
             TapGestureRecognizer tgr = new();
@@ -1853,66 +1921,157 @@ public class TreeViewItem : Grid, INotifyPropertyChanged, IDisposable
     {
         // OnClickedTree
     }
+
+    static TreeViewItem lastNorth = null;
+
+    public static bool CompareObjects(object obj1, object obj2)
+    {
+        try
+        {
+            if (obj1 == null || obj2 == null)
+                return obj1 == obj2;
+
+            Type type1 = obj1.GetType();
+            Type type2 = obj2.GetType();
+
+            if (type1 != type2)
+                return false;
+
+            PropertyInfo[] properties = type1.GetProperties();
+
+            foreach (PropertyInfo property in properties)
+            {
+                object value1 = property.GetValue(obj1);
+                object value2 = property.GetValue(obj2);
+
+                if (value1 == null || value2 == null)
+                {
+                }
+                else if (property.Name == "ClickedEventCommand")
+                {
+
+                }
+                else if (property.Name == "ColumnDefinitions")
+                {
+
+                }
+                else if (property.Name == "RowDefinitions")
+                {
+
+                }
+                else if (property.Name == "Children")
+                {
+
+                }
+                /*
+                   else if (property.Name == "Command`1")
+                   {
+
+                   }
+                   */
+
+                else if (!object.Equals(value1, value2))
+                    return false;
+            }
+        }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("CompareObjects: " + ex.Message, IGlobalData.protMode.crisp);
+        }
+        return true;
+    }
+
     public void CalcToggles()
     {
-        if (SubTree != null)
+        try
         {
-            if (SubTree!.Children.Count > 0)
+
+            if (SubTree != null)
             {
-                ToggleButton!.IsVisible = true;
-
-
-                int ix = 0;
-                foreach (var iv in SubTree!.Children)
+                if (SubTree!.Children.Count > 0)
                 {
-                    if (iv.GetType() == typeof(TreeViewItem))
-                    {
-                        TreeViewItem? tv1 = (iv as TreeViewItem);
-                        if (tv1?.CurrentTreeState == TreeState.open)
-                        {
-                            tv1!.ToggleButton!.Rotation = 45;
-                            tv1!.ToggleButton!.Opacity = 0.3;
-                            tv1!.CalcToggles();
-                        }
-                        else
-                        {
-                            tv1!.ToggleButton!.Rotation = 0;
-                            tv1!.ToggleButton!.Opacity = 1;
+                    ToggleButton!.IsVisible = true;
 
-                            if( tv1!.SubTree!.Children.Count > 0 || tv1!.OrderTable != null || tv1!.OrderListTable != null)
+
+                    int ix = 0;
+                    foreach (var iv in SubTree!.Children)
+                    {
+                        if (iv.GetType() == typeof(TreeViewItem))
+                        {
+                            TreeViewItem? tv1 = (iv as TreeViewItem);
+                            if (tv1?.CurrentTreeState == TreeState.open)
                             {
-                                tv1!.ToggleButton!.IsVisible = true;
+                                tv1!.ToggleButton!.Rotation = 45;
+                                tv1!.ToggleButton!.Opacity = 0.3;
+                                tv1!.CalcToggles();
                             }
                             else
                             {
-                                tv1!.ToggleButton!.IsVisible = false;
+                                /*
+                                tv1.TextLabel.ClearValue(Label.FontSizeProperty);
+
+                                if (tv1.TextLabel.Text == "Gehe nach Norden")
+                                {
+                                    if (lastNorth != null)
+                                    {
+                                        CompareObjects(lastNorth, tv1);
+                                    }
+                                    lastNorth = tv1;
+
+                                }
+                                // tv1.Scale = 0;
+                                // tv1.ScaleTo( 1 );
+                                if (tv1.TextLabel.FontSize != 14)
+                                {
+                                }
+                                */
+
+                                tv1!.ToggleButton!.Rotation = 0;
+                                tv1!.ToggleButton!.Opacity = 1;
+
+                                if (tv1!.SubTree!.Children.Count > 0 || tv1!.OrderTable != null || tv1!.OrderListTable != null)
+                                {
+                                    tv1!.ToggleButton!.IsVisible = true;
+                                }
+                                else
+                                {
+                                    tv1!.ToggleButton!.IsVisible = false;
+
+                                }
 
                             }
+                        }
+                        else if (iv.GetType() == typeof(Grid))
+                        {
 
                         }
-                    }
-                    else if (iv.GetType() == typeof(Grid))
-                    {
+                        else
+                        {
+                        }
 
+                        ix++;
                     }
 
-                    ix++;
+                }
+                else if (this.OrderTable != null || this.OrderListTable != null)
+                {
+                    ToggleButton!.IsVisible = true;
+                    this.ToggleButton!.Rotation = 0;
+                    this.ToggleButton!.Opacity = 1;
+                }
+                else
+                {
+                    ToggleButton!.IsVisible = false;
                 }
 
             }
-            else if( this.OrderTable != null || this.OrderListTable != null )
-            {
-                ToggleButton!.IsVisible = true;
-                this.ToggleButton!.Rotation = 0;
-                this.ToggleButton!.Opacity = 1;
-            }
-            else
-            {
-                ToggleButton!.IsVisible = false;
-            }
+        }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("CalcToggles: " + ex.Message, IGlobalData.protMode.crisp);
 
         }
-      }
+    }
 
 
     public void CallbackAll(DelVoidObject dvo)
@@ -2157,7 +2316,8 @@ public class TreeViewItem : Grid, INotifyPropertyChanged, IDisposable
         */
 
         Button b1 = UIElement.NewButton();
-        b1.StyleClass = UIElement.Get_Button_NoBackground_NoBorder(); 
+        // b1.StyleClass = UIElement.Get_Button_NoBackground_NoBorder(); 
+        b1.TextColor = GlobalSpecs.CurrentGlobalSpecs.GetCurrentTheme().Col_FG;
         b1.Text = FaSolid.CaretRight;
         b1.FontFamily = "Fa-Solid";
         b1.Clicked += ToggleTreeView;
@@ -2168,7 +2328,12 @@ public class TreeViewItem : Grid, INotifyPropertyChanged, IDisposable
         g1.Add(b1);
         b1.Opacity = 1;
         b1.BorderWidth = 0;
-
+        b1.SetValue(Button.OpacityProperty, 1.0f);
+        b1.BackgroundColor = Colors.Red;
+        b1.Background = Colors.Transparent;
+        b1.HeightRequest = -1;
+        b1.ClearValue(Button.HeightRequestProperty);
+        // b1.TextColor = Colors.Red;
 
 
         /*
@@ -2204,6 +2369,8 @@ public class TreeViewItem : Grid, INotifyPropertyChanged, IDisposable
         l1.Opacity = 1;
         l1.SetValue( Label.OpacityProperty, 1.0f );
         l1.TextColor = GlobalSpecs.CurrentGlobalSpecs.GetCurrentTheme().Col_FG;
+        l1.HeightRequest = -1;
+        l1.WidthRequest = -1;
         // l1.BackgroundColor = Colors.Red;
         // l1.Background = Colors.Green;
         // l1.SetValue(Label.BackgroundColorProperty, Colors.Blue);
@@ -2290,11 +2457,11 @@ public class TreeViewItem : Grid, INotifyPropertyChanged, IDisposable
         Rows.Add(rd2);
         this.RowDefinitions = Rows;
 
-        Grid g1 = new();
+        Grid g1 = UIElement.NewGrid();
         this.Add(g1);
         this.SetRow(g1, 0);
 
-        Grid g2 = new();
+        Grid g2 = UIElement.NewGrid();
         this.Add(g2);
         this.SetRow(g2, 1);
 
@@ -2321,6 +2488,12 @@ public class TreeViewItem : Grid, INotifyPropertyChanged, IDisposable
         b1.Opacity = 1;
         b1.SetValue(Label.OpacityProperty, 1.0f);
         b1.BorderWidth = 0;
+        b1.Background = Colors.Transparent;
+        b1.HeightRequest = -1;
+        b1.ClearValue(Button.HeightRequestProperty);
+        b1.ClearValue(Button.TextColorProperty);
+        b1.TextColor = GlobalSpecs.CurrentGlobalSpecs.GetCurrentTheme().Col_FG; //  Colors.White;
+        b1.Style = null;
 
         Label l1 = UIElement.NewLabel();
         l1.Text = ott.Name;
@@ -2350,7 +2523,7 @@ public class TreeViewItem : Grid, INotifyPropertyChanged, IDisposable
         Columns.Add(cd4);
         g2.ColumnDefinitions = Columns;
 
-        Grid g5 = new();
+        Grid g5 = UIElement.NewGrid();
         g2.Add(g5);
         g2.SetColumn(g5, 1);
 
@@ -2751,9 +2924,12 @@ public class OrderListView : TreeViewItem, INotifyPropertyChanged
         }
        
 
-        Grid g2 = new();
+        Grid g2 = UIElement.NewGrid();
         Add(g2);
         this.SetRow(g2, Children.Count);
+        // g2.BackgroundColor = Colors.Red;
+        g2.ClearValue(Grid.BackgroundColorProperty);
+        g2.ClearValue(Grid.BackgroundProperty);
         g2.StyleClass = s7;
         g2.Padding = new Thickness(10, 0, 10, 0);
         g2.Margin = new Thickness(50, 2, 5, 2);
@@ -2855,8 +3031,12 @@ public class OrderListView : TreeViewItem, INotifyPropertyChanged
         g1.Add(b1);
         g1.SetColumn(b1, 0);
         b1.SetCursorHand();
+        b1.Background = Colors.Transparent;
+        // b1.TextColor = Colors.Cyan;
+        b1.HeightRequest = -1;
+        b1.ClearValue(Button.HeightRequestProperty);
 
-        Grid gx = new Grid();
+        Grid gx = UIElement.NewGrid();
         g1.SetColumn(gx, 3);
         g1.Add(gx);
         List<string> styleGridBGBG = new();
@@ -3143,7 +3323,7 @@ public class OrderListView : TreeViewItem, INotifyPropertyChanged
         Rows.Add(rd2);
         this.RowDefinitions = Rows;
 
-        Grid g1 = new();
+        Grid g1 = UIElement.NewGrid();
         this.Add(g1);
         this.SetRow(g1, 0);
         List<string> s3 = new();
@@ -3152,7 +3332,7 @@ public class OrderListView : TreeViewItem, INotifyPropertyChanged
         g1.Padding = new Thickness(5, 5, 5, 5);
         g1.Margin= new Thickness(5, 5, 5, 5);
 
-        Grid g2 = new();
+        Grid g2 = UIElement.NewGrid();
         this.Add(g2);
         this.SetRow(g2, 1);
         g2.StyleClass = s3;

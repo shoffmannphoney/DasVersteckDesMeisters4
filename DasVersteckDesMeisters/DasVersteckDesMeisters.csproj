@@ -20,7 +20,7 @@
 
 
 		<OutputType>Exe</OutputType>
-		<RootNamespace>Phoney_MAUI</RootNamespace>
+		<RootNamespace>DasVersteckDesMeisters</RootNamespace>
 		<UseMaui>true</UseMaui>
 		<SingleProject>true</SingleProject>
 		<ImplicitUsings>enable</ImplicitUsings>
@@ -78,40 +78,40 @@
 	  <AndroidSigningStorePass>Lian1234</AndroidSigningStorePass>
 	  <AndroidSigningKeyAlias>mynewkey</AndroidSigningKeyAlias>
 	  <AndroidSigningKeyPass>Lian4321</AndroidSigningKeyPass>
-	  <ApplicationVersion>4</ApplicationVersion>
+	  <ApplicationVersion>5</ApplicationVersion>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-android|x64'">
 	  <AndroidKeyStore>True</AndroidKeyStore>
 	  <AndroidSigningStorePass>Lian1234</AndroidSigningStorePass>
 	  <AndroidSigningKeyAlias>mynewkey</AndroidSigningKeyAlias>
 	  <AndroidSigningKeyPass>Lian4321</AndroidSigningKeyPass>
-	  <ApplicationVersion>4</ApplicationVersion>
+	  <ApplicationVersion>5</ApplicationVersion>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-android|AnyCPU'">
 	  <AndroidKeyStore>True</AndroidKeyStore>
 	  <AndroidSigningStorePass>Lian1234</AndroidSigningStorePass>
 	  <AndroidSigningKeyAlias>mynewkey</AndroidSigningKeyAlias>
 	  <AndroidSigningKeyPass>Lian4321</AndroidSigningKeyPass>
-	  <ApplicationVersion>4</ApplicationVersion>
+	  <ApplicationVersion>5</ApplicationVersion>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-android|x64'">
 	  <AndroidKeyStore>True</AndroidKeyStore>
 	  <AndroidSigningStorePass>Lian1234</AndroidSigningStorePass>
 	  <AndroidSigningKeyAlias>mynewkey</AndroidSigningKeyAlias>
 	  <AndroidSigningKeyPass>Lian4321</AndroidSigningKeyPass>
-	  <ApplicationVersion>4</ApplicationVersion>
+	  <ApplicationVersion>5</ApplicationVersion>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-windows10.0.19041.0|AnyCPU'">
-	  <ApplicationVersion>4</ApplicationVersion>
+	  <ApplicationVersion>5</ApplicationVersion>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-windows10.0.19041.0|x64'">
-	  <ApplicationVersion>4</ApplicationVersion>
+	  <ApplicationVersion>5</ApplicationVersion>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-windows10.0.19041.0|AnyCPU'">
-	  <ApplicationVersion>4</ApplicationVersion>
+	  <ApplicationVersion>5</ApplicationVersion>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-windows10.0.19041.0|x64'">
-	  <ApplicationVersion>4</ApplicationVersion>
+	  <ApplicationVersion>5</ApplicationVersion>
 	</PropertyGroup>
 
 	<ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">
@@ -185,6 +185,22 @@
 		<None Remove="PhoneyIslandGame_TemporaryKey.pfx" />
 		<None Remove="Directory.Build.props" />
 		<None Remove="Resources\AppIcon\ballsmaller.png" />
+		<None Remove="Resources\Raw\ver_l01.jpg" />
+		<None Remove="Resources\Raw\ver_l02.jpg" />
+		<None Remove="Resources\Raw\ver_l03.jpg" />
+		<None Remove="Resources\Raw\ver_l04.jpg" />
+		<None Remove="Resources\Raw\ver_l05.jpg" />
+		<None Remove="Resources\Raw\ver_l06.jpg" />
+		<None Remove="Resources\Raw\ver_l07.jpg" />
+		<None Remove="Resources\Raw\ver_l08.jpg" />
+		<None Remove="Resources\Raw\ver_l09.jpg" />
+		<None Remove="Resources\Raw\ver_l10.jpg" />
+		<None Remove="Resources\Raw\ver_l11.jpg" />
+		<None Remove="Resources\Raw\ver_l12.jpg" />
+		<None Remove="Resources\Raw\ver_l13.jpg" />
+		<None Remove="Resources\Raw\ver_l14.jpg" />
+		<None Remove="Resources\Raw\ver_l15.jpg" />
+		<None Remove="Resources\Raw\ver_title.jpg" />
 		<None Remove="sign.bat" />
 	</ItemGroup>
 
@@ -237,6 +253,22 @@
 	  <MauiAsset Remove="Resources\Raw\HTMLPage4.html" />
 	  <MauiAsset Remove="Resources\Raw\HTMLPage5.html" />
 	  <MauiAsset Remove="Resources\Raw\HTMLPage6.html" />
+	  <MauiAsset Remove="Resources\Raw\ver_l01.jpg" />
+	  <MauiAsset Remove="Resources\Raw\ver_l02.jpg" />
+	  <MauiAsset Remove="Resources\Raw\ver_l03.jpg" />
+	  <MauiAsset Remove="Resources\Raw\ver_l04.jpg" />
+	  <MauiAsset Remove="Resources\Raw\ver_l05.jpg" />
+	  <MauiAsset Remove="Resources\Raw\ver_l06.jpg" />
+	  <MauiAsset Remove="Resources\Raw\ver_l07.jpg" />
+	  <MauiAsset Remove="Resources\Raw\ver_l08.jpg" />
+	  <MauiAsset Remove="Resources\Raw\ver_l09.jpg" />
+	  <MauiAsset Remove="Resources\Raw\ver_l10.jpg" />
+	  <MauiAsset Remove="Resources\Raw\ver_l11.jpg" />
+	  <MauiAsset Remove="Resources\Raw\ver_l12.jpg" />
+	  <MauiAsset Remove="Resources\Raw\ver_l13.jpg" />
+	  <MauiAsset Remove="Resources\Raw\ver_l14.jpg" />
+	  <MauiAsset Remove="Resources\Raw\ver_l15.jpg" />
+	  <MauiAsset Remove="Resources\Raw\ver_title.jpg" />
 	</ItemGroup>
 	<ItemGroup>
 		<MauiXaml Remove="Pages\SignatureCapturePage.xaml" />
@@ -272,6 +304,22 @@
 	  <EmbeddedResource Include="Resources\Raw\HTMLPage4.html" />
 	  <EmbeddedResource Include="Resources\Raw\HTMLPage5.html" />
 	  <EmbeddedResource Include="Resources\Raw\HTMLPage6.html" />
+	  <EmbeddedResource Include="Resources\Raw\ver_l01.jpg" />
+	  <EmbeddedResource Include="Resources\Raw\ver_l02.jpg" />
+	  <EmbeddedResource Include="Resources\Raw\ver_l03.jpg" />
+	  <EmbeddedResource Include="Resources\Raw\ver_l04.jpg" />
+	  <EmbeddedResource Include="Resources\Raw\ver_l05.jpg" />
+	  <EmbeddedResource Include="Resources\Raw\ver_l06.jpg" />
+	  <EmbeddedResource Include="Resources\Raw\ver_l07.jpg" />
+	  <EmbeddedResource Include="Resources\Raw\ver_l08.jpg" />
+	  <EmbeddedResource Include="Resources\Raw\ver_l09.jpg" />
+	  <EmbeddedResource Include="Resources\Raw\ver_l10.jpg" />
+	  <EmbeddedResource Include="Resources\Raw\ver_l11.jpg" />
+	  <EmbeddedResource Include="Resources\Raw\ver_l12.jpg" />
+	  <EmbeddedResource Include="Resources\Raw\ver_l13.jpg" />
+	  <EmbeddedResource Include="Resources\Raw\ver_l14.jpg" />
+	  <EmbeddedResource Include="Resources\Raw\ver_l15.jpg" />
+	  <EmbeddedResource Include="Resources\Raw\ver_title.jpg" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Compile Update="Resources\Styles\ThemeI.xaml.cs">

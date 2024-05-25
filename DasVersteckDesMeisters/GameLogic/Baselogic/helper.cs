@@ -318,6 +318,7 @@ namespace GameCore
                         Person? pVP = null;
                         Person? rp = null;
                         Person? pr = null;
+                        Person? papp = null;
                         Item? iVP = null;
                         Topic? t = null;
                         string? pString = null;
@@ -635,6 +636,101 @@ namespace GameCore
                             {
                                 int id = (int)obj[5];
                                 iapp = (Item?)_advGame!.Items!.Find(id);
+
+                            }
+                            // int id = (int)obj[5];
+                            // i = (Item)_advGame!.Items!.Find(id);
+                            lenSeq += 6;
+                        }
+                        else if (FindString(s, ix, "[Pla1,"))
+                        {
+                            if (obj[0].GetType() == typeof(Person))
+                            {
+                                papp = (Person)obj[0];
+                            }
+                            else
+                            {
+                                int id = (int)obj[0];
+                                papp = (Person?)_advGame?.Persons?.Find(id);
+
+                            }
+                            // i = (Item)_advGame!.Items!.Find(id);
+                            lenSeq += 6;
+                        }
+                        else if (FindString(s, ix, "[Pla2,"))
+                        {
+                            if (obj[1].GetType() == typeof(Person))
+                            {
+                                papp = (Person?)obj[1];
+                            }
+                            else
+                            {
+                                int id = (int)obj[1];
+                                papp = (Person?)_advGame?.Persons?.Find(id);
+
+                            }
+                            // int id = (int)obj[1];
+                            // i = (Item)_advGame!.Items!.Find(id);
+                            lenSeq += 6;
+                        }
+                        else if (FindString(s, ix, "[Pla3,"))
+                        {
+                            if (obj[2].GetType() == typeof(Person))
+                            {
+                                papp = (Person?)obj[2];
+                            }
+                            else
+                            {
+                                int id = (int)obj[2];
+                                papp = (Person?)_advGame?.Persons?.Find(id);
+
+                            }
+                            // int id = (int)obj[2];
+                            // i = (Item)_advGame!.Items!.Find(id);
+                            lenSeq += 6;
+                        }
+                        else if (FindString(s, ix, "[Pla4,"))
+                        {
+                            if (obj[3].GetType() == typeof(Person))
+                            {
+                                papp = (Person?)obj[3];
+                            }
+                            else
+                            {
+                                int id = (int)obj[3];
+                                papp = (Person?)_advGame!.Persons!.Find(id);
+
+                            }
+                            // int id = (int)obj[3];
+                            // i = (Item)_advGame!.Items!.Find(id);
+                            lenSeq += 6;
+                        }
+                        else if (FindString(s, ix, "[Pla5,"))
+                        {
+                            if (obj[4].GetType() == typeof(Person))
+                            {
+                                papp = (Person?)obj[4];
+                            }
+                            else
+                            {
+                                int id = (int)obj[4];
+                                papp = (Person?)_advGame!.Persons!.Find(id);
+
+                            }
+                            // int id = (int)obj[4];
+                            // i = (Item)_advGame!.Items!.Find(id);
+                            lenSeq += 6;
+                        }
+                        else if (FindString(s, ix, "[Pla6,"))
+                        {
+                            if (obj[5].GetType() == typeof(Person))
+                            {
+                                papp = (Person?)obj[5];
+                            }
+                            else
+                            {
+                                int id = (int)obj[5];
+                                papp = (Person?)_advGame!.Persons!.Find(id);
 
                             }
                             // int id = (int)obj[5];
@@ -1038,7 +1134,11 @@ namespace GameCore
                         {
                             snew += _persons!.GetPersonVerbLink(plv, aocase, verbID, _a!.Tense);
                         }
-                        else if( rp != null)
+                        else if (papp != null)
+                        {
+                            snew += _persons!.GetPersonNameLink(papp, aocase);
+                        }
+                        else if ( rp != null)
                         {
                             snew += Grammar.GetReflexivePronoun(rp, aocase);
                         }
@@ -1099,6 +1199,7 @@ namespace GameCore
                             Person? pVP = null;
                             Person? rp = null;
                             Person? pr = null;
+                            Person? papp = null;
                             Item? iVP = null;
                             Topic? t = null;
                             string? pString = null;
@@ -1485,6 +1586,101 @@ namespace GameCore
                                 {
                                     int id = (int)obj[5];
                                     iapp = (Item?)_advGame!.Items!.Find(id);
+
+                                }
+                                // int id = (int)obj[5];
+                                // i = (Item)_advGame!.Items!.Find(id);
+                                lenSeq += 6;
+                            }
+                            else if (FindString(s, ix, "[Pla1,"))
+                            {
+                                if (obj[0].GetType() == typeof(Person))
+                                {
+                                    papp = (Person)obj[0];
+                                }
+                                else
+                                {
+                                    int id = (int)obj[0];
+                                    papp = (Person?)_advGame?.Persons?.Find(id);
+
+                                }
+                                // i = (Item)_advGame!.Items!.Find(id);
+                                lenSeq += 6;
+                            }
+                            else if (FindString(s, ix, "[Pla2,"))
+                            {
+                                if (obj[1].GetType() == typeof(Person))
+                                {
+                                    papp = (Person?)obj[1];
+                                }
+                                else
+                                {
+                                    int id = (int)obj[1];
+                                    papp = (Person?)_advGame?.Persons?.Find(id);
+
+                                }
+                                // int id = (int)obj[1];
+                                // i = (Item)_advGame!.Items!.Find(id);
+                                lenSeq += 6;
+                            }
+                            else if (FindString(s, ix, "[Pla3,"))
+                            {
+                                if (obj[2].GetType() == typeof(Person))
+                                {
+                                    papp = (Person?)obj[2];
+                                }
+                                else
+                                {
+                                    int id = (int)obj[2];
+                                    papp = (Person?)_advGame?.Persons?.Find(id);
+
+                                }
+                                // int id = (int)obj[2];
+                                // i = (Item)_advGame!.Items!.Find(id);
+                                lenSeq += 6;
+                            }
+                            else if (FindString(s, ix, "[Pla4,"))
+                            {
+                                if (obj[3].GetType() == typeof(Person))
+                                {
+                                    papp = (Person?)obj[3];
+                                }
+                                else
+                                {
+                                    int id = (int)obj[3];
+                                    papp = (Person?)_advGame!.Persons!.Find(id);
+
+                                }
+                                // int id = (int)obj[3];
+                                // i = (Item)_advGame!.Items!.Find(id);
+                                lenSeq += 6;
+                            }
+                            else if (FindString(s, ix, "[Pla5,"))
+                            {
+                                if (obj[4].GetType() == typeof(Person))
+                                {
+                                    papp = (Person?)obj[4];
+                                }
+                                else
+                                {
+                                    int id = (int)obj[4];
+                                    papp = (Person?)_advGame!.Persons!.Find(id);
+
+                                }
+                                // int id = (int)obj[4];
+                                // i = (Item)_advGame!.Items!.Find(id);
+                                lenSeq += 6;
+                            }
+                            else if (FindString(s, ix, "[Pla6,"))
+                            {
+                                if (obj[5].GetType() == typeof(Person))
+                                {
+                                    papp = (Person?)obj[5];
+                                }
+                                else
+                                {
+                                    int id = (int)obj[5];
+                                    papp = (Person?)_advGame!.Persons!.Find(id);
 
                                 }
                                 // int id = (int)obj[5];
@@ -1886,6 +2082,10 @@ namespace GameCore
                             else if (plv != null)
                             {
                                 snew.Append(_persons!.GetPersonVerbLink(plv, aocase, verbID, _a!.Tense));
+                            }
+                            else if (papp != null)
+                            {
+                                snew.Append(_persons!.GetPersonNameLink(papp, aocase));
                             }
                             else if (rp != null)
                             {
@@ -2700,25 +2900,42 @@ namespace GameCore
         }
         static int SearchItemID(string s)
         {
-            // s = "VT_" + s;
-            // Noloca: 001
-            System.Reflection.PropertyInfo? pi = typeof(CoAdv).GetProperty(s, BindingFlags.Public | BindingFlags.Instance);
+            try
+            {
+                // s = "VT_" + s;
+                // Noloca: 001
+                System.Reflection.PropertyInfo? pi = typeof(CoAdv).GetProperty(s, BindingFlags.Public | BindingFlags.Instance);
 
-            object o = pi!.GetValue(_advGame!.CA!, null)!;
+                object o = pi!.GetValue(_advGame!.CA!, null)!;
 
-            return ((o as Item)!.ID)!;
+                return ((o as Item)!.ID)!;
+            }
+            catch( Exception e)
+            {
+                GlobalData.AddLog("SearchItemID: " + s, Phoney_MAUI.Model.IGlobalData.protMode.crisp);
 
+            }
+            return 0;
         }
         static int SearchPersonID(string s)
         {
-            // s = "VT_" + s;
-            // Noloca: 001
-            System.Reflection.PropertyInfo? pi = typeof(CoAdv).GetProperty(s, BindingFlags.Public | BindingFlags.Instance);
+            try
+            {
+                // s = "VT_" + s;
+                // Noloca: 001
+                System.Reflection.PropertyInfo? pi = typeof(CoAdv).GetProperty(s, BindingFlags.Public | BindingFlags.Instance);
 
-            object o = pi!.GetValue(_advGame!.CA!, null)!;
+                object o = pi!.GetValue(_advGame!.CA!, null)!;
 
-            return ((o as Person)!.ID)!;
+                return ((o as Person)!.ID)!;
 
+            }
+            catch (Exception e)
+            {
+                GlobalData.AddLog("SearchItemID: " + s, Phoney_MAUI.Model.IGlobalData.protMode.crisp);
+
+            }
+            return 0;
         }
         static int SearchlocationID(string s)
         {

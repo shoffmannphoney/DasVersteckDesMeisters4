@@ -431,7 +431,7 @@ namespace GameCore
             return (this.controller);
         }
 
-        public virtual string? FullName( AbstractAdvObject AO, int Case, bool ForceArticle = false, bool ShowAppendix = false, bool spaceAsUnderline = false)
+        public virtual string? FullName( AbstractAdvObject AO, int Case, List<Noun> CurrentNouns, bool ForceArticle = false, bool ShowAppendix = false, bool spaceAsUnderline = false)
         {
             string? space = " ";
             if (spaceAsUnderline)

@@ -32,6 +32,9 @@ public partial class Adv: AdvBase
         Verbs.AddLoca(CA!.Verb_Enlight.ID, "Verb_bescheine");
         Verbs.AddLoca(CA!.Verb_Enlight.ID, "Verb_erhelle");
 
+        CA!.Verb_Fixate = Verbs!.AddLoca("Verb_fixiere");
+        Verbs.AddLoca(CA!.Verb_Fixate.ID, "Verb_fixier");
+
         CA!.Verb_Spread = Verbs!.AddLoca( "Verb_streue");
 
         CA!.Verb_Story = Verbs!.AddLoca("Order_Story");
@@ -723,6 +726,7 @@ public partial class Adv: AdvBase
         CB!.Verb_Load = Verbs.AddLocaLoca( loca.AdvBase_InitializeGame_14240, "AdvBase_InitializeGame_14240");
         Verbs.AddLocaLoca( loca.AdvBase_InitializeGame_14241, CB!.Verb_Load.ID, "AdvBase_InitializeGame_14241");
         Verbs.AddLocaLoca( loca.AdvBase_InitializeGame_14242, CB!.Verb_Load.ID, "AdvBase_InitializeGame_14242");
+        Verbs.AddLocaLoca(loca.Verb_Restore, CB!.Verb_Load.ID, "Verb_Restore");
 
         CB!.Verb_Help = Verbs.AddLocaLoca( loca.AdvBase_InitializeGame_14243, "AdvBase_InitializeGame_14243");
         Verbs.AddLocaLoca( loca.AdvBase_InitializeGame_14244, CB!.Verb_Help.ID, "AdvBase_InitializeGame_14244");
@@ -806,6 +810,9 @@ public partial class Adv: AdvBase
         CA!.Verb_Enlight = Verbs!.AddLocaLoca(loca.Verb_beleuchte, "Verb_beleuchte");
         Verbs.AddLocaLoca(loca.Verb_bescheine, CA!.Verb_Enlight.ID, "Verb_bescheine");
         Verbs.AddLocaLoca(loca.Verb_erhelle, CA!.Verb_Enlight.ID, "Verb_erhelle");
+
+        CA!.Verb_Fixate = Verbs!.AddLocaLoca(loca.Verb_fixiere, "Verb_fixiere");
+        Verbs.AddLocaLoca(loca.Verb_fixier, CA!.Verb_Fixate.ID, "Verb_fixier");
 
         CA!.Verb_Spread = Verbs!.AddLocaLoca(loca.Verb_streue, "Verb_streue");
         Verbs.AddLocaLoca(loca.Verb_streu, CA!.Verb_Spread.ID, "Verb_streu");

@@ -1837,12 +1837,12 @@ public partial class ReplayPage : ContentPage, IMenuExtension
     {
         if (UIS.STTListeningOn == IUIServices.sttListeningMode.off)
         {
-            if (GD!.STTMicroState == IGlobalData.microMode.continuous)
+            if (GD!.LayoutDescription.STTMicroState == IGlobalData.microMode.continuous)
             {
                 // Mike.Background = Colors.Red;
                 await UIS.STTStartListening(IUIServices.sttListeningMode.continuous);
             }
-            else if( GD!.STTMicroState == IGlobalData.microMode.once )
+            else if( GD!.LayoutDescription.STTMicroState == IGlobalData.microMode.once )
             {
                 // Mike.Background = Colors.Yellow;
                 await UIS.STTStartListening(IUIServices.sttListeningMode.on);
@@ -1890,7 +1890,7 @@ public partial class ReplayPage : ContentPage, IMenuExtension
         _menuExtension!.QuitMethod = PressEndLocal;
         _menuExtension.ListCalls.Add(new(DoSpeech, -1));
 
-        if (GD.STTMicroState == IGlobalData.microMode.off)
+        if (GD.LayoutDescription.STTMicroState == IGlobalData.microMode.off)
         {
             Grid_Search.ColumnDefinitions[1].Width = new GridLength(0);
             Mike.IsVisible = false;

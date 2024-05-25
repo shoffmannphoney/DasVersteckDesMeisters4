@@ -1135,6 +1135,7 @@ namespace GameCore
             }
         }
 
+        public List<Noun> CurrentNouns { get; set; } = null;
          public ItemList? Items { get; set; }
 
          public PersonList? Persons { get; set; }
@@ -1277,7 +1278,32 @@ namespace GameCore
             return true;
         }
 
-
+        public bool CollectNouns()
+        {
+            CurrentNouns = new List<Noun>();
+            foreach (Item i in Items!.List.Values)
+            {
+                if (Items.IsItemHere(i, Co.Range_Here))
+                {
+                    foreach (Noun n in i.Names)
+                    {
+                        CurrentNouns.Add(n);
+                    }
+                }
+            }
+            Person pI = Persons!.Find(A.ActPerson);
+            foreach (Person p in Persons.List.Values )
+            {
+                if (p.locationID == A.ActLoc || p.locationID == pI.ID ) 
+                {
+                    foreach (Noun n in p.Names)
+                    {
+                        CurrentNouns.Add(n);
+                    }
+                }
+            }
+            return true;
+        }
         public bool DoGameLoop(string s, ParseTokenList? ptl = null, ParseLineList? ptlSignatures = null)
         {
 

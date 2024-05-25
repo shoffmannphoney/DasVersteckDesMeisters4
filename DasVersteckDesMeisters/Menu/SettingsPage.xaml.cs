@@ -242,395 +242,403 @@ public partial class SettingsPage : ContentPage, IMenuExtension
 
     private void SetButtonStates()
     {
-        if (GD.Language == IGlobalData.language.german)
-            LanguageButton_Deutsch.Text = "--- " + loca.MAUI_UI_Language_Deutsch + " ---";
-        else
-            LanguageButton_Deutsch.Text = loca.MAUI_UI_Language_Deutsch;
-
-        if (GD.Language == IGlobalData.language.english)
-            LanguageButton_English.Text = "--- " + loca.MAUI_UI_Language_English + " ---";
-        else
-            LanguageButton_English.Text = loca.MAUI_UI_Language_English;
-
-
-        if (GD.PicMode == IGlobalData.picMode.off)
-            IllustrationButton_Off.Text = "--- " + loca.MAUI_UI_Buttonstate_Off + " ---";
-        else
-            IllustrationButton_Off.Text = loca.MAUI_UI_Buttonstate_Off;
-
-        if (GD.PicMode == IGlobalData.picMode.small)
-            IllustrationButton_Small.Text = "--- " + loca.MAUI_UI_Buttonstate_Small + " ---";
-        else
-            IllustrationButton_Small.Text = loca.MAUI_UI_Buttonstate_Small;
-
-        if (GD.PicMode == IGlobalData.picMode.medium)
-            IllustrationButton_Medium.Text = "--- " + loca.MAUI_UI_Buttonstate_Medium + " ---";
-        else
-            IllustrationButton_Medium.Text = loca.MAUI_UI_Buttonstate_Medium;
-
-        if (GD.PicMode == IGlobalData.picMode.big)
-            IllustrationButton_Big.Text = "--- " + loca.MAUI_UI_Buttonstate_Big + " ---";
-        else
-            IllustrationButton_Big.Text = loca.MAUI_UI_Buttonstate_Big;
-
-
-        if (GD.SimpleMC == true)
-            SimpleMCButton_On.Text = "--- " + loca.MAUI_UI_Buttonstate_On + " ---";
-        else
-            SimpleMCButton_On.Text = loca.MAUI_UI_Buttonstate_On;
-
-        if (GD.SimpleMC == false)
-            SimpleMCButton_Off.Text = "--- " + loca.MAUI_UI_Buttonstate_Off + " ---";
-        else
-            SimpleMCButton_Off.Text = loca.MAUI_UI_Buttonstate_Off;
-
-
-        if (GD.Highlighting == true)
-            TextAttributes_On.Text = "--- " + loca.MAUI_UI_Buttonstate_On + " ---";
-        else
-            TextAttributes_On.Text = loca.MAUI_UI_Buttonstate_On;
-
-        if (GD.Highlighting == false)
-            TextAttributes_Off.Text = "--- " + loca.MAUI_UI_Buttonstate_Off + " ---";
-        else
-            TextAttributes_Off.Text = loca.MAUI_UI_Buttonstate_Off;
-
-
-        if (GD.LayoutDescription.OrderListPos == ILayoutDescription.selectedPosition.off)
-            OrderListPosButton_Off.Text = "--- " + loca.MAUI_UI_Buttonstate_Off + " ---";
-        else
-            OrderListPosButton_Off.Text = loca.MAUI_UI_Buttonstate_Off;
-
-        if (GD.LayoutDescription.OrderListPos == ILayoutDescription.selectedPosition.leftUp)
-            OrderListPosButton_LU.Text = "--- " + loca.MAUI_UI_Buttonstate_LU + " ---";
-        else
-            OrderListPosButton_LU.Text = loca.MAUI_UI_Buttonstate_LU;
-
-        if (GD.LayoutDescription.OrderListPos == ILayoutDescription.selectedPosition.leftDown)
-            OrderListPosButton_LD.Text = "--- " + loca.MAUI_UI_Buttonstate_LD + " ---";
-        else
-            OrderListPosButton_LD.Text = loca.MAUI_UI_Buttonstate_LD;
-
-        if (GD.LayoutDescription.OrderListPos == ILayoutDescription.selectedPosition.rightUp)
-            OrderListPosButton_RU.Text = "--- " + loca.MAUI_UI_Buttonstate_RU + " ---";
-        else
-            OrderListPosButton_RU.Text = loca.MAUI_UI_Buttonstate_RU;
-
-        if (GD.LayoutDescription.OrderListPos == ILayoutDescription.selectedPosition.rightDown)
-            OrderListPosButton_RD.Text = "--- " + loca.MAUI_UI_Buttonstate_RD + " ---";
-        else
-            OrderListPosButton_RD.Text = loca.MAUI_UI_Buttonstate_RD;
-
-        // Items Loc
-        if (GD.LayoutDescription.ItemsLocListPos == ILayoutDescription.selectedPosition.off)
-            ItemsLocListPosButton_Off.Text = "--- " + loca.MAUI_UI_Buttonstate_Off + " ---";
-        else
-            ItemsLocListPosButton_Off.Text = loca.MAUI_UI_Buttonstate_Off;
-
-        if (GD.LayoutDescription.ItemsLocListPos == ILayoutDescription.selectedPosition.leftUp)
-            ItemsLocListPosButton_LU.Text = "--- " + loca.MAUI_UI_Buttonstate_LU + " ---";
-        else
-            ItemsLocListPosButton_LU.Text = loca.MAUI_UI_Buttonstate_LU;
-
-        if (GD.LayoutDescription.ItemsLocListPos == ILayoutDescription.selectedPosition.leftDown)
-            ItemsLocListPosButton_LD.Text = "--- " + loca.MAUI_UI_Buttonstate_LD + " ---";
-        else
-            ItemsLocListPosButton_LD.Text = loca.MAUI_UI_Buttonstate_LD;
-
-        if (GD.LayoutDescription.ItemsLocListPos == ILayoutDescription.selectedPosition.rightUp)
-            ItemsLocListPosButton_RU.Text = "--- " + loca.MAUI_UI_Buttonstate_RU + " ---";
-        else
-            ItemsLocListPosButton_RU.Text = loca.MAUI_UI_Buttonstate_RU;
-
-        if (GD.LayoutDescription.ItemsLocListPos == ILayoutDescription.selectedPosition.rightDown)
-            ItemsLocListPosButton_RD.Text = "--- " + loca.MAUI_UI_Buttonstate_RD + " ---";
-        else
-            ItemsLocListPosButton_RD.Text = loca.MAUI_UI_Buttonstate_RD;
-
-        // Items Inv
-        if (GD.LayoutDescription.ItemsInvListPos == ILayoutDescription.selectedPosition.off)
-            ItemsInvListPosButton_Off.Text = "--- " + loca.MAUI_UI_Buttonstate_Off + " ---";
-        else
-            ItemsInvListPosButton_Off.Text = loca.MAUI_UI_Buttonstate_Off;
-
-        if (GD.LayoutDescription.ItemsInvListPos == ILayoutDescription.selectedPosition.leftUp)
-            ItemsInvListPosButton_LU.Text = "--- " + loca.MAUI_UI_Buttonstate_LU + " ---";
-        else
-            ItemsInvListPosButton_LU.Text = loca.MAUI_UI_Buttonstate_LU;
-
-        if (GD.LayoutDescription.ItemsInvListPos == ILayoutDescription.selectedPosition.leftDown)
-            ItemsInvListPosButton_LD.Text = "--- " + loca.MAUI_UI_Buttonstate_LD + " ---";
-        else
-            ItemsInvListPosButton_LD.Text = loca.MAUI_UI_Buttonstate_LD;
-
-        if (GD.LayoutDescription.ItemsInvListPos == ILayoutDescription.selectedPosition.rightUp)
-            ItemsInvListPosButton_RU.Text = "--- " + loca.MAUI_UI_Buttonstate_RU + " ---";
-        else
-            ItemsInvListPosButton_RU.Text = loca.MAUI_UI_Buttonstate_RU;
-
-        if (GD.LayoutDescription.ItemsInvListPos == ILayoutDescription.selectedPosition.rightDown)
-            ItemsInvListPosButton_RD.Text = "--- " + loca.MAUI_UI_Buttonstate_RD + " ---";
-        else
-            ItemsInvListPosButton_RD.Text = loca.MAUI_UI_Buttonstate_RD;
-
-        int columns = 0;
-        if (FirstColumnUsed() == true)
-            columns++;
-        if (SecondColumnUsed() == true)
-            columns++;
-        if (ThirdColumnUsed() == true)
-            columns++;
-
-        // OrderList PT
-        if (GD.LayoutDescription.OrderListPosPT == ILayoutDescription.selectedPositionPT.off)
-            OrderListPosButtonPT_Off.Text = "--- " + loca.MAUI_UI_Buttonstate_Off + " ---";
-        else
-            OrderListPosButtonPT_Off.Text = loca.MAUI_UI_Buttonstate_Off;
-
-        if (GD.LayoutDescription.OrderListPosPT == ILayoutDescription.selectedPositionPT.first)
-            OrderListPosButtonPT_1st.Text = "--- " + loca.MAUI_UI_Buttonstate_First + " ---";
-        else
-            OrderListPosButtonPT_1st.Text = loca.MAUI_UI_Buttonstate_First;
-
-        if (GD.LayoutDescription.OrderListPosPT == ILayoutDescription.selectedPositionPT.second)
-            OrderListPosButtonPT_2nd.Text = "--- " + loca.MAUI_UI_Buttonstate_Second + " ---";
-        else
-            OrderListPosButtonPT_2nd.Text = loca.MAUI_UI_Buttonstate_Second;
-
-        if (GD.LayoutDescription.OrderListPosPT == ILayoutDescription.selectedPositionPT.third)
-            OrderListPosButtonPT_3rd.Text = "--- " + loca.MAUI_UI_Buttonstate_Third + " ---";
-        else
-            OrderListPosButtonPT_3rd.Text = loca.MAUI_UI_Buttonstate_Third;
-
-
-        // Itemlist Loc PT
-        if (GD.LayoutDescription.ItemsLocListPosPT == ILayoutDescription.selectedPositionPT.off)
-            ItemsLocListPosButtonPT_Off.Text = "--- " + loca.MAUI_UI_Buttonstate_Off + " ---";
-        else
-            ItemsLocListPosButtonPT_Off.Text = loca.MAUI_UI_Buttonstate_Off;
-
-        if (GD.LayoutDescription.ItemsLocListPosPT == ILayoutDescription.selectedPositionPT.first)
-            ItemsLocListPosButtonPT_1st.Text = "--- " + loca.MAUI_UI_Buttonstate_First + " ---";
-        else
-            ItemsLocListPosButtonPT_1st.Text = loca.MAUI_UI_Buttonstate_First;
-
-        if (GD.LayoutDescription.ItemsLocListPosPT == ILayoutDescription.selectedPositionPT.second)
-            ItemsLocListPosButtonPT_2nd.Text = "--- " + loca.MAUI_UI_Buttonstate_Second + " ---";
-        else
-            ItemsLocListPosButtonPT_2nd.Text = loca.MAUI_UI_Buttonstate_Second;
-
-        if (GD.LayoutDescription.ItemsLocListPosPT == ILayoutDescription.selectedPositionPT.third)
-            ItemsLocListPosButtonPT_3rd.Text = "--- " + loca.MAUI_UI_Buttonstate_Third + " ---";
-        else
-            ItemsLocListPosButtonPT_3rd.Text = loca.MAUI_UI_Buttonstate_Third;
-
-        // Itemlist Inv PT
-        if (GD.LayoutDescription.ItemsInvListPosPT == ILayoutDescription.selectedPositionPT.off)
-            ItemsInvListPosButtonPT_Off.Text = "--- " + loca.MAUI_UI_Buttonstate_Off + " ---";
-        else
-            ItemsInvListPosButtonPT_Off.Text = loca.MAUI_UI_Buttonstate_Off;
-
-        if (GD.LayoutDescription.ItemsInvListPosPT == ILayoutDescription.selectedPositionPT.first)
-            ItemsInvListPosButtonPT_1st.Text = "--- " + loca.MAUI_UI_Buttonstate_First + " ---";
-        else
-            ItemsInvListPosButtonPT_1st.Text = loca.MAUI_UI_Buttonstate_First;
-
-        if (GD.LayoutDescription.ItemsInvListPosPT == ILayoutDescription.selectedPositionPT.second)
-            ItemsInvListPosButtonPT_2nd.Text = "--- " + loca.MAUI_UI_Buttonstate_Second + " ---";
-        else
-            ItemsInvListPosButtonPT_2nd.Text = loca.MAUI_UI_Buttonstate_Second;
-
-        if (GD.LayoutDescription.ItemsInvListPosPT == ILayoutDescription.selectedPositionPT.third)
-            ItemsInvListPosButtonPT_3rd.Text = "--- " + loca.MAUI_UI_Buttonstate_Third + " ---";
-        else
-            ItemsInvListPosButtonPT_3rd.Text = loca.MAUI_UI_Buttonstate_Third;
-
-        if (GD.LayoutDescription.ClickMargin == ILayoutDescription.eClickMargin.very_low)
-            RowMargin_VeryLow.Text = "--- " + loca.MAUI_Listrow_Very_Low + " ---";
-        else
-            RowMargin_VeryLow.Text = loca.MAUI_Listrow_Very_Low;
-
-        if (GD.LayoutDescription.ClickMargin == ILayoutDescription.eClickMargin.low)
-            RowMargin_Low.Text = "--- " + loca.MAUI_Listrow_Low + " ---";
-        else
-            RowMargin_Low.Text = loca.MAUI_Listrow_Low;
-
-        if (GD.LayoutDescription.ClickMargin == ILayoutDescription.eClickMargin.medium)
-            RowMargin_Medium.Text = "--- " + loca.MAUI_Listrow_Medium + " ---";
-        else
-            RowMargin_Medium.Text = loca.MAUI_Listrow_Medium;
-
-        if (GD.LayoutDescription.ClickMargin == ILayoutDescription.eClickMargin.high)
-            RowMargin_High.Text = "--- " + loca.MAUI_Listrow_High + " ---";
-        else
-            RowMargin_High.Text = loca.MAUI_Listrow_High;
-
-        if (GD.LayoutDescription.ClickMargin == ILayoutDescription.eClickMargin.very_high)
-            RowMargin_VeryHigh.Text = "--- " + loca.MAUI_Listrow_Very_High + " ---";
-        else
-            RowMargin_VeryHigh.Text = loca.MAUI_Listrow_Very_High;
-
-        if (GD.STTMicroState == IGlobalData.microMode.off)
-            STTMode_Off.Text = "--- " + loca.MAUI_STT_Off + " ---";
-        else 
-            STTMode_Off.Text = loca.MAUI_STT_Off;
-
-        if (GD.STTMicroState == IGlobalData.microMode.once)
-            STTMode_Manuell.Text = "--- " + loca.MAUI_STT_Manual + " ---";
-        else
-            STTMode_Manuell.Text = loca.MAUI_STT_Manual;
-
-        bool speech = UIS.STTInqSpeechSync();
-        
-        if ( speech  == false)
+        try
         {
-            STTMode_Manuell.FontAttributes = FontAttributes.Italic;
+            if (GD.Language == IGlobalData.language.german)
+                LanguageButton_Deutsch.Text = "--- " + loca.MAUI_UI_Language_Deutsch + " ---";
+            else
+                LanguageButton_Deutsch.Text = loca.MAUI_UI_Language_Deutsch;
+
+            if (GD.Language == IGlobalData.language.english)
+                LanguageButton_English.Text = "--- " + loca.MAUI_UI_Language_English + " ---";
+            else
+                LanguageButton_English.Text = loca.MAUI_UI_Language_English;
+
+
+            if (GD.LayoutDescription.PicMode == IGlobalData.picMode.off)
+                IllustrationButton_Off.Text = "--- " + loca.MAUI_UI_Buttonstate_Off + " ---";
+            else
+                IllustrationButton_Off.Text = loca.MAUI_UI_Buttonstate_Off;
+
+            if (GD.LayoutDescription.PicMode == IGlobalData.picMode.small)
+                IllustrationButton_Small.Text = "--- " + loca.MAUI_UI_Buttonstate_Small + " ---";
+            else
+                IllustrationButton_Small.Text = loca.MAUI_UI_Buttonstate_Small;
+
+            if (GD.LayoutDescription.PicMode == IGlobalData.picMode.medium)
+                IllustrationButton_Medium.Text = "--- " + loca.MAUI_UI_Buttonstate_Medium + " ---";
+            else
+                IllustrationButton_Medium.Text = loca.MAUI_UI_Buttonstate_Medium;
+
+            if (GD.LayoutDescription.PicMode == IGlobalData.picMode.big)
+                IllustrationButton_Big.Text = "--- " + loca.MAUI_UI_Buttonstate_Big + " ---";
+            else
+                IllustrationButton_Big.Text = loca.MAUI_UI_Buttonstate_Big;
+
+
+            if (GD.LayoutDescription.SimpleMC == true)
+                SimpleMCButton_On.Text = "--- " + loca.MAUI_UI_Buttonstate_On + " ---";
+            else
+                SimpleMCButton_On.Text = loca.MAUI_UI_Buttonstate_On;
+
+            if (GD.LayoutDescription.SimpleMC == false)
+                SimpleMCButton_Off.Text = "--- " + loca.MAUI_UI_Buttonstate_Off + " ---";
+            else
+                SimpleMCButton_Off.Text = loca.MAUI_UI_Buttonstate_Off;
+
+
+            if (GD.LayoutDescription.Highlighting == true)
+                TextAttributes_On.Text = "--- " + loca.MAUI_UI_Buttonstate_On + " ---";
+            else
+                TextAttributes_On.Text = loca.MAUI_UI_Buttonstate_On;
+
+            if (GD.LayoutDescription.Highlighting == false)
+                TextAttributes_Off.Text = "--- " + loca.MAUI_UI_Buttonstate_Off + " ---";
+            else
+                TextAttributes_Off.Text = loca.MAUI_UI_Buttonstate_Off;
+
+
+            if (GD.LayoutDescription.OrderListPos == ILayoutDescription.selectedPosition.off)
+                OrderListPosButton_Off.Text = "--- " + loca.MAUI_UI_Buttonstate_Off + " ---";
+            else
+                OrderListPosButton_Off.Text = loca.MAUI_UI_Buttonstate_Off;
+
+            if (GD.LayoutDescription.OrderListPos == ILayoutDescription.selectedPosition.leftUp)
+                OrderListPosButton_LU.Text = "--- " + loca.MAUI_UI_Buttonstate_LU + " ---";
+            else
+                OrderListPosButton_LU.Text = loca.MAUI_UI_Buttonstate_LU;
+
+            if (GD.LayoutDescription.OrderListPos == ILayoutDescription.selectedPosition.leftDown)
+                OrderListPosButton_LD.Text = "--- " + loca.MAUI_UI_Buttonstate_LD + " ---";
+            else
+                OrderListPosButton_LD.Text = loca.MAUI_UI_Buttonstate_LD;
+
+            if (GD.LayoutDescription.OrderListPos == ILayoutDescription.selectedPosition.rightUp)
+                OrderListPosButton_RU.Text = "--- " + loca.MAUI_UI_Buttonstate_RU + " ---";
+            else
+                OrderListPosButton_RU.Text = loca.MAUI_UI_Buttonstate_RU;
+
+            if (GD.LayoutDescription.OrderListPos == ILayoutDescription.selectedPosition.rightDown)
+                OrderListPosButton_RD.Text = "--- " + loca.MAUI_UI_Buttonstate_RD + " ---";
+            else
+                OrderListPosButton_RD.Text = loca.MAUI_UI_Buttonstate_RD;
+
+            // Items Loc
+            if (GD.LayoutDescription.ItemsLocListPos == ILayoutDescription.selectedPosition.off)
+                ItemsLocListPosButton_Off.Text = "--- " + loca.MAUI_UI_Buttonstate_Off + " ---";
+            else
+                ItemsLocListPosButton_Off.Text = loca.MAUI_UI_Buttonstate_Off;
+
+            if (GD.LayoutDescription.ItemsLocListPos == ILayoutDescription.selectedPosition.leftUp)
+                ItemsLocListPosButton_LU.Text = "--- " + loca.MAUI_UI_Buttonstate_LU + " ---";
+            else
+                ItemsLocListPosButton_LU.Text = loca.MAUI_UI_Buttonstate_LU;
+
+            if (GD.LayoutDescription.ItemsLocListPos == ILayoutDescription.selectedPosition.leftDown)
+                ItemsLocListPosButton_LD.Text = "--- " + loca.MAUI_UI_Buttonstate_LD + " ---";
+            else
+                ItemsLocListPosButton_LD.Text = loca.MAUI_UI_Buttonstate_LD;
+
+            if (GD.LayoutDescription.ItemsLocListPos == ILayoutDescription.selectedPosition.rightUp)
+                ItemsLocListPosButton_RU.Text = "--- " + loca.MAUI_UI_Buttonstate_RU + " ---";
+            else
+                ItemsLocListPosButton_RU.Text = loca.MAUI_UI_Buttonstate_RU;
+
+            if (GD.LayoutDescription.ItemsLocListPos == ILayoutDescription.selectedPosition.rightDown)
+                ItemsLocListPosButton_RD.Text = "--- " + loca.MAUI_UI_Buttonstate_RD + " ---";
+            else
+                ItemsLocListPosButton_RD.Text = loca.MAUI_UI_Buttonstate_RD;
+
+            // Items Inv
+            if (GD.LayoutDescription.ItemsInvListPos == ILayoutDescription.selectedPosition.off)
+                ItemsInvListPosButton_Off.Text = "--- " + loca.MAUI_UI_Buttonstate_Off + " ---";
+            else
+                ItemsInvListPosButton_Off.Text = loca.MAUI_UI_Buttonstate_Off;
+
+            if (GD.LayoutDescription.ItemsInvListPos == ILayoutDescription.selectedPosition.leftUp)
+                ItemsInvListPosButton_LU.Text = "--- " + loca.MAUI_UI_Buttonstate_LU + " ---";
+            else
+                ItemsInvListPosButton_LU.Text = loca.MAUI_UI_Buttonstate_LU;
+
+            if (GD.LayoutDescription.ItemsInvListPos == ILayoutDescription.selectedPosition.leftDown)
+                ItemsInvListPosButton_LD.Text = "--- " + loca.MAUI_UI_Buttonstate_LD + " ---";
+            else
+                ItemsInvListPosButton_LD.Text = loca.MAUI_UI_Buttonstate_LD;
+
+            if (GD.LayoutDescription.ItemsInvListPos == ILayoutDescription.selectedPosition.rightUp)
+                ItemsInvListPosButton_RU.Text = "--- " + loca.MAUI_UI_Buttonstate_RU + " ---";
+            else
+                ItemsInvListPosButton_RU.Text = loca.MAUI_UI_Buttonstate_RU;
+
+            if (GD.LayoutDescription.ItemsInvListPos == ILayoutDescription.selectedPosition.rightDown)
+                ItemsInvListPosButton_RD.Text = "--- " + loca.MAUI_UI_Buttonstate_RD + " ---";
+            else
+                ItemsInvListPosButton_RD.Text = loca.MAUI_UI_Buttonstate_RD;
+
+            int columns = 0;
+            if (FirstColumnUsed() == true)
+                columns++;
+            if (SecondColumnUsed() == true)
+                columns++;
+            if (ThirdColumnUsed() == true)
+                columns++;
+
+            // OrderList PT
+            if (GD.LayoutDescription.OrderListPosPT == ILayoutDescription.selectedPositionPT.off)
+                OrderListPosButtonPT_Off.Text = "--- " + loca.MAUI_UI_Buttonstate_Off + " ---";
+            else
+                OrderListPosButtonPT_Off.Text = loca.MAUI_UI_Buttonstate_Off;
+
+            if (GD.LayoutDescription.OrderListPosPT == ILayoutDescription.selectedPositionPT.first)
+                OrderListPosButtonPT_1st.Text = "--- " + loca.MAUI_UI_Buttonstate_First + " ---";
+            else
+                OrderListPosButtonPT_1st.Text = loca.MAUI_UI_Buttonstate_First;
+
+            if (GD.LayoutDescription.OrderListPosPT == ILayoutDescription.selectedPositionPT.second)
+                OrderListPosButtonPT_2nd.Text = "--- " + loca.MAUI_UI_Buttonstate_Second + " ---";
+            else
+                OrderListPosButtonPT_2nd.Text = loca.MAUI_UI_Buttonstate_Second;
+
+            if (GD.LayoutDescription.OrderListPosPT == ILayoutDescription.selectedPositionPT.third)
+                OrderListPosButtonPT_3rd.Text = "--- " + loca.MAUI_UI_Buttonstate_Third + " ---";
+            else
+                OrderListPosButtonPT_3rd.Text = loca.MAUI_UI_Buttonstate_Third;
+
+
+            // Itemlist Loc PT
+            if (GD.LayoutDescription.ItemsLocListPosPT == ILayoutDescription.selectedPositionPT.off)
+                ItemsLocListPosButtonPT_Off.Text = "--- " + loca.MAUI_UI_Buttonstate_Off + " ---";
+            else
+                ItemsLocListPosButtonPT_Off.Text = loca.MAUI_UI_Buttonstate_Off;
+
+            if (GD.LayoutDescription.ItemsLocListPosPT == ILayoutDescription.selectedPositionPT.first)
+                ItemsLocListPosButtonPT_1st.Text = "--- " + loca.MAUI_UI_Buttonstate_First + " ---";
+            else
+                ItemsLocListPosButtonPT_1st.Text = loca.MAUI_UI_Buttonstate_First;
+
+            if (GD.LayoutDescription.ItemsLocListPosPT == ILayoutDescription.selectedPositionPT.second)
+                ItemsLocListPosButtonPT_2nd.Text = "--- " + loca.MAUI_UI_Buttonstate_Second + " ---";
+            else
+                ItemsLocListPosButtonPT_2nd.Text = loca.MAUI_UI_Buttonstate_Second;
+
+            if (GD.LayoutDescription.ItemsLocListPosPT == ILayoutDescription.selectedPositionPT.third)
+                ItemsLocListPosButtonPT_3rd.Text = "--- " + loca.MAUI_UI_Buttonstate_Third + " ---";
+            else
+                ItemsLocListPosButtonPT_3rd.Text = loca.MAUI_UI_Buttonstate_Third;
+
+            // Itemlist Inv PT
+            if (GD.LayoutDescription.ItemsInvListPosPT == ILayoutDescription.selectedPositionPT.off)
+                ItemsInvListPosButtonPT_Off.Text = "--- " + loca.MAUI_UI_Buttonstate_Off + " ---";
+            else
+                ItemsInvListPosButtonPT_Off.Text = loca.MAUI_UI_Buttonstate_Off;
+
+            if (GD.LayoutDescription.ItemsInvListPosPT == ILayoutDescription.selectedPositionPT.first)
+                ItemsInvListPosButtonPT_1st.Text = "--- " + loca.MAUI_UI_Buttonstate_First + " ---";
+            else
+                ItemsInvListPosButtonPT_1st.Text = loca.MAUI_UI_Buttonstate_First;
+
+            if (GD.LayoutDescription.ItemsInvListPosPT == ILayoutDescription.selectedPositionPT.second)
+                ItemsInvListPosButtonPT_2nd.Text = "--- " + loca.MAUI_UI_Buttonstate_Second + " ---";
+            else
+                ItemsInvListPosButtonPT_2nd.Text = loca.MAUI_UI_Buttonstate_Second;
+
+            if (GD.LayoutDescription.ItemsInvListPosPT == ILayoutDescription.selectedPositionPT.third)
+                ItemsInvListPosButtonPT_3rd.Text = "--- " + loca.MAUI_UI_Buttonstate_Third + " ---";
+            else
+                ItemsInvListPosButtonPT_3rd.Text = loca.MAUI_UI_Buttonstate_Third;
+
+            if (GD.LayoutDescription.ClickMargin == ILayoutDescription.eClickMargin.very_low)
+                RowMargin_VeryLow.Text = "--- " + loca.MAUI_Listrow_Very_Low + " ---";
+            else
+                RowMargin_VeryLow.Text = loca.MAUI_Listrow_Very_Low;
+
+            if (GD.LayoutDescription.ClickMargin == ILayoutDescription.eClickMargin.low)
+                RowMargin_Low.Text = "--- " + loca.MAUI_Listrow_Low + " ---";
+            else
+                RowMargin_Low.Text = loca.MAUI_Listrow_Low;
+
+            if (GD.LayoutDescription.ClickMargin == ILayoutDescription.eClickMargin.medium)
+                RowMargin_Medium.Text = "--- " + loca.MAUI_Listrow_Medium + " ---";
+            else
+                RowMargin_Medium.Text = loca.MAUI_Listrow_Medium;
+
+            if (GD.LayoutDescription.ClickMargin == ILayoutDescription.eClickMargin.high)
+                RowMargin_High.Text = "--- " + loca.MAUI_Listrow_High + " ---";
+            else
+                RowMargin_High.Text = loca.MAUI_Listrow_High;
+
+            if (GD.LayoutDescription.ClickMargin == ILayoutDescription.eClickMargin.very_high)
+                RowMargin_VeryHigh.Text = "--- " + loca.MAUI_Listrow_Very_High + " ---";
+            else
+                RowMargin_VeryHigh.Text = loca.MAUI_Listrow_Very_High;
+
+            if (GD.LayoutDescription.STTMicroState == IGlobalData.microMode.off)
+                STTMode_Off.Text = "--- " + loca.MAUI_STT_Off + " ---";
+            else
+                STTMode_Off.Text = loca.MAUI_STT_Off;
+
+            if (GD.LayoutDescription.STTMicroState == IGlobalData.microMode.once)
+                STTMode_Manuell.Text = "--- " + loca.MAUI_STT_Manual + " ---";
+            else
+                STTMode_Manuell.Text = loca.MAUI_STT_Manual;
+
+            bool speech = UIS.STTInqSpeechSync();
+
+            if (speech == false)
+            {
+                STTMode_Manuell.FontAttributes = FontAttributes.Italic;
+            }
+            else
+            {
+                STTMode_Manuell.FontAttributes = FontAttributes.None;
+
+            }
+
+            if (GD.LayoutDescription.STTMicroState == IGlobalData.microMode.continuous)
+                STTMode_Continuous.Text = "--- " + loca.MAUI_STT_Continuous + " ---";
+            else
+                STTMode_Continuous.Text = loca.MAUI_STT_Continuous;
+
+            if (speech == false)
+            {
+                STTMode_Continuous.FontAttributes = FontAttributes.Italic;
+            }
+            else
+            {
+                STTMode_Continuous.FontAttributes = FontAttributes.None;
+
+            }
+
+            if (GD.LayoutDescription.ParagraphClusterMode == ILayoutDescription.ParagraphClusters.none)
+                ParagraphMode_Off.Text = "--- " + loca.MAUI_Paragraphmode_Off + " ---";
+            else
+                ParagraphMode_Off.Text = loca.MAUI_Paragraphmode_Off;
+
+            if (GD.LayoutDescription.ParagraphClusterMode == ILayoutDescription.ParagraphClusters.latest)
+                ParagraphMode_Last.Text = "--- " + loca.MAUI_Paragraphmode_Latest + " ---";
+            else
+                ParagraphMode_Last.Text = loca.MAUI_Paragraphmode_Latest;
+
+            if (GD.LayoutDescription.ParagraphClusterMode == ILayoutDescription.ParagraphClusters.all)
+                ParagraphMode_Full.Text = "--- " + loca.MAUI_Paragraphmode_Full + " ---";
+            else
+                ParagraphMode_Full.Text = loca.MAUI_Paragraphmode_Full;
+
+            /*
+            if( columns < 1 )
+            {
+                OrderListPosButtonPT_3rd.IsVisible= false;
+                ItemsLocListPosButtonPT_3rd.IsVisible = false;
+                ItemsInvListPosButtonPT_3rd.IsVisible = false;
+
+                OrderListPosButtonPT_2nd.IsVisible = false;
+                ItemsLocListPosButtonPT_2nd.IsVisible = false;
+                ItemsInvListPosButtonPT_2nd.IsVisible = false;
+
+
+                MGMInner.RowDefinitions[15].Height = new GridLength(120);
+                MGMInner.RowDefinitions[17].Height = new GridLength(120);
+                MGMInner.RowDefinitions[19].Height = new GridLength(120);
+            }
+            else if ( columns < 2 )
+            {
+                OrderListPosButtonPT_3rd.IsVisible = false;
+                ItemsLocListPosButtonPT_3rd.IsVisible = false;
+                ItemsInvListPosButtonPT_3rd.IsVisible = false;
+
+                OrderListPosButtonPT_2nd.IsVisible = true;
+                ItemsLocListPosButtonPT_2nd.IsVisible = true;
+                ItemsInvListPosButtonPT_2nd.IsVisible = true;
+
+                MGMInner.RowDefinitions[15].Height = new GridLength(180);
+                MGMInner.RowDefinitions[17].Height = new GridLength(180);
+                MGMInner.RowDefinitions[19].Height = new GridLength(180);
+            }
+            else
+            {
+                OrderListPosButtonPT_3rd.IsVisible = true;
+                ItemsLocListPosButtonPT_3rd.IsVisible = true;
+                ItemsInvListPosButtonPT_3rd.IsVisible = true;
+
+                OrderListPosButtonPT_2nd.IsVisible = true;
+                ItemsLocListPosButtonPT_2nd.IsVisible = true;
+                ItemsInvListPosButtonPT_2nd.IsVisible = true;
+
+                MGMInner.RowDefinitions[15].Height = new GridLength(240);
+                MGMInner.RowDefinitions[17].Height = new GridLength(240);
+                MGMInner.RowDefinitions[19].Height = new GridLength(240);
+
+            }
+            */
+
+            // OrderList
+            if (columns < 1) // || (columns == 1 && GD.LayoutDescription.OrderListPosPT == ILayoutDescription.selectedPositionPT.first))
+            {
+                OrderListPosButtonPT_3rd.IsVisible = false;
+                OrderListPosButtonPT_2nd.IsVisible = false;
+                MGMInner.RowDefinitions[15].Height = new GridLength(120);
+            }
+            else if (columns < 2) // || (columns == 2 && (GD.LayoutDescription.OrderListPosPT == ILayoutDescription.selectedPositionPT.second || GD.LayoutDescription.OrderListPosPT == ILayoutDescription.selectedPositionPT.first)))
+            {
+                OrderListPosButtonPT_3rd.IsVisible = false;
+                OrderListPosButtonPT_2nd.IsVisible = true;
+                MGMInner.RowDefinitions[15].Height = new GridLength(180);
+            }
+            else
+            {
+                OrderListPosButtonPT_3rd.IsVisible = true;
+                OrderListPosButtonPT_2nd.IsVisible = true;
+                MGMInner.RowDefinitions[15].Height = new GridLength(240);
+            }
+
+            // Items Loc
+            if (columns < 1) // || (columns == 1 && GD.LayoutDescription.OrderListPosPT == ILayoutDescription.selectedPositionPT.first))
+            {
+                ItemsLocListPosButtonPT_3rd.IsVisible = false;
+                ItemsLocListPosButtonPT_2nd.IsVisible = false;
+                MGMInner.RowDefinitions[17].Height = new GridLength(120);
+            }
+            else if (columns < 2) // || (columns == 1 && GD.LayoutDescription.OrderListPosPT == ILayoutDescription.selectedPositionPT.first))
+            {
+                ItemsLocListPosButtonPT_3rd.IsVisible = false;
+                ItemsLocListPosButtonPT_2nd.IsVisible = true;
+                MGMInner.RowDefinitions[17].Height = new GridLength(180);
+            }
+            else
+            {
+                ItemsLocListPosButtonPT_3rd.IsVisible = true;
+                ItemsLocListPosButtonPT_2nd.IsVisible = true;
+                MGMInner.RowDefinitions[17].Height = new GridLength(240);
+            }
+
+
+            // Items Inv
+            if (columns < 1) // || (columns == 1 && GD.LayoutDescription.OrderListPosPT == ILayoutDescription.selectedPositionPT.first))
+            {
+                ItemsInvListPosButtonPT_3rd.IsVisible = false;
+                ItemsInvListPosButtonPT_2nd.IsVisible = false;
+                MGMInner.RowDefinitions[19].Height = new GridLength(120);
+            }
+            else if (columns < 2) // || (columns == 1 && GD.LayoutDescription.OrderListPosPT == ILayoutDescription.selectedPositionPT.first))
+            {
+                ItemsInvListPosButtonPT_3rd.IsVisible = false;
+                ItemsInvListPosButtonPT_2nd.IsVisible = true;
+                MGMInner.RowDefinitions[19].Height = new GridLength(180);
+            }
+            else
+            {
+                ItemsInvListPosButtonPT_3rd.IsVisible = true;
+                ItemsInvListPosButtonPT_2nd.IsVisible = true;
+                MGMInner.RowDefinitions[19].Height = new GridLength(240);
+
+            }
+            // MGMInner.RowDefinitions[32].Height = new GridLength(100);
+            // MGMInner.RowDefinitions[33].Height = new GridLength(400);
         }
-        else
+        catch (Exception ex)
         {
-            STTMode_Manuell.FontAttributes = FontAttributes.None;
-
+            GlobalData.AddLog("SetButtonStates: " + ex.Message, IGlobalData.protMode.crisp);
         }
-
-        if (GD.STTMicroState == IGlobalData.microMode.continuous)
-            STTMode_Continuous.Text = "--- " + loca.MAUI_STT_Continuous + " ---";
-        else
-            STTMode_Continuous.Text = loca.MAUI_STT_Continuous;
-
-        if (speech == false)
-        {
-            STTMode_Continuous.FontAttributes = FontAttributes.Italic;
-        }
-        else
-        {
-            STTMode_Continuous.FontAttributes = FontAttributes.None;
-
-        }
-
-        if (GD.LayoutDescription.ParagraphClusterMode == ILayoutDescription.ParagraphClusters.none)
-            ParagraphMode_Off.Text = "--- " + loca.MAUI_Paragraphmode_Off + " ---";
-        else
-            ParagraphMode_Off.Text = loca.MAUI_Paragraphmode_Off;
-
-        if (GD.LayoutDescription.ParagraphClusterMode == ILayoutDescription.ParagraphClusters.latest)
-            ParagraphMode_Last.Text = "--- " + loca.MAUI_Paragraphmode_Latest + " ---";
-        else
-            ParagraphMode_Last.Text = loca.MAUI_Paragraphmode_Latest;
-
-        if (GD.LayoutDescription.ParagraphClusterMode == ILayoutDescription.ParagraphClusters.all)
-            ParagraphMode_Full.Text = "--- " + loca.MAUI_Paragraphmode_Full + " ---";
-        else
-            ParagraphMode_Full.Text = loca.MAUI_Paragraphmode_Full;
-
-        /*
-        if( columns < 1 )
-        {
-            OrderListPosButtonPT_3rd.IsVisible= false;
-            ItemsLocListPosButtonPT_3rd.IsVisible = false;
-            ItemsInvListPosButtonPT_3rd.IsVisible = false;
-
-            OrderListPosButtonPT_2nd.IsVisible = false;
-            ItemsLocListPosButtonPT_2nd.IsVisible = false;
-            ItemsInvListPosButtonPT_2nd.IsVisible = false;
-
-
-            MGMInner.RowDefinitions[15].Height = new GridLength(120);
-            MGMInner.RowDefinitions[17].Height = new GridLength(120);
-            MGMInner.RowDefinitions[19].Height = new GridLength(120);
-        }
-        else if ( columns < 2 )
-        {
-            OrderListPosButtonPT_3rd.IsVisible = false;
-            ItemsLocListPosButtonPT_3rd.IsVisible = false;
-            ItemsInvListPosButtonPT_3rd.IsVisible = false;
-
-            OrderListPosButtonPT_2nd.IsVisible = true;
-            ItemsLocListPosButtonPT_2nd.IsVisible = true;
-            ItemsInvListPosButtonPT_2nd.IsVisible = true;
-
-            MGMInner.RowDefinitions[15].Height = new GridLength(180);
-            MGMInner.RowDefinitions[17].Height = new GridLength(180);
-            MGMInner.RowDefinitions[19].Height = new GridLength(180);
-        }
-        else
-        {
-            OrderListPosButtonPT_3rd.IsVisible = true;
-            ItemsLocListPosButtonPT_3rd.IsVisible = true;
-            ItemsInvListPosButtonPT_3rd.IsVisible = true;
-
-            OrderListPosButtonPT_2nd.IsVisible = true;
-            ItemsLocListPosButtonPT_2nd.IsVisible = true;
-            ItemsInvListPosButtonPT_2nd.IsVisible = true;
-
-            MGMInner.RowDefinitions[15].Height = new GridLength(240);
-            MGMInner.RowDefinitions[17].Height = new GridLength(240);
-            MGMInner.RowDefinitions[19].Height = new GridLength(240);
-
-        }
-        */
-
-        // OrderList
-        if (columns < 1 ) // || (columns == 1 && GD.LayoutDescription.OrderListPosPT == ILayoutDescription.selectedPositionPT.first))
-        {
-            OrderListPosButtonPT_3rd.IsVisible = false;
-            OrderListPosButtonPT_2nd.IsVisible = false;
-            MGMInner.RowDefinitions[15].Height = new GridLength(120);
-        }
-        else if (columns < 2 ) // || (columns == 2 && (GD.LayoutDescription.OrderListPosPT == ILayoutDescription.selectedPositionPT.second || GD.LayoutDescription.OrderListPosPT == ILayoutDescription.selectedPositionPT.first)))
-        {
-            OrderListPosButtonPT_3rd.IsVisible = false;
-            OrderListPosButtonPT_2nd.IsVisible = true;
-            MGMInner.RowDefinitions[15].Height = new GridLength(180);
-        }
-        else
-        {
-            OrderListPosButtonPT_3rd.IsVisible = true;
-            OrderListPosButtonPT_2nd.IsVisible = true;
-            MGMInner.RowDefinitions[15].Height = new GridLength(240);
-        }
-
-        // Items Loc
-        if (columns < 1) // || (columns == 1 && GD.LayoutDescription.OrderListPosPT == ILayoutDescription.selectedPositionPT.first))
-        {
-            ItemsLocListPosButtonPT_3rd.IsVisible = false;
-            ItemsLocListPosButtonPT_2nd.IsVisible = false;
-            MGMInner.RowDefinitions[17].Height = new GridLength(120);
-        }
-        else if (columns < 2) // || (columns == 1 && GD.LayoutDescription.OrderListPosPT == ILayoutDescription.selectedPositionPT.first))
-        {
-            ItemsLocListPosButtonPT_3rd.IsVisible = false;
-            ItemsLocListPosButtonPT_2nd.IsVisible = true;
-            MGMInner.RowDefinitions[17].Height = new GridLength(180);
-        }
-        else
-        {
-            ItemsLocListPosButtonPT_3rd.IsVisible = true;
-            ItemsLocListPosButtonPT_2nd.IsVisible = true;
-            MGMInner.RowDefinitions[17].Height = new GridLength(240);
-        }
-
-
-        // Items Inv
-        if (columns < 1) // || (columns == 1 && GD.LayoutDescription.OrderListPosPT == ILayoutDescription.selectedPositionPT.first))
-        {
-            ItemsInvListPosButtonPT_3rd.IsVisible = false;
-            ItemsInvListPosButtonPT_2nd.IsVisible = false;
-            MGMInner.RowDefinitions[19].Height = new GridLength(120);
-        }
-        else if (columns < 2) // || (columns == 1 && GD.LayoutDescription.OrderListPosPT == ILayoutDescription.selectedPositionPT.first))
-        {
-            ItemsInvListPosButtonPT_3rd.IsVisible = false;
-            ItemsInvListPosButtonPT_2nd.IsVisible = true;
-            MGMInner.RowDefinitions[19].Height = new GridLength(180);
-        }
-        else
-        {
-            ItemsInvListPosButtonPT_3rd.IsVisible = true;
-            ItemsInvListPosButtonPT_2nd.IsVisible = true;
-            MGMInner.RowDefinitions[19].Height = new GridLength(240);
-
-        }
-
     }
 
     public void DoResize(double width, double height)
@@ -645,8 +653,8 @@ public partial class SettingsPage : ContentPage, IMenuExtension
         MGMInner.RowDefinitions[2].Height = new GridLength(0);
         MGMInner.RowDefinitions[3].Height = new GridLength(0);
 
-        IllustrationLabel.IsVisible = false;
-        IllustrationGrid.IsVisible = false;
+        IllustrationLabel_old.IsVisible = false;
+        IllustrationGrid_old.IsVisible = false;
 
         LanguageLabel.IsVisible = false;
         LanguageGrid.IsVisible = false;
@@ -684,23 +692,23 @@ public partial class SettingsPage : ContentPage, IMenuExtension
     }
     void OnClickIlluOff(object? sender, EventArgs e)
     {
-        GD.PicMode = IGlobalData.picMode.off;
+        GD.LayoutDescription.PicMode = IGlobalData.picMode.off;
         SetButtonStates();
     }
     void OnClickIlluSmall(object? sender, EventArgs e)
     {
-        GD.PicMode = IGlobalData.picMode.small;
+        GD.LayoutDescription.PicMode = IGlobalData.picMode.small;
         SetButtonStates();
     }
     void OnClickIlluMedium(object? sender, EventArgs e)
     {
-        GD.PicMode = IGlobalData.picMode.medium;
+        GD.LayoutDescription.PicMode = IGlobalData.picMode.medium;
 
         SetButtonStates();
     }
     void OnClickIlluBig(object? sender, EventArgs e)
     {
-        GD.PicMode = IGlobalData.picMode.big;
+        GD.LayoutDescription.PicMode = IGlobalData.picMode.big;
 
         SetButtonStates();
     }
@@ -713,24 +721,24 @@ public partial class SettingsPage : ContentPage, IMenuExtension
             GD.DebugMode = true;
             DebugMenuOpen();
         }
-        GD.SimpleMC = true;
+        GD.LayoutDescription.SimpleMC = true;
         SetButtonStates();
     }
     void OnClickSimpleMCOff(object? sender, EventArgs e)
     {
         GD.DebugCount = 0;
 
-        GD.SimpleMC = false;
+        GD.LayoutDescription.SimpleMC = false;
         SetButtonStates();
     }
     void OnClickTextAttribOn(object? sender, EventArgs e)
     {
-        GD.Highlighting = true;
+        GD.LayoutDescription.Highlighting = true;
         SetButtonStates();
     }
     void OnClickTextAttribOff(object? sender, EventArgs e)
     {
-        GD.Highlighting = false;
+        GD.LayoutDescription.Highlighting = false;
         SetButtonStates();
     }
 
@@ -996,7 +1004,7 @@ public partial class SettingsPage : ContentPage, IMenuExtension
     private void OnClickSTTMode_Off(object? sender, EventArgs e)
     {
         // GD.STTContinuous = false;
-        GD.STTMicroState = IGlobalData.microMode.off;
+        GD.LayoutDescription.STTMicroState = IGlobalData.microMode.off;
         SetButtonStates();
     }
     private void OnClickSTTMode_Manuell(object? sender, EventArgs e)
@@ -1004,9 +1012,9 @@ public partial class SettingsPage : ContentPage, IMenuExtension
         bool state =  UIS.STTInqSpeech().Result;
 
         if ( state == true )
-            GD.STTMicroState = IGlobalData.microMode.once;
+            GD.LayoutDescription.STTMicroState = IGlobalData.microMode.once;
         else
-            GD.STTMicroState = IGlobalData.microMode.off;
+            GD.LayoutDescription.STTMicroState = IGlobalData.microMode.off;
 
         SetButtonStates();
     }
@@ -1015,9 +1023,9 @@ public partial class SettingsPage : ContentPage, IMenuExtension
         bool state = UIS.STTInqSpeech().Result;
 
         if (state == true)
-            GD.STTMicroState = IGlobalData.microMode.continuous;
+            GD.LayoutDescription.STTMicroState = IGlobalData.microMode.continuous;
         else
-            GD.STTMicroState = IGlobalData.microMode.off;
+            GD.LayoutDescription.STTMicroState = IGlobalData.microMode.off;
 
         SetButtonStates();
     }

@@ -14740,9 +14740,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Ich reinigte die Rüstung mit dem Polierlappen. Auf der Rückseite legte ich damit einige Buchstaben frei.";
+                return "Ich reinigte die Rüstung mit dem Polierlappen. Auf der Rückseite legte ich damit [I:I06_Letters]einige Buchstaben[/I] frei.";
             else
-                return "Ich reinigte die Rüstung mit dem Polierlappen. Auf der Rückseite legte ich damit einige Buchstaben frei.";
+                return "Ich reinigte die Rüstung mit dem Polierlappen. Auf der Rückseite legte ich damit [I:I06_Letters]einige Buchstaben[/I] frei.";
         }
     }
     public static string Order_WashIn_I1_46_Wasserhahn_1886
@@ -15553,16 +15553,6 @@ public static partial class loca
                 return "Nach reiflicher Überlegung fiel mir doch kein guter Grund ein, [Pl1,Dat] in [Il2,Nom] zu wickeln.";
             else
                 return "After careful consideration, I couldn't think of a good reason to wrap [Pl1,Dat] in [Il2,Nom] after all.";
-        }
-    }
-    public static string Order_WrapAround_Not
-    {
-        get
-        {
-            if (_gd!.Language == IGlobalData.language.german)
-                return "Nach reiflicher Überlegung fiel mir doch kein guter Grund ein, [Il1,Nom] um [Il2,Dat] zu wickeln.";
-            else
-                return "After careful consideration, I couldn't think of a good reason to wrap [Il1,Nom] around [Il2,Dat] after all.";
         }
     }
     public static string Order_PaintP_Person_Ludmilla_1976
@@ -64273,6 +64263,16 @@ public static partial class loca
                 return "- [Ila1,Nom]";
             else
                 return "- [Ila1,Nom]";
+        }
+    }
+    public static string OrderFeedback_ListItems_Akku
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "- [Ila1,Akku]";
+            else
+                return "- [Ila1,Akku]";
         }
     }
     public static string OrderFeedback_ListItemsPersons_Person_Everyone_14069

@@ -243,6 +243,7 @@ public partial class Adv: AdvBase
         CounterDoorInit(CA!.I05_Door, Items!.Last()!.ID);
 
         CA!.I06_Door = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Tuer! }, new List<Adj> { CA!.Adj_wuchtig! }, Co.SEX_FEMALE, CB!.LocType_Loc, CA!.L06_Long_Floor, loca.Adv_I06_Door, "Adv_I06_Door", Co.SZ_small, true, false, Nouns, Adjs));
+        Items!.Last().SynAdjectives= new List<Adj> { CA!.Adj_schwer! };
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_GoThroughable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
@@ -396,6 +397,7 @@ public partial class Adv: AdvBase
         CounterDoorInit(CA!.I05_Library_Door, Items!.Last()!.ID);
 
         CA!.I09_Red_Shelf = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Regal! }, new List<Adj> { CA!.Adj_rot! }, Co.SEX_NEUTER, CB!.LocType_Loc, CA!.L09_Library, loca.Adv_I09_Red_Shelf, "Adv_I09_Red_Shelf", Co.SZ_small, true, false, Nouns, Adjs));
+        Items!.Last().SynNames = new List<Noun> { CA!.Noun_Regale };
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
@@ -403,6 +405,7 @@ public partial class Adv: AdvBase
         Items!.Last().StorageOn = 30;
 
         CA!.I09_Green_Shelf = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Regal! }, new List<Adj> { CA!.Adj_gruen! }, Co.SEX_NEUTER, CB!.LocType_Loc, CA!.L09_Library, loca.Adv_I09_Green_Shelf, "Adv_I09_Green_Shelf", Co.SZ_small, true, false, Nouns, Adjs));
+        Items!.Last().SynNames = new List<Noun> { CA!.Noun_Regale };
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
@@ -574,6 +577,7 @@ public partial class Adv: AdvBase
         CounterDoorInit(CA!.I07_Door_Blue, Items!.Last()!.ID);
 
         CA!.I11_Left_Shelf = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Regal! }, new List<Adj> { CA!.Adj_links! }, Co.SEX_NEUTER, CB!.LocType_Loc, CA!.L11_Storage_Room, loca.Adv_I11_Left_Shelf, "Adv_I11_Left_Shelf", Co.SZ_small, true, false, Nouns, Adjs));
+        Items!.Last().SynNames = new List<Noun> { CA!.Noun_Regale };
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
@@ -581,6 +585,7 @@ public partial class Adv: AdvBase
         Items!.Last().StorageOn = 30;
 
         CA!.I11_Right_Shelf = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Regal! }, new List<Adj> { CA!.Adj_rechts! }, Co.SEX_NEUTER, CB!.LocType_Loc, CA!.L11_Storage_Room, loca.Adv_I11_Right_Shelf, "Adv_I11_Right_Shelf", Co.SZ_small, true, false, Nouns, Adjs));
+        Items!.Last().SynNames = new List<Noun> { CA!.Noun_Regale };
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
@@ -790,7 +795,7 @@ public partial class Adv: AdvBase
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Tipable), relTypes.r_essential);
 
         CA!.I00_Magic_Candle = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Kerzenhalter! }, new List<Adj> { CA!.Adj_magisch! }, Co.SEX_MALE, CB!.LocType_In_Item, CA!.I04_Opening.ID, loca.Adv_I00_Magic_Candle, "Adv_I00_Magic_Candle", Co.SZ_small, false, true, Nouns, Adjs));
-        Items!.Last().SynNames = new List<Noun> { CA!.Noun_Kerze!, CA!.Noun_Halter!, CA!.Noun_Flamme };
+        Items!.Last().SynNames = new List<Noun> { CA!.Noun_Kerze!, CA!.Noun_Halter!, CA!.Noun_Flamme, CA!.Noun_Lampe };
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith), relTypes.r_essential);
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Enlightable), relTypes.r_essential);

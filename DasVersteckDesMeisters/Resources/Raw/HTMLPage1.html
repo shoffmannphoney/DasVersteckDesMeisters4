@@ -137,11 +137,31 @@
             FullyLoaded = 0;
             function DoScroll()
             {
-                oldYPos = [YPOS];
-                if (oldYPos > 0) {
-                    window.scrollTo({ top: oldYPos });
-                    console.log(oldYPos);
-                    console.log("DoScroll()");
+                oldYPos2 = [YPOSOLD];
+                    oldYPos = [YPOS];
+                if (oldYPos > 0)
+                { 
+                    console.log( "DestPos: " + oldYPos);
+                    console.log("OldPos: " + oldYPos2);
+                            console.log( "pageYOffset: " + window.pageYOffset);
+                    console.log("InnerHeight: " + window.innerHeight);
+                    console.log("ScrollHeight: " + document.body.scrollHeight);
+                    console.log("DestPos berechnet: " + ( document.body.scrollHeight - window.innerHeight ) );
+
+                    /*
+                    if ((oldYPos - oldYPos2 < 300) && (oldYPos - oldYPos2 > -300 ) )
+                    {
+                        console.log("DoSmoothScroll()");
+                        window.scrollTo({ top: oldYPos2 });
+                        window.scrollTo({ top: oldYPos, behavior: 'smooth' });
+                    }
+                    else
+                    */
+                    {
+                        console.log("DoScroll()");
+                        window.scrollTo({ top: oldYPos });
+                    }
+                    // window.scrollTo({ top: oldYPos });
                 }
             }
             function callStartScrolling2(yPos) { window.location.href = 'https://runcsharp.StartScrolling2?' + yPos; }
