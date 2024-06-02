@@ -20810,7 +20810,7 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "f<nameNom> mit <> säubern";
+                return "<nameNom> mit <> säubern";
             else
                 return "clean <nameNom> with <>";
         }
@@ -64250,9 +64250,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "- [Ila1,Akk]";
+                return "- [Ila1,Akk][S2]";
             else
-                return "- [Ila1,Akk]";
+                return "- [Ila1,Akk][S2]";
         }
     }
     public static string OrderFeedback_ListItems_Nom
@@ -64260,9 +64260,19 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "- [Ila1,Nom]";
+                return "- [Ila1,Nom][S2]";
             else
-                return "- [Ila1,Nom]";
+                return "- [Ila1,Nom][S2]";
+        }
+    }
+    public static string OrderFeedback_ListItems_Nom_U
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "- [Ila1,Nomu][S2]";
+            else
+                return "- [Ila1,Nomu][S2]";
         }
     }
     public static string OrderFeedback_ListItems_Akku
@@ -90940,7 +90950,7 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Gehe nach Norden";
+                return "Norden";
             else
                 return "Go North";
         }
@@ -90960,7 +90970,7 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Gehe nach Nordosten";
+                return "Nordosten";
             else
                 return "Go Northeast";
         }
@@ -90980,7 +90990,7 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Gehe nach Osten";
+                return "Osten";
             else
                 return "Go east";
         }
@@ -91000,7 +91010,7 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Gehe nach Südosten";
+                return "Südosten";
             else
                 return "Go Southeast";
         }
@@ -91020,7 +91030,7 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Gehe nach Süden";
+                return "Süden";
             else
                 return "Go South";
         }
@@ -91040,7 +91050,7 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Gehe nach Südwesten";
+                return "Südwesten";
             else
                 return "Go Southwest";
         }
@@ -91060,7 +91070,7 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Gehe nach Westen";
+                return "Westen";
             else
                 return "Go West";
         }
@@ -91080,7 +91090,7 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Gehe nach Nordwesten";
+                return "Nordwesten";
             else
                 return "Go Northwest";
         }

@@ -327,6 +327,7 @@ namespace GameCore
                         int itemID = 0;
                         int locationID = 0;
                         int dirID = 0;
+                        string insertString = "";
 
                         // Erst mal werden die location-Inserts eingef�gt, die vollst�ndig im String kodiert sind
                         if (s.Substring(ix, 4) == "[/I]")
@@ -344,6 +345,42 @@ namespace GameCore
                         else if (s.Substring(ix, 4) == "[/D]")
                         {
                             lenSeq = 4;
+                        }
+                        else if (FindString(s, ix, "[S1]"))
+                        {
+                            lenSeq = 4;
+                            insertString = (string)obj[0];
+                            snew += insertString;
+                        }
+                        else if (FindString(s, ix, "[S2]"))
+                        {
+                            lenSeq = 4;
+                            insertString = (string)obj[1];
+                            snew += insertString;
+                        }
+                        else if (FindString(s, ix, "[S3]"))
+                        {
+                            lenSeq = 4;
+                            insertString = (string)obj[2];
+                            snew += insertString;
+                        }
+                        else if (FindString(s, ix, "[S4]"))
+                        {
+                            lenSeq = 4;
+                            insertString = (string)obj[3];
+                            snew += insertString;
+                        }
+                        else if (FindString(s, ix, "[S5]"))
+                        {
+                            lenSeq = 4;
+                            insertString = (string)obj[4];
+                            snew += insertString;
+                        }
+                        else if (FindString(s, ix, "[S6]"))
+                        {
+                            lenSeq = 4;
+                            insertString = (string)obj[5];
+                            snew += insertString;
                         }
                         else if (s.Substring(ix, 3) == "[I:")
                         {
@@ -1108,35 +1145,35 @@ namespace GameCore
 
                         if (i != null)
                         {
-                            snew += _items!.GetItemNameLink(i.ID, aocase);
+                            snew += _items!.GetItemNameLink(i.ID, aocase, _a.Adventure.CurrentNouns);
                         }
                         else if (iapp != null)
                         {
-                            snew += _items!.GetItemNameLink(iapp.ID, aocase, true );
+                            snew += _items!.GetItemNameLink(iapp.ID, aocase, _a.Adventure.CurrentNouns, true);
                         }
                         else if (it != null)
                         {
-                            snew += _items!.GetName(it.ID, aocase);
+                            snew += _items!.GetName(it.ID, aocase, null);
                         }
                         else if (p != null)
                         {
-                            snew += _persons!.GetPersonLink(p, pString);
+                            snew += _persons!.GetPersonLink(p, _a.Adventure.CurrentNouns, pString);
                         }
                         else if (pt != null)
                         {
-                            snew += _persons!.GetPersonName(pt, aocase);
+                            snew += _persons!.GetPersonName(pt, aocase, _a.Adventure.CurrentNouns);
                         }
                         else if (plt != null)
                         {
-                            snew += _persons!.GetPersonNameLink(plt, aocase);
+                            snew += _persons!.GetPersonNameLink(plt, aocase, _a.Adventure.CurrentNouns );
                         }
                         else if (plv != null)
                         {
-                            snew += _persons!.GetPersonVerbLink(plv, aocase, verbID, _a!.Tense);
+                            snew += _persons!.GetPersonVerbLink(plv, aocase, verbID, _a.Adventure.CurrentNouns, _a!.Tense);
                         }
                         else if (papp != null)
                         {
-                            snew += _persons!.GetPersonNameLink(papp, aocase);
+                            snew += _persons!.GetPersonNameLink(papp, aocase, _a.Adventure.CurrentNouns);
                         }
                         else if ( rp != null)
                         {
@@ -1148,7 +1185,7 @@ namespace GameCore
                         }
                         else if (t != null)
                         {
-                            snew += _topics!.GetTopicName( t.ID, aocase ); 
+                            snew += _topics!.GetTopicName( t.ID, aocase, _a.Adventure.CurrentNouns ); 
                         }
 
                         if (lenSeq == 0)
@@ -2057,35 +2094,35 @@ namespace GameCore
 
                             if (i != null)
                             {
-                                snew.Append(_items!.GetItemNameLink(i.ID, aocase));
+                                snew.Append(_items!.GetItemNameLink(i.ID, aocase, null ));
                             }
                             else if (iapp != null)
                             {
-                                snew.Append(_items!.GetItemNameLink(iapp.ID, aocase, true));
+                                snew.Append(_items!.GetItemNameLink(iapp.ID, aocase, _a.Adventure.CurrentNouns, true));
                             }
                             else if (it != null)
                             {
-                                snew.Append(_items!.GetName(it.ID, aocase));
+                                snew.Append(_items!.GetName(it.ID, aocase, _a.Adventure.CurrentNouns ));
                             }
                             else if (p != null)
                             {
-                                snew.Append(_persons!.GetPersonLink(p, pString));
+                                snew.Append(_persons!.GetPersonLink(p, _a.Adventure.CurrentNouns, pString));
                             }
                             else if (pt != null)
                             {
-                                snew.Append(_persons!.GetPersonName(pt, aocase));
+                                snew.Append(_persons!.GetPersonName(pt, aocase, _a.Adventure.CurrentNouns));
                             }
                             else if (plt != null)
                             {
-                                snew.Append(_persons!.GetPersonNameLink(plt, aocase));
+                                snew.Append(_persons!.GetPersonNameLink(plt, aocase, _a.Adventure.CurrentNouns));
                             }
                             else if (plv != null)
                             {
-                                snew.Append(_persons!.GetPersonVerbLink(plv, aocase, verbID, _a!.Tense));
+                                snew.Append(_persons!.GetPersonVerbLink(plv, aocase, verbID, null, _a!.Tense));
                             }
                             else if (papp != null)
                             {
-                                snew.Append(_persons!.GetPersonNameLink(papp, aocase));
+                                snew.Append(_persons!.GetPersonNameLink(papp, aocase, _a.Adventure.CurrentNouns));
                             }
                             else if (rp != null)
                             {
@@ -2097,7 +2134,7 @@ namespace GameCore
                             }
                             else if (t != null)
                             {
-                                snew.Append(_topics!.GetTopicName(t.ID, aocase));
+                                snew.Append(_topics!.GetTopicName(t.ID, aocase, _a.Adventure.CurrentNouns));
                             }
 
                             if (lenSeq == 0)
@@ -2836,31 +2873,31 @@ namespace GameCore
 
                         if (i != null)
                         {
-                            snew.Append(_items!.GetItemNameLink(i.ID, aocase));
+                            snew.Append(_items!.GetItemNameLink(i.ID, aocase, _a.Adventure.CurrentNouns));
                         }
                         else if (iapp != null)
                         {
-                            snew.Append(_items!.GetItemNameLink(iapp.ID, aocase, true));
+                            snew.Append(_items!.GetItemNameLink(iapp.ID, aocase, _a.Adventure.CurrentNouns, true));
                         }
                         else if (it != null)
                         {
-                            snew.Append(_items!.GetName(it.ID, aocase));
+                            snew.Append(_items!.GetName(it.ID, aocase, _a.Adventure.CurrentNouns));
                         }
                         else if (p != null)
                         {
-                            snew.Append(_persons!.GetPersonLink(p, pString));
+                            snew.Append(_persons!.GetPersonLink(p, _a.Adventure.CurrentNouns, pString));
                         }
                         else if (pt != null)
                         {
-                            snew.Append(_persons!.GetPersonName(pt, aocase));
+                            snew.Append(_persons!.GetPersonName(pt, aocase, _a.Adventure.CurrentNouns));
                         }
                         else if (plt != null)
                         {
-                            snew.Append(_persons!.GetPersonNameLink(plt, aocase));
+                            snew.Append(_persons!.GetPersonNameLink(plt, aocase, _a.Adventure.CurrentNouns));
                         }
                         else if (plv != null)
                         {
-                            snew.Append(_persons!.GetPersonVerbLink(plv, aocase, verbID, _a!.Tense));
+                            snew.Append(_persons!.GetPersonVerbLink(plv, aocase, verbID, _a.Adventure.CurrentNouns, _a!.Tense));
                         }
                         else if (rp != null)
                         {
@@ -2872,7 +2909,7 @@ namespace GameCore
                         }
                         else if (t != null)
                         {
-                            snew.Append(_topics!.GetTopicName(t.ID, aocase));
+                            snew.Append(_topics!.GetTopicName(t.ID, aocase, _a.Adventure.CurrentNouns));
                         }
 
                         if (lenSeq == 0)

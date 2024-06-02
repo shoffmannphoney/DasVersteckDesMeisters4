@@ -184,9 +184,9 @@ namespace GameCore
             return (rTopicIX);
         }
 
-        public string GetTopicName(int TopicID, int Case)
+        public string GetTopicName(int TopicID, int Case, List <Noun> CourrentNouns)
         {
-            return (this.List[this.FindIx(TopicID)].FullName(this.Find(TopicID)!, Case )!);
+            return (this.List[this.FindIx(TopicID)].FullName(this.Find(TopicID)!, Case, CourrentNouns)!);
         }
         public bool RestoreTopics()
         {

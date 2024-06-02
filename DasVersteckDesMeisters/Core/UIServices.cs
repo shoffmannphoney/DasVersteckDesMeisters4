@@ -644,25 +644,34 @@ public class UIServices : IUIServices
 
     public bool DoStatusSave()
     {
-        GD.LayoutDescription.WinWidth = App.MainWindow!.Width;
-        GD.LayoutDescription.WinHeight = App.MainWindow!.Height;
-        GD.LayoutDescription.WinX = App.MainWindow!.X;
-        GD.LayoutDescription.WinY = App.MainWindow!.Y;
-
-        string? pathfileName = DeviceData._deviceData!.GetSavePath()! + "/" + loca.MAUI_Win_Config;
-
-
-        string? jsonDest = JsonConvert.SerializeObject(GD.LayoutDescription, Newtonsoft.Json.Formatting.Indented);
-        File.WriteAllText(pathfileName, jsonDest);
-
-        if (GlobalSpecs.CurrentGlobalSpecs!.InitRunning == IGlobalSpecs.initRunning.started || GlobalSpecs.CurrentGlobalSpecs!.InitRunning == IGlobalSpecs.initRunning.finished)
+        try
         {
-            GD!.OrderList.SaveOrderTable();
-            GD!.Adventure!.Autosave(true);
+            GD.LayoutDescription.WinWidth = App.MainWindow!.Width;
+            GD.LayoutDescription.WinHeight = App.MainWindow!.Height;
+            GD.LayoutDescription.WinX = App.MainWindow!.X;
+            GD.LayoutDescription.WinY = App.MainWindow!.Y;
 
+            string? pathfileName = DeviceData._deviceData!.GetSavePath()! + "/" + loca.MAUI_Win_Config;
+
+
+            string? jsonDest = JsonConvert.SerializeObject(GD.LayoutDescription, Newtonsoft.Json.Formatting.Indented);
+            File.WriteAllText(pathfileName, jsonDest);
+
+            if (GlobalSpecs.CurrentGlobalSpecs!.InitRunning == IGlobalSpecs.initRunning.started || GlobalSpecs.CurrentGlobalSpecs!.InitRunning == IGlobalSpecs.initRunning.finished)
+            {
+                GD!.OrderList.SaveOrderTable();
+                GD!.Adventure!.Autosave(true);
+
+            }
+
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Phoney_MAUI.Core.GlobalData.AddLog("DoStatusSave: " + ex.Message, IGlobalData.protMode.crisp);
+            return false;
         }
 
-        return true;
     }
     public bool QuitApplication()
     {
@@ -1145,25 +1154,34 @@ public class UIServices : IUIServices
         /// <returns>A deep copy of the object.</returns>
         public static T? Clone<T>(T source)
         {
-         
-            /*
-            if (!typeof(T).IsSerializable)
+
+            try
             {
-                throw new ArgumentException("The type must be serializable.", nameof(source));
+                /*
+                if (!typeof(T).IsSerializable)
+                {
+                    throw new ArgumentException("The type must be serializable.", nameof(source));
+                }
+                */
+
+                // Don't serialize a null object, simply return the default for that object
+                if (ReferenceEquals(source, null)) return default;
+
+                Stream stream = new MemoryStream();
+                IFormatter formatter = new BinaryFormatter();
+                formatter.Serialize(stream, source);
+                stream.Seek(0, SeekOrigin.Begin);
+                stream.Close();
+                stream.Dispose();
+                return (T)formatter.Deserialize(stream);
             }
-            */
-
-            // Don't serialize a null object, simply return the default for that object
-            if (ReferenceEquals(source, null)) return default;
-
-            Stream stream = new MemoryStream();
-            IFormatter formatter = new BinaryFormatter();
-            formatter.Serialize(stream, source);
-            stream.Seek(0, SeekOrigin.Begin);
-            stream.Close();
-            stream.Dispose();
-            return (T)formatter.Deserialize(stream);
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("ObjectCopier: " + ex.Message, IGlobalData.protMode.crisp);
+                return default(T);
+            }
         }
+
     }
 
     public void BackupOrdertable()
@@ -1176,6 +1194,7 @@ public class UIServices : IUIServices
 
     public static byte[] ObjectToByteArray(Object obj)
     {
+
         /*
         byte[] buf;
 
@@ -1202,11 +1221,11 @@ public class UIServices : IUIServices
             {
                 bf.Serialize(ms, obj);
             }
-            catch // (Exception e)
+            catch (Exception ex)
             {
-
-                // int a = 5;
+                Phoney_MAUI.Core.GlobalData.AddLog("ObjectToByteArray: " + ex.Message, IGlobalData.protMode.crisp);
             }
+
             finally
             {
                 // int a = 5;
@@ -2103,7 +2122,7 @@ public class MCMenuView
 
             MW.AdjustTextPanel();
             */
-// MW.FeedbackTextObj.FeedbackModeMC = true;
+            // MW.FeedbackTextObj.FeedbackModeMC = true;
 #if !NEWSCROLL
             UIS!.Scr!.CompactToEnd();
             UIS!.Scr!.SetScrollerToEnd();
@@ -2111,7 +2130,7 @@ public class MCMenuView
         }
         else
         {
-            DelBoolInt? dbi =  GD.ProvideMCGrid;
+            DelBoolInt? dbi = GD.ProvideMCGrid;
 
             if (dbi != null)
             {
@@ -2142,17 +2161,17 @@ public class MCMenuView
         {
             DelBoolInt dbi = GD.ProvideMCGrid!;
 
-            if( dbi != null )
+            if (dbi != null)
             {
                 dbi(false, 0);
             }
             // Behaviors löschen
 
-            VerticalStackLayout? vsl = (_mcGrid.Children[0] as ScrollView).Content as VerticalStackLayout; 
+            VerticalStackLayout? vsl = (_mcGrid.Children[0] as ScrollView).Content as VerticalStackLayout;
 
             foreach (IView iv in vsl.Children)
             {
-                if( iv.GetType() == typeof( Grid ))
+                if (iv.GetType() == typeof(Grid))
                 {
 
                     Label l1 = (iv as Grid).Children[0] as Label;
@@ -2185,7 +2204,7 @@ public class MCMenuView
         UIS!.MCMVVisible = false;
         UIS.Scr.YPosMode = Scroller.YPosModes.backfrommc;
         UIS.Scr.SetFastScrollingArea();
-        UIS.FinishBrowserUpdate( IUIServices.onBrowserContentLoaded.ScrollToEnd);
+        UIS.FinishBrowserUpdate(IUIServices.onBrowserContentLoaded.ScrollToEnd);
         // UIS!.Scr.InqScrollingAreaAsync().Wait();
     }
 
@@ -2196,7 +2215,7 @@ public class MCMenuView
         // mcmwObj.MCOutput();
     }
 
-    public  void DoTapEntry(object? sender, TappedEventArgs e)
+    public void DoTapEntry(object? sender, TappedEventArgs e)
     {
         if (UIS!.UpdateBrowserCallsPerCycle > 0)
             return;
@@ -2225,19 +2244,19 @@ public class MCMenuView
         }
         */
         // GD.MenuExtension.DestroyMEMenus();
-        if( _callbackSelection == null )
+        if (_callbackSelection == null)
         {
 
         }
 
-        if (_callbackSelection != null )
+        if (_callbackSelection != null)
         {
             // UIS!.StoryTextObj!.DividingLine();
             UIS!.InitBrowserUpdate();
             UIS!.UpdateBrowserCallsPerCycle = 0;
             _callbackSelection(UIS!.MCM!, (sender as IDLabel)!.ID);
             UIS!.StoryTextObj!.AdvTextRefresh();
-            UIS!.FinishBrowserUpdate( IUIServices.onBrowserContentLoaded.PageDown);
+            UIS!.FinishBrowserUpdate(IUIServices.onBrowserContentLoaded.PageDown);
 #if !NEWSCROLL
     UIS!.Scr.SetScrollerToEnd();
 #endif
@@ -2249,16 +2268,16 @@ public class MCMenuView
 
     }
 
-    public void CallBackMCMenuView( int id )
+    public void CallBackMCMenuView(int id)
     {
         if (_callbackSelection != null)
         {
             // UIS!.StoryTextObj!.DividingLine();
             UIS!.InitBrowserUpdate();
             // UIS!.UpdateBrowserCallsPerCycle = 0;
-            _callbackSelection(UIS!.MCM!, id );
+            _callbackSelection(UIS!.MCM!, id);
             UIS!.StoryTextObj!.AdvTextRefresh();
-            UIS!.FinishBrowserUpdate( IUIServices.onBrowserContentLoaded.PageDown);
+            UIS!.FinishBrowserUpdate(IUIServices.onBrowserContentLoaded.PageDown);
 #if !NEWSCROLL
             UIS!.Scr.SetScrollerToEnd();
 #endif
@@ -2272,12 +2291,12 @@ public class MCMenuView
     public MCMenu? NewMCM { get; set; }
 
     Phoney_MAUI.Model.DelMCMSelection? _mcmvcallbackselection;
-    public Phoney_MAUI.Model.DelMCMSelection? MCMVcallbackSelection 
-    { 
-        get => _mcmvcallbackselection;  
+    public Phoney_MAUI.Model.DelMCMSelection? MCMVcallbackSelection
+    {
+        get => _mcmvcallbackselection;
         set
         {
-            if( value == null )
+            if (value == null)
             {
                 // int a = 5;
             }
@@ -2424,54 +2443,54 @@ public class MCMenuView
 
     public void MCOutput(MCMenu MCM_par, Phoney_MAUI.Model.DelMCMSelection? callbackSelection_par, bool CanBeInterrupted_par)
     {
-        if(callbackSelection_par != null )
-            GD!.Adventure!.Orders!.MCCallbackName = callbackSelection_par.Method.Name;
-        else
+        try
         {
-            GD!.Adventure!.Orders!.MCCallbackName = null;
-
-        }
-        if (GD.MCAsContextmenu == true)
-        {
-            MCMenu MCM = MCM_par;
-            Phoney_MAUI.Model.DelMCMSelection? callbackSelection = callbackSelection_par;
-            bool CanBeInterrupted = CanBeInterrupted_par;
-            lvl++;
-
-            if (GD.MenuExtension!.MEMenus.Count < 1) return;
-
-            if (GD.MenuExtension.MEMenus[GD.MenuExtension.MEMenus.Count - 1].InnerView != null)
+            if (callbackSelection_par != null)
+                GD!.Adventure!.Orders!.MCCallbackName = callbackSelection_par.Method.Name;
+            else
             {
-                UIS!.MCM = MCM;
+                GD!.Adventure!.Orders!.MCCallbackName = null;
 
-                if(callbackSelection != null )
-                    _callbackSelection = callbackSelection;
+            }
+            if (GD.MCAsContextmenu == true)
+            {
+                MCMenu MCM = MCM_par;
+                Phoney_MAUI.Model.DelMCMSelection? callbackSelection = callbackSelection_par;
+                bool CanBeInterrupted = CanBeInterrupted_par;
+                lvl++;
 
-                GD!.MenuExtension!.MEMenus[GD!.MenuExtension!.MEMenus.Count - 1]!.InnerView!.Clear();
-                int startVal = 0;
+                if (GD.MenuExtension!.MEMenus.Count < 1) return;
 
-                if (MCM!.GetCurrent(0)!.Speaker == 0 && MCM.Current!.Count > 0)
+                if (GD.MenuExtension.MEMenus[GD.MenuExtension.MEMenus.Count - 1].InnerView != null)
                 {
-                    GD!.MenuExtension!.MEMenus![GD!.MenuExtension!.MEMenus.Count - 1]!.HeaderLabel!.Text = MCM.GetCurrent(0)!.Text;
-                    startVal++;
-                }
+                    UIS!.MCM = MCM;
 
-                int Limit = MCM.Current!.Count;
+                    if (callbackSelection != null)
+                        _callbackSelection = callbackSelection;
 
-                ScrollView sv = new();
-                GD!.MenuExtension!.MEMenus[GD!.MenuExtension!.MEMenus.Count - 1]!.InnerView!.Add(sv);
+                    GD!.MenuExtension!.MEMenus[GD!.MenuExtension!.MEMenus.Count - 1]!.InnerView!.Clear();
+                    int startVal = 0;
+
+                    if (MCM!.GetCurrent(0)!.Speaker == 0 && MCM.Current!.Count > 0)
+                    {
+                        GD!.MenuExtension!.MEMenus![GD!.MenuExtension!.MEMenus.Count - 1]!.HeaderLabel!.Text = MCM.GetCurrent(0)!.Text;
+                        startVal++;
+                    }
+
+                    int Limit = MCM.Current!.Count;
+
+                    ScrollView sv = UIElement.NewScrollView();
+                    GD!.MenuExtension!.MEMenus[GD!.MenuExtension!.MEMenus.Count - 1]!.InnerView!.Add(sv);
 
 
-                VerticalStackLayout vsl = new();
-                sv.Content = vsl;
-                // tapvsl = vsl;
-                vsl.GestureRecognizers.Clear();
+                    VerticalStackLayout vsl = UIElement.NewVerticalStackLayout();
+                    sv.Content = vsl;
+                    // tapvsl = vsl;
+                    vsl.GestureRecognizers.Clear();
 
-                try
-                {
                     for (int i = startVal; i < Limit; i++)
                     {
-                        Grid g = new();
+                        Grid g = UIElement.NewGrid();
                         ColumnDefinitionCollection rdc = new();
                         ColumnDefinition rd1 = new ColumnDefinition(new GridLength(40));
                         rdc.Add(rd1);
@@ -2489,7 +2508,7 @@ public class MCMenuView
 
 
 
-                        IDLabel l = new();
+                        IDLabel l = UIElement.NewIDLabel();
 
 
                         g.Add(l);
@@ -2502,6 +2521,7 @@ public class MCMenuView
                         l.GestureRecognizers.Clear();
                         TapGestureRecognizer tgr = new();
                         tgr.Tapped += DoTapEntry;
+                        l.GMethods.Add(new IDLabel.GestureMethods(tgr, DoTapEntry));
                         l.GestureRecognizers.Add(tgr);
                         l.SetCursorHand();
                         // }
@@ -2516,7 +2536,7 @@ public class MCMenuView
 
                         if (s != null)
                         {
-                            IDLabel l2 = new();
+                            IDLabel l2 = UIElement.NewIDLabel();
                             l2.Text = s;
                             l2.Margin = margin;
                             l2.StyleClass = LS1;
@@ -2526,61 +2546,53 @@ public class MCMenuView
 
                         }
                     }
-                }
-                catch // (Exception e)
-                {
-                    // int a = 5;
-                }
 
+                }
             }
-        }
-        else
-        {
-            MCMenu MCM = MCM_par;
-            Phoney_MAUI.Model.DelMCMSelection? callbackSelection = callbackSelection_par;
-            bool CanBeInterrupted = CanBeInterrupted_par;
-            lvl++;
-            if (callbackSelection != null)
-                _callbackSelection = callbackSelection;
-
-            // if (_mcGrid == null) return;
-
-
-
-            if (_mcGrid != null)
+            else
             {
-                App.CurrentPage!.Focus();
-                UIS!.MCM = MCM;
+                MCMenu MCM = MCM_par;
+                Phoney_MAUI.Model.DelMCMSelection? callbackSelection = callbackSelection_par;
+                bool CanBeInterrupted = CanBeInterrupted_par;
+                lvl++;
+                if (callbackSelection != null)
+                    _callbackSelection = callbackSelection;
 
-                _mcGrid.Clear();
-                int startVal = 0;
 
-                /*
-                if (MCM.GetCurrent(0).Speaker == null && MCM.Current.Count > 0)
+                if (_mcGrid != null)
                 {
-                    GD.MenuExtension.MEMenus[GD.MenuExtension.MEMenus.Count - 1].HeaderLabel.Text = MCM.GetCurrent(0)!.Text;
-                    startVal++;
-                }
-                */
+                    App.CurrentPage!.Focus();
+                    UIS!.MCM = MCM;
 
-                int Limit = MCM.Current!.Count;
+                    TreeView.EmptyTreeViewItem(_mcGrid!, false, false );
 
-                ScrollView sv = new();
-                _mcGrid.Add(sv);
+                    _mcGrid.Clear();
+                    int startVal = 0;
+
+                    /*
+                    if (MCM.GetCurrent(0).Speaker == null && MCM.Current.Count > 0)
+                    {
+                        GD.MenuExtension.MEMenus[GD.MenuExtension.MEMenus.Count - 1].HeaderLabel.Text = MCM.GetCurrent(0)!.Text;
+                        startVal++;
+                    }
+                    */
+
+                    int Limit = MCM.Current!.Count;
+
+                    ScrollView sv = UIElement.NewScrollView();
+                    _mcGrid.Add(sv);
 
 
-                VerticalStackLayout vsl = new();
-                sv.Content = vsl;
-                // tapvsl = vsl;
-                vsl.GestureRecognizers.Clear();
+                    VerticalStackLayout vsl = UIElement.NewVerticalStackLayout();
+                    sv.Content = vsl;
+                    // tapvsl = vsl;
+                    vsl.GestureRecognizers.Clear();
 
-                try
-                {
                     for (int i = startVal; i < Limit; i++)
                     {
-                        if (MCM!.GetCurrent(i)!.Speaker == 0 && i == 0 )
+                        if (MCM!.GetCurrent(i)!.Speaker == 0 && i == 0)
                         {
-                            Grid g = new();
+                            Grid g = UIElement.NewGrid();
                             ColumnDefinitionCollection rdc = new();
                             ColumnDefinition rd1 = new ColumnDefinition(new GridLength(0));
                             rdc.Add(rd1);
@@ -2597,7 +2609,7 @@ public class MCMenuView
 
                             List<string> LS1 = new();
                             LS1.Add("IDLabel_Normal");
-                            IDLabel l = new();
+                            IDLabel l = UIElement.NewIDLabel();
                             g.Add(l);
                             g.SetColumn(l, 1);
                             l.Text = MCM.GetCurrent(i)!.Text;
@@ -2608,6 +2620,8 @@ public class MCMenuView
                             l.GestureRecognizers.Clear();
                             TapGestureRecognizer tgr = new();
                             tgr.Tapped += DoTapEntry;
+                            l.GMethods.Add(new IDLabel.GestureMethods(tgr, DoTapEntry));
+
                             l.GestureRecognizers.Add(tgr);
                             l.SetCursorHand();
 
@@ -2622,7 +2636,7 @@ public class MCMenuView
                         }
                         else
                         {
-                            Grid g = new();
+                            Grid g = UIElement.NewGrid();
                             ColumnDefinitionCollection rdc = new();
                             ColumnDefinition rd1 = new ColumnDefinition(new GridLength(40));
                             rdc.Add(rd1);
@@ -2637,7 +2651,7 @@ public class MCMenuView
 
                             List<string> LS1 = new();
                             LS1.Add("IDLabel_Normal");
-                            IDLabel l = new();
+                            IDLabel l = UIElement.NewIDLabel();
                             g.Add(l);
                             g.SetColumn(l, 1);
                             l.Text = MCM.GetCurrent(i)!.Text;
@@ -2648,6 +2662,7 @@ public class MCMenuView
                             l.GestureRecognizers.Clear();
                             TapGestureRecognizer tgr = new();
                             tgr.Tapped += DoTapEntry;
+                            l.GMethods.Add( new IDLabel.GestureMethods( tgr, DoTapEntry));
                             l.GestureRecognizers.Add(tgr);
                             l.SetCursorHand();
 
@@ -2671,7 +2686,7 @@ public class MCMenuView
 
                             if (s != null)
                             {
-                                IDLabel l2 = new();
+                                IDLabel l2 = UIElement.NewIDLabel();
                                 l2.Text = s;
                                 l2.Margin = margin;
                                 l2.StyleClass = LS1;
@@ -2682,17 +2697,19 @@ public class MCMenuView
                             }
                         }
                     }
-                }
-                catch // (Exception e)
-                {
-                    // int a = 5;
+
                 }
 
             }
+        }
+
+        catch (Exception e)
+        {
+
+            GlobalData.AddLog("MCOutput: " + e.Message, IGlobalData.protMode.crisp);
 
         }
     }
-
 }
 
 public class GameDefinitions : IGameDefinitions

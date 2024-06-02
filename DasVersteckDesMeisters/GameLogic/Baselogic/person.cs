@@ -210,14 +210,14 @@ namespace GameCore
             return ((locationType * 65536) + locationID);
         }
 
-        public string? FullName(AbstractAdvObject AO, int Case, bool ShowAppendix = false)
+        public string? FullName(AbstractAdvObject AO, int Case, List<Noun> CurrentNouns, bool ShowAppendix = false)
         {
-            return base.FullName(AO, Case, false, ShowAppendix, false);
+            return base.FullName(AO, Case, CurrentNouns, false, ShowAppendix, false);
         }
 
-        public string? FullName(int Case,bool ShowAppendix = false)
+        public string? FullName(int Case, List<Noun> CurrentNouns, bool ShowAppendix = false)
         {
-            return base.FullName(this, Case, false, ShowAppendix, false);
+            return base.FullName(this, Case, CurrentNouns, false, ShowAppendix, false);
         }
     }
     [Serializable]
@@ -556,7 +556,7 @@ namespace GameCore
         }
 
  
-        public string? GetPersonName(Person? PersonID, int Case)
+        public string? GetPersonName(Person? PersonID, int Case, List<Noun> CurrentNouns )
         {
             if (PersonID == A!.Adventure!.CA!.Person_I) return (loca.Adv_InitializeGame_Person_I_3487);
             else if (PersonID == A.Adventure!.CA!.Person_You) return ( loca.PersonList_GetPersonName_Person_You_16235);
@@ -565,21 +565,21 @@ namespace GameCore
             // Dieser Code hier lief plötzlich nicht mehr mit den neuen Inserts. Problem: die Persons-Liste ist komplett 
             // veraltet
             // else return (PersonID.FullName(this.Find(PersonID), Case));
-            else return (PersonID!.FullName(PersonID, Case));
+            else return (PersonID!.FullName(PersonID, Case, CurrentNouns ));
         }
 
-        public string GetPersonVerb(Person PersonID, int Case, int VerbID, int Tense)
+        public string GetPersonVerb(Person PersonID, int Case, List<Noun> CurrentNouns, int VerbID, int Tense)
         {
             // string s = GetPersonName(PersonID, Case) +  Helper.Insert(" [VP:,1]", PersonID );
             // Noloca: 001
-            string s = GetPersonName(PersonID, Case) + Helper.Insert(" [VP1,2]", PersonID, VerbID);
+            string s = GetPersonName(PersonID, Case, CurrentNouns ) + Helper.Insert(" [VP1,2]", PersonID, VerbID);
             return s;
         }
 
-        public string GetPersonVerbLink(Person PersonID, int Case, int VerbID, int Tense)
+        public string GetPersonVerbLink(Person PersonID, int Case, int VerbID, List<Noun> CurrentNouns, int Tense)
         {
             // Noloca: 001
-            string s = this.GetPersonNameLink( PersonID, Case) +  Helper.Insert(" [VP1,2]", PersonID, VerbID );
+            string s = this.GetPersonNameLink( PersonID, Case, CurrentNouns) +  Helper.Insert(" [VP1,2]", PersonID, VerbID );
             return s;
         }
         /*
@@ -810,9 +810,9 @@ namespace GameCore
             return (rPersonIX);
         }
 
-        public string GetPersonNameLink(Person PersonID, int Case)
+        public string GetPersonNameLink(Person PersonID, int Case, List<Noun> CurrentNouns )
         {
-            string? s = this.GetPersonName(PersonID, Case);
+            string? s = this.GetPersonName(PersonID, Case, CurrentNouns );
 
             if( s != loca.PersonList_GetPersonNameLink_16236 )
             {
@@ -853,9 +853,9 @@ namespace GameCore
             return (s);
         }
 
-        public string GetPersonLink(Person? PersonID, string? desc )
+        public string GetPersonLink(Person? PersonID, List<Noun> CurrentNouns, string? desc )
         {
-            string? s = this.GetPersonName(PersonID, Co.CASE_NOM);
+            string? s = this.GetPersonName(PersonID, Co.CASE_NOM, CurrentNouns );
 
             // Noloca: 001
             if (s != "ich")
@@ -898,7 +898,7 @@ namespace GameCore
                     if ((tPerson.HereText != "") && (tPerson.HereText != null))
                         AdvGame!.StoryOutput(OutputLocID, A.Adventure!.CA!.Person_Everyone, GetPersonNameLink(tPerson.HereText, tPerson ));
                     else if ( !tPerson.IsHidden)
-                        AdvGame!.StoryOutput(OutputLocID, A.Adventure!.CA!.Person_Everyone, GetPersonVerbLink(tPerson, Co.CASE_AKK, Co.CB!.VT_sein, A.Tense) + loca.PersonList_ListPersons_Person_Everyone_16242);
+                        AdvGame!.StoryOutput(OutputLocID, A.Adventure!.CA!.Person_Everyone, GetPersonVerbLink(tPerson, Co.CASE_AKK, Co.CB!.VT_sein, A.Adventure.CurrentNouns, A.Tense) + loca.PersonList_ListPersons_Person_Everyone_16242);
 
                 }
             }

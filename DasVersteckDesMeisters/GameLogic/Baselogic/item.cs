@@ -235,14 +235,14 @@ namespace GameCore
             return (true);
         }
 
-        public string? FullName(AbstractAdvObject AO, int Case, bool ShowAppendix = false)
+        public string? FullName(AbstractAdvObject AO, int Case, List<Noun> CurrentNouns, bool ShowAppendix = false)
         {
-            return base.FullName(AO, Case, true, ShowAppendix, false);
+            return base.FullName(AO, Case, CurrentNouns, true, ShowAppendix, false);
         }
 
-        public string? FullName(int Case, bool ShowAppendix = false)
+        public string? FullName(int Case, List<Noun> CurrentNouns, bool ShowAppendix = false)
         {
-            string? fName = base.FullName(this, Case, true, ShowAppendix, false);
+            string? fName = base.FullName(this, Case, CurrentNouns, true, ShowAppendix, false);
             if (ShowAppendix && this.IsDressed)
             {
                 fName = fName + loca.ItemList_GetName_16123;
@@ -926,10 +926,10 @@ namespace GameCore
             return (rItemIX);
         }
 
-        public string GetName(int ItemID, int Case, bool ShowAppendix = false)
+        public string GetName(int ItemID, int Case, List<Noun> CurrentNouns, bool ShowAppendix = false)
         {
             // string s = this.List[this.FindIx(ItemID)].FullName(this.Find(ItemID), Case, ShowAppendix);
-            string s = this.List![ItemID].FullName(this.Find(ItemID!)!, Case, ShowAppendix)!;
+            string s = this.List![ItemID].FullName(this.Find(ItemID!)!, Case, CurrentNouns, ShowAppendix)!;
             // if ( ShowAppendix && this.List[this.FindIx(ItemID)].IsDressed )
             if (ShowAppendix && this.List[ItemID ].IsDressed)
             {
@@ -938,10 +938,10 @@ namespace GameCore
             return (s);
         }
 
-        public string GetName(Item I , int Case, bool ShowAppendix = false)
+        public string GetName(Item I , int Case, List<Noun> CurrentNouns, bool ShowAppendix = false)
         {
             // string s = this.List[this.FindIx(I.ID)].FullName(I, Case, ShowAppendix);
-            string s = I.FullName(I, Case, ShowAppendix)!;
+            string s = I.FullName(I, Case, CurrentNouns, ShowAppendix)!;
             // if (ShowAppendix && this.List[this.FindIx(I.ID)].IsDressed)
             if (ShowAppendix && I.IsDressed)
             {
@@ -951,9 +951,9 @@ namespace GameCore
         }
 
 
-        public string GetItemNameLink(int ItemID, int Case, bool ShowAppendix = false)
+        public string GetItemNameLink(int ItemID, int Case, List<Noun> CurrentNouns, bool ShowAppendix = false)
         {
-            string s = this.GetName(ItemID, Case, ShowAppendix);
+            string s = this.GetName(ItemID, Case, CurrentNouns, ShowAppendix);
 #if CHROMIUM
             // Noloca: 002
             string scr = System.Web.HttpUtility.HtmlEncode( "boundAsync.JSCallback(\"Item: " + $"{ItemID:00000}\");");
@@ -973,9 +973,9 @@ namespace GameCore
             return (s);
         }
 
-        public string GetItemNameLink(Item I , int Case, bool ShowAppendix = false)
+        public string GetItemNameLink(Item I , int Case, List<Noun> CurrentNouns, bool ShowAppendix = false)
         {
-            string s = this.GetName(I, Case, ShowAppendix);
+            string s = this.GetName(I, Case, CurrentNouns, ShowAppendix);
 
 #if CHROMIUM
             // Noloca: 004

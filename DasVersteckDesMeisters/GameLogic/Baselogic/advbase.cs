@@ -849,7 +849,7 @@ namespace GameCore
 
                         // string scr = "boundAsync.JSCallback('ActPerson');>" + Adventure?.FirstUpper(Adventure?.Persons?.GetPersonName(Adventure!.Persons!.Find(ActPerson), Co.CASE_AKK));
                         string scr = System.Web.HttpUtility.HtmlEncode("window.location.href = 'https://defineobject.ActPerson/'") + "'>";
-                        scr += Adventure?.FirstUpper(Adventure?.Persons?.GetPersonName(Adventure!.Persons!.Find(ActPerson), Co.CASE_AKK));
+                        scr += Adventure?.FirstUpper(Adventure?.Persons?.GetPersonName(Adventure!.Persons!.Find(ActPerson), Co.CASE_AKK, Adventure.CurrentNouns ));
                         // Ignores: 002
                         // Noloca: 002
                         string persName = "<a style='cursor:pointer' class='class1' onclick='" + scr + "</a>";
@@ -871,7 +871,7 @@ namespace GameCore
                         // Ignores: 001
                         // string scr = System.Web.HttpUtility.HtmlEncode(loca.AdvData_GetConvertedText_14102 + Adventure?.Persons?.GetPersonName(Adventure!.Persons!.Find(ActPerson), Co.CASE_AKK));
                         string scr = System.Web.HttpUtility.HtmlEncode("window.location.href = 'https://defineobject.ActPerson/';>");
-                        scr += Adventure?.Persons?.GetPersonName(Adventure!.Persons!.Find(ActPerson), Co.CASE_AKK);
+                        scr += Adventure?.Persons?.GetPersonName(Adventure!.Persons!.Find(ActPerson), Co.CASE_AKK, Adventure.CurrentNouns );
                         // Ignores: 002
                         string persName = loca.AdvData_GetConvertedText_14103 + scr + loca.AdvData_GetConvertedText_14104;
 #else
@@ -1275,19 +1275,32 @@ namespace GameCore
             UIS!.Scr!.ScrollPageFinal();
             UIS!.Scr!.SetNext = true;
             */
+            CollectNouns();
             return true;
         }
 
         public bool CollectNouns()
         {
             CurrentNouns = new List<Noun>();
+
+            List<Noun> tCurrentNouns = new List<Noun>();
             foreach (Item i in Items!.List.Values)
             {
                 if (Items.IsItemHere(i, Co.Range_Here))
                 {
                     foreach (Noun n in i.Names)
                     {
-                        CurrentNouns.Add(n);
+                        if( tCurrentNouns.Contains( n ) == true && CurrentNouns.Contains( n ) == false )
+                            CurrentNouns.Add(n );
+
+                        tCurrentNouns.Add(n );
+                    }
+                    foreach (Noun n in i.SynNames)
+                    {
+                        if (tCurrentNouns.Contains(n) == true && CurrentNouns.Contains(n) == false)
+                            CurrentNouns.Add(n);
+
+                        tCurrentNouns.Add(n);
                     }
                 }
             }
@@ -1298,14 +1311,27 @@ namespace GameCore
                 {
                     foreach (Noun n in p.Names)
                     {
-                        CurrentNouns.Add(n);
+                        if (tCurrentNouns.Contains(n) == true)
+                            CurrentNouns.Add(n);
+
+                        tCurrentNouns.Add(n );
+                    }
+                    foreach (Noun n in p.SynNames)
+                    {
+                        if (tCurrentNouns.Contains(n) == true)
+                            CurrentNouns.Add(n);
+
+                        tCurrentNouns.Add(n);
                     }
                 }
             }
+
             return true;
         }
         public bool DoGameLoop(string s, ParseTokenList? ptl = null, ParseLineList? ptlSignatures = null)
         {
+
+            CollectNouns();
 
             bool success = false;
             if (s != null)
@@ -1316,6 +1342,9 @@ namespace GameCore
                 if (GD!.FeedbackWindow == false && GD!.UseMoreBuffer == false)
                 {
                     // UIS!.StoryTextObj!.BufferedInput = loca.AdvBase_DoGameLoop_Person_I_14113 + s;
+                    SetStoryLine = false;
+                    int val = 0;
+                    // GD!.OrderList!.AddOrder(orderType.orderText, s, null, loca.GD!.Language, Parser.latestPTL, Parser.latestPTLSignatures, ref val);
                     StoryOutput(loca.AdvBase_DoGameLoop_Person_I_14113 + s);
                 }
 
@@ -1520,15 +1549,15 @@ namespace GameCore
             return true;
         }
 
-        public bool StoryOutput(string? Text)
+        public bool StoryOutput(string? Text, bool SuppressOrderEntry = false)
         {
             if (AdvGame!.CA == null)
                 return false;
 
-            return StoryOutput(AdvGame!.CA!.Person_I!.locationID, AdvGame!.CA!.Person_I, Text);
+            return StoryOutput(AdvGame!.CA!.Person_I!.locationID, AdvGame!.CA!.Person_I, Text, SuppressOrderEntry);
         }
 
-        public bool StoryOutput(int locationID, Person? PersonID, string? Text)
+        public bool StoryOutput(int locationID, Person? PersonID, string? Text, bool SuppressOrderEntry = false)
         {
             if (PersonID == null) PersonID = A!.Adventure!.CA!.Person_Everyone;
 
@@ -1564,7 +1593,8 @@ namespace GameCore
                 }
                 Text = Helper.Insert(Text);
 
-                GD!.OrderList!.AddOrderText(Helper.StripHTML(Text!));
+                if( SuppressOrderEntry == false)
+                    GD!.OrderList!.AddOrderText(Helper.StripHTML(Text!));
                 UIS!.TextOutput(A!.GetConvertedText(Text!)!);
                 // MW.TextOutput( Text);
             }
@@ -1587,7 +1617,7 @@ namespace GameCore
             string s1 = loca.AdvBase_StateDescription_14125;
             if (AdvGame.LastSpeaker != null)
             {
-                s1 = Persons!.GetPersonName(AdvGame!.LastSpeaker, Co.CASE_DAT)!;
+                s1 = Persons!.GetPersonName(AdvGame!.LastSpeaker, Co.CASE_DAT, CurrentNouns )!;
             }
             s += String.Format(loca.AdvBase_StateDescription_14126, s1);
 
@@ -1703,8 +1733,17 @@ namespace GameCore
 
         public string SaveObj(object o)
         {
-            string str = JsonConvert.SerializeObject(o, Newtonsoft.Json.Formatting.Indented);
-            return str;
+            try
+            {
+                string str = JsonConvert.SerializeObject(o, Newtonsoft.Json.Formatting.Indented);
+                return str;
+            }
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("ObjectToByteArray: " + ex.Message, IGlobalData.protMode.crisp);
+                return null;
+            }
+
 
         }
 
@@ -3177,27 +3216,27 @@ namespace GameCore
 
                         if (i != null)
                         {
-                            snew += Items!.GetItemNameLink(i.ID, aocase);
+                            snew += Items!.GetItemNameLink(i.ID, aocase, CurrentNouns );
                         }
                         else if (it != null)
                         {
-                            snew += Items!.GetName(it.ID, aocase);
+                            snew += Items!.GetName(it.ID, aocase, CurrentNouns );
                         }
                         else if (p != null)
                         {
-                            snew += Persons!.GetPersonLink(p, pString);
+                            snew += Persons!.GetPersonLink(p, CurrentNouns, pString );
                         }
                         else if (pt != null)
                         {
-                            snew += Persons!.GetPersonName(pt, aocase);
+                            snew += Persons!.GetPersonName(pt, aocase, CurrentNouns );
                         }
                         else if (plt != null)
                         {
-                            snew += Persons!.GetPersonNameLink(plt, aocase);
+                            snew += Persons!.GetPersonNameLink(plt, aocase, CurrentNouns );
                         }
                         else if (plv != null)
                         {
-                            snew += Persons!.GetPersonVerbLink(plv, aocase, verbID, A.Tense);
+                            snew += Persons!.GetPersonVerbLink(plv, aocase, verbID, CurrentNouns, A.Tense);
                         }
 
                         if (lenSeq == 0)

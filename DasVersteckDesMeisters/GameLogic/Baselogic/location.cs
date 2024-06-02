@@ -804,7 +804,7 @@ namespace GameCore
             */
             if (anzahlGefunden > 0)
             {
-                AdvGame.StoryOutput(locationID, null, Persons!.GetPersonVerbLink(Persons!.Find( A!.ActPerson! )!, Co.CASE_AKK, AdvGame.CB!.VT_sehen, A.Tense) + loca.locationList_ShowlocationFull_16138);
+                AdvGame.StoryOutput(locationID, null, Persons!.GetPersonVerbLink(Persons!.Find( A!.ActPerson! )!, Co.CASE_AKK, AdvGame.CB!.VT_sehen, AdvGame.CurrentNouns, A.Tense) + loca.locationList_ShowlocationFull_16138);
 
                 foreach( Item item in Items!.List.Values )
                 {
@@ -884,7 +884,7 @@ namespace GameCore
             */
             if (anzahlGefunden > 0)
             {
-                AdvGame.StoryOutput(locationID, null, Persons!.GetPersonVerbLink( Persons!.Find( A!.ActPerson )!, Co.CASE_AKK, AdvGame.CB!.VT_sehen, A.Tense) + loca.locationList_ShowlocationFull_16138 );
+                AdvGame.StoryOutput(locationID, null, Persons!.GetPersonVerbLink( Persons!.Find( A!.ActPerson )!, Co.CASE_AKK, AdvGame.CB!.VT_sehen, AdvGame.CurrentNouns, A.Tense) + loca.locationList_ShowlocationFull_16138 );
 
                 foreach( Item item in Items!.List.Values )
                 {

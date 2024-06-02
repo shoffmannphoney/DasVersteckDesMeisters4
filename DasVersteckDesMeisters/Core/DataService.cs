@@ -47,12 +47,20 @@ namespace Phoney_MAUI.Core
 
         public bool WriteJsonIndex(OrderListInfo oli)
         {
-            string? pathfileName = DeviceData._deviceData!.GetSavePath()! + loca.OrderList_WriteJsonIndex_16209;
+            try
+            {
+                string? pathfileName = DeviceData._deviceData!.GetSavePath()! + loca.OrderList_WriteJsonIndex_16209;
 
-            string? jsonDest = JsonConvert.SerializeObject(oli, Newtonsoft.Json.Formatting.Indented);
-            File.WriteAllText(pathfileName, jsonDest);
+                string? jsonDest = JsonConvert.SerializeObject(oli, Newtonsoft.Json.Formatting.Indented);
+                File.WriteAllText(pathfileName, jsonDest);
 
-            return true;
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("WriteJsonIndex: " + ex.Message, IGlobalData.protMode.crisp);
+                return false;
+            }
         }
 
         public OrderListInfo ReadJsonIndex()
@@ -240,74 +248,82 @@ namespace Phoney_MAUI.Core
 
         public bool ZipOrderTable(int val)
         {
-            string orderTableName = "/ordertable.zip";
-            // Noloca: 003
-            string? pathName = DeviceData._deviceData!.GetSavePath()!;
-            string? pathfileName = pathName + orderTableName;
-
-
-            string? jsonString =
-                JsonConvert.SerializeObject(GD!.OrderList!.OTL![val]!.OT!,
-                    Newtonsoft.Json.Formatting.Indented,
-                    new JsonSerializerSettings
-                    {
-                        NullValueHandling = NullValueHandling.Ignore,
-                        Formatting = Formatting.Indented
-                    }
-                );
-
-            // byte[] compressedBytes;
-
-            var outStream = new MemoryStream();
-            ZipArchive archive;
-
-            if (File.Exists(pathfileName))
+            try
             {
-                archive = ZipFile.Open(pathfileName, ZipArchiveMode.Update);
+                string orderTableName = "/ordertable.zip";
+                // Noloca: 003
+                string? pathName = DeviceData._deviceData!.GetSavePath()!;
+                string? pathfileName = pathName + orderTableName;
+
+
+                string? jsonString =
+                    JsonConvert.SerializeObject(GD!.OrderList!.OTL![val]!.OT!,
+                        Newtonsoft.Json.Formatting.Indented,
+                        new JsonSerializerSettings
+                        {
+                            NullValueHandling = NullValueHandling.Ignore,
+                            Formatting = Formatting.Indented
+                        }
+                    );
+
+                // byte[] compressedBytes;
+
+                var outStream = new MemoryStream();
+                ZipArchive archive;
+
+                if (File.Exists(pathfileName))
+                {
+                    archive = ZipFile.Open(pathfileName, ZipArchiveMode.Update);
+                }
+                else
+                {
+                    archive = new ZipArchive(outStream, ZipArchiveMode.Update, true);
+                }
+
+
+                // Noloca: 001
+                string jsonName = GD.OrderList.OTL![val].Name + ".json";
+
+                var fileInArchive = archive.GetEntry(jsonName);
+                if (fileInArchive != null)
+                {
+                    fileInArchive.Delete();
+                    fileInArchive = null;
+                }
+
+                if (fileInArchive == null)
+                    fileInArchive = archive.CreateEntry(jsonName, CompressionLevel.Optimal);
+
+                byte[] jsonBytes = Encoding.UTF8.GetBytes(jsonString);
+                // string s2 = Encoding.Unicode.GetString(jsonBytes);
+
+                using (var entryStream = fileInArchive.Open())
+                using (var fileToCompressStream = new MemoryStream(jsonBytes))
+                {
+                    fileToCompressStream.CopyTo(entryStream);
+                }
+
+                archive.Dispose();
+
+                using (var fileStream = new FileStream(pathfileName, FileMode.OpenOrCreate))
+                {
+                    outStream.Position = 0;
+                    outStream.WriteTo(fileStream);
+                    outStream.Flush();
+                }
+                outStream.Close();
+                outStream.Dispose();
+
+                GD.OrderList.OTL![val].OT = null;
+                GD.OrderList.OTL![val].Zipped = true;
+
+                return true;
             }
-            else
+            catch (Exception ex)
             {
-                archive = new ZipArchive(outStream, ZipArchiveMode.Update, true);
+                Phoney_MAUI.Core.GlobalData.AddLog("ZipOrderTable: " + ex.Message, IGlobalData.protMode.crisp);
+                return false;
             }
-
-
-            // Noloca: 001
-            string jsonName = GD.OrderList.OTL![val].Name + ".json";
-
-            var fileInArchive = archive.GetEntry(jsonName);
-            if (fileInArchive != null)
-            {
-                fileInArchive.Delete();
-                fileInArchive = null;
-            }
-
-            if (fileInArchive == null)
-                fileInArchive = archive.CreateEntry(jsonName, CompressionLevel.Optimal);
-
-            byte[] jsonBytes = Encoding.UTF8.GetBytes(jsonString);
-            // string s2 = Encoding.Unicode.GetString(jsonBytes);
-
-            using (var entryStream = fileInArchive.Open())
-            using (var fileToCompressStream = new MemoryStream(jsonBytes))
-            {
-                fileToCompressStream.CopyTo(entryStream);
-            }
-
-            archive.Dispose();
-
-            using (var fileStream = new FileStream(pathfileName, FileMode.OpenOrCreate))
-            {
-                outStream.Position = 0;
-                outStream.WriteTo(fileStream);
-                outStream.Flush();
-            }
-            outStream.Close();
-            outStream.Dispose();
-
-            GD.OrderList.OTL![val].OT = null;
-            GD.OrderList.OTL![val].Zipped = true;
-
-            return true;
         }
 
         public bool DeleteZipOrderTableEntry(string name)
@@ -392,75 +408,83 @@ namespace Phoney_MAUI.Core
 
         public bool SaveOrderTable()
         {
-
-            // Hier wird gespeichert. Später
-            // Noloca: 003
-
-            string? pathName = DeviceData._deviceData!.GetSavePath()!;
-            string? pathfileName = pathName + "/ordertable.json";
-
-            if (GD!.SilentMode == true) return false;
-
-            int ix;
-            bool fullWrite = false;
-
-            // ToDo: Integration mit dem Spiel
-            if (GD.Adventure != null)
+            try
             {
-                if (GD.Adventure!.A != null)
+                // Hier wird gespeichert. Später
+                // Noloca: 003
+
+                string? pathName = DeviceData._deviceData!.GetSavePath()!;
+                string? pathfileName = pathName + "/ordertable.json";
+
+                if (GD!.SilentMode == true) return false;
+
+                int ix;
+                bool fullWrite = false;
+
+                // ToDo: Integration mit dem Spiel
+                if (GD.Adventure != null)
                 {
-                    if (GD.Adventure!.A.Finish == true)
+                    if (GD.Adventure!.A != null)
                     {
-                        fullWrite = true;
+                        if (GD.Adventure!.A.Finish == true)
+                        {
+                            fullWrite = true;
+                        }
                     }
                 }
+
+                if (fullWrite)
+                {
+                    for (ix = 0; ix < GD.OrderList!.OTL!.Count; ix++)
+                    {
+                        if (!GD.OrderList.OTL![ix].Zipped)
+                        {
+                            GD.OrderList.ZipOrderTable(ix);
+                        }
+                    }
+
+                }
+                // Es wird erst geschrieben, sobald die Initialisierung erfolgt ist
+                else if (GD.OrderList != null)
+                {
+                    int startVal = 1;
+                    int olIndex = GD.OrderList.CurrentViewOrderListIx;
+
+                    /* ToDo: Wofür ist _actualGame gut? Das sieht so derartig fishy aus...
+                    if (GD.OrderList._actualGame == false)
+                    {
+                        startVal = 0;
+                    }
+                    */
+                    for (ix = startVal; ix < GD.OrderList.OTL!.Count; ix++)
+                    {
+                        if (!GD.OrderList.OTL![ix].Zipped && ix != GD.OrderList.CurrentOrderListIx && ix != olIndex)
+                        {
+                            GD.OrderList.ZipOrderTable(ix);
+                        }
+                    }
+                }
+
+                string jsonString =
+                    JsonConvert.SerializeObject(GD.OrderList,
+                        Newtonsoft.Json.Formatting.Indented,
+                        new JsonSerializerSettings
+                        {
+                            NullValueHandling = NullValueHandling.Ignore,
+                            Formatting = Formatting.Indented
+                        }
+                    );
+                File.WriteAllTextAsync(pathfileName, jsonString);
+                // WriteToFileAsync(pathfileName, jsonString);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("SaveOrderTable: " + ex.Message, IGlobalData.protMode.crisp);
+                return false;
             }
 
-            if (fullWrite)
-            {
-                for (ix = 0; ix < GD.OrderList!.OTL!.Count; ix++)
-                {
-                    if (!GD.OrderList.OTL![ix].Zipped)
-                    {
-                        GD.OrderList.ZipOrderTable(ix);
-                    }
-                }
-
-            }
-            // Es wird erst geschrieben, sobald die Initialisierung erfolgt ist
-            else if (GD.OrderList != null)
-            {
-                int startVal = 1;
-                int olIndex = GD.OrderList.CurrentViewOrderListIx;
-
-                /* ToDo: Wofür ist _actualGame gut? Das sieht so derartig fishy aus...
-                if (GD.OrderList._actualGame == false)
-                {
-                    startVal = 0;
-                }
-                */
-                for (ix = startVal; ix < GD.OrderList.OTL!.Count; ix++)
-                {
-                    if (!GD.OrderList.OTL![ix].Zipped && ix != GD.OrderList.CurrentOrderListIx && ix != olIndex)
-                    {
-                        GD.OrderList.ZipOrderTable(ix);
-                    }
-                }
-            }
-
-            string jsonString =
-                JsonConvert.SerializeObject(GD.OrderList,
-                    Newtonsoft.Json.Formatting.Indented,
-                    new JsonSerializerSettings
-                    {
-                        NullValueHandling = NullValueHandling.Ignore,
-                        Formatting = Formatting.Indented
-                    }
-                );
-            File.WriteAllTextAsync(pathfileName, jsonString);
-            // WriteToFileAsync(pathfileName, jsonString);
-
-            return true;
         }
 
         /*

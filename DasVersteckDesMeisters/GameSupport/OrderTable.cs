@@ -785,15 +785,24 @@ public class OrderList : IOrderList
 
     public bool WriteJsonIndex()
     {
-        string? jsonDest = JsonConvert.SerializeObject(SetOrderListInfo, Newtonsoft.Json.Formatting.Indented);
-        UIS!.SaveString(loca.OrderList_WriteJsonIndex_16209, jsonDest);
-        /*
-        string? pathName = GlobalData.CurrentPath(); 
-        string? pathfileName = pathName + loca.OrderList_WriteJsonIndex_16209;
+        try
+        {
+            string? jsonDest = JsonConvert.SerializeObject(SetOrderListInfo, Newtonsoft.Json.Formatting.Indented);
+            UIS!.SaveString(loca.OrderList_WriteJsonIndex_16209, jsonDest);
+            /*
+            string? pathName = GlobalData.CurrentPath(); 
+            string? pathfileName = pathName + loca.OrderList_WriteJsonIndex_16209;
 
-        File.WriteAllText(pathfileName, jsonDest);
-        */
-        return true;
+            File.WriteAllText(pathfileName, jsonDest);
+            */
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Phoney_MAUI.Core.GlobalData.AddLog("WriteJsonIndex: " + ex.Message, IGlobalData.protMode.crisp);
+            return false;
+        }
+
     }
 
     public void StripOrderList()
@@ -1328,6 +1337,11 @@ public class OrderList : IOrderList
         {
             return;
         }
+        if (text.Length >= 1 && text.Substring(0, 1) == "n")
+        {
+
+        }
+
         text = Helper.FirstUpper(text)!;
 
         if (Collector != null)
@@ -1409,6 +1423,11 @@ public class OrderList : IOrderList
                 SetOrderListInfo.listNr++;
             }
 
+            if (Name.Length >= 1 && Name.Substring(0, 1) == "n")
+            {
+                
+            }
+
             if (OTL == null)
             {
                 OTL = new List<OrderListTable>();
@@ -1447,6 +1466,8 @@ public class OrderList : IOrderList
     {
         if (text == null || text == "") return;
 
+        
+
         if (OTL![Index].TempPoint >= 0)
         {
             if (OTL![Index].TempPoint > 0)
@@ -1477,7 +1498,7 @@ public class OrderList : IOrderList
             }
             else if (!sysComment)
             {
-                OTL![Index]!.OT![OTL![Index].Point]!.OrderType = orderType.noText;
+                // OTL![Index]!.OT![OTL![Index].Point]!.OrderType = orderType.noText;
             }
 
             if (OTL![Index].OT![OTL![Index].Point].OrderFeedback != "")

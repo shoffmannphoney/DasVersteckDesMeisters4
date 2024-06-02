@@ -29,14 +29,21 @@ public partial class App : Application
 
     public App()
 	{
-		InitializeComponent();
+        try
+        {
+            InitializeComponent();
 
-        ThisApplication = this;
+            ThisApplication = this;
 
-        MainPage = new AppShell();
-		AppMainPage = MainPage;
+            MainPage = new AppShell();
+            AppMainPage = MainPage;
 
-        
+        }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("App(): " + ex.Message, Phoney_MAUI.Model.IGlobalData.protMode.crisp);
+
+        }
 
     }
 

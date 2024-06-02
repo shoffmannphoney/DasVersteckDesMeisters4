@@ -981,7 +981,7 @@ namespace GameCore
                             // Wenn SpeakVerb und ggf. SpeakAdverb gesetzt sind
                             if (tMCME.SpeakVerb > 0 && tMCME.Speaker != 0 && tMCME.SpeakVerb != AdvGame!.CB!.VT_nothing)
                             {
-                                string speakertext = Persons!.Find(tMCME.Speaker)!.FullName(Co.CASE_AKK, true) + " " + Grammar.GetVerbDeclination(tMCME.SpeakVerb, Persons.Find(tMCME.Speaker), A!.Tense);
+                                string speakertext = Persons!.Find(tMCME.Speaker)!.FullName(Co.CASE_AKK, AdvGame.CurrentNouns, true) + " " + Grammar.GetVerbDeclination(tMCME.SpeakVerb, Persons.Find(tMCME.Speaker), A!.Tense);
                                 string? empty = null;
                                 if (tMCME.SpeakAdverb != null)
                                     // Ignores: 001

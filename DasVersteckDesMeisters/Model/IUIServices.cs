@@ -17,6 +17,7 @@ public delegate bool DelDouble(double d);
 public delegate bool DelVoid();
 public delegate bool Del4Double( double a, double b, double c, double d);
 public delegate void DelVoidSenderObject( object? o, EventArgs ea );
+public delegate void DelVoidTapped( object o, Microsoft.Maui.Controls.TappedEventArgs ea );
 
 public delegate bool DelInt(int val);
 public delegate bool DelOrderList(OrderList ol);

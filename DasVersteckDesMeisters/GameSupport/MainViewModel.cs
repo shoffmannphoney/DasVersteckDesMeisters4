@@ -42,6 +42,7 @@ public class MainViewModel : BaseViewModel
 
         SelectedTheme = (ResourceDictionary) new Resources.Styles.ThemeI();
         SelectedReplay = _globalSpecs.GetCurrentReplayInfo();
+        SelectTheme(GlobalData.CurrentGlobalData.CurrentTheme);
 
         GlobalSpecs.CurrentGlobalSpecs!.AppRunning = IGlobalSpecs.appRunning.running;
     }
@@ -80,8 +81,9 @@ public class MainViewModel : BaseViewModel
         AppShell._mainAppShell!.ChangeTheme(rd);
 
         SelectedTheme = rd;
-         _globalSpecs!.SetCurrentTheme(ti);
-
+        // ti.SetThemeInfo(ti);
+        GlobalData.CurrentGlobalData.LayoutDescription.CurrentThemeNo = ti.Id;
+        _globalSpecs!.SetCurrentTheme(ti);
     }
 
 
@@ -106,7 +108,9 @@ public class MainViewModel : BaseViewModel
 
         AppShell._mainAppShell!.ChangeFont(rd);
 
+        GlobalData.CurrentGlobalData.LayoutDescription.CurrentFontNo = fi.Id;
         _globalSpecs!.SetCurrentFont(fi);
+        // fi.SetFontInfo(fi);
 
     }
     public void SelectFontSize(FontSizeInfo fsi)
@@ -126,7 +130,9 @@ public class MainViewModel : BaseViewModel
 
         AppShell._mainAppShell!.ChangeFontSize(rd);
 
+        GlobalData.CurrentGlobalData.LayoutDescription.CurrentFontSizeNo = fsi.Id;
         _globalSpecs!.SetCurrentFontSize(fsi);
+        // fsi.SetFontInfo(fsi);
 
     }
 

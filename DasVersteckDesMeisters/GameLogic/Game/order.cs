@@ -581,10 +581,23 @@ namespace GameCore
                 PersonID = CA.Person_I;
             }
 
-            AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_location_Person_Everyone_13922, PersonID, PersonID));
+            if (AdvGame.GD.LayoutDescription.OrderRepeat == true)
+                AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_location_Person_Everyone_13922, PersonID, PersonID));
+
             locations!.ShowLocation(Persons!.LocOnly(PersonID));
 
-            if (LocationID == CA.L05_Atrium)
+            if (LocationID == CA.L04_Shabby_Little_Chamber)
+            {
+                if (CA.I04_Opening.locationID == CA.L04_Shabby_Little_Chamber)
+                {
+                    AdvGame!.StoryOutput(loca.Adv_L04_Opening);
+                }
+                else if (CA.I04_Flap.locationID == CA.L04_Shabby_Little_Chamber)
+                {
+                    AdvGame!.StoryOutput(loca.Adv_L04_Flap);
+                }
+            }
+            else if (LocationID == CA.L05_Atrium)
             {
                 if (CA.I00_Claw.locationID == CA.I05_Pedestal.ID)
                 {
@@ -636,6 +649,19 @@ namespace GameCore
                     AdvGame!.StoryOutput(loca.Adv_L11_Animal);
 
                 AdvGame!.StoryOutput(loca.Adv_L11_Magpie);
+            }
+            else if (LocationID == CA.L14_Bathroom)
+            {
+                if (CA.I14_Opening.locationID == CA.L14_Bathroom)
+                {
+                    AdvGame!.StoryOutput(loca.Adv_L14_Opening);
+                }
+                else if (CA.I14_Special_Tile.locationID == CA.L14_Bathroom)
+                {
+                    AdvGame!.StoryOutput(loca.Adv_L14_Tile);
+                }
+
+
             }
 
             return true;
@@ -933,13 +959,13 @@ namespace GameCore
                 {
                     if( talkString == null )
                     {
-                        mcM.AddSpeaker(CA!.Person_Self, String.Format( loca.Order_GenericDialog_Person_Self_433, Persons!.GetPersonVerbLink(CA!.Person_Self!, Co.CASE_AKK, CB!.VT_sagen, A!.Tense) ) );
-                        mcM.AddSpeaker(PersonID, String.Format(loca.Order_GenericDialog_Person_Self_434, Persons!.GetPersonVerbLink(PersonID, Co.CASE_AKK, CB!.VT_sagen, A!.Tense) ) );
+                        mcM.AddSpeaker(CA!.Person_Self, String.Format( loca.Order_GenericDialog_Person_Self_433, Persons!.GetPersonVerbLink(CA!.Person_Self!, Co.CASE_AKK, CB!.VT_sagen, AdvGame.CurrentNouns, A!.Tense) ) );
+                        mcM.AddSpeaker(PersonID, String.Format(loca.Order_GenericDialog_Person_Self_434, Persons!.GetPersonVerbLink(PersonID, Co.CASE_AKK, CB!.VT_sagen, AdvGame.CurrentNouns, A!.Tense) ) );
                     }
                     else
                     {
-                        mcM.AddSpeaker(CA!.Person_Self, String.Format(loca.Order_GenericDialog_Person_Self_435, Persons!.GetPersonNameLink(CA!.Person_Self!, Co.CASE_AKK ), talkString) );
-                        mcM.AddSpeaker(PersonID, String.Format(loca.Order_GenericDialog_Person_Self_436, Persons!.GetPersonNameLink(PersonID!, Co.CASE_AKK ), talkString ) );
+                        mcM.AddSpeaker(CA!.Person_Self, String.Format(loca.Order_GenericDialog_Person_Self_435, Persons!.GetPersonNameLink(CA!.Person_Self!, Co.CASE_AKK, AdvGame.CurrentNouns), talkString) );
+                        mcM.AddSpeaker(PersonID, String.Format(loca.Order_GenericDialog_Person_Self_436, Persons!.GetPersonNameLink(PersonID!, Co.CASE_AKK, AdvGame.CurrentNouns), talkString ) );
 
                     }
                 }
@@ -1899,6 +1925,11 @@ namespace GameCore
                 handled = true;
 
             }
+            else if (item1.ID == CA!.I08_Well!.ID && CA.I08_Wooden_Cover.locationID != CA.I08_Well.ID )
+            {
+                Examine(PersonID, PTL);
+                handled = true;
+            }
             else if (item1.ID == CA!.I08_Water!.ID )
             {
                 Examine(PersonID, PTL);
@@ -2284,6 +2315,7 @@ namespace GameCore
                 Items.TransferItem(CA.I00_Stable_Pliers_With_Claw.ID, CB.LocType_Person, CA.Person_I!.ID);
                 Items.TransferItem(CA.I00_Magic_Candle.ID, CB.LocType_Person, CA.Person_I!.ID);
                 Items.TransferItem(CA.I00_Polished_Stone.ID, CB.LocType_Person, CA.Person_I!.ID);
+                Items.TransferItem(CA.I00_Slag.ID, CB.LocType_Person, CA.Person_I!.ID);
                 Items.TransferItem(CA.I12_Matress.ID, CB.LocType_On_Item, CA.I12_Bed.ID);
                 CA!.I12_Matress.IsBackground = false;
 
@@ -2392,7 +2424,7 @@ namespace GameCore
 
                 if (!response)
                 {
-                    AdvGame!.StoryOutput(Helper.Insert( loca.KnockOn_Fail, Persons.GetPersonNameLink( person1.FullName( Co.CASE_NOM ), person1 ) ));
+                    AdvGame!.StoryOutput(Helper.Insert( loca.KnockOn_Fail, Persons.GetPersonNameLink( person1.FullName( Co.CASE_NOM, AdvGame.CurrentNouns), person1 ) ));
                     response = true;
 
                     
@@ -4503,7 +4535,7 @@ namespace GameCore
             */
             if ( !handled )
             {
-                AdvGame!.FeedbackOutput(PersonID, topic!.FullName(topic, Co.CASE_NOM) + loca.Order_ExamineT_1198);
+                AdvGame!.FeedbackOutput(PersonID, topic!.FullName(topic, Co.CASE_NOM, AdvGame.CurrentNouns) + loca.Order_ExamineT_1198);
 
             }
             return (handled);
@@ -5932,6 +5964,11 @@ namespace GameCore
 
             }
             if( item1.ID == CA!.I05_Sign.ID)
+            {
+                Examine(PersonID, PTL);
+                success = true;
+            }
+            if (item1.ID == CA!.I03_Runes.ID)
             {
                 Examine(PersonID, PTL);
                 success = true;

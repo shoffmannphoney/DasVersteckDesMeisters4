@@ -71,6 +71,11 @@ public interface ILayoutDescription
     public bool SimpleMC { get; set; }
     public bool Highlighting { get; set; }
     public IGlobalData.microMode STTMicroState { get; set; }
+    public bool OrderRepeat { get; set; }
+
+    public int CurrentThemeNo { get; set; }
+    public int CurrentFontNo { get; set; }
+    public int CurrentFontSizeNo { get; set; }
 }
 
 public interface IGlobalData
@@ -181,6 +186,11 @@ public interface IGlobalData
     public IUIServices? UIS { get; set; }
     public Phoney_MAUI.Menu.MenuExtension? MenuExtension { get; set; }
     public List<Phoney_MAUI.Model.DelVoid>? _languageCallbacks { get; set; }
+
+    public ThemeInfo? CurrentTheme { get; }
+    public FontInfo? CurrentFont { get; }
+    public FontSizeInfo? CurrentFontSize { get; }
+
 }
 public interface IGlobalSpecs
 {

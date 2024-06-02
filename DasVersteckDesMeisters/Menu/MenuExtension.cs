@@ -685,8 +685,11 @@ public class MenuExtension
         LatestMenuVisible = true;
         return true;
     }
+    int _menuCount = 0;
     public void CloseTap( object? sender, EventArgs? ea)
     {
+        _menuCount++;
+
         if (MEMenus.Count > 0)
         {
             MEMenus[MEMenus.Count - 1].Visible = false;

@@ -50,7 +50,7 @@ public partial class CreditsPage : ContentPage, IMenuExtension
         string s = String.Format(loca.Order_GameInfo_1949a, AdvGame!.GD!.Version.Version1, AdvGame!.GD!.Version.Version2, AdvGame!.GD!.Version.Version3, AdvGame!.GD!.Version.VersionDate.Day, AdvGame!.GD!.Version.VersionDate.Month, AdvGame!.GD!.Version.VersionDate.Year);
 
         // CreditsText.Text = loca.Order_Credits_plain_1935 + loca.Order_Credits_plain_1936 + s + loca.MAUI_Phoney_Generell + loca.MAUI_Phoney_Translation + loca.MAUI_Phoney_Grafik + loca.Order_Credits_plain_1937 + loca.MAUI_Phoney_Licence;
-        CreditsText.Text = loca.Order_Credits_plain_1935 + loca.Order_Credits_plain_1936 + s + loca.General_Info + loca.Order_Credits_plain_1937 + loca.MAUI_Phoney_Licence;
+        CreditsText.Text = loca.Order_Credits_plain_1935 + loca.Order_Credits_plain_1936 + s + loca.General_Info + loca.Order_Credits_plain_1937 + loca.MAUI_Phoney_Grafik + loca.MAUI_Phoney_Licence;
     }
 
     protected override async void OnNavigatedTo(NavigatedToEventArgs args)

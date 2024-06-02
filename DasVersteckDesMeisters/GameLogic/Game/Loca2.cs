@@ -3996,6 +3996,26 @@ public static partial class loca
                 return "Versteck";
         }
     }
+    public static string Noun_Fliese
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Fliese";
+            else
+                return "Fliese";
+        }
+    }
+    public static string Noun_Fliesen
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Fliesen";
+            else
+                return "Fliesen";
+        }
+    }
     public static string Noun_Krempel
     {
         get
@@ -4965,6 +4985,26 @@ public static partial class loca
                 return "Auf dem Podest funkelte [I:I00_Claw]die prächtige, riesenhafte Klaue[/I], das Objekt meiner Begierde.";
         }
     }
+    public static string Adv_L04_Opening
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Hinter [I:I04_Flap]einer Klappe[/I] an der Wand war eine [I:I04_Opening]dunkle Öffnung[/I] zu erkennen.";
+            else
+                return "Hinter [I:I04_Flap]einer Klappe[/I] an der Wand war eine [I:I04_Opening]dunkle Öffnung[/I] zu erkennen.";
+        }
+    }
+    public static string Adv_L04_Flap
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "An der Wand hinter [I:I04_Cupboard]dem Schrank[/I] befand sich [I:I04_Flap]einer Klappe[/I].";
+            else
+                return "An der Wand hinter [I:I04_Cupboard]dem Schrank[/I] befand sich [I:I04_Flap]einer Klappe[/I].";
+        }
+    }
     public static string Adv_L06_Floor_Letters
     {
         get
@@ -4990,9 +5030,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Im Wäschekorb lag [I:I08_Clothing]ein Haufen nasser Wäsche[/I].";
+                return "Im Wäschekorb lag [I:I08_Clothes]ein Haufen nasser Wäsche[/I].";
             else
-                return "Im Wäschekorb lag [I:I08_Clothing]ein Haufen nasser Wäsche[/I].";
+                return "Im Wäschekorb lag [I:I08_Clothes]ein Haufen nasser Wäsche[/I].";
         }
     }
     public static string Adv_L08_Abdeckung_drauf
@@ -5003,6 +5043,26 @@ public static partial class loca
                 return "Auf dem Brunnen befand sich [I:I08_Wooden_Cover]eine hölzerne Abdeckung[/I].";
             else
                 return "Auf dem Brunnen befand sich [I:I08_Wooden_Cover]eine hölzerne Abdeckung[/I].";
+        }
+    }
+    public static string Adv_L14_Opening
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "Eine der Kacheln an der Wand fehlte, stattdessen klaffte dort [I:I14_Opening]eine Öffnung[/I].";
+            else
+                return "Eine der Kacheln an der Wand fehlte, stattdessen klaffte dort [I:I14_Opening]eine Öffnung[/I].";
+        }
+    }
+    public static string Adv_L14_Tile
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "[I:I14_Special_Tile]Eine der Kacheln[/I] an der Wand wirkte etwas anders als die anderen.";
+            else
+                return "[I:I14_Special_Tile]Eine der Kacheln[/I] an der Wand wirkte etwas anders als die anderen.";
         }
     }
     public static string Adv_L08_Abdeckung_runter
@@ -8277,9 +8337,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "Würdest du für mich in einen Brunnen tauchen und dort eine schimmernde Münze vom Grund aufnehmen.";
+                return "Würdest du für mich in einen Brunnen tauchen und dort eine schimmernde Münze vom Grund aufnehmen?";
             else
-                return "Würdest du für mich in einen Brunnen tauchen und dort eine schimmernde Münze vom Grund aufnehmen.";
+                return "Würdest du für mich in einen Brunnen tauchen und dort eine schimmernde Münze vom Grund aufnehmen?";
         }
     }
     public static string Fish_Dialog_Coin2
@@ -9480,9 +9540,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "- [Pl1,Akk]";
+                return "- [Pl1,Akk][S2]";
             else
-                return "- [Pl1,Akk]";
+                return "- [Pl1,Akk][S2]";
         }
     }
     public static string OrderFeedback_ListIPersons_clickable
@@ -9490,9 +9550,19 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "- [Pla1,Akk]";
+                return "- [Pla1,Akk][S2]";
             else
-                return "- [Pla1,Akk]";
+                return "- [Pla1,Akk][S2]";
+        }
+    }
+    public static string OrderFeedback_ListIPersons_clickable_U
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return "- [Pla1,Akku][S2]";
+            else
+                return "- [Pla1,Akku][S2]";
         }
     }
     public static string OrderFeedback_ListIPersons_clickable_Akku
@@ -9500,9 +9570,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "- [Pla1,Akku]";
+                return "- [Pla1,Akku][S2]";
             else
-                return "- [Pla1,Akku]";
+                return "- [Pla1,Akku][S2]";
         }
     }
     public static string OrderFeedback_ListPersons_Nom
@@ -9510,9 +9580,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "- [Pl1,Nom]";
+                return "- [Pl1,Nom][S2]";
             else
-                return "- [Pl1,Nom]";
+                return "- [Pl1,Nom][S2]";
         }
     }
     public static string Verb_Skript
@@ -9804,6 +9874,26 @@ public static partial class loca
                 return "Nach reiflicher Überlegung fiel mir doch kein guter Grund ein, [Il1,Nom] um [Il2,AKK] zu wickeln.";
             else
                 return "After careful consideration, I couldn't think of a good reason to wrap [Il1,Nom] around [Il2,Dat] after all.";
+        }
+    }
+    public static string Inv_Opened
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return " (offen)";
+            else
+                return " (offen)";
+        }
+    }
+    public static string Inv_Closed
+    {
+        get
+        {
+            if (_gd!.Language == IGlobalData.language.german)
+                return " (geschlossen)";
+            else
+                return " (geschlossen)";
         }
     }
 }

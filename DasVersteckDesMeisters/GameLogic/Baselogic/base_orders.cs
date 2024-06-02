@@ -489,27 +489,27 @@ namespace GameCore
 
                         if (i != null)
                         {
-                            snew += Items?.GetItemNameLink(i!.ID, aocase);
+                            snew += Items?.GetItemNameLink(i!.ID, aocase, AdvGame.CurrentNouns);
                         }
                         else if (it != null)
                         {
-                            snew += Items?.GetName(it!.ID, aocase);
+                            snew += Items?.GetName(it!.ID, aocase, AdvGame.CurrentNouns);
                         }
                         else if (p != null)
                         {
-                            snew += Persons?.GetPersonLink(p, pString);
+                            snew += Persons?.GetPersonLink(p, AdvGame.CurrentNouns, pString);
                         }
                         else if (pt != null)
                         {
-                            snew += Persons?.GetPersonName(pt, aocase);
+                            snew += Persons?.GetPersonName(pt, aocase, AdvGame.CurrentNouns);
                         }
                         else if (plt != null)
                         {
-                            snew += Persons?.GetPersonNameLink(plt, aocase);
+                            snew += Persons?.GetPersonNameLink(plt, aocase, AdvGame.CurrentNouns );
                         }
                         else if (plv != null)
                         {
-                            snew += Persons?.GetPersonVerbLink(plv, aocase, verbID, (int) A!.Tense);
+                            snew += Persons?.GetPersonVerbLink(plv, aocase, verbID, AdvGame.CurrentNouns, (int) A!.Tense);
                         }
 
                         if (lenSeq == 0)
@@ -557,7 +557,8 @@ namespace GameCore
 
             // Ignores: 001
             // MW.TextOutput( "<i>Du untersuchst " + Items!.GetItemNameLink(I!.ID, Co.CASE_NOM) + ". ( " + I!.ID + ")</i>");
-            AdvGame!.StoryOutput((int) Persons?.Find(PersonID)!.locationID!, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_Examine_Person_Everyone_13898, PersonID, item!.ID));
+            if (AdvGame.GD.LayoutDescription.OrderRepeat == true)
+                AdvGame!.StoryOutput((int) Persons?.Find(PersonID)!.locationID!, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_Examine_Person_Everyone_13898, PersonID, item!.ID));
             // AdvGame!.StoryOutput(Person!.Find(PersonID)!.locationID, CA!.Person_Everyone, Insert( "<i>[Plv1,betrachten,Akk] [Il2,Nom].</i>", CA!.Person_I, item ) );
             of.Success = true;
             of.Handled = true;
@@ -663,11 +664,13 @@ namespace GameCore
             OrderFeedback of = new OrderFeedback();
             Person person = PTL.GetFirstPerson()!; //  GetPersonRef(Adv_PT[1].WordID);
 
-            if (person!.ID == CA!.Person_I!.ID)
-                AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_ExamineP_Person_Me_13910, PersonID));
-            else
-                AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_ExamineP_Person_Everyone_13910, PersonID, person));
-
+            if (AdvGame.GD.LayoutDescription.OrderRepeat == true)
+            {
+                if (person!.ID == CA!.Person_I!.ID)
+                    AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_ExamineP_Person_Me_13910, PersonID));
+                else
+                    AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_ExamineP_Person_Everyone_13910, PersonID, person));
+            }
             if (person.Picture != null)
                 AdvGame!.PictureOutput(person.Picture);
 
@@ -794,8 +797,11 @@ namespace GameCore
             OrderFeedback of = new OrderFeedback();
             AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_Inventory_Person_Everyone_13920, PersonID, PersonID, PersonID));
 
-            ListItems(Helper.Insert(loca.OrderFeedback_Inventory_Person_Everyone_13921, PersonID), PersonID, CB!.LocType_Person, PersonID!.ID, false, false, Co.CASE_NOM);
- 
+            // if (AdvGame.GD.LayoutDescription.OrderRepeat == true)
+            //    ListItems(Helper.Insert(loca.OrderFeedback_Inventory_Person_Everyone_13921, PersonID), PersonID, CB!.LocType_Person, PersonID!.ID, false, false, Co.CASE_NOM);
+            // else
+                ListItems(null, PersonID, CB!.LocType_Person, PersonID!.ID, false, false, Co.CASE_NOM_UNDEF );
+
             of.StoryOutput = true;
             of.Success = true;
             of.Handled = true;
@@ -1682,7 +1688,8 @@ namespace GameCore
         {
             OrderFeedback of = new OrderFeedback();
             Item item1 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[2].WordID);
-            AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_ExamineBelow_Person_Everyone_13982, PersonID, item1!.ID));
+            if (AdvGame.GD.LayoutDescription.OrderRepeat == true)
+                AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_ExamineBelow_Person_Everyone_13982, PersonID, item1!.ID));
             ListItems(Helper.Insert(loca.OrderFeedback_ExamineBelow_Person_Everyone_13983, PersonID), PersonID, CB!.LocType_Below_Item, item1!.ID, true, false);
             of.StoryOutput = true;
             of.Success = true;
@@ -1997,7 +2004,8 @@ namespace GameCore
         {
             OrderFeedback of = new OrderFeedback();
             Item item1 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[2].WordID);
-            AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_ExamineOn_Person_Everyone_14004, PersonID, item1!.ID));
+            if (AdvGame.GD.LayoutDescription.OrderRepeat == true)
+                AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_ExamineOn_Person_Everyone_14004, PersonID, item1!.ID));
             ListItems(Helper.Insert(loca.OrderFeedback_ExamineOn_Person_Everyone_14005, PersonID), PersonID, CB!.LocType_On_Item, item1!.ID, true, false);
             of.StoryOutput = true;
             of.Handled = true;
@@ -2011,7 +2019,8 @@ namespace GameCore
         {
             OrderFeedback of = new OrderFeedback();
             Item item1 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[2].WordID);
-            AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_ExamineBehind_Person_Everyone_14006, PersonID, item1!.ID));
+            if (AdvGame.GD.LayoutDescription.OrderRepeat == true)
+                AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_ExamineBehind_Person_Everyone_14006, PersonID, item1!.ID));
             ListItems(Helper.Insert(loca.OrderFeedback_ExamineBehind_Person_Everyone_14007, PersonID), PersonID, CB!.LocType_Behind_Item, item1!.ID, true, false);
             of.StoryOutput = true;
             of.Handled = true;
@@ -2024,7 +2033,8 @@ namespace GameCore
         {
             OrderFeedback of = new OrderFeedback();
             Item item1 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[2].WordID);
-            AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_ExamineBeside_Person_Everyone_14008, PersonID, item1!.ID!));
+            if (AdvGame.GD.LayoutDescription.OrderRepeat == true)
+                AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_ExamineBeside_Person_Everyone_14008, PersonID, item1!.ID!));
             ListItems(Helper.Insert(loca.OrderFeedback_ExamineBeside_Person_Everyone_14009, PersonID), PersonID, CB!.LocType_Beside_Item, item1!.ID!, true, false);
             of.StoryOutput = true;
             of.Handled = true;
@@ -7044,92 +7054,140 @@ namespace GameCore
 
         public bool ListItems(string? InitText, Person? PersonID, int LocType, int LocID, bool ShowHidden, bool SuppressComment, int grammar = 0, OrderFeedback? of = null, string? nothingString = null )
         {
-            if (nothingString == null)
-                nothingString = loca.OrderFeedback_ListItems_14067;
-            int i = 0;
+            try
+            {
+                if (nothingString == null)
+                    nothingString = loca.OrderFeedback_ListItems_14067;
+                int i = 0;
 
-            if( grammar == 0 )
-            {
-                grammar = Co.CASE_NOM_UNDEF;
-            }
-
-            foreach (Item tItem in Items!.List!.Values)
-            {
-                if ((tItem.locationType == LocType) && (tItem.locationID == LocID) && (tItem.IsBackground == false) && ((tItem.IsHidden == false) || (ShowHidden == true)))
-                    i++;
-            }
-            foreach (Person tPerson in Persons!.List!.Values)
-            {
-                if ((tPerson.locationType == LocType) && (tPerson.locationID == LocID) && (tPerson.IsBackground == false) && ((tPerson.IsHidden == false) || (ShowHidden == true)))
-                    i++;
-            }
-            if (i > 0)
-            {
-                int Found = 0;
-                string insertBase = loca.OrderFeedback_ListItems_Person_Everyone_14068_App;
-                string insertBaseP = loca.OrderFeedback_ListIPersons;
-
-                if (grammar == Co.CASE_NOM)
+                if (grammar == 0)
                 {
-                    insertBase = loca.OrderFeedback_ListItems_Nom;
-                    insertBaseP = loca.OrderFeedback_ListIPersons_clickable;
-                }
-                else if (grammar == Co.CASE_AKK_UNDEF)
-                {
-                    insertBase = loca.OrderFeedback_ListItems_Akku;
-                    insertBaseP = loca.OrderFeedback_ListIPersons_clickable_Akku;
+                    grammar = Co.CASE_NOM_UNDEF;
                 }
 
-                AdvGame!.StoryOutput(Persons!.Find(PersonID!)!.locationID, CA!.Person_Everyone, InitText);
-
-                if (of != null) of.StoryOutput = true;
-                foreach (Item item in Items!.List.Values)
+                foreach (Item tItem in Items!.List!.Values)
                 {
-                    if ((item.locationType == LocType) && (item.locationID == LocID) && (item.IsBackground == false) && ((item.IsHidden == false) || (ShowHidden == true)))
+                    if ((tItem.locationType == LocType) && (tItem.locationID == LocID) && (tItem.IsBackground == false) && ((tItem.IsHidden == false) || (ShowHidden == true)))
+                        i++;
+                }
+                foreach (Person tPerson in Persons!.List!.Values)
+                {
+                    if ((tPerson.locationType == LocType) && (tPerson.locationID == LocID) && (tPerson.IsBackground == false) && ((tPerson.IsHidden == false) || (ShowHidden == true)))
+                        i++;
+                }
+                if (i > 0)
+                {
+                    int Found = 0;
+                    string insertBase = loca.OrderFeedback_ListItems_Person_Everyone_14068_App;
+                    string insertBaseP = loca.OrderFeedback_ListIPersons;
+                    string status = "";
+
+                    if (grammar == Co.CASE_NOM)
                     {
-                        // MW.TextOutput( "- <a href=\"https:www.spiegel.de\" onclick=\"var myMenu = new Menu(); myMenu.addMenuItem(\"my menu item A\"); myMenu.addMenuItem(\"my menu item B\"); myMenu.addMenuItem(\"my menu item C\"); myMenu.addMenuItem(\"my menu item D\"); myMenu.writeMenus();\">"+ Items!.GetItemNameLink(IT[j]!.ID, Co.CASE_NOM_UNDEF)+"</a>");
-                        string sx = Helper.Insert(insertBase, item!.ID);
-                        AdvGame!.StoryOutput(Persons!.Find(PersonID!)!.locationID, CA!.Person_Everyone,  Helper.Insert(insertBase, item!.ID ));
-                        // Items!.List[j].IsHidden = false;
-                        Found++;
-                        if (item.IsHidden == true) item.IsHidden = false;
-
+                        insertBase = loca.OrderFeedback_ListItems_Nom;
+                        insertBaseP = loca.OrderFeedback_ListIPersons_clickable;
                     }
-                    /*
-                    for (int j = 0; j < Items!.List.Count; j++)
+                    else if (grammar == Co.CASE_NOM_UNDEF)
                     {
-                        if ((Items!.List[j].locationType == LocType) && (Items!.List[j].locationID == LocID) && (Items!.List[j].IsBackground == false) && ((Items!.List[j].IsHidden == false) || (ShowHidden == true)))
+                        insertBase = loca.OrderFeedback_ListItems_Nom_U;
+                        insertBaseP = loca.OrderFeedback_ListIPersons_clickable_U;
+                    }
+                    else if (grammar == Co.CASE_AKK_UNDEF)
+                    {
+                        insertBase = loca.OrderFeedback_ListItems_Akku;
+                        insertBaseP = loca.OrderFeedback_ListIPersons_clickable_Akku;
+                    }
+
+                    if (InitText != null)
+                        AdvGame!.StoryOutput(Persons!.Find(PersonID!)!.locationID, CA!.Person_Everyone, InitText);
+
+                    if (of != null) of.StoryOutput = true;
+                    foreach (Item item in Items!.List.Values)
+                    {
+                        if ((item.locationType == LocType) && (item.locationID == LocID) && (item.IsBackground == false) && ((item.IsHidden == false) || (ShowHidden == true)))
                         {
+                            status = "";
+                            if (item.CanBeClosed)
+                            {
+                                if (item.IsClosed)
+                                    status = loca.Inv_Closed;
+                                else
+                                    status = loca.Inv_Opened;
+
+                            }
                             // MW.TextOutput( "- <a href=\"https:www.spiegel.de\" onclick=\"var myMenu = new Menu(); myMenu.addMenuItem(\"my menu item A\"); myMenu.addMenuItem(\"my menu item B\"); myMenu.addMenuItem(\"my menu item C\"); myMenu.addMenuItem(\"my menu item D\"); myMenu.writeMenus();\">"+ Items!.GetItemNameLink(IT[j]!.ID, Co.CASE_NOM_UNDEF)+"</a>");
-                            AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone,  Helper.Insert("- [Il1,Akk]", Items!.List[j]!.ID ));
+                            string sx = Helper.Insert(insertBase, item!.ID, status);
+                            AdvGame!.StoryOutput(Persons!.Find(PersonID!)!.locationID, CA!.Person_Everyone, Helper.Insert(insertBase, item!.ID, status));
+
+                            if (item.StorageIn > 0 && item.IsClosed == false)
+                            {
+                                foreach (Item item2 in Items!.List.Values)
+                                {
+                                    if ((item2.locationID == item.ID) && (item2.IsBackground == false) && ((item2.IsHidden == false) || (ShowHidden == true)))
+                                    {
+                                        // string sx = Helper.Insert(insertBase, item2!.ID);
+                                        status = "";
+                                        AdvGame!.StoryOutput(Persons!.Find(PersonID!)!.locationID, CA!.Person_Everyone, "-" + Helper.Insert(insertBase, item2!.ID, status));
+
+                                    }
+                                }
+                            }
                             // Items!.List[j].IsHidden = false;
                             Found++;
-                            if (Items!.List[j].IsHidden == true) Items!.List[j].IsHidden = false;
+                            if (item.IsHidden == true) item.IsHidden = false;
+
+
+                        }
+                        /*
+                        for (int j = 0; j < Items!.List.Count; j++)
+                        {
+                            if ((Items!.List[j].locationType == LocType) && (Items!.List[j].locationID == LocID) && (Items!.List[j].IsBackground == false) && ((Items!.List[j].IsHidden == false) || (ShowHidden == true)))
+                            {
+                                // MW.TextOutput( "- <a href=\"https:www.spiegel.de\" onclick=\"var myMenu = new Menu(); myMenu.addMenuItem(\"my menu item A\"); myMenu.addMenuItem(\"my menu item B\"); myMenu.addMenuItem(\"my menu item C\"); myMenu.addMenuItem(\"my menu item D\"); myMenu.writeMenus();\">"+ Items!.GetItemNameLink(IT[j]!.ID, Co.CASE_NOM_UNDEF)+"</a>");
+                                AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone,  Helper.Insert("- [Il1,Akk]", Items!.List[j]!.ID ));
+                                // Items!.List[j].IsHidden = false;
+                                Found++;
+                                if (Items!.List[j].IsHidden == true) Items!.List[j].IsHidden = false;
+
+                            }
+                        }
+                        */
+                    }
+                    foreach (Person person in Persons!.List.Values)
+                    {
+                        if ((person.locationType == LocType) && (person.locationID == LocID) && (person.IsBackground == false) && ((person.IsHidden == false) || (ShowHidden == true)))
+                        {
+                            status = "";
+                            if (person.CanBeClosed)
+                            {
+                                if (person.IsClosed)
+                                    status = loca.Inv_Closed;
+                                else
+                                    status = loca.Inv_Opened;
+
+                            }
+                            string sx = Helper.Insert(insertBaseP, person);
+                            // MW.TextOutput( "- <a href=\"https:www.spiegel.de\" onclick=\"var myMenu = new Menu(); myMenu.addMenuItem(\"my menu item A\"); myMenu.addMenuItem(\"my menu item B\"); myMenu.addMenuItem(\"my menu item C\"); myMenu.addMenuItem(\"my menu item D\"); myMenu.writeMenus();\">"+ Items!.GetItemNameLink(IT[j]!.ID, Co.CASE_NOM_UNDEF)+"</a>");
+                            AdvGame!.StoryOutput(Persons!.Find(PersonID!)!.locationID, CA!.Person_Everyone, Helper.Insert(insertBaseP, person!, status));
+                            // Items!.List[j].IsHidden = false;
+                            Found++;
+                            if (person.IsHidden == true) person.IsHidden = false;
 
                         }
                     }
-                    */
                 }
-                foreach (Person person in Persons!.List.Values)
+                else if (!SuppressComment)
                 {
-                    if ((person.locationType == LocType) && (person.locationID == LocID) && (person.IsBackground == false) && ((person.IsHidden == false) || (ShowHidden == true)))
-                    {
-                        string sx = Helper.Insert(insertBaseP, person);
-                        // MW.TextOutput( "- <a href=\"https:www.spiegel.de\" onclick=\"var myMenu = new Menu(); myMenu.addMenuItem(\"my menu item A\"); myMenu.addMenuItem(\"my menu item B\"); myMenu.addMenuItem(\"my menu item C\"); myMenu.addMenuItem(\"my menu item D\"); myMenu.writeMenus();\">"+ Items!.GetItemNameLink(IT[j]!.ID, Co.CASE_NOM_UNDEF)+"</a>");
-                        AdvGame!.StoryOutput(Persons!.Find(PersonID!)!.locationID, CA!.Person_Everyone, Helper.Insert(insertBaseP, person!));
-                        // Items!.List[j].IsHidden = false;
-                        Found++;
-                        if (person.IsHidden == true) person.IsHidden = false;
-
-                    }
+                    AdvGame!.StoryOutput(Persons!.Find(PersonID!)!.locationID, CA!.Person_Everyone, nothingString);
+                    if (of != null) of.StoryOutput = true;
                 }
+                return (true);
             }
-            else if (!SuppressComment)
+            catch (Exception ex)
             {
-                AdvGame!.StoryOutput(Persons!.Find(PersonID!)!.locationID, CA!.Person_Everyone, nothingString );
-                if (of != null) of.StoryOutput = true;
+                GlobalData.AddLog("ListItems: " + ex.Message, IGlobalData.protMode.crisp);
+                return true;
             }
-            return (true);
         }
 
         public bool ListItemsPersons(string InitText, Person PersonID, int LocType, int LocID, bool ShowHidden, bool SuppressComment, int caseObject, OrderFeedback? of = null)

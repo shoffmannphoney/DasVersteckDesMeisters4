@@ -879,11 +879,11 @@ namespace GameCore
 
                     if (caseVal == 0)
                         caseVal = Co.CASE_NOM;
-                    s = s + Items!.GetName((pt.O as Item)!.ID, caseVal) + " ";
+                    s = s + Items!.GetName((pt.O as Item)!.ID, caseVal, AdvGame.CurrentNouns) + " ";
                 }
                 else if (pt.O?.GetType() == typeof(Person))
                 {
-                    s = s + Persons!.GetPersonName((pt.O as Person), pt.CaseVal) + " ";
+                    s = s + Persons!.GetPersonName((pt.O as Person), pt.CaseVal, AdvGame.CurrentNouns) + " ";
                 }
             }
 
@@ -1553,19 +1553,19 @@ namespace GameCore
                                 {
                                     follower = new List<int>();
                                     follower.Add(-1);
-                                    mcM.Add(new MCMenuEntry(AdvGame!.CB!.MCE_Text, AdvGame!.CA!.Person_I, Persons!.GetPersonName(((Person)PTL!.Index(j)!.O!), Co.CASE_NOM), idCt++, follower, null, 0, false, false, false, null, null));
+                                    mcM.Add(new MCMenuEntry(AdvGame!.CB!.MCE_Text, AdvGame!.CA!.Person_I, Persons!.GetPersonName(((Person)PTL!.Index(j)!.O!), Co.CASE_NOM, AdvGame.CurrentNouns), idCt++, follower, null, 0, false, false, false, null, null));
                                 }
                                 if ((PTL!.Index(j)!.O!.GetType() == typeof(Item)) && (Items!.IsItemHere((Item)PTL!.Index(j)!.O!, wordType)))
                                 {
                                     follower = new List<int>();
                                     follower.Add(-1);
-                                    mcM.Add(new MCMenuEntry(AdvGame!.CB!.MCE_Text, AdvGame.CA!.Person_I, Items!.GetName(((Item)PTL!.Index(j)!.O!).ID!, Co.CASE_NOM), idCt++, follower, null, 0, false, false, false, null, null));
+                                    mcM.Add(new MCMenuEntry(AdvGame!.CB!.MCE_Text, AdvGame.CA!.Person_I, Items!.GetName(((Item)PTL!.Index(j)!.O!).ID!, Co.CASE_NOM, AdvGame.CurrentNouns), idCt++, follower, null, 0, false, false, false, null, null));
                                 }
                                 if ((PTL!.Index(j)!.O!.GetType() == typeof(Topic)) && (Topics!.IsTopicHere((Topic)PTL!.Index(j)!.O!, wordType)))
                                 {
                                     follower = new List<int>();
                                     follower.Add(-1);
-                                    mcM.Add(new MCMenuEntry(AdvGame!.CB!.MCE_Text, AdvGame!.CA!.Person_I, Topics!.GetTopicName(((Topic)PTL!.Index(j)!.O!).ID!, Co.CASE_NOM), idCt++, follower, null, 0, false, false, false, null, null));
+                                    mcM.Add(new MCMenuEntry(AdvGame!.CB!.MCE_Text, AdvGame!.CA!.Person_I, Topics!.GetTopicName(((Topic)PTL!.Index(j)!.O!).ID!, Co.CASE_NOM, AdvGame.CurrentNouns), idCt++, follower, null, 0, false, false, false, null, null));
                                 }
                             }
                             follower = new List<int>();
@@ -2664,7 +2664,7 @@ namespace GameCore
 
                         if (p.Count > 0)
                         {
-                            errorText = String.Format(loca.Parse_NotSuitableForPerson, p[0].FullName(Co.CASE_DAT_UNDEF)!);
+                            errorText = String.Format(loca.Parse_NotSuitableForPerson, p[0].FullName(Co.CASE_DAT_UNDEF, AdvGame.CurrentNouns)!);
 
                         }
                         /*
@@ -3263,7 +3263,7 @@ namespace GameCore
                                             break;
                                     }
                                 }
-                                ErrorText = genericItems[genericItems!.Count - 1]!.Item!.FullName( Co.CASE_AKK_UNDEF ) + loca.Parse_StringToParseTokensNew_16232;
+                                ErrorText = genericItems[genericItems!.Count - 1]!.Item!.FullName( Co.CASE_AKK_UNDEF, AdvGame.CurrentNouns) + loca.Parse_StringToParseTokensNew_16232;
                             }
                             else
                             {
@@ -3398,19 +3398,19 @@ namespace GameCore
                 {
                     follower = new List<int>();
                     follower.Add(-1);
-                    mcM.Add(new MCMenuEntry(AdvGame.CB!.MCE_Text, AdvGame.CA!.Person_I, Persons!.GetPersonName(((Person)ambiObjects[ambiCt]), Co.CASE_NOM), idCt++, follower, null, 0, false, false, false, null, null));
+                    mcM.Add(new MCMenuEntry(AdvGame.CB!.MCE_Text, AdvGame.CA!.Person_I, Persons!.GetPersonName(((Person)ambiObjects[ambiCt]), Co.CASE_NOM, AdvGame.CurrentNouns), idCt++, follower, null, 0, false, false, false, null, null));
                 }
                 if ((ambiObjects[ambiCt].GetType() == typeof(Item)) )
                 {
                     follower = new List<int>();
                     follower.Add(-1);
-                    mcM.Add(new MCMenuEntry(AdvGame.CB!.MCE_Text, AdvGame.CA!.Person_I, Items!.GetName(((Item)ambiObjects[ambiCt]).ID, Co.CASE_NOM, true), idCt++, follower, null, 0, false, false, false, null, null));
+                    mcM.Add(new MCMenuEntry(AdvGame.CB!.MCE_Text, AdvGame.CA!.Person_I, Items!.GetName(((Item)ambiObjects[ambiCt]).ID, Co.CASE_NOM, AdvGame.CurrentNouns, true), idCt++, follower, null, 0, false, false, false, null, null));
                 }
                 if ((ambiObjects[ambiCt].GetType() == typeof(Topic)))
                 {
                     follower = new List<int>();
                     follower.Add(-1);
-                    mcM.Add(new MCMenuEntry(AdvGame.CB!.MCE_Text, AdvGame.CA!.Person_I, Topics!.GetTopicName(((Topic)ambiObjects[ambiCt]).ID, Co.CASE_NOM), idCt++, follower, null, 0, false, false, false, null, null));
+                    mcM.Add(new MCMenuEntry(AdvGame.CB!.MCE_Text, AdvGame.CA!.Person_I, Topics!.GetTopicName(((Topic)ambiObjects[ambiCt]).ID, Co.CASE_NOM, AdvGame.CurrentNouns), idCt++, follower, null, 0, false, false, false, null, null));
                 }
             }
             follower = new List<int>();

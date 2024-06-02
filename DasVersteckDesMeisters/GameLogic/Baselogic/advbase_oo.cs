@@ -433,336 +433,384 @@ namespace GameCore
 
         public virtual string? FullName( AbstractAdvObject AO, int Case, List<Noun> CurrentNouns, bool ForceArticle = false, bool ShowAppendix = false, bool spaceAsUnderline = false)
         {
-            string? space = " ";
-            if (spaceAsUnderline)
-                space = ".";
-
-            int j;
-            // int IX = GetPersonIx(PersonID);
             string? s = "";
-
-            AO.Known = true;
-
-            // if (PersonID == A.P_I) return ( "ich");
-            // if (PersonID == A.P_You) return ( "du");
-
-            if( loca.GD!.Language == IGlobalData.language.german)
+            try
             {
-                if ((AO.Adjectives?.Count > 0) || (ForceArticle))
+                string? space = " ";
+                if (spaceAsUnderline)
+                    space = ".";
+                bool adjectives = true;
+
+                int j;
+                // int IX = GetPersonIx(PersonID);
+
+                AO.Known = true;
+
+                // if (PersonID == A.P_I) return ( "ich");
+                // if (PersonID == A.P_You) return ( "du");
+
+                if (CurrentNouns != null)
                 {
-                    if (Case == Co.CASE_NOM)
+                    /*
+                    bool allInList = true;
+
+                    foreach (Noun n in AO.Names)
                     {
-                        if (AO.Sex == Co.SEX_MALE)
-                            s = s + "den";
-                        else if (AO.Sex == Co.SEX_FEMALE)
-                            s = s + "die";
-                        else if (AO.Sex == Co.SEX_NEUTER)
-                            s = s + "das";
+                        if (CurrentNouns.Contains(n) == false)
+                        {
+                            allInList = false;
+                            break;
+                        }
                         else
-                            s = s + "die";
+                        {
+
+                        }
                     }
-                    else if (Case == Co.CASE_AKK)
+
+                    if (!allInList)
                     {
-                        if (AO.Sex == Co.SEX_MALE)
-                            s = s + "der";
-                        else if (AO.Sex == Co.SEX_FEMALE)
-                            s = s + "die";
-                        else if (AO.Sex == Co.SEX_NEUTER)
-                            s = s + "das";
-                        else
-                            s = s + "die";
+                        adjectives = false;
                     }
-                    else if (Case == Co.CASE_DAT)
+                    */
+                    adjectives = false;
+
+                    foreach (Noun n in AO.Names)
                     {
-                        if (AO.Sex == Co.SEX_MALE)
-                            s = s + "dem";
-                        else if (AO.Sex == Co.SEX_FEMALE)
-                            s = s + "der";
-                        else if (AO.Sex == Co.SEX_NEUTER)
-                            s = s + "dem";
-                        else
-                            s = s + "den";
+                        if (CurrentNouns.Contains(n) == true)
+                        {
+                            adjectives = true;
+                            break;
+                        }
                     }
-                    else if (Case == Co.CASE_NOM_UNDEF && AO.IsCountable)
-                    {
-                        if (AO.Sex == Co.SEX_MALE)
-                            s = s + "einen";
-                        else if (AO.Sex == Co.SEX_FEMALE)
-                            s = s + "eine";
-                        else if (AO.Sex == Co.SEX_NEUTER)
-                            s = s + "ein";
-                    }
-                    else if (Case == Co.CASE_AKK_UNDEF && AO.IsCountable)
-                    {
-                        if (AO.Sex == Co.SEX_MALE)
-                            s = s + "ein";
-                        else if (AO.Sex == Co.SEX_FEMALE)
-                            s = s + "eine";
-                        else if (AO.Sex == Co.SEX_NEUTER)
-                            s = s + "ein";
-                    }
-                    else if (Case == Co.CASE_DAT_UNDEF && AO.IsCountable)
-                    {
-                        if (AO.Sex == Co.SEX_MALE)
-                            s = s + "einem";
-                        else if (AO.Sex == Co.SEX_FEMALE)
-                            s = s + "einer";
-                        else if (AO.Sex == Co.SEX_NEUTER)
-                            s = s + "einem";
-                    }
+
                 }
-                for (j = 0; j < AO.Adjectives?.Count; j++)
+
+                if (loca.GD!.Language == IGlobalData.language.german)
                 {
-                    Adj adj = (Adj)AO.Adjectives[j];
-                    if (j > 0)
-                        s = s + ",";
-
-                    s = s + space + adj.Name; // Adjs!.GetAdj(adj);
-
-                    if (adj!.Name?[adj!.Name!.Length - 1] == 'e')
-                    {
-                        if (Case == Co.CASE_NOM)
-                        {
-                            if (AO.Sex == Co.SEX_MALE_PL || AO.Sex == Co.SEX_FEMALE_PL || AO.Sex == Co.SEX_NEUTER_PL)
-                                s = s + "n";
-/*
-                            if (AO.Sex == Co.SEX_MALE)
-                                s = s + "n";
-                            else if (AO.Sex == Co.SEX_FEMALE)
-                                ; //  s = s
-                            else if (AO.Sex == Co.SEX_NEUTER)
-                                ; //  s = s;
-                            else
-                                s = s + "n";
-*/
-                        }
-                        else if (Case == Co.CASE_AKK)
-                        {
-                            if (AO.Sex == Co.SEX_MALE_PL || AO.Sex == Co.SEX_FEMALE_PL || AO.Sex == Co.SEX_NEUTER_PL)
-                                s = s + "n";
-                            /*
-                            if (AO.Sex == Co.SEX_MALE)
-                                s = s;
-                            else if (AO.Sex == Co.SEX_FEMALE)
-                                s = s;
-                            else if (AO.Sex == Co.SEX_NEUTER)
-                                s = s;
-                            else
-                                s = s + "n";
-                            */
-                        }
-                        else if (Case == Co.CASE_DAT)
-                        {
-                            if (AO.Sex == Co.SEX_MALE)
-                                s = s + "n";
-                            else if (AO.Sex == Co.SEX_FEMALE)
-                                s = s + "n";
-                            else if (AO.Sex == Co.SEX_NEUTER)
-                                s = s + "n";
-                            else
-                                s = s + "n";
-                        }
-                        else if (Case == Co.CASE_NOM_UNDEF)
-                        {
-                            if (AO.Sex == Co.SEX_MALE)
-                                s = s + "n";
-                            // else if (AO.Sex == Co.SEX_FEMALE)
-                            //     ;
-                            else if (AO.Sex == Co.SEX_NEUTER)
-                                s = s + "s";
-                            // else
-                            //     ;
-                        }
-                        else if (Case == Co.CASE_AKK_UNDEF)
-                        {
-                            if (AO.Sex == Co.SEX_MALE)
-                                s = s + "r";
-                            // else if (AO.Sex == Co.SEX_FEMALE)
-                            //     ;
-                            else if (AO.Sex == Co.SEX_NEUTER)
-                                s = s + "s";
-                            else
-                                s = s + "e";
-                        }
-                        else if (Case == Co.CASE_DAT_UNDEF)
-                        {
-                            if (AO.Sex == Co.SEX_MALE)
-                                s = s + "n";
-                            else if (AO.Sex == Co.SEX_FEMALE)
-                                s = s + "n";
-                            else if (AO.Sex == Co.SEX_NEUTER)
-                                s = s + "n";
-                            else
-                                s = s + "n";
-                        }
-
-                    }
-                    else if (adj.Name?[adj.Name!.Length - 1] == 'a')
-                    {
-                        // Lila, Rosa etc. werden gar nicht dekliniert, die bleiben so, wie sie sind
-                    }
-                    else
+                    if ((AO.Adjectives?.Count > 0 && adjectives == true ) || (ForceArticle))
                     {
                         if (Case == Co.CASE_NOM)
                         {
                             if (AO.Sex == Co.SEX_MALE)
-                                s = s + "en";
+                                s = s + "den";
                             else if (AO.Sex == Co.SEX_FEMALE)
-                                s = s + "e";
+                                s = s + "die";
                             else if (AO.Sex == Co.SEX_NEUTER)
-                                s = s + "e";
+                                s = s + "das";
                             else
-                                s = s + "en";
+                                s = s + "die";
                         }
                         else if (Case == Co.CASE_AKK)
                         {
                             if (AO.Sex == Co.SEX_MALE)
-                                s = s + "e";
+                                s = s + "der";
                             else if (AO.Sex == Co.SEX_FEMALE)
-                                s = s + "e";
+                                s = s + "die";
                             else if (AO.Sex == Co.SEX_NEUTER)
-                                s = s + "e";
+                                s = s + "das";
                             else
-                                s = s + "en";
+                                s = s + "die";
                         }
                         else if (Case == Co.CASE_DAT)
                         {
                             if (AO.Sex == Co.SEX_MALE)
-                                s = s + "en";
+                                s = s + "dem";
                             else if (AO.Sex == Co.SEX_FEMALE)
-                                s = s + "en";
+                                s = s + "der";
                             else if (AO.Sex == Co.SEX_NEUTER)
-                                s = s + "en";
+                                s = s + "dem";
                             else
-                                s = s + "en";
+                                s = s + "den";
                         }
-                        else if (Case == Co.CASE_NOM_UNDEF)
+                        else if (Case == Co.CASE_NOM_UNDEF && AO.IsCountable)
                         {
                             if (AO.Sex == Co.SEX_MALE)
-                                s = s + "en";
+                                s = s + "einen";
                             else if (AO.Sex == Co.SEX_FEMALE)
-                                s = s + "e";
+                                s = s + "eine";
                             else if (AO.Sex == Co.SEX_NEUTER)
-                                s = s + "es";
-                            else
-                                s = s + "e";
-                        }
-                        else if (Case == Co.CASE_AKK_UNDEF)
-                        {
-                            if (AO.Sex == Co.SEX_MALE)
-                                s = s + "er";
-                            else if (AO.Sex == Co.SEX_FEMALE)
-                                s = s + "e";
-                            else if (AO.Sex == Co.SEX_NEUTER)
-                                s = s + "es";
-                            else
-                                s = s + "e";
-                        }
-                        else if (Case == Co.CASE_DAT_UNDEF)
-                        {
-                            if (AO.Sex == Co.SEX_MALE)
-                                s = s + "en";
-                            else if (AO.Sex == Co.SEX_FEMALE)
-                                s = s + "en";
-                            else if (AO.Sex == Co.SEX_NEUTER)
-                                s = s + "en";
-                            else
-                                s = s + "en";
-                        }
-
-                    }
-
-
-                }
-
-                int i;
-                for (i = 0; i < AO.Names?.Count; i++)
-                {
-                    Noun noun = AO.Names[i];
-
-                    if (s == "")
-                        // s = Nouns.GetNoun(AO.Names[i]);
-                        s = noun.Name;
-                    else
-                        // s = s + " " + Nouns.GetNoun(AO.Names[i]);
-                        s = s + space + noun.Name;
-
-                    if ((Case == Co.CASE_DAT) && ((AO.Sex == Co.SEX_FEMALE_PL) || (AO.Sex == Co.SEX_MALE_PL) || (AO.Sex == Co.SEX_NEUTER_PL)))
-                    {
-                        if (s?[s!.Length - 1] == 'e') s += "n";
-                        else if (s!.EndsWith("el")) s += "n";
-                    }
-                }
-
-                if ((Appendix != null) && (ShowAppendix))
-                {
-                    s = s + space + Appendix;
-                }
-
-            }
-            else
-            {
-                if ((AO.Adjectives?.Count > 0) || (ForceArticle))
-                {
-                    if (Case == Co.CASE_NOM)
-                    {
-                        s = s + "the";
-                    }
-                    else if (Case == Co.CASE_AKK)
-                    {
-                        s = s + "the";
-                    }
-                    else if (Case == Co.CASE_DAT)
-                    {
-                        s = s + "the";
-                    }
-                    else if ( Sex == Co.SEX_FEMALE || Sex == Co.SEX_MALE || Sex == Co.SEX_NEUTER )
-                    {
-                        if (Case == Co.CASE_NOM_UNDEF && AO.IsCountable)
-                        {
-                            s = s + "a";
+                                s = s + "ein";
                         }
                         else if (Case == Co.CASE_AKK_UNDEF && AO.IsCountable)
                         {
-                            s = s + "a";
+                            if (AO.Sex == Co.SEX_MALE)
+                                s = s + "ein";
+                            else if (AO.Sex == Co.SEX_FEMALE)
+                                s = s + "eine";
+                            else if (AO.Sex == Co.SEX_NEUTER)
+                                s = s + "ein";
                         }
                         else if (Case == Co.CASE_DAT_UNDEF && AO.IsCountable)
                         {
-                            s = s + "a";
+                            if (AO.Sex == Co.SEX_MALE)
+                                s = s + "einem";
+                            else if (AO.Sex == Co.SEX_FEMALE)
+                                s = s + "einer";
+                            else if (AO.Sex == Co.SEX_NEUTER)
+                                s = s + "einem";
+                        }
+                    }
+                    if( adjectives )
+                    {
+                        for (j = 0; j < AO.Adjectives?.Count; j++)
+                        {
+                            Adj adj = (Adj)AO.Adjectives[j];
+                            if (j > 0)
+                                s = s + ",";
+
+                            s = s + space + adj.Name; // Adjs!.GetAdj(adj);
+
+                            if (adj!.Name?[adj!.Name!.Length - 1] == 'e')
+                            {
+                                if (Case == Co.CASE_NOM)
+                                {
+                                    if (AO.Sex == Co.SEX_MALE_PL || AO.Sex == Co.SEX_FEMALE_PL || AO.Sex == Co.SEX_NEUTER_PL)
+                                        s = s + "n";
+                                    /*
+                                                                if (AO.Sex == Co.SEX_MALE)
+                                                                    s = s + "n";
+                                                                else if (AO.Sex == Co.SEX_FEMALE)
+                                                                    ; //  s = s
+                                                                else if (AO.Sex == Co.SEX_NEUTER)
+                                                                    ; //  s = s;
+                                                                else
+                                                                    s = s + "n";
+                                    */
+                                }
+                                else if (Case == Co.CASE_AKK)
+                                {
+                                    if (AO.Sex == Co.SEX_MALE_PL || AO.Sex == Co.SEX_FEMALE_PL || AO.Sex == Co.SEX_NEUTER_PL)
+                                        s = s + "n";
+                                    /*
+                                    if (AO.Sex == Co.SEX_MALE)
+                                        s = s;
+                                    else if (AO.Sex == Co.SEX_FEMALE)
+                                        s = s;
+                                    else if (AO.Sex == Co.SEX_NEUTER)
+                                        s = s;
+                                    else
+                                        s = s + "n";
+                                    */
+                                }
+                                else if (Case == Co.CASE_DAT)
+                                {
+                                    if (AO.Sex == Co.SEX_MALE)
+                                        s = s + "n";
+                                    else if (AO.Sex == Co.SEX_FEMALE)
+                                        s = s + "n";
+                                    else if (AO.Sex == Co.SEX_NEUTER)
+                                        s = s + "n";
+                                    else
+                                        s = s + "n";
+                                }
+                                else if (Case == Co.CASE_NOM_UNDEF)
+                                {
+                                    if (AO.Sex == Co.SEX_MALE)
+                                        s = s + "n";
+                                    // else if (AO.Sex == Co.SEX_FEMALE)
+                                    //     ;
+                                    else if (AO.Sex == Co.SEX_NEUTER)
+                                        s = s + "s";
+                                    // else
+                                    //     ;
+                                }
+                                else if (Case == Co.CASE_AKK_UNDEF)
+                                {
+                                    if (AO.Sex == Co.SEX_MALE)
+                                        s = s + "r";
+                                    // else if (AO.Sex == Co.SEX_FEMALE)
+                                    //     ;
+                                    else if (AO.Sex == Co.SEX_NEUTER)
+                                        s = s + "s";
+                                    else
+                                        s = s + "e";
+                                }
+                                else if (Case == Co.CASE_DAT_UNDEF)
+                                {
+                                    if (AO.Sex == Co.SEX_MALE)
+                                        s = s + "n";
+                                    else if (AO.Sex == Co.SEX_FEMALE)
+                                        s = s + "n";
+                                    else if (AO.Sex == Co.SEX_NEUTER)
+                                        s = s + "n";
+                                    else
+                                        s = s + "n";
+                                }
+
+                            }
+                            else if (adj.Name?[adj.Name!.Length - 1] == 'a')
+                            {
+                                // Lila, Rosa etc. werden gar nicht dekliniert, die bleiben so, wie sie sind
+                            }
+                            else
+                            {
+                                if (Case == Co.CASE_NOM)
+                                {
+                                    if (AO.Sex == Co.SEX_MALE)
+                                        s = s + "en";
+                                    else if (AO.Sex == Co.SEX_FEMALE)
+                                        s = s + "e";
+                                    else if (AO.Sex == Co.SEX_NEUTER)
+                                        s = s + "e";
+                                    else
+                                        s = s + "en";
+                                }
+                                else if (Case == Co.CASE_AKK)
+                                {
+                                    if (AO.Sex == Co.SEX_MALE)
+                                        s = s + "e";
+                                    else if (AO.Sex == Co.SEX_FEMALE)
+                                        s = s + "e";
+                                    else if (AO.Sex == Co.SEX_NEUTER)
+                                        s = s + "e";
+                                    else
+                                        s = s + "en";
+                                }
+                                else if (Case == Co.CASE_DAT)
+                                {
+                                    if (AO.Sex == Co.SEX_MALE)
+                                        s = s + "en";
+                                    else if (AO.Sex == Co.SEX_FEMALE)
+                                        s = s + "en";
+                                    else if (AO.Sex == Co.SEX_NEUTER)
+                                        s = s + "en";
+                                    else
+                                        s = s + "en";
+                                }
+                                else if (Case == Co.CASE_NOM_UNDEF)
+                                {
+                                    if (AO.Sex == Co.SEX_MALE)
+                                        s = s + "en";
+                                    else if (AO.Sex == Co.SEX_FEMALE)
+                                        s = s + "e";
+                                    else if (AO.Sex == Co.SEX_NEUTER)
+                                        s = s + "es";
+                                    else
+                                        s = s + "e";
+                                }
+                                else if (Case == Co.CASE_AKK_UNDEF)
+                                {
+                                    if (AO.Sex == Co.SEX_MALE)
+                                        s = s + "er";
+                                    else if (AO.Sex == Co.SEX_FEMALE)
+                                        s = s + "e";
+                                    else if (AO.Sex == Co.SEX_NEUTER)
+                                        s = s + "es";
+                                    else
+                                        s = s + "e";
+                                }
+                                else if (Case == Co.CASE_DAT_UNDEF)
+                                {
+                                    if (AO.Sex == Co.SEX_MALE)
+                                        s = s + "en";
+                                    else if (AO.Sex == Co.SEX_FEMALE)
+                                        s = s + "en";
+                                    else if (AO.Sex == Co.SEX_NEUTER)
+                                        s = s + "en";
+                                    else
+                                        s = s + "en";
+                                }
+
+                            }
+
+                        }
+                    }
+
+                    int i;
+                    for (i = 0; i < AO.Names?.Count; i++)
+                    {
+                        Noun noun = AO.Names[i];
+
+                        if (s == "")
+                            // s = Nouns.GetNoun(AO.Names[i]);
+                            s = noun.Name;
+                        else
+                            // s = s + " " + Nouns.GetNoun(AO.Names[i]);
+                            s = s + space + noun.Name;
+
+                        if ((Case == Co.CASE_DAT) && ((AO.Sex == Co.SEX_FEMALE_PL) || (AO.Sex == Co.SEX_MALE_PL) || (AO.Sex == Co.SEX_NEUTER_PL)))
+                        {
+                            if (s?[s!.Length - 1] == 'e') s += "n";
+                            else if (s!.EndsWith("el")) s += "n";
+                        }
+                    }
+
+                    if ((Appendix != null) && (ShowAppendix))
+                    {
+                        s = s + space + Appendix;
+                    }
+
+                }
+                else
+                {
+                    if ((AO.Adjectives?.Count > 0 && adjectives ) || (ForceArticle))
+                    {
+                        if (Case == Co.CASE_NOM)
+                        {
+                            s = s + "the";
+                        }
+                        else if (Case == Co.CASE_AKK)
+                        {
+                            s = s + "the";
+                        }
+                        else if (Case == Co.CASE_DAT)
+                        {
+                            s = s + "the";
+                        }
+                        else if (Sex == Co.SEX_FEMALE || Sex == Co.SEX_MALE || Sex == Co.SEX_NEUTER)
+                        {
+                            if (Case == Co.CASE_NOM_UNDEF && AO.IsCountable)
+                            {
+                                s = s + "a";
+                            }
+                            else if (Case == Co.CASE_AKK_UNDEF && AO.IsCountable)
+                            {
+                                s = s + "a";
+                            }
+                            else if (Case == Co.CASE_DAT_UNDEF && AO.IsCountable)
+                            {
+                                s = s + "a";
+                            }
+
+                        }
+                    }
+                    if (adjectives)
+                    {
+                        for (j = 0; j < AO!.Adjectives!.Count; j++)
+                        {
+                            Adj adj = (Adj)AO!.Adjectives[j];
+                            if (j > 0)
+                                s = s + ",";
+
+                            s = s + space + adj.Name; // Adjs!.GetAdj(adj);
                         }
 
+                        int i;
+                        for (i = 0; i < AO.Names?.Count; i++)
+                        {
+                            Noun noun = AO.Names[i];
+
+                            if (s == "")
+                                // s = Nouns.GetNoun(AO.Names[i]);
+                                s = noun.Name;
+                            else
+                                // s = s + " " + Nouns.GetNoun(AO.Names[i]);
+                                s = s + space + noun.Name;
+
+                        }
                     }
-                }
-                for (j = 0; j < AO!.Adjectives!.Count; j++)
-                {
-                    Adj adj = (Adj)AO!.Adjectives[j];
-                    if (j > 0)
-                        s = s + ",";
 
-                    s = s + space + adj.Name; // Adjs!.GetAdj(adj);
-                }
-
-                int i;
-                for (i = 0; i < AO.Names?.Count; i++)
-                {
-                    Noun noun = AO.Names[i];
-
-                    if (s == "")
-                        // s = Nouns.GetNoun(AO.Names[i]);
-                        s = noun.Name;
-                    else
-                        // s = s + " " + Nouns.GetNoun(AO.Names[i]);
-                        s = s + space + noun.Name;
+                    if ((Appendix != null) && (ShowAppendix))
+                    {
+                        s = s + space + Appendix;
+                    }
 
                 }
-
-                if ((Appendix != null) && (ShowAppendix))
-                {
-                    s = s + space + Appendix;
-                }
-
             }
-
+            catch (Exception e)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("Full Name: " + e.Message, IGlobalData.protMode.crisp);
+            }
             // HIer wird jetzt noch ein Link draus gemacht
             return (s);
         }
