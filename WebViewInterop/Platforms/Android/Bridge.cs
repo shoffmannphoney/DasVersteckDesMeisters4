@@ -21,11 +21,11 @@ public partial class Bridge : Java.Lang.Object
           source = new TaskCompletionSource<string>();
         }
 
-        public void OnReceiveValue(Java.Lang.Object value)
+        public  void OnReceiveValue(Java.Lang.Object? value)
         {
             try
             {
-                var jstr = value.ToString(); ;
+                var jstr = value!.ToString(); ;
                 source.SetResult(jstr.Trim('"'));
             }
             catch (Exception ex)
@@ -47,7 +47,7 @@ public partial class Bridge : Java.Lang.Object
         try
         {
             _webView = webView;
-            Context.RunOnUiThread(() =>
+            Context!.RunOnUiThread(() =>
             {
                 webView.AddJavascriptInterface(this, BRIDGE_NAME);
             });
@@ -62,7 +62,7 @@ public partial class Bridge : Java.Lang.Object
 
     public void Disconnect(Android.Webkit.WebView webView)
     {
-        Context.RunOnUiThread(() =>
+        Context!.RunOnUiThread(() =>
         {
             webView.RemoveJavascriptInterface(BRIDGE_NAME);
         });
@@ -109,7 +109,7 @@ public partial class Bridge : Java.Lang.Object
     CaptureSignatureImplementation(options.ToString());
   }
 
-    public async Task<string> EvaluateJavascriptAsync(string script)
+    public async Task<string>? EvaluateJavascriptAsync(string script)
     {
         try
         {
@@ -170,7 +170,7 @@ public partial class Bridge : Java.Lang.Object
     }
     public static void InitLog( string s1)
         {
-        if( !_initProtocol.Equals( null ) )
+        if( !_initProtocol!.Equals( null ) )
             _initProtocol(s1);
     }
     public void SetProtocol(DelVoidString initProtocol, DelVoidStringProtMode addProtocol)

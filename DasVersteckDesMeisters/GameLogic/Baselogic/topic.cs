@@ -23,7 +23,7 @@ namespace GameCore
 
         }
 
-        public Topic(int pTopicID, List<Noun> pNames, List<Adj> pAdjectives, int pSex, NounList pNouns, AdjList pAdjs )
+        public Topic(int pTopicID, List<Noun>? pNames, List<Adj>? pAdjectives, int pSex, NounList pNouns, AdjList pAdjs )
            : base(pTopicID, pNames, null, pAdjectives, null, pSex, null, true, null, pNouns, pAdjs)
         {
             /*
@@ -47,7 +47,7 @@ namespace GameCore
             */
         }
 
-        public Topic(List<Noun> pNames, List<Adj> pAdjectives, int pSex, NounList pNouns, AdjList pAdjs)
+        public Topic(List<Noun>? pNames, List<Adj>? pAdjectives, int pSex, NounList pNouns, AdjList pAdjs)
                  : this(SerialNumberGenerator.Instance.NextSerial, pNames, pAdjectives, pSex, pNouns, pAdjs)
 
         {

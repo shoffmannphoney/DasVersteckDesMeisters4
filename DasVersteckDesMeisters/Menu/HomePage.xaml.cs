@@ -335,9 +335,7 @@ public partial class HomePage : ContentPage, IMenuExtension
 
         pd = _menuExtension!.CalcBounds(pd);
 
-        int val;
-
-        string Text = loca.MAUI_Infodialog_Info;
+       string Text = loca.MAUI_Infodialog_Info;
 
         _menuExtension!.OpenShowMenu(true, pd, true, Text);
 

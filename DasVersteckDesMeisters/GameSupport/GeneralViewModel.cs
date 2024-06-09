@@ -293,7 +293,7 @@ public class GeneralViewModel : BaseViewModel, INotifyPropertyChanged
             }
 
         }
-        catch (Exception e)
+        catch // (Exception e)
         {
             // int a;
         }

@@ -58,7 +58,7 @@ public class CustomWebViewClient : WebViewClient
         catch (Exception ex)
         {
             // GetBridge().AddLog(ex.Message, protMode.crisp);0
-            BridgedWebViewHandler.GetAddProt()( ex.Message, protMode.crisp);
+            BridgedWebViewHandler.GetAddProt()!( ex.Message, protMode.crisp);
             return false;
         }
     }
@@ -159,8 +159,9 @@ public class BridgedWebViewHandler : ViewHandler<IBridgedWebView, Android.Webkit
         }
         catch (Exception ex)
         {
-            BridgedWebViewHandler.GetAddProt()(ex.Message, protMode.crisp);
-            return null;
+            BridgedWebViewHandler.GetAddProt()!(ex.Message, protMode.crisp);
+            Android.Webkit.WebView wv = new(Context.ApplicationContext);
+            return wv;
         }
     }
 
@@ -210,7 +211,7 @@ public class BridgedWebViewHandler : ViewHandler<IBridgedWebView, Android.Webkit
         }
         catch (Exception ex)
         {
-            BridgedWebViewHandler.GetAddProt()(ex.Message, protMode.crisp);
+            BridgedWebViewHandler.GetAddProt()!(ex.Message, protMode.crisp);
 
         }
     }
@@ -225,7 +226,7 @@ public class BridgedWebViewHandler : ViewHandler<IBridgedWebView, Android.Webkit
 
             // platformView.LoadUrl("https://www.google.com");
 
-            string? baseUrl = "file:///android_asset/raw/";
+            // string? baseUrl = "file:///android_asset/raw/";
 
 
             // String html = "<html><head><title>TITLE!!!</title></head>";
@@ -241,7 +242,7 @@ public class BridgedWebViewHandler : ViewHandler<IBridgedWebView, Android.Webkit
         }
         catch (Exception ex)
         {
-            BridgedWebViewHandler.GetAddProt()(ex.Message, protMode.crisp);
+            BridgedWebViewHandler.GetAddProt()!(ex.Message, protMode.crisp);
 
         }
 

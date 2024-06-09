@@ -45,8 +45,8 @@ public partial class GamePage : ContentPage, IMenuExtension
     TabItem? TICol1_0 { get; set; }
     TabItem? TICol2_0 { get; set; }
     TabItem? TICol3_0 { get; set; }
-     public GlobalData GD { get; set; }
-    private IUIServices UIS { get; set; }
+     public GlobalData? GD { get; set; }
+    private IUIServices? UIS { get; set; }
     private IGlobalData.screenMode lastSM;
 
     // private string? RecognitionText;
@@ -127,7 +127,7 @@ public partial class GamePage : ContentPage, IMenuExtension
             UIS.UpdateBrowserBlocked = false;
             GlobalSpecs.CurrentGlobalSpecs.InitRunning = IGlobalSpecs.initRunning.finished;
         }
-        catch (Exception e)
+        catch  // (Exception e)
         {
         }
     }
@@ -148,11 +148,11 @@ public partial class GamePage : ContentPage, IMenuExtension
         {
             GlobalData.AddLog("PageDown by Keyboard", IGlobalData.protMode.crisp);
 
-            UIS.Scr.PageDown();
+            UIS!.Scr.PageDown();
 
             ea.Handled = true;
         }
-        else if ( UIS.MCMVVisible == true )
+        else if ( UIS!.MCMVVisible == true )
         {
             int code = 48;
 
@@ -503,15 +503,15 @@ public partial class GamePage : ContentPage, IMenuExtension
             int ix = 0;
             bool found = false;
 
-            for (ix = UIS.MCM!.Current!.Count - 1; ix >= 0; ix++)
+            for (ix = UIS!.MCM!.Current!.Count - 1; ix >= 0; ix++)
             {
-                if (UIS.MCM.Current[ix] > 0)
+                if (UIS!.MCM.Current[ix] > 0)
                 {
                     MCMenuEntry? me = UIS.MCM.FindID(UIS.MCM.Current[ix]);
 
                     if (me!.Keys!.Count > 0)
                     {
-                        if ((me!.Follower.Count == 1 && me!.Follower[0] == -1 && me.Hidden == MCMenuEntry.HiddenType.visible)
+                        if ((me!.Follower!.Count == 1 && me!.Follower[0] == -1 && me.Hidden == MCMenuEntry.HiddenType.visible)
                                 || (me!.DefaultBreak == true)
                              )
                         {
@@ -530,7 +530,7 @@ public partial class GamePage : ContentPage, IMenuExtension
         {
             int ix = 0;
             bool found = false;
-            for (ix = 0; ix < UIS.MCM!.Current!.Count; ix++)
+            for (ix = 0; ix < UIS!.MCM!.Current!.Count; ix++)
             {
                 if (UIS.MCM.Current[ix] > 0)
                 {
@@ -680,7 +680,7 @@ public partial class GamePage : ContentPage, IMenuExtension
 
         if (rdc[2].Height.Value == target)
         {
-            UIS.Scr.ScrollEndWait(2);
+            UIS!.Scr.ScrollEndWait(2);
             _menuExtension!.RemoveListCall(SetMCHeight);
         }
         /*
@@ -1201,7 +1201,7 @@ public partial class GamePage : ContentPage, IMenuExtension
         if (GlobalSpecs.CurrentGlobalSpecs!.InitRunning == IGlobalSpecs.initRunning.started)
             return false;
 
-        UIS.AddUICycle();
+        UIS!.AddUICycle();
         return true;
     }
 
@@ -1209,6 +1209,10 @@ public partial class GamePage : ContentPage, IMenuExtension
 
     public bool ExecuteGamePageLayout()
     {
+        // Nur testweise eingefügt: GC.Collect() muss unbedingt wieder raus
+        GC.Collect();
+
+
         if (gplUpdate == true)
         {
             return false;
@@ -1771,7 +1775,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                 ItemLocTreeHasChanged = true;
 
 
-            if (UIS.UpdateBrowserBlocked == false)
+            if (UIS!.UpdateBrowserBlocked == false)
             {
 
                 EmptyTreeOrderNew = CreateOrderTreeEmpty();
@@ -1817,9 +1821,9 @@ public partial class GamePage : ContentPage, IMenuExtension
 
                 }
 
-                EmptyEmptyTreeViewItem(EmptyTreeOrderOld );
-                EmptyEmptyTreeViewItem(EmptyTreeItemInvOld);
-                EmptyEmptyTreeViewItem(EmptyTreeItemLocOld);
+                EmptyEmptyTreeViewItem(EmptyTreeOrderOld! );
+                EmptyEmptyTreeViewItem(EmptyTreeItemInvOld!);
+                EmptyEmptyTreeViewItem(EmptyTreeItemLocOld!);
                 EmptyTreeOrderOld = EmptyTreeOrderNew;
                 EmptyTreeItemInvOld = EmptyTreeItemInvNew;
                 EmptyTreeItemLocOld = EmptyTreeItemLocNew;
@@ -2315,7 +2319,7 @@ public partial class GamePage : ContentPage, IMenuExtension
 
                         }
                         ItemInvTreeHasInitialized = true;
-                        tvOrder.CalcToggles();
+                        tvOrder!.CalcToggles();
 
                     }
                     else
@@ -2323,7 +2327,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                         TICol1_0!.TabPanels[2].SelectButton!.IsVisible = false;
 
                     }
-                    TICol1_0.SyncTabStyles();
+                    TICol1_0!.SyncTabStyles();
 
                 }
                 if (IsPortraitColVisible(1))
@@ -2387,7 +2391,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                             // TICol2_2!.TabPanels[0].TabPanelGrid.Clear();
                             // TICol2_2!.TabPanels[0].TabPanelGrid!.Clear();
                             TreeView.EmptyTreeViewItem( TICol2_0!.TabPanels[2].TabPanelGrid!.Children[0]);
-                            TICol2_0!.TabPanels[2].TabPanelGrid.Children[0] = tvOrder;
+                            TICol2_0!.TabPanels[2].TabPanelGrid!.Children[0] = tvOrder;
                             TICol2_0!.TabPanels[2].SelectButton!.IsVisible = true;
                             TICol2_0!.TabPanels[2].SelectButton!.Text = FaSolid.Suitcase;
                             tvOrder.CalcToggles();
@@ -2403,7 +2407,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                         TICol2_0!.TabPanels[2].SelectButton!.IsVisible = false;
 
                     }
-                    TICol2_0.SyncTabStyles();
+                    TICol2_0!.SyncTabStyles();
 
                 }
                 // Column 3
@@ -2417,7 +2421,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                             // TICol3_0!.TabPanels[0].TabPanelGrid.Clear();
                             // TICol3_0!.TabPanels[0].TabPanelGrid!.Clear();
                             TreeView.EmptyTreeViewItem( TICol3_0!.TabPanels[0].TabPanelGrid!.Children[0]);
-                            TICol3_0!.TabPanels[0].TabPanelGrid.Children[0] = tvOrder;
+                            TICol3_0!.TabPanels[0].TabPanelGrid!.Children[0] = tvOrder;
                             TICol3_0!.TabPanels[0].SelectButton!.IsVisible = true;
                             TICol3_0!.TabPanels[0].SelectButton!.Text = FaSolid.Wrench;
                             tvOrder.CalcToggles();
@@ -2955,7 +2959,7 @@ public partial class GamePage : ContentPage, IMenuExtension
         tv.SetupTreeView();
         tv.CurrentTreeState = TreeViewItem.TreeState.open;
 
-        if (GD.Adventure == null)
+        if (GD!.Adventure == null)
             return tv;
 
         location l = GD.Adventure!.locations!.Find(GD.Adventure!.A!.ActLoc!)!;
@@ -2967,7 +2971,7 @@ public partial class GamePage : ContentPage, IMenuExtension
             {
                 if (item.IsMentionable == true && (!item.IsLessImportant || GD.LayoutDescription.SimpleMC == false))
                 {
-                    TreeViewItem newChild = AddTreeViewItem(tv, item.FullName(Case: Co.CASE_AKK, GD.Adventure.CurrentNouns, ShowAppendix: true), item.FullName(Case: Co.CASE_AKK, CurrentNouns: GD.Adventure.CurrentNouns ));
+                    TreeViewItem newChild = AddTreeViewItem(tv, item.FullName(Case: Co.CASE_AKK, GD.Adventure.CurrentNouns!, ShowAppendix: true), item.FullName(Case: Co.CASE_AKK, CurrentNouns: GD.Adventure.CurrentNouns! ));
                     AddSiblings(newChild, item);
 
                 }
@@ -2979,7 +2983,7 @@ public partial class GamePage : ContentPage, IMenuExtension
             {
                 if ((person.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_Loc, GD.Adventure!.A!.ActLoc)) && (person.Active == true) && (person.IsHidden == false))
                 {
-                    TreeViewItem newChild = AddTreeViewItem(tv, person.FullName(Co.CASE_AKK, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns), person.FullName(Case: Co.CASE_AKK, CurrentNouns: GD.Adventure.CurrentNouns));
+                    TreeViewItem newChild = AddTreeViewItem(tv, person.FullName(Co.CASE_AKK, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns!), person.FullName(Case: Co.CASE_AKK, CurrentNouns: GD.Adventure.CurrentNouns!));
                     AddSiblings(newChild, person);
   
                 }
@@ -2997,7 +3001,7 @@ public partial class GamePage : ContentPage, IMenuExtension
             {
                 if (item.IsMentionable == false && (!item.IsLessImportant || GD.LayoutDescription.SimpleMC == false))
                 {
-                    TreeViewItem newChild = AddTreeViewItem(BackgroundChild, item.FullName(Case: Co.CASE_AKK, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns), item.FullName(Case: Co.CASE_AKK, CurrentNouns: GD.Adventure.CurrentNouns));
+                    TreeViewItem newChild = AddTreeViewItem(BackgroundChild, item.FullName(Case: Co.CASE_AKK, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns!), item.FullName(Case: Co.CASE_AKK, CurrentNouns: GD.Adventure.CurrentNouns!));
                     AddSiblings(newChild, item);
 
                 }
@@ -3015,7 +3019,7 @@ public partial class GamePage : ContentPage, IMenuExtension
         EmptyTreeView tv = new();
         tv.Children = new();
 
-        if (GD.Adventure == null)
+        if (GD!.Adventure == null)
             return tv;
 
         location l = GD.Adventure!.locations!.Find(GD.Adventure!.A!.ActLoc!)!;
@@ -3080,7 +3084,7 @@ public partial class GamePage : ContentPage, IMenuExtension
         tv.SetupTreeView();
         tv.CurrentTreeState = TreeViewItem.TreeState.open;
 
-        if (GD.Adventure == null)
+        if (GD!.Adventure == null)
             return tv;
 
         location l = GD.Adventure!.locations!.Find(GD.Adventure!.A!.ActLoc!)!;
@@ -3090,7 +3094,7 @@ public partial class GamePage : ContentPage, IMenuExtension
         {
             if ((item.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_Person, GD.Adventure!.A!.ActPerson)) && (item.IsHidden == false) && (item.Active == true))
             {
-                TreeViewItem newChild = AddTreeViewItem(tv, item!.FullName(Case: Co.CASE_AKK, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns), item.FullName(Case: Co.CASE_AKK, CurrentNouns: GD.Adventure.CurrentNouns));
+                TreeViewItem newChild = AddTreeViewItem(tv, item!.FullName(Case: Co.CASE_AKK, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns!), item.FullName(Case: Co.CASE_AKK, CurrentNouns: GD.Adventure.CurrentNouns!));
                 AddSiblings(newChild, item);
             }
         }
@@ -3098,7 +3102,7 @@ public partial class GamePage : ContentPage, IMenuExtension
         {
             if ((person.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_Person, GD.Adventure!.A!.ActPerson)) && (person.Active == true) && (person.IsHidden == false))
             {
-                TreeViewItem newChild = AddTreeViewItem(tv, person.FullName(Co.CASE_AKK, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns), person.FullName(Case: Co.CASE_AKK, CurrentNouns: GD.Adventure.CurrentNouns));
+                TreeViewItem newChild = AddTreeViewItem(tv, person.FullName(Co.CASE_AKK, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns!), person.FullName(Case: Co.CASE_AKK, CurrentNouns: GD.Adventure.CurrentNouns!));
                 AddSiblings(newChild, person);
             }
         }
@@ -3108,7 +3112,7 @@ public partial class GamePage : ContentPage, IMenuExtension
     {
         EmptyTreeView tv = new();
 
-        if (GD.Adventure == null)
+        if (GD!.Adventure == null)
             return tv;
 
         location l = GD.Adventure!.locations!.Find(GD.Adventure!.A!.ActLoc!)!;
@@ -3145,11 +3149,11 @@ public partial class GamePage : ContentPage, IMenuExtension
                 PutInChild.SetupTreeViewItem();
                 int sysChildren = PutInChild.Children.Count;
 
-                foreach (Item item2 in GD.Adventure!.Items!.List!.Values)
+                foreach (Item item2 in GD!.Adventure!.Items!.List!.Values)
                 {
                     if ((item2.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_In_Item, item.ID)) && (item2.IsHidden == false) && (item2.Active == true))
                     {
-                        TreeViewItem newChild = AddTreeViewItem(PutInChild, item2.FullName(Case: Co.CASE_AKK, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns), item2.FullName(Case: Co.CASE_AKK, CurrentNouns: GD.Adventure.CurrentNouns));
+                        TreeViewItem newChild = AddTreeViewItem(PutInChild, item2.FullName(Case: Co.CASE_AKK, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns!), item2.FullName(Case: Co.CASE_AKK, CurrentNouns: GD.Adventure.CurrentNouns!));
                         if (item2.InvisibleIn == false)
                             AddSiblings(newChild, item2);
                     }
@@ -3158,7 +3162,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                 {
                     if ((person2.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_In_Item, item.ID)) && (person2.Active == true) && (person2.IsHidden == false))
                     {
-                        TreeViewItem newChild = AddTreeViewItem(PutInChild, person2.FullName(Co.CASE_AKK, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns), person2.FullName(Case: Co.CASE_AKK, CurrentNouns: GD.Adventure.CurrentNouns));
+                        TreeViewItem newChild = AddTreeViewItem(PutInChild, person2.FullName(Co.CASE_AKK, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns!), person2.FullName(Case: Co.CASE_AKK, CurrentNouns: GD.Adventure.CurrentNouns!));
                         AddSiblings(newChild, person2);
 
                      }
@@ -3166,7 +3170,7 @@ public partial class GamePage : ContentPage, IMenuExtension
 
                 if (PutInChild!.SubTree!.Count > 0)
                 {
-                    PutInChild.Text = String.Format(loca.CustomRequestHandler_DoUIUpdate_Person_You_16300, item.FullName(Co.CASE_DAT, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns));
+                    PutInChild.Text = String.Format(loca.CustomRequestHandler_DoUIUpdate_Person_You_16300, item.FullName(Co.CASE_DAT, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns!));
                     currentChild.Add(PutInChild);
                 }
             }
@@ -3176,11 +3180,11 @@ public partial class GamePage : ContentPage, IMenuExtension
                 PutInChild.SetupTreeViewItem();
                 int sysChildren = PutInChild.Children.Count;
 
-                foreach (Item item2 in GD.Adventure!.Items!.List!.Values)
+                foreach (Item item2 in GD!.Adventure!.Items!.List!.Values)
                 {
                     if ((item2.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_On_Item, item.ID)) && (item2.IsHidden == false) && (item2.Active == true))
                     {
-                        TreeViewItem newChild = AddTreeViewItem(PutInChild, item2.FullName(Case: Co.CASE_AKK, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns), item2.FullName(Case: Co.CASE_AKK, CurrentNouns: GD.Adventure.CurrentNouns));
+                        TreeViewItem newChild = AddTreeViewItem(PutInChild, item2.FullName(Case: Co.CASE_AKK, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns!), item2.FullName(Case: Co.CASE_AKK, CurrentNouns: GD.Adventure.CurrentNouns!));
                         if (item2.InvisibleIn == false)
                             AddSiblings(newChild, item2);
                     }
@@ -3189,7 +3193,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                 {
                     if ((person2.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_On_Item, item.ID)) && (person2.Active == true) && (person2.IsHidden == false))
                     {
-                        TreeViewItem newChild = AddTreeViewItem(PutInChild, person2.FullName(Co.CASE_AKK, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns), person2.FullName(Case: Co.CASE_AKK, CurrentNouns: GD.Adventure.CurrentNouns));
+                        TreeViewItem newChild = AddTreeViewItem(PutInChild, person2.FullName(Co.CASE_AKK, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns!), person2.FullName(Case: Co.CASE_AKK, CurrentNouns: GD.Adventure.CurrentNouns!));
                         AddSiblings(newChild, person2);
                     }
                 }
@@ -3197,7 +3201,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                 if (PutInChild.SubTree!.Count > 0)
                 {
 
-                    PutInChild.Text = String.Format(loca.CustomRequestHandler_DoUIUpdate_Person_You_16301, item.FullName(Co.CASE_DAT, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns));
+                    PutInChild.Text = String.Format(loca.CustomRequestHandler_DoUIUpdate_Person_You_16301, item.FullName(Co.CASE_DAT, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns!));
                     currentChild.Add(PutInChild);
                 }
            }
@@ -3207,11 +3211,11 @@ public partial class GamePage : ContentPage, IMenuExtension
                 PutInChild.SetupTreeViewItem();
                 int sysChildren = PutInChild.Children.Count;
 
-                foreach (Item item2 in GD.Adventure!.Items!.List!.Values)
+                foreach (Item item2 in GD!.Adventure!.Items!.List!.Values)
                 {
                     if ((item2.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_Behind_Item, item.ID)) && (item2.IsHidden == false) && (item2.Active == true))
                     {
-                        TreeViewItem newChild = AddTreeViewItem(PutInChild, item2.FullName(Case: Co.CASE_AKK, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns), item2.FullName(Case: Co.CASE_AKK, CurrentNouns: GD.Adventure.CurrentNouns));
+                        TreeViewItem newChild = AddTreeViewItem(PutInChild, item2.FullName(Case: Co.CASE_AKK, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns!), item2.FullName(Case: Co.CASE_AKK, CurrentNouns: GD.Adventure.CurrentNouns!));
                         if (item2.InvisibleIn == false)
                             AddSiblings(newChild, item2);
                     }
@@ -3220,14 +3224,14 @@ public partial class GamePage : ContentPage, IMenuExtension
                 {
                     if ((person2.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_Behind_Item, item.ID)) && (person2.Active == true) && (person2.IsHidden == false))
                     {
-                        TreeViewItem newChild = AddTreeViewItem(PutInChild, person2.FullName(Co.CASE_AKK, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns), person2.FullName(Case: Co.CASE_AKK, CurrentNouns: GD.Adventure.CurrentNouns));
+                        TreeViewItem newChild = AddTreeViewItem(PutInChild, person2.FullName(Co.CASE_AKK, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns!), person2.FullName(Case: Co.CASE_AKK, CurrentNouns: GD.Adventure.CurrentNouns!));
                         AddSiblings(newChild, person2);
                     }
                 }
 
                 if (PutInChild.SubTree!.Count > 0)
                 {
-                    PutInChild.Text = String.Format(loca.CustomRequestHandler_DoUIUpdate_Person_You_16302, item.FullName(Co.CASE_DAT, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns));
+                    PutInChild.Text = String.Format(loca.CustomRequestHandler_DoUIUpdate_Person_You_16302, item.FullName(Co.CASE_DAT, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns!));
                     currentChild.Add(PutInChild);
                 }
             }
@@ -3237,11 +3241,11 @@ public partial class GamePage : ContentPage, IMenuExtension
                 PutInChild.SetupTreeViewItem();
                 int sysChildren = PutInChild.Children.Count;
 
-                foreach (Item item2 in GD.Adventure!.Items!.List!.Values)
+                foreach (Item item2 in GD!.Adventure!.Items!.List!.Values)
                 {
                     if ((item2.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_Below_Item, item.ID)) && (item2.IsHidden == false) && (item2.Active == true))
                     {
-                        TreeViewItem newChild = AddTreeViewItem(PutInChild, item2.FullName(Case: Co.CASE_AKK, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns), item2.FullName(Case: Co.CASE_AKK, CurrentNouns: GD.Adventure.CurrentNouns));
+                        TreeViewItem newChild = AddTreeViewItem(PutInChild, item2.FullName(Case: Co.CASE_AKK, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns!), item2.FullName(Case: Co.CASE_AKK, CurrentNouns: GD.Adventure.CurrentNouns!));
                         if (item2.InvisibleIn == false)
                             AddSiblings(newChild, item2);
                     }
@@ -3250,7 +3254,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                 {
                     if ((person2.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_Below_Item, item.ID)) && (person2.Active == true) && (person2.IsHidden == false))
                     {
-                        TreeViewItem newChild = AddTreeViewItem(PutInChild, person2.FullName(Co.CASE_AKK, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns), person2.FullName(Case: Co.CASE_AKK, CurrentNouns: GD.Adventure.CurrentNouns));
+                        TreeViewItem newChild = AddTreeViewItem(PutInChild, person2.FullName(Co.CASE_AKK, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns!), person2.FullName(Case: Co.CASE_AKK, CurrentNouns: GD.Adventure.CurrentNouns!));
                         AddSiblings(newChild, person2);
                     }
                 }
@@ -3258,7 +3262,7 @@ public partial class GamePage : ContentPage, IMenuExtension
 
                 if ( PutInChild.SubTree!.Count > 0)
                 {
-                    PutInChild.Text = String.Format(loca.CustomRequestHandler_DoUIUpdate_Person_You_16303, item.FullName(Co.CASE_DAT, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns));
+                    PutInChild.Text = String.Format(loca.CustomRequestHandler_DoUIUpdate_Person_You_16303, item.FullName(Co.CASE_DAT, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns!));
                     currentChild.Add(PutInChild);
                     // currentChild.CurrentTreeState = TreeViewItem.TreeState.open;
                     // PutInChild.CurrentTreeState = TreeViewItem.TreeState.open;
@@ -3271,11 +3275,11 @@ public partial class GamePage : ContentPage, IMenuExtension
             PutInChild.SetupTreeViewItem();
             int sysChildren = PutInChild.Children.Count;
 
-            foreach (Item item2 in GD.Adventure!.Items!.List!.Values)
+            foreach (Item item2 in GD!.Adventure!.Items!.List!.Values)
             {
                 if ((item2.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_Beside_Item, item.ID)) && (item2.IsHidden == false) && (item2.Active == true))
                 {
-                    TreeViewItem newChild = AddTreeViewItem(PutInChild, item2.FullName(Case: Co.CASE_AKK, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns), item2.FullName(Case: Co.CASE_AKK, CurrentNouns: GD.Adventure.CurrentNouns));
+                    TreeViewItem newChild = AddTreeViewItem(PutInChild, item2.FullName(Case: Co.CASE_AKK, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns!), item2.FullName(Case: Co.CASE_AKK, CurrentNouns: GD!.Adventure.CurrentNouns!));
                     if (item2.InvisibleIn == false)
                         AddSiblings(newChild, item2);
                 }
@@ -3284,7 +3288,7 @@ public partial class GamePage : ContentPage, IMenuExtension
             {
                 if ((person2.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_Beside_Item, item.ID)) && (person2.Active == true) && (person2.IsHidden == false))
                 {
-                    TreeViewItem newChild = AddTreeViewItem(PutInChild, person2.FullName(Co.CASE_AKK, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns), person2.FullName(Case: Co.CASE_AKK, CurrentNouns: GD.Adventure.CurrentNouns));
+                    TreeViewItem newChild = AddTreeViewItem(PutInChild, person2.FullName(Co.CASE_AKK, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns!), person2.FullName(Case: Co.CASE_AKK, CurrentNouns: GD!.Adventure.CurrentNouns!));
                     AddSiblings(newChild, person2);
                 }
             }
@@ -3292,7 +3296,7 @@ public partial class GamePage : ContentPage, IMenuExtension
 
             if (PutInChild.SubTree!.Count > sysChildren)
             {
-                PutInChild.Text = String.Format(loca.CustomRequestHandler_DoUIUpdate_Person_You_16305, item.FullName(Co.CASE_DAT, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns));
+                PutInChild.Text = String.Format(loca.CustomRequestHandler_DoUIUpdate_Person_You_16305, item.FullName(Co.CASE_DAT, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns!));
                 currentChild.Add(PutInChild);
             }
         }
@@ -3306,11 +3310,11 @@ public partial class GamePage : ContentPage, IMenuExtension
                 TreeViewItem PutInChild = UIElement.NewTreeViewItem();
                 PutInChild.SetupTreeViewItem();
 
-                foreach (Item item2 in GD.Adventure!.Items!.List!.Values)
+                foreach (Item item2 in GD!.Adventure!.Items!.List!.Values)
                 {
                     if ((item2.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_In_Item, person.ID)) && (item2.IsHidden == false) && (item2.Active == true))
                     {
-                        TreeViewItem newChild = AddTreeViewItem(PutInChild, item2.FullName(Case: Co.CASE_AKK, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns)!, item2.FullName(Case: Co.CASE_AKK, CurrentNouns: GD.Adventure.CurrentNouns)!);
+                        TreeViewItem newChild = AddTreeViewItem(PutInChild, item2.FullName(Case: Co.CASE_AKK, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns!)!, item2.FullName(Case: Co.CASE_AKK, CurrentNouns: GD.Adventure.CurrentNouns!));
                         if (item2.InvisibleIn == false)
                             AddSiblings(newChild, item2);
                     }
@@ -3319,14 +3323,14 @@ public partial class GamePage : ContentPage, IMenuExtension
                 {
                     if ((person2.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_In_Item, person.ID)) && (person2.Active == true) && (person2.IsHidden == false))
                     {
-                        TreeViewItem newChild = AddTreeViewItem(PutInChild, person2.FullName(Co.CASE_AKK, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns)!, person2.FullName(Case: Co.CASE_AKK, CurrentNouns: GD.Adventure.CurrentNouns)!);
+                        TreeViewItem newChild = AddTreeViewItem(PutInChild, person2.FullName(Co.CASE_AKK, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns!)!, person2.FullName(Case: Co.CASE_AKK, CurrentNouns: GD.Adventure.CurrentNouns!)!);
                         AddSiblings(newChild, person2);
                     }
                 }
 
                 if (PutInChild.Children.Count > 0)
                 {
-                    PutInChild.Text = String.Format(loca.CustomRequestHandler_OrderListPlayTo_16306, person.FullName(Co.CASE_DAT, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns));
+                    PutInChild.Text = String.Format(loca.CustomRequestHandler_OrderListPlayTo_16306, person.FullName(Co.CASE_DAT, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns!));
                     currentChild.Add(PutInChild);
                 }
             }
@@ -3342,7 +3346,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                 EmptyTreeViewItem PutInChild = new EmptyTreeViewItem();
                 PutInChild.ID = item.ID;
 
-                foreach (Item item2 in GD.Adventure!.Items!.List!.Values)
+                foreach (Item item2 in GD!.Adventure!.Items!.List!.Values)
                 {
                     if ((item2.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_In_Item, item.ID)) && (item2.IsHidden == false) && (item2.Active == true))
                     {
@@ -3373,7 +3377,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                 EmptyTreeViewItem PutInChild = new EmptyTreeViewItem();
                 PutInChild.ID = item.ID;
 
-                foreach (Item item2 in GD.Adventure!.Items!.List!.Values)
+                foreach (Item item2 in GD!.Adventure!.Items!.List!.Values)
                 {
                     if ((item2.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_On_Item, item.ID)) && (item2.IsHidden == false) && (item2.Active == true))
                     {
@@ -3401,7 +3405,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                 EmptyTreeViewItem PutInChild = new EmptyTreeViewItem();
                 PutInChild.ID = item.ID;
 
-                foreach (Item item2 in GD.Adventure!.Items!.List!.Values)
+                foreach (Item item2 in GD!.Adventure!.Items!.List!.Values)
                 {
                     if ((item2.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_Behind_Item, item.ID)) && (item2.IsHidden == false) && (item2.Active == true))
                     {
@@ -3429,7 +3433,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                 EmptyTreeViewItem PutInChild = new EmptyTreeViewItem();
                 PutInChild.ID = item.ID;
 
-                foreach (Item item2 in GD.Adventure!.Items!.List!.Values)
+                foreach (Item item2 in GD!.Adventure!.Items!.List!.Values)
                 {
                     if ((item2.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_Below_Item, item.ID)) && (item2.IsHidden == false) && (item2.Active == true))
                     {
@@ -3459,7 +3463,7 @@ public partial class GamePage : ContentPage, IMenuExtension
             EmptyTreeViewItem PutInChild = new EmptyTreeViewItem();
             PutInChild.ID = item.ID;
 
-            foreach (Item item2 in GD.Adventure!.Items!.List!.Values)
+            foreach (Item item2 in GD!.Adventure!.Items!.List!.Values)
             {
                 if ((item2.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_Beside_Item, item.ID)) && (item2.IsHidden == false) && (item2.Active == true))
                 {
@@ -3493,7 +3497,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                 EmptyTreeViewItem PutInChild = new EmptyTreeViewItem();
                 PutInChild.ID = person.ID;
 
-                foreach (Item item2 in GD.Adventure!.Items!.List!.Values)
+                foreach (Item item2 in GD!.Adventure!.Items!.List!.Values)
                 {
                     if ((item2.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_In_Item, person.ID)) && (item2.IsHidden == false) && (item2.Active == true))
                     {
@@ -3526,7 +3530,7 @@ public partial class GamePage : ContentPage, IMenuExtension
         tv.SetupTreeView();
         tv.CurrentTreeState = TreeViewItem.TreeState.open;
 
-        if (GD.Adventure == null)
+        if (GD!.Adventure == null)
             return tv;
         
         
@@ -3635,10 +3639,10 @@ public partial class GamePage : ContentPage, IMenuExtension
 
         try
         {
-            if (GD.Adventure == null)
+            if (GD!.Adventure == null)
                 return tv;
 
-            location l = GD.Adventure!.locations!.Find(GD.Adventure!.A!.ActLoc!)!;
+            location l = GD!.Adventure!.locations!.Find(GD!.Adventure!.A!.ActLoc!)!;
             if (l == null)
                 return tv;
 
@@ -3833,11 +3837,11 @@ public partial class GamePage : ContentPage, IMenuExtension
         TreeViewItem? tvi = (TreeViewItem)sender!;
         string? ParseText = (tvi!.UserDefinedObject as string)!;
 
-        UIS.UpdateBrowserCallsPerCycle = 0;
+        UIS!.UpdateBrowserCallsPerCycle = 0;
 
-        GD.OrderList!.DisableTempOrderList();
-        GD.Adventure!.SetStoryLine = false;
-        GD.Adventure!.DoGameLoop(ParseText!);
+        GD!.OrderList!.DisableTempOrderList();
+        GD!.Adventure!.SetStoryLine = false;
+        GD!.Adventure!.DoGameLoop(ParseText!);
         UIS!.StoryTextObj!.AdvTextRefresh();
 #if !NEWSCROLL
 
@@ -3968,7 +3972,7 @@ public partial class GamePage : ContentPage, IMenuExtension
             */
         }
 
-        if (UIS.MCMVVisible)
+        if (UIS!.MCMVVisible)
         {
             GridLength gl1 = new GridLength(_mcGridHeight);
             if( lastGrid_OutputRowHeight2.Equals( gl1 ) == false )
@@ -4060,13 +4064,13 @@ public partial class GamePage : ContentPage, IMenuExtension
         SetGamePageLayout();
         AdaptGridHeights();
 
-        UIS.Scr.SetToEnd();  
+        UIS!.Scr.SetToEnd();  
 
         lastSM = sm;
     }
     public void DoResize( double width, double height)
     {
-        UIS.Scr.SetRescale();
+        UIS!.Scr.SetRescale();
  
         SetGamePageLayout();
         AdaptGridHeights();
@@ -4285,7 +4289,7 @@ public partial class GamePage : ContentPage, IMenuExtension
     {
         // Pr�fen: Ist diese Umschaltung informant?
         // Aktuell wird sie deutlich zu oft aufgerufen und k�nnte optimiert werden
-        if (UIS.MCMVVisible == false)
+        if (UIS!.MCMVVisible == false)
         {
             SetGridActive(GridLU, true);
             SetGridActive(GridLD, true);
@@ -4423,7 +4427,7 @@ public partial class GamePage : ContentPage, IMenuExtension
 #endif
 
 
-            if (GD.LayoutDescription.STTMicroState == IGlobalData.microMode.off)
+            if (GD!.LayoutDescription.STTMicroState == IGlobalData.microMode.off)
             {
                 Grid_Input_Sub.ColumnDefinitions[1].Width = new GridLength(0);
                 Grid_MC.ColumnDefinitions[1].Width = new GridLength(0);
@@ -4445,13 +4449,13 @@ public partial class GamePage : ContentPage, IMenuExtension
 
             GlobalSpecs.CurrentGlobalSpecs!.InitRunning = IGlobalSpecs.initRunning.started;
 
-            UIS.UpdateBrowserBlocked = true;
+            UIS!.UpdateBrowserBlocked = true;
 
             GlobalSpecs.CurrentGlobalSpecs!.SetCurrentPage(CurrentPage);
-            GD.MenuExtension = (MenuExtension)_menuExtension!;
+            GD!.MenuExtension = (MenuExtension)_menuExtension!;
 
-            GD.SetDelProvideMCGrid(ProvideMCGrid!);
-            UIS.SetLocalUIUpdate(SetGamePageLayout);
+            GD!.SetDelProvideMCGrid(ProvideMCGrid!);
+            UIS!.SetLocalUIUpdate(SetGamePageLayout);
 
             GlobalData.CurrentGlobalData!.UIS = UIS;
 
@@ -4633,7 +4637,7 @@ public partial class GamePage : ContentPage, IMenuExtension
             UIS!.FinishBrowserUpdate(IUIServices.onBrowserContentLoaded.SetToEnd);
             GD.InitProcess = false;
         }
-        catch (Exception ex)
+        catch // (Exception ex)
         {
 
         }
@@ -4644,21 +4648,21 @@ public partial class GamePage : ContentPage, IMenuExtension
     {
         if( mode == IUIServices.sttListeningMode.off)
         {
-            UIS.NewMikeColor = Colors.White;
+            UIS!.NewMikeColor = Colors.White;
         }
         else if ( mode == IUIServices.sttListeningMode.on)
         {
-            UIS.NewMikeColor = Colors.LightGreen;
+            UIS!.NewMikeColor = Colors.LightGreen;
 
         }
         else if ( mode == IUIServices.sttListeningMode.continuous)
         {
-            UIS.NewMikeColor = Colors.Red;
+            UIS!.NewMikeColor = Colors.Red;
         }
     }
 
 
-    int CountDebugLoops = 0;
+    // int CountDebugLoops = 0;
     public bool DoSpeech()
     {
         try
@@ -4667,10 +4671,10 @@ public partial class GamePage : ContentPage, IMenuExtension
             {
 
                 GameOut.SetProtocol(GlobalData.InitLog, GlobalData.AddLog);
-                GameOut.SetCBFullyLoaded(GD.UIS!.Scr.ResetWait);
+                GameOut.SetCBFullyLoaded(GD!.UIS!.Scr.ResetWait);
             }
 
-            DebugLabel.Text = String.Format("{0} - {1} - {2} - {3} - {4} - {5}", UIS.Scr.HTMLViewYRef, UIS.Scr.HTMLViewYPos, UIS.Scr.HTMLViewMaxYPos, UIS.Scr.HTMLLastSet, UIS.Scr.HTMLLastSet2, UIS.Scr.HTMLLastSet3);
+            DebugLabel.Text = String.Format("{0} - {1} - {2} - {3} - {4} - {5}", UIS!.Scr.HTMLViewYRef, UIS!.Scr.HTMLViewYPos, UIS!.Scr.HTMLViewMaxYPos, UIS!.Scr.HTMLLastSet, UIS!.Scr.HTMLLastSet2, UIS!.Scr.HTMLLastSet3);
 
             /*
             if(Grid_Input.IsVisible == false )
@@ -4685,9 +4689,9 @@ public partial class GamePage : ContentPage, IMenuExtension
             }
             */
 
-            if (GD.SavegameFailed == true)
+            if (GD!.SavegameFailed == true)
             {
-                GD.SavegameFailed = false;
+                GD!.SavegameFailed = false;
 
                 ShowDialog(loca.MAUI_Infodialog_Savegame_Failed);
 
@@ -5266,13 +5270,13 @@ public partial class GamePage : ContentPage, IMenuExtension
 #endif
         _menuExtension!.RemoveListCall(DoSpeech);
 
-        UIS.STTStopListening();
+        UIS!.STTStopListening();
         if (Inputline.IsSoftKeyboardShowing() == true)
             Inputline.HideKeyboardAsync(CancellationToken.None);
 
-        GD.SetDelProvideMCGrid(null!);
-        GD.SetDelProvideMoreGrid(null);
-        GD.SetDelSelectOutput(null);
+        GD!.SetDelProvideMCGrid(null!);
+        GD!.SetDelProvideMoreGrid(null);
+        GD!.SetDelSelectOutput(null);
 
         UIS!.SetMCMVVisibleCallback(null!);
         UIS!.SetScoreMethod(null!);
@@ -5313,8 +5317,8 @@ public partial class GamePage : ContentPage, IMenuExtension
         {
             try
             {
-                GD.OrderList!.DisableTempOrderList();
-                if( GD.LayoutDescription.ParagraphClusterMode != ILayoutDescription.ParagraphClusters.none)
+                GD!.OrderList!.DisableTempOrderList();
+                if( GD!.LayoutDescription.ParagraphClusterMode != ILayoutDescription.ParagraphClusters.none)
                     UIS!.StoryTextObj!.DividingLine();
                 else
                     UIS!.StoryTextObj!.NotDividingLine();
@@ -5368,7 +5372,7 @@ public partial class GamePage : ContentPage, IMenuExtension
             ((sender as WebView)!.Handler!.PlatformView as Microsoft.Maui.Platform.MauiWebView)!.LoadUrl($"https://localhost/empty.html");
 #endif
         }
-        catch (Exception ex)
+        catch // (Exception ex)
         {
         }
     }
@@ -5378,7 +5382,7 @@ public partial class GamePage : ContentPage, IMenuExtension
         { 
             await LoadMauiAsset();
         }
-        catch (Exception ex)
+        catch // (Exception ex)
         {
         }
     }
@@ -5427,7 +5431,7 @@ public partial class GamePage : ContentPage, IMenuExtension
     {
         GlobalData.AddLog("PageDown by More", IGlobalData.protMode.crisp);
 
-        UIS.Scr.PageDown();
+        UIS!.Scr.PageDown();
          // int a = 5;
     }
     private async void Clicked_Keyboard( object? sender, EventArgs e)
@@ -5442,7 +5446,7 @@ public partial class GamePage : ContentPage, IMenuExtension
             else
                 await Inputline.HideKeyboardAsync(CancellationToken.None);
         }
-        catch (Exception ex)
+        catch // (Exception ex)
         {
         }
     }
@@ -5451,17 +5455,17 @@ public partial class GamePage : ContentPage, IMenuExtension
     {
         try
         {
-            if (UIS.STTListeningOn == IUIServices.sttListeningMode.off)
+            if (UIS!.STTListeningOn == IUIServices.sttListeningMode.off)
             {
-                if (GD.LayoutDescription.STTMicroState == IGlobalData.microMode.continuous)
+                if (GD!.LayoutDescription.STTMicroState == IGlobalData.microMode.continuous)
                 {
                     // Mike.Background = Colors.Red;
                     await UIS.STTStartListening(IUIServices.sttListeningMode.continuous);
                 }
-                else if (GD.LayoutDescription.STTMicroState == IGlobalData.microMode.once)
+                else if (GD!.LayoutDescription.STTMicroState == IGlobalData.microMode.once)
                 {
                     // Mike.Background = Colors.Yellow;
-                    await UIS.STTStartListening(IUIServices.sttListeningMode.on);
+                    await UIS!.STTStartListening(IUIServices.sttListeningMode.on);
 
                 }
                 // doListening = true;
@@ -5473,7 +5477,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                 // Mike.Background = Colors.Transparent;
             }
         }
-        catch (Exception ex)
+        catch // (Exception ex)
         {
         }
 
@@ -5482,14 +5486,14 @@ public partial class GamePage : ContentPage, IMenuExtension
     {
         try
         {
-            if (UIS.STTListeningOn == IUIServices.sttListeningMode.off)
+            if (UIS!.STTListeningOn == IUIServices.sttListeningMode.off)
             {
-                if (GD.LayoutDescription.STTMicroState == IGlobalData.microMode.continuous)
+                if (GD!.LayoutDescription.STTMicroState == IGlobalData.microMode.continuous)
                 {
                     // Mike.Background = Colors.Red;
                     await UIS.STTStartListening(IUIServices.sttListeningMode.continuous);
                 }
-                else if (GD.LayoutDescription.STTMicroState == IGlobalData.microMode.once)
+                else if (GD!.LayoutDescription.STTMicroState == IGlobalData.microMode.once)
                 {
                     // Mike.Background = Colors.Yellow;
                     await UIS.STTStartListening(IUIServices.sttListeningMode.on);
@@ -5504,7 +5508,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                 // Mike.Background = Colors.Transparent;
             }
         }
-        catch (Exception ex)
+        catch // (Exception ex)
         {
         }
 
@@ -5513,14 +5517,14 @@ public partial class GamePage : ContentPage, IMenuExtension
     {
         try
         {
-            if (UIS.STTListeningOn == IUIServices.sttListeningMode.off)
+            if (UIS!.STTListeningOn == IUIServices.sttListeningMode.off)
             {
-                if (GD.LayoutDescription.STTMicroState == IGlobalData.microMode.continuous)
+                if (GD!.LayoutDescription.STTMicroState == IGlobalData.microMode.continuous)
                 {
                     // Mike.Background = Colors.Red;
                     await UIS.STTStartListening(IUIServices.sttListeningMode.continuous);
                 }
-                else if (GD.LayoutDescription.STTMicroState == IGlobalData.microMode.once)
+                else if (GD!.LayoutDescription.STTMicroState == IGlobalData.microMode.once)
                 {
                     // Mike.Background = Colors.Yellow;
                     await UIS.STTStartListening(IUIServices.sttListeningMode.on);
@@ -5535,7 +5539,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                 // Mike.Background = Colors.Transparent;
             }
         }
-        catch (Exception ex)
+        catch // (Exception ex)
         {
         }
 
@@ -5630,7 +5634,7 @@ public partial class GamePage : ContentPage, IMenuExtension
         }
     }
     */
-    public IUIServices GetUIServices()
+    public IUIServices? GetUIServices()
     {
         return UIS;
     }
@@ -7155,7 +7159,7 @@ public partial class GamePage : ContentPage, IMenuExtension
     }
     public void DoQuit(object? o, EventArgs ea)
     {
-        UIS.QuitApplication();
+        UIS!.QuitApplication();
         // App.ThisApplication!.Quit();
         _menuExtension!.CloseContextMenu();
     }
@@ -7180,8 +7184,7 @@ public partial class GamePage : ContentPage, IMenuExtension
 
         pd = _menuExtension!.CalcBounds(pd);
 
-        int val;
-
+ 
         string Text = loca.MAUI_Infodialog_Info;
 
         _menuExtension!.OpenShowMenu(true, pd, true, Text);

@@ -95,13 +95,13 @@ namespace GameCore
             AdvGame!.StoryOutput(loca.Adv_Intro3);
             AdvGame!.StoryOutput(loca.Adv_Intro4);
 
-            AdvGame!.Orders.Location(null, A!.ActLoc);
+            AdvGame!.Orders!.Location(null, A!.ActLoc);
         }
         public bool KADialogCalc(List<MCMenuEntry> MCMEntry)
         {
             persistentMCMenu!.SetNewStart(11);
 
-            if(persistentMCMenu!.FindID(104)!.Hidden != MCMenuEntry.HiddenType.hidden && CA!.Status_Tuer_Schlafkammer_angeschaut!.Val > 0 && CA.Status_Tuer_Schlafkammer.Val == 0 )
+            if(persistentMCMenu!.FindID(104)!.Hidden != MCMenuEntry.HiddenType.hidden && CA!.Status_Tuer_Schlafkammer_angeschaut!.Val > 0 && CA.Status_Tuer_Schlafkammer!.Val == 0 )
             {
                 persistentMCMenu!.FindID(105)!.Hidden = MCMenuEntry.HiddenType.visible;
 
@@ -134,16 +134,16 @@ namespace GameCore
 
             AdvGame!.StoryOutput(loca.KnightArmour_Tuer);
 
-            CA.Status_Tuer_Schlafkammer.Val = 1;
+            CA.Status_Tuer_Schlafkammer!.Val = 1;
 
-            CA.I06_Door.LocaDescription = "Adv_I06_Door_Broken";
-            CA.I06_Door.LocaDescriptionHandle= loca.Adv_I06_Door_Broken;
+            CA.I06_Door!.LocaDescription = "Adv_I06_Door_Broken";
+            CA.I06_Door!.LocaDescriptionHandle= loca.Adv_I06_Door_Broken;
 
-            CA.I06_Seal.LocaDescription = "Adv_I06_Seal_Broken";
-            CA.I06_Seal.LocaDescriptionHandle = loca.Adv_I06_Seal_Broken;
+            CA.I06_Seal!.LocaDescription = "Adv_I06_Seal_Broken";
+            CA.I06_Seal!.LocaDescriptionHandle = loca.Adv_I06_Seal_Broken;
 
-            CA.I06_Sign.LocaDescription = "Adv_I06_Sign_Broken";
-            CA.I06_Sign.LocaDescriptionHandle = loca.Adv_I06_Sign_Broken;
+            CA.I06_Sign!.LocaDescription = "Adv_I06_Sign_Broken";
+            CA.I06_Sign!.LocaDescriptionHandle = loca.Adv_I06_Sign_Broken;
 
 
             KADialogCalc(MCMEntry);
@@ -263,7 +263,7 @@ namespace GameCore
         {
             AdvGame!.StoryOutput(loca.Owl_Library_Door);
             AdvGame!.SetScoreToken(CA!.Score_Bibliothek_offen);
-            CA.Status_Tuer_Bibliothek.Val = 1;
+            CA.Status_Tuer_Bibliothek!.Val = 1;
             persistentMCMenu!.FindID(102)!.Hidden = MCMenuEntry.HiddenType.outdated;
 
             return true;
@@ -271,19 +271,19 @@ namespace GameCore
 
         public bool OwlDialog_Quizstart(List<MCMenuEntry> MCMEntry)
         {
-            CA.Status_Quiz_Start.Val = 1;
+            CA!.Status_Quiz_Start!.Val = 1;
             persistentMCMenu!.SetNewStart(11);
-            if ( CA.Status_Antwort_Lieblingstier.Val > 0 )
+            if ( CA.Status_Antwort_Lieblingstier!.Val > 0 )
             {
                 persistentMCMenu!.FindID(353)!.Hidden = MCMenuEntry.HiddenType.visible;
 
             }
-            if (CA.Status_Antwort_Ruestung.Val > 0)
+            if (CA.Status_Antwort_Ruestung!.Val > 0)
             {
                 persistentMCMenu!.FindID(303)!.Hidden = MCMenuEntry.HiddenType.visible;
 
             }
-            if (CA.Status_Antwort_Unterwaesche.Val > 0)
+            if (CA.Status_Antwort_Unterwaesche!.Val > 0)
             {
                 persistentMCMenu!.FindID(253)!.Hidden = MCMenuEntry.HiddenType.visible;
 
@@ -552,13 +552,13 @@ namespace GameCore
         {
             persistentMCMenu!.SetNewStart(11);
 
-            if( CA.Status_Coin_Entdeckt.Val > 0 && CA.Status_Fish_Coin.Val == 0 && persistentMCMenu!.FindID(103).Hidden == MCMenuEntry.HiddenType.hidden )
+            if( CA!.Status_Coin_Entdeckt!.Val > 0 && CA!.Status_Fish_Coin!.Val == 0 && persistentMCMenu!.FindID(103)!.Hidden == MCMenuEntry.HiddenType.hidden )
             {
 
                 persistentMCMenu!.FindID(103)!.Hidden = MCMenuEntry.HiddenType.visible;
                 
             }
-            if (persistentMCMenu!.FindID(103)!.Hidden == MCMenuEntry.HiddenType.visible && CA.Score_Muenze.Active == true )
+            if (persistentMCMenu!.FindID(103)!.Hidden == MCMenuEntry.HiddenType.visible && CA.Score_Muenze!.Active == true )
             {
 
                 persistentMCMenu!.FindID(103)!.Hidden = MCMenuEntry.HiddenType.outdated;
@@ -568,7 +568,7 @@ namespace GameCore
         }
         public bool FishDialog_Coin(List<MCMenuEntry> MCMEntry)
         {
-            CA.Status_Fish_Coin.Val = 1;
+            CA!.Status_Fish_Coin!.Val = 1;
             return true;
         }
 
@@ -604,7 +604,7 @@ namespace GameCore
             cFollower.Add(103);
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Fish_Dialog_Coin", 103, 230, true, false));
             mcM.Last()!.SetSpeaker(CB!.VT_sagen);
-            mcM.Last().Hidden = MCMenuEntry.HiddenType.hidden;
+            mcM.Last()!.Hidden = MCMenuEntry.HiddenType.hidden;
 
             cFollower.Add(199);
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Fish_Dialog_Ende", 199, -1, true, false));
@@ -649,7 +649,7 @@ namespace GameCore
         {
             persistentMCMenu!.SetNewStart(11);
 
-            if( Items.IsItemInv( CA.I00_Cheese) && persistentMCMenu!.FindID(101).Hidden == MCMenuEntry.HiddenType.outdated && persistentMCMenu!.FindID(103).Hidden == MCMenuEntry.HiddenType.hidden)
+            if( Items!.IsItemInv( CA!.I00_Cheese) && persistentMCMenu!.FindID(101)!.Hidden == MCMenuEntry.HiddenType.outdated && persistentMCMenu!.FindID(103)!.Hidden == MCMenuEntry.HiddenType.hidden)
             {
 
                 persistentMCMenu!.FindID(103)!.Hidden = MCMenuEntry.HiddenType.visible;
@@ -660,15 +660,15 @@ namespace GameCore
         }
         public bool MagpieDialog_Swap_Intro(List<MCMenuEntry> MCMEntry)
         {
-            CA.Status_Elster_Tauschintro.Val = 1;
+            CA!.Status_Elster_Tauschintro!.Val = 1;
             MagpieDialogCalc(MCMEntry);
 
             return true;
         }
         public bool MagpieDialog_Swap( List<MCMenuEntry> MCMEntry)
         {
-            Items.TransferItem(CA.I00_Cheese.ID, CB!.LocType_In_Item, CA.I00_Nullbehaelter2.ID);
-            Items.TransferItem(CA!.I00_Polished_Stone.ID, CB!.LocType_Person, CA.Person_I!.ID);
+            Items!.TransferItem(CA!.I00_Cheese!.ID, CB!.LocType_In_Item, CA.I00_Nullbehaelter2!.ID);
+            Items!.TransferItem(CA!.I00_Polished_Stone!.ID, CB!.LocType_Person, CA.Person_I!.ID);
             AdvGame!.SetScoreToken(CA!.Score_Polierter_Stein);
             return true;
         }
@@ -705,7 +705,7 @@ namespace GameCore
             cFollower.Add(103);
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Magpie_Dialog_Tauschen", 103, 230, true, true));
             mcM.Last()!.SetSpeaker(CB!.VT_sagen);
-            mcM.Last().Hidden = MCMenuEntry.HiddenType.hidden;
+            mcM.Last()!.Hidden = MCMenuEntry.HiddenType.hidden;
 
             cFollower.Add(199);
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Magpie_Dialog_Ende", 199, -1, true, false));
@@ -751,7 +751,7 @@ namespace GameCore
         {
             persistentMCMenu!.SetNewStart(11);
 
-            if( Items.IsItemInv( CA.I00_Lightless_Stone) == true && persistentMCMenu!.FindID(103).Hidden == MCMenuEntry.HiddenType.hidden )
+            if( Items!.IsItemInv( CA!.I00_Lightless_Stone) == true && persistentMCMenu!.FindID(103)!.Hidden == MCMenuEntry.HiddenType.hidden )
             {
                 persistentMCMenu!.FindID(103)!.Hidden = MCMenuEntry.HiddenType.visible;                
             }
@@ -760,7 +760,7 @@ namespace GameCore
         }
         public bool ParrotDialog_Fliegen(List<MCMenuEntry> MCMEntry)
         {
-            Items.TransferItem(CA.I00_Lightless_Stone.ID, CB!.LocType_Person, CA.Person_Parrot!.ID);
+            Items!.TransferItem(CA!.I00_Lightless_Stone!.ID, CB!.LocType_Person, CA.Person_Parrot!.ID);
 
             return true;
         }
@@ -797,7 +797,7 @@ namespace GameCore
             cFollower.Add(103);
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Parrot_Dialog_Fliegen", 103, 230, true, true));
             mcM.Last()!.SetSpeaker(CB!.VT_sagen);
-            mcM.Last().Hidden = MCMenuEntry.HiddenType.hidden;
+            mcM.Last()!.Hidden = MCMenuEntry.HiddenType.hidden;
 
             cFollower.Add(199);
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Parrot_Dialog_Ende", 199, -1, true, false));
@@ -906,7 +906,7 @@ namespace GameCore
         }
         public bool BookDialog_Rezept(List<MCMenuEntry> MCMEntry)
         {
-            CA.Status_Rezept_Gelesen.Val = 1;
+            CA!.Status_Rezept_Gelesen!.Val = 1;
 
             return true;
         }

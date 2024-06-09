@@ -659,7 +659,7 @@ public class UIServices : IUIServices
 
             if (GlobalSpecs.CurrentGlobalSpecs!.InitRunning == IGlobalSpecs.initRunning.started || GlobalSpecs.CurrentGlobalSpecs!.InitRunning == IGlobalSpecs.initRunning.finished)
             {
-                GD!.OrderList.SaveOrderTable();
+                GD!.OrderList!.SaveOrderTable();
                 GD!.Adventure!.Autosave(true);
 
             }

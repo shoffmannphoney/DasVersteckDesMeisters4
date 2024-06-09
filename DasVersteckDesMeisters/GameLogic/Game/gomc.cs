@@ -22,13 +22,13 @@ namespace GameCore
         {
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Order_GoMCDialog_Person_Self_10293", 1, 1 + CB!.MCE_Choice_Off, false));
             int ix = 100;
-            int cix = 2;
+            // int cix = 2;
 
             cFollower.Add(ix);
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(null, "Order_GoMCDialog_Person_Self_10294", ix, -1, false, true));
             ix += 1;
 
-            if (A.ActLoc <= CA!.L04_Shabby_Little_Chamber)
+            if (A!.ActLoc <= CA!.L04_Shabby_Little_Chamber)
             {
                 AddLoc(CA!.L01_Dark_Forest, mcM, Goto_L01_Dark_Forest, cFollower, ref ix);
                 AddLoc(CA!.L02_In_Front_Of_A_Hut, mcM, Goto_L02_In_Front_Of_A_Hut, cFollower, ref ix);
@@ -302,12 +302,12 @@ namespace GameCore
 
         public bool GoTargetlocation(int loc)
         {
-            if (loc >= CA!.L05_Atrium && loc <= CA!.L14_Bathroom && A.ActLoc >= CA!.L05_Atrium && A.ActLoc <= CA!.L14_Bathroom)
+            if (loc >= CA!.L05_Atrium && loc <= CA!.L14_Bathroom && A!.ActLoc >= CA!.L05_Atrium && A!.ActLoc <= CA!.L14_Bathroom)
             {
                 DoRoute(loc, true);
 
             }
-            else if (loc >= CA!.L01_Dark_Forest && loc <= CA!.L04_Shabby_Little_Chamber && A.ActLoc >= CA!.L01_Dark_Forest && A.ActLoc <= CA!.L04_Shabby_Little_Chamber)
+            else if (loc >= CA!.L01_Dark_Forest && loc <= CA!.L04_Shabby_Little_Chamber && A!.ActLoc >= CA!.L01_Dark_Forest && A!.ActLoc <= CA!.L04_Shabby_Little_Chamber)
             {
                 DoRoute(loc, true);
 
@@ -401,7 +401,7 @@ namespace GameCore
 
             cFollower.Add(ix);
             mcM.Add(MCMenuEntry.MCMenuEntryLoca(CA!.Person_Self, "Order_ManualDialog_Person_Self_10325", ix, CB!.MCE_Choice1, false, false));
-            mcM.Last().DefaultBreak = true;
+            mcM.Last()!.DefaultBreak = true;
             ix += 1;
 
 

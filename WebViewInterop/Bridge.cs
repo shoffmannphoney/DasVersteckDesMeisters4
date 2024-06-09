@@ -24,7 +24,7 @@ public partial class Bridge
         options.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
         options.Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping;
         var json = JsonSerializer.Serialize(result, options);
-        var res = await EvaluateJavascriptAsync($"window.webViewBridgeTarget.provideSignature({json})");
+        var res = await EvaluateJavascriptAsync($"window.webViewBridgeTarget.provideSignature({json})")!;
     }
 
     public async void AlertImplementation(string message)
@@ -58,7 +58,7 @@ public partial class Bridge
         await MainThread.InvokeOnMainThreadAsync(async () =>
         {
 
-            await EvaluateJavascriptAsync("window.scrollTo( 0, " + yPos + " )");
+            await EvaluateJavascriptAsync("window.scrollTo( 0, " + yPos + " )")!;
 
             // await Application.Current.MainPage.DisplayAlert("Stefan Information", message.ToString(), "Oha");
         });

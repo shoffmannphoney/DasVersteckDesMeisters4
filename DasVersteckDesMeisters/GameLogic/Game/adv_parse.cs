@@ -5384,7 +5384,7 @@ public partial class Adv : AdvBase
         PLLEng.Add(new ParseLine(CB!.PL_Save_MC, PList, Orders!.SaveMC, false));
 
         PList = new ParseTokenList();
-        PList.AddNoun(CA!.Noun_Spiel.ID);
+        PList.AddNoun(CA!.Noun_Spiel!.ID);
         PList.AddVerb(CB!.Verb_Save);
         PLLEng.Add(new ParseLine(CB!.PL_Save_MC, PList, Orders!.SaveMC, false));
 
@@ -5574,7 +5574,7 @@ public partial class Adv : AdvBase
         PLLEng.Add(new ParseLine(CA!.PL_Throw, PList, Orders!.ThrowPin));
 
         PList = new ParseTokenList();
-        PList.AddNoun(CA!.Noun_Schleuder.ID);
+        PList.AddNoun(CA!.Noun_Schleuder!.ID);
         PList.AddPerson();
         PList.AddPrep(CB!.Prep_in);
         PList.AddItem();
@@ -8497,12 +8497,12 @@ public partial class Adv : AdvBase
         PList = new ParseTokenList();
         PList.AddVerb(CA!.Verb_Steal);
         PList.AddItem();
-        PLL.Add(new ParseLine(CA!.PL_StealP, PList, Orders!.Steal));
+        PLLEng.Add(new ParseLine(CA!.PL_StealP, PList, Orders!.Steal));
 
         PList = new ParseTokenList();
-        PList.AddNoun(CA!.Noun_Klaue.ID);
+        PList.AddNoun(CA!.Noun_Klaue!.ID);
         PList.AddItem();
-        PLL.Add(new ParseLine(CA!.PL_StealP, PList, Orders!.Steal));
+        PLLEng.Add(new ParseLine(CA!.PL_StealP, PList, Orders!.Steal));
 
         // bestehlen
         PList = new ParseTokenList();

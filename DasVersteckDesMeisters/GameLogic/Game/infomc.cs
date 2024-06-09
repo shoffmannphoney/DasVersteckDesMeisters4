@@ -56,7 +56,7 @@ namespace GameCore
 
 
             ix = CalcIx(CA!.imc_Start);
-            if (locations.Find( CA!.L02_In_Front_Of_A_Hut ).Visited == false )
+            if (locations.Find( CA!.L02_In_Front_Of_A_Hut! ).Visited == false )
             {
                 cFollower.Add(ix);
                 mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Start, ix, CB!.MCE_Choice1, true, true));

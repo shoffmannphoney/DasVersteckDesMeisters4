@@ -58,7 +58,7 @@
 		<HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
 		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
 		<AppInstallerUri>c:\projects\installBuilds\Bla</AppInstallerUri>
-		<NoWarn>CS1591</NoWarn>
+		<NoWarn>CS1591;CS0612</NoWarn>
 		<DefaultLanguage>de-DE</DefaultLanguage>
 		<HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
 		<PublishReadyToRun>false</PublishReadyToRun>
@@ -79,6 +79,9 @@
 	  <AndroidSigningKeyAlias>mynewkey</AndroidSigningKeyAlias>
 	  <AndroidSigningKeyPass>Lian4321</AndroidSigningKeyPass>
 	  <ApplicationVersion>6</ApplicationVersion>
+		<!-- Test -->
+		<AndroidUseAndroidX>true</AndroidUseAndroidX>
+		<AndroidEnableJetifier>true</AndroidEnableJetifier>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-android|x64'">
 	  <AndroidKeyStore>True</AndroidKeyStore>
@@ -182,6 +185,7 @@
 		<MauiXaml Remove="GameLogic\Model\**" />
 		<None Remove="GameLogic\Model\**" />
 		<AndroidResource Remove="Platforms\Android\Resources\drawable\maui_splash.xml" />
+		<AndroidResource Remove="Platforms\Android\Resources\drawable\onion2.png" />
 		<None Remove="PhoneyIslandGame_TemporaryKey.pfx" />
 		<None Remove="Directory.Build.props" />
 		<None Remove="Resources\AppIcon\ballsmaller.png" />
@@ -202,6 +206,7 @@
 		<None Remove="Resources\Raw\ver_l15.jpg" />
 		<None Remove="Resources\Raw\ver_title.jpg" />
 		<None Remove="sign.bat" />
+		<AndroidResource Include="Resources\drawable\onion3.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -212,7 +217,7 @@
 	</ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net8.0-windows10.0.19041.0'">
-    <PackageReference Include="Microsoft.Windows.CsWinRT" Version="2.0.3" />
+    <PackageReference Include="Microsoft.Windows.CsWinRT" Version="2.0.7" />
   </ItemGroup>
 
   <ItemGroup>
@@ -282,9 +287,9 @@
 	  <Content Include="gem.scale-400.png" />
 	  <Content Include="gem.targetsize-256.png" />
 	  <Content Include="gem.targetsize-48.png" />
-	  <Content Include="Resources\AppIcon\claw.png" />
-	  <Content Include="Resources\AppIcon\claw.scale-100.png" />
-	  <Content Include="Resources\AppIcon\claw.scale-125.png" />
+		<Content Include="Resources\AppIcon\claw.png" />
+	  <AndroidResource Include="Resources\AppIcon\claw.scale-100.png" />
+	  <AndroidResource Include="Resources\AppIcon\claw.scale-125.png" />
 	  <Content Include="Resources\AppIcon\claw.scale-150.png" />
 	  <Content Include="Resources\AppIcon\claw.scale-200.png" />
 	  <Content Include="Resources\AppIcon\claw.scale-400.png" />
@@ -320,6 +325,9 @@
 	  <EmbeddedResource Include="Resources\Raw\ver_l14.jpg" />
 	  <EmbeddedResource Include="Resources\Raw\ver_l15.jpg" />
 	  <EmbeddedResource Include="Resources\Raw\ver_title.jpg" />
+	</ItemGroup>
+	<ItemGroup>
+	  <MauiImage Include="Resources\drawable\onion3.png" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Compile Update="Resources\Styles\ThemeI.xaml.cs">

@@ -1145,11 +1145,11 @@ namespace GameCore
 
                         if (i != null)
                         {
-                            snew += _items!.GetItemNameLink(i.ID, aocase, _a.Adventure.CurrentNouns);
+                            snew += _items!.GetItemNameLink(i.ID, aocase, _a!.Adventure!.CurrentNouns!);
                         }
                         else if (iapp != null)
                         {
-                            snew += _items!.GetItemNameLink(iapp.ID, aocase, _a.Adventure.CurrentNouns, true);
+                            snew += _items!.GetItemNameLink(iapp.ID, aocase, _a!.Adventure!.CurrentNouns!, true);
                         }
                         else if (it != null)
                         {
@@ -1157,23 +1157,23 @@ namespace GameCore
                         }
                         else if (p != null)
                         {
-                            snew += _persons!.GetPersonLink(p, _a.Adventure.CurrentNouns, pString);
+                            snew += _persons!.GetPersonLink(p, _a!.Adventure!.CurrentNouns!, pString);
                         }
                         else if (pt != null)
                         {
-                            snew += _persons!.GetPersonName(pt, aocase, _a.Adventure.CurrentNouns);
+                            snew += _persons!.GetPersonName(pt, aocase, _a!.Adventure!.CurrentNouns!);
                         }
                         else if (plt != null)
                         {
-                            snew += _persons!.GetPersonNameLink(plt, aocase, _a.Adventure.CurrentNouns );
+                            snew += _persons!.GetPersonNameLink(plt, aocase, _a!.Adventure!.CurrentNouns! );
                         }
                         else if (plv != null)
                         {
-                            snew += _persons!.GetPersonVerbLink(plv, aocase, verbID, _a.Adventure.CurrentNouns, _a!.Tense);
+                            snew += _persons!.GetPersonVerbLink(plv, aocase, verbID, _a!.Adventure!.CurrentNouns!, _a!.Tense);
                         }
                         else if (papp != null)
                         {
-                            snew += _persons!.GetPersonNameLink(papp, aocase, _a.Adventure.CurrentNouns);
+                            snew += _persons!.GetPersonNameLink(papp, aocase, _a!.Adventure!.CurrentNouns!);
                         }
                         else if ( rp != null)
                         {
@@ -1185,7 +1185,7 @@ namespace GameCore
                         }
                         else if (t != null)
                         {
-                            snew += _topics!.GetTopicName( t.ID, aocase, _a.Adventure.CurrentNouns ); 
+                            snew += _topics!.GetTopicName( t.ID, aocase, _a!.Adventure!.CurrentNouns! ); 
                         }
 
                         if (lenSeq == 0)
@@ -2098,19 +2098,19 @@ namespace GameCore
                             }
                             else if (iapp != null)
                             {
-                                snew.Append(_items!.GetItemNameLink(iapp.ID, aocase, _a.Adventure.CurrentNouns, true));
+                                snew.Append(_items!.GetItemNameLink(iapp.ID, aocase, _a!.Adventure!.CurrentNouns, true));
                             }
                             else if (it != null)
                             {
-                                snew.Append(_items!.GetName(it.ID, aocase, _a.Adventure.CurrentNouns ));
+                                snew.Append(_items!.GetName(it.ID, aocase, _a!.Adventure!.CurrentNouns ));
                             }
                             else if (p != null)
                             {
-                                snew.Append(_persons!.GetPersonLink(p, _a.Adventure.CurrentNouns, pString));
+                                snew.Append(_persons!.GetPersonLink(p, _a!.Adventure!.CurrentNouns!, pString));
                             }
                             else if (pt != null)
                             {
-                                snew.Append(_persons!.GetPersonName(pt, aocase, _a.Adventure.CurrentNouns));
+                                snew.Append(_persons!.GetPersonName(pt, aocase, _a!.Adventure!.CurrentNouns!));
                             }
                             else if (plt != null)
                             {

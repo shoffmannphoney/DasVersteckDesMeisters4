@@ -621,14 +621,14 @@ public class GlobalData : IGlobalData
     { 
         get
         {
-            return _themeInfo[LayoutDescription.CurrentThemeNo - 1 ];
+            return _themeInfo![LayoutDescription.CurrentThemeNo - 1 ];
         }
     }
     public FontInfo? CurrentFont
     {
         get
         {
-            return _fontInfo[LayoutDescription.CurrentFontNo - 1];
+            return _fontInfo![LayoutDescription.CurrentFontNo - 1];
         }
     }
 
@@ -636,7 +636,7 @@ public class GlobalData : IGlobalData
     {
         get
         {
-            return _fontSizeInfo[LayoutDescription.CurrentFontSizeNo - 1];
+            return _fontSizeInfo![LayoutDescription.CurrentFontSizeNo - 1];
         }
     }
 
@@ -822,10 +822,10 @@ public class GlobalData : IGlobalData
                      
                 }
 
-                return (HTMLPage!.Replace("[Body]", CurrentContent)).Replace("[YPOS]", (val).ToString()).Replace("[YPOSOLD]", UIS.Scr.HTMLViewYPos.ToString());
+                return (HTMLPage!.Replace("[Body]", CurrentContent)).Replace("[YPOS]", (val).ToString()).Replace("[YPOSOLD]", UIS!.Scr.HTMLViewYPos.ToString());
             }
             else
-                return (HTMLPage!.Replace("[Body]", CurrentContent)).Replace("[YPOS]", 0.ToString()).Replace("[YPOSOLD]", UIS.Scr.HTMLViewYPos.ToString());
+                return (HTMLPage!.Replace("[Body]", CurrentContent)).Replace("[YPOS]", 0.ToString()).Replace("[YPOSOLD]", UIS!.Scr.HTMLViewYPos.ToString());
 
         }
     }
@@ -1093,7 +1093,7 @@ public class GlobalData : IGlobalData
         // if (FeedbackTextObj.FeedbackModeMC == false && FlushText == false)
         if (true)
         {
-            if (GlobalData.CurrentGlobalData.LayoutDescription.Highlighting)
+            if (GlobalData.CurrentGlobalData!.LayoutDescription.Highlighting)
             // if (true)
             {
                 colorAccentStory = ti.Webcol_FGAccent1;
@@ -1178,7 +1178,7 @@ public class GlobalData : IGlobalData
 
     public static void InitLog( string s1)
     {
-        if (GlobalData.CurrentGlobalData.ProtMode != IGlobalData.protMode.off)
+        if (GlobalData.CurrentGlobalData!.ProtMode != IGlobalData.protMode.off)
         {
 
             string path = CurrentPath() + String.Format("/versteck {0}.{1}.{2} {3:D2}.{4:D2}.{5:D2}.txt", DateTime.Now.Day, DateTime.Now.Month, DateTime.Now.Year, DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second );
@@ -1616,7 +1616,7 @@ public class GlobalSpecs : IGlobalSpecs
 
     public void ReloadThemeInfo()
     {
-        GlobalData.CurrentGlobalData._themeInfo
+        GlobalData.CurrentGlobalData!._themeInfo
              = new ObservableCollection<ThemeInfo>
              {
                     new ThemeInfo { Id = 1, Name = "Theme A",
@@ -1817,7 +1817,7 @@ public class GlobalSpecs : IGlobalSpecs
     }
     public void ReloadFontInfo()
     {
-        GlobalData.CurrentGlobalData._fontInfo
+        GlobalData.CurrentGlobalData!._fontInfo
            = new ObservableCollection<FontInfo>
            {
                 new FontInfo { Id = 1, Name = "Open Sans Regular", Font ="OpenSansRegular", HTMLName = "\'Open Sans\'"},
@@ -1836,7 +1836,7 @@ public class GlobalSpecs : IGlobalSpecs
     }
     public void ReloadFontSizeInfo()
     {
-        GlobalData.CurrentGlobalData._fontSizeInfo
+        GlobalData.CurrentGlobalData!._fontSizeInfo
             = new ObservableCollection<FontSizeInfo>
             {
                 new FontSizeInfo { Id = 1, Name="sehr klein", Size = 12 },
@@ -1892,7 +1892,7 @@ public class GlobalSpecs : IGlobalSpecs
 
         AppShell._mainAppShell!.ChangeFont(rd);
 
-        GlobalData.CurrentGlobalData.LayoutDescription.CurrentFontNo = fi.Id;
+        GlobalData.CurrentGlobalData!.LayoutDescription.CurrentFontNo = fi.Id;
         SetCurrentFont(fi);
         // fi.SetFontInfo(fi);
 
@@ -1914,7 +1914,7 @@ public class GlobalSpecs : IGlobalSpecs
 
         AppShell._mainAppShell!.ChangeFontSize(rd);
 
-        GlobalData.CurrentGlobalData.LayoutDescription.CurrentFontSizeNo = fsi.Id;
+        GlobalData.CurrentGlobalData!.LayoutDescription.CurrentFontSizeNo = fsi.Id;
         SetCurrentFontSize(fsi);
         // fsi.SetFontInfo(fsi);
 
@@ -1954,18 +1954,18 @@ public class GlobalSpecs : IGlobalSpecs
         GlobalData.CurrentGlobalData.LayoutDescription.CurrentFontSize = _fontSizeInfo![2]!;
         */
 
-        _currentTheme = GlobalData.CurrentGlobalData.CurrentTheme; //  _themeInfo![3]!;
+        _currentTheme = GlobalData.CurrentGlobalData!.CurrentTheme; //  _themeInfo![3]!;
         _currentFont = GlobalData.CurrentGlobalData.CurrentFont; // _fontInfo![1]!;
         _currentFontSize = GlobalData.CurrentGlobalData.CurrentFontSize; // _fontSizeInfo![2]!;
         _currentReplayInfo = _replayInfo![0]!;
 
          GlobalData.CurrentGlobalData!.SetHtmlFromTheme();
         _currentTheme = GlobalData.CurrentGlobalData.CurrentTheme;
-        SetCurrentTheme(_currentTheme);
-        SetCurrentFont(_currentFont);
-        SetCurrentFontSize(_currentFontSize);
-        SelectFont(_currentFont);
-        SelectFontSize(_currentFontSize);
+        SetCurrentTheme(_currentTheme!);
+        SetCurrentFont(_currentFont!);
+        SetCurrentFontSize(_currentFontSize!);
+        SelectFont(_currentFont!);
+        SelectFontSize(_currentFontSize!);
 
         switch ( GlobalData.CurrentGlobalData.LayoutDescription.CurrentThemeNo )
         {
@@ -2011,22 +2011,22 @@ public class GlobalSpecs : IGlobalSpecs
     }
     public ObservableCollection<ThemeInfo>? GetThemeInfo()
     {
-        return GlobalData.CurrentGlobalData._themeInfo;
+        return GlobalData.CurrentGlobalData!._themeInfo;
     }
     public ThemeInfo? GetCurrentTheme()
     {
-        return GetGlobalData().CurrentTheme;
+        return GetGlobalData()!.CurrentTheme;
 
         // return _currentTheme;
     }
     public FontInfo? GetCurrentFont()
     {
-        return GetGlobalData().CurrentFont;
+        return GetGlobalData()!.CurrentFont;
         // return _currentFont;
     }
     public FontSizeInfo? GetCurrentFontSize()
     {
-        return GetGlobalData().CurrentFontSize;
+        return GetGlobalData()!.CurrentFontSize;
         // return _currentFontSize;
     }
     public ReplayInfo? GetCurrentReplayInfo()
@@ -2085,11 +2085,11 @@ public class GlobalSpecs : IGlobalSpecs
     }
     public ObservableCollection<FontInfo>? GetFontInfo()
     {
-        return GlobalData.CurrentGlobalData._fontInfo;
+        return GlobalData.CurrentGlobalData!._fontInfo;
     }
     public ObservableCollection<FontSizeInfo>? GetFontSizeInfo()
     {
-        return GlobalData.CurrentGlobalData._fontSizeInfo;
+        return GlobalData.CurrentGlobalData!._fontSizeInfo;
     }
     public ObservableCollection<ReplayInfo>? GetReplayList()
     {

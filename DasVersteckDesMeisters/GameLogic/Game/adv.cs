@@ -923,7 +923,7 @@ namespace GameCore
                 s.Add("ver_l14.jpg");
                 s.Add("ver_l15.jpg");
 
-                GD!.UIS.CacheResources(s);
+                GD!.UIS!.CacheResources(s);
             }
 #endif
 
@@ -5439,7 +5439,7 @@ namespace GameCore
         {
             CA!.Person_Knights_Armor = Persons!.Add(Person.PersonLoca(new List<Noun> { CA!.Noun_Ritterruestung! }, new List<Adj> { CA!.Adj_stattlich! }, Co.SEX_FEMALE, CB!.LocType_Loc, CA!.L06_Long_Floor, "Adv_Person_Knights_Armor", Co.SZ_medium, true, DoRitterruestung, Nouns, Adjs));
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Takeable));
-            Persons!.Last()!.SynNames = new List<Noun> { CA!.Noun_Ritter, CA!.Noun_Ruestung };
+            Persons!.Last()!.SynNames = new List<Noun> { CA!.Noun_Ritter!, CA!.Noun_Ruestung! };
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Talkable), relTypes.r_essential);
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_GiveTarget));
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_QuestionTarget));
@@ -5456,7 +5456,7 @@ namespace GameCore
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_UsableWith));
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Listenable));
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Touchwithable), relTypes.r_essential);
-            Persons!.Last().IsBackground = true;
+            Persons!.Last()!.IsBackground = true;
 
             CA!.Person_Librarian = Persons!.Add(Person.PersonLoca(new List<Noun> { CA!.Noun_Skelett! }, new List<Adj> { CA!.Adj_vergilbt! }, Co.SEX_NEUTER, CB!.LocType_Loc, CA!.L09_Library, "Adv_Person_Librarian", Co.SZ_medium, true, DoSkeleton, Nouns, Adjs));
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Talkable), relTypes.r_essential);
@@ -5466,7 +5466,7 @@ namespace GameCore
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Listenable));
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Touchwithable), relTypes.r_essential);
 
-            CA!.Person_Fish = Persons!.Add(Person.PersonLoca(new List<Noun> { CA!.Noun_Fish! }, new List<Adj> { CA!.Adj_ausgestopft! }, Co.SEX_MALE, CB!.LocType_On_Item, CA!.I11_Left_Shelf.ID, "Adv_Person_Fish", Co.SZ_medium, true, DoFish, Nouns, Adjs));
+            CA!.Person_Fish = Persons!.Add(Person.PersonLoca(new List<Noun> { CA!.Noun_Fish! }, new List<Adj> { CA!.Adj_ausgestopft! }, Co.SEX_MALE, CB!.LocType_On_Item, CA!.I11_Left_Shelf!.ID, "Adv_Person_Fish", Co.SZ_medium, true, DoFish, Nouns, Adjs));
             CA!.Person_Fish.CanBeTaken = true;
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Takeable), relTypes.r_essential);
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Talkable), relTypes.r_essential);
@@ -5489,7 +5489,7 @@ namespace GameCore
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Touchwithable), relTypes.r_essential);
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Throwable), relTypes.r_essential);
 
-            CA!.Person_Snake = Persons!.Add(Person.PersonLoca(new List<Noun> { CA!.Noun_Schlange! }, new List<Adj> { CA!.Adj_ausgestopft! }, Co.SEX_FEMALE, CB!.LocType_On_Item, CA!.I11_Right_Shelf.ID, "Adv_Person_Snake", Co.SZ_medium, true, DoSnake, Nouns, Adjs));
+            CA!.Person_Snake = Persons!.Add(Person.PersonLoca(new List<Noun> { CA!.Noun_Schlange! }, new List<Adj> { CA!.Adj_ausgestopft! }, Co.SEX_FEMALE, CB!.LocType_On_Item, CA!.I11_Right_Shelf!.ID, "Adv_Person_Snake", Co.SZ_medium, true, DoSnake, Nouns, Adjs));
             CA!.Person_Snake.CanBeTaken = true;
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Takeable), relTypes.r_essential);
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Talkable), relTypes.r_essential);
@@ -5500,7 +5500,7 @@ namespace GameCore
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Touchwithable), relTypes.r_essential);
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Throwable), relTypes.r_essential);
 
-            CA!.Person_Magpie = Persons!.Add(Person.PersonLoca(new List<Noun> { CA!.Noun_Elster! }, new List<Adj> { CA!.Adj_ausgestopft! }, Co.SEX_FEMALE, CB!.LocType_On_Item, CA!.I11_Bird_Stand.ID, "Adv_Person_Magpie", Co.SZ_medium, true, DoMagpie, Nouns, Adjs));
+            CA!.Person_Magpie = Persons!.Add(Person.PersonLoca(new List<Noun> { CA!.Noun_Elster! }, new List<Adj> { CA!.Adj_ausgestopft! }, Co.SEX_FEMALE, CB!.LocType_On_Item, CA!.I11_Bird_Stand!.ID, "Adv_Person_Magpie", Co.SZ_medium, true, DoMagpie, Nouns, Adjs));
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Talkable), relTypes.r_essential);
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.Cat_Takeable), relTypes.r_essential);
             Persons!.Last()!.Categories!.Add(Categories!.Find(A.CounterCat_GiveTarget));
@@ -5697,7 +5697,7 @@ namespace GameCore
             //
             // CA!.TP_Boden = Topics.Add(new Topic(new List<Noun> { CA!.Noun_Boden }, new List<Adj> { CA!.Adj_gewoehnlich }, Co.SEX_MALE, Nouns, Adjs));
             // CA!.TP_Ecke = Topics.Add(new Topic(new List<Noun> { CA!.Noun_Ecke }, null, Co.SEX_FEMALE, Nouns, Adjs));
-            CA!.TP_Versteck = Topics!.Add(new Topic(new List<Noun> { CA!.Noun_Versteck }, null, Co.SEX_NEUTER, Nouns, Adjs));
+            CA!.TP_Versteck = Topics!.Add(new Topic(new List<Noun> { CA!.Noun_Versteck! }, null, Co.SEX_NEUTER, Nouns!, Adjs!));
             // TEST
             // Aufgemerkt: Das muss nachher wieder raus, sobald die CAs korrekt verschaltet sind
             if (LoadedInitData == null)
@@ -5807,37 +5807,37 @@ namespace GameCore
 
         void InitScores()
         {
-            CA!.Score_Beutelchen = Scores.Add(new Score((int)scoreVal.easy, scoreChapter.chapter_one));
-            CA!.Score_Kerzenhalter = Scores.Add(new Score((int)scoreVal.easy, scoreChapter.chapter_one));
-            CA!.Score_Transfer1 = Scores.Add(new Score((int)scoreVal.mediocre, scoreChapter.chapter_one));
-            CA!.Score_Zuckerzange = Scores.Add(new Score((int)scoreVal.easy, scoreChapter.chapter_one));
-            CA!.Score_Kaese = Scores.Add(new Score((int)scoreVal.easy, scoreChapter.chapter_one));
-            CA!.Score_Polierlappen = Scores.Add(new Score((int)scoreVal.easy, scoreChapter.chapter_one));
-            CA!.Score_Plastiktuete = Scores.Add(new Score((int)scoreVal.easy, scoreChapter.chapter_one));
-            CA!.Score_Schluessel = Scores.Add(new Score((int)scoreVal.easy, scoreChapter.chapter_one));
-            CA!.Score_Erste_Belebung = Scores.Add(new Score((int)scoreVal.mediocre, scoreChapter.chapter_one));
-            CA!.Score_Erstes_Gespraech = Scores.Add(new Score((int)scoreVal.mediocre, scoreChapter.chapter_one));
-            CA!.Score_Tuer_eintreten = Scores.Add(new Score((int)scoreVal.simple, scoreChapter.chapter_one));
-            CA!.Score_Tuer_aufschliessen = Scores.Add(new Score((int)scoreVal.simple, scoreChapter.chapter_one));
-            CA!.Score_Rollpflaster = Scores.Add(new Score((int)scoreVal.easy, scoreChapter.chapter_one));
-            CA!.Score_Klauenzange1 = Scores.Add(new Score((int)scoreVal.simple, scoreChapter.chapter_one));
-            CA!.Score_Klauenzange2 = Scores.Add(new Score((int)scoreVal.advanced, scoreChapter.chapter_one));
-            CA!.Score_Antwort_Unterwaesche = Scores.Add(new Score((int)scoreVal.simple, scoreChapter.chapter_one));
-            CA!.Score_Antwort_Ruestung = Scores.Add(new Score((int)scoreVal.mediocre, scoreChapter.chapter_one));
-            CA!.Score_Antwort_Tier= Scores.Add(new Score((int)scoreVal.simple, scoreChapter.chapter_one));
-            CA!.Score_Bibliothek_offen = Scores.Add(new Score((int)scoreVal.advanced, scoreChapter.chapter_one));
-            CA!.Score_Buch = Scores.Add(new Score((int)scoreVal.easy, scoreChapter.chapter_one));
-            CA!.Score_Deckel = Scores.Add(new Score((int)scoreVal.simple, scoreChapter.chapter_one));
-            CA!.Score_Muenze = Scores.Add(new Score((int)scoreVal.advanced, scoreChapter.chapter_one));
-            CA!.Score_Muenze_Gefunden = Scores.Add(new Score((int)scoreVal.advanced, scoreChapter.chapter_one));
-            CA!.Score_Polierter_Stein = Scores.Add(new Score((int)scoreVal.mediocre, scoreChapter.chapter_one));
-            CA!.Score_Lichtloser_Stein = Scores.Add(new Score((int)scoreVal.mediocre, scoreChapter.chapter_one));
-            CA!.Score_Mondstein = Scores.Add(new Score((int)scoreVal.advanced, scoreChapter.chapter_one));
-            CA!.Score_Schwamm = Scores.Add(new Score((int)scoreVal.advanced, scoreChapter.chapter_one));
-            CA!.Score_Schlacke = Scores.Add(new Score((int)scoreVal.advanced, scoreChapter.chapter_one));
-            CA!.Score_Meues_Pulver = Scores.Add(new Score((int)scoreVal.complex, scoreChapter.chapter_one));
-            CA!.Score_Transfer2= Scores.Add(new Score((int)scoreVal.mindblowing, scoreChapter.chapter_one));
-            CA!.Score_Schale_Befestigung = Scores.Add(new Score((int)scoreVal.easy, scoreChapter.chapter_one));
+            CA!.Score_Beutelchen = Scores!.Add(new Score((int)scoreVal.easy, scoreChapter.chapter_one));
+            CA!.Score_Kerzenhalter = Scores!.Add(new Score((int)scoreVal.easy, scoreChapter.chapter_one));
+            CA!.Score_Transfer1 = Scores!.Add(new Score((int)scoreVal.mediocre, scoreChapter.chapter_one));
+            CA!.Score_Zuckerzange = Scores!.Add(new Score((int)scoreVal.easy, scoreChapter.chapter_one));
+            CA!.Score_Kaese = Scores!.Add(new Score((int)scoreVal.easy, scoreChapter.chapter_one));
+            CA!.Score_Polierlappen = Scores!.Add(new Score((int)scoreVal.easy, scoreChapter.chapter_one));
+            CA!.Score_Plastiktuete = Scores!.Add(new Score((int)scoreVal.easy, scoreChapter.chapter_one));
+            CA!.Score_Schluessel = Scores!.Add(new Score((int)scoreVal.easy, scoreChapter.chapter_one));
+            CA!.Score_Erste_Belebung = Scores!.Add(new Score((int)scoreVal.mediocre, scoreChapter.chapter_one));
+            CA!.Score_Erstes_Gespraech = Scores!.Add(new Score((int)scoreVal.mediocre, scoreChapter.chapter_one));
+            CA!.Score_Tuer_eintreten = Scores!.Add(new Score((int)scoreVal.simple, scoreChapter.chapter_one));
+            CA!.Score_Tuer_aufschliessen = Scores!.Add(new Score((int)scoreVal.simple, scoreChapter.chapter_one));
+            CA!.Score_Rollpflaster = Scores!.Add(new Score((int)scoreVal.easy, scoreChapter.chapter_one));
+            CA!.Score_Klauenzange1 = Scores!.Add(new Score((int)scoreVal.simple, scoreChapter.chapter_one));
+            CA!.Score_Klauenzange2 = Scores!.Add(new Score((int)scoreVal.advanced, scoreChapter.chapter_one));
+            CA!.Score_Antwort_Unterwaesche = Scores!.Add(new Score((int)scoreVal.simple, scoreChapter.chapter_one));
+            CA!.Score_Antwort_Ruestung = Scores!.Add(new Score((int)scoreVal.mediocre, scoreChapter.chapter_one));
+            CA!.Score_Antwort_Tier= Scores!.Add(new Score((int)scoreVal.simple, scoreChapter.chapter_one));
+            CA!.Score_Bibliothek_offen = Scores!.Add(new Score((int)scoreVal.advanced, scoreChapter.chapter_one));
+            CA!.Score_Buch = Scores!.Add(new Score((int)scoreVal.easy, scoreChapter.chapter_one));
+            CA!.Score_Deckel = Scores!.Add(new Score((int)scoreVal.simple, scoreChapter.chapter_one));
+            CA!.Score_Muenze = Scores!.Add(new Score((int)scoreVal.advanced, scoreChapter.chapter_one));
+            CA!.Score_Muenze_Gefunden = Scores!.Add(new Score((int)scoreVal.advanced, scoreChapter.chapter_one));
+            CA!.Score_Polierter_Stein = Scores!.Add(new Score((int)scoreVal.mediocre, scoreChapter.chapter_one));
+            CA!.Score_Lichtloser_Stein = Scores!.Add(new Score((int)scoreVal.mediocre, scoreChapter.chapter_one));
+            CA!.Score_Mondstein = Scores!.Add(new Score((int)scoreVal.advanced, scoreChapter.chapter_one));
+            CA!.Score_Schwamm = Scores!.Add(new Score((int)scoreVal.advanced, scoreChapter.chapter_one));
+            CA!.Score_Schlacke = Scores!.Add(new Score((int)scoreVal.advanced, scoreChapter.chapter_one));
+            CA!.Score_Meues_Pulver = Scores!.Add(new Score((int)scoreVal.complex, scoreChapter.chapter_one));
+            CA!.Score_Transfer2= Scores!.Add(new Score((int)scoreVal.mindblowing, scoreChapter.chapter_one));
+            CA!.Score_Schale_Befestigung = Scores!.Add(new Score((int)scoreVal.easy, scoreChapter.chapter_one));
         }
 
         public string? _currentEventName;
@@ -5864,7 +5864,7 @@ namespace GameCore
         {
             try
             {
-                if (CA!.Status_Ritterruestung_Klaue.Val > 0)
+                if (CA!.Status_Ritterruestung_Klaue!.Val > 0)
                 {
                     CA!.Status_Ritterruestung_Klaue.Val--;
                     if (CA!.Status_Ritterruestung_Klaue.Val == 0)
@@ -5875,9 +5875,9 @@ namespace GameCore
 
                 if (CA!.Person_I!.locationID == locationID)
                 {
-                    if (CA.Status_Ritterruestung_Klaue.Val <= 0 && (Items.IsItemInv(CA.I00_Unstable_Pliers_With_Claw) || Items.IsItemInv(CA.I00_Stable_Pliers_With_Claw)))
+                    if (CA.Status_Ritterruestung_Klaue.Val <= 0 && (Items!.IsItemInv(CA.I00_Unstable_Pliers_With_Claw) || Items!.IsItemInv(CA.I00_Stable_Pliers_With_Claw)))
                     {
-                        int a = 5;
+                       
                         int val = GD!.RandomNumber(0, 10);
                         {
                             if (val < 1)
@@ -5925,7 +5925,7 @@ namespace GameCore
                     }
                 }
             }
-            catch (Exception ex)
+            catch // (Exception ex)
             {
             }
             return true;
@@ -5945,9 +5945,8 @@ namespace GameCore
                 }
                 if (CA!.Person_I!.locationID == locationID)
                 {
-                    if (CA.Status_Eule_Klaue!.Val <= 0 && (Items.IsItemInv(CA.I00_Unstable_Pliers_With_Claw) || Items.IsItemInv(CA.I00_Stable_Pliers_With_Claw)))
+                    if (CA.Status_Eule_Klaue!.Val <= 0 && (Items!.IsItemInv(CA.I00_Unstable_Pliers_With_Claw) || Items!.IsItemInv(CA.I00_Stable_Pliers_With_Claw)))
                     {
-                        int a = 5;
                         int val = GD!.RandomNumber(0, 10);
                         {
                             if (val < 1)
@@ -5994,7 +5993,7 @@ namespace GameCore
                     }
                 }
             }
-            catch (Exception ex)
+            catch // (Exception ex)
             {
             }
             return true;
@@ -6003,7 +6002,7 @@ namespace GameCore
         {
             try
             {
-                if (CA!.Status_Skelett_Klaue.Val > 0)
+                if (CA!.Status_Skelett_Klaue!.Val > 0)
                 {
                     CA!.Status_Skelett_Klaue.Val--;
                     if (CA!.Status_Skelett_Klaue.Val == 0)
@@ -6016,7 +6015,6 @@ namespace GameCore
                 {
                     if (CA.Status_Skelett_Klaue.Val <= 0 && (Items!.IsItemInv(CA.I00_Unstable_Pliers_With_Claw) || Items.IsItemInv(CA.I00_Stable_Pliers_With_Claw)))
                     {
-                        int a = 5;
                         int val = GD!.RandomNumber(0, 10);
                         {
                             if (val < 1)
@@ -6063,7 +6061,7 @@ namespace GameCore
                     }
                 }
             }
-            catch (Exception ex)
+            catch // (Exception ex)
             {
             }
 
@@ -6073,7 +6071,7 @@ namespace GameCore
         {
             try
             {
-                if (CA!.Status_Papagei_Klaue.Val > 0)
+                if (CA!.Status_Papagei_Klaue!.Val > 0)
                 {
                     CA!.Status_Papagei_Klaue.Val--;
                     if (CA!.Status_Papagei_Klaue.Val == 0)
@@ -6086,7 +6084,6 @@ namespace GameCore
                 {
                     if (CA.Status_Papagei_Klaue.Val <= 0 && (Items!.IsItemInv(CA.I00_Unstable_Pliers_With_Claw) || Items.IsItemInv(CA.I00_Stable_Pliers_With_Claw)))
                     {
-                        int a = 5;
                         int val = GD!.RandomNumber(0, 30);
                         {
                             if (val < 1)
@@ -6133,7 +6130,7 @@ namespace GameCore
                     }
                 }
             }
-            catch (Exception ex)
+            catch // (Exception ex)
             {
             }
 
@@ -6143,20 +6140,19 @@ namespace GameCore
         {
             try
             {
-                if (CA!.Status_Elster_Klaue.Val > 0)
+                if (CA!.Status_Elster_Klaue!.Val > 0)
                 {
                     CA!.Status_Elster_Klaue.Val--;
                     if (CA!.Status_Elster_Klaue.Val == 0)
                     {
-                        StoryOutput(CA!.Person_Magpie.locationID, CA!.Person_I, loca.Do_Magpie_Finish);
+                        StoryOutput(CA!.Person_Magpie!.locationID, CA!.Person_I, loca.Do_Magpie_Finish);
                     }
                 }
 
                 if (CA!.Person_I!.locationID == locationID)
                 {
-                    if (CA.Status_Elster_Klaue.Val <= 0 && (Items.IsItemInv(CA.I00_Unstable_Pliers_With_Claw) || Items.IsItemInv(CA.I00_Stable_Pliers_With_Claw)))
+                    if (CA.Status_Elster_Klaue.Val <= 0 && (Items!.IsItemInv(CA.I00_Unstable_Pliers_With_Claw) || Items!.IsItemInv(CA.I00_Stable_Pliers_With_Claw)))
                     {
-                        int a = 5;
                         int val = GD!.RandomNumber(0, 30);
                         {
                             if (val < 1)
@@ -6203,7 +6199,7 @@ namespace GameCore
                     }
                 }
             }
-            catch (Exception ex)
+            catch // (Exception ex)
             {
             }
 
@@ -6213,33 +6209,32 @@ namespace GameCore
         {
             try
             {
-                if (CA!.Status_Fisch_Klaue.Val > 0)
+                if (CA!.Status_Fisch_Klaue!.Val > 0)
                 {
                     CA!.Status_Fisch_Klaue.Val--;
                     if (CA!.Status_Fisch_Klaue.Val == 0)
                     {
-                        StoryOutput(CA!.Person_Fish.locationID, CA!.Person_I, loca.Do_Fish_Finish);
+                        StoryOutput(CA!.Person_Fish!.locationID, CA!.Person_I, loca.Do_Fish_Finish);
                     }
                 }
 
                 if (CA!.Person_I!.locationID == locationID)
                 {
-                    if (CA.Status_Fisch_Klaue.Val <= 0 && (Items.IsItemInv(CA.I00_Unstable_Pliers_With_Claw) || Items.IsItemInv(CA.I00_Stable_Pliers_With_Claw)))
+                    if (CA.Status_Fisch_Klaue.Val <= 0 && (Items!.IsItemInv(CA.I00_Unstable_Pliers_With_Claw) || Items!.IsItemInv(CA.I00_Stable_Pliers_With_Claw)))
                     {
-                        int a = 5;
                         int val = GD!.RandomNumber(0, 30);
                         {
                             if (val < 1)
                             {
-                                StoryOutput(CA!.Person_Fish.locationID, CA!.Person_I, loca.Do_Fish_Reaktion1);
+                                StoryOutput(CA!.Person_Fish!.locationID, CA!.Person_I, loca.Do_Fish_Reaktion1);
                             }
                             else if (val < 2)
                             {
-                                StoryOutput(CA!.Person_Fish.locationID, CA!.Person_I, loca.Do_Fish_Reaktion2);
+                                StoryOutput(CA!.Person_Fish!.locationID, CA!.Person_I, loca.Do_Fish_Reaktion2);
                             }
                             else if (val < 3)
                             {
-                                StoryOutput(CA!.Person_Fish.locationID, CA!.Person_I, loca.Do_Fish_Reaktion3);
+                                StoryOutput(CA!.Person_Fish!.locationID, CA!.Person_I, loca.Do_Fish_Reaktion3);
                             }
 
                         }
@@ -6250,30 +6245,30 @@ namespace GameCore
                         {
                             if (val < 1)
                             {
-                                StoryOutput(CA!.Person_Fish.locationID, CA!.Person_I, loca.Do_Fish_Action1);
+                                StoryOutput(CA!.Person_Fish!.locationID, CA!.Person_I, loca.Do_Fish_Action1);
                             }
                             else if (val < 2)
                             {
-                                StoryOutput(CA!.Person_Fish.locationID, CA!.Person_I, loca.Do_Fish_Action2);
+                                StoryOutput(CA!.Person_Fish!.locationID, CA!.Person_I, loca.Do_Fish_Action2);
                             }
                             else if (val < 3)
                             {
-                                StoryOutput(CA!.Person_Fish.locationID, CA!.Person_I, loca.Do_Fish_Action3);
+                                StoryOutput(CA!.Person_Fish!.locationID, CA!.Person_I, loca.Do_Fish_Action3);
                             }
                             else if (val < 4)
                             {
-                                StoryOutput(CA!.Person_Fish.locationID, CA!.Person_I, loca.Do_Fish_Action4);
+                                StoryOutput(CA!.Person_Fish!.locationID, CA!.Person_I, loca.Do_Fish_Action4);
                             }
                             else if (val < 5)
                             {
-                                StoryOutput(CA!.Person_Fish.locationID, CA!.Person_I, loca.Do_Fish_Action5);
+                                StoryOutput(CA!.Person_Fish!.locationID, CA!.Person_I, loca.Do_Fish_Action5);
                             }
 
                         }
                     }
                 }
             }
-            catch (Exception ex)
+            catch //  (Exception ex)
             {
             }
 
@@ -6283,33 +6278,32 @@ namespace GameCore
         {
             try
             {
-                if (CA!.Status_Schlange_Klaue.Val > 0)
+                if (CA!.Status_Schlange_Klaue!.Val > 0)
                 {
                     CA!.Status_Schlange_Klaue.Val--;
                     if (CA!.Status_Schlange_Klaue.Val == 0)
                     {
-                        StoryOutput(CA!.Person_Snake.locationID, CA!.Person_I, loca.Do_Snake_Finish);
+                        StoryOutput(CA!.Person_Snake!.locationID, CA!.Person_I, loca.Do_Snake_Finish);
                     }
                 }
 
                 if (CA!.Person_I!.locationID == locationID)
                 {
-                    if (CA.Status_Schlange_Klaue.Val <= 0 && (Items.IsItemInv(CA.I00_Unstable_Pliers_With_Claw) || Items.IsItemInv(CA.I00_Stable_Pliers_With_Claw)))
+                    if (CA.Status_Schlange_Klaue.Val <= 0 && (Items!.IsItemInv(CA.I00_Unstable_Pliers_With_Claw) || Items!.IsItemInv(CA.I00_Stable_Pliers_With_Claw)))
                     {
-                        int a = 5;
                         int val = GD!.RandomNumber(0, 30);
                         {
                             if (val < 1)
                             {
-                                StoryOutput(CA!.Person_Snake.locationID, CA!.Person_I, loca.Do_Snake_Reaktion1);
+                                StoryOutput(CA!.Person_Snake!.locationID, CA!.Person_I, loca.Do_Snake_Reaktion1);
                             }
                             else if (val < 2)
                             {
-                                StoryOutput(CA!.Person_Snake.locationID, CA!.Person_I, loca.Do_Snake_Reaktion2);
+                                StoryOutput(CA!.Person_Snake!.locationID, CA!.Person_I, loca.Do_Snake_Reaktion2);
                             }
                             else if (val < 3)
                             {
-                                StoryOutput(CA!.Person_Snake.locationID, CA!.Person_I, loca.Do_Snake_Reaktion3);
+                                StoryOutput(CA!.Person_Snake!.locationID, CA!.Person_I, loca.Do_Snake_Reaktion3);
                             }
 
                         }
@@ -6320,30 +6314,30 @@ namespace GameCore
                         {
                             if (val < 1)
                             {
-                                StoryOutput(CA!.Person_Snake.locationID, CA!.Person_I, loca.Do_Snake_Action1);
+                                StoryOutput(CA!.Person_Snake!.locationID, CA!.Person_I, loca.Do_Snake_Action1);
                             }
                             else if (val < 2)
                             {
-                                StoryOutput(CA!.Person_Snake.locationID, CA!.Person_I, loca.Do_Snake_Action2);
+                                StoryOutput(CA!.Person_Snake!.locationID, CA!.Person_I, loca.Do_Snake_Action2);
                             }
                             else if (val < 3)
                             {
-                                StoryOutput(CA!.Person_Snake.locationID, CA!.Person_I, loca.Do_Snake_Action3);
+                                StoryOutput(CA!.Person_Snake!.locationID, CA!.Person_I, loca.Do_Snake_Action3);
                             }
                             else if (val < 4)
                             {
-                                StoryOutput(CA!.Person_Parrot!.locationID, CA!.Person_I, loca.Do_Snake_Action4);
+                                StoryOutput(CA!.Person_Snake!.locationID, CA!.Person_I, loca.Do_Snake_Action4);
                             }
                             else if (val < 5)
                             {
-                                StoryOutput(CA!.Person_Parrot!.locationID, CA!.Person_I, loca.Do_Snake_Action5);
+                                StoryOutput(CA!.Person_Snake!.locationID, CA!.Person_I, loca.Do_Snake_Action5);
                             }
 
                         }
                     }
                 }
             }
-            catch (Exception ex)
+            catch // (Exception ex)
             {
             }
 
@@ -6495,7 +6489,7 @@ namespace GameCore
                 string path2_2 = loca.ScoreEvent_Finish;
                 string? path2 = null;
                 string? path3 = null;
-                string? path4 = null;
+                // string? path4 = null;
 
                 // während des Pfadaufbaus reicht Abschnitt path2 immer vom CurrentEventName bis "Current"
                 path2 = String.Format(loca.ScoreEvent_Von_Bis, CurrentEventName, loca.ScoreEvent_Finish);
@@ -6564,7 +6558,7 @@ namespace GameCore
                     _actLocCollecting = false;
                 }
 
-                if( AdvGame.Orders != Orders )
+                if( AdvGame!.Orders != Orders )
                 {
 
                 }
@@ -6575,7 +6569,7 @@ namespace GameCore
 
                     if (AdvGame!.Orders.persistentMCMenu?.MCSpeakerText.Count > 1)
                         if (AdvGame!.Orders.persistentMCMenu.MCSpeakerText[1].SpeakerID != AdvGame!.Orders.persistentMCMenu.MCSpeakerText[0].SpeakerID)
-                            speaker = String.Format(loca.ScoreEvent_Talk_With, AdvGame!.Persons!.Find(AdvGame!.Orders.persistentMCMenu.MCSpeakerText[1].SpeakerID)!.FullName(Co.CASE_DAT, CurrentNouns ));
+                            speaker = String.Format(loca.ScoreEvent_Talk_With, AdvGame!.Persons!.Find(AdvGame!.Orders.persistentMCMenu.MCSpeakerText[1].SpeakerID)!.FullName(Co.CASE_DAT, CurrentNouns! ));
 
                     path3 = speaker;
                 }
@@ -6773,7 +6767,7 @@ namespace GameCore
 
                 if (AdvGame!.Orders.persistentMCMenu?.MCSpeakerText.Count > 1)
                     if (AdvGame!.Orders.persistentMCMenu.MCSpeakerText[1].SpeakerID != AdvGame!.Orders.persistentMCMenu.MCSpeakerText[0].SpeakerID)
-                        speaker = String.Format( loca.ScoreEvent_Talk_With, AdvGame!.Persons!.Find(AdvGame!.Orders.persistentMCMenu.MCSpeakerText[1].SpeakerID )!.FullName(Co.CASE_DAT, CurrentNouns ) );
+                        speaker = String.Format( loca.ScoreEvent_Talk_With, AdvGame!.Persons!.Find(AdvGame!.Orders.persistentMCMenu.MCSpeakerText[1].SpeakerID )!.FullName(Co.CASE_DAT, CurrentNouns! ) );
 
                 path4 = speaker;
             }
@@ -6874,7 +6868,7 @@ namespace GameCore
                     if (s.Substring(i, FindAkk1.Length) == FindAkk1)
                     {
                         if (AO1 != null)
-                            s2 += AO1.FullName(AO1, Co.CASE_AKK, CurrentNouns );
+                            s2 += AO1.FullName(AO1, Co.CASE_AKK, CurrentNouns! );
                         else
                             s2 += loca.Adv_Autosave_4585;
 
@@ -6888,7 +6882,7 @@ namespace GameCore
                     if (s.Substring(i, FindNom1.Length) == FindNom1)
                     {
                         if (AO1 != null)
-                            s2 += AO1.FullName(AO1, Co.CASE_NOM, CurrentNouns );
+                            s2 += AO1.FullName(AO1, Co.CASE_NOM, CurrentNouns! );
                         else
                             s2 += loca.Adv_Autosave_4586;
 
@@ -6903,7 +6897,7 @@ namespace GameCore
                     {
   
                         if (AO1 != null)
-                            s2 += AO1.FullName(AO1, Co.CASE_DAT, CurrentNouns);
+                            s2 += AO1.FullName(AO1, Co.CASE_DAT, CurrentNouns!);
                         else
                             s2 += loca.Adv_Autosave_4587;
 
@@ -6918,7 +6912,7 @@ namespace GameCore
                     {
                         if (AO2 != null)
                         {
-                            s2 += AO2.FullName(AO2, Co.CASE_AKK, CurrentNouns);
+                            s2 += AO2.FullName(AO2, Co.CASE_AKK, CurrentNouns!);
                         }
                         else
                             s2 += loca.Adv_Autosave_4588;
@@ -6933,7 +6927,7 @@ namespace GameCore
                     {
                         if (AO2 != null)
                         {
-                            s2 += AO2.FullName(AO2, Co.CASE_NOM, CurrentNouns);
+                            s2 += AO2.FullName(AO2, Co.CASE_NOM, CurrentNouns!);
                         }
                         else
                             s2 += loca.Adv_Autosave_4589;
@@ -6949,7 +6943,7 @@ namespace GameCore
    
                         if (AO2 != null)
                         {
-                            s2 += AO2.FullName(AO2, Co.CASE_DAT, CurrentNouns);
+                            s2 += AO2.FullName(AO2, Co.CASE_DAT, CurrentNouns!);
                         }
                         else
                             s2 += loca.Adv_Autosave_4590;
@@ -7086,9 +7080,9 @@ namespace GameCore
             if ((Category == A.CounterCat_TakeFromBesideable) && (item.CanPutBeside)) return (true);
             */
 
-            if (item.Categories!.List!.ContainsKey(Category))
+            if (item!.Categories!.List!.ContainsKey(Category))
             {
-                CategoryRel c = Categories.List[Category];
+                CategoryRel c = Categories!.List![Category];
                 if ((!AdvGame!.GD!.LayoutDescription.SimpleMC || c.Relevance == relTypes.r_essential))
                     found = true;
             }
@@ -7365,7 +7359,7 @@ namespace GameCore
                         if (pi.Type == PI.TypeVal.Item)
                         {
                             Item? it2 = Items!.Find(pi.ID);
-                            string s4 = it2!.FullName(Co.CASE_NOM, CurrentNouns, true)!;
+                            string s4 = it2!.FullName(Co.CASE_NOM, CurrentNouns!, true)!;
                             string s2 =  Helper.Insert(loca.Adv_DoMCItem_Person_I_4614, itemID, it2.ID );
                             efollower.Add(idCt);
                             mcM.Add(new MCMenuEntry(CB!.MCE_Text, CA!.Person_I, s4, idCt++, follower, null, 0, false, false, false, null, s2));
@@ -7402,7 +7396,7 @@ namespace GameCore
                         if (pi.Type == PI.TypeVal.Item)
                         {
                             Item? it2 = Items!.Find(pi.ID);
-                            string s4 = it2!.FullName(Co.CASE_NOM, CurrentNouns, true)!;
+                            string s4 = it2!.FullName(Co.CASE_NOM, CurrentNouns!, true)!;
                             string s2 =  Helper.Insert(loca.Adv_DoMCItem_Person_I_4619, itemID, it2.ID )!;
                             efollower.Add(idCt);
                             mcM.Add(new MCMenuEntry(CB!.MCE_Text, CA!.Person_I, s4, idCt++, follower, null, 0, false, false, false, null, s2));
@@ -7439,7 +7433,7 @@ namespace GameCore
                         if (pi.Type == PI.TypeVal.Item)
                         {
                             Item? it2 = Items!.Find(pi.ID);
-                            string s4 = it2!.FullName(Co.CASE_NOM, CurrentNouns, true)!;
+                            string s4 = it2!.FullName(Co.CASE_NOM, CurrentNouns!, true)!;
                             string s2 =  Helper.Insert(loca.Adv_DoMCItem_Person_I_4624, itemID, it2.ID )!;
                             efollower.Add(idCt);
                             mcM.Add(new MCMenuEntry(CB!.MCE_Text, CA!.Person_I, s4, idCt++, follower, null, 0, false, false, false, null, s2));
@@ -7476,7 +7470,7 @@ namespace GameCore
                         if (pi.Type == PI.TypeVal.Item)
                         {
                             Item? it2 = Items!.Find(pi.ID);
-                            string s4 = it2!.FullName(Co.CASE_NOM, CurrentNouns, true)!;
+                            string s4 = it2!.FullName(Co.CASE_NOM, CurrentNouns!, true)!;
                             string s2 =  Helper.Insert(loca.Adv_DoMCItem_Person_I_4629, itemID, it2.ID );
                             efollower.Add(idCt);
                             mcM.Add(new MCMenuEntry(CB!.MCE_Text, CA!.Person_I, s4, idCt++, follower, null, 0, false, false, false, null, s2));
@@ -7601,14 +7595,14 @@ namespace GameCore
                                             {
                                                 if ((c.Category!.CategoryID == cr.CounterCategoryID) && (Items!.IsItemHere(it2, Co.Range_Visible) == true))
                                                 {
-                                                    string s4 = it2.FullName(Co.CASE_DAT, CurrentNouns, true)!;
+                                                    string s4 = it2.FullName(Co.CASE_DAT, CurrentNouns!, true)!;
 
                                                     if (cr.ParseLine == null)
                                                         s4 = "";
                                                     else if (cr.ParseLine!.Contains(loca.Adv_DoMCItem_Person_I_4633))
-                                                        s4 = it2.FullName(Co.CASE_NOM, CurrentNouns,  true)!;
+                                                        s4 = it2.FullName(Co.CASE_NOM, CurrentNouns!,  true)!;
                                                     else if (cr.ParseLine!.Contains(loca.Adv_DoMCItem_Person_I_4634))
-                                                        s4 = it2.FullName(Co.CASE_AKK, CurrentNouns, true)!;
+                                                        s4 = it2.FullName(Co.CASE_AKK, CurrentNouns!, true)!;
 
                                                     s2 = DoStringMagic(cr.ParseLine, item, it2)!;
                                                     efollower.Add(idCt);
@@ -7629,11 +7623,11 @@ namespace GameCore
                                         {
                                             if ((c.Category!.CategoryID == cr.CounterCategoryID) && (Persons!.IsPersonHere(pe2, Co.Range_Visible) == true))
                                             {
-                                                string s4 = pe2.FullName(Co.CASE_DAT, CurrentNouns, true)!;
+                                                string s4 = pe2.FullName(Co.CASE_DAT, CurrentNouns!, true)!;
                                                 if (cr.ParseLine!.Contains(loca.Adv_DoMCItem_Person_I_4635))
-                                                    s4 = pe2.FullName(Co.CASE_NOM, CurrentNouns, true)!;
+                                                    s4 = pe2.FullName(Co.CASE_NOM, CurrentNouns!, true)!;
                                                 else if (cr.ParseLine!.Contains(loca.Adv_DoMCItem_Person_I_4636))
-                                                    s4 = pe2.FullName(Co.CASE_AKK, CurrentNouns, true)!;
+                                                    s4 = pe2.FullName(Co.CASE_AKK, CurrentNouns!, true)!;
                                                 s2 = DoStringMagic(cr.ParseLine, item, pe2)!;
                                                 efollower.Add(idCt);
                                                 mcM.Add(new MCMenuEntry(CB!.MCE_Text, CA!.Person_I, s4, idCt++, follower, null, 0, false, false, false, null, s2));
@@ -7878,7 +7872,7 @@ namespace GameCore
             else
             {
                 cfollower.Add(idCt);
-                mcM.Add(new MCMenuEntry(CB!.MCE_Text, null, Persons!.GetPersonName(personID, Co.CASE_AKK, CurrentNouns ), idCt++, follower, null, 0, false, false, false, null, null));
+                mcM.Add(new MCMenuEntry(CB!.MCE_Text, null, Persons!.GetPersonName(personID, Co.CASE_AKK, CurrentNouns! ), idCt++, follower, null, 0, false, false, false, null, null));
 
                 cfollower.Add(idCt);
                 mcM.Add(new MCMenuEntry(CB!.MCE_Text, CA!.Person_I,  Helper.Insert(loca.Adv_DoMCPerson_Person_I_4657, personID ), idCt++, follower, null, 0, false, false, false, null,  Helper.Insert(loca.Adv_DoMCPerson_Person_I_4658, personID )));
@@ -7949,9 +7943,9 @@ namespace GameCore
                                 dfollower.Add(idCtChoice + CB!.MCE_Choice_Off);
                             }
 
-                            string s1 = DoStringMagic(cr.ContextMenuText, person, null)!;
-                            string s2 = DoStringMagic(cr.ParseLine, person, null)!;
-                            string s3 = DoStringMagic(cr.Headline2, person, null)!;
+                            string? s1 = DoStringMagic(cr.ContextMenuText, person, null)!;
+                            string? s2 = DoStringMagic(cr.ParseLine, person, null)!;
+                            string? s3 = DoStringMagic(cr.Headline2, person, null)!;
 
                             if ((cr.CounterCategoryID == -1) || (CountCounter > 0))
                             {
@@ -7976,7 +7970,7 @@ namespace GameCore
                                         {
                                             if ((c.Category!.CategoryID == cr.CounterCategoryID) && (Items!.IsItemHere(it2, Co.Range_Visible) == true))
                                             {
-                                                string s4 = it2.FullName(Co.CASE_DAT, CurrentNouns )!;
+                                                string s4 = it2.FullName(Co.CASE_DAT, CurrentNouns! )!;
                                                 s2 = DoStringMagic(cr.ParseLine, person, it2)!;
                                                 efollower.Add(idCt);
                                                 mcM.Add(new MCMenuEntry(CB!.MCE_Text, CA!.Person_I, s4, idCt++, follower, null, 0, false, false, false, null, s2));
@@ -7994,7 +7988,7 @@ namespace GameCore
                                             {
                                                 if ((c.Category!.CategoryID == cr.CounterCategoryID) && (Persons!.IsPersonHere(pe2, Co.Range_Visible) == true))
                                                 {
-                                                    string s4 = pe2.FullName(Co.CASE_DAT, CurrentNouns )!;
+                                                    string s4 = pe2.FullName(Co.CASE_DAT, CurrentNouns! )!;
                                                     s2 = DoStringMagic(cr.ParseLine, person, pe2)!;
                                                     efollower.Add(idCt);
                                                     mcM.Add(new MCMenuEntry(CB!.MCE_Text, CA!.Person_I, s4, idCt++, follower, null, 0, false, false, false, null, s2));
@@ -8194,7 +8188,7 @@ namespace GameCore
                             cfollower.Add(idCt);
                             follower = new List<int>();
                             follower.Add(-1);
-                            mcM.Add(new MCMenuEntry(CB!.MCE_Text, CA!.Person_I, Persons!.Find(il[i].ID)!.FullName(Co.CASE_NOM, CurrentNouns ), idCt++, follower, null, 0, false, false, false, null, s1));
+                            mcM.Add(new MCMenuEntry(CB!.MCE_Text, CA!.Person_I, Persons!.Find(il[i].ID)!.FullName(Co.CASE_NOM, CurrentNouns! ), idCt++, follower, null, 0, false, false, false, null, s1));
                         }
                         else
                         {
@@ -8202,7 +8196,7 @@ namespace GameCore
                             follower = new List<int>();
                             follower.Add(idCtChoice + CB!.MCE_Choice_Off);
                             cfollower.Add(idCt);
-                            mcM.Add(new MCMenuEntry(CB!.MCE_Text, CA!.Person_I, Persons!.Find(il[i].ID)!.FullName(Co.CASE_NOM, CurrentNouns ), idCt++, follower, null, 0, false, false, false, null, s1));
+                            mcM.Add(new MCMenuEntry(CB!.MCE_Text, CA!.Person_I, Persons!.Find(il[i].ID)!.FullName(Co.CASE_NOM, CurrentNouns! ), idCt++, follower, null, 0, false, false, false, null, s1));
 
 
                             dfollower = new List<int>();

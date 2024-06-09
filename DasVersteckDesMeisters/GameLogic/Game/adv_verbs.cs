@@ -16,7 +16,7 @@ public partial class Adv: AdvBase
 
         }
 
-        CA!.Verb_Be = Verbs.AddLoca("Verb_bin");
+        CA!.Verb_Be = Verbs!.AddLoca("Verb_bin");
         Verbs.AddLoca(CA!.Verb_Be.ID, "Verb_sein");
         Verbs.AddLoca(CA!.Verb_Be.ID, "Verb_sind");
         Verbs.AddLoca(CA!.Verb_Be.ID, "Verb_ist");

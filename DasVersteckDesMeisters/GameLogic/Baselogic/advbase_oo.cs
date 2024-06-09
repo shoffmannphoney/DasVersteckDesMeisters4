@@ -474,7 +474,7 @@ namespace GameCore
                     */
                     adjectives = false;
 
-                    foreach (Noun n in AO.Names)
+                    foreach (Noun n in AO.Names!)
                     {
                         if (CurrentNouns.Contains(n) == true)
                         {

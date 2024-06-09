@@ -849,7 +849,7 @@ namespace GameCore
 
                         // string scr = "boundAsync.JSCallback('ActPerson');>" + Adventure?.FirstUpper(Adventure?.Persons?.GetPersonName(Adventure!.Persons!.Find(ActPerson), Co.CASE_AKK));
                         string scr = System.Web.HttpUtility.HtmlEncode("window.location.href = 'https://defineobject.ActPerson/'") + "'>";
-                        scr += Adventure?.FirstUpper(Adventure?.Persons?.GetPersonName(Adventure!.Persons!.Find(ActPerson), Co.CASE_AKK, Adventure.CurrentNouns ));
+                        scr += Adventure?.FirstUpper(Adventure?.Persons?.GetPersonName(Adventure!.Persons!.Find(ActPerson), Co.CASE_AKK, Adventure.CurrentNouns! ));
                         // Ignores: 002
                         // Noloca: 002
                         string persName = "<a style='cursor:pointer' class='class1' onclick='" + scr + "</a>";
@@ -871,7 +871,7 @@ namespace GameCore
                         // Ignores: 001
                         // string scr = System.Web.HttpUtility.HtmlEncode(loca.AdvData_GetConvertedText_14102 + Adventure?.Persons?.GetPersonName(Adventure!.Persons!.Find(ActPerson), Co.CASE_AKK));
                         string scr = System.Web.HttpUtility.HtmlEncode("window.location.href = 'https://defineobject.ActPerson/';>");
-                        scr += Adventure?.Persons?.GetPersonName(Adventure!.Persons!.Find(ActPerson), Co.CASE_AKK, Adventure.CurrentNouns );
+                        scr += Adventure?.Persons?.GetPersonName(Adventure!.Persons!.Find(ActPerson), Co.CASE_AKK, Adventure.CurrentNouns! );
                         // Ignores: 002
                         string persName = loca.AdvData_GetConvertedText_14103 + scr + loca.AdvData_GetConvertedText_14104;
 #else
@@ -1135,7 +1135,7 @@ namespace GameCore
             }
         }
 
-        public List<Noun> CurrentNouns { get; set; } = null;
+        public List<Noun>? CurrentNouns { get; set; } = null;
          public ItemList? Items { get; set; }
 
          public PersonList? Persons { get; set; }
@@ -1284,18 +1284,18 @@ namespace GameCore
             CurrentNouns = new List<Noun>();
 
             List<Noun> tCurrentNouns = new List<Noun>();
-            foreach (Item i in Items!.List.Values)
+            foreach (Item i in Items!.List!.Values)
             {
                 if (Items.IsItemHere(i, Co.Range_Here))
                 {
-                    foreach (Noun n in i.Names)
+                    foreach (Noun n in i.Names!)
                     {
                         if( tCurrentNouns.Contains( n ) == true && CurrentNouns.Contains( n ) == false )
                             CurrentNouns.Add(n );
 
                         tCurrentNouns.Add(n );
                     }
-                    foreach (Noun n in i.SynNames)
+                    foreach (Noun n in i.SynNames!)
                     {
                         if (tCurrentNouns.Contains(n) == true && CurrentNouns.Contains(n) == false)
                             CurrentNouns.Add(n);
@@ -1304,19 +1304,19 @@ namespace GameCore
                     }
                 }
             }
-            Person pI = Persons!.Find(A.ActPerson);
-            foreach (Person p in Persons.List.Values )
+            Person? pI = Persons!.Find(A.ActPerson!);
+            foreach (Person p in Persons.List!.Values )
             {
-                if (p.locationID == A.ActLoc || p.locationID == pI.ID ) 
+                if (p.locationID == A.ActLoc || p.locationID == pI!.ID ) 
                 {
-                    foreach (Noun n in p.Names)
+                    foreach (Noun n in p!.Names!)
                     {
                         if (tCurrentNouns.Contains(n) == true)
                             CurrentNouns.Add(n);
 
                         tCurrentNouns.Add(n );
                     }
-                    foreach (Noun n in p.SynNames)
+                    foreach (Noun n in p.SynNames!)
                     {
                         if (tCurrentNouns.Contains(n) == true)
                             CurrentNouns.Add(n);
@@ -1343,7 +1343,6 @@ namespace GameCore
                 {
                     // UIS!.StoryTextObj!.BufferedInput = loca.AdvBase_DoGameLoop_Person_I_14113 + s;
                     SetStoryLine = false;
-                    int val = 0;
                     // GD!.OrderList!.AddOrder(orderType.orderText, s, null, loca.GD!.Language, Parser.latestPTL, Parser.latestPTLSignatures, ref val);
                     StoryOutput(loca.AdvBase_DoGameLoop_Person_I_14113 + s);
                 }
@@ -1615,9 +1614,9 @@ namespace GameCore
             s += loca.AdvBase_StateDescription_14124;
 
             string s1 = loca.AdvBase_StateDescription_14125;
-            if (AdvGame.LastSpeaker != null)
+            if (AdvGame!.LastSpeaker != null)
             {
-                s1 = Persons!.GetPersonName(AdvGame!.LastSpeaker, Co.CASE_DAT, CurrentNouns )!;
+                s1 = Persons!.GetPersonName(AdvGame!.LastSpeaker, Co.CASE_DAT, CurrentNouns ! )!;
             }
             s += String.Format(loca.AdvBase_StateDescription_14126, s1);
 
@@ -1731,7 +1730,7 @@ namespace GameCore
         // byte[]? nounBuffer;
         // string? nounString;
 
-        public string SaveObj(object o)
+        public string? SaveObj(object o)
         {
             try
             {
@@ -3216,27 +3215,27 @@ namespace GameCore
 
                         if (i != null)
                         {
-                            snew += Items!.GetItemNameLink(i.ID, aocase, CurrentNouns );
+                            snew += Items!.GetItemNameLink(i.ID, aocase, CurrentNouns! );
                         }
                         else if (it != null)
                         {
-                            snew += Items!.GetName(it.ID, aocase, CurrentNouns );
+                            snew += Items!.GetName(it.ID, aocase, CurrentNouns! );
                         }
                         else if (p != null)
                         {
-                            snew += Persons!.GetPersonLink(p, CurrentNouns, pString );
+                            snew += Persons!.GetPersonLink(p, CurrentNouns!, pString );
                         }
                         else if (pt != null)
                         {
-                            snew += Persons!.GetPersonName(pt, aocase, CurrentNouns );
+                            snew += Persons!.GetPersonName(pt, aocase, CurrentNouns! );
                         }
                         else if (plt != null)
                         {
-                            snew += Persons!.GetPersonNameLink(plt, aocase, CurrentNouns );
+                            snew += Persons!.GetPersonNameLink(plt, aocase, CurrentNouns! );
                         }
                         else if (plv != null)
                         {
-                            snew += Persons!.GetPersonVerbLink(plv, aocase, verbID, CurrentNouns, A.Tense);
+                            snew += Persons!.GetPersonVerbLink(plv, aocase, verbID, CurrentNouns!, A.Tense);
                         }
 
                         if (lenSeq == 0)

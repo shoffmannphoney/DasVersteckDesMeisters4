@@ -23,19 +23,19 @@ public partial class Order: AbstractOrder
         Item item = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[1].WordID);
 
 
-        if( item == CA!.I05_Library_Door && CA.Status_Tuer_Bibliothek.Val == 0 )
+        if( item == CA!.I05_Library_Door && CA.Status_Tuer_Bibliothek!.Val == 0 )
         {
             AdvGame.StoryOutput(loca.Open_Library_Door_Locked);
             handled = true;
             success = false;
         }
-        else if (item == CA!.I06_Door && CA.Status_Tuer_Schlafkammer.Val == 0)
+        else if (item == CA!.I06_Door && CA.Status_Tuer_Schlafkammer!.Val == 0)
         {
             AdvGame.StoryOutput(loca.Open_Sleepingroom_Door_Locked);
             handled = true;
             success = false;
         }
-        else if (item == CA!.I07_Door && CA.Status_Tuer_Labor .Val == 0)
+        else if (item == CA!.I07_Door && CA.Status_Tuer_Labor! .Val == 0)
         {
             AdvGame.StoryOutput(loca.Open_Laboratory_Door_Locked);
             handled = true;
@@ -50,7 +50,7 @@ public partial class Order: AbstractOrder
             of.Handled = true;
             of.Action = true;
         }
-        if (item == CA!.I10_Hatch)
+        if (item == CA!.I10_Hatch && handled == true )
         {
             Items.TransferItem(CA!.I10_Opening.ID, CB.LocType_On_Item, CA!.I10_Darkness_Machine.ID);
             AdvGame.StoryOutput(loca.Open_L10_Flap);

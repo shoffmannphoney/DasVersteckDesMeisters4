@@ -569,7 +569,7 @@ namespace GameCore
             return (success);
         }
 
-        public bool Location(Person PersonID, int LocationID)
+        public bool Location(Person? PersonID, int LocationID)
         {
             return Location(PersonID, LocationID, false);
         }

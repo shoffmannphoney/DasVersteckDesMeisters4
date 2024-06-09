@@ -926,7 +926,7 @@ namespace GameCore
             return (rItemIX);
         }
 
-        public string GetName(int ItemID, int Case, List<Noun> CurrentNouns, bool ShowAppendix = false)
+        public string GetName(int ItemID, int Case, List<Noun>? CurrentNouns, bool ShowAppendix = false)
         {
             // string s = this.List[this.FindIx(ItemID)].FullName(this.Find(ItemID), Case, ShowAppendix);
             string s = this.List![ItemID].FullName(this.Find(ItemID!)!, Case, CurrentNouns, ShowAppendix)!;
@@ -951,7 +951,7 @@ namespace GameCore
         }
 
 
-        public string GetItemNameLink(int ItemID, int Case, List<Noun> CurrentNouns, bool ShowAppendix = false)
+        public string GetItemNameLink(int ItemID, int Case, List<Noun>? CurrentNouns, bool ShowAppendix = false)
         {
             string s = this.GetName(ItemID, Case, CurrentNouns, ShowAppendix);
 #if CHROMIUM

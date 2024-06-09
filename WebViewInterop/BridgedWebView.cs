@@ -50,7 +50,7 @@ public class BridgedWebView : View, IBridgedWebView
                     await Task.Delay(100);
                     handler = this.Handler;
                 }
-                result = await (handler as BridgedWebViewHandler)!.GetBridge()!.EvaluateJavascriptAsync(script);
+                result = await (handler as BridgedWebViewHandler)!.GetBridge()!.EvaluateJavascriptAsync(script)!;
 
                 // return result;
             }
@@ -132,11 +132,11 @@ public class BridgedWebView : View, IBridgedWebView
                 var handler = this.Handler;
 
                 if (Handler != null)
-                    (handler as BridgedWebViewHandler)!.GetBridge().SetProtocol( ds1, dspm1 );
+                    (handler as BridgedWebViewHandler)!.GetBridge()!.SetProtocol( ds1, dspm1 );
             });
 #endif
         }
-        catch (Exception ex)
+        catch // (Exception ex)
         {
 
         }
@@ -152,7 +152,7 @@ public class BridgedWebView : View, IBridgedWebView
             var handler = this.Handler;
 
             if (Handler != null)
-                (handler as BridgedWebViewHandler)!.GetBridge().SetCBFullyLoaded(cbFullyLoaded);
+                (handler as BridgedWebViewHandler)!.GetBridge()!.SetCBFullyLoaded(cbFullyLoaded);
         });
 #else
         this.BackgroundColor = Colors.Black;
@@ -169,8 +169,8 @@ public class BridgedWebView : View, IBridgedWebView
                 _addProtocol("SetCBFullyLoaded failed: " + ex.Message.ToString(), protMode.crisp);
         }
     }
-    public EventHandler<WebNavigatingEventArgs>? Navigating { get; set; }
-    public EventHandler<WebNavigatedEventArgs>? Navigated { get; set; }
+    public EventHandler<WebNavigatingEventArgs> Navigating { get; set; }
+    public EventHandler<WebNavigatedEventArgs> Navigated { get; set; }
 
     // Definiert eine virtuelle Methode, die das Ereignis auslöst
     protected virtual void OnNavigating(WebNavigatingEventArgs e)
