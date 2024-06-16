@@ -2,6 +2,8 @@
 using Android.Content.PM;
 using Android.OS;
 using Android.Views;
+using Microsoft.Maui;
+using System;
 
 namespace Phoney_MAUI;
 
@@ -77,4 +79,10 @@ public class MainActivity : MauiAppCompatActivity
 
         SetWindowLayout();
     }
+    static MainActivity()
+    {
+        // Setzen des GREF-Limits auf 200000
+        System.Environment.SetEnvironmentVariable("MONO_GC_PARAMS", "soft-heap-limit=512m,nursery-size=64m,major=marksweep-par,bridge-implementation=new,nrefs=200000");
+    }
+
 }

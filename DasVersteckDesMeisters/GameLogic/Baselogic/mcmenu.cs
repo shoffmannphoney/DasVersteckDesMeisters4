@@ -399,8 +399,10 @@ namespace GameCore
                 {
                     this.Del = (DelMCMenuEntry)Delegate.CreateDelegate(typeof(DelMCMenuEntry), AdvGame, this.delName, false);
                 }
-                catch
+                catch (Exception e)
                 {
+                    GlobalData.AddLog("GetDel: " + e.Message, IGlobalData.protMode.crisp);
+
                     try
                     {
                         this.Del = (DelMCMenuEntry)Delegate.CreateDelegate(typeof(DelMCMenuEntry), AdvGame!.Orders!, this.delName, false);
@@ -408,6 +410,7 @@ namespace GameCore
                     }
                     catch
                     {
+                        GlobalData.AddLog("GetDel: " + e.Message, IGlobalData.protMode.crisp);
                         this.Del = null;
                     }
                 }
@@ -981,7 +984,7 @@ namespace GameCore
                             // Wenn SpeakVerb und ggf. SpeakAdverb gesetzt sind
                             if (tMCME.SpeakVerb > 0 && tMCME.Speaker != 0 && tMCME.SpeakVerb != AdvGame!.CB!.VT_nothing)
                             {
-                                string speakertext = Persons!.Find(tMCME.Speaker)!.FullName(Co.CASE_AKK, AdvGame.CurrentNouns, true) + " " + Grammar.GetVerbDeclination(tMCME.SpeakVerb, Persons.Find(tMCME.Speaker), A!.Tense);
+                                string speakertext = Persons!.Find(tMCME.Speaker)!.FullName(Co.CASE_AKK, AdvGame.CurrentNouns!, true) + " " + Grammar.GetVerbDeclination(tMCME.SpeakVerb, Persons.Find(tMCME.Speaker), A!.Tense);
                                 string? empty = null;
                                 if (tMCME.SpeakAdverb != null)
                                     // Ignores: 001
@@ -1172,6 +1175,7 @@ namespace GameCore
             }
             catch (Exception e)
             {
+                GlobalData.AddLog("MCMenu.Set: " + e.Message , IGlobalData.protMode.crisp);
             }
 
             if (tMCME == null || AdvGame!.GD!.ValidRun == false )

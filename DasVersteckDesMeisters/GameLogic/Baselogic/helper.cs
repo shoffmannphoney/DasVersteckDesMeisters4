@@ -174,8 +174,10 @@ namespace GameCore
                         {
                             while (s[i] != '>') i++;
                         }
-                        catch // ( Exception e)
+                        catch ( Exception e)
                         {
+                            GlobalData.AddLog("StripHTML: " + e.Message, Phoney_MAUI.Model.IGlobalData.protMode.crisp);
+
                             // int a = 5;
                         }
                         i++;
@@ -2114,7 +2116,7 @@ namespace GameCore
                             }
                             else if (plt != null)
                             {
-                                snew.Append(_persons!.GetPersonNameLink(plt, aocase, _a.Adventure.CurrentNouns));
+                                snew.Append(_persons!.GetPersonNameLink(plt, aocase, _a!.Adventure!.CurrentNouns!));
                             }
                             else if (plv != null)
                             {
@@ -2122,7 +2124,7 @@ namespace GameCore
                             }
                             else if (papp != null)
                             {
-                                snew.Append(_persons!.GetPersonNameLink(papp, aocase, _a.Adventure.CurrentNouns));
+                                snew.Append(_persons!.GetPersonNameLink(papp, aocase, _a!.Adventure!.CurrentNouns!));
                             }
                             else if (rp != null)
                             {
@@ -2134,7 +2136,7 @@ namespace GameCore
                             }
                             else if (t != null)
                             {
-                                snew.Append(_topics!.GetTopicName(t.ID, aocase, _a.Adventure.CurrentNouns));
+                                snew.Append(_topics!.GetTopicName(t.ID, aocase, _a!.Adventure!.CurrentNouns!));
                             }
 
                             if (lenSeq == 0)
@@ -2147,6 +2149,7 @@ namespace GameCore
             }
             catch (Exception e)
             {
+                GlobalData.AddLog("InsertString: " + e.Message, Phoney_MAUI.Model.IGlobalData.protMode.crisp);
 
             }
             // Noloca: 000
@@ -2873,31 +2876,31 @@ namespace GameCore
 
                         if (i != null)
                         {
-                            snew.Append(_items!.GetItemNameLink(i.ID, aocase, _a.Adventure.CurrentNouns));
+                            snew.Append(_items!.GetItemNameLink(i.ID, aocase, _a!.Adventure!.CurrentNouns));
                         }
                         else if (iapp != null)
                         {
-                            snew.Append(_items!.GetItemNameLink(iapp.ID, aocase, _a.Adventure.CurrentNouns, true));
+                            snew.Append(_items!.GetItemNameLink(iapp.ID, aocase, _a!.Adventure!.CurrentNouns, true));
                         }
                         else if (it != null)
                         {
-                            snew.Append(_items!.GetName(it.ID, aocase, _a.Adventure.CurrentNouns));
+                            snew.Append(_items!.GetName(it.ID, aocase, _a!.Adventure!.CurrentNouns));
                         }
                         else if (p != null)
                         {
-                            snew.Append(_persons!.GetPersonLink(p, _a.Adventure.CurrentNouns, pString));
+                            snew.Append(_persons!.GetPersonLink(p, _a!.Adventure!.CurrentNouns!, pString));
                         }
                         else if (pt != null)
                         {
-                            snew.Append(_persons!.GetPersonName(pt, aocase, _a.Adventure.CurrentNouns));
+                            snew.Append(_persons!.GetPersonName(pt, aocase, _a!.Adventure!.CurrentNouns!));
                         }
                         else if (plt != null)
                         {
-                            snew.Append(_persons!.GetPersonNameLink(plt, aocase, _a.Adventure.CurrentNouns));
+                            snew.Append(_persons!.GetPersonNameLink(plt, aocase, _a!.Adventure!.CurrentNouns!));
                         }
                         else if (plv != null)
                         {
-                            snew.Append(_persons!.GetPersonVerbLink(plv, aocase, verbID, _a.Adventure.CurrentNouns, _a!.Tense));
+                            snew.Append(_persons!.GetPersonVerbLink(plv, aocase, verbID, _a!.Adventure!.CurrentNouns, _a!.Tense));
                         }
                         else if (rp != null)
                         {
@@ -2909,7 +2912,7 @@ namespace GameCore
                         }
                         else if (t != null)
                         {
-                            snew.Append(_topics!.GetTopicName(t.ID, aocase, _a.Adventure.CurrentNouns));
+                            snew.Append(_topics!.GetTopicName(t.ID, aocase, _a!.Adventure!.CurrentNouns!));
                         }
 
                         if (lenSeq == 0)
@@ -2949,7 +2952,7 @@ namespace GameCore
             }
             catch( Exception e)
             {
-                GlobalData.AddLog("SearchItemID: " + s, Phoney_MAUI.Model.IGlobalData.protMode.crisp);
+                GlobalData.AddLog("SearchItemID: " + e.Message + s, Phoney_MAUI.Model.IGlobalData.protMode.crisp);
 
             }
             return 0;
@@ -2969,7 +2972,7 @@ namespace GameCore
             }
             catch (Exception e)
             {
-                GlobalData.AddLog("SearchItemID: " + s, Phoney_MAUI.Model.IGlobalData.protMode.crisp);
+                GlobalData.AddLog("SearchItemID: " + e.Message + s, Phoney_MAUI.Model.IGlobalData.protMode.crisp);
 
             }
             return 0;

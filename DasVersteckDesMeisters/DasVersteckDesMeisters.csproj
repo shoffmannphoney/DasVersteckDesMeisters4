@@ -58,7 +58,7 @@
 		<HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
 		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
 		<AppInstallerUri>c:\projects\installBuilds\Bla</AppInstallerUri>
-		<NoWarn>CS1591;CS0612</NoWarn>
+		<NoWarn>CS1591;CS0612;CS0618;SYSLIB0011</NoWarn>
 		<DefaultLanguage>de-DE</DefaultLanguage>
 		<HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
 		<PublishReadyToRun>false</PublishReadyToRun>
@@ -165,11 +165,11 @@
 	  <None Remove="Platforms\Android\ball.png" />
 	  <None Remove="Platforms\Android\Resources\values\styles.xml" />
 	  <None Remove="Resources\AppIcon\claw.png" />
-	  <None Remove="Resources\AppIcon\claw.scale-100.png" />
-	  <None Remove="Resources\AppIcon\claw.scale-125.png" />
 	  <None Remove="Resources\AppIcon\claw.scale-150.png" />
 	  <None Remove="Resources\AppIcon\claw.scale-200.png" />
 	  <None Remove="Resources\AppIcon\claw.scale-400.png" />
+	  <None Remove="Resources\AppIcon\claw.scale100.png" />
+	  <None Remove="Resources\AppIcon\claw.scale125.png" />
 	  <None Remove="Resources\AppIcon\clawmobile.png" />
 	  <None Remove="Resources\Images\onion.png" />
 	  <None Remove="Resources\Raw\Index.html" />
@@ -211,7 +211,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
-		<PackageReference Include="CommunityToolkit.Maui" Version="9.0.0" />
+		<PackageReference Include="CommunityToolkit.Maui" Version="9.0.1" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 		<!-- <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.5.240311000" />  -->
 	</ItemGroup>
@@ -219,11 +219,11 @@
   <ItemGroup Condition="'$(TargetFramework)' == 'net8.0-windows10.0.19041.0'">
     <PackageReference Include="Microsoft.Windows.CsWinRT" Version="2.0.7" />
   </ItemGroup>
-
+ 
   <ItemGroup>
     <ProjectReference Include="..\WebViewInterop\WebViewInterop.csproj" />
   </ItemGroup>
-
+ 
 	<Target Name="__BackCalculateOptimizationInputAssemblies" DependsOnTargets="__SnapshotResolvedFileToPublishBeforeOptimization;__SnapshotResolvedFileToPublishAfterOptimization" Returns="@(_OptimizationInputAssemblies)">
 		<PropertyGroup>
 			<IncludeDebugSymbolsProjectOutputGroup Condition="'$(IncludeDebugSymbolsProjectOutputGroup)' == ''">true</IncludeDebugSymbolsProjectOutputGroup>
@@ -288,8 +288,8 @@
 	  <Content Include="gem.targetsize-256.png" />
 	  <Content Include="gem.targetsize-48.png" />
 		<Content Include="Resources\AppIcon\claw.png" />
-	  <AndroidResource Include="Resources\AppIcon\claw.scale-100.png" />
-	  <AndroidResource Include="Resources\AppIcon\claw.scale-125.png" />
+		<Content Include="Resources\AppIcon\claw.scale100.png" />
+		<Content Include="Resources\AppIcon\claw.scale125.png" />
 	  <Content Include="Resources\AppIcon\claw.scale-150.png" />
 	  <Content Include="Resources\AppIcon\claw.scale-200.png" />
 	  <Content Include="Resources\AppIcon\claw.scale-400.png" />

@@ -82,7 +82,7 @@ public class CustomWebViewClient : WebViewClient
         }
         catch (Exception ex)
         {
-            BridgedWebViewHandler.GetAddProt()(ex.Message, protMode.crisp);
+            BridgedWebViewHandler.GetAddProt()!(ex.Message, protMode.crisp);
 
         }
     }
@@ -129,7 +129,7 @@ public class BridgedWebViewHandler : ViewHandler<IBridgedWebView, Android.Webkit
     public static Bridge? _bridge;
     public static IBridgedWebView? _bridgeWebView;
 
-    private Android.App.Activity? Context
+    private new Android.App.Activity? Context
     {
         get { return Microsoft.Maui.ApplicationModel.Platform.CurrentActivity; }
     }
@@ -160,7 +160,7 @@ public class BridgedWebViewHandler : ViewHandler<IBridgedWebView, Android.Webkit
         catch (Exception ex)
         {
             BridgedWebViewHandler.GetAddProt()!(ex.Message, protMode.crisp);
-            Android.Webkit.WebView wv = new(Context.ApplicationContext);
+            Android.Webkit.WebView wv = new(Context!.ApplicationContext!);
             return wv;
         }
     }

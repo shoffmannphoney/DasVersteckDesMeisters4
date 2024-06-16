@@ -33,17 +33,25 @@ namespace Phoney_MAUI.Core
 
         public DataService(IDeviceData deviceData)
         {
-            string? currentPath;
-
-            _dataService = this;
-            currentPath = DeviceData._deviceData!.GetSavePath();
-
-            if (Directory.Exists(currentPath) == false)
+            try
             {
-                Directory.CreateDirectory(currentPath!);
+                string? currentPath;
 
+                _dataService = this;
+                currentPath = DeviceData._deviceData!.GetSavePath();
+
+                if (Directory.Exists(currentPath) == false)
+                {
+                    Directory.CreateDirectory(currentPath!);
+
+                }
             }
-         }
+            catch (Exception e)
+            {
+                GlobalData.AddLog("DataService: " + e.Message, Phoney_MAUI.Model.IGlobalData.protMode.crisp);
+            }
+
+        }
 
         public bool WriteJsonIndex(OrderListInfo oli)
         {
@@ -65,181 +73,216 @@ namespace Phoney_MAUI.Core
 
         public OrderListInfo ReadJsonIndex()
         {
-            OrderListInfo? oli = null;
-
-            // Die Indexer-Datei laden, falls vorhanden
-            string? pathfileName = DeviceData._deviceData!.GetSavePath()! + loca.OrderList_WriteJsonIndex_16209;
-
-            // Laden der Indexer-Datei (und Wert wird dann um eins erhöht)
-            if (File.Exists(pathfileName))
+            try
             {
-                string jsonSource = File.ReadAllText(pathfileName);
+                OrderListInfo? oli = null;
 
-                oli = JsonConvert.DeserializeObject<OrderListInfo>(jsonSource);
-                oli!.jsonIndex++;
+                // Die Indexer-Datei laden, falls vorhanden
+                string? pathfileName = DeviceData._deviceData!.GetSavePath()! + loca.OrderList_WriteJsonIndex_16209;
+
+                // Laden der Indexer-Datei (und Wert wird dann um eins erhöht)
+                if (File.Exists(pathfileName))
+                {
+                    string jsonSource = File.ReadAllText(pathfileName);
+
+                    oli = JsonConvert.DeserializeObject<OrderListInfo>(jsonSource);
+                    oli!.jsonIndex++;
+                }
+                else
+                {
+                    oli = new OrderListInfo();
+                    oli!.jsonIndex = 0;
+                    oli!.listNr = 1;
+                }
+
+                return oli;
             }
-            else
+            catch (Exception e)
             {
-                oli = new OrderListInfo();
-                oli!.jsonIndex = 0;
-                oli!.listNr = 1;
+                GlobalData.AddLog("ReadJsonIndex: " + e.Message, Phoney_MAUI.Model.IGlobalData.protMode.crisp);
+                return null;
             }
-
-            return oli;
 
         }
 
         public bool ReadZipOrderTable(int val, string name)
         {
-            string orderTableName = "/ordertable.zip";
-            // Ignores: 001
-            string? pathName = DeviceData._deviceData!.GetSavePath()!;
-            // Ignores: 002
-            string? pathfileName = pathName + orderTableName;
-
-            // Ignores: 001
-            string? jsonName = name + ".json";
-            string? jsonString;
-            byte[] jsonBytes;
-
-
-
-            if (File.Exists(pathfileName))
+            try
             {
-                ZipArchive archive = ZipFile.Open(pathfileName, ZipArchiveMode.Update);
+                string orderTableName = "/ordertable.zip";
+                // Ignores: 001
+                string? pathName = DeviceData._deviceData!.GetSavePath()!;
+                // Ignores: 002
+                string? pathfileName = pathName + orderTableName;
 
-                var fileInArchive = archive.GetEntry(jsonName);
-                if (fileInArchive != null)
+                // Ignores: 001
+                string? jsonName = name + ".json";
+                string? jsonString;
+                byte[] jsonBytes;
+
+
+
+                if (File.Exists(pathfileName))
                 {
-                    Stream s = fileInArchive.Open();
-                    StreamReader sr = new StreamReader(s);
-                    using (MemoryStream ms = new MemoryStream())
-                    {
-                        sr.BaseStream.CopyTo(ms);
-                        jsonBytes = ms.ToArray();
+                    ZipArchive archive = ZipFile.Open(pathfileName, ZipArchiveMode.Update);
 
+                    var fileInArchive = archive.GetEntry(jsonName);
+                    if (fileInArchive != null)
+                    {
+                        Stream s = fileInArchive.Open();
+                        StreamReader sr = new StreamReader(s);
+                        using (MemoryStream ms = new MemoryStream())
+                        {
+                            sr.BaseStream.CopyTo(ms);
+                            jsonBytes = ms.ToArray();
+
+                        }
+                        sr.Close();
+                        sr.Dispose();
+                        s.Close();
+                        s.Dispose();
+
+                        if (jsonBytes != null)
+                        {
+                            // jsonBytes = sr.ReadToEnd();
+                            jsonString = Encoding.UTF8.GetString(jsonBytes);
+
+                            // ToDo: Diese Initialisierung kann ich erst vornehmen, wenn die Datenstrukturen komplett sind
+                            GD!.OrderList!.OTL![val].OT =
+                                JsonConvert.DeserializeObject<ObservableCollection<OrderTable>>(jsonString);
+                        }
+                        else
+                        {
+                            // int a = 3;
+                        }
                     }
-                    sr.Close();
-                    sr.Dispose();
-                    s.Close();
-                    s.Dispose();
 
-                    if (jsonBytes != null)
-                    {
-                        // jsonBytes = sr.ReadToEnd();
-                        jsonString = Encoding.UTF8.GetString(jsonBytes);
+                    archive.Dispose();
 
-                        // ToDo: Diese Initialisierung kann ich erst vornehmen, wenn die Datenstrukturen komplett sind
-                        GD!.OrderList!.OTL![val].OT =
-                            JsonConvert.DeserializeObject<ObservableCollection<OrderTable>>(jsonString);
-                    }
-                    else
+                    GD!.OrderList!.OTL![val]!.Zipped = false;
+                    // GD.OrderList!.OTL![val].DG = null;
+                    if (GD.OrderList.OTL![val].Point >= GD.OrderList.OTL![val].OT?.Count)
                     {
-                        // int a = 3;
+                        GD.OrderList.OTL![val].Point = GD.OrderList!.OTL![val]!.OT!.Count - 1;
                     }
                 }
 
-                archive.Dispose();
-
-                GD!.OrderList!.OTL![val]!.Zipped = false;
-                // GD.OrderList!.OTL![val].DG = null;
-                if (GD.OrderList.OTL![val].Point >= GD.OrderList.OTL![val].OT?.Count)
-                {
-                    GD.OrderList.OTL![val].Point = GD.OrderList!.OTL![val]!.OT!.Count - 1;
-                }
+                return true;
+            }
+            catch (Exception e)
+            {
+                GlobalData.AddLog("ReadZipOrderTable: " + e.Message, Phoney_MAUI.Model.IGlobalData.protMode.crisp);
+                return false;
             }
 
-            return true;
         }
 
         public OrderList? ReadOrderTable()
         {
-             OrderList? ol2 = new OrderList();
-            string pathName = DeviceData._deviceData!.GetSavePath();
-
-
-            // Die aktuelle OrderTable wird gesichert über den Indexerwert im Dateinamen
-            string pathfileName = pathName + loca.OrderList_OrderList_16198;
-            if (File.Exists(pathfileName))
-            {
-                string pathDestName = pathName + loca.OrderList_OrderList_16199 +
-                                      string.Format(loca.OrderList_OrderList_16200,
-                                          GlobalSpecs.CurrentOrderList!.SetOrderListInfo!.jsonIndex);
-                File.Copy(pathfileName, pathDestName, true);
-            }
-
-            string pathFileNameZip = pathName + loca.OrderList_OrderList_16201 + loca.OrderList_OrderList_16202;
-            if (File.Exists(pathFileNameZip))
-            {
-                string pathDestNameZip = pathName + loca.OrderList_OrderList_16203 +
-                                         string.Format(loca.OrderList_OrderList_16204,
-                                             GlobalSpecs.CurrentOrderList!.SetOrderListInfo!.jsonIndex!);
-                File.Copy(pathFileNameZip, pathDestNameZip, true);
-
-            }
-
-            // Und jetzt laden wir die OrderTable ein
-            if (File.Exists(pathfileName))
+            try
             {
 
-                string jsonSource = File.ReadAllText(pathfileName);
-
-                // OrderList? ol2 = new OrderList(SaveOrderListExtern, ZipOrderListExtern, ReadZipOrderListExtern, ref _orderListInfo!, _gd, false);
-                ol2 = JsonConvert.DeserializeObject<OrderList>(jsonSource);
+                OrderList? ol2 = new OrderList();
+                string pathName = DeviceData._deviceData!.GetSavePath();
 
 
-                if (ol2 != null)
+                // Die aktuelle OrderTable wird gesichert über den Indexerwert im Dateinamen
+                string pathfileName = pathName + loca.OrderList_OrderList_16198;
+                if (File.Exists(pathfileName))
                 {
-                    // ToDo: OrderList konnte eingelesen werden, jetzt wird sie noch initialisiert
+                    string pathDestName = pathName + loca.OrderList_OrderList_16199 +
+                                          string.Format(loca.OrderList_OrderList_16200,
+                                              GlobalSpecs.CurrentOrderList!.SetOrderListInfo!.jsonIndex);
+                    File.Copy(pathfileName, pathDestName, true);
+                }
 
-                    GD!.OrderList!.OTL = ol2._otl;
-                    GD!.OrderList!.CurrentOrderListIx = ol2.CurrentOrderListIx;
-                     // this._gd = gd;
-                    ol2.StripOrderList();
+                string pathFileNameZip = pathName + loca.OrderList_OrderList_16201 + loca.OrderList_OrderList_16202;
+                if (File.Exists(pathFileNameZip))
+                {
+                    string pathDestNameZip = pathName + loca.OrderList_OrderList_16203 +
+                                             string.Format(loca.OrderList_OrderList_16204,
+                                                 GlobalSpecs.CurrentOrderList!.SetOrderListInfo!.jsonIndex!);
+                    File.Copy(pathFileNameZip, pathDestNameZip, true);
+
+                }
+
+                // Und jetzt laden wir die OrderTable ein
+                if (File.Exists(pathfileName))
+                {
+
+                    string jsonSource = File.ReadAllText(pathfileName);
+
+                    // OrderList? ol2 = new OrderList(SaveOrderListExtern, ZipOrderListExtern, ReadZipOrderListExtern, ref _orderListInfo!, _gd, false);
+                    ol2 = JsonConvert.DeserializeObject<OrderList>(jsonSource);
+
+
+                    if (ol2 != null)
+                    {
+                        // ToDo: OrderList konnte eingelesen werden, jetzt wird sie noch initialisiert
+
+                        GD!.OrderList!.OTL = ol2._otl;
+                        GD!.OrderList!.CurrentOrderListIx = ol2.CurrentOrderListIx;
+                        // this._gd = gd;
+                        ol2.StripOrderList();
+                    }
+                    else
+                    {
+                        ol2!.AddOrderList(loca.OrderList_OrderList_16205, true);
+                        ol2!.CurrentOrderListIx = ol2.OTL!.Count - 1;
+                    }
                 }
                 else
                 {
-                    ol2!.AddOrderList(loca.OrderList_OrderList_16205, true);
-                    ol2!.CurrentOrderListIx = ol2.OTL!.Count - 1;
-                 }
+                    // ol2.AddOrderList(loca.OrderList_OrderList_16206, true);
+                    // ol2.CurrentOrderListIx = ol2.OTL!.Count - 1;
+
+                    // ToDo: OrderList-Intialisieren, wenn noch nichts gelesen werden konnte
+                    ol2.AddOrderList(loca.OrderList_OrderList_16206, true);
+                    GD!.OrderList!.OTL = ol2.OTL;
+                    GD!.OrderList!.CurrentOrderListIx = GD!.OrderList!.OTL!.Count - 1;
+                }
+
+                if (ol2 != null)
+                {
+                    ol2.SetOrderListInfo = DataService._dataService!.ReadJsonIndex();
+                    ol2.SetSaveOrderList = SaveOrderTable;
+                    ol2.SetZipOrderList = ZipOrderTable;
+                    ol2.SetReadZipOrderList = ReadZipOrderTable;
+                }
+
+                return ol2;
             }
-            else
+            catch (Exception e)
             {
-                // ol2.AddOrderList(loca.OrderList_OrderList_16206, true);
-                // ol2.CurrentOrderListIx = ol2.OTL!.Count - 1;
-
-                // ToDo: OrderList-Intialisieren, wenn noch nichts gelesen werden konnte
-                ol2.AddOrderList(loca.OrderList_OrderList_16206, true);
-                GD!.OrderList!.OTL = ol2.OTL;
-                GD!.OrderList!.CurrentOrderListIx = GD!.OrderList!.OTL!.Count - 1;
+                GlobalData.AddLog("ReadOrderTable: " + e.Message, Phoney_MAUI.Model.IGlobalData.protMode.crisp);
+                return null;
             }
 
-            if (ol2 != null)
-            {
-                ol2.SetOrderListInfo = DataService._dataService!.ReadJsonIndex();
-                ol2.SetSaveOrderList = SaveOrderTable;
-                ol2.SetZipOrderList = ZipOrderTable;
-                ol2.SetReadZipOrderList = ReadZipOrderTable;
-            }
-
-            return ol2;
         }
 
         public bool DeleteFile(string fileName)
         {
             bool deleted = false;
 
-            // Noloca: 003
-            string pathName = DeviceData._deviceData!.GetSavePath();
-
-            // Ignores: 002  
-            string? pathFileName = pathName + "\\" + fileName;
-
-            if (File.Exists(pathFileName) == true)
+            try
             {
-                File.Delete(pathFileName);
-                deleted = true;
+                // Noloca: 003
+                string pathName = DeviceData._deviceData!.GetSavePath();
+
+                // Ignores: 002  
+                string? pathFileName = pathName + "\\" + fileName;
+
+                if (File.Exists(pathFileName) == true)
+                {
+                    File.Delete(pathFileName);
+                    deleted = true;
+                }
             }
+            catch (Exception e)
+            {
+                GlobalData.AddLog("DeleteFile: " + e.Message, Phoney_MAUI.Model.IGlobalData.protMode.crisp);
+            }
+
 
             return deleted;
         }
@@ -328,78 +371,92 @@ namespace Phoney_MAUI.Core
 
         public bool DeleteZipOrderTableEntry(string name)
         {
-            string? pathName = DeviceData._deviceData!.GetSavePath()!;
-            string? pathfileName = pathName + "/ordertable.zip";
-
-            var outStream = new MemoryStream();
-            ZipArchive archive;
-
-            if (File.Exists(pathfileName))
+            try
             {
-                archive = ZipFile.Open(pathfileName, ZipArchiveMode.Update);
+                string? pathName = DeviceData._deviceData!.GetSavePath()!;
+                string? pathfileName = pathName + "/ordertable.zip";
 
-                // Ignores: 001
-                // Noloca: 001
-                string jsonName = name + ".json";
+                var outStream = new MemoryStream();
+                ZipArchive archive;
 
-                var fileInArchive = archive.GetEntry(jsonName);
-                if (fileInArchive != null)
+                if (File.Exists(pathfileName))
                 {
-                    fileInArchive.Delete();
-                }
+                    archive = ZipFile.Open(pathfileName, ZipArchiveMode.Update);
 
-                archive.Dispose();
+                    // Ignores: 001
+                    // Noloca: 001
+                    string jsonName = name + ".json";
 
-                using (var fileStream = new FileStream(pathfileName, FileMode.OpenOrCreate))
-                {
-                    outStream.Position = 0;
-                    outStream.WriteTo(fileStream);
-                    outStream.Flush();
+                    var fileInArchive = archive.GetEntry(jsonName);
+                    if (fileInArchive != null)
+                    {
+                        fileInArchive.Delete();
+                    }
+
+                    archive.Dispose();
+
+                    using (var fileStream = new FileStream(pathfileName, FileMode.OpenOrCreate))
+                    {
+                        outStream.Position = 0;
+                        outStream.WriteTo(fileStream);
+                        outStream.Flush();
+                    }
                 }
+                outStream.Close();
+                outStream.Dispose();
             }
-            outStream.Close();
-            outStream.Dispose();
+            catch (Exception e)
+            {
+                GlobalData.AddLog("DeleteZipOrderTableEntry: " + e.Message, Phoney_MAUI.Model.IGlobalData.protMode.crisp);
+            }
 
             return true;
         }
 
         public bool RenameZipOrderTableEntry(string oldName, string newName)
         {
-            string pathName = DeviceData._deviceData!.GetSavePath();
-            string? pathfileName = pathName + "/ordertable.zip";
-
-            var outStream = new MemoryStream();
-            ZipArchive archive;
-
-            if (File.Exists(pathfileName))
+            try
             {
-                archive = ZipFile.Open(pathfileName, ZipArchiveMode.Update);
+                string pathName = DeviceData._deviceData!.GetSavePath();
+                string? pathfileName = pathName + "/ordertable.zip";
 
-                // Noloca: 002
-                // Ignores: 001
-                var fileInArchive = archive.GetEntry(oldName + ".json");
-                if (fileInArchive != null)
+                var outStream = new MemoryStream();
+                ZipArchive archive;
+
+                if (File.Exists(pathfileName))
                 {
+                    archive = ZipFile.Open(pathfileName, ZipArchiveMode.Update);
+
+                    // Noloca: 002
                     // Ignores: 001
-                    var newEntry = archive.CreateEntry(newName + ".json");
-                    using (var a = fileInArchive.Open())
-                    using (var b = newEntry.Open())
-                        a.CopyTo(b);
-                    fileInArchive.Delete();
+                    var fileInArchive = archive.GetEntry(oldName + ".json");
+                    if (fileInArchive != null)
+                    {
+                        // Ignores: 001
+                        var newEntry = archive.CreateEntry(newName + ".json");
+                        using (var a = fileInArchive.Open())
+                        using (var b = newEntry.Open())
+                            a.CopyTo(b);
+                        fileInArchive.Delete();
 
+                    }
+
+                    archive.Dispose();
+
+                    using (var fileStream = new FileStream(pathfileName, FileMode.OpenOrCreate))
+                    {
+                        outStream.Position = 0;
+                        outStream.WriteTo(fileStream);
+                        outStream.Flush();
+                    }
                 }
-
-                archive.Dispose();
-
-                using (var fileStream = new FileStream(pathfileName, FileMode.OpenOrCreate))
-                {
-                    outStream.Position = 0;
-                    outStream.WriteTo(fileStream);
-                    outStream.Flush();
-                }
+                outStream.Close();
+                outStream.Dispose();
             }
-            outStream.Close();
-            outStream.Dispose();
+            catch (Exception e)
+            {
+                GlobalData.AddLog("RenameZipOrderTableEntry: " + e.Message, Phoney_MAUI.Model.IGlobalData.protMode.crisp);
+            }
 
             return true;
         }

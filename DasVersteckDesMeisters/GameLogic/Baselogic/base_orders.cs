@@ -2951,8 +2951,9 @@ namespace GameCore
                     ix++;
                 }
             }
-            catch // ( Exception e)
+            catch ( Exception e)
             {
+                GlobalData.AddLog("SaveItems: " + e.Message, IGlobalData.protMode.crisp);
 
             }
         }
@@ -4600,8 +4601,9 @@ namespace GameCore
                         // int a = 5;
                     }
                 }
-                catch //  (Exception e)
+                catch (Exception e)
                 {
+                    GlobalData.AddLog("SavePersons: " + e.Message, IGlobalData.protMode.crisp);
 
                 }
             }
@@ -4721,8 +4723,9 @@ namespace GameCore
                     }
 
                 }
-                catch // (Exception e)
+                catch (Exception e)
                 {
+                    GlobalData.AddLog("RestoreReflection: " + e.Message, IGlobalData.protMode.crisp);
 
                 }
             }

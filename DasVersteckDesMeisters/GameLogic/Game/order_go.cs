@@ -238,7 +238,7 @@ public partial class Order: AbstractOrder
     {
         OrderFeedback of = new OrderFeedback();
 
-        bool karrenAvail = false;
+        // bool karrenAvail = false;
         bool handled = true;
         bool success = true;
         int OldLoc = PersonID!.locationID;
@@ -307,7 +307,7 @@ public partial class Order: AbstractOrder
             PT.AddItem(CA!.I06_Door_Wide);
             success = Open(PersonID, PT);
         }
-        else if ((Persons!.GetLoc(PersonID) == Co.CA!.L06_Long_Floor) && (Dir == Co.DIR_E) && (CA!.I06_Door_White.IsClosed))
+        else if ((Persons!.GetLoc(PersonID) == Co.CA!.L06_Long_Floor) && (Dir == Co.DIR_E) && (CA!.I06_Door_White!.IsClosed))
         {
             ParseTokenList PT = new ParseTokenList();
             PT.AddVerb(CB!.Verb_Open);
@@ -503,7 +503,7 @@ public partial class Order: AbstractOrder
         bool success = false;
         Item item1 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[1].WordID);
 
-        if( item1.ID == CA.I02_Shed.ID)
+        if( item1.ID == CA!.I02_Shed!.ID)
         {
             GoDir(PersonID, Co.DIR_N);
             success = true;

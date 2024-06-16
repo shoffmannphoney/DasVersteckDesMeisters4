@@ -568,18 +568,18 @@ namespace GameCore
             else return (PersonID!.FullName(PersonID, Case, CurrentNouns ));
         }
 
-        public string GetPersonVerb(Person PersonID, int Case, List<Noun> CurrentNouns, int VerbID, int Tense)
+        public string GetPersonVerb(Person PersonID, int Case, List<Noun>? CurrentNouns, int VerbID, int Tense)
         {
             // string s = GetPersonName(PersonID, Case) +  Helper.Insert(" [VP:,1]", PersonID );
             // Noloca: 001
-            string s = GetPersonName(PersonID, Case, CurrentNouns ) + Helper.Insert(" [VP1,2]", PersonID, VerbID);
+            string s = GetPersonName(PersonID, Case, CurrentNouns! ) + Helper.Insert(" [VP1,2]", PersonID, VerbID);
             return s;
         }
 
-        public string GetPersonVerbLink(Person PersonID, int Case, int VerbID, List<Noun> CurrentNouns, int Tense)
+        public string GetPersonVerbLink(Person PersonID, int Case, int VerbID, List<Noun>? CurrentNouns, int Tense)
         {
             // Noloca: 001
-            string s = this.GetPersonNameLink( PersonID, Case, CurrentNouns) +  Helper.Insert(" [VP1,2]", PersonID, VerbID );
+            string s = this.GetPersonNameLink( PersonID, Case, CurrentNouns!) +  Helper.Insert(" [VP1,2]", PersonID, VerbID );
             return s;
         }
         /*

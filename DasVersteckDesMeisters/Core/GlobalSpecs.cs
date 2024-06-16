@@ -641,7 +641,7 @@ public class GlobalData : IGlobalData
     }
 
     public IGlobalData.protMode ProtMode { get; set; }
-    public string ProtFile { get; set; }
+    public string? ProtFile { get; set; }
 
     IGlobalData.globalMenu _globalMenu;
 
@@ -653,7 +653,7 @@ public class GlobalData : IGlobalData
 
     IGlobalData._setGlobalMenuState? SetGlobalMenuState = null;
     IGlobalData._setLocalMenuState? SetLocalMenuState = null;
-    [JsonIgnore][NonSerialized] Random GDRandom;
+    [JsonIgnore][NonSerialized] Random? GDRandom;
 
 
     public static Page? MainPage;
@@ -867,8 +867,10 @@ public class GlobalData : IGlobalData
             stream.Close();
             stream.Dispose();
         }
-        catch // (Exception e)
+        catch (Exception e)
         {
+            GlobalData.AddLog("ReadTextFile: " + e.Message, IGlobalData.protMode.crisp);
+
             return string.Empty;
         }
         return txt;
@@ -1012,8 +1014,9 @@ public class GlobalData : IGlobalData
             _htmlStyle = await ReadTextFile("HTMLPage4.html");
             _htmlPageLoc = await ReadTextFile("HTMLPage5.html");
         }
-        catch // ( Exception e)
+        catch ( Exception e)
         {
+            GlobalData.AddLog("LoadData: " + e.Message, IGlobalData.protMode.crisp);
 
             // int a = 5;
         }
@@ -1198,6 +1201,10 @@ public class GlobalData : IGlobalData
 
     public static void AddLog(string s1, IGlobalData.protMode PM)
     {
+        if( s1 == "window.pageYOffset")
+        {
+
+        }
         try
         {
             // Wenn das ganze System noch nicht initialisiert wurde, dann gibts auch keine Errorlogs. Sollte natürlich nie passieren
@@ -1206,17 +1213,17 @@ public class GlobalData : IGlobalData
 
             if (PM != IGlobalData.protMode.off && PM <= GlobalData.CurrentGlobalData.ProtMode)
             {
-                string s2 = String.Format("[{0}.{1}.{2} {3}.{4}.{5:D2}] {6:D2} ", DateTime.Now.Day, DateTime.Now.Month, DateTime.Now.Year, DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second, s1);
+                string s2 = String.Format("[{0}.{1}.{2} {3:D2}.{4:D2}.{5:D2}] {6:D2} ", DateTime.Now.Day, DateTime.Now.Month, DateTime.Now.Year, DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second, s1);
                 if (File.Exists(GlobalData.CurrentGlobalData.ProtFile) == false)
                 {
-                    File.WriteAllText(GlobalData.CurrentGlobalData.ProtFile, "=== Start Log ===" + "\n");
+                    File.WriteAllText(GlobalData.CurrentGlobalData.ProtFile!, "=== Start Log ===" + "\n");
 
                 }
 
 
-                string path = GlobalData.CurrentGlobalData.ProtFile;
+                string? path = GlobalData.CurrentGlobalData.ProtFile;
 
-                File.AppendAllText(path, s2 + "\n");
+                File.AppendAllText(path!, s2 + "\n");
 
             }
         }
@@ -1467,7 +1474,7 @@ public class GlobalData : IGlobalData
 
     public int RandomNumber(int min, int max)
     {
-        return GDRandom.Next(min, max);
+        return GDRandom!.Next(min, max);
     }
 
     public void ResetLanguageCallbacks()

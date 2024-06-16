@@ -117,7 +117,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "Ich wusste nicht, wie ich dorthin kommen sollte.";
             else
-                return "Ich wusste nicht, wie ich dorthin kommen sollte.";
+                return "I didn't know how to get there.";
         }
     }
     public static string Verb_putze
@@ -127,7 +127,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "putze";
             else
-                return "putze";
+                return "___clean";
         }
 
     }
@@ -138,7 +138,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "zerstoße";
             else
-                return "zerstoße";
+                return "crush";
         }
 
     }
@@ -149,7 +149,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "zerstoß";
             else
-                return "zerstoß";
+                return "_crush";
         }
 
     }
@@ -160,7 +160,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "zerdrücke";
             else
-                return "zerdrücke";
+                return "squash";
         }
 
     }
@@ -171,7 +171,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "zerdrück";
             else
-                return "zerdrück";
+                return "_squash";
         }
 
     }
@@ -182,7 +182,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "Ich stand mitten im Wald. Wo befand sich bloß das Versteck des Meisters? Hier irgendwo in der Nähe musste doch seine Hütte sein!";
             else
-                return "Ich stand mitten im Wald. Wo befand sich bloß das Versteck des Meisters? Hier irgendwo in der Nähe musste doch seine Hütte sein!";
+                return "I was standing in the middle of the forest. Where was the master's hiding place? His hut had to be around here somewhere!";
         }
 
     }
@@ -193,7 +193,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Tipps!) Die Hütte des Meisters hatte ich gefunden. Aber das war ganz sicher nicht sein Versteck, zumindest sah sie aus wie eine baufällige Bruchbude. Irgendwo hier musste doch ein verborgener Eingang liegen!";
             else
-                return "(Tipps!) Die Hütte des Meisters hatte ich gefunden. Aber das war ganz sicher nicht sein Versteck, zumindest sah sie aus wie eine baufällige Bruchbude. Irgendwo hier musste doch ein verborgener Eingang liegen!";
+                return "(Tips!) I had found the master's hut. But it certainly wasn't his hiding place, at least it looked like a dilapidated hovel. There had to be a hidden entrance here somewhere!";
         }
 
     }
@@ -204,7 +204,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "Wie konnte ich das geheime Domizil des Meisters finden?";
             else
-                return "Wie konnte ich das geheime Domizil des Meisters finden?";
+                return "How did I find the master's secret residence?";
         }
 
     }
@@ -215,7 +215,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Tipp) Ich war mir sicher: Ohne magische Hlfe würde es nicht gehen!";
             else
-                return "(Tipp) Ich war mir sicher: Ohne magische Hlfe würde es nicht gehen!";
+                return "(Tip) I was sure that it wouldn't work without magical help!";
         }
 
     }
@@ -226,7 +226,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Hilfe) Manche Leute legten sich ihren Ersatzschlüssel unter die Fußmatte. Und wer weiß, was sich alles in der schäbigen Kammmer finden ließ.";
             else
-                return "(Hilfe) Manche Leute legten sich ihren Ersatzschlüssel unter die Fußmatte. Und wer weiß, was sich alles in der schäbigen Kammmer finden ließ.";
+                return "(Help) Some people put their spare keys under the doormat. And who knows what could be found in the shabby chambers.";
         }
 
     }
@@ -237,7 +237,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Lösung) Unter der Fußmatte vor der Hütte lag ein Beutelchen mit magischem Pulver. Hinter dem Schrank in der schäbigen Kammer befand sich eine Klappe, und in der Öffnung dahinter eine magische Kerze. Aufs Pentagramm stellen in der Stube, Pulver drauf streuen - und schon ging die Reise los.";
             else
-                return "(Lösung) Unter der Fußmatte vor der Hütte lag ein Beutelchen mit magischem Pulver. Hinter dem Schrank in der schäbigen Kammer befand sich eine Klappe, und in der Öffnung dahinter eine magische Kerze. Aufs Pentagramm stellen in der Stube, Pulver drauf streuen - und schon ging die Reise los.";
+                return "(Solution) Under the doormat in front of the hut was a small bag of magic powder. There was a flap behind the cupboard in the shabby room and a magic candle in the opening behind it. Place it on the pentagram in the living room, sprinkle the powder on it - and the journey begins.";
         }
 
     }
@@ -248,7 +248,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Tipps!) Ein Pentagramm mitten in der Stube der Hütte. Das hatte doch gewiss etwas zu bedeuten. Aber was?";
             else
-                return "(Tipps!) Ein Pentagramm mitten in der Stube der Hütte. Das hatte doch gewiss etwas zu bedeuten. Aber was?";
+                return "(Tips!) A pentagram in the middle of the living room of the hut. Surely that meant something. But what?";
         }
 
     }
@@ -259,7 +259,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "Was hatte es mit dem Pentagramm auf sich?";
             else
-                return "Was hatte es mit dem Pentagramm auf sich?";
+                return "What was the pentagram all about?";
         }
 
     }
@@ -270,7 +270,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Tipp) Meister Gunnar liebte Pentagramme. Wo sie waren, war Magie nicht weit. Und nutze Meiser Gunnar seine Pentgramme nicht gerne für Teleportzauber?";
             else
-                return "(Tipp) Meister Gunnar liebte Pentagramme. Wo sie waren, war Magie nicht weit. Und nutze Meiser Gunnar seine Pentgramme nicht gerne für Teleportzauber?";
+                return "(Tip) Master Gunnar loved pentagrams. Wherever they were, magic wasn't far away. And didn't Master Gunnar like to use his pentagrams for teleport spells?";
         }
 
     }
@@ -281,7 +281,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Hilfe) Meister Gunnar hatte das Pentagamm hier sicher nicht zum Spaß hingemalt. Vermutlich lagen hier irgendwo Zauberzutaten. Ich sollte alles in und vor der Hütte gründllich absuchen.";
             else
-                return "(Hilfe) Meister Gunnar hatte das Pentagamm hier sicher nicht zum Spaß hingemalt. Vermutlich lagen hier irgendwo Zauberzutaten. Ich sollte alles in und vor der Hütte gründllich absuchen.";
+                return "(Help) Master Gunnar certainly didn't paint the pentagam here for fun. There were probably magic ingredients here somewhere. I should search everything inside and outside the hut thoroughly.";
         }
 
     }
@@ -292,7 +292,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Lösung) Unter der Fußmatte vor der Hütte lag ein Beutelchen mit magischem Pulver. Hinter dem Schrank in der schäbigen Kammer befand sich eine Klappe, und in der Öffnung dahinter eine magische Kerze. Aufs Pentagramm stellen in der Stube, Pulver drauf streuen - und schon ging die Reise los.";
             else
-                return "(Lösung) Unter der Fußmatte vor der Hütte lag ein Beutelchen mit magischem Pulver. Hinter dem Schrank in der schäbigen Kammer befand sich eine Klappe, und in der Öffnung dahinter eine magische Kerze. Aufs Pentagramm stellen in der Stube, Pulver drauf streuen - und schon ging die Reise los.";
+                return "(Solution) Under the doormat in front of the hut was a small bag of magic powder. There was a flap behind the cupboard in the shabby room and a magic candle in the opening behind it. Place it on the pentagram in the living room, sprinkle the powder on it - and the journey begins.";
         }
 
     }
@@ -303,7 +303,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "Ich war im Versteck des Meisters angekommen. Jetzt noch schnell die Klaue an mich nehmen und nichts wie raus hier!";
             else
-                return "Ich war im Versteck des Meisters angekommen. Jetzt noch schnell die Klaue an mich nehmen und nichts wie raus hier!";
+                return "I had arrived at the master's hideout. Now let's quickly grab the claw and get out of here!";
         }
 
     }
@@ -314,7 +314,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Tipps!) Ich hatte die Klaue gefunden. Leider schien es viel zu gefährlich zu sein, sie einfach zu nehmen.";
             else
-                return "(Tipps!) Ich hatte die Klaue gefunden. Leider schien es viel zu gefährlich zu sein, sie einfach zu nehmen.";
+                return "(Tips!) I had found the claw. Unfortunately, it seemed far too dangerous to just take it.";
         }
 
     }
@@ -325,7 +325,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "Wie konnte ich die Klaue an mich nehmen?";
             else
-                return "Wie konnte ich die Klaue an mich nehmen?";
+                return "How could I take the claw?";
         }
 
     }
@@ -336,7 +336,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Tipp) Wenn ich sie nicht direkt nehmen konnte, dann gab es vielleicht einen Gegenstand, der mir beim Nehmen helfen könnte.";
             else
-                return "(Tipp) Wenn ich sie nicht direkt nehmen konnte, dann gab es vielleicht einen Gegenstand, der mir beim Nehmen helfen könnte.";
+                return "(Tip) If I couldn't take it directly, then maybe there was an object that could help me take it.";
         }
 
     }
@@ -347,7 +347,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Hilfe) In der Küchenschublade fand sich ein nützlicher Gegenstand, um die Klaue damit aufzunehmen. Leider war das Ganze aber nicht perfekt.";
             else
-                return "(Hilfe) In der Küchenschublade fand sich ein nützlicher Gegenstand, um die Klaue damit aufzunehmen. Leider war das Ganze aber nicht perfekt.";
+                return "(Help) A useful object was found in the kitchen drawer to pick up the claw. Unfortunately, it wasn't perfect.";
         }
 
     }
@@ -358,7 +358,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Lösung) In der Küchenschublade fand ich eine Zuckerzange. Die konnte ich mit der Klaue benutzen, um sie hochzunehmen. Fehlte noch eine Fixierung für das ganze Gebilde.";
             else
-                return "(Lösung) In der Küchenschublade fand ich eine Zuckerzange. Die konnte ich mit der Klaue benutzen, um sie hochzunehmen. Fehlte noch eine Fixierung für das ganze Gebilde.";
+                return "(Solution) I found a pair of sugar tongs in the kitchen drawer. I was able to use the claw to pick it up. I still needed a fixation for the whole thing.";
         }
 
     }
@@ -369,7 +369,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "Ich hatte die Klaue gefunden und mit der Zuckerzange an mich genommen. Leider war das Gebilde alles anderes als stabil.";
             else
-                return "Ich hatte die Klaue gefunden und mit der Zuckerzange an mich genommen. Leider war das Gebilde alles anderes als stabil.";
+                return "I found the claw and took it with the sugar tongs. Unfortunately, the structure was anything but stable.";
         }
 
     }
@@ -380,7 +380,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "Wie konnte ich die Klaue in der Zuckerzange fixieren?";
             else
-                return "Wie konnte ich die Klaue in der Zuckerzange fixieren?";
+                return "How could I fix the claw in the sugar tongs?";
         }
 
     }
@@ -391,7 +391,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Tipps!) Ich brauchte ja eigentlich nur etwas, das die Zuckerzange zusammendrücke.";
             else
-                return "(Tipps!) Ich brauchte ja eigentlich nur etwas, das die Zuckerzange zusammendrücke.";
+                return "(Tips!) All I really needed was something to compress the sugar tongs.";
         }
 
     }
@@ -402,7 +402,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Hilfe) Ich brauchte irgendein Klebeband, zur Not tat es Pflaster. Sollte Meister Gunnar nicht irgendwo in seinem Labor einen Erste-Hilfe-Kasten haben?";
             else
-                return "(Hilfe) Ich brauchte irgendein Klebeband, zur Not tat es Pflaster. Sollte Meister Gunnar nicht irgendwo in seinem Labor einen Erste-Hilfe-Kasten haben?";
+                return "(Help) I needed some adhesive tape, if necessary I could use plaster. Shouldn't Master Gunnar have a first aid kit somewhere in his lab?";
         }
 
     }
@@ -413,7 +413,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Lösung) Im Labor gab es einen Erste-Hilfe-Kasten. Dort konnte ich Rollpflaster finden. Das ließ sich dann um den Griff der Zange wickeln und so zusammendrücken. Fertig war der perfekte Klauenhalter.";
             else
-                return "(Lösung) Im Labor gab es einen Erste-Hilfe-Kasten. Dort konnte ich Rollpflaster finden. Das ließ sich dann um den Griff der Zange wickeln und so zusammendrücken. Fertig war der perfekte Klauenhalter.";
+                return "(Solution) There was a first aid box in the laboratory. I was able to find a roll of plaster there. This could then be wrapped around the handle of the pliers and pressed together. The perfect claw holder was ready.";
         }
 
     }
@@ -424,7 +424,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Tipps!) Ich hatte nun diese schicke Klauenzange. Aber was sollte ich damit machen?";
             else
-                return "(Tipps!) Ich hatte nun diese schicke Klauenzange. Aber was sollte ich damit machen?";
+                return "(Tips!) I now had these fancy claw pliers. But what should I do with it?";
         }
 
     }
@@ -435,7 +435,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "Was tun mit der Klaue?";
             else
-                return "Was tun mit der Klaue?";
+                return "What to do with the claw?";
         }
 
     }
@@ -446,7 +446,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Tipp) Naja, sie soll ja Lebensenergie übertragen. Wem könnte das gut tun?";
             else
-                return "(Tipp) Naja, sie soll ja Lebensenergie übertragen. Wem könnte das gut tun?";
+                return "(Tip) Well, it's supposed to transfer life energy. Who could benefit from that?";
         }
 
     }
@@ -457,7 +457,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Hilfe) Ob die ausgestopfte Eule oder andere Exlebewesen wohl positiv darauf reagieren, mit der Klaue berührt zu werden?";
             else
-                return "(Hilfe) Ob die ausgestopfte Eule oder andere Exlebewesen wohl positiv darauf reagieren, mit der Klaue berührt zu werden?";
+                return "(Help) I wonder if the stuffed owl or other ex-living creatures react positively to being touched with a claw?";
         }
 
     }
@@ -468,7 +468,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Lösung) Mit der Klaue ließen sich nicht nur alle ausgestopften Viecher wiederbeleben, sondern auch die Ritterrüstung auf dem Flur.";
             else
-                return "(Lösung) Mit der Klaue ließen sich nicht nur alle ausgestopften Viecher wiederbeleben, sondern auch die Ritterrüstung auf dem Flur.";
+                return "(Solution) The claw could be used to revive not only all the stuffed animals, but also the knight's armor in the hallway.";
         }
 
     }
@@ -479,7 +479,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Tipps!) Ich hatte nun diese schicke Klauenzange und damit auch schon etwas belebt. Aber was sollte ich jetzt damit machen?";
             else
-                return "(Tipps!) Ich hatte nun diese schicke Klauenzange und damit auch schon etwas belebt. Aber was sollte ich jetzt damit machen?";
+                return "(Tips!) I now had these fancy claw pliers and had already revitalized them a bit. But what should I do with it now?";
         }
 
     }
@@ -490,7 +490,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "Was tun mit der schicken stabilen Klauenzange?";
             else
-                return "Was tun mit der schicken stabilen Klauenzange?";
+                return "What to do with the stylish, sturdy claw pliers?";
         }
 
     }
@@ -501,7 +501,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Tipp) Tja, was hatte man davon, etwas zu beleben?";
             else
-                return "(Tipp) Tja, was hatte man davon, etwas zu beleben?";
+                return "(Tip) Well, what was the point of reviving something?";
         }
 
     }
@@ -512,7 +512,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Hilfe) Jemand, der wiederbelebt war, hatte vielleicht Lust, sich mit mir zu unterhalten?";
             else
-                return "(Hilfe) Jemand, der wiederbelebt war, hatte vielleicht Lust, sich mit mir zu unterhalten?";
+                return "(Help) Someone who was revived might have wanted to talk to me?";
         }
 
     }
@@ -523,7 +523,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Lösung) Ich konnte alle ausgestopften Viecher und die Ritterrüstung wiederbeleben und anschließend Gespräche mit ihnen führen.";
             else
-                return "(Lösung) Ich konnte alle ausgestopften Viecher und die Ritterrüstung wiederbeleben und anschließend Gespräche mit ihnen führen.";
+                return "(Solution) I was able to revive all the stuffed animals and the knight's armor and then have conversations with them.";
         }
 
     }
@@ -534,7 +534,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "Die Eule hatte Fragen an mich, die ich beantworten musste, um in die Bibliothek zu gelangen.";
             else
-                return "Die Eule hatte Fragen an mich, die ich beantworten musste, um in die Bibliothek zu gelangen.";
+                return "The owl had questions for me that I had to answer in order to get into the library.";
         }
 
     }
@@ -545,7 +545,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Tipps!) Die erste Frage der Eule bezog sich auf die Unterwäsche-Marke des Meisters.";
             else
-                return "(Tipps!) Die erste Frage der Eule bezog sich auf die Unterwäsche-Marke des Meisters.";
+                return "(Tips!) The owl's first question was about the master's brand of underwear.";
         }
 
     }
@@ -556,7 +556,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "Wie fand ich heraus, welche Unterwäschemarke der Meister trug?";
             else
-                return "Wie fand ich heraus, welche Unterwäschemarke der Meister trug?";
+                return "How did I find out what brand of underwear the master wore?";
         }
 
     }
@@ -567,7 +567,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Tipp) Einfach mal nachschauen, was ich für Wäsche fand, konnte keine schlechte Idee sein.";
             else
-                return "(Tipp) Einfach mal nachschauen, was ich für Wäsche fand, konnte keine schlechte Idee sein.";
+                return "(Tip) Just having a look at what I found for laundry couldn't have been a bad idea.";
         }
 
     }
@@ -578,7 +578,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Hilfe) In der Waschküche fand sich sicherlich auch Unterwäsche des Meisters. Ich musste sie mir nur genau anschauen.";
             else
-                return "(Hilfe) In der Waschküche fand sich sicherlich auch Unterwäsche des Meisters. Ich musste sie mir nur genau anschauen.";
+                return "(Help) I was sure to find the master's underwear in the laundry room. I just had to take a close look at them.";
         }
 
     }
@@ -589,7 +589,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Lösung) In der Waschmaschine in der Waschküche fand sich eine Unterhose, auf der die Marke stand. Das musste ich mir einfach nur anschauen.";
             else
-                return "(Lösung) In der Waschmaschine in der Waschküche fand sich eine Unterhose, auf der die Marke stand. Das musste ich mir einfach nur anschauen.";
+                return "(Solution) In the washing machine in the laundry room, I found a pair of underpants with the brand written on them. I just had to have a look.";
         }
 
     }
@@ -600,7 +600,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Tipps!) Die zweite Frage der Eule bezog sich auf den früheren Besitzer der Ritterrüstung.";
             else
-                return "(Tipps!) Die zweite Frage der Eule bezog sich auf den früheren Besitzer der Ritterrüstung.";
+                return "(Tips!) The owl's second question referred to the former owner of the knight's armor.";
         }
 
     }
@@ -611,7 +611,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "Wie fand ich heraus, wem die Ritterüstung früher gehört hatte?";
             else
-                return "Wie fand ich heraus, wem die Ritterüstung früher gehört hatte?";
+                return "How did I find out who had owned the knight's armor in the past?";
         }
 
     }
@@ -622,7 +622,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Tipp) Vielleicht war der Name ja eingraviert und musste nur freigelegt werden?";
             else
-                return "(Tipp) Vielleicht war der Name ja eingraviert und musste nur freigelegt werden?";
+                return "(Hint) Maybe the name was engraved and just needed to be uncovered?";
         }
 
     }
@@ -633,7 +633,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Hilfe) Mit einem Polierlappen ließ sich die Rüstung sicherlich gut reinigen. So etwas konnte sich in der Küche finden.";
             else
-                return "(Hilfe) Mit einem Polierlappen ließ sich die Rüstung sicherlich gut reinigen. So etwas konnte sich in der Küche finden.";
+                return "(Help) The armor could certainly be cleaned well with a polishing cloth. Something like this could be found in the kitchen.";
         }
 
     }
@@ -644,7 +644,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Hilfe) Im Küchenschrank in der Küche befand sich ein Polierlappen. Damit konnte ich die Rüstung reinigen, aber die entdeckte Schrift war zu klein. Im Labor des Meisters fand sich eine Lupe in der Schublade, damit konnte ich die Schrift entziffern.";
             else
-                return "(Hilfe) Im Küchenschrank in der Küche befand sich ein Polierlappen. Damit konnte ich die Rüstung reinigen, aber die entdeckte Schrift war zu klein. Im Labor des Meisters fand sich eine Lupe in der Schublade, damit konnte ich die Schrift entziffern.";
+                return "(Help) There was a polishing cloth in the kitchen cupboard in the kitchen. I used it to clean the armor, but the writing I found was too small. I found a magnifying glass in the drawer of the master's laboratory and was able to decipher the writing.";
         }
 
     }
@@ -653,9 +653,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "[Tipps] Die dritte Frage der Eule bezog sich auf das Lieblingstier des Meisters.";
+                return "(Tipps) Die dritte Frage der Eule bezog sich auf das Lieblingstier des Meisters.";
             else
-                return "[Tipps] Die dritte Frage der Eule bezog sich auf das Lieblingstier des Meisters.";
+                return "(Tips) The owl's third question was about the master's favorite animal.";
         }
 
     }
@@ -666,7 +666,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "Wie fand ich heraus, was das Lieblingstier des Meisters war?";
             else
-                return "Wie fand ich heraus, was das Lieblingstier des Meisters war?";
+                return "How did I find out what the master's favorite animal was?";
         }
 
     }
@@ -677,7 +677,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Tipps!) Vielleicht fand sich das besagte Lieblingstier ja irgendwo? Hatte der Meister vielleicht in seinem allerprivatesten Refugium solche Hinweise hinterlassen?";
             else
-                return "(Tipps!) Vielleicht fand sich das besagte Lieblingstier ja irgendwo? Hatte der Meister vielleicht in seinem allerprivatesten Refugium solche Hinweise hinterlassen?";
+                return "(Tips!) Perhaps the favorite animal in question could be found somewhere? Had the master perhaps left such clues in his most private retreat?";
         }
 
     }
@@ -688,7 +688,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Hilfe) Ich musste ins Schlafgemach des Meisters. Dass die Tür versiegelt war, war vermutlich für eine zerstörungswütige Ritterrüstung kein so großes Hindernis.";
             else
-                return "(Hilfe) Ich musste ins Schlafgemach des Meisters. Dass die Tür versiegelt war, war vermutlich für eine zerstörungswütige Ritterrüstung kein so großes Hindernis.";
+                return "(Help) I had to get into the master's bedchamber. The fact that the door was sealed was probably not such a big obstacle for a destructive knight's armor.";
         }
 
     }
@@ -699,7 +699,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Lösung) Ich musste ins Schlafgemach des Meisters. Um die Tür aufzubekommen, sollte ich mir Schild und Siegel darauf genau anschauen. Dann redete ich am Besten mit der wiederbelebten Ritterrüstung und sagte ihr, sie solle die Tür einrennen. Im Schlafzimmer fand ich dann unter der Matratze Liebeslyrik der verstörenden Art.";
             else
-                return "(Lösung) Ich musste ins Schlafgemach des Meisters. Um die Tür aufzubekommen, sollte ich mir Schild und Siegel darauf genau anschauen. Dann redete ich am Besten mit der wiederbelebten Ritterrüstung und sagte ihr, sie solle die Tür einrennen. Im Schlafzimmer fand ich dann unter der Matratze Liebeslyrik der verstörenden Art.";
+                return "(Solution) I had to get into the master's bedchamber. To get the door open, I should take a close look at the shield and sigil on it. Then I talked to the revived knight's armor and told her to break down the door. In the bedroom, I found some disturbing love poetry under the mattress.";
         }
 
     }
@@ -710,7 +710,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "Ich wusste nun, wie man das magische Pulver für den Teleport herstellte. War das mein Ticket aus dem Versteck heraus?";
             else
-                return "Ich wusste nun, wie man das magische Pulver für den Teleport herstellte. War das mein Ticket aus dem Versteck heraus?";
+                return "I now knew how to make the magic powder for the teleport. Was this my ticket out of hiding?";
         }
 
     }
@@ -721,7 +721,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Tipps!) Ich hatte nicht die geringste Ahnung, wo ich hier hier einen Mondstein auftreiben sollte.";
             else
-                return "(Tipps!) Ich hatte nicht die geringste Ahnung, wo ich hier hier einen Mondstein auftreiben sollte.";
+                return "(Tips!) I didn't have the slightest idea where I was supposed to find a moonstone here.";
         }
 
     }
@@ -732,7 +732,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "Wie kam ich an einen Mondstein?";
             else
-                return "Wie kam ich an einen Mondstein?";
+                return "How did I get a moonstone?";
         }
 
     }
@@ -743,7 +743,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Tipp) Nun, nicht alles, was ein Mondstein war, hatte auch als solches angefangen. Manchmal begann alles mit hart gewordenen Lebensmitteln.";
             else
-                return "(Tipp) Nun, nicht alles, was ein Mondstein war, hatte auch als solches angefangen. Manchmal begann alles mit hart gewordenen Lebensmitteln.";
+                return "(Tip) Well, not everything that was a moonstone had started out as one. Sometimes it all started with food that had become hard.";
         }
 
     }
@@ -754,7 +754,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Hilfe) Im Kühlschrank fand ich alten, harten Käse. Vielleicht half mir der. ";
             else
-                return "(Hilfe) Im Kühlschrank fand ich alten, harten Käse. Vielleicht half mir der. ";
+                return "(Help) I found old, hard cheese in the fridge. Maybe that helped me.";
         }
 
     }
@@ -765,7 +765,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Hilfe) Im Kühlschrank fand ich alten, harten Käse. Vielleicht konnte ich den später gegen etwas eintauschen.";
             else
-                return "(Hilfe) Im Kühlschrank fand ich alten, harten Käse. Vielleicht konnte ich den später gegen etwas eintauschen.";
+                return "(Help) I found old, hard cheese in the fridge. Maybe I could swap it for something later.";
         }
 
     }
@@ -776,7 +776,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Tipps!) Was sollte ich bloß mit einem vertrockneten Stück Käse anfangen?";
             else
-                return "(Tipps!) Was sollte ich bloß mit einem vertrockneten Stück Käse anfangen?";
+                return "(Tips!) What should I do with a dried-up piece of cheese?";
         }
 
     }
@@ -787,7 +787,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "Was sollte ich bloß mit einem vertrockneten Stück Käse anfangen?";
             else
-                return "Was sollte ich bloß mit einem vertrockneten Stück Käse anfangen?";
+                return "What was I supposed to do with a dried-up piece of cheese?";
         }
 
     }
@@ -798,7 +798,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Tipp) Vielleicht konnte ich das Ding irgendwo eintauschen? Wer tauschte überhaupt im Domizil?";
             else
-                return "(Tipp) Vielleicht konnte ich das Ding irgendwo eintauschen? Wer tauschte überhaupt im Domizil?";
+                return "(Hint) Maybe I could trade the thing somewhere? Who traded in the domicile anyway?";
         }
 
     }
@@ -809,7 +809,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Hilfe) Vielleicht konnte ich das Ding bei der Elster eintauschen?";
             else
-                return "(Hilfe) Vielleicht konnte ich das Ding bei der Elster eintauschen?";
+                return "(Hint) Maybe I could trade the thing somewhere? Who traded in the domicile anyway?";
         }
 
     }
@@ -820,7 +820,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Lösung) Vielleicht konnte ich das Ding bei der Elster eintauschen? Auch wenn das Ergebnis des Tauschgeschäfts vielleicht nur ein Zwischenschritt war.";
             else
-                return "(Lösung) Vielleicht konnte ich das Ding bei der Elster eintauschen? Auch wenn das Ergebnis des Tauschgeschäfts vielleicht nur ein Zwischenschritt war.";
+                return "(Solution) Maybe I could trade the thing in at the Elster? Even if the result of the swap was perhaps only an intermediate step.";
         }
 
     }
@@ -831,7 +831,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Tipps!) Was sollte ich bloß mit einem dämlichen Kiesel anfangen? Da konnte die Elster auch noch so stolz auf ihren depperten Schatz sein...";
             else
-                return "(Tipps!) Was sollte ich bloß mit einem dämlichen Kiesel anfangen? Da konnte die Elster auch noch so stolz auf ihren depperten Schatz sein...";
+                return "(Tips!) What was I supposed to do with a stupid pebble? The magpie could be so proud of its stupid treasure...";
         }
 
     }
@@ -842,7 +842,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "Was sollte ich mit dem Kiesel anfangen?";
             else
-                return "Was sollte ich mit dem Kiesel anfangen?";
+                return "What should I do with the pebble?";
         }
 
     }
@@ -853,7 +853,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Tipp) Das Buch des Meisters in der Bibliothek enthielt einige Tipps dazu.";
             else
-                return "(Tipp) Das Buch des Meisters in der Bibliothek enthielt einige Tipps dazu.";
+                return "(Tip) The master's book in the library contained some tips on this.";
         }
 
     }
@@ -864,7 +864,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Hilfe) Die Dunkelheitsmaschine im Labor konnte dem Kiesel zumindest mal alles Licht entziehen. Das wäre doch schon mal ein ordentlicher Fortschritt.";
             else
-                return "(Hilfe) Die Dunkelheitsmaschine im Labor konnte dem Kiesel zumindest mal alles Licht entziehen. Das wäre doch schon mal ein ordentlicher Fortschritt.";
+                return "(Help) The darkness machine in the laboratory was at least able to remove all light from the pebble. That would be quite a bit of progress.";
         }
 
     }
@@ -875,7 +875,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Lösung) Ich legte den Kiesel in die Dunkelheitsmaschine, betätigte den Schalter, und bekam einen vollkommen lichtlosen Stein. Der ideale Grundstoff für den nächsten Schritt: Den Mondstein!";
             else
-                return "(Lösung) Ich legte den Kiesel in die Dunkelheitsmaschine, betätigte den Schalter, und bekam einen vollkommen lichtlosen Stein. Der ideale Grundstoff für den nächsten Schritt: Den Mondstein!";
+                return "(Solution) I put the pebble in the darkness machine, pressed the switch and got a completely lightless stone. The ideal raw material for the next step: the moonstone!";
         }
 
     }
@@ -886,7 +886,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Tipps!) Was sollte ich bloß mit diesem komischen lichtlosen Kiesel anfangen?";
             else
-                return "(Tipps!) Was sollte ich bloß mit diesem komischen lichtlosen Kiesel anfangen?";
+                return "(Tips!) What should I do with this strange lightless pebble?";
         }
 
     }
@@ -897,7 +897,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "Was konnte ich mit dem lichtlosen Kiesel anfangen?";
             else
-                return "Was konnte ich mit dem lichtlosen Kiesel anfangen?";
+                return "What could I do with the lightless pebble?";
         }
 
     }
@@ -908,7 +908,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Tipp) Ein lichtloser Stein war geradezu dafür gemacht, um sich mit Mondlicht vollzusaugen. Dazu musste man nur dem Mond so nahe wie möglich kommen.";
             else
-                return "(Tipp) Ein lichtloser Stein war geradezu dafür gemacht, um sich mit Mondlicht vollzusaugen. Dazu musste man nur dem Mond so nahe wie möglich kommen.";
+                return "(Tip) A lightless stone was virtually made to soak up moonlight. All you had to do was get as close to the moon as possible.";
         }
 
     }
@@ -919,7 +919,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Hilfe) Der lichtlose Stein würde sich mit Mondlicht vollsaugen, wenn er dem Mond nahe genug kam. Nun brauchte es nur noch eine Möglichkeit, vom Atrium aus zum Vollmond zu fliegen.";
             else
-                return "(Hilfe) Der lichtlose Stein würde sich mit Mondlicht vollsaugen, wenn er dem Mond nahe genug kam. Nun brauchte es nur noch eine Möglichkeit, vom Atrium aus zum Vollmond zu fliegen.";
+                return "(Help) The lightless stone would soak up moonlight when it got close enough to the moon. Now all that was needed was a way to fly from the atrium to the full moon.";
         }
 
     }
@@ -930,7 +930,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Lösung) Der lichtlose Stein würde sich mit Mondlicht vollsaugen, wenn er dem Mond nahe genug kam. Das konnte der Papagei übernehmen, wenn ich ihm gut zuredete und anschließend in den Himmel warf.";
             else
-                return "(Lösung) Der lichtlose Stein würde sich mit Mondlicht vollsaugen, wenn er dem Mond nahe genug kam. Das konnte der Papagei übernehmen, wenn ich ihm gut zuredete und anschließend in den Himmel warf.";
+                return "(Help) The lightless stone would soak up moonlight when it got close enough to the moon. Now all that was needed was a way to fly from the atrium to the full moon.";
         }
 
     }
@@ -941,7 +941,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Tipps!) Ich brauchte eine Goldmünze. Wo fand ich hier sowas?";
             else
-                return "(Tipps!) Ich brauchte eine Goldmünze. Wo fand ich hier sowas?";
+                return "(Tips!) I needed a gold coin. Where could I find one here?";
         }
 
     }
@@ -952,7 +952,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "Wie kam ich hier an eine Goldmünze?";
             else
-                return "Wie kam ich hier an eine Goldmünze?";
+                return "How did I get a gold coin here?";
         }
 
     }
@@ -963,7 +963,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Tipp) Meistens fand sich ja in Brunnen allerlei Kleingeld, das unbedachte Passanten hinein warfen.";
             else
-                return "(Tipp) Meistens fand sich ja in Brunnen allerlei Kleingeld, das unbedachte Passanten hinein warfen.";
+                return "(Tip) Most of the time, all kinds of small change were found in fountains, thrown in by careless passers-by.";
         }
 
     }
@@ -974,7 +974,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Hilfe) In der Waschküche stand ein Brunnen, dessen Deckel ich wegschieben konnte. Jetzt musste ich nur noch im dunklen Wasser etwas entdecken.";
             else
-                return "(Hilfe) In der Waschküche stand ein Brunnen, dessen Deckel ich wegschieben konnte. Jetzt musste ich nur noch im dunklen Wasser etwas entdecken.";
+                return "(Help) There was a well in the laundry room, the lid of which I was able to push away. Now I just had to discover something in the dark water.";
         }
 
     }
@@ -985,7 +985,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Lösung) In der Waschküche stand ein Brunnen, dessen Deckel ich wegschieben konnte. Wenn ich mit der Kerze ins Wasser leuchtete, würde ich die Münze entdecken.";
             else
-                return "(Lösung) In der Waschküche stand ein Brunnen, dessen Deckel ich wegschieben konnte. Wenn ich mit der Kerze ins Wasser leuchtete, würde ich die Münze entdecken.";
+                return "(Solution) There was a well in the laundry room, the lid of which I could push away. If I shone the candle into the water, I would discover the coin.";
         }
 
     }
@@ -996,7 +996,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Tipps!) Ich hatte eine goldene Münze unten im Brunnen entdeckt. Wie kam ich dort heran?";
             else
-                return "(Tipps!) Ich hatte eine goldene Münze unten im Brunnen entdeckt. Wie kam ich dort heran?";
+                return "(Tips!) I had discovered a golden coin at the bottom of the well. How did I get there?";
         }
 
     }
@@ -1007,7 +1007,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "Wie kam ich an die Goldmünze im Brunnen?";
             else
-                return "Wie kam ich an die Goldmünze im Brunnen?";
+                return "How did I get the gold coin in the fountain?";
         }
 
     }
@@ -1018,7 +1018,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Tipp) Selbst konnte ich da sicher nicht runtertauchen. Das war viel zu gefährlich.";
             else
-                return "(Tipp) Selbst konnte ich da sicher nicht runtertauchen. Das war viel zu gefährlich.";
+                return "(Tip) I certainly couldn't dive down there myself. It was far too dangerous.";
         }
 
     }
@@ -1029,7 +1029,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Hilfe) Vielleicht konnte ich den ausgestopften Fisch überreden, in den Brunnen zu tauchen?";
             else
-                return "(Hilfe) Vielleicht konnte ich den ausgestopften Fisch überreden, in den Brunnen zu tauchen?";
+                return "(Help) Maybe I could persuade the stuffed fish to dive into the well?";
         }
 
     }
@@ -1040,7 +1040,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Lösung) Ich sollte den Fisch bitten, nach der Münze zu tauchen. Wenn er erst eingewilligt hatte, brauchte ich ihn nur ins Wasser zu werfen.";
             else
-                return "(Lösung) Ich sollte den Fisch bitten, nach der Münze zu tauchen. Wenn er erst eingewilligt hatte, brauchte ich ihn nur ins Wasser zu werfen.";
+                return "(Solution) I should ask the fish to dive for the coin. Once it had agreed, all I had to do was throw it into the water.";
         }
 
     }
@@ -1051,7 +1051,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Tipps!) Wie sollte ich bloß einen Wunderwarzenschwamm auftreiben? Und was war das eigentlich für ein bescheuerter Name?";
             else
-                return "(Tipps!) Wie sollte ich bloß einen Wunderwarzenschwamm auftreiben? Und was war das eigentlich für ein bescheuerter Name?";
+                return "(Tips!) How was I supposed to find a wonder wart sponge? And what kind of stupid name was that anyway?";
         }
 
     }
@@ -1062,7 +1062,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "Wie sollte ich einen Wunderwarzenschwamm auftreiben?";
             else
-                return "Wie sollte ich einen Wunderwarzenschwamm auftreiben?";
+                return "How should I find a wonder wart sponge?";
         }
 
     }
@@ -1073,7 +1073,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Tipp) Wenn hier sowas nicht wuchs, dann konnte ich es vielleicht züchten?";
             else
-                return "(Tipp) Wenn hier sowas nicht wuchs, dann konnte ich es vielleicht züchten?";
+                return "(Hint) If something like that didn't grow here, then maybe I could breed it?";
         }
 
     }
@@ -1084,7 +1084,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Hilfe) Wenn hier sowas nicht wuchs, dann konnte ich es vielleicht züchten. Ich brauchte die passenden Sporen und einen feuchten Untergrund.";
             else
-                return "(Hilfe) Wenn hier sowas nicht wuchs, dann konnte ich es vielleicht züchten. Ich brauchte die passenden Sporen und einen feuchten Untergrund.";
+                return "(Help) If something like that didn't grow here, then perhaps I could grow it. I needed the right spores and a moist substrate.";
         }
 
     }
@@ -1095,7 +1095,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Lösung) Im Gefrierfach fand ich die Sporen. In der Waschküche konnte ich die Wäsche aus der Waschmaschine nehmen und in den Wäschekorb legen. Wenn ich die Sporen auf die nasse Wäsche legte, würde in Nullkommanichts ein Wunderwarzenschwamm gedeihen.";
             else
-                return "(Lösung) Im Gefrierfach fand ich die Sporen. In der Waschküche konnte ich die Wäsche aus der Waschmaschine nehmen und in den Wäschekorb legen. Wenn ich die Sporen auf die nasse Wäsche legte, würde in Nullkommanichts ein Wunderwarzenschwamm gedeihen.";
+                return "(Solution) I found the spores in the freezer compartment. In the laundry room, I was able to take the laundry out of the washing machine and put it in the laundry basket. If I put the spores on the wet laundry, a miracle wart sponge would grow in no time at all.";
         }
 
     }
@@ -1106,7 +1106,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Tipps!) Ich hatte alle Zutaten für das magische Pulver. Und jetzt?";
             else
-                return "(Tipps!) Ich hatte alle Zutaten für das magische Pulver. Und jetzt?";
+                return "(Tips!) I had all the ingredients for the magic powder. And now?";
         }
 
     }
@@ -1117,7 +1117,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "Wie konnte ich das magische Pulver herstellen?";
             else
-                return "Wie konnte ich das magische Pulver herstellen?";
+                return "How could I make the magic powder?";
         }
 
     }
@@ -1128,7 +1128,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Tipp) Im Labor befand sich eine Metallschale, die ich an einer Halterung befestigen konnte. Kein schlechter Start.";
             else
-                return "(Tipp) Im Labor befand sich eine Metallschale, die ich an einer Halterung befestigen konnte. Kein schlechter Start.";
+                return "(Tip) There was a metal bowl in the lab that I could attach to a holder. Not a bad start.";
         }
 
     }
@@ -1139,7 +1139,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Hilfe) Im Labor befand sich eine Metallschale, die ich an einer Halterung befestigen konnte. Dann legte ich alle Zutaten hinein. Und jetzt brauchte die Sache nur noch etwas Feuer!";
             else
-                return "(Hilfe) Im Labor befand sich eine Metallschale, die ich an einer Halterung befestigen konnte. Dann legte ich alle Zutaten hinein. Und jetzt brauchte die Sache nur noch etwas Feuer!";
+                return "(Help) There was a metal bowl in the lab that I could attach to a holder. Then I put all the ingredients in it. And now it just needed some fire!";
         }
 
     }
@@ -1150,7 +1150,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Lösung) Im Labor befand sich eine Metallschale, die ich an einer Halterung befestigte. Dann legte ich alle Zutaten hinein und erhitzte das ganze mit der magischen Kerze!";
             else
-                return "(Lösung) Im Labor befand sich eine Metallschale, die ich an einer Halterung befestigte. Dann legte ich alle Zutaten hinein und erhitzte das ganze mit der magischen Kerze!";
+                return "(Solution) There was a metal bowl in the laboratory, which I attached to a holder. Then I put all the ingredients in it and heated the whole thing with the magic candle!";
         }
 
     }
@@ -1161,7 +1161,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Tipps!) Ich hatte einen netten Klumpen Schlacke erzeugt. Was machte ich jetzt damit?";
             else
-                return "(Tipps!) Ich hatte einen netten Klumpen Schlacke erzeugt. Was machte ich jetzt damit?";
+                return "(Tips!) I had created a nice lump of slag. What did I do with it now?";
         }
 
     }
@@ -1172,7 +1172,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "Was konnte ich jetzt mit der Schlacke tun?";
             else
-                return "Was konnte ich jetzt mit der Schlacke tun?";
+                return "What could I do with the slag now?";
         }
 
     }
@@ -1183,7 +1183,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Tipp) Praktischerweise fand sich alles Handwerkszeug zur Weiterverarbeitung im Labor.";
             else
-                return "(Tipp) Praktischerweise fand sich alles Handwerkszeug zur Weiterverarbeitung im Labor.";
+                return "(Tip) Conveniently, all the tools for further processing were in the laboratory.";
         }
 
     }
@@ -1194,7 +1194,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Hilfe) Im Labor fanden sich Mörser und Stößel, um den Klumpen klein zu stößeln.";
             else
-                return "(Hilfe) Im Labor fanden sich Mörser und Stößel, um den Klumpen klein zu stößeln.";
+                return "(Help) A mortar and pestle were found in the laboratory to crush the lump.";
         }
 
     }
@@ -1205,7 +1205,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "(Lösung) Ich legte die Schlacke in den Mörser und bearbeitete sie mit dem Stößel. Das Ergebnis war das magische Pulver, das ich so dringend benötigte.";
             else
-                return "(Lösung) Ich legte die Schlacke in den Mörser und bearbeitete sie mit dem Stößel. Das Ergebnis war das magische Pulver, das ich so dringend benötigte.";
+                return "(solution) I put the slag in the mortar and worked it with the pestle. The result was the magic powder I so desperately needed.";
         }
 
     }
@@ -1216,7 +1216,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "Ich hatte magisches Pulver hergestellt. Meister Gunnar wäre stolz auf mich. Also solange er nicht mitbekam, was ich sonst noch so ausgefressen hatte. Jetzt musste ich hier allerdings noch den Abflug machen.";
             else
-                return "Ich hatte magisches Pulver hergestellt. Meister Gunnar wäre stolz auf mich. Also solange er nicht mitbekam, was ich sonst noch so ausgefressen hatte. Jetzt musste ich hier allerdings noch den Abflug machen.";
+                return "I had made magic powder. Master Gunnar would be proud of me. As long as he didn't find out what else I'd been up to. But now I still had to leave here.";
         }
 
     }
@@ -1227,7 +1227,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "Ich war hier am Ende. Es gab nichts mehr zu tun. ";
             else
-                return "Ich war hier am Ende. Es gab nichts mehr zu tun. ";
+                return "I was at the end here. There was nothing more to do. ";
         }
 
     }
@@ -1238,7 +1238,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "Das Spiel würde jetzt gerne auf Englisch wechseln, aber die englischen Texte sind noch gar nicht fertig. Kommt irgendwann noch!";
             else
-                return "Das Spiel würde jetzt gerne auf Englisch wechseln, aber die englischen Texte sind noch gar nicht fertig. Kommt irgendwann noch!";
+                return "The game would like to switch to English now, but the English texts are not ready yet. Will come at some point!";
         }
 
     }
@@ -1249,7 +1249,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "Ich klopfte an [S1]. Nichts weiter geschah.";
             else
-                return "Ich klopfte an [S1]. Nothing else happened.";
+                return "I knocked on [S1]. Nothing else happened.";
         }
     }
     public static string KnockOn_Armor
@@ -1259,7 +1259,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "Ich klopfte an [P:Person_Knights_Armor]die Ritterrüstung[/P]. Es schepperte, ansonsten geschah wenig.";
             else
-                return "Ich klopfte an [P:Person_Knights_Armor]die Ritterrüstung[/P]. Es schepperte, ansonsten geschah wenig.";
+                return "I knocked on [P:Person_Knights_Armor]the knight's armor[/P]. It rattled, but little else happened.";
         }
     }
     public static string Order_Score_891
@@ -1269,7 +1269,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "... eines hoffnungslosen Kleinkriminellen...";
             else
-                return "... eines hoffnungslosen Kleinkriminellen...";
+                return "... of a hopeless petty criminal...";
         }
     }
     public static string Order_Score_892
@@ -1279,7 +1279,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "... eines schwächlichen Strauchdiebs...";
             else
-                return "... eines schwächlichen Strauchdiebs...";
+                return "... of a feeble shrub thief...";
         }
     }
     public static string Order_Score_893
@@ -1289,7 +1289,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "... eines hoffnungsvollen Straßenräubers...";
             else
-                return "... eines hoffnungsvollen Straßenräubers...";
+                return "... of a promising highwayman...";
         }
     }
     public static string Order_Score_894
@@ -1299,7 +1299,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "... eines ambitionierten Verbrechers...";
             else
-                return "... eines ambitionierten Verbrechers...";
+                return "... of an ambitious criminal...";
         }
     }
     public static string Order_Score_895
@@ -1309,7 +1309,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "... eines fortgeschrittenen Diebeskünstlers...";
             else
-                return "... eines fortgeschrittenen Diebeskünstlers...";
+                return "... of an advanced thief artist...";
         }
     }
     public static string Order_Score_896
@@ -1319,7 +1319,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "... eines Masterminds des unfreiwilligen Eigentumstransfers...";
             else
-                return "... eines Masterminds des unfreiwilligen Eigentumstransfers...";
+                return "... a mastermind of the involuntary transfer of ownership...";
         }
     }
     public static string Order_Score_897
@@ -1329,7 +1329,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "... eines wahren Meisterdiebs...";
             else
-                return "... eines wahren Meisterdiebs...";
+                return "... of a true master thief...";
         }
     }
 
@@ -1340,7 +1340,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "Wozu sollte ich [P:Person_Magpie]der Elster[/P] meinen [I:I00_Cheese]schönen Käse[/I] anbieten? Vielleicht sollte ich erst mal mit ihr reden.";
             else
-                return "Wozu sollte ich [P:Person_Magpie]der Elster[/P] meinen [I:I00_Cheese]schönen Käse[/I] anbieten? Vielleicht sollte ich erst mal mit ihr reden.";
+                return "Why should I offer [P:Person_Magpie]the magpie[/P] my [I:I00_Cheese]nice cheese[/I]? Maybe I should talk to her first.";
         }
     }
     public static string Grab_In_Fail
@@ -1350,7 +1350,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "In [Il1,Nom] konnte ich nicht hineingreifen.";
             else
-                return "In [Il1,Nom] konnte ich nicht hineingreifen.";
+                return "I could not reach into [Il1,Nom].";
         }
     }
     public static string Grab_In_Find
@@ -1360,7 +1360,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "Ich griff in [Il1,Nom] hinein und ertastete so einiges.";
             else
-                return "Ich griff in [Il1,Nom] hinein und ertastete so einiges.";
+                return "I reached into [Il1,Nom] and felt a lot of things.";
         }
     }
     public static string Drop_Pouch_Fail
@@ -1370,7 +1370,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "Das [I:I00_Pouch]Beutelchen[/I] behielt ich bei mir. Wer weiß, ob ich es nochmal brauchte.";
             else
-                return "Das Beutelchen behielt ich bei mir. Wer weiß, ob ich es nochmal brauchte.";
+                return "I kept the little bag with me. Who knows if I'll need it again.";
         }
     }
 
@@ -1380,9 +1380,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "\\documents\\My Games\\Das Versteck des Meisters";
+                return "\\documents\\My Games\\The Masters Lair";
             else
-                return "\\documents\\My Games\\Das Versteck des Meisters";
+                return "\\documents\\My Games\\The Masters Lair";
         }
     }
     public static string OrderFeedback_PathFileNameFromFileName_MAUI
@@ -1390,9 +1390,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "\\documents\\My Games\\Das Versteck des Meisters";
+                return "\\documents\\My Games\\The Masters Lair";
             else
-                return "\\documents\\My Games\\Das Versteck des Meisters";
+                return "\\documents\\My Games\\The Masters Lair";
         }
     }
     public static string MAUI_UI_Home_WindowTitle
@@ -1402,7 +1402,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "Das Versteck des Meisters - eine Art Exitgame";
             else
-                return "Das Versteck des Meisters - eine Art Exitgame";
+                return "The Masters Lair - a kind of escape game";
         }
     }
 
@@ -1413,7 +1413,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "Die komplette bisherige Geschichte liegt als 'Versteck_Meister_Story_Recording.html' im Verzeichnis 'Das Versteck des Meisters'.";
             else
-                return "Die komplette bisherige Geschichte liegt als 'Versteck_Meister_Story_Recording.html' im Verzeichnis 'Das Versteck des Meisters'.";
+                return "The complete story so far is available as 'masters_lair_Story_Recording.html' in the directory 'The Masters Lair'.";
         }
 
     }
@@ -1422,9 +1422,9 @@ public static partial class loca
         get
         {
             if (_gd!.Language == IGlobalData.language.german)
-                return "\\documents\\My Games\\Das Versteck des Meisters";
+                return "\\documents\\My Games\\The Masters Lair";
             else
-                return "\\documents\\My Games\\Das Versteck des Meisters";
+                return "\\documents\\My Games\\The Masters Lair";
         }
     }
 
@@ -1435,7 +1435,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "[benutze Gegenstand mit anderem Gegenstand] Wendet einen Gegenstand mit einem anderen an. Was genau passiert, sollte sich aus dem Kontext ergeben: \"Benutze Feuerzeug mit Zigarette\". Aber vorsicht: Das hier ist ein Nichtraucherspiel. Wer im Versteck des Meisters raucht, zahlt 200€ für die Endreinigung.";
             else
-                return "[benutze Gegenstand mit anderem Gegenstand] Wendet einen Gegenstand mit einem anderen an. Was genau passiert, sollte sich aus dem Kontext ergeben: \"Benutze Feuerzeug mit Zigarette\". Aber vorsicht: Das hier ist ein Nichtraucherspiel. Wer im Versteck des Meisters raucht, zahlt 200€ für die Endreinigung.";
+                return "[use item with another item] Uses one item with another. What exactly happens should be clear from the context: \"Use lighter with cigarette\". But be careful: this is a non-smoking game. Anyone who smokes in the master's hiding place pays €200 for the final cleaning.";
         }
     }
 
@@ -1446,7 +1446,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "Interactive Fiction ist eine Geschichte, die du als Spieler selbst vorantreiben musst.<br>Du bewegst dich durch eine fremde Welt, begegnest Leuten und findest Dinge. Wie die Geschichte sich entwickelt, hängt davon ab, was du den Leuten erzählst, was du mit den Gegenständen anfängst und zu welchen Orten du dich wendest. Dabei kommunizierst du mit der Geschichte über Texteingaben oder Multiple Choice. Genau so ist es auch bei \"Das Versteck des Meisters\".";
             else
-                return "Interactive Fiction ist eine Geschichte, die du als Spieler selbst vorantreiben musst.<br>Du bewegst dich durch eine fremde Welt, begegnest Leuten und findest Dinge. Wie die Geschichte sich entwickelt, hängt davon ab, was du den Leuten erzählst, was du mit den Gegenständen anfängst und zu welchen Orten du dich wendest. Dabei kommunizierst du mit der Geschichte über Texteingaben oder Multiple Choice. Genau so ist es auch bei \"Das Versteck des Meisters\".";
+                return "Interactive Fiction is a story that you as the player have to drive forward yourself.<br>You move through a strange world, meet people and find things. How the story develops depends on what you tell people, what you do with the objects and which places you go to. You communicate with the story via text input or multiple choice. It's exactly the same with \"The Master's Lair\".";
         }
     }
     public static string Order_ManualDialog_Person_Self_10316
@@ -1456,7 +1456,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "\"Das Versteck des Meisters\" ist eine interactive Fiction (eine interaktive Geschichte), die per Multiple Choice sowie (größtenteils) auch per Texteingabe gespielt werden kann.<br>";
             else
-                return "\"Das Versteck des Meisters\" ist eine interactive Fiction (eine interaktive Geschichte), die per Multiple Choice sowie (größtenteils) auch per Texteingabe gespielt werden kann.<br>";
+                return "\"The Master's Lair\" is an interactive fiction (an interactive story) that can be played via multiple choice and (for the most part) also via text input.<br>";
         }
     }
     public static string Order_ManualDialog_Person_Self_10317
@@ -1466,7 +1466,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "\"Das Versteck des Meisters\" lässt sich komplett mit Multiple Choice spielen, und zwar in zwei Modi: Wählst du \"Simples Multiple Choice\", wirst du weniger Optionen erhalten, was du machen kannst. Die Lösungen werden dadurch etwas einfacher. Wählst du diese Option nicht, erhältst du mehr Optionen. Lösbar ist das Spiel in jedem Fall. Wähle die einfachere Option, wenn du dich von zuvielen Handlungsmöglichkeiten umzingelt fühlst.<br>Bei Multiple Choice kannst du Gegenstände, Personen oder Orte direkt anklicken: Entweder im Fließtext oder in einer der zuschaltbaren Listen. Sogleich erhältst du eine Auswahl an Möglichkeiten, die du nun hast. Einfach was auswählen - und schon wird es ausgeführt, oder dir mitgeteilt, warum das gerade eine schlechte Idee war.<br>Du kannst über die Befehlsliste auch den umgekehrten Weg gehen und zuerst einmal einen Befehl auswählen. Wenn der Befehl nur mit einem Objekt funktioniert, wirst du danach gefragt.<br>Dialoge und alle Entscheidungen im Spiel funktionieren grundsätzlich über Multiple Choice. ";
             else
-                return "\"Das Versteck des Meisters\" lässt sich komplett mit Multiple Choice spielen, und zwar in zwei Modi: Wählst du \"Simples Multiple Choice\", wirst du weniger Optionen erhalten, was du machen kannst. Die Lösungen werden dadurch etwas einfacher. Wählst du diese Option nicht, erhältst du mehr Optionen. Lösbar ist das Spiel in jedem Fall. Wähle die einfachere Option, wenn du dich von zuvielen Handlungsmöglichkeiten umzingelt fühlst.<br>Bei Multiple Choice kannst du Gegenstände, Personen oder Orte direkt anklicken: Entweder im Fließtext oder in einer der zuschaltbaren Listen. Sogleich erhältst du eine Auswahl an Möglichkeiten, die du nun hast. Einfach was auswählen - und schon wird es ausgeführt, oder dir mitgeteilt, warum das gerade eine schlechte Idee war.<br>Du kannst über die Befehlsliste auch den umgekehrten Weg gehen und zuerst einmal einen Befehl auswählen. Wenn der Befehl nur mit einem Objekt funktioniert, wirst du danach gefragt.<br>Dialoge und alle Entscheidungen im Spiel funktionieren grundsätzlich über Multiple Choice. ";
+                return "\\\"The Master's Lair\" can be played entirely with multiple choice, in two modes: If you choose \\\"Simple Multiple Choice\\\", you will be given fewer options of what you can do. This will make the solutions a little easier. If you do not select this option, you will be given more options. The game can be solved in any case. Choose the simpler option if you feel surrounded by too many possible courses of action.<br>With multiple choice, you can click on objects, people or places directly: either in the continuous text or in one of the selectable lists. You will immediately be presented with a selection of options. Simply select something - and it will be executed, or you will be told why it was a bad idea.<br>You can also go the other way round via the command list and select a command first. If the command only works with one object, you will be asked for it.<br>Dialogs and all decisions in the game are based on multiple choice. ";
         }
     }
     public static string Order_ManualDialog_Person_Self_10318
@@ -1476,7 +1476,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "\"Das Versteck des Meisters\" beinhaltet einen klassischen Textparser. Eingaben wie \"töte die spröde Kröte mit der schnöden Tröte\" werden selbstverständlich verstanden (sofern Kröte und Tröte vor Ort sind). Wenn es für deine Eingaben mehrere Interpretationsmöglichkeiten gibt, fragt das Spiel nach. Redest du mit Personen oder musst du eine Entscheidung treffen, kommt immer auch Multiple Choice ins Spiel. Alle Multiple Choice Menüs können übrigens auch mit der Tastatur bedient werden.<br>Wenn du ein fortgeschrittener Spieler bist und die volle Spieltiefe haben willst, sei dir die Texteingabe empfohlen.";
             else
-                return "\"Das Versteck des Meisters\" beinhaltet einen klassischen Textparser. Eingaben wie \"töte die spröde Kröte mit der schnöden Tröte\" werden selbstverständlich verstanden (sofern Kröte und Tröte vor Ort sind). Wenn es für deine Eingaben mehrere Interpretationsmöglichkeiten gibt, fragt das Spiel nach. Redest du mit Personen oder musst du eine Entscheidung treffen, kommt immer auch Multiple Choice ins Spiel. Alle Multiple Choice Menüs können übrigens auch mit der Tastatur bedient werden.<br>Wenn du ein fortgeschrittener Spieler bist und die volle Spieltiefe haben willst, sei dir die Texteingabe empfohlen.";
+                return "\"The Master's Lair\" contains a classic text parser. Inputs such as \"kill Bill with the quill\" are understood as a matter of course (provided Bill and quill are present). If there are several possible interpretations for your entries, the game will ask you. If you talk to people or have to make a decision, multiple choice always comes into play. All multiple choice menus can also be operated using the keyboard.<br>If you are an advanced player and want the full depth of the game, text input is recommended.";
         }
     }
 
@@ -1487,7 +1487,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "Über 'Das Versteck des Meisters'";
             else
-                return "Über 'Das Versteck des Meisters'";
+                return "About 'The Masters's Lair'";
         }
     }
 
@@ -1498,7 +1498,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "Ich befestigte [I:I10_Metall_Tray]die Schale[/I] an [I:I10_Bracket]der Halterung[/I].";
             else
-                return "Ich befestigte [I:I10_Metall_Tray]die Schale[/I] an [I:I10_Bracket]der Halterung[/I].";
+                return "I attached [I:I10_Metal_Tray]the tray[/I] to [I:I10_Bracket]the bracket[/I].";
         }
     }
     public static string Heat_NoFire

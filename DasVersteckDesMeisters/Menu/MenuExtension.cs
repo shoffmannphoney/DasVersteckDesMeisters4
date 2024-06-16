@@ -375,8 +375,10 @@ public class MenuExtension
         {
             LocalMethods!.Remove(method!);
         }
-        catch // ( Exception e )
+        catch ( Exception e )
         {
+            Phoney_MAUI.Core.GlobalData.AddLog("RemoveLocalMethod: " + e.Message, IGlobalData.protMode.crisp);
+
             // int a = 5;
         }
     }
@@ -1266,8 +1268,42 @@ public class MenuExtension
         }
     }
 
+#if ANDROID
+    public void debugGlobalRefWorker()
+    {
+        while (true)
+        {
+            dumpGlobalRefTable();
+            Task.Delay(10000).Wait();
+        }
+    }
+
+    //dont create these in dumpGlobalRefTable otherwise they will clutter up the gref log
+    Java.Lang.Reflect.Method dumpGREFTableMethod = Java.Lang.Class.ForName("dalvik.system.VMDebug").GetDeclaredMethod("dumpReferenceTables");
+    Java.Lang.Object[] args = new Java.Lang.Object[0];
+
+    public void dumpGlobalRefTable()
+    {
+        //          Java.Lang.Class cls = Java.Lang.Class.ForName("android.os.Debug");
+        //          Java.Lang.Class cls = Java.Lang.Class.ForName("dalvik.system.VMDebug");
+        //      var method = cls.GetDeclaredMethod("dumpReferenceTables");
+        // dumpGREFTableMethod.Invoke(null, args);
+    }
+    int ctDumpRefs = 0;
+#endif
+
     private bool MenuRescalerMT()
     {
+#if ANDROID
+        ctDumpRefs++;
+        if (ctDumpRefs > 100)
+        {
+            dumpGlobalRefTable();
+            ctDumpRefs = 0;
+        }
+
+#endif
+
         // Callback-Service im Menü-Thread
         int ix; 
         for(  ix = 0; ix < ListCalls.Count; ix++)
@@ -1301,6 +1337,7 @@ public class MenuExtension
             }
             catch (Exception e)
             {
+                Phoney_MAUI.Core.GlobalData.AddLog("MenuRescalerMT: " + e.Message, IGlobalData.protMode.crisp);
                 Console.WriteLine(e);
                 throw;
             }

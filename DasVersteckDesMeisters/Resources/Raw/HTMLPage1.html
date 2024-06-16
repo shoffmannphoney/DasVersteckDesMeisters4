@@ -141,12 +141,12 @@
                     oldYPos = [YPOS];
                 if (oldYPos > 0)
                 { 
-                    console.log( "DestPos: " + oldYPos);
-                    console.log("OldPos: " + oldYPos2);
-                            console.log( "pageYOffset: " + window.pageYOffset);
-                    console.log("InnerHeight: " + window.innerHeight);
-                    console.log("ScrollHeight: " + document.body.scrollHeight);
-                    console.log("DestPos berechnet: " + ( document.body.scrollHeight - window.innerHeight ) );
+                    // console.log( "DestPos: " + oldYPos);
+        // console.log("OldPos: " + oldYPos2);
+        //          console.log( "pageYOffset: " + window.pageYOffset);
+        // console.log("InnerHeight: " + window.innerHeight);
+        //          console.log("ScrollHeight: " + document.body.scrollHeight);
+        //       console.log("DestPos berechnet: " + ( document.body.scrollHeight - window.innerHeight ) );
 
                     /*
                     if ((oldYPos - oldYPos2 < 300) && (oldYPos - oldYPos2 > -300 ) )
@@ -158,7 +158,7 @@
                     else
                     */
                     {
-                        console.log("DoScroll()");
+                        // console.log("DoScroll()");
                         window.scrollTo({ top: oldYPos });
                     }
                     // window.scrollTo({ top: oldYPos });
@@ -173,7 +173,7 @@
             function SetFullyLoaded()
             {
                 window.FullyLoaded ++;
-                console.log("Gnu gnu gnu " + window.FullyLoaded ) ;
+                // console.log("Gnu gnu gnu " + window.FullyLoaded ) ;
                 // window.location.href = 'https://runcsharp.LoadedFully?' + document.body.scrollHeight;
                 oldYPos = [YPOS];
                 window.scrollTo({ top: oldYPos });
@@ -184,17 +184,17 @@
             function cbFullyLoaded()
             {
               DoScroll();
-              console.log("Gna gne gni");
+              // console.log("Gna gne gni");
                 window.webViewBridge?.cbFullyLoaded( "Töte die Kröte mit der Flöte!");
             }
             function cbFullyLoadedDOM() {
                 DoScroll();
-                console.log("Gna gne gni DOM");
+    // console.log("Gna gne gni DOM");
                 window.webViewBridge?.cbFullyLoaded("Töte die Kröte mit der Flöte!");
             }
           function SetFullyLoadedDoc() {
                 window.FullyLoaded++;
-                console.log("Gni gni gni " + window.FullyLoaded);
+    // console.log("Gni gni gni " + window.FullyLoaded);
                 // window.location.href = 'https://runcsharp.LoadedFully?' + document.body.scrollHeight;
                 oldYPos = [YPOS];
                 window.scrollTo({ top: oldYPos });

@@ -5,7 +5,7 @@
 			<action android:name="android.speech.RecognitionService" />
 		</intent>
 	</queries>
-	<application android:allowBackup="true" android:supportsRtl="true" android:icon="@mipmap/clawmobile"></application>
+	<application android:allowBackup="true" android:supportsRtl="true" android:icon="@mipmap/clawmobile" android:largeHeap="true" ></application>
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.INTERNET" />
 	<uses-permission android:name="android.permission.RECORD_AUDIO" />

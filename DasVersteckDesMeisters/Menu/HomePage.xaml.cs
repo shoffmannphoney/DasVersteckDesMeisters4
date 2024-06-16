@@ -229,7 +229,6 @@ public partial class HomePage : ContentPage, IMenuExtension
         B_Credits.Clicked -= _menuExtension!.PressCredits;
         B_End.Clicked -= PressEndLocal;
 
-
         _menuExtension!.QuitMethod = null;
     }
     public AbsoluteLayout GetAbsoluteLayout()
@@ -346,6 +345,97 @@ public partial class HomePage : ContentPage, IMenuExtension
         }
         // BlueBox.IsVisible = true;
         // AbsoluteLayout.SetLayoutBounds(BlueBox, new Rect(p3.X, p3.Y, 400, 200));
+    }
+
+    public void DoTest( object? sender, EventArgs ea)
+    {
+
+#if ANDROID
+        
+        GC.Collect();
+        int grefCount1 = Java.Interop.JniRuntime.CurrentRuntime.GlobalReferenceCount;
+        TreeView tv = UIElement.NewTreeView();
+        tv.SetupTreeView();
+        PageGrid.Children.Add(tv);
+        TreeViewItem t1 = AddTreeViewItem(tv, "Jehova 1", "Jehova 2");
+        TreeViewItem t2 = AddTreeViewItem(tv, "Jehova 2_1", "Jehova 2");
+        TreeViewItem t3 = AddTreeViewItem(t1, "Jehova 3_1", "Jehova 2");
+        TreeViewItem t4 = AddTreeViewItem(t1, "Jehova 4_1", "Jehova 2");
+        GC.Collect();
+        int grefCount2 = Java.Interop.JniRuntime.CurrentRuntime.GlobalReferenceCount;
+
+        PageGrid.Children.Remove(tv);
+        PageGrid.Children.Add(tv);
+        PageGrid.Children.Remove(tv);
+        PageGrid.Children.Add(tv);
+        PageGrid.Children.Remove(tv);
+        PageGrid.Children.Add(tv);
+        PageGrid.Children.Remove(tv);
+        PageGrid.Children.Add(tv);
+        PageGrid.Children.Remove(tv);
+        PageGrid.Children.Add(tv);
+
+
+        GC.Collect();
+        int grefCount2a = Java.Interop.JniRuntime.CurrentRuntime.GlobalReferenceCount;
+
+
+        PageGrid.Children.Remove(tv);
+        TreeView.EmptyTreeViewItem(tv, true, true, true);
+        GC.Collect();
+        int grefCount3 = Java.Interop.JniRuntime.CurrentRuntime.GlobalReferenceCount;
+        Console.WriteLine("Exit Test: " + grefCount1.ToString() + " " + grefCount2.ToString() + " " + grefCount2a.ToString() + " " + grefCount3.ToString());
+
+
+#endif
+    }
+
+    TreeViewItem AddTreeViewItem(TreeViewItem tv, string? Name, string? CallString)
+    {
+        TreeViewItem tv1 = UIElement.NewTreeViewItem();
+        tv1.SetupTreeViewItem();
+        tv1.UserDefinedObject = CallString!;
+        tv1.Text = Name!;
+        tv.Add(tv1);
+        tv1.SetCursorHand();
+        tv1.SetClicked(SelectTreeViewItem);
+        tv1.HorizontalOptions = LayoutOptions.Start;
+        tv1.CascadeInputTransparent = false;
+        tv1.InputTransparent = false;
+        // tv1.Background = Colors.Blue;
+
+        /*
+        var tap = new TapGestureRecognizer();
+        tap.Tapped += SelectTreeViewItem; 
+        tv1.GestureRecognizers.Add(tap);
+        */
+        // tv1.CurrentTreeState = TreeViewItem.TreeState.open;
+        return tv1;
+    }
+    void SelectTreeViewItem(object? sender, EventArgs e)
+    {
+        if (GlobalData.CurrentGlobalData!.Adventure!.UIS!.MCMVVisible == true)
+            return;
+        // if (FeedbackTextObj.FeedbackModeMC == true || FlushText == true) return;
+
+        TreeViewItem? tvi = (TreeViewItem)sender!;
+        string? ParseText = (tvi!.UserDefinedObject as string)!;
+
+        UIS!.UpdateBrowserCallsPerCycle = 0;
+
+        GD!.OrderList!.DisableTempOrderList();
+        GD!.Adventure!.SetStoryLine = false;
+        GD!.Adventure!.DoGameLoop(ParseText!);
+        UIS!.StoryTextObj!.AdvTextRefresh();
+#if !NEWSCROLL
+
+        UIS!.Scr.SetScrollerToEnd();
+#endif
+        SetInputFocus();
+    }
+    public bool SetInputFocus()
+    {
+        return true;
     }
 
     public void PressEndLocal(object? sender, EventArgs ea)

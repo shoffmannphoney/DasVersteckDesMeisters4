@@ -378,7 +378,7 @@ public partial class ReplayPage : ContentPage, IMenuExtension
 
         foreach ( IView iv in ReplayTable.Children )
         {
-            TreeView.EmptyTreeViewItem( iv );
+            TreeView.EmptyTreeViewItem( iv, true, true, true);
 
         }
         ReplayTable.Children.Clear();
@@ -650,8 +650,9 @@ public partial class ReplayPage : ContentPage, IMenuExtension
         {
             val = Int32.Parse( e!.Text);
         }
-        catch 
-        { 
+        catch (Exception ex)
+        {
+            Phoney_MAUI.Core.GlobalData.AddLog("CMEditChoiceUnfocused: " + ex.Message, IGlobalData.protMode.crisp);
         }
 
         if (_menuExtension!.MEMenus[_menuExtension!.MEMenus.Count - 1].UserDefinedData != null)

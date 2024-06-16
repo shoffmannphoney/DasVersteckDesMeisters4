@@ -59,6 +59,7 @@ public partial class GamePage : ContentPage, IMenuExtension
             GD = GlobalData.CurrentGlobalData!;
             GD.InitProcess = true;
 
+            GD.LayoutDescription.Highlighting = true;
 
             GlobalSpecs.CurrentGlobalSpecs!.InitRunning = IGlobalSpecs.initRunning.started;
             InitializeComponent();
@@ -97,7 +98,7 @@ public partial class GamePage : ContentPage, IMenuExtension
             UIS!.SetScoreMethod(SetScore);
             UIS!.SetMCFocusMethod(SetMCFocus);
 
-            _menuExtension!.SetMenuExtension(GetMenuGridLeft, GetMenuGridTotal, GetMenuGridMenu, WebView_Grid, Page_Grid, GetMenuButton, GetUIServices, GetAbsoluteLayout, GetMenuTitle, nameof(GamePage));
+            _menuExtension!.SetMenuExtension(GetMenuGridLeft, GetMenuGridTotal, GetMenuGridMenu, WebView_Grid, Page_Grid, GetMenuButton, GetUIServices!, GetAbsoluteLayout, GetMenuTitle, nameof(GamePage));
             UIS.ExternalGameOut = GameOut;
             // UIS.ExternalGameOut.Navigating += UIS.WebView1_Navigating;
             // UIS.ExternalGameOut.Navigated += UIS.WebView1_Navigated;
@@ -127,8 +128,10 @@ public partial class GamePage : ContentPage, IMenuExtension
             UIS.UpdateBrowserBlocked = false;
             GlobalSpecs.CurrentGlobalSpecs.InitRunning = IGlobalSpecs.initRunning.finished;
         }
-        catch  // (Exception e)
+        catch  (Exception e)
         {
+            Phoney_MAUI.Core.GlobalData.AddLog("GamePage: " + e.Message, IGlobalData.protMode.crisp);
+
         }
     }
 
@@ -1210,7 +1213,7 @@ public partial class GamePage : ContentPage, IMenuExtension
     public bool ExecuteGamePageLayout()
     {
         // Nur testweise eingefügt: GC.Collect() muss unbedingt wieder raus
-        GC.Collect();
+        // GC.Collect();
 
 
         if (gplUpdate == true)
@@ -2044,8 +2047,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                     if (tp.TypeID == 1 && tp0.SelectButton!.IsVisible == true && OrderTreeHasChanged == true)
                     {
                         tvOrder = CreateOrderTree();
-                        TreeView.EmptyTreeViewItem(tp0.TabPanelGrid!.Children[0]);
-                        // tp0.TabPanelGrid!.Children[0] = null;
+                        TreeView.EmptyTreeViewItem(tp0.TabPanelGrid!.Children[0], true, true, true);
                         tp0.TabPanelGrid!.Children[0] = tvOrder;
                         tvOrder.CalcToggles();
                         OrderTreeHasInitialized = true;
@@ -2054,9 +2056,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                     else if (tp.TypeID == 2 && tp1.SelectButton!.IsVisible == true && ItemLocTreeHasChanged == true)
                     {
                         tvOrder = CreateItemLocTree();
-                        TreeView.EmptyTreeViewItem(tp1.TabPanelGrid!.Children[0]);
-
-                        // tp1.TabPanelGrid!.Children[0] = null;
+                        TreeView.EmptyTreeViewItem(tp1.TabPanelGrid!.Children[0], true, true, true);
                         tp1.TabPanelGrid!.Children[0] = tvOrder;
                         tvOrder.CalcToggles();
                         ItemLocTreeHasInitialized = true;
@@ -2065,8 +2065,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                     else if (tp.TypeID == 3 && tp2.SelectButton!.IsVisible == true && ItemInvTreeHasChanged == true)
                     {
                         tvOrder = CreateItemInvTree();
-                        TreeView.EmptyTreeViewItem( tp2.TabPanelGrid!.Children[0]);
-                        // tp2.TabPanelGrid!.Children[0] = null;
+                        TreeView.EmptyTreeViewItem( tp2.TabPanelGrid!.Children[0], true, true, true);
                         tp2.TabPanelGrid!.Children[0] = tvOrder;
                         tvOrder.CalcToggles();
                         ItemInvTreeHasInitialized = true;
@@ -2087,8 +2086,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                     if (tp.TypeID == 1 && tp0.SelectButton!.IsVisible == true && OrderTreeHasChanged == true)
                     {
                         tvOrder = CreateOrderTree();
-                        TreeView.EmptyTreeViewItem( tp0.TabPanelGrid!.Children[0]);
-                        // tp0.TabPanelGrid!.Children[0] = null;
+                        TreeView.EmptyTreeViewItem( tp0.TabPanelGrid!.Children[0], true, true, true);
                         tp0.TabPanelGrid!.Children[0] = tvOrder;
                         tvOrder.CalcToggles();
                         OrderTreeHasInitialized = true;
@@ -2098,8 +2096,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                     else if (tp.TypeID == 2 && tp1.SelectButton!.IsVisible == true && ItemLocTreeHasChanged == true)
                     {
                         tvOrder = CreateItemLocTree();
-                        TreeView.EmptyTreeViewItem(tp1.TabPanelGrid!.Children[0]);
-                        // tp1.TabPanelGrid!.Children[0] = null;
+                        TreeView.EmptyTreeViewItem(tp1.TabPanelGrid!.Children[0], true, true, true);
                         tp1.TabPanelGrid!.Children[0] = tvOrder;
                         tvOrder.CalcToggles();
                         ItemLocTreeHasInitialized = true;
@@ -2108,8 +2105,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                     else if (tp.TypeID == 3 && tp2.SelectButton!.IsVisible == true && ItemInvTreeHasChanged == true)
                     {
                         tvOrder = CreateItemInvTree();
-                        TreeView.EmptyTreeViewItem( tp2.TabPanelGrid!.Children[0]);
-                        // tp2.TabPanelGrid!.Children[0] = null;
+                        TreeView.EmptyTreeViewItem( tp2.TabPanelGrid!.Children[0], true, true, true);
                         tp2.TabPanelGrid!.Children[0] = tvOrder;
                         tvOrder.CalcToggles();
                         ItemInvTreeHasInitialized = true;
@@ -2124,14 +2120,12 @@ public partial class GamePage : ContentPage, IMenuExtension
                 TabItem.TabPanel tp2 = TIRightUp.TabPanels[2];
                 foreach (TabItem.TabPanel tp in TIRightUp.TabPanels)
                 {
-
                     if (tp.TypeID == 1 && tp0.SelectButton!.IsVisible == true && OrderTreeHasChanged == true)
                     {
                         tvOrder = CreateOrderTree();
                         if (tvOrder != null && tp0.TabPanelGrid!.Children.Count > 0)
                         {
-                            TreeView.EmptyTreeViewItem(tp0.TabPanelGrid!.Children[0]);
-                            // tp0.TabPanelGrid!.Children[0] = null;
+                            TreeView.EmptyTreeViewItem(tp0.TabPanelGrid!.Children[0], true, true, true);
                             tp0.TabPanelGrid!.Children[0] = tvOrder;
                             tvOrder.CalcToggles();
                         }
@@ -2142,14 +2136,13 @@ public partial class GamePage : ContentPage, IMenuExtension
                         OrderTreeHasInitialized = true;
                         // GD.Adventure!.StoryOutput("Befehle aktualisiert RU");
                     }
-                    else if (tp.TypeID == 2 && tp1.SelectButton!.IsVisible == true && ItemLocTreeHasChanged == true)
+                    else 
+                    if (tp.TypeID == 2 && tp1.SelectButton!.IsVisible == true && ItemLocTreeHasChanged == true)
                     {
                         tvOrder = CreateItemLocTree();
                         if (tvOrder != null && tp1.TabPanelGrid!.Children.Count > 0 )
                         {
-                            // tp1.TabPanelGrid!.Children[0] = null;
-                            TreeView.EmptyTreeViewItem( tp1.TabPanelGrid!.Children[0]);
-                            // tp1.TabPanelGrid!.Children[0] = null;
+                            TreeView.EmptyTreeViewItem( tp1.TabPanelGrid!.Children[0], true, true, true);
                             tp1.TabPanelGrid!.Children[0] = tvOrder;
                             tvOrder.CalcToggles();
                         }
@@ -2165,8 +2158,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                         tvOrder = CreateItemInvTree();
                         if (tvOrder != null && tp2.TabPanelGrid!.Children.Count > 0)
                         {
-                            TreeView.EmptyTreeViewItem( tp2.TabPanelGrid!.Children[0]);
-                            // tp2.TabPanelGrid!.Children[0] = null;
+                            TreeView.EmptyTreeViewItem( tp2.TabPanelGrid!.Children[0], true, true, true);
                             tp2.TabPanelGrid!.Children[0] = tvOrder;
                             tvOrder.CalcToggles();
                         }
@@ -2193,8 +2185,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                         tvOrder = CreateOrderTree();
                         if (tvOrder != null)
                         {
-                            TreeView.EmptyTreeViewItem( tp0.TabPanelGrid!.Children[0]);
-                            // tp0.TabPanelGrid!.Children[0] = null;
+                            TreeView.EmptyTreeViewItem( tp0.TabPanelGrid!.Children[0], true, true, true);
                             tp0.TabPanelGrid!.Children[0] = tvOrder;
                             tvOrder.CalcToggles();
                         }
@@ -2210,9 +2201,8 @@ public partial class GamePage : ContentPage, IMenuExtension
                         tvOrder = CreateItemLocTree();
                         if (tvOrder != null)
                         {
-                            TreeView.EmptyTreeViewItem( tp1.TabPanelGrid!.Children[0]);
+                            TreeView.EmptyTreeViewItem( tp1.TabPanelGrid!.Children[0], true, true, true);
 
-                            // tp1.TabPanelGrid!.Children[0] = null;
                             tp1.TabPanelGrid!.Children[0] = tvOrder;
                             tvOrder.CalcToggles();
                         }
@@ -2228,8 +2218,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                         tvOrder = CreateItemInvTree();
                         if (tvOrder != null)
                         {
-                            TreeView.EmptyTreeViewItem( tp2.TabPanelGrid!.Children[0]);
-                            // tp2.TabPanelGrid!.Children[0] = null;
+                            TreeView.EmptyTreeViewItem( tp2.TabPanelGrid!.Children[0], true, true, true);
                             tp2.TabPanelGrid!.Children[0] = tvOrder;
                             tvOrder.CalcToggles();
                         }
@@ -2244,6 +2233,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                 }
             }
 
+           
             if (GD.LayoutDescription.ScreenMode == IGlobalData.screenMode.portrait)
             {
 
@@ -2260,7 +2250,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                         {
                             // TICol1_0!.AddTabPanel(FaSolid.Wrench, 1);
                             // TICol1_0!.TabPanels[ix].TabPanelGrid.Clear();
-                            TreeView.EmptyTreeViewItem( TICol1_0!.TabPanels[0].TabPanelGrid!.Children[0]);
+                            TreeView.EmptyTreeViewItem( TICol1_0!.TabPanels[0].TabPanelGrid!.Children[0], true, true, true);
                             TICol1_0!.TabPanels[0].TabPanelGrid!.Children[0] = tvOrder;
                             TICol1_0!.TabPanels[0].SelectButton!.IsVisible = true;
                             TICol1_0!.TabPanels[0].SelectButton!.Text = FaSolid.Wrench;
@@ -2284,7 +2274,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                         {
                             // TICol1_0!.AddTabPanel(FaSolid.MapMarkerAlt, 2);
                             // TICol1_0!.TabPanels[ix].TabPanelGrid.Clear();
-                            TreeView.EmptyTreeViewItem( TICol1_0!.TabPanels[1].TabPanelGrid!.Children[0]);
+                            TreeView.EmptyTreeViewItem( TICol1_0!.TabPanels[1].TabPanelGrid!.Children[0], true, true, true);
                             TICol1_0!.TabPanels[1].TabPanelGrid!.Children[0] = tvOrder;
                             TICol1_0!.TabPanels[1].SelectButton!.IsVisible = true;
                             TICol1_0!.TabPanels[1].SelectButton!.Text = FaSolid.MapMarkerAlt;
@@ -2308,7 +2298,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                         {
                             // TICol1_0!.TabPanels[ix].TabPanelGrid.Clear();
                             // TICol1_0!.AddTabPanel(FaSolid.Suitcase, 3);
-                            TreeView.EmptyTreeViewItem( TICol1_0!.TabPanels[2].TabPanelGrid!.Children[0]);
+                            TreeView.EmptyTreeViewItem( TICol1_0!.TabPanels[2].TabPanelGrid!.Children[0], true, true, true);
                             TICol1_0!.TabPanels[2].TabPanelGrid!.Children[0] = tvOrder;
                             TICol1_0!.TabPanels[2].SelectButton!.IsVisible = true;
                             TICol1_0!.TabPanels[2].SelectButton!.Text = FaSolid.Suitcase;
@@ -2341,7 +2331,7 @@ public partial class GamePage : ContentPage, IMenuExtension
 
                             // TICol2_0!.TabPanels[0].TabPanelGrid.Clear();
                             // TICol2_0!.TabPanels![0].TabPanelGrid!.Clear();
-                            TreeView.EmptyTreeViewItem( TICol2_0!.TabPanels[0].TabPanelGrid!.Children[0]);
+                            TreeView.EmptyTreeViewItem( TICol2_0!.TabPanels[0].TabPanelGrid!.Children[0], true, true, true);
                             TICol2_0!.TabPanels![0].TabPanelGrid!.Children[0] = tvOrder;
                             TICol2_0!.TabPanels![0].SelectButton!.IsVisible = true;
                             TICol2_0!.TabPanels![0].SelectButton!.Text = FaSolid.Wrench;
@@ -2366,7 +2356,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                         // TICol2_1!.TabPanels[0].TabPanelGrid!.Clear();
                         if (tvOrder != null)
                         {
-                            TreeView.EmptyTreeViewItem( TICol2_0!.TabPanels[1].TabPanelGrid!.Children[0]);
+                            TreeView.EmptyTreeViewItem( TICol2_0!.TabPanels[1].TabPanelGrid!.Children[0], true, true, true);
                             TICol2_0!.TabPanels[1].TabPanelGrid!.Children[0] = tvOrder;
                             TICol2_0!.TabPanels[1].SelectButton!.IsVisible = true;
                             TICol2_0!.TabPanels[1].SelectButton!.Text = FaSolid.MapMarkerAlt;
@@ -2390,7 +2380,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                         {
                             // TICol2_2!.TabPanels[0].TabPanelGrid.Clear();
                             // TICol2_2!.TabPanels[0].TabPanelGrid!.Clear();
-                            TreeView.EmptyTreeViewItem( TICol2_0!.TabPanels[2].TabPanelGrid!.Children[0]);
+                            TreeView.EmptyTreeViewItem( TICol2_0!.TabPanels[2].TabPanelGrid!.Children[0], true, true, true);
                             TICol2_0!.TabPanels[2].TabPanelGrid!.Children[0] = tvOrder;
                             TICol2_0!.TabPanels[2].SelectButton!.IsVisible = true;
                             TICol2_0!.TabPanels[2].SelectButton!.Text = FaSolid.Suitcase;
@@ -2420,7 +2410,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                         {
                             // TICol3_0!.TabPanels[0].TabPanelGrid.Clear();
                             // TICol3_0!.TabPanels[0].TabPanelGrid!.Clear();
-                            TreeView.EmptyTreeViewItem( TICol3_0!.TabPanels[0].TabPanelGrid!.Children[0]);
+                            TreeView.EmptyTreeViewItem( TICol3_0!.TabPanels[0].TabPanelGrid!.Children[0], true, true, true);
                             TICol3_0!.TabPanels[0].TabPanelGrid!.Children[0] = tvOrder;
                             TICol3_0!.TabPanels[0].SelectButton!.IsVisible = true;
                             TICol3_0!.TabPanels[0].SelectButton!.Text = FaSolid.Wrench;
@@ -2445,7 +2435,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                         {
                             // TICol3_1!.TabPanels[0].TabPanelGrid.Clear();
                             // TICol3_1!.TabPanels[0].TabPanelGrid!.Clear();
-                            TreeView.EmptyTreeViewItem( TICol3_0!.TabPanels[1].TabPanelGrid!.Children[0]);
+                            TreeView.EmptyTreeViewItem( TICol3_0!.TabPanels[1].TabPanelGrid!.Children[0], true, true, true);
                             TICol3_0!.TabPanels[1].TabPanelGrid!.Children[0] = tvOrder;
                             TICol3_0!.TabPanels[1].SelectButton!.IsVisible = true;
                             TICol3_0!.TabPanels[1].SelectButton!.Text = FaSolid.MapMarkerAlt;
@@ -2468,7 +2458,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                         tvOrder = CreateItemInvTree();
                         // TICol3_2!.TabPanels[0].TabPanelGrid.Clear();
                         // TICol3_2!.TabPanels[0].TabPanelGrid!.Clear();
-                        TreeView.EmptyTreeViewItem( TICol3_0!.TabPanels[2].TabPanelGrid!.Children[0]);
+                        TreeView.EmptyTreeViewItem( TICol3_0!.TabPanels[2].TabPanelGrid!.Children[0], true, true, true);
                         TICol3_0!.TabPanels[2].TabPanelGrid!.Children[0] = tvOrder;
                         TICol3_0!.TabPanels[2].SelectButton!.IsVisible = true;
                         TICol3_0!.TabPanels[2].SelectButton!.Text = FaSolid.Suitcase;
@@ -3818,7 +3808,8 @@ public partial class GamePage : ContentPage, IMenuExtension
         }
         catch (Exception e)
         {
-            Console.WriteLine(e);
+            Phoney_MAUI.Core.GlobalData.AddLog("GamePage: " + e.Message, IGlobalData.protMode.crisp);
+            // Console.WriteLine(e);
             throw;
         }
 
@@ -3832,6 +3823,9 @@ public partial class GamePage : ContentPage, IMenuExtension
     {
         if (GlobalData.CurrentGlobalData!.Adventure!.UIS!.MCMVVisible == true)
             return;
+
+        (sender as Phoney_MAUI.TreeViewItem).BackgroundColor = Colors.AliceBlue;
+
         // if (FeedbackTextObj.FeedbackModeMC == true || FlushText == true) return;
 
         TreeViewItem? tvi = (TreeViewItem)sender!;
@@ -4402,7 +4396,7 @@ public partial class GamePage : ContentPage, IMenuExtension
 
     public void DoSetTextActive(object? o)
     {
-         TreeViewItem? tvi = (o as TreeViewItem)!;
+        TreeViewItem? tvi = (o as TreeViewItem)!;
         Label? l1 = tvi!.TextLabel;
 
         l1!.StyleClass = UIElement.Get_Label_Normal();
@@ -4637,8 +4631,9 @@ public partial class GamePage : ContentPage, IMenuExtension
             UIS!.FinishBrowserUpdate(IUIServices.onBrowserContentLoaded.SetToEnd);
             GD.InitProcess = false;
         }
-        catch // (Exception ex)
+        catch (Exception ex)
         {
+            Phoney_MAUI.Core.GlobalData.AddLog("OnNavigatedTo: " + ex.Message, IGlobalData.protMode.crisp);
 
         }
         // Thread.Sleep(100);
@@ -5296,8 +5291,10 @@ public partial class GamePage : ContentPage, IMenuExtension
             if (Windows.ApplicationModel.Package.Current != null)
                 return true;
         }
-        catch
+        catch (Exception e)
         {
+                    Phoney_MAUI.Core.GlobalData.AddLog("OnNavigatingFrom: " + e.Message, IGlobalData.protMode.crisp);
+
             // no-op
         }
 
@@ -5327,15 +5324,17 @@ public partial class GamePage : ContentPage, IMenuExtension
                 GlobalData.CurrentGlobalData!.Adventure!.DoGameLoop(Inputline.Text!);
                 // UIS!.Scr.PageDown();
             }
-            catch // ( Exception ex)
+            catch ( Exception ex)
             {
+                Phoney_MAUI.Core.GlobalData.AddLog("UpdateMessage: " + ex.Message, IGlobalData.protMode.crisp);
+
                 // int a = 5;
             }
-  
+
             // GlobalData.CurrentGlobalData!.Adventure!.UIS.Scr.ScrollPageFinal();
             // GlobalData.CurrentGlobalData!.Adventure!.UIS.UpdateBrowser();
 
-            if( GlobalData.CurrentGlobalData!.FocusMethod != null )
+            if ( GlobalData.CurrentGlobalData!.FocusMethod != null )
                 GlobalData.CurrentGlobalData!.FocusMethod();
             Inputline.Text = "";
         }
@@ -5372,8 +5371,9 @@ public partial class GamePage : ContentPage, IMenuExtension
             ((sender as WebView)!.Handler!.PlatformView as Microsoft.Maui.Platform.MauiWebView)!.LoadUrl($"https://localhost/empty.html");
 #endif
         }
-        catch // (Exception ex)
+        catch (Exception ex)
         {
+            Phoney_MAUI.Core.GlobalData.AddLog("WebView_HandlerChanged: " + ex.Message, IGlobalData.protMode.crisp);
         }
     }
     async void OnLoadHtmlFileClicked(object? sender, EventArgs e)
@@ -5382,8 +5382,9 @@ public partial class GamePage : ContentPage, IMenuExtension
         { 
             await LoadMauiAsset();
         }
-        catch // (Exception ex)
+        catch (Exception ex)
         {
+            Phoney_MAUI.Core.GlobalData.AddLog("OnLoadHtmlFileClicked: " + ex.Message, IGlobalData.protMode.crisp);
         }
     }
 
@@ -5446,8 +5447,9 @@ public partial class GamePage : ContentPage, IMenuExtension
             else
                 await Inputline.HideKeyboardAsync(CancellationToken.None);
         }
-        catch // (Exception ex)
+        catch (Exception ex)
         {
+            Phoney_MAUI.Core.GlobalData.AddLog("Clicked_Keyboard: " + ex.Message, IGlobalData.protMode.crisp);
         }
     }
 
@@ -5477,8 +5479,9 @@ public partial class GamePage : ContentPage, IMenuExtension
                 // Mike.Background = Colors.Transparent;
             }
         }
-        catch // (Exception ex)
+        catch (Exception ex)
         {
+            Phoney_MAUI.Core.GlobalData.AddLog("Clicked_Microphone: " + ex.Message, IGlobalData.protMode.crisp);
         }
 
     }
@@ -5508,8 +5511,9 @@ public partial class GamePage : ContentPage, IMenuExtension
                 // Mike.Background = Colors.Transparent;
             }
         }
-        catch // (Exception ex)
+        catch (Exception ex)
         {
+            Phoney_MAUI.Core.GlobalData.AddLog("Clicked_Microphone2: " + ex.Message, IGlobalData.protMode.crisp);
         }
 
     }
@@ -5539,8 +5543,9 @@ public partial class GamePage : ContentPage, IMenuExtension
                 // Mike.Background = Colors.Transparent;
             }
         }
-        catch // (Exception ex)
+        catch (Exception ex)
         {
+            Phoney_MAUI.Core.GlobalData.AddLog("Clicked_Microphone3: " + ex.Message, IGlobalData.protMode.crisp);
         }
 
     }
@@ -6120,8 +6125,10 @@ public partial class GamePage : ContentPage, IMenuExtension
 
                         SetWidth(xSplitNew.Value);
                     }
-                    catch // (Exception e)
+                    catch (Exception e)
                     {
+                                Phoney_MAUI.Core.GlobalData.AddLog("DoHorizontalSplitterButton: " + e.Message, IGlobalData.protMode.crisp);
+
                         // int a = 5;
                     }
 
@@ -6184,8 +6191,10 @@ public partial class GamePage : ContentPage, IMenuExtension
                         cdc[colSplit].Width = xSplitNew;
                         SetWidth(xSplitNew.Value);
                     }
-                    catch // (Exception e)
+                    catch (Exception e)
                     {
+                        Phoney_MAUI.Core.GlobalData.AddLog("DoHorizontalSplitterButton2: " + e.Message, IGlobalData.protMode.crisp);
+
                         // int a = 5;
                     }
 #endif
@@ -6305,8 +6314,10 @@ public partial class GamePage : ContentPage, IMenuExtension
 
                         SetWidth(xSplitNew.Value);
                     }
-                    catch // (Exception e)
+                    catch (Exception e)
                     {
+                        Phoney_MAUI.Core.GlobalData.AddLog("DoColumnSplitterButton: " + e.Message, IGlobalData.protMode.crisp);
+
                         // int a = 5;
                     }
 
@@ -6385,8 +6396,10 @@ public partial class GamePage : ContentPage, IMenuExtension
 
                         SetWidth(xSplitNew.Value);
                     }
-                    catch // (Exception e)
+                    catch (Exception e)
                     {
+                        Phoney_MAUI.Core.GlobalData.AddLog("DoColumnSplitterButton2: " + e.Message, IGlobalData.protMode.crisp);
+
                         // int a = 5;
                     }
 #endif
@@ -6510,8 +6523,10 @@ public partial class GamePage : ContentPage, IMenuExtension
 
                         SetHeight(ySplitNew.Value);
                     }
-                    catch // (Exception e)
+                    catch (Exception e)
                     {
+                                            Phoney_MAUI.Core.GlobalData.AddLog("DoVerticalSplitterButton: " + e.Message, IGlobalData.protMode.crisp);
+
                         // int a = 5;
                     }
 
@@ -6569,8 +6584,10 @@ public partial class GamePage : ContentPage, IMenuExtension
                         rdc[rowSplit].Height = ySplitNew;
                         SetHeight(ySplitNew.Value);
                     }
-                    catch // (Exception e)
+                    catch (Exception e)
                     {
+                        Phoney_MAUI.Core.GlobalData.AddLog("DoVerticalSplitterButton2: " + e.Message, IGlobalData.protMode.crisp);
+
                         // int a = 5;
                     }
 #endif
@@ -6668,8 +6685,10 @@ public partial class GamePage : ContentPage, IMenuExtension
                         SetGridDimensions();
                         SetPortraitGridDimensions();
                     }
-                    catch // (Exception e)
+                    catch (Exception e)
                     {
+                        Phoney_MAUI.Core.GlobalData.AddLog("DoPortraitSplitterButton: " + e.Message, IGlobalData.protMode.crisp);
+
                         // int a = 5;
                     }
 
@@ -6729,8 +6748,10 @@ public partial class GamePage : ContentPage, IMenuExtension
                         SetGridDimensions();
                         SetPortraitGridDimensions();
                     }
-                    catch // (Exception e)
+                    catch (Exception e)
                     {
+                        Phoney_MAUI.Core.GlobalData.AddLog("DoPortraitSplitterButton2: " + e.Message, IGlobalData.protMode.crisp);
+
                         // int a = 5;
                     }
 #endif
@@ -6815,8 +6836,9 @@ public partial class GamePage : ContentPage, IMenuExtension
                     // Xamarin-Test
                     // GridSplitter_R_Box.Margin = m;
                 }
-                catch // ( Exception e)
+                catch ( Exception e)
                 {
+                        Phoney_MAUI.Core.GlobalData.AddLog("GridSplitter_R_Pan: " + e.Message, IGlobalData.protMode.crisp);
                     // int a = 5;
                 }
 #endif
@@ -6865,8 +6887,10 @@ public partial class GamePage : ContentPage, IMenuExtension
                         cdc[2].Width = x3New;
                         cdc[4].Width = x5New;
                     }
-                    catch // ( Exception e)
+                    catch ( Exception e)
                     {
+                        Phoney_MAUI.Core.GlobalData.AddLog("GridSplitter_R_Pan2: " + e.Message, IGlobalData.protMode.crisp);
+
                         // int a = 5;
                     }
                     break;
@@ -6913,8 +6937,10 @@ public partial class GamePage : ContentPage, IMenuExtension
                         // Xamarin-Test
                         // GridSplitter_R_Box.Margin = m;
                     }
-                    catch // (Exception e)
+                    catch (Exception e)
                     {
+                        Phoney_MAUI.Core.GlobalData.AddLog("GridSplitter_R_Pan3: " + e.Message, IGlobalData.protMode.crisp);
+
                         // int a = 5;
                     }
 
@@ -7144,7 +7170,8 @@ public partial class GamePage : ContentPage, IMenuExtension
         b.Text = text;
         g.Add(b);
         g.SetRow(b, yoff);
-        g.SetColumn(b, xoff);
+
+         g.SetColumn(b, xoff);
         List<string> ButtonStyle = new();
         ButtonStyle.Add("ObjButton_Invers");
         b.StyleClass = ButtonStyle;

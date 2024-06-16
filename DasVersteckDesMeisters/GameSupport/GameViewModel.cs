@@ -66,8 +66,17 @@ public class GameViewModel : BaseViewModel
 
     private void UpdateMessage()
     {
-        if (_sendcallback != null)
-            _sendcallback();
+        try
+        {
+            if (_sendcallback != null)
+                _sendcallback();
+        }
+        catch (Exception e)
+        {
+            Phoney_MAUI.Core.GlobalData.AddLog("UpdateMessage: " + e.Message, IGlobalData.protMode.crisp);
+
+            // int a;
+        }
     }
     private bool CanUpdateMessage()
     {
@@ -76,8 +85,18 @@ public class GameViewModel : BaseViewModel
 
     public override async Task Initialize()
     {
-        await LoadDataAsync();
-        await base.Initialize();
+        try
+        {
+            await LoadDataAsync();
+            await base.Initialize();
+        }
+        catch (Exception e)
+        {
+            Phoney_MAUI.Core.GlobalData.AddLog("GameViewModel.Initialize: " + e.Message, IGlobalData.protMode.crisp);
+
+            // int a;
+        }
+
     }
     public void ChangeOrientation(IGlobalData.screenMode sm)
     {

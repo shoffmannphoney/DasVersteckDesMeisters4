@@ -5925,8 +5925,10 @@ namespace GameCore
                     }
                 }
             }
-            catch // (Exception ex)
+            catch (Exception e)
             {
+                Phoney_MAUI.Core.GlobalData.AddLog("DoRitterruestung: " + e.Message, Phoney_MAUI.Model.IGlobalData.protMode.crisp);
+
             }
             return true;
         }
@@ -5993,8 +5995,9 @@ namespace GameCore
                     }
                 }
             }
-            catch // (Exception ex)
+            catch (Exception ex)
             {
+                Phoney_MAUI.Core.GlobalData.AddLog("DoOwl: " + ex.Message, IGlobalData.protMode.crisp);
             }
             return true;
         }
@@ -6061,8 +6064,9 @@ namespace GameCore
                     }
                 }
             }
-            catch // (Exception ex)
+            catch (Exception ex)
             {
+                Phoney_MAUI.Core.GlobalData.AddLog("DoSkeleton: " + ex.Message, IGlobalData.protMode.crisp);
             }
 
             return true;
@@ -6130,8 +6134,9 @@ namespace GameCore
                     }
                 }
             }
-            catch // (Exception ex)
+            catch (Exception ex)
             {
+                Phoney_MAUI.Core.GlobalData.AddLog("DoParrot: " + ex.Message, IGlobalData.protMode.crisp);
             }
 
             return true;
@@ -6199,8 +6204,9 @@ namespace GameCore
                     }
                 }
             }
-            catch // (Exception ex)
+            catch (Exception ex)
             {
+                Phoney_MAUI.Core.GlobalData.AddLog("DoMagpie: " + ex.Message, IGlobalData.protMode.crisp);
             }
 
             return true;
@@ -6268,8 +6274,9 @@ namespace GameCore
                     }
                 }
             }
-            catch //  (Exception ex)
+            catch (Exception ex)
             {
+                Phoney_MAUI.Core.GlobalData.AddLog("DoFish: " + ex.Message, IGlobalData.protMode.crisp);
             }
 
             return true;
@@ -6337,8 +6344,9 @@ namespace GameCore
                     }
                 }
             }
-            catch // (Exception ex)
+            catch (Exception ex)
             {
+                Phoney_MAUI.Core.GlobalData.AddLog("DoSnake: " + ex.Message, IGlobalData.protMode.crisp);
             }
 
             return true;

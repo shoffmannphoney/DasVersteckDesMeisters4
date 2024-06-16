@@ -134,30 +134,44 @@ public class UIServices : IUIServices
     public int UpdateBrowserCallsPerCycle { get; set; }
     public UIServices( )
     {
-        GD = GlobalData.CurrentGlobalData!;
-        GS = GlobalSpecs.CurrentGlobalSpecs!;
+        try
+        {
+            GD = GlobalData.CurrentGlobalData!;
+            GS = GlobalSpecs.CurrentGlobalSpecs!;
 
-        NewMikeColor = Colors.Brown;
-        RecordedText = "";
+            NewMikeColor = Colors.Brown;
+            RecordedText = "";
 
-        this.FeedbackTextObj = new();
-        this.FeedbackTextObj.FeedbackModeMC = false;
-        this.Scr = new(this);
-        this.StoryTextObj = new StoryText( this );
-        this.JSBoundObject = new();
-        this.JSBoundObject.UIS = this;
+            this.FeedbackTextObj = new();
+            this.FeedbackTextObj.FeedbackModeMC = false;
+            this.Scr = new(this);
+            this.StoryTextObj = new StoryText(this);
+            this.JSBoundObject = new();
+            this.JSBoundObject.UIS = this;
 
-        if( GD != null )
-          loca.GD!.AddLanguageCallback(SetLanguage);
+            if (GD != null)
+                loca.GD!.AddLanguageCallback(SetLanguage);
+        }
+        catch (Exception ex)
+        {
+            Phoney_MAUI.Core.GlobalData.AddLog("UIServices Constructor: " + ex.Message, IGlobalData.protMode.crisp);
+        }
+
     }
 
     private DelVoid? _setLanguage;
 
     public bool SetLanguage()
     {
-        if (_setLanguage != null)
-            _setLanguage();
-
+        try
+        {
+            if (_setLanguage != null)
+                _setLanguage();
+        }
+        catch (Exception ex)
+        {
+            Phoney_MAUI.Core.GlobalData.AddLog("SetLanguage: " + ex.Message, IGlobalData.protMode.crisp);
+        }
         return true;
     }
 
@@ -191,11 +205,19 @@ public class UIServices : IUIServices
 
     public void FlushUICycle()
     {
-        if( _uiCount > 0 && _reqUICallback != null )
+        try
         {
-            _uiCount = 0;
-            _reqUICallback();
+            if (_uiCount > 0 && _reqUICallback != null)
+            {
+                _uiCount = 0;
+                _reqUICallback();
+            }
         }
+        catch (Exception ex)
+        {
+            Phoney_MAUI.Core.GlobalData.AddLog("FlushUICycle: " + ex.Message, IGlobalData.protMode.crisp);
+        }
+
     }
 
     public void ResetUICycle()
@@ -211,9 +233,16 @@ public class UIServices : IUIServices
     }
     public void SetScoreEpisode(string s)
     {
-        if( _setScoreEpisodeMethod != null )
+        try
         {
-            _setScoreEpisodeMethod();
+            if (_setScoreEpisodeMethod != null)
+            {
+                _setScoreEpisodeMethod();
+            }
+        }
+        catch (Exception ex)
+        {
+            Phoney_MAUI.Core.GlobalData.AddLog("SetScoreEpisode: " + ex.Message, IGlobalData.protMode.crisp);
         }
 
         // Eingabezeile auf "" setzen
@@ -225,180 +254,219 @@ public class UIServices : IUIServices
     }
     public void RecalcPictures( bool calcOnly = false )
     {
-        if (ExternalGameOut == null)
-            return;
-        int endLine = StoryTextObj!.Slines!.Count - 100;
-        if (endLine < 0)
-            endLine = 0;
-
-        for (int Line = StoryTextObj.Slines!.Count - 1; Line >= endLine; Line--)
+        try
         {
-            string searchString = "<center><img src=\"";
-            if (StoryTextObj.Slines?[Line]?.Contains(searchString) == true)
+            if (ExternalGameOut == null)
+                return;
+            int endLine = StoryTextObj!.Slines!.Count - 100;
+            if (endLine < 0)
+                endLine = 0;
+
+            for (int Line = StoryTextObj.Slines!.Count - 1; Line >= endLine; Line--)
             {
-                int pos;
-                int posEnd; 
-                string fName;
-
-                posEnd = (int)StoryTextObj.Slines?[Line]?.IndexOf("\"", searchString.Length, StoryTextObj.Slines[Line]!.Length - searchString.Length)!;
-                fName = StoryTextObj.Slines?[Line]!.Substring(searchString.Length, posEnd - searchString.Length)!;
-
-                pos = (int) StoryTextObj.Slines?[Line]?.IndexOf( "width=", 0, StoryTextObj.Slines[Line]!.Length )!+7;
-                posEnd = pos + 1;
-                if( pos >= 0)
+                string searchString = "<center><img src=\"";
+                if (StoryTextObj.Slines?[Line]?.Contains(searchString) == true)
                 {
-                    posEnd = ((int)StoryTextObj.Slines?[Line]?.IndexOf("\"", pos, 10)!)!;
+                    int pos;
+                    int posEnd;
+                    string fName;
+
+                    posEnd = (int)StoryTextObj.Slines?[Line]?.IndexOf("\"", searchString.Length, StoryTextObj.Slines[Line]!.Length - searchString.Length)!;
+                    fName = StoryTextObj.Slines?[Line]!.Substring(searchString.Length, posEnd - searchString.Length)!;
+
+                    pos = (int)StoryTextObj.Slines?[Line]?.IndexOf("width=", 0, StoryTextObj.Slines[Line]!.Length)! + 7;
+                    posEnd = pos + 1;
+                    if (pos >= 0)
+                    {
+                        posEnd = ((int)StoryTextObj.Slines?[Line]?.IndexOf("\"", pos, 10)!)!;
+                    }
+                    int pWidth = Int32.Parse(StoryTextObj.Slines?[Line]?.Substring(pos, posEnd - pos)!);
+
+                    pos = (int)StoryTextObj.Slines?[Line]?.IndexOf("height=", 0, StoryTextObj.Slines[Line]!.Length)! + 8;
+                    if (pos >= 0)
+                    {
+                        posEnd = ((int)StoryTextObj.Slines?[Line]?.IndexOf("\"", pos, 10)!);
+                    }
+                    int pHeight = Int32.Parse(StoryTextObj.Slines?[Line]?.Substring(pos, posEnd - pos)!);
+
+                    int perCent = 20;
+                    if (GD.LayoutDescription.PicMode == IGlobalData.picMode.medium) perCent = 40;
+                    if (GD.LayoutDescription.PicMode == IGlobalData.picMode.big) perCent = 60;
+
+
+                    int pWidthNew = (int)((ExternalGameOut.Width * perCent) / 100);
+                    int pHeightNew = (int)((pWidthNew * 9) / 16);
+                    string sResult = String.Format("<center><img src=\"{0}\" width=\"{1}\" height=\"{2}\"  align=\"middle\"/> </center>", fName, pWidthNew, pHeightNew);
+
+                    StoryTextObj.Slines![Line] = sResult;
                 }
-                int pWidth = Int32.Parse(StoryTextObj.Slines?[Line]?.Substring(pos, posEnd - pos)!);
 
-                pos = (int) StoryTextObj.Slines?[Line]?.IndexOf( "height=", 0, StoryTextObj.Slines[Line]!.Length)! +8;
-                if (pos >= 0)
-                {
-                    posEnd = ((int)StoryTextObj.Slines?[Line]?.IndexOf("\"", pos, 10)!);
-                }
-                int pHeight = Int32.Parse(StoryTextObj.Slines?[Line]?.Substring(pos, posEnd - pos)!);
-
-                int perCent = 20;
-                if (GD.LayoutDescription.PicMode == IGlobalData.picMode.medium) perCent = 40;
-                if (GD.LayoutDescription.PicMode == IGlobalData.picMode.big) perCent = 60;
-
-
-                int pWidthNew = (int)( (ExternalGameOut.Width * perCent) / 100 );
-                int pHeightNew = (int)((pWidthNew * 9) / 16);
-                string sResult = String.Format("<center><img src=\"{0}\" width=\"{1}\" height=\"{2}\"  align=\"middle\"/> </center>", fName, pWidthNew, pHeightNew);
-
-                StoryTextObj.Slines![Line] = sResult;
             }
 
+            if (!calcOnly)
+            {
+                StoryTextObj.RecalcLatest(false);
+                GD.CurrentContent = StoryTextObj.LatestStory!.ToString();
+                // InitBrowserUpdate();
+                FinishBrowserUpdate();
+            }
+        }
+        catch (Exception ex)
+        {
+            Phoney_MAUI.Core.GlobalData.AddLog("RecalcPictures: " + ex.Message, IGlobalData.protMode.crisp);
         }
 
-        if (!calcOnly)
-        {
-            StoryTextObj.RecalcLatest( false );
-            GD.CurrentContent = StoryTextObj.LatestStory!.ToString();
-            // InitBrowserUpdate();
-            FinishBrowserUpdate();
-        }
     }
     public void LoadPicToHtml(string? picName)
     {
-        if ( GD.LayoutDescription.PicMode != IGlobalData.picMode.off && picName != null)
+        try
         {
-            if (ExternalGameOut != null)
+            if (GD.LayoutDescription.PicMode != IGlobalData.picMode.off && picName != null)
             {
-                int pHeight, pWidth;
-                // string size = "100";
-                pWidth = (int)((ExternalGameOut.Width * 20) / 100);
-                pHeight = (int)((pWidth * 9) / 16);
-                if (GD.LayoutDescription.PicMode == IGlobalData.picMode.medium)
+                if (ExternalGameOut != null)
                 {
-                    // size = "400";
-                    pWidth = (int)((ExternalGameOut.Width * 40) / 100);
+                    int pHeight, pWidth;
+                    // string size = "100";
+                    pWidth = (int)((ExternalGameOut.Width * 20) / 100);
                     pHeight = (int)((pWidth * 9) / 16);
-                }
-                if (GD.LayoutDescription.PicMode == IGlobalData.picMode.big)
-                {
-                    // size = "800";
-                    pWidth = (int)((ExternalGameOut.Width * 60) / 100);
-                    pHeight = (int)((pWidth * 9) / 16);
-                }
+                    if (GD.LayoutDescription.PicMode == IGlobalData.picMode.medium)
+                    {
+                        // size = "400";
+                        pWidth = (int)((ExternalGameOut.Width * 40) / 100);
+                        pHeight = (int)((pWidth * 9) / 16);
+                    }
+                    if (GD.LayoutDescription.PicMode == IGlobalData.picMode.big)
+                    {
+                        // size = "800";
+                        pWidth = (int)((ExternalGameOut.Width * 60) / 100);
+                        pHeight = (int)((pWidth * 9) / 16);
+                    }
 
-                string s1 = picName; //  this.Find(locationID)!.LocPicture!;
+                    string s1 = picName; //  this.Find(locationID)!.LocPicture!;
 
 
-                // string s = string.Format( "<center><img src=\"localfolder:./{0}\" width=\"{1}\" align=\"middle\" /> </center>", this.Find( locationID ).LocPicture, size );
-                // GD.Adventure!.StoryOutput("<img src=\"http://localhost:8000/l015.jpg\" width=\"50%\" height=\"50%\"/img");
+                    // string s = string.Format( "<center><img src=\"localfolder:./{0}\" width=\"{1}\" align=\"middle\" /> </center>", this.Find( locationID ).LocPicture, size );
+                    // GD.Adventure!.StoryOutput("<img src=\"http://localhost:8000/l015.jpg\" width=\"50%\" height=\"50%\"/img");
 
 #if WINDOWS
                 // string s = string.Format("<center><img src=\"ms-appx-web:///Resources/Images/{0}\" width=\"{1}\" height=\"{1}\" align=\"middle\" /img></center>", s1, size);
                 string s = string.Format("<center><img src=\"http://localhost:8000/{0}\" width=\"{1}\" height=\"{2}\"  align=\"middle\" /> </center>", s1, pWidth, pHeight);
                 // string s = string.Format("<center><img src=\"http://localhost:8000/{0}\" width=\"{1}\" height=\"{1}\" align=\"middle\" /> </center>", s1, size);
 #elif ANDROID
-                //         CurrentContent += "<img src=\"l012.jpg\" width=\"50%\" height=\"50%\"/img>";
+                    //         CurrentContent += "<img src=\"l012.jpg\" width=\"50%\" height=\"50%\"/img>";
 
-                // string s = string.Format("<center><img src='drawable/{0}' width=\"{1}\" height=\"{2}\" align=\"middle\" /img></center>", s1, pWidth, pHeight);
+                    // string s = string.Format("<center><img src='drawable/{0}' width=\"{1}\" height=\"{2}\" align=\"middle\" /img></center>", s1, pWidth, pHeight);
 
-                string s = string.Format("<center><img src='file:///" + Phoney_MAUI.Platform.DeviceData._deviceData!.GetSavePath() + "/{0}' width=\"{1}\" height=\"{2}\" align=\"middle\" /img></center>", s1, pWidth, pHeight);
+                    string s = string.Format("<center><img src='file:///" + Phoney_MAUI.Platform.DeviceData._deviceData!.GetSavePath() + "/{0}' width=\"{1}\" height=\"{2}\" align=\"middle\" /img></center>", s1, pWidth, pHeight);
 #else
 
             string s = "Fick dich";
 #endif
-                // <img src=\"l012.jpg\" width=\"50%\" height=\"50%\"/img>
-                GD!.Adventure!.StoryOutput(s);
-            }
-            else
-            {
-                int pHeight, pWidth;
-                string size = "20%";
-                pWidth = (int)((100 * 20) / 100);
-                pHeight = (int)((pWidth * 9) / 16);
-                if (GD.LayoutDescription.PicMode == IGlobalData.picMode.medium)
-                {
-                    size = "40%";
-                    pWidth = (int)((100 * 40) / 100);
-                    pHeight = (int)((pWidth * 9) / 16);
+                    // <img src=\"l012.jpg\" width=\"50%\" height=\"50%\"/img>
+                    GD!.Adventure!.StoryOutput(s);
                 }
-                if (GD.LayoutDescription.PicMode == IGlobalData.picMode.big)
+                else
                 {
-                    size = "60%";
-                    pWidth = (int)((100 * 60) / 100);
+                    int pHeight, pWidth;
+#if ANDROID
+                    string size = "20%";
+#endif
+                    pWidth = (int)((100 * 20) / 100);
                     pHeight = (int)((pWidth * 9) / 16);
-                }
+                    if (GD.LayoutDescription.PicMode == IGlobalData.picMode.medium)
+                    {
+#if ANDROID
+                        size = "40%";
+#endif
+                        pWidth = (int)((100 * 40) / 100);
+                        pHeight = (int)((pWidth * 9) / 16);
+                    }
+                    if (GD.LayoutDescription.PicMode == IGlobalData.picMode.big)
+                    {
+#if ANDROID
+                        size = "60%";
+#endif
+                        pWidth = (int)((100 * 60) / 100);
+                        pHeight = (int)((pWidth * 9) / 16);
+                    }
 
-                string s1 = picName; //  this.Find(locationID)!.LocPicture!;
+                    string s1 = picName; //  this.Find(locationID)!.LocPicture!;
 
 
-                // string s = string.Format( "<center><img src=\"localfolder:./{0}\" width=\"{1}\" align=\"middle\" /> </center>", this.Find( locationID ).LocPicture, size );
-                // GD.Adventure!.StoryOutput("<img src=\"http://localhost:8000/l015.jpg\" width=\"50%\" height=\"50%\"/img");
+                    // string s = string.Format( "<center><img src=\"localfolder:./{0}\" width=\"{1}\" align=\"middle\" /> </center>", this.Find( locationID ).LocPicture, size );
+                    // GD.Adventure!.StoryOutput("<img src=\"http://localhost:8000/l015.jpg\" width=\"50%\" height=\"50%\"/img");
 
 #if WINDOWS
                 string s = string.Format("<center><img src=\"http://localhost:8000/{0}\" width=\"{1}\" height=\"{2}\"  align=\"middle\" /> </center>", s1, pWidth, pHeight);
                 // string s = string.Format("<center><img src=\"http://localhost:8000/{0}\" width=\"{1}\" height=\"{1}\" align=\"middle\" /> </center>", s1, size);
 #elif ANDROID
-            //         CurrentContent += "<img src=\"l012.jpg\" width=\"50%\" height=\"50%\"/img>";
+                    //         CurrentContent += "<img src=\"l012.jpg\" width=\"50%\" height=\"50%\"/img>";
 
-            string s = string.Format("<center><img src=\"{0}\" width=\"{1}\" height=\"{1}\" align=\"middle\" /img></center>", s1, size);
+                    string s = string.Format("<center><img src=\"{0}\" width=\"{1}\" height=\"{1}\" align=\"middle\" /img></center>", s1, size);
 #else
             string s = "Fick dich";
 #endif
-                // <img src=\"l012.jpg\" width=\"50%\" height=\"50%\"/img>
-                GD!.Adventure!.StoryOutput(s);
+                    // <img src=\"l012.jpg\" width=\"50%\" height=\"50%\"/img>
+                    GD!.Adventure!.StoryOutput(s);
 
+                }
             }
         }
+        catch (Exception ex)
+        {
+            Phoney_MAUI.Core.GlobalData.AddLog("LoadPicToHtml: " + ex.Message, IGlobalData.protMode.crisp);
+        }
+
 
     }
 
     public bool CacheResources(List<string> resources)
     {
-        var assembly = Assembly.GetExecutingAssembly();
-
-        bool loaded = true;
-
-        foreach (string rscName in resources)
+        try
         {
-            using var stream = assembly.GetManifestResourceStream("DasVersteckDesMeisters.Resources.Raw." + rscName);
-            var filePath = Path.Combine(Phoney_MAUI.Platform.DeviceData._deviceData!.GetSavePath(), rscName);
-            if (File.Exists(filePath) == true)
-                return false;
+            var assembly = Assembly.GetExecutingAssembly();
 
-            using var fileStream = File.Create(filePath);
-            stream.CopyTo(fileStream);
-            stream.Close();
-            fileStream.Close();
+            bool loaded = true;
 
+            foreach (string rscName in resources)
+            {
+                using var stream = assembly.GetManifestResourceStream("DasVersteckDesMeisters.Resources.Raw." + rscName);
+                var filePath = Path.Combine(Phoney_MAUI.Platform.DeviceData._deviceData!.GetSavePath(), rscName);
+                if (File.Exists(filePath) == true)
+                    return false;
+
+                using var fileStream = File.Create(filePath);
+                stream!.CopyTo(fileStream);
+                stream!.Close();
+                fileStream.Close();
+
+            }
+            return loaded;
         }
-        return loaded;
+        catch (Exception ex)
+        {
+            Phoney_MAUI.Core.GlobalData.AddLog("CacheResources: " + ex.Message, IGlobalData.protMode.crisp);
+            return false;
+        }
+
     }
 
     public bool DoUIUpdate()
     {
-        if( LocalUIUpdate != null )
+        try
         {
-            
-            
-            LocalUIUpdate();
+            if (LocalUIUpdate != null)
+            {
+
+
+                LocalUIUpdate();
+            }
         }
+        catch (Exception ex)
+        {
+            Phoney_MAUI.Core.GlobalData.AddLog("DoUIUpdate: " + ex.Message, IGlobalData.protMode.crisp);
+        }
+
         return true;
     }
 
@@ -412,34 +480,42 @@ public class UIServices : IUIServices
 
     public void DoMCRestart(bool newList = false)
     {
-        StoryTextObj = new StoryText(this);
-        FeedbackTextObj.FeedbackWindowTextMC = new List<string>();
-        FeedbackTextObj.FeedbackWindowText = new List<string>();
-
-        GC.Collect();
-
+        try
         {
-            if (GD.Adventure != null)
-                Adv.CleanupAdv(GD.Adventure);
-            GD.Adventure = null!;
-            GD.Adventure = new Adv(true, false);
-            GD.AskForPlayLevel = true;
-            GD.AskForPlayLevelCount = 1;
-            GD.Adventure!.Orders!.ReadSlotDescription();
-        }
-        GC.Collect();
+            StoryTextObj = new StoryText(this);
+            FeedbackTextObj.FeedbackWindowTextMC = new List<string>();
+            FeedbackTextObj.FeedbackWindowText = new List<string>();
 
-        if (newList == true)
+            GC.Collect();
+
+            {
+                if (GD.Adventure != null)
+                    Adv.CleanupAdv(GD.Adventure);
+                GD.Adventure = null!;
+                GD.Adventure = new Adv(true, false);
+                GD.AskForPlayLevel = true;
+                GD.AskForPlayLevelCount = 1;
+                GD.Adventure!.Orders!.ReadSlotDescription();
+            }
+            GC.Collect();
+
+            if (newList == true)
+            {
+                GD.OrderList!.AddOrderList(loca.CustomRequestHandler_DoMCRestart_16295);
+                GD.OrderList!.CurrentOrderListIx = GD!.OrderList!.OTL!.Count - 1;
+            }
+
+            StoryTextObj.RecalcLatest();
+            StoryTextObj.AdvTextRefresh();
+            StoryTextObj.TextReFreshman();
+            InitBrowserUpdate();
+            FinishBrowserUpdate(IUIServices.onBrowserContentLoaded.PageDown);
+        }
+        catch (Exception ex)
         {
-            GD.OrderList!.AddOrderList(loca.CustomRequestHandler_DoMCRestart_16295);
-            GD.OrderList!.CurrentOrderListIx = GD!.OrderList!.OTL!.Count - 1;
+            Phoney_MAUI.Core.GlobalData.AddLog("DoMCRestart: " + ex.Message, IGlobalData.protMode.crisp);
         }
 
-        StoryTextObj.RecalcLatest();
-        StoryTextObj.AdvTextRefresh();
-        StoryTextObj.TextReFreshman();
-        InitBrowserUpdate();
-        FinishBrowserUpdate( IUIServices.onBrowserContentLoaded.PageDown );
     }
 
     public void ExecuteRestart(bool newList = false)
@@ -465,31 +541,39 @@ public class UIServices : IUIServices
 
     public int TextOutput(string? s, bool ignoreLimit = false)
     {
-        int lines = 0;
-
-        // Noloca: 002
-        if (s != null)
-            s = s.Replace("<br>", "</p><p class=\"para\" style=\"margin-bottom:2px;margin-top:0px\" >");
-        if (StoryTextObj != null)
+        try
         {
-            // Logik für More-Buffer wurde entfernt = nicht benötigt
+            int lines = 0;
 
-            // Experimental: Wert habe ich hier eingetragen, weil MeasureString() sich ohne Skalierung einen ganz schönen Mist zusammenrechnet.
-            double xScale = GS.ScaleFactor; //  GetWindowsScaling();
-            StoryTextObj!.Slines!.Add(Helper.FirstUpper(s));
-            if (StoryTextObj.WholeStory != null)
+            // Noloca: 002
+            if (s != null)
+                s = s.Replace("<br>", "</p><p class=\"para\" style=\"margin-bottom:2px;margin-top:0px\" >");
+            if (StoryTextObj != null)
             {
+                // Logik für More-Buffer wurde entfernt = nicht benötigt
+
+                // Experimental: Wert habe ich hier eingetragen, weil MeasureString() sich ohne Skalierung einen ganz schönen Mist zusammenrechnet.
+                double xScale = GS.ScaleFactor; //  GetWindowsScaling();
+                StoryTextObj!.Slines!.Add(Helper.FirstUpper(s));
+                if (StoryTextObj.WholeStory != null)
+                {
                     StoryTextObj!.AddSlineWholeStory(StoryTextObj!.Slines[StoryTextObj!.Slines!.Count - 1]!, StoryTextObj!.Slines.Count - 1);
-            }
-            if (StoryTextObj!.LatestStory != null && GD.SilentMode == false)
-            {
+                }
+                if (StoryTextObj!.LatestStory != null && GD.SilentMode == false)
+                {
                     StoryTextObj!.AddSline(StoryTextObj!.Slines[StoryTextObj!.Slines.Count - 1], StoryTextObj!.Slines.Count - 1);
-            }
+                }
 
-            if (GD.SilentMode == false)
-                StoryTextObj!.TextReFreshman();
+                if (GD.SilentMode == false)
+                    StoryTextObj!.TextReFreshman();
+            }
+            return lines;
         }
-        return lines;
+        catch (Exception ex)
+        {
+            Phoney_MAUI.Core.GlobalData.AddLog("TextOutput: " + ex.Message, IGlobalData.protMode.crisp);
+            return 0;
+        }
 
     }
 
@@ -504,46 +588,62 @@ public class UIServices : IUIServices
 
     public void SetTextInput()
     {
-        GD!.LayoutDescription.OrderListPos = ILayoutDescription.selectedPosition.off;
-        GD!.LayoutDescription.ItemsInvListPos = ILayoutDescription.selectedPosition.off;
-        GD!.LayoutDescription.ItemsLocListPos = ILayoutDescription.selectedPosition.off;
+        try
+        {
+            GD!.LayoutDescription.OrderListPos = ILayoutDescription.selectedPosition.off;
+            GD!.LayoutDescription.ItemsInvListPos = ILayoutDescription.selectedPosition.off;
+            GD!.LayoutDescription.ItemsLocListPos = ILayoutDescription.selectedPosition.off;
 
-        GD.LayoutDescription.OrderListPosPT = ILayoutDescription.selectedPositionPT.off;
-        GD.LayoutDescription.ItemsInvListPosPT = ILayoutDescription.selectedPositionPT.off;
-        GD.LayoutDescription.ItemsLocListPosPT = ILayoutDescription.selectedPositionPT.off;
+            GD.LayoutDescription.OrderListPosPT = ILayoutDescription.selectedPositionPT.off;
+            GD.LayoutDescription.ItemsInvListPosPT = ILayoutDescription.selectedPositionPT.off;
+            GD.LayoutDescription.ItemsLocListPosPT = ILayoutDescription.selectedPositionPT.off;
 
-        LayoutDescription ld = (LayoutDescription)GlobalData.CurrentGlobalData!.LayoutDescription;
-        ld.LU_Order = false;
-        ld.LU_ItemLoc = false;
-        ld.LU_ItemInv = false;
-        ld.LD_Order = false;
-        ld.LD_ItemLoc = false;
-        ld.LD_ItemInv = false;
-        ld.RU_Order = false;
-        ld.RU_ItemLoc = false;
-        ld.RU_ItemInv = false;
-        ld.RD_Order = false;
-        ld.RD_ItemLoc = false;
-        ld.RD_ItemInv = false;
+            LayoutDescription ld = (LayoutDescription)GlobalData.CurrentGlobalData!.LayoutDescription;
+            ld.LU_Order = false;
+            ld.LU_ItemLoc = false;
+            ld.LU_ItemInv = false;
+            ld.LD_Order = false;
+            ld.LD_ItemLoc = false;
+            ld.LD_ItemInv = false;
+            ld.RU_Order = false;
+            ld.RU_ItemLoc = false;
+            ld.RU_ItemInv = false;
+            ld.RD_Order = false;
+            ld.RD_ItemLoc = false;
+            ld.RD_ItemInv = false;
 
-        DoUIUpdate();
+            DoUIUpdate();
+        }
+        catch (Exception ex)
+        {
+            Phoney_MAUI.Core.GlobalData.AddLog("SetTextInput: " + ex.Message, IGlobalData.protMode.crisp);
+        }
+
     }
 
 
     public void RefreshOrderList()
     {
-        if(GD!.OrderList!.OTL![GD!.OrderList!.CurrentOLIndex].Zipped )
+        try
         {
-            GD.OrderList.ReadZipOrderTable(GD!.OrderList!.CurrentOLIndex, GD!.OrderList!.OTL![GD!.OrderList!.CurrentOLIndex].Name!);
+            if (GD!.OrderList!.OTL![GD!.OrderList!.CurrentOLIndex].Zipped)
+            {
+                GD.OrderList.ReadZipOrderTable(GD!.OrderList!.CurrentOLIndex, GD!.OrderList!.OTL![GD!.OrderList!.CurrentOLIndex].Name!);
 
+            }
+            ObservableCollection<OrderTable>? ot = GD!.OrderList!.OTL[GD!.OrderList!.CurrentOLIndex].OT;
+
+            for (int ix = 0; ix < ot!.Count; ix++)
+            {
+                ot[ix].No = ix + 1;
+            }
         }
-        ObservableCollection<OrderTable>? ot = GD!.OrderList!.OTL[GD!.OrderList!.CurrentOLIndex].OT;
-
-        for( int ix = 0; ix < ot!.Count; ix++)
+        catch (Exception ex)
         {
-            ot[ix].No = ix + 1;
+            Phoney_MAUI.Core.GlobalData.AddLog("RefreshOrderList" + ex.Message, IGlobalData.protMode.crisp);
         }
-        
+
+
     }
 
 
@@ -569,61 +669,77 @@ public class UIServices : IUIServices
 
     public void SetSimpleMC()
     {
-        GD.LayoutDescription.SimpleMC = true;
+        try
+        {
+            GD.LayoutDescription.SimpleMC = true;
 
-        GD!.LayoutDescription.OrderListPos = ILayoutDescription.selectedPosition.rightUp;
-        GD!.LayoutDescription.ItemsInvListPos = ILayoutDescription.selectedPosition.rightUp;
-        GD!.LayoutDescription.ItemsLocListPos = ILayoutDescription.selectedPosition.rightUp;
+            GD!.LayoutDescription.OrderListPos = ILayoutDescription.selectedPosition.rightUp;
+            GD!.LayoutDescription.ItemsInvListPos = ILayoutDescription.selectedPosition.rightUp;
+            GD!.LayoutDescription.ItemsLocListPos = ILayoutDescription.selectedPosition.rightUp;
 
-        GD.LayoutDescription.OrderListPosPT = ILayoutDescription.selectedPositionPT.first;
-        GD.LayoutDescription.ItemsInvListPosPT = ILayoutDescription.selectedPositionPT.first;
-        GD.LayoutDescription.ItemsLocListPosPT = ILayoutDescription.selectedPositionPT.first;
+            GD.LayoutDescription.OrderListPosPT = ILayoutDescription.selectedPositionPT.first;
+            GD.LayoutDescription.ItemsInvListPosPT = ILayoutDescription.selectedPositionPT.first;
+            GD.LayoutDescription.ItemsLocListPosPT = ILayoutDescription.selectedPositionPT.first;
 
-        LayoutDescription ld = (LayoutDescription)GlobalData.CurrentGlobalData!.LayoutDescription;
-        ld.LU_Order = false;
-        ld.LU_ItemLoc = false;
-        ld.LU_ItemInv = false;
-        ld.LD_Order = false;
-        ld.LD_ItemLoc = false;
-        ld.LD_ItemInv = false;
-        ld.RU_Order = true;
-        ld.RU_ItemLoc = false;
-        ld.RU_ItemInv = true;
-        ld.RD_Order = false;
-        ld.RD_ItemLoc = true;
-        ld.RD_ItemInv = false;
+            LayoutDescription ld = (LayoutDescription)GlobalData.CurrentGlobalData!.LayoutDescription;
+            ld.LU_Order = false;
+            ld.LU_ItemLoc = false;
+            ld.LU_ItemInv = false;
+            ld.LD_Order = false;
+            ld.LD_ItemLoc = false;
+            ld.LD_ItemInv = false;
+            ld.RU_Order = true;
+            ld.RU_ItemLoc = false;
+            ld.RU_ItemInv = true;
+            ld.RD_Order = false;
+            ld.RD_ItemLoc = true;
+            ld.RD_ItemInv = false;
 
-        DoUIUpdate();
+            DoUIUpdate();
+        }
+        catch (Exception ex)
+        {
+            Phoney_MAUI.Core.GlobalData.AddLog("SetSimpleMC: " + ex.Message, IGlobalData.protMode.crisp);
+        }
+
     }
 
     public void SetComplexMC()
     {
-        GD.LayoutDescription.SimpleMC = false;
+        try
+        {
+            GD.LayoutDescription.SimpleMC = false;
 
-        // Hier noch die Menüs aktualisieren
-        GD!.LayoutDescription.OrderListPos = ILayoutDescription.selectedPosition.rightUp;
-        GD!.LayoutDescription.ItemsInvListPos = ILayoutDescription.selectedPosition.rightUp;
-        GD!.LayoutDescription.ItemsLocListPos = ILayoutDescription.selectedPosition.rightUp;
+            // Hier noch die Menüs aktualisieren
+            GD!.LayoutDescription.OrderListPos = ILayoutDescription.selectedPosition.rightUp;
+            GD!.LayoutDescription.ItemsInvListPos = ILayoutDescription.selectedPosition.rightUp;
+            GD!.LayoutDescription.ItemsLocListPos = ILayoutDescription.selectedPosition.rightUp;
 
-        GD.LayoutDescription.OrderListPosPT = ILayoutDescription.selectedPositionPT.first;
-        GD.LayoutDescription.ItemsInvListPosPT = ILayoutDescription.selectedPositionPT.first;
-        GD.LayoutDescription.ItemsLocListPosPT = ILayoutDescription.selectedPositionPT.first;
+            GD.LayoutDescription.OrderListPosPT = ILayoutDescription.selectedPositionPT.first;
+            GD.LayoutDescription.ItemsInvListPosPT = ILayoutDescription.selectedPositionPT.first;
+            GD.LayoutDescription.ItemsLocListPosPT = ILayoutDescription.selectedPositionPT.first;
 
-        LayoutDescription ld = (LayoutDescription)GlobalData.CurrentGlobalData!.LayoutDescription;
-        ld.LU_Order = false;
-        ld.LU_ItemLoc = false;
-        ld.LU_ItemInv = false;
-        ld.LD_Order = false;
-        ld.LD_ItemLoc = false;
-        ld.LD_ItemInv = false;
-        ld.RU_Order = true;
-        ld.RU_ItemLoc = false;
-        ld.RU_ItemInv = true;
-        ld.RD_Order = false;
-        ld.RD_ItemLoc = true;
-        ld.RD_ItemInv = false;
+            LayoutDescription ld = (LayoutDescription)GlobalData.CurrentGlobalData!.LayoutDescription;
+            ld.LU_Order = false;
+            ld.LU_ItemLoc = false;
+            ld.LU_ItemInv = false;
+            ld.LD_Order = false;
+            ld.LD_ItemLoc = false;
+            ld.LD_ItemInv = false;
+            ld.RU_Order = true;
+            ld.RU_ItemLoc = false;
+            ld.RU_ItemInv = true;
+            ld.RD_Order = false;
+            ld.RD_ItemLoc = true;
+            ld.RD_ItemInv = false;
 
-        DoUIUpdate();
+            DoUIUpdate();
+        }
+        catch (Exception ex)
+        {
+            Phoney_MAUI.Core.GlobalData.AddLog("SetComplexMC: " + ex.Message, IGlobalData.protMode.crisp);
+        }
+
     }
 
     public bool FlushText { get; set; }
@@ -675,11 +791,20 @@ public class UIServices : IUIServices
     }
     public bool QuitApplication()
     {
-        DoStatusSave();
-        App.ThisApplication!.Quit();
-        GlobalSpecs.CurrentGlobalSpecs!.AppRunning = IGlobalSpecs.appRunning.quit;
+        try
+        {
+            DoStatusSave();
+            App.ThisApplication!.Quit();
+            GlobalSpecs.CurrentGlobalSpecs!.AppRunning = IGlobalSpecs.appRunning.quit;
 
-        return true;
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Phoney_MAUI.Core.GlobalData.AddLog("QuitApplication: " + ex.Message, IGlobalData.protMode.crisp);
+            return false;
+        }
+
     }
 
     public static LayoutDescription? ReadConfig()
@@ -711,9 +836,16 @@ public class UIServices : IUIServices
     }
     public void SetScore(double cscore, double ctotalscore, double score, double totalscore, double val)
     {
-        if( _setScoreMethod != null )
+        try
         {
-            _setScoreMethod(cscore, ctotalscore, score, totalscore);
+            if (_setScoreMethod != null)
+            {
+                _setScoreMethod(cscore, ctotalscore, score, totalscore);
+            }
+        }
+        catch (Exception e)
+        {
+            GlobalData.AddLog("SetScore: " + e.Message, IGlobalData.protMode.crisp);
         }
     }
 
@@ -721,32 +853,232 @@ public class UIServices : IUIServices
 
     public void SaveToZip( string fileName, List<IUIServices.ZipObject>  objects )
     {
-        var outStream = new MemoryStream();
-        ZipArchive archive;
-
-        string pathfileName = GlobalData.CurrentPath() + "/" + fileName;
-
-        if (File.Exists(pathfileName))
+        try
         {
-            archive = ZipFile.Open(pathfileName, ZipArchiveMode.Update);
+            var outStream = new MemoryStream();
+            ZipArchive archive;
+
+            string pathfileName = GlobalData.CurrentPath() + "/" + fileName;
+
+            if (File.Exists(pathfileName))
+            {
+                archive = ZipFile.Open(pathfileName, ZipArchiveMode.Update);
+            }
+            else
+            {
+                archive = new ZipArchive(outStream, ZipArchiveMode.Update, true);
+            }
+
+            foreach (IUIServices.ZipObject zo in objects)
+            {
+                string? nameInZip = zo.Name;
+
+                var fileInArchive = archive.GetEntry(nameInZip!);
+                if (fileInArchive != null)
+                {
+                    fileInArchive.Delete();
+                }
+                fileInArchive = archive.CreateEntry(nameInZip!, CompressionLevel.Optimal);
+
+                byte[] jsonBytes = Encoding.UTF8.GetBytes(zo.Data!);
+
+                using (var entryStream = fileInArchive.Open())
+                using (var fileToCompressStream = new MemoryStream(jsonBytes))
+                {
+                    fileToCompressStream.CopyTo(entryStream);
+                }
+
+            }
+
+            archive.Dispose();
+
+            using (var fileStream = new FileStream(pathfileName, FileMode.OpenOrCreate))
+            {
+                outStream.Position = 0;
+                outStream.WriteTo(fileStream);
+                outStream.Flush();
+            }
+            outStream.Close();
+            outStream.Dispose();
         }
-        else
+        catch (Exception e)
         {
-            archive = new ZipArchive(outStream, ZipArchiveMode.Update, true);
+            GlobalData.AddLog("SaveToZip: " + e.Message, IGlobalData.protMode.crisp);
         }
 
-        foreach(IUIServices.ZipObject zo in objects )
-        {
-            string? nameInZip = zo.Name;
+    }
 
-            var fileInArchive = archive.GetEntry(nameInZip!);
+    public string GetRealAssemblyName( string name )
+    {
+        try
+        {
+            string? newName = "";
+
+            int ix;
+            for (ix = 0; ix < name.Length; ix++)
+            {
+                if (name[ix] == ' ')
+                    newName += '_';
+                else
+                    newName += name[ix];
+            }
+
+            return newName;
+        }
+        catch (Exception e)
+        {
+            GlobalData.AddLog("GetRealAssemblyName: " + e.Message, IGlobalData.protMode.crisp);
+            return "";
+        }
+
+    }
+
+    public  Stream GetResourceFile(string rscName)
+    {
+        try
+        {
+            // Erhalten Sie den Assembly-Namen
+            string? assemblyName = GetRealAssemblyName(Assembly.GetExecutingAssembly().GetName().Name!);
+
+            // Erstellen Sie den vollständigen Ressourcennamen
+            string? resourceName = $"{assemblyName}.{rscName}";
+            string? resourceName2 = $"{assemblyName}.Resources.Raw.{rscName}";
+
+            // var x = Assembly.GetExecutingAssembly().GetManifestResourceNames();
+            // var y = Assembly.GetEntryAssembly()!.GetManifestResourceNames();
+
+            // Öffnen Sie die Ressource als Stream
+            Stream currentStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceName)!;
+            if (currentStream == null)
+                currentStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceName2)!;
+
+            // Geben Sie den Stream zurück
+            return currentStream;
+        }
+        catch (Exception e)
+        {
+            GlobalData.AddLog("GetResourceFile: " + e.Message, IGlobalData.protMode.crisp);
+            return null;
+        }
+
+    }
+
+    public List<IUIServices.ZipObject> LoadFromZip(string fileName)
+    {
+        try
+        {
+            Stream str = GetResourceFile(fileName);
+
+            // bool error = false;
+            List<IUIServices.ZipObject> objects = new();
+
+            ZipArchive archive = new ZipArchive(str);
+
+            byte[] bufBytes;
+
+            foreach (ZipArchiveEntry zae in archive.Entries)
+            {
+                IUIServices.ZipObject zo = new();
+
+                string nameInZip = zae.Name;
+
+                zo.Name = zae.Name;
+
+                var fileInArchive = archive.GetEntry(nameInZip);
+                if (fileInArchive != null)
+                {
+                    Stream s = fileInArchive.Open();
+                    StreamReader sr = new StreamReader(s);
+                    using (MemoryStream ms = new MemoryStream())
+                    {
+                        sr.BaseStream.CopyTo(ms);
+                        bufBytes = ms.ToArray();
+
+                    }
+                    if (bufBytes != null)
+                    {
+                        // jsonBytes = sr.ReadToEnd();
+                        zo.Data = Encoding.UTF8.GetString(bufBytes);
+                        // zo.Data = (string)ByteArrayToObject(bufBytes);
+
+                    }
+                    else
+                    {
+                        // int a = 3;
+                    }
+                    s.Close();
+                    s.Dispose();
+                    sr.Close();
+                    sr.Dispose();
+                }
+                objects.Add(zo);
+            }
+            archive.Dispose();
+            str.Close();
+            str.Dispose();
+
+            return (objects);
+        }
+        catch (Exception e)
+        {
+            GlobalData.AddLog("LoadFromZip: " + e.Message, IGlobalData.protMode.crisp);
+            return null;
+        }
+
+    }
+    public string? LoadStringFromRSC(string fileName)
+    {
+        try
+        {
+            Stream str = GetResourceFile(fileName);
+            string? txt = null;
+
+            using (var reader = new StreamReader(str))
+            {
+                txt = reader.ReadToEnd();
+            }
+            str.Close();
+            str.Dispose();
+
+            return txt;
+        }
+        catch (Exception e)
+        {
+            GlobalData.AddLog("LoadStringFromRSC: " + e.Message, IGlobalData.protMode.crisp);
+            return null;
+        }
+
+
+    }
+
+    public void CoreSaveToFile(string diffSavegame, string fileName)
+    {
+        try
+        {
+            var outStream = new MemoryStream();
+            ZipArchive archive;
+
+            string pathfileName = GlobalData.CurrentPath() + "/" + fileName;
+
+            if (File.Exists(pathfileName))
+            {
+                archive = ZipFile.Open(pathfileName, ZipArchiveMode.Update);
+            }
+            else
+            {
+                archive = new ZipArchive(outStream, ZipArchiveMode.Update, true);
+            }
+
+            string nameInZip = "uncompressed";
+
+            var fileInArchive = archive.GetEntry(nameInZip);
             if (fileInArchive != null)
             {
                 fileInArchive.Delete();
             }
-            fileInArchive = archive.CreateEntry(nameInZip!, CompressionLevel.Optimal);
+            fileInArchive = archive.CreateEntry(nameInZip, CompressionLevel.Optimal);
 
-            byte[] jsonBytes = Encoding.UTF8.GetBytes(zo.Data!);
+            byte[] jsonBytes = Encoding.UTF8.GetBytes(diffSavegame);
 
             using (var entryStream = fileInArchive.Open())
             using (var fileToCompressStream = new MemoryStream(jsonBytes))
@@ -754,295 +1086,176 @@ public class UIServices : IUIServices
                 fileToCompressStream.CopyTo(entryStream);
             }
 
-        }
+            archive.Dispose();
 
-        archive.Dispose();
-
-        using (var fileStream = new FileStream(pathfileName, FileMode.OpenOrCreate))
-        {
-            outStream.Position = 0;
-            outStream.WriteTo(fileStream);
-            outStream.Flush();
-        }
-        outStream.Close();
-        outStream.Dispose();
-
-    }
-
-    public string GetRealAssemblyName( string name )
-    {
-        string? newName = "";
-
-        int ix;
-        for( ix = 0; ix < name.Length; ix++)
-        {
-            if (name[ix] == ' ')
-                newName +=  '_';
-            else
-                newName += name[ix];
-        }
-
-        return newName;
-    }
-
-    public  Stream GetResourceFile(string rscName)
-    {
-        
-        // Erhalten Sie den Assembly-Namen
-        string? assemblyName = GetRealAssemblyName( Assembly.GetExecutingAssembly().GetName().Name! );
-
-        // Erstellen Sie den vollständigen Ressourcennamen
-        string? resourceName = $"{assemblyName}.{rscName}";
-        string? resourceName2 = $"{assemblyName}.Resources.Raw.{rscName}";
-
-        // var x = Assembly.GetExecutingAssembly().GetManifestResourceNames();
-        // var y = Assembly.GetEntryAssembly()!.GetManifestResourceNames();
-
-        // Öffnen Sie die Ressource als Stream
-        Stream currentStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceName)!;
-        if(currentStream == null )
-            currentStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceName2)!;
-
-        // Geben Sie den Stream zurück
-        return currentStream;
-    }
-
-    public List<IUIServices.ZipObject> LoadFromZip(string fileName)
-    {
-        Stream str = GetResourceFile(fileName);
-
-        // bool error = false;
-        List<IUIServices.ZipObject> objects = new();
-
-        ZipArchive archive = new ZipArchive(str);
-
-        byte[] bufBytes;
-
-        foreach (ZipArchiveEntry zae in archive.Entries)
-        {
-            IUIServices.ZipObject zo = new();
-
-            string nameInZip = zae.Name;
-
-            zo.Name = zae.Name;
-
-            var fileInArchive = archive.GetEntry(nameInZip);
-            if (fileInArchive != null)
+            using (var fileStream = new FileStream(pathfileName, FileMode.OpenOrCreate))
             {
-                Stream s = fileInArchive.Open();
-                StreamReader sr = new StreamReader(s);
-                using (MemoryStream ms = new MemoryStream())
-                {
-                    sr.BaseStream.CopyTo(ms);
-                    bufBytes = ms.ToArray();
-
-                }
-                if (bufBytes != null)
-                {
-                    // jsonBytes = sr.ReadToEnd();
-                    zo.Data = Encoding.UTF8.GetString(bufBytes);
-                    // zo.Data = (string)ByteArrayToObject(bufBytes);
-
-                }
-                else
-                {
-                    // int a = 3;
-                }
-                s.Close();
-                s.Dispose();
-                sr.Close();
-                sr.Dispose();
+                outStream.Position = 0;
+                outStream.WriteTo(fileStream);
+                outStream.Flush();
             }
-            objects.Add(zo);
+            outStream.Close();
+            outStream.Dispose();
         }
-        archive.Dispose();
-        str.Close();
-        str.Dispose();
-
-        return (objects);
-
-    }
-    public string? LoadStringFromRSC(string fileName)
-    {
-        Stream str = GetResourceFile(fileName);
-        string? txt = null;
-
-        using (var reader = new StreamReader(str))
+        catch (Exception e)
         {
-            txt = reader.ReadToEnd();
+            GlobalData.AddLog("CoreSaveToFile: " + e.Message, IGlobalData.protMode.crisp);
         }
-        str.Close();
-        str.Dispose();
-
-        return txt;
-
-
-    }
-
-    public void CoreSaveToFile(string diffSavegame, string fileName)
-    {
-        var outStream = new MemoryStream();
-        ZipArchive archive;
-
-        string pathfileName = GlobalData.CurrentPath() + "/" + fileName;
-
-        if (File.Exists(pathfileName))
-        {
-            archive = ZipFile.Open(pathfileName, ZipArchiveMode.Update);
-        }
-        else
-        {
-            archive = new ZipArchive(outStream, ZipArchiveMode.Update, true);
-        }
-
-        string nameInZip = "uncompressed";
-
-        var fileInArchive = archive.GetEntry(nameInZip);
-        if (fileInArchive != null)
-        {
-            fileInArchive.Delete();
-        }
-        fileInArchive = archive.CreateEntry(nameInZip, CompressionLevel.Optimal);
-
-        byte[] jsonBytes = Encoding.UTF8.GetBytes(diffSavegame);
-
-        using (var entryStream = fileInArchive.Open())
-        using (var fileToCompressStream = new MemoryStream(jsonBytes))
-        {
-            fileToCompressStream.CopyTo(entryStream);
-        }
-
-        archive.Dispose();
-
-        using (var fileStream = new FileStream(pathfileName, FileMode.OpenOrCreate))
-        {
-            outStream.Position = 0;
-            outStream.WriteTo(fileStream);
-            outStream.Flush();
-        }
-        outStream.Close();
-        outStream.Dispose();
 
     }
 
     public void CoreSaveToFile(SaveObj SO, string fileName)
     {
-        var outStream = new MemoryStream();
-        ZipArchive archive;
-
-        string pathfileName = GlobalData.CurrentPath() + "\\"  + fileName;
-
-        if (File.Exists(pathfileName))
+        try
         {
-            archive = ZipFile.Open(pathfileName, ZipArchiveMode.Update);
-        }
-        else
-        {
-            archive = new ZipArchive(outStream, ZipArchiveMode.Update, true);
-        }
+            var outStream = new MemoryStream();
+            ZipArchive archive;
 
-        string nameInZip = "uncompressed";
+            string pathfileName = GlobalData.CurrentPath() + "\\" + fileName;
 
-        var fileInArchive = archive.GetEntry(nameInZip);
-        if (fileInArchive != null)
-        {
-            fileInArchive.Delete();
-        }
-        fileInArchive = archive.CreateEntry(nameInZip, CompressionLevel.Optimal);
+            if (File.Exists(pathfileName))
+            {
+                archive = ZipFile.Open(pathfileName, ZipArchiveMode.Update);
+            }
+            else
+            {
+                archive = new ZipArchive(outStream, ZipArchiveMode.Update, true);
+            }
 
-        byte[] jsonBytes = ObjectToByteArray(SO); //  Encoding.UTF8.GetBytes(SO);
-
-        using (var entryStream = fileInArchive.Open())
-        using (var fileToCompressStream = new MemoryStream(jsonBytes))
-        {
-            fileToCompressStream.CopyTo(entryStream);
-        }
-
-        archive.Dispose();
-
-        using (var fileStream = new FileStream(pathfileName, FileMode.OpenOrCreate))
-        {
-            outStream.Position = 0;
-            outStream.WriteTo(fileStream);
-            outStream.Flush();
-        }
-        outStream.Close();
-        outStream.Dispose();
-
-    }
-
-    public SaveObj? CoreLoadFromFile(string fileName)
-    {
-        SaveObj? SO = null;
-        string pathfileName = GlobalData.CurrentPath() + "\\" + fileName;
-
-        byte[] bufBytes;
-
-        if (File.Exists(pathfileName))
-        {
-            ZipArchive archive = ZipFile.Open(pathfileName, ZipArchiveMode.Update);
             string nameInZip = "uncompressed";
 
             var fileInArchive = archive.GetEntry(nameInZip);
             if (fileInArchive != null)
             {
-                Stream s = fileInArchive.Open();
-                StreamReader sr = new StreamReader(s);
-                using (MemoryStream ms = new MemoryStream())
-                {
-                    sr.BaseStream.CopyTo(ms);
-                    bufBytes = ms.ToArray();
-
-                }
-                if (bufBytes != null)
-                {
-                    // jsonBytes = sr.ReadToEnd();
-                    SO = (SaveObj)ByteArrayToObject(bufBytes);
-
-                }
-                else
-                {
-                    // int a = 3;
-                }
-                sr.Close();
-                sr.Dispose();
-                s.Close();
-                s.Dispose();
+                fileInArchive.Delete();
             }
+            fileInArchive = archive.CreateEntry(nameInZip, CompressionLevel.Optimal);
+
+            byte[] jsonBytes = ObjectToByteArray(SO); //  Encoding.UTF8.GetBytes(SO);
+
+            using (var entryStream = fileInArchive.Open())
+            using (var fileToCompressStream = new MemoryStream(jsonBytes))
+            {
+                fileToCompressStream.CopyTo(entryStream);
+            }
+
             archive.Dispose();
 
-
+            using (var fileStream = new FileStream(pathfileName, FileMode.OpenOrCreate))
+            {
+                outStream.Position = 0;
+                outStream.WriteTo(fileStream);
+                outStream.Flush();
+            }
+            outStream.Close();
+            outStream.Dispose();
+        }
+        catch (Exception e)
+        {
+            GlobalData.AddLog("CoreSaveToFile: " + e.Message, IGlobalData.protMode.crisp);
         }
 
-        return (SO);
+    }
+
+    public SaveObj? CoreLoadFromFile(string fileName)
+    {
+        try
+        {
+            SaveObj? SO = null;
+            string pathfileName = GlobalData.CurrentPath() + "\\" + fileName;
+
+            byte[] bufBytes;
+
+            if (File.Exists(pathfileName))
+            {
+                ZipArchive archive = ZipFile.Open(pathfileName, ZipArchiveMode.Update);
+                string nameInZip = "uncompressed";
+
+                var fileInArchive = archive.GetEntry(nameInZip);
+                if (fileInArchive != null)
+                {
+                    Stream s = fileInArchive.Open();
+                    StreamReader sr = new StreamReader(s);
+                    using (MemoryStream ms = new MemoryStream())
+                    {
+                        sr.BaseStream.CopyTo(ms);
+                        bufBytes = ms.ToArray();
+
+                    }
+                    if (bufBytes != null)
+                    {
+                        // jsonBytes = sr.ReadToEnd();
+                        SO = (SaveObj)ByteArrayToObject(bufBytes);
+
+                    }
+                    else
+                    {
+                        // int a = 3;
+                    }
+                    sr.Close();
+                    sr.Dispose();
+                    s.Close();
+                    s.Dispose();
+                }
+                archive.Dispose();
+
+
+            }
+
+            return (SO);
+        }
+        catch (Exception e)
+        {
+            GlobalData.AddLog("CoreLoadFromFile: " + e.Message, IGlobalData.protMode.crisp);
+            return null;
+        }
+
     }
 
 
     public string? LoadString(string fileName)
     {
-        string? sSlash = "/";
-        string? s = null;
-
-        if( fileName.StartsWith("/"))
+        try
         {
-            sSlash = "";
+            string? sSlash = "/";
+            string? s = null;
+
+            if (fileName.StartsWith("/"))
+            {
+                sSlash = "";
+            }
+            string pathfileName = GlobalData.CurrentPath() + sSlash + fileName;
+            if (File.Exists(pathfileName))
+            {
+                s = File.ReadAllText(pathfileName);
+            }
+
+            return s;
         }
-        string pathfileName = GlobalData.CurrentPath() + sSlash + fileName;
-        if (File.Exists(pathfileName))
+        catch (Exception e)
         {
-            s = File.ReadAllText(pathfileName);
+            GlobalData.AddLog("LoadString: " + e.Message, IGlobalData.protMode.crisp);
+            return null;
         }
 
-        return s;
     }
     public bool SaveString(string fileName, string WriteString)
-    {   
-        string? pathName = GlobalData.CurrentPath();
-        string? pathfileName = pathName + "/" + fileName; //  loca.OrderList_WriteJsonIndex_16209;
+    {
+        try
+        {
+            string? pathName = GlobalData.CurrentPath();
+            string? pathfileName = pathName + "/" + fileName; //  loca.OrderList_WriteJsonIndex_16209;
 
-        File.WriteAllText(pathfileName, WriteString);
+            File.WriteAllText(pathfileName, WriteString);
 
-        return true;
+            return true;
+        }
+        catch (Exception e)
+        {
+            GlobalData.AddLog("SaveString: " + e.Message, IGlobalData.protMode.crisp);
+            return false;
+        }
+
     }
     public string? CoreLoadStringFromFile(string fileName)
     {
@@ -1090,8 +1303,9 @@ public class UIServices : IUIServices
                 }
                 archive.Dispose();
             }
-            catch // ( Exception e)
+            catch ( Exception e)
             {
+                GlobalData.AddLog("CoreLoadStringFromFile: " + e.Message, IGlobalData.protMode.crisp);
 
             }
 
@@ -1102,14 +1316,23 @@ public class UIServices : IUIServices
 
     public bool ExistFile(string fileName)
     {
-        string slash = "/";
+        try
+        {
+            string slash = "/";
 
-        if (fileName.StartsWith("/"))
-            slash = "";
+            if (fileName.StartsWith("/"))
+                slash = "";
 
-        string pathFileName = GlobalData.CurrentPath() + slash + fileName;
+            string pathFileName = GlobalData.CurrentPath() + slash + fileName;
 
-        return (File.Exists(pathFileName));
+            return (File.Exists(pathFileName));
+        }
+        catch (Exception e)
+        {
+            GlobalData.AddLog("ExistFile: " + e.Message, IGlobalData.protMode.crisp);
+            return false;
+        }
+
     }
 
     public string CurrentPathPlusFilename( string fileName )
@@ -1125,19 +1348,30 @@ public class UIServices : IUIServices
     }
     public bool WriteStory()
     {
-        string pathfileName = CurrentPathPlusFilename("Versteck_Meister_Story_Recording.html");
-
         try
         {
-            File.WriteAllTextAsync(pathfileName, GD.HTMLPage!.Replace("[Body]", StoryTextObj!.WholeStory!.ToString()));
+            string pathfileName = CurrentPathPlusFilename("Versteck_Meister_Story_Recording.html");
 
+            try
+            {
+                File.WriteAllTextAsync(pathfileName, GD.HTMLPage!.Replace("[Body]", StoryTextObj!.WholeStory!.ToString()));
+
+            }
+            catch (Exception e)
+            {
+                GlobalData.AddLog("WriteStory: " + e.Message, IGlobalData.protMode.crisp);
+
+                return false;
+            }
+
+            return true;
         }
-        catch
+        catch (Exception e)
         {
+            GlobalData.AddLog("WriteStory: " + e.Message, IGlobalData.protMode.crisp);
             return false;
         }
 
-        return true;
     }
 
     public void InitPath()
@@ -1233,7 +1467,7 @@ public class UIServices : IUIServices
             return ms.ToArray();
         }
     }
-    public static Object ByteArrayToObject(byte[] arrBytes)
+    public static Object? ByteArrayToObject(byte[] arrBytes)
     {
         /*
         Object? o = null;
@@ -1257,18 +1491,26 @@ public class UIServices : IUIServices
         byte[] buf = System.Text.Json.JsonSerializer.Deserialize().SerializeToUtf8Bytes(obj);
         return buf;
         */
-         using (var memStream = new MemoryStream())
+        try
         {
-            var binForm = new BinaryFormatter();
-            memStream.Write(arrBytes, 0, arrBytes.Length);
-            memStream.Seek(0, SeekOrigin.Begin);
-            var obj = binForm.Deserialize(memStream);
-            return obj;
+            using (var memStream = new MemoryStream())
+            {
+                var binForm = new BinaryFormatter();
+                memStream.Write(arrBytes, 0, arrBytes.Length);
+                memStream.Seek(0, SeekOrigin.Begin);
+                var obj = binForm.Deserialize(memStream);
+                return obj;
+            }
+        }
+        catch (Exception e)
+        {
+            GlobalData.AddLog("ByteArrayToObject: " + e.Message, IGlobalData.protMode.crisp);
+            return null;
         }
     }
 
     List<string>? LatestNaviStrings = null;
-    int lnsPt = 0;
+    // int lnsPt = 0;
 
     public async void WaitWebsiteReady()
     {
@@ -1282,7 +1524,7 @@ public class UIServices : IUIServices
 
 
             // Warte, bis die neue Webseite geladen ist
-            string result = await ExternalGameOut.EvaluateJavaScriptAsync("new Promise((resolve, reject) => { var interval = setInterval(() => { var state = getDocumentReadyState(); if (state == 'complete') { clearInterval(interval); resolve(state); } }, 100); });");
+            string? result = await ExternalGameOut.EvaluateJavaScriptAsync("new Promise((resolve, reject) => { var interval = setInterval(() => { var state = getDocumentReadyState(); if (state == 'complete') { clearInterval(interval); resolve(state); } }, 100); });");
 
             // Prüfe, ob die Webseite vollständig geladen ist
             if (result == "complete")
@@ -1293,11 +1535,12 @@ public class UIServices : IUIServices
                 ExternalGameOut.NavigateToString(ExternalGameOut.LatestString!);
             }
 
-            string result2 = await ExternalGameOut.EvaluateJavaScriptAsync("Promise.resolve('gna')");
+            string? result2 = await ExternalGameOut.EvaluateJavaScriptAsync("Promise.resolve('gna')");
         }
         // Wenn das Warten auf Fertigstellung nicht klappt: Tja, dann flackerts halt
-        catch (Exception ex)
+        catch (Exception e)
         {
+            GlobalData.AddLog("WaitWebsiteReady: " + e.Message, IGlobalData.protMode.crisp);
 
         }
     }
@@ -1329,157 +1572,164 @@ public class UIServices : IUIServices
 
     public void WebView1_Navigating(object? sender, WebNavigatingEventArgs e)
     {
-        // if(((Microsoft.Maui.Controls.HtmlWebViewSource)ExternalGameOut.Source).Html.Length != e.Url)
-        // LatestNaviStrings.Add( e.Url);
-
-        if( e.Url.Substring( 0, 5) != "data:")
+        try
         {
+            // if(((Microsoft.Maui.Controls.HtmlWebViewSource)ExternalGameOut.Source).Html.Length != e.Url)
+            // LatestNaviStrings.Add( e.Url);
 
-        }
-        var urlParts = e.Url.Split(".");
-        if (urlParts[0].ToLower().Equals("https://runcsharp"))
-        {
-            var funcToCall = urlParts[1].Split("?");
-            var methodName = funcToCall[0];
-            var funcParams = funcToCall[1];
-            // Debug.WriteLine("Calling " + methodName);
+            if (e.Url.Substring(0, 5) != "data:")
+            {
 
-            if (methodName == "gethtmlypos/")
-            {
-                JSBoundObject.GetHtmlYPos(Int32.Parse(funcParams));
             }
-            else if (methodName == "gethtmlheight/")
+            var urlParts = e.Url.Split(".");
+            if (urlParts[0].ToLower().Equals("https://runcsharp"))
             {
-                JSBoundObject.GetHtmlHeight(Int32.Parse(funcParams));
-            }
-            /*
-            else if (methodName == "gethtmlheight/")
-            {
-                JSBoundObject.GetHtmlHeight(Int32.Parse(funcParams));
-            }
-            */
-            else if (methodName == "gethtmlmaxypos/")
-            {
-                JSBoundObject.GetHtmlMaxYPos(Int32.Parse(funcParams));
-            }
-            else if (methodName == "gethtmlmaxyposoffset/")
-            {
-                JSBoundObject.GetHtmlMaxYPosOffset(Int32.Parse(funcParams));
-            }
-            else if (methodName == "startscrolling/")
-            {
-                JSBoundObject.StartScrolling(Int32.Parse(funcParams));
-            }
-            else if (methodName == "startscrolling2/")
-            {
-                JSBoundObject.GetHtmlYPos(Int32.Parse(funcParams));
-            }
-            else if (methodName == "loadedfully/")
-            {
-                JSBoundObject.HmtlLoaded(Int32.Parse(funcParams) );
-            }
-            else
-            {
-                JSBoundObject.GetHtmlYPos(Int32.Parse(funcParams));
-            }
+                var funcToCall = urlParts[1].Split("?");
+                var methodName = funcToCall[0];
+                var funcParams = funcToCall[1];
+                // Debug.WriteLine("Calling " + methodName);
 
-            // 
-            // prevent the navigation to complete
-            e.Cancel = true;
-
-            // TODO smart parsing and type casting of parameters and then some reflection magic
-        }
-        else if (urlParts[0].ToLower().Equals("https://defineobject"))
-        {
-            // Wenn e.Cancel schon gesetzt, dann wurde der Link schon verarbeitet
-            if (e.Cancel == false)
-            {
-                bool skip = false;
-
-                LatestNaviStrings = new();
-                LatestNaviStrings.Add(urlParts[0]);
-                lnsPt = 1;
-
-                // Dieser Mechanismus ist darauf ausgelegt, dass auf einen Klick insgesamt 3 Messages folgen, von denen 2 tunlichst 
-                // verschluckt werden sollten. Das ist aus irgendeinem Grund nun nicht mehr nötig, bzw. dadurch ist es halt jetzt falsch
-
-                /*
-                bool skip = true;
-
-                if( LatestNaviStrings == null )
+                if (methodName == "gethtmlypos/")
                 {
-                    LatestNaviStrings = new();
-                    LatestNaviStrings.Add(urlParts[0]);
-                    lnsPt = 1;
-                    skip = false;
+                    JSBoundObject.GetHtmlYPos(Int32.Parse(funcParams));
                 }
-                else if (urlParts[0] == LatestNaviStrings[ lnsPt - 1])
+                else if (methodName == "gethtmlheight/")
                 {
-                    LatestNaviStrings.Add(urlParts[0]);
-                    lnsPt++;
-                    if( lnsPt >= 3)
-                    {
-                        LatestNaviStrings = null;
-                    }
+                    JSBoundObject.GetHtmlHeight(Int32.Parse(funcParams));
+                }
+                /*
+                else if (methodName == "gethtmlheight/")
+                {
+                    JSBoundObject.GetHtmlHeight(Int32.Parse(funcParams));
                 }
                 */
-
-                if (!skip)
+                else if (methodName == "gethtmlmaxypos/")
                 {
-                    string? s = null;
+                    JSBoundObject.GetHtmlMaxYPos(Int32.Parse(funcParams));
+                }
+                else if (methodName == "gethtmlmaxyposoffset/")
+                {
+                    JSBoundObject.GetHtmlMaxYPosOffset(Int32.Parse(funcParams));
+                }
+                else if (methodName == "startscrolling/")
+                {
+                    JSBoundObject.StartScrolling(Int32.Parse(funcParams));
+                }
+                else if (methodName == "startscrolling2/")
+                {
+                    JSBoundObject.GetHtmlYPos(Int32.Parse(funcParams));
+                }
+                else if (methodName == "loadedfully/")
+                {
+                    JSBoundObject.HmtlLoaded(Int32.Parse(funcParams));
+                }
+                else
+                {
+                    JSBoundObject.GetHtmlYPos(Int32.Parse(funcParams));
+                }
 
-                    var funcToCall = urlParts[1].Split("/");
+                // 
+                // prevent the navigation to complete
+                e.Cancel = true;
 
-                    if (funcToCall[0] == "item")
-                    {
-                        s = "Item: " + funcToCall[1];
-                    }
-                    else if (funcToCall[0] == "dir")
-                    {
-                        s = "Dir: " + funcToCall[1];
-                    }
-                    else if (funcToCall[0] == "loc")
-                    {
-                        s = "Loc: " + funcToCall[1];
-                    }
-                    else if (funcToCall[0] == "actloc")
-                    {
-                        s = "ActLoc";
-                    }
-                    else if (funcToCall[0] == "actperson")
-                    {
-                        s = "ActPerson";
-                    }
-                    else if (funcToCall[0] == "person")
-                    {
-                        s = "Person: " + funcToCall[1];
-                    }
+                // TODO smart parsing and type casting of parameters and then some reflection magic
+            }
+            else if (urlParts[0].ToLower().Equals("https://defineobject"))
+            {
+                // Wenn e.Cancel schon gesetzt, dann wurde der Link schon verarbeitet
+                if (e.Cancel == false)
+                {
+                    bool skip = false;
 
-                    if (s != null)
+                    LatestNaviStrings = new();
+                    LatestNaviStrings.Add(urlParts[0]);
+                    // lnsPt = 1;
+
+                    // Dieser Mechanismus ist darauf ausgelegt, dass auf einen Klick insgesamt 3 Messages folgen, von denen 2 tunlichst 
+                    // verschluckt werden sollten. Das ist aus irgendeinem Grund nun nicht mehr nötig, bzw. dadurch ist es halt jetzt falsch
+
+                    /*
+                    bool skip = true;
+
+                    if( LatestNaviStrings == null )
                     {
-                        InitBrowserUpdate();
-                        // UpdateBrowserCallsPerCycle = 0;
-                        GlobalData.CurrentGlobalData!.Adventure!.LinkCallback(s);
-                        DoUIUpdate();
-                        StoryTextObj!.AdvTextRefresh(true);
-                        FinishBrowserUpdate(IUIServices.onBrowserContentLoaded.PageDown);
-                        if (_setMCFocusMethod != null)
+                        LatestNaviStrings = new();
+                        LatestNaviStrings.Add(urlParts[0]);
+                        lnsPt = 1;
+                        skip = false;
+                    }
+                    else if (urlParts[0] == LatestNaviStrings[ lnsPt - 1])
+                    {
+                        LatestNaviStrings.Add(urlParts[0]);
+                        lnsPt++;
+                        if( lnsPt >= 3)
                         {
-                            _setMCFocusMethod();
+                            LatestNaviStrings = null;
                         }
+                    }
+                    */
+
+                    if (!skip)
+                    {
+                        string? s = null;
+
+                        var funcToCall = urlParts[1].Split("/");
+
+                        if (funcToCall[0] == "item")
+                        {
+                            s = "Item: " + funcToCall[1];
+                        }
+                        else if (funcToCall[0] == "dir")
+                        {
+                            s = "Dir: " + funcToCall[1];
+                        }
+                        else if (funcToCall[0] == "loc")
+                        {
+                            s = "Loc: " + funcToCall[1];
+                        }
+                        else if (funcToCall[0] == "actloc")
+                        {
+                            s = "ActLoc";
+                        }
+                        else if (funcToCall[0] == "actperson")
+                        {
+                            s = "ActPerson";
+                        }
+                        else if (funcToCall[0] == "person")
+                        {
+                            s = "Person: " + funcToCall[1];
+                        }
+
+                        if (s != null)
+                        {
+                            InitBrowserUpdate();
+                            // UpdateBrowserCallsPerCycle = 0;
+                            GlobalData.CurrentGlobalData!.Adventure!.LinkCallback(s);
+                            DoUIUpdate();
+                            StoryTextObj!.AdvTextRefresh(true);
+                            FinishBrowserUpdate(IUIServices.onBrowserContentLoaded.PageDown);
+                            if (_setMCFocusMethod != null)
+                            {
+                                _setMCFocusMethod();
+                            }
 #if !NEWSCROLL
                     Scr!.ScrollPageFinal();
                     Scr!.SetNext = true;
 #endif
+                        }
                     }
+                    e.Cancel = true;
                 }
-                e.Cancel = true;
+            }
+            else
+            {
+                // int a = 5;
+                e.Cancel = false;
             }
         }
-        else
+        catch (Exception ex)
         {
-            // int a = 5;
-            e.Cancel = false;
+            GlobalData.AddLog("WebView1_Navigating: " + ex.Message, IGlobalData.protMode.crisp);
         }
     }
 
@@ -1600,8 +1850,10 @@ public class UIServices : IUIServices
                     // Scr.ScrollEnd( yPos );
 #endif
                 }
-                catch // (Exception e)
+                catch (Exception e)
                 {
+                    GlobalData.AddLog("UpdateBrowser: " + e.Message, IGlobalData.protMode.crisp);
+
                     // int a = 5;
                 }
             }
@@ -1648,6 +1900,7 @@ public class UIServices : IUIServices
         }
         catch (Exception e)
         {
+            GlobalData.AddLog("STTTestRunning: " + e.Message, IGlobalData.protMode.crisp);
 
         }
 #endif
@@ -1680,6 +1933,7 @@ public class UIServices : IUIServices
         }
         catch (Exception e)
         {
+            GlobalData.AddLog("STTInqSpeech: " + e.Message, IGlobalData.protMode.crisp);
 
         }
 
@@ -1763,6 +2017,8 @@ public class UIServices : IUIServices
         }
         catch (Exception e)
         {
+            GlobalData.AddLog("STTStartListening: " + e.Message, IGlobalData.protMode.crisp);
+
             GD.LayoutDescription.STTMicroState = IGlobalData.microMode.off;
         }
     }
@@ -1849,6 +2105,7 @@ public class UIServices : IUIServices
         }
         catch (Exception e)
         {
+            GlobalData.AddLog("STTStopListening: " + e.Message, IGlobalData.protMode.crisp);
 
         }
     }
@@ -1882,6 +2139,7 @@ public class UIServices : IUIServices
         }
         catch (Exception e)
         {
+            GlobalData.AddLog("OnStateChanged: " + e.Message, IGlobalData.protMode.crisp);
 
         }
     }
@@ -1914,6 +2172,7 @@ public class UIServices : IUIServices
         }
         catch (Exception e)
         {
+            GlobalData.AddLog("OnRecognitionTextUpdated: " + e.Message, IGlobalData.protMode.crisp);
 
         }
     }
@@ -1938,6 +2197,7 @@ public class UIServices : IUIServices
         }
         catch (Exception e)
         {
+            GlobalData.AddLog("OnRecognitionTextCompleted: " + e.Message, IGlobalData.protMode.crisp);
 
         }
     }
@@ -2009,19 +2269,28 @@ public class MCMenuView
 
     public void CreateButton(Microsoft.Maui.Controls.Grid g, string text, int off, int val, EventHandler? ev)
     {
-        IDButton b = new();
-        b.ID = val;
-        b.Text = text;
-        g.Add(b);
-        g.SetRow(b, off);
-        List<string> ButtonStyle = new();
-        ButtonStyle.Add("IDButton_Invers");
-        b.StyleClass = ButtonStyle;
-        Thickness m = new(6, 6, 6, 0);
-        b.Margin = m;
-        b.Clicked += ev;
+        try
+        {
+            IDButton b = new();
+            b.ID = val;
+            b.Text = text;
+            g.Add(b);
+            g.SetRow(b, off);
+            List<string> ButtonStyle = new();
+            ButtonStyle.Add("IDButton_Invers");
+            b.StyleClass = ButtonStyle;
+            Thickness m = new(6, 6, 6, 0);
+            b.Margin = m;
+            b.Clicked += ev;
+        }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("CreateButton: " + ex.Message, IGlobalData.protMode.crisp);
+        }
+
     }
 
+    /*
     public void SetMC(Microsoft.Maui.Controls.Grid? contextGrid, int val)
     {
         contextGrid!.Children.Clear();
@@ -2043,6 +2312,7 @@ public class MCMenuView
         CreateButton(contextGrid, "Neuer Eintrag danach", 3, val, null);
         CreateButton(contextGrid, "Neuer Eintrag davor", 4, val, null);
     }
+    */
 
     public void SetCallbackSelection(Phoney_MAUI.Model.DelMCMSelection? CallbackSelection)
     {
@@ -2055,157 +2325,178 @@ public class MCMenuView
 
     public MCMenuView()
     {
-        // mcmwObj = this;
-
-        // this.UIS = UIS;
-        // this.GD = gd;
-        UIS!.MCMV = this;
-        UIS!.MCMVVisible = true;
-        UIS.Scr.YPosMode = Scroller.YPosModes.startmc;
-        UIS.Scr.SetFastScrollingArea();
-
-        if (GD!.MCAsContextmenu == true)
+        try
         {
-            string Text = "Huhu";
+            // mcmwObj = this;
 
+            // this.UIS = UIS;
+            // this.GD = gd;
+            UIS!.MCMV = this;
+            UIS!.MCMVVisible = true;
+            UIS.Scr.YPosMode = Scroller.YPosModes.startmc;
+            UIS.Scr.SetFastScrollingArea();
 
-            // int val = 5;
-
-            double x1 = GlobalSpecs.CurrentGlobalSpecs!.GetScreenWidth();
-            double y1 = GlobalSpecs.CurrentGlobalSpecs!.GetScreenHeight();
-
-            Rect pd = new();
-            pd.Width = 300;
-            pd.Height = 400;
-            pd.X = (x1 / 2) - (pd.Width / 2);
-            pd.Y = (y1 / 2) - (pd.Height / 2);
-
-            GD.MenuExtension!.OpenShowMenu(true, pd, true, Text);
-            GD.MenuExtension!.MEMenus[GD.MenuExtension.MEMenus.Count - 1].Scalable = true;
-            GD.MenuExtension!.MEMenus[GD.MenuExtension.MEMenus.Count - 1].MinWidth = 200;
-            GD.MenuExtension!.MEMenus[GD.MenuExtension.MEMenus.Count - 1].MaxWidth = 600;
-            GD.MenuExtension!.MEMenus[GD.MenuExtension.MEMenus.Count - 1].MinHeight = 200;
-            GD.MenuExtension!.MEMenus[GD.MenuExtension.MEMenus.Count - 1].MaxHeight = 600;
-            /*
-            if (GD.MenuExtension.MEMenus[GD.MenuExtension.MEMenus.Count - 1].InnerView != null)
+            if (GD!.MCAsContextmenu == true)
             {
-                SetMC(GD.MenuExtension.MEMenus[GD.MenuExtension.MEMenus.Count - 1].InnerView, val);
-            }
-            */
+                string Text = "Huhu";
 
-            this.UIS!.MCMenuViewObj = this;
-            /*
-            MW.TextinputTemp = MW.Inputline.Text;
-            MW.textinputarea1.Visibility = Visibility.Hidden;
-            MW.textinputarea2.Visibility = Visibility.Hidden;
-            MW.textoutputarea.Visibility = Visibility.Visible;
 
-            if (MW.WCFG!.CurrentScheme != null)
-                MW.textoutputarea.Background = MW.WCFG.CurrentScheme.BGMC; //  Brushes.LightCyan;
-                                                                           // MW.InputGrid.Color= MW.CurrentScheme.BGMC;
-                                                                           // MW.ReturnButton.Visibility = Visibility.Hidden;
-            if (MW.FeedbackTextObj.FeedbackModeMC == false && MW.FlushText == false)
-                Instances = 1;
-            else
-                Instances++;
+                // int val = 5;
 
-            if (MW.FeedbackTextObj.FeedbackModeMC == false && MW.FlushText == false)
-            {
-                MW.FeedbackTextObj.FeedbackOffMC = 0;
-                MW.FeedbackTextObj.FeedbackModeMC = true;
-                if (GD.SilentMode == false)
-                    MW.SetScheme(true);
-            }
+                double x1 = GlobalSpecs.CurrentGlobalSpecs!.GetScreenWidth();
+                double y1 = GlobalSpecs.CurrentGlobalSpecs!.GetScreenHeight();
 
-            // UIS!.Scr.JumpToEnd();
-            MW.FeedbackTextObj.FeedbackWindowInitText();
+                Rect pd = new();
+                pd.Width = 300;
+                pd.Height = 400;
+                pd.X = (x1 / 2) - (pd.Width / 2);
+                pd.Y = (y1 / 2) - (pd.Height / 2);
 
-            MW.AdjustTextPanel();
-            */
-            // MW.FeedbackTextObj.FeedbackModeMC = true;
+                GD.MenuExtension!.OpenShowMenu(true, pd, true, Text);
+                GD.MenuExtension!.MEMenus[GD.MenuExtension.MEMenus.Count - 1].Scalable = true;
+                GD.MenuExtension!.MEMenus[GD.MenuExtension.MEMenus.Count - 1].MinWidth = 200;
+                GD.MenuExtension!.MEMenus[GD.MenuExtension.MEMenus.Count - 1].MaxWidth = 600;
+                GD.MenuExtension!.MEMenus[GD.MenuExtension.MEMenus.Count - 1].MinHeight = 200;
+                GD.MenuExtension!.MEMenus[GD.MenuExtension.MEMenus.Count - 1].MaxHeight = 600;
+                /*
+                if (GD.MenuExtension.MEMenus[GD.MenuExtension.MEMenus.Count - 1].InnerView != null)
+                {
+                    SetMC(GD.MenuExtension.MEMenus[GD.MenuExtension.MEMenus.Count - 1].InnerView, val);
+                }
+                */
+
+                this.UIS!.MCMenuViewObj = this;
+                /*
+                MW.TextinputTemp = MW.Inputline.Text;
+                MW.textinputarea1.Visibility = Visibility.Hidden;
+                MW.textinputarea2.Visibility = Visibility.Hidden;
+                MW.textoutputarea.Visibility = Visibility.Visible;
+
+                if (MW.WCFG!.CurrentScheme != null)
+                    MW.textoutputarea.Background = MW.WCFG.CurrentScheme.BGMC; //  Brushes.LightCyan;
+                                                                               // MW.InputGrid.Color= MW.CurrentScheme.BGMC;
+                                                                               // MW.ReturnButton.Visibility = Visibility.Hidden;
+                if (MW.FeedbackTextObj.FeedbackModeMC == false && MW.FlushText == false)
+                    Instances = 1;
+                else
+                    Instances++;
+
+                if (MW.FeedbackTextObj.FeedbackModeMC == false && MW.FlushText == false)
+                {
+                    MW.FeedbackTextObj.FeedbackOffMC = 0;
+                    MW.FeedbackTextObj.FeedbackModeMC = true;
+                    if (GD.SilentMode == false)
+                        MW.SetScheme(true);
+                }
+
+                // UIS!.Scr.JumpToEnd();
+                MW.FeedbackTextObj.FeedbackWindowInitText();
+
+                MW.AdjustTextPanel();
+                */
+                // MW.FeedbackTextObj.FeedbackModeMC = true;
 #if !NEWSCROLL
             UIS!.Scr!.CompactToEnd();
             UIS!.Scr!.SetScrollerToEnd();
 #endif
-        }
-        else
-        {
-            DelBoolInt? dbi = GD.ProvideMCGrid;
-
-            if (dbi != null)
+            }
+            else
             {
-                Grid g1 = dbi(true, 200);
+                DelBoolInt? dbi = GD.ProvideMCGrid;
 
-                this.UIS!.MCMenuViewObj = this;
+                if (dbi != null)
+                {
+                    Grid g1 = dbi(true, 200);
+
+                    this.UIS!.MCMenuViewObj = this;
 #if !NEWSCROLL
                 UIS!.Scr!.CompactToEnd();
                 UIS!.Scr!.SetScrollerToEnd();
 #endif
-                _mcGrid = g1;
+                    _mcGrid = g1;
+                }
             }
         }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("MCMenuView: " + ex.Message, IGlobalData.protMode.crisp);
+        }
+
         // UIS!.Scr.InqScrollingAreaAsync().Wait();
     }
 
     public void Close()
     {
-        if (GD!.MCAsContextmenu == true)
+        try
         {
-            // GlobalData.CurrentGlobalData!.Adventure.UIS!.StoryTextObj.AdvTextOut(); //  RecalcLatest();
-            // GlobalData.CurrentGlobalData!.Adventure.UIS!.UpdateBrowser();
-            GD.MenuExtension!.DestroyMEMenus();
-            // UIS!.DoUpdateBrowser = true;
-            // mcmwObj.Close();
-        }
-        else
-        {
-            DelBoolInt dbi = GD.ProvideMCGrid!;
-
-            if (dbi != null)
+            if (GD!.MCAsContextmenu == true)
             {
-                dbi(false, 0);
+                // GlobalData.CurrentGlobalData!.Adventure.UIS!.StoryTextObj.AdvTextOut(); //  RecalcLatest();
+                // GlobalData.CurrentGlobalData!.Adventure.UIS!.UpdateBrowser();
+                GD.MenuExtension!.DestroyMEMenus();
+                // UIS!.DoUpdateBrowser = true;
+                // mcmwObj.Close();
             }
-            // Behaviors löschen
-
-            VerticalStackLayout? vsl = (_mcGrid.Children[0] as ScrollView).Content as VerticalStackLayout;
-
-            foreach (IView iv in vsl.Children)
+            else
             {
-                if (iv.GetType() == typeof(Grid))
+                DelBoolInt dbi = GD.ProvideMCGrid!;
+
+                if (dbi != null)
                 {
+                    dbi(false, 0);
+                }
+                // Behaviors löschen
 
-                    Label l1 = (iv as Grid).Children[0] as Label;
+                VerticalStackLayout? vsl = (_mcGrid!.Children[0] as ScrollView)!.Content as VerticalStackLayout;
 
-                    while (l1.Behaviors.Count > 0)
+                TreeView.EmptyTreeViewItem(vsl, false, false, true);
+
+                /*
+                foreach (IView iv in vsl.Children)
+                {
+                    if (iv.GetType() == typeof(Grid))
                     {
-                        l1.Behaviors.RemoveAt(0);
-                    }
 
-                    if ((iv as Grid).Children.Count > 1)
-                    {
-                        Label? l2 = (iv as Grid).Children[1] as Label;
+                        Label l1 = ( (iv as Grid)!.Children[0] as Label ) !;
 
-                        while (l2.Behaviors.Count > 0)
+                        while (l1!.Behaviors.Count > 0)
                         {
-                            l2.Behaviors.RemoveAt(0);
+                            l1.Behaviors.RemoveAt(0);
+                        }
+
+                        if ((iv as Grid)!.Children.Count > 1)
+                        {
+                            Label? l2 = (iv as Grid)!.Children[1] as Label;
+
+                            while (l2.Behaviors.Count > 0)
+                            {
+                                l2.Behaviors.RemoveAt(0);
+                            }
                         }
                     }
+
                 }
+                */
 
             }
+            UIS!.Scr.CompactToEnd();
+            UIS.StoryTextObj!.AdvTextRefresh();
+            UIS.StoryTextObj!.TextReFreshman();
 
+            // UIS.Scr.JumpToEndInstantly();
+
+            UIS!.MCMVVisible = false;
+            UIS.Scr.YPosMode = Scroller.YPosModes.backfrommc;
+            UIS.Scr.SetFastScrollingArea();
+            UIS.FinishBrowserUpdate(IUIServices.onBrowserContentLoaded.ScrollToEnd);
+            // UIS!.Scr.InqScrollingAreaAsync().Wait();
         }
-        UIS!.Scr.CompactToEnd();
-        UIS.StoryTextObj!.AdvTextRefresh();
-        UIS.StoryTextObj!.TextReFreshman();
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("Close: " + ex.Message, IGlobalData.protMode.crisp);
+        }
 
-        // UIS.Scr.JumpToEndInstantly();
 
-        UIS!.MCMVVisible = false;
-        UIS.Scr.YPosMode = Scroller.YPosModes.backfrommc;
-        UIS.Scr.SetFastScrollingArea();
-        UIS.FinishBrowserUpdate(IUIServices.onBrowserContentLoaded.ScrollToEnd);
-        // UIS!.Scr.InqScrollingAreaAsync().Wait();
     }
 
 
@@ -2217,52 +2508,62 @@ public class MCMenuView
 
     public void DoTapEntry(object? sender, TappedEventArgs e)
     {
-        if (UIS!.UpdateBrowserCallsPerCycle > 0)
-            return;
-        /*
-        if( tapvsl!= null )
+        try
         {
-            foreach( Object o in tapvsl.Children)
+            if (UIS!.UpdateBrowserCallsPerCycle > 0)
+                return;
+
+
+            (sender as Phoney_MAUI.IDLabel).TextColor = Colors.AliceBlue;
+            /*
+            if( tapvsl!= null )
             {
-                if( o.GetType() == typeof( Grid ))
+                foreach( Object o in tapvsl.Children)
                 {
-                    Grid g2 = o as Grid;
-
-                    foreach (object o2 in g2.Children)
+                    if( o.GetType() == typeof( Grid ))
                     {
+                        Grid g2 = o as Grid;
 
-                        IDLabel i = o2 as IDLabel;
-
-                        while (i.GestureRecognizers.Count > 0)
+                        foreach (object o2 in g2.Children)
                         {
-                            i.GestureRecognizers.RemoveAt(0);
+
+                            IDLabel i = o2 as IDLabel;
+
+                            while (i.GestureRecognizers.Count > 0)
+                            {
+                                i.GestureRecognizers.RemoveAt(0);
+                            }
                         }
                     }
+
                 }
-                        
             }
-        }
-        */
-        // GD.MenuExtension.DestroyMEMenus();
-        if (_callbackSelection == null)
-        {
+            */
+            // GD.MenuExtension.DestroyMEMenus();
+            if (_callbackSelection == null)
+            {
 
-        }
+            }
 
-        if (_callbackSelection != null)
-        {
-            // UIS!.StoryTextObj!.DividingLine();
-            UIS!.InitBrowserUpdate();
-            UIS!.UpdateBrowserCallsPerCycle = 0;
-            _callbackSelection(UIS!.MCM!, (sender as IDLabel)!.ID);
-            UIS!.StoryTextObj!.AdvTextRefresh();
-            UIS!.FinishBrowserUpdate(IUIServices.onBrowserContentLoaded.PageDown);
+            if (_callbackSelection != null)
+            {
+                // UIS!.StoryTextObj!.DividingLine();
+                UIS!.InitBrowserUpdate();
+                UIS!.UpdateBrowserCallsPerCycle = 0;
+                _callbackSelection(UIS!.MCM!, (sender as IDLabel)!.ID);
+                UIS!.StoryTextObj!.AdvTextRefresh();
+                UIS!.FinishBrowserUpdate(IUIServices.onBrowserContentLoaded.PageDown);
 #if !NEWSCROLL
     UIS!.Scr.SetScrollerToEnd();
 #endif
+            }
+            // UIS!.StoryTextObj.AdvTextOut();
+            // UIS!.UpdateBrowser();
         }
-        // UIS!.StoryTextObj.AdvTextOut();
-        // UIS!.UpdateBrowser();
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("DoTapEntry: " + ex.Message, IGlobalData.protMode.crisp);
+        }
 
 
 
@@ -2270,18 +2571,26 @@ public class MCMenuView
 
     public void CallBackMCMenuView(int id)
     {
-        if (_callbackSelection != null)
+        try
         {
-            // UIS!.StoryTextObj!.DividingLine();
-            UIS!.InitBrowserUpdate();
-            // UIS!.UpdateBrowserCallsPerCycle = 0;
-            _callbackSelection(UIS!.MCM!, id);
-            UIS!.StoryTextObj!.AdvTextRefresh();
-            UIS!.FinishBrowserUpdate(IUIServices.onBrowserContentLoaded.PageDown);
+            if (_callbackSelection != null)
+            {
+                // UIS!.StoryTextObj!.DividingLine();
+                UIS!.InitBrowserUpdate();
+                // UIS!.UpdateBrowserCallsPerCycle = 0;
+                _callbackSelection(UIS!.MCM!, id);
+                UIS!.StoryTextObj!.AdvTextRefresh();
+                UIS!.FinishBrowserUpdate(IUIServices.onBrowserContentLoaded.PageDown);
 #if !NEWSCROLL
             UIS!.Scr.SetScrollerToEnd();
 #endif
+            }
         }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("CallBackMCMenuView: " + ex.Message, IGlobalData.protMode.crisp);
+        }
+
 
     }
 
@@ -2564,7 +2873,7 @@ public class MCMenuView
                     App.CurrentPage!.Focus();
                     UIS!.MCM = MCM;
 
-                    TreeView.EmptyTreeViewItem(_mcGrid!, false, false );
+                    TreeView.EmptyTreeViewItem(_mcGrid!, false, false, true );
 
                     _mcGrid.Clear();
                     int startVal = 0;
@@ -2625,6 +2934,7 @@ public class MCMenuView
                             l.GestureRecognizers.Add(tgr);
                             l.SetCursorHand();
 
+#if WINDOWS
                             var touchBehaviorL = new TouchBehavior
                             {
                                 // HoveredBackgroundColor = Colors.AliceBlue,
@@ -2632,7 +2942,7 @@ public class MCMenuView
 
                             };
                             l.Behaviors.Add(touchBehaviorL);
-
+#endif
                         }
                         else
                         {
@@ -2666,6 +2976,7 @@ public class MCMenuView
                             l.GestureRecognizers.Add(tgr);
                             l.SetCursorHand();
 
+#if WINDOWS
                             var touchBehaviorL = new TouchBehavior
                             {
                                 // HoveredBackgroundColor = Colors.AliceBlue,
@@ -2675,7 +2986,7 @@ public class MCMenuView
 
                             };
                             l.Behaviors.Add(touchBehaviorL);
-
+#endif
                             string? s = null;
 
                             if (MCM.GetCurrent(i)!.Keys!.Count > 0)
@@ -2895,10 +3206,10 @@ public class Scroller : IScroller
         }
     }
 
-    int CountFlushes = 0;
+    // int CountFlushes = 0;
     public bool ResetWait()
     {
-        CountFlushes = 0;
+        // CountFlushes = 0;
         UIS!.BrowserRefreshOngoing = false;
         FlushJavaScript();
         InqScrollingAreaAsync().GetAwaiter();
@@ -2947,7 +3258,7 @@ public class Scroller : IScroller
     {
         if (UIS!.BrowserRefreshOngoing)
         {
-            jsCallbacks.Add(scrollOrder);
+            jsCallbacks!.Add(scrollOrder);
         }
         else
         {
@@ -2963,6 +3274,7 @@ public class Scroller : IScroller
             }
             catch (Exception e)
             {
+                Phoney_MAUI.Core.GlobalData.AddLog("StartScrollOrder: " + e.Message, IGlobalData.protMode.crisp);
             }
         }
     }
@@ -3007,7 +3319,7 @@ public class Scroller : IScroller
     {
         int yPos = (int)HTMLViewMaxYPos;
 
-        GlobalData.AddLog("Endjumper: " + "window.scrollTo({ top: " + yPos + ", behavior: 'smooth' }", IGlobalData.protMode.crisp);
+        GlobalData.AddLog("Endjumper: " + "window.scrollTo({ top: " + yPos + ", behavior: 'smooth' }", IGlobalData.protMode.medium);
 
         string s1 = "window.scrollTo({ top: " + yPos + " });";
 
@@ -3046,7 +3358,7 @@ public class Scroller : IScroller
         {
 
         }
-        GlobalData.AddLog("PageDowner: " + "window.scrollTo({ top: " + y + ", behavior: 'smooth' }", IGlobalData.protMode.crisp);
+        GlobalData.AddLog("PageDowner: " + "window.scrollTo({ top: " + y + ", behavior: 'smooth' }", IGlobalData.protMode.medium);
         string s1 = "window.scrollTo({ top: " + y + ", behavior: 'smooth' });";
 
         StartScrollOrder(s1).GetAwaiter();
@@ -3153,7 +3465,7 @@ public class Scroller : IScroller
         {
             if (UIS!.BrowserRefreshOngoing == false)
             {
-                if (jsCallbacks.Count > 1)
+                if (jsCallbacks!.Count > 1)
                 {
                 }
 
@@ -3182,7 +3494,7 @@ public class Scroller : IScroller
         FlushJS--;
     }
 
-    List<string> jsCallbacks = null;
+    List<string>? jsCallbacks = null;
     public void DoScroll()
     {
         if( jsCallbacks == null )
@@ -3388,8 +3700,9 @@ public class Scroller : IScroller
             }
             catch (Exception ex)
             {
+                Phoney_MAUI.Core.GlobalData.AddLog("Gedoens: " + ex.Message, IGlobalData.protMode.crisp);
             }
-    }
+        }
 }
 
     public async Task<bool> InqScrollingAreaAsync()
@@ -3403,12 +3716,12 @@ public class Scroller : IScroller
         if (GlobalSpecs.CurrentGlobalSpecs!.AppRunning == IGlobalSpecs.appRunning.quit || GlobalSpecs.CurrentGlobalSpecs!.AppRunning == IGlobalSpecs.appRunning.start)
             return false;
 
-        string s;
+        string? s;
 
         try
         {
             IFormatProvider ifp = CultureInfo.CreateSpecificCulture("en-EN");
-            string s2 = await UIS!.ExternalGameOut.EvaluateJavaScriptAsync($"window.pageYOffset");
+            string? s2 = await UIS!.ExternalGameOut.EvaluateJavaScriptAsync($"window.pageYOffset");
 
             while (s2 == null)
             {
@@ -3518,6 +3831,7 @@ public class Scroller : IScroller
         }
         catch (Exception e)
         {
+            GlobalData.AddLog("InqScrollingAreaAsync: " + e.Message, Phoney_MAUI.Model.IGlobalData.protMode.crisp);
         }
 
         return true;
@@ -3669,8 +3983,9 @@ public class ScrollerOld : IScroller
         {
             var result = UIS!.ExternalGameOut!.EvaluateJavaScriptAsync("Jehova").Result; // get the value of someVariable from JavaScript
         }
-        catch // (Exception e)
+        catch (Exception e)
         {
+            GlobalData.AddLog("DoScroll: " + e.Message, IGlobalData.protMode.crisp);
 
         }
 
@@ -3913,6 +4228,7 @@ public class ScrollerOld : IScroller
         }
         catch  ( Exception E )
         {
+            GlobalData.AddLog("StartScrollOrder: " + E.Message, Phoney_MAUI.Model.IGlobalData.protMode.crisp);
             //  int a = 5;
         }
 
@@ -4026,7 +4342,7 @@ public class ScrollerOld : IScroller
                     // }
 
 
-                    string s = await UIS!.ExternalGameOut.EvaluateJavaScriptAsync(scr).ConfigureAwait(false);
+                    string? s = await UIS!.ExternalGameOut.EvaluateJavaScriptAsync(scr).ConfigureAwait(false);
 
                     if (s == null)
                     {
@@ -4034,8 +4350,10 @@ public class ScrollerOld : IScroller
                     }
                     // int a = 5;
                 }
-                catch // ( Exception e)
+                catch ( Exception e)
                 {
+                    GlobalData.AddLog("InqScrollingAreaAsync: " + e.Message, IGlobalData.protMode.crisp);
+
                     // int a = 5;
                     UIS!.JSBoundObject.ctCalls-=5;
                 }
@@ -4098,6 +4416,7 @@ public class ScrollerOld : IScroller
         }
         catch (Exception e)
         {
+            GlobalData.AddLog("InqScrollingAreaAsyncNoReturn: " + e.Message, IGlobalData.protMode.crisp);
             // int a = 5;
             // callAll = false;
         }
@@ -4144,11 +4463,13 @@ public class ScrollerOld : IScroller
             try
             {
 
-                string s = await UIS!.ExternalGameOut.EvaluateJavaScriptAsync(scr).ConfigureAwait(false);
+                string? s = await UIS!.ExternalGameOut.EvaluateJavaScriptAsync(scr).ConfigureAwait(false);
 
             }
-            catch // ( Exception e)
+            catch ( Exception e)
             {
+                GlobalData.AddLog("InqScrollingAreaAsync: " + e.Message, IGlobalData.protMode.crisp);
+
                 // int a = 5;
                 UIS!.JSBoundObject.ctCalls -= 5;
             }
@@ -4158,7 +4479,8 @@ public class ScrollerOld : IScroller
         }
         catch (Exception e)
         {
-            // int a = 5;
+            GlobalData.AddLog("InqScrollingAreaAsyncNoReturn: " + e.Message, IGlobalData.protMode.crisp);
+            // int a = 5InqScrollingAreaAsyncNoReturn
             // callAll = false;
         }
 
@@ -4449,6 +4771,7 @@ public class StoryText : IStoryText
         }
         catch (Exception ex)
         {
+            GlobalData.AddLog("ExchangeAdvBrowserContent: " + ex.Message, IGlobalData.protMode.crisp);
             // int a = 5;
         }
 

@@ -29,18 +29,34 @@ public abstract class BaseViewModel : INotifyPropertyChanged
 
     protected bool SetProperty<T>(ref T backingStore, T value, [CallerMemberName] string? PropertyName = null, Action? onChanged = null)
     {
-        if (EqualityComparer<T>.Default.Equals(backingStore, value))
+        try
         {
+            if (EqualityComparer<T>.Default.Equals(backingStore, value))
+            {
+                return false;
+            }
+            backingStore = value;
+            onChanged?.Invoke();
+            OnPropertyChanged(PropertyName);
+            return true;
+        }
+        catch (Exception e)
+        {
+            GlobalData.AddLog("SetProperty: " + e.Message, Phoney_MAUI.Model.IGlobalData.protMode.crisp);
             return false;
         }
-        backingStore = value;
-        onChanged?.Invoke();
-        OnPropertyChanged(PropertyName);
-        return true;
+
     }
 
     protected virtual void OnPropertyChanged([CallerMemberName] string? PropertyName = null)
     {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
+        try
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
+        }
+        catch (Exception e)
+        {
+            GlobalData.AddLog("BaseViewModel.OnPropertyChanged: " + e.Message, Phoney_MAUI.Model.IGlobalData.protMode.crisp);
+        }
     }
 }

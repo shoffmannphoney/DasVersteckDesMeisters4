@@ -25,19 +25,19 @@ public partial class Order: AbstractOrder
 
         if( item == CA!.I05_Library_Door && CA.Status_Tuer_Bibliothek!.Val == 0 )
         {
-            AdvGame.StoryOutput(loca.Open_Library_Door_Locked);
+            AdvGame!.StoryOutput(loca.Open_Library_Door_Locked);
             handled = true;
             success = false;
         }
         else if (item == CA!.I06_Door && CA.Status_Tuer_Schlafkammer!.Val == 0)
         {
-            AdvGame.StoryOutput(loca.Open_Sleepingroom_Door_Locked);
+            AdvGame!.StoryOutput(loca.Open_Sleepingroom_Door_Locked);
             handled = true;
             success = false;
         }
         else if (item == CA!.I07_Door && CA.Status_Tuer_Labor! .Val == 0)
         {
-            AdvGame.StoryOutput(loca.Open_Laboratory_Door_Locked);
+            AdvGame!.StoryOutput(loca.Open_Laboratory_Door_Locked);
             handled = true;
             success = false;
         }
@@ -52,8 +52,8 @@ public partial class Order: AbstractOrder
         }
         if (item == CA!.I10_Hatch && handled == true )
         {
-            Items.TransferItem(CA!.I10_Opening.ID, CB.LocType_On_Item, CA!.I10_Darkness_Machine.ID);
-            AdvGame.StoryOutput(loca.Open_L10_Flap);
+            Items!.TransferItem(CA!.I10_Opening!.ID, CB!.LocType_On_Item, CA!.I10_Darkness_Machine!.ID);
+            AdvGame!.StoryOutput(loca.Open_L10_Flap);
         }
 
         if ((success) && (item.GetStatus(CA!.iStatus_Counter_Door) > 0))
@@ -66,8 +66,8 @@ public partial class Order: AbstractOrder
         {
             if (item == CA!.I04_Flap)
             {
-                AdvGame.StoryOutput(loca.Open_L04_Flap);
-                Items.TransferItem(CA.I04_Opening.ID, CB.LocType_Loc, CA.L04_Shabby_Little_Chamber);
+                AdvGame!.StoryOutput(loca.Open_L04_Flap);
+                Items!.TransferItem(CA.I04_Opening!.ID, CB!.LocType_Loc, CA.L04_Shabby_Little_Chamber);
 
             }
         }
@@ -99,7 +99,7 @@ public partial class Order: AbstractOrder
 
         if (item == CA!.I10_Hatch)
         {
-            Items.TransferItem(CA!.I10_Opening.ID, CB.LocType_In_Item, CA!.I00_Nullbehaelter3.ID );
+            Items!.TransferItem(CA!.I10_Opening!.ID, CB!.LocType_In_Item, CA!.I00_Nullbehaelter3!.ID );
         }
 
         // Post
@@ -107,8 +107,8 @@ public partial class Order: AbstractOrder
         {
             if (item == CA!.I04_Flap)
             {
-                AdvGame.StoryOutput(loca.Close_L04_Flap);
-                Items.TransferItem(CA.I04_Opening.ID, CB.LocType_In_Item, CA.I00_Nullbehaelter2.ID);
+                AdvGame!.StoryOutput(loca.Close_L04_Flap);
+                Items!.TransferItem(CA.I04_Opening!.ID, CB!.LocType_In_Item, CA.I00_Nullbehaelter2!.ID);
 
             }
         }
@@ -130,9 +130,9 @@ public partial class Order: AbstractOrder
         Person person = PTL.GetFirstPerson()!; //  GetPersonRef(Adv_PT[1].WordID);
 
 
-        if( person.ID == CA.Person_Knights_Armor.ID )
+        if( person.ID == CA!.Person_Knights_Armor!.ID )
         {
-            AdvGame.StoryOutput(loca.Open_Knights_Armor);
+            AdvGame!.StoryOutput(loca.Open_Knights_Armor);
 
         }
         // Pre

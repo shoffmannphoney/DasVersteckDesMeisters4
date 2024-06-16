@@ -267,8 +267,10 @@ namespace GameCore
             {
                 this.controller = (DelAdvObject)Delegate.CreateDelegate(typeof(DelAdvObject), AdvGame, this.controllerName!, false);
             }
-            catch
+            catch (Exception e)
             {
+                GlobalData.AddLog("SetControllerByName: " + e.Message, IGlobalData.protMode.crisp);
+
                 success = false;
             }
             return (false);

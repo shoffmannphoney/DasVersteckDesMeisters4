@@ -532,8 +532,9 @@ namespace GameCore
 
                 }
             }
-            catch// ( Exception e)
+            catch ( Exception e)
             {
+                GlobalData.AddLog("RestoreItems: " + e.Message, IGlobalData.protMode.crisp);
 
             }
             return true;
@@ -596,7 +597,7 @@ namespace GameCore
             }
             catch( Exception e)
             {
-                GlobalData.AddLog("GetItemLoc: " + ItemID.ToString(), IGlobalData.protMode.crisp);
+                GlobalData.AddLog("GetItemLoc: " + e.Message + ItemID.ToString(), IGlobalData.protMode.crisp);
 
             }
             return loc;
@@ -929,7 +930,7 @@ namespace GameCore
         public string GetName(int ItemID, int Case, List<Noun>? CurrentNouns, bool ShowAppendix = false)
         {
             // string s = this.List[this.FindIx(ItemID)].FullName(this.Find(ItemID), Case, ShowAppendix);
-            string s = this.List![ItemID].FullName(this.Find(ItemID!)!, Case, CurrentNouns, ShowAppendix)!;
+            string s = this.List![ItemID].FullName(this.Find(ItemID!)!, Case, CurrentNouns!, ShowAppendix)!;
             // if ( ShowAppendix && this.List[this.FindIx(ItemID)].IsDressed )
             if (ShowAppendix && this.List[ItemID ].IsDressed)
             {

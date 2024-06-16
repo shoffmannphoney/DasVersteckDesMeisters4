@@ -86,20 +86,20 @@ public partial class Bridge : Java.Lang.Object
     [Export("cbFullyLoaded")]
     public void cbFullyLoaded(Java.Lang.String message)
     {
-        AddLog( "FullyLoadedIn", protMode.crisp);
+        AddLog( "FullyLoadedIn", protMode.medium);
         cbFullyLoadedImplementation(message.ToString());
-        AddLog("FullyLoadedOut", protMode.crisp);
+        AddLog("FullyLoadedOut", protMode.medium);
     }
     [JavascriptInterface]
     [Export("setYPos")]
     public void SetYPos(Java.Lang.String? yPos)
     {
-        AddLog("SetYPos in", protMode.crisp);
+        AddLog("SetYPos in", protMode.medium);
 
         int yPosInt = Int32.Parse((string)yPos!);
         SetYPosImplementation(yPosInt);
 
-        AddLog("SetYPos ou", protMode.crisp);
+        AddLog("SetYPos ou", protMode.medium);
     }
 
     [JavascriptInterface]
@@ -117,7 +117,7 @@ public partial class Bridge : Java.Lang.Object
             if (len > 100)
                 len = 100;
 
-            AddLog( script.Substring(0, len), protMode.crisp);
+            AddLog( script.Substring(0, len), protMode.extensive);
             var javascriptResult = new StringCallback();
 
             Context!.RunOnUiThread(() =>

@@ -56,14 +56,14 @@ namespace GameCore
 
 
             ix = CalcIx(CA!.imc_Start);
-            if (locations.Find( CA!.L02_In_Front_Of_A_Hut! ).Visited == false )
+            if (locations!.Find( CA!.L02_In_Front_Of_A_Hut! )!.Visited == false )
             {
                 cFollower.Add(ix);
                 mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Start, ix, CB!.MCE_Choice1, true, true));
                 ix += 10;
             }
             ix = CalcIx(CA!.imc_Suche_Versteck);
-            if (locations.Find(CA!.L02_In_Front_Of_A_Hut).Visited == true && locations.Find(CA!.L05_Atrium ).Visited == false)
+            if (locations!.Find(CA!.L02_In_Front_Of_A_Hut)!.Visited == true && locations!.Find(CA!.L05_Atrium )!.Visited == false)
             {
                 cFollower.Add(ix);
                 mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Suche_Versteck, ix, ChoiceIx(ix), true, false));
@@ -82,7 +82,7 @@ namespace GameCore
                 // ix += 30;
             }
             ix = CalcIx(CA!.imc_Pentagramm);
-            if (locations.Find(CA!.L03_In_The_Parlor ).Visited == true && locations.Find(CA!.L05_Atrium).Visited == false )
+            if (locations!.Find(CA!.L03_In_The_Parlor )!.Visited == true && locations!.Find(CA!.L05_Atrium)!.Visited == false )
             {
                 cFollower.Add(ix);
                 mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Pentagramm, ix, ChoiceIx(ix), true, false));
@@ -99,14 +99,14 @@ namespace GameCore
             }
 
             ix = CalcIx(CA!.imc_Atrium_Ankunft);
-            if (locations.Find(CA!.L05_Atrium).Visited == true && CA.Status_Klaue_Nehmversuch.Val == 0 && CA.I00_Claw.locationID == CA.I05_Pedestal.ID )
+            if (locations!.Find(CA!.L05_Atrium)!.Visited == true && CA.Status_Klaue_Nehmversuch!.Val == 0 && CA.I00_Claw!.locationID == CA.I05_Pedestal!.ID )
             {
                 cFollower.Add(ix);
                 mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Atrium_Ankunft, ix, CB!.MCE_Choice1, true, true));
                 ix += 10;
             }
             ix = CalcIx(CA!.imc_Klaue_nicht_nehmbar);
-            if ( CA.Status_Klaue_Nehmversuch.Val == 1 && CA.I00_Claw.locationID == CA.I05_Pedestal.ID)
+            if ( CA.Status_Klaue_Nehmversuch!.Val == 1 && CA.I00_Claw!.locationID == CA.I05_Pedestal!.ID)
             {
                 cFollower.Add(ix);
                 mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Klaue_nicht_nehmbar, ix, ChoiceIx(ix), true, false));
@@ -123,7 +123,7 @@ namespace GameCore
             }
 
             ix = CalcIx(CA!.imc_Klaue_nicht_fixiert);
-            if ( CA.I00_Unstable_Pliers_With_Claw.locationID != CA.I00_Nullbehaelter.ID && CA.I00_Unstable_Pliers_With_Claw.locationID != CA.I00_Nullbehaelter2.ID)
+            if ( CA.I00_Unstable_Pliers_With_Claw!.locationID != CA.I00_Nullbehaelter!.ID && CA.I00_Unstable_Pliers_With_Claw.locationID != CA.I00_Nullbehaelter2!.ID)
             {
                 cFollower.Add(ix);
                 mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Klaue_nicht_fixiert, ix, ChoiceIx(ix), true, false));
@@ -139,7 +139,7 @@ namespace GameCore
                 mcM.Last()!.SetDel(Klauenzange2_75);
             }
             ix = CalcIx(CA!.imc_Klaue_noch_niemand_belebt );
-            if (CA.I00_Stable_Pliers_With_Claw.locationID != CA.I00_Nullbehaelter.ID && CA.Score_Erste_Belebung.Active == false )
+            if (CA.I00_Stable_Pliers_With_Claw!.locationID != CA.I00_Nullbehaelter.ID && CA.Score_Erste_Belebung!.Active == false )
             {
                 cFollower.Add(ix);
                 mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Klaue_noch_niemand_belebt, ix, ChoiceIx(ix), true, false));
@@ -154,7 +154,7 @@ namespace GameCore
                 mcM.AddEntry(null, loca.Info_Klaue_noch_niemand_belebt_3, ChoiceIx(ix) + 30, ChoiceIx(ix), true);
                 mcM.Last()!.SetDel(ErsteBelebung75);
             }
-            else  if (CA.I00_Stable_Pliers_With_Claw.locationID != CA.I00_Nullbehaelter.ID && CA.Score_Erstes_Gespraech.Active == false)
+            else  if (CA.I00_Stable_Pliers_With_Claw.locationID != CA.I00_Nullbehaelter.ID && CA.Score_Erstes_Gespraech!.Active == false)
             {
                 ix = CalcIx(CA!.imc_Klaue_noch_niemand_gesprochen);
                 cFollower.Add(ix);
@@ -172,18 +172,18 @@ namespace GameCore
             }
 
             ix = CalcIx(CA!.imc_Uhu_Fragen );
-            if (CA.Status_Quiz_Start.Val == 1 && CA.Status_Tuer_Bibliothek.Val == 0 )
+            if (CA.Status_Quiz_Start!.Val == 1 && CA.Status_Tuer_Bibliothek!.Val == 0 )
             {
                 cFollower.Add(ix);
                 mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Uhu_Fragen, ix, CB!.MCE_Choice1, true, true));
                 ix += 10;
 
-                if( CA.Status_Antwort_Unterwaesche.Val == 0)
+                if( CA.Status_Antwort_Unterwaesche!.Val == 0)
                 {
                     ix = CalcIx(CA!.imc_Uhu_Fragen_Unterwaesche );
                     cFollower.Add(ix);
                     mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Uhu_Fragen_Unterwaesche, ix, ChoiceIx(ix), true, false));
-                    SetGenericTipps(mcM, loca.Info_Uhu_Fragen_Unterwaesche_0, CA.Score_Antwort_Unterwaesche, ix);
+                    SetGenericTipps(mcM, loca.Info_Uhu_Fragen_Unterwaesche_0, CA.Score_Antwort_Unterwaesche!, ix);
 
                     mcM.AddEntry(null, loca.Info_Uhu_Fragen_Unterwaesche_1, ChoiceIx(ix) + 10, ChoiceIx(ix), true);
                     mcM.Last()!.SetDel(AntwortUnterwaesche25);
@@ -195,12 +195,12 @@ namespace GameCore
                     mcM.Last()!.SetDel(AntwortUnterwaesche75);
                 }
 
-                if ( CA.Status_Antwort_Ruestung.Val == 0)
+                if ( CA.Status_Antwort_Ruestung!.Val == 0)
                 {
                     ix = CalcIx(CA!.imc_Uhu_Fragen_Ruestung);
                     cFollower.Add(ix);
                     mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Uhu_Fragen_Ruestung, ix, ChoiceIx(ix), true, false));
-                    SetGenericTipps(mcM, loca.Info_Uhu_Fragen_Ruestung_0, CA.Score_Antwort_Ruestung, ix);
+                    SetGenericTipps(mcM, loca.Info_Uhu_Fragen_Ruestung_0, CA.Score_Antwort_Ruestung!, ix);
 
                     mcM.AddEntry(null, loca.Info_Uhu_Fragen_Ruestung_1, ChoiceIx(ix) + 10, ChoiceIx(ix), true);
                     mcM.Last()!.SetDel(AntwortRuestung25);
@@ -212,12 +212,12 @@ namespace GameCore
                     mcM.Last()!.SetDel(AntwortRuestung75);
                 }
 
-                if (CA.Status_Antwort_Lieblingstier.Val == 0)
+                if (CA.Status_Antwort_Lieblingstier!.Val == 0)
                 {
                     ix = CalcIx(CA!.imc_Uhu_Fragen_Tier);
                     cFollower.Add(ix);
                     mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Uhu_Fragen_Tier, ix, ChoiceIx(ix), true, false));
-                    SetGenericTipps(mcM, loca.Info_Uhu_Fragen_Tier_0, CA.Score_Antwort_Tier, ix);
+                    SetGenericTipps(mcM, loca.Info_Uhu_Fragen_Tier_0, CA.Score_Antwort_Tier!, ix);
 
                     mcM.AddEntry(null, loca.Info_Uhu_Fragen_Tier_1, ChoiceIx(ix) + 10, ChoiceIx(ix), true);
                     mcM.Last()!.SetDel(AntwortTier25);
@@ -231,17 +231,17 @@ namespace GameCore
             }
 
             ix = CalcIx(CA!.imc_Neues_Pulver_Wie );
-            if( CA.Status_Rezept_Gelesen.Val == 1 && CA.I00_Supermagic_Powder.locationID == CA.I00_Nullbehaelter.ID)
+            if( CA.Status_Rezept_Gelesen!.Val == 1 && CA.I00_Supermagic_Powder!.locationID == CA.I00_Nullbehaelter.ID)
             {
                 cFollower.Add(ix);
                 mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Neues_Rezept_Wie, ix, CB!.MCE_Choice1, true, true));
 
-                if (CA!.I00_Cheese.locationID == CA.I13_Fridge.ID)
+                if (CA!.I00_Cheese!.locationID == CA.I13_Fridge!.ID)
                 {
                     ix = CalcIx(CA!.imc_Kaese_Not_Found);
                     cFollower.Add(ix);
                     mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Kaese_Not_Found, ix, ChoiceIx(ix), true, false));
-                    SetGenericTipps(mcM, loca.Info_Kaese_Not_Found_0, CA.Score_Kaese, ix);
+                    SetGenericTipps(mcM, loca.Info_Kaese_Not_Found_0, CA.Score_Kaese!, ix);
 
                     mcM.AddEntry(null, loca.Info_Kaese_Not_Found_1, ChoiceIx(ix) + 10, ChoiceIx(ix), true);
                     mcM.Last()!.SetDel(Kaese25);
@@ -252,12 +252,12 @@ namespace GameCore
                     mcM.AddEntry(null, loca.Info_Kaese_Not_Found_3, ChoiceIx(ix) + 30, ChoiceIx(ix), true);
                     mcM.Last()!.SetDel(Kaese75);
                 }
-                else if (CA.I00_Polished_Stone.locationID == CA.I00_Nullbehaelter.ID)
+                else if (CA.I00_Polished_Stone!.locationID == CA!.I00_Nullbehaelter.ID)
                 {
                     ix = CalcIx(CA!.imc_Kaese_Wozu);
                     cFollower.Add(ix);
                     mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Kaese_Wozu, ix, ChoiceIx(ix), true, false));
-                    SetGenericTipps(mcM, loca.Info_Kaese_Wozu_0, CA.Score_Polierter_Stein, ix);
+                    SetGenericTipps(mcM, loca.Info_Kaese_Wozu_0, CA.Score_Polierter_Stein!, ix);
 
                     mcM.AddEntry(null, loca.Info_Kaese_Wozu_1, ChoiceIx(ix) + 10, ChoiceIx(ix), true);
                     mcM.Last()!.SetDel(PolierterStein25);
@@ -268,12 +268,12 @@ namespace GameCore
                     mcM.AddEntry(null, loca.Info_Kaese_Wozu_3, ChoiceIx(ix) + 30, ChoiceIx(ix), true);
                     mcM.Last()!.SetDel(PolierterStein75);
                 }
-                else if (CA.I00_Lightless_Stone.locationID == CA.I00_Nullbehaelter.ID)
+                else if (CA.I00_Lightless_Stone!.locationID == CA.I00_Nullbehaelter.ID)
                 {
                     ix = CalcIx(CA!.imc_Kiesel_Wozu );
                     cFollower.Add(ix);
                     mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Kiesel_Wozu, ix, ChoiceIx(ix), true, false));
-                    SetGenericTipps(mcM, loca.Info_Kiesel_Wozu_0, CA.Score_Lichtloser_Stein, ix);
+                    SetGenericTipps(mcM, loca.Info_Kiesel_Wozu_0, CA.Score_Lichtloser_Stein!, ix);
 
                     mcM.AddEntry(null, loca.Info_Kiesel_Wozu_1, ChoiceIx(ix) + 10, ChoiceIx(ix), true);
                     mcM.Last()!.SetDel(LichtloserStein25);
@@ -284,12 +284,12 @@ namespace GameCore
                     mcM.AddEntry(null, loca.Info_Kiesel_Wozu_3, ChoiceIx(ix) + 30, ChoiceIx(ix), true);
                     mcM.Last()!.SetDel(LichtloserStein75);
                 }
-                else if (CA.I00_Moonstone.locationID == CA.I00_Nullbehaelter.ID)
+                else if (CA.I00_Moonstone!.locationID == CA.I00_Nullbehaelter.ID)
                 {
                     ix = CalcIx(CA!.imc_Lichtloser_Stein_Wozu );
                     cFollower.Add(ix);
                     mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Lichtloser_Stein_Wozu, ix, ChoiceIx(ix), true, false));
-                    SetGenericTipps(mcM, loca.Info_Lichtloser_Stein_Wozu_0, CA.Score_Mondstein, ix);
+                    SetGenericTipps(mcM, loca.Info_Lichtloser_Stein_Wozu_0, CA!.Score_Mondstein!, ix);
 
                     mcM.AddEntry(null, loca.Info_Lichtloser_Stein_Wozu_1, ChoiceIx(ix) + 10, ChoiceIx(ix), true);
                     mcM.Last()!.SetDel(Mondstein25);
@@ -302,12 +302,12 @@ namespace GameCore
                 }
 
 
-                if (CA.I00_Coin.locationID == CA.I00_Nullbehaelter.ID  )
+                if (CA.I00_Coin!.locationID == CA.I00_Nullbehaelter.ID  )
                 {
                     ix = CalcIx(CA.imc_Goldmuenze_Woher);
                     cFollower.Add(ix);
                     mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Goldmuenze_Woher, ix, ChoiceIx(ix), true, false));
-                    SetGenericTipps(mcM, loca.Info_Goldmuenze_Woher_0, CA.Score_Muenze_Gefunden, ix);
+                    SetGenericTipps(mcM, loca.Info_Goldmuenze_Woher_0, CA.Score_Muenze_Gefunden!, ix);
 
                     mcM.AddEntry(null, loca.Info_Goldmuenze_Woher_1, ChoiceIx(ix) + 10, ChoiceIx(ix), true);
                     mcM.Last()!.SetDel(MuenzeGefunden25);
@@ -318,12 +318,12 @@ namespace GameCore
                     mcM.AddEntry(null, loca.Info_Goldmuenze_Woher_3, ChoiceIx(ix) + 30, ChoiceIx(ix), true);
                     mcM.Last()!.SetDel(MuenzeGefunden75);
                 }
-                else if (CA.I00_Coin.locationID == CA.I08_Water.ID)
+                else if (CA.I00_Coin.locationID == CA.I08_Water!.ID)
                 {
                     ix = CalcIx(CA.imc_Goldmuenze_Woher2);
                     cFollower.Add(ix);
                     mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Goldmuenze_Woher2, ix, ChoiceIx(ix), true, false));
-                    SetGenericTipps(mcM, loca.Info_Goldmuenze_Woher2_0, CA.Score_Muenze, ix);
+                    SetGenericTipps(mcM, loca.Info_Goldmuenze_Woher2_0, CA.Score_Muenze!, ix);
 
                     mcM.AddEntry(null, loca.Info_Goldmuenze_Woher2_1, ChoiceIx(ix) + 10, ChoiceIx(ix), true);
                     mcM.Last()!.SetDel(Muenze25);
@@ -335,12 +335,12 @@ namespace GameCore
                     mcM.Last()!.SetDel(Muenze75);
                 }
 
-                if (CA.I00_Wonder_Wart_Sponge.locationID == CA.I00_Nullbehaelter.ID )
+                if (CA.I00_Wonder_Wart_Sponge!.locationID == CA.I00_Nullbehaelter.ID )
                 {
                     ix = CalcIx(CA.imc_Schwamm_Woher);
                     cFollower.Add(ix);
                     mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Schwamm_Woher, ix, ChoiceIx(ix), true, false));
-                    SetGenericTipps(mcM, loca.Info_Schwamm_Woher_0, CA.Score_Schwamm, ix);
+                    SetGenericTipps(mcM, loca.Info_Schwamm_Woher_0, CA.Score_Schwamm!, ix);
 
                     mcM.AddEntry(null, loca.Info_Schwamm_Woher_1, ChoiceIx(ix) + 10, ChoiceIx(ix), true);
                     mcM.Last()!.SetDel(Schwamm25);
@@ -352,12 +352,12 @@ namespace GameCore
                     mcM.Last()!.SetDel(Schwamm75);
                 }
             }
-            if ( Items.IsItemInv( CA.I00_Moonstone ) && Items.IsItemInv( CA.I00_Wonder_Wart_Sponge ) && Items.IsItemInv( CA.I00_Coin ) )
+            if ( Items!.IsItemInv( CA.I00_Moonstone ) && Items.IsItemInv( CA.I00_Wonder_Wart_Sponge ) && Items.IsItemInv( CA.I00_Coin ) )
             {
                 ix = CalcIx(CA.imc_Alle_Zutaten_da);
                 cFollower.Add(ix);
                 mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Alle_Zutaten_da, ix, ChoiceIx(ix), true, false));
-                SetGenericTipps(mcM, loca.Info_Alle_Zutaten_da_0, CA.Score_Schlacke, ix);
+                SetGenericTipps(mcM, loca.Info_Alle_Zutaten_da_0, CA.Score_Schlacke!, ix);
 
                 mcM.AddEntry(null, loca.Info_Alle_Zutaten_da_1, ChoiceIx(ix) + 10, ChoiceIx(ix), true);
                 mcM.Last()!.SetDel(Schlacke25);
@@ -368,12 +368,12 @@ namespace GameCore
                 mcM.AddEntry(null, loca.Info_Alle_Zutaten_da_3, ChoiceIx(ix) + 30, ChoiceIx(ix), true);
                 mcM.Last()!.SetDel(Schlacke75);
             }
-            if ( CA.I00_Slag.locationID != CA.I00_Nullbehaelter.ID && CA.I00_Slag.locationID != CA.I00_Nullbehaelter2.ID)
+            if ( CA.I00_Slag!.locationID != CA.I00_Nullbehaelter.ID && CA.I00_Slag.locationID != CA.I00_Nullbehaelter2!.ID)
             {
                 ix = CalcIx(CA.imc_Schlacke_Wozu);
                 cFollower.Add(ix);
                 mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.Info_Schlacke_Wozu, ix, ChoiceIx(ix), true, false));
-                SetGenericTipps(mcM, loca.Info_Schlacke_Wozu_0, CA.Score_Meues_Pulver, ix);
+                SetGenericTipps(mcM, loca.Info_Schlacke_Wozu_0, CA.Score_Meues_Pulver!, ix);
 
                 mcM.AddEntry(null, loca.Info_Schlacke_Wozu_1, ChoiceIx(ix) + 10, ChoiceIx(ix), true);
                 mcM.Last()!.SetDel(NeuesPulver25);
@@ -384,7 +384,7 @@ namespace GameCore
                 mcM.AddEntry(null, loca.Info_Schlacke_Wozu_3, ChoiceIx(ix) + 30, ChoiceIx(ix), true);
                 mcM.Last()!.SetDel(NeuesPulver75);
             }
-            if (CA.I00_Supermagic_Powder.locationID != CA.I00_Nullbehaelter.ID )
+            if (CA.I00_Supermagic_Powder!.locationID != CA.I00_Nullbehaelter.ID )
             {
                 ix = CalcIx(CA.imc_Neues_Pulver_Wozu);
                 cFollower.Add(ix);

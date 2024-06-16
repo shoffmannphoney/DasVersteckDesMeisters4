@@ -33,17 +33,17 @@ public partial class Order: AbstractOrder
             */
         }
 
-        if (person == CA.Person_Owl && CA.Status_Eule_Klaue.Val <= 0)
+        if (person == CA!.Person_Owl && CA!.Status_Eule_Klaue!.Val <= 0)
         {
             AdvGame!.StoryOutput(loca.Talk_Owl_Dead);
             handled = true;
         }
-        else if (person == CA.Person_Knights_Armor && CA.Status_Ritterruestung_Klaue.Val <= 0)
+        else if (person == CA.Person_Knights_Armor && CA.Status_Ritterruestung_Klaue!.Val <= 0)
         {
             AdvGame!.StoryOutput(loca.Talk_Knights_Armor_Dead);
             handled = true;
         }
-        else if (person == CA.Person_Knights_Armor && CA.Status_Ritterruestung_Klaue.Val >= 1)
+        else if (person == CA.Person_Knights_Armor && CA.Status_Ritterruestung_Klaue!.Val >= 1)
         {
             AdvGame!.SetScoreToken(CA!.Score_Erstes_Gespraech);
             GenericDialog(CA!.Person_Knights_Armor, KnightsArmorDialog);
@@ -204,7 +204,7 @@ public partial class Order: AbstractOrder
 
         if( item1.ID == CA!.I00_Cheese!.ID && person2.ID == CA!.Person_Magpie!.ID)
         {
-            if( CA!.Status_Elster_Tauschintro.Val == 0)
+            if( CA!.Status_Elster_Tauschintro!.Val == 0)
             {
                 AdvGame!.StoryOutput(loca.Give_Magpie_Fail);
             }

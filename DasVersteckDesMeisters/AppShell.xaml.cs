@@ -12,6 +12,21 @@ using System.Windows.Input;
 
 namespace Phoney_MAUI;
 
+public class MyTouchBehavior : TouchBehavior
+{
+    public void OnDetachingFrom(View bindable)
+    {
+        // Beispiel: Abmelden von einem Ereignis
+        // bindable.PropertyChanged -= OnBindablePropertyChanged;
+        base.OnDetachingFrom(bindable);
+    }
+
+    public void Dispose()
+    {
+
+    }
+}
+
 public static class ViewHelpers
 {
     public static Rect GetAbsoluteBounds(this Microsoft.Maui.Controls.View element)
@@ -312,7 +327,7 @@ public static class UIElement
     public static List<ScrollView> listScrollView = new();
     public static List<OrderListView> listOrderListView = new();
 
-    public static bool StoreMode { get; set; } = false;
+    public static bool StoreMode { get; set; } = true;
 
     public static void RemoveEventHandler( TapGestureRecognizer tgr, EventHandler eh)
     {
@@ -343,16 +358,20 @@ public static class UIElement
 
             while (g.ColumnDefinitions.Count > 0)
             {
+                g.ColumnDefinitions[0].Width = GridLength.Star;
                 g.ColumnDefinitions.RemoveAt(0);
             }
             while (g.RowDefinitions.Count > 0)
             {
+                g.RowDefinitions[0].Height = GridLength.Star;
                 g.RowDefinitions.RemoveAt(0);
             }
 
             g.ColumnDefinitions.Clear();
             g.RowDefinitions.Clear();
 
+            g.ClearValue(Grid.ColumnProperty);
+            g.ClearValue(Grid.RowProperty);
             g.ClearValue(Grid.BackgroundColorProperty);
             g.ClearValue(Grid.BackgroundProperty);
             g.ClearValue(Grid.BindingContextProperty);
@@ -391,8 +410,10 @@ public static class UIElement
             g.ClearLogicalChildren();
             g.Parent = null;
             g.Children.Clear();
+            g.StyleClass = null;
+            g.Margin = Thickness.Zero;
             /*
-                 */
+                   */
 
             if (Pooling == true && listGrid.Count < 100 && StoreMode == true )
                 listGrid.Add(g);
@@ -415,7 +436,9 @@ public static class UIElement
         }
 
 
-        g.ClearValue(VerticalStackLayout.BackgroundColorProperty);
+            g.ClearValue(Grid.ColumnProperty);
+            g.ClearValue(Grid.RowProperty);
+            g.ClearValue(VerticalStackLayout.BackgroundColorProperty);
         g.ClearValue(VerticalStackLayout.BackgroundProperty);
         g.ClearValue(VerticalStackLayout.BindingContextProperty);
         g.ClearValue(VerticalStackLayout.HeightRequestProperty);
@@ -450,8 +473,10 @@ public static class UIElement
         g.Parent = null;
         g.ClearLogicalChildren();
         g.Children.Clear();
+            g.StyleClass = null;
+            g.Margin = Thickness.Zero;
 
-        if (Pooling == true && listVerticalStackLayout.Count < 100 && StoreMode == true)
+            if (Pooling == true && listVerticalStackLayout.Count < 100 && StoreMode == true)
                 listVerticalStackLayout.Add(g);
         }
         catch (Exception ex)
@@ -474,20 +499,25 @@ public static class UIElement
 
             tvi.ResetTreeViewItem();
 
-          while (tvi.ColumnDefinitions.Count > 0)
+            while (tvi.ColumnDefinitions.Count > 0)
            {
-               tvi.ColumnDefinitions.RemoveAt(0);
+                tvi.ColumnDefinitions[0].Width = GridLength.Star;
+                tvi.ColumnDefinitions.RemoveAt(0);
            }
            while (tvi.RowDefinitions.Count > 0)
            {
-               tvi.RowDefinitions.RemoveAt(0);
+                tvi.RowDefinitions[0].Height = GridLength.Star;
+                tvi.RowDefinitions.RemoveAt(0);
            }
 
 
            tvi.ColumnDefinitions.Clear();
            tvi.RowDefinitions.Clear();
 
-       tvi.ClearValue(TreeViewItem.ColumnDefinitionsProperty);
+            tvi.UserDefinedObject = null;
+            tvi.ClearValue(TreeViewItem.ColumnProperty);
+            tvi.ClearValue(TreeViewItem.RowProperty);
+            tvi.ClearValue(TreeViewItem.ColumnDefinitionsProperty);
          tvi.ClearValue(TreeViewItem.RowDefinitionsProperty);
 
          tvi.ClearValue(TreeViewItem.BackgroundColorProperty);
@@ -528,6 +558,8 @@ public static class UIElement
                tvi.SubTree = null;
             tvi.ParentSubTree = null;
             tvi.IsVisible = true;
+            tvi.StyleClass = null;
+            tvi.Margin = Thickness.Zero;
             // tvi.ClickedEventCommand = null;
             /*
 
@@ -558,11 +590,13 @@ public static class UIElement
 
         while (tv.ColumnDefinitions.Count > 0)
         {
-            tv.ColumnDefinitions.RemoveAt(0);
+                tv.ColumnDefinitions[0].Width = GridLength.Star;
+                tv.ColumnDefinitions.RemoveAt(0);
         }
         while (tv.RowDefinitions.Count > 0)
         {
-            tv.RowDefinitions.RemoveAt(0);
+                tv.RowDefinitions[0].Height = GridLength.Star;
+                tv.RowDefinitions.RemoveAt(0);
         }
 
 
@@ -570,7 +604,10 @@ public static class UIElement
         tv.RowDefinitions.Clear();
 
 
-        tv.ClearValue(TreeView.BackgroundColorProperty);
+            tv.UserDefinedObject = null;
+            tv.ClearValue(TreeViewItem.ColumnProperty);
+            tv.ClearValue(TreeViewItem.RowProperty);
+            tv.ClearValue(TreeView.BackgroundColorProperty);
         tv.ClearValue(TreeView.BackgroundProperty);
         tv.ClearValue(TreeView.BindingContextProperty);
         tv.ClearValue(TreeView.ColumnDefinitionsProperty);
@@ -607,10 +644,12 @@ public static class UIElement
         tv.Parent = null;
         tv.SubTree = null;
         tv.ParentSubTree = null;
-        // tv.ClickedEventCommand = null;
+            tv.StyleClass = null;
+            tv.Margin = Thickness.Zero;
+            // tv.ClickedEventCommand = null;
 
 
-        if (Pooling == true && listTreeView.Count < 100 && StoreMode == true)
+            if (Pooling == true && listTreeView.Count < 100 && StoreMode == true)
            listTreeView.Add(tv);
         }
         catch (Exception ex)
@@ -632,18 +671,22 @@ public static class UIElement
 
         while (olv.ColumnDefinitions.Count > 0)
         {
-            olv.ColumnDefinitions.RemoveAt(0);
+                olv.ColumnDefinitions[0].Width = GridLength.Star;
+                olv.ColumnDefinitions.RemoveAt(0);
         }
         while (olv.RowDefinitions.Count > 0)
         {
-            olv.RowDefinitions.RemoveAt(0);
+                olv.RowDefinitions[0].Height = GridLength.Star;
+                olv.RowDefinitions.RemoveAt(0);
         }
 
 
         olv.ColumnDefinitions.Clear();
         olv.RowDefinitions.Clear();
 
-        olv.ClearValue(OrderListView.BackgroundColorProperty);
+            olv.ClearValue(OrderListView.ColumnProperty);
+            olv.ClearValue(OrderListView.RowProperty);
+            olv.ClearValue(OrderListView.BackgroundColorProperty);
         olv.ClearValue(OrderListView.BackgroundProperty);
         olv.ClearValue(OrderListView.BindingContextProperty);
         olv.ClearValue(OrderListView.ColumnDefinitionsProperty);
@@ -678,9 +721,11 @@ public static class UIElement
         olv.ClearValue(OrderListView.ScaleProperty);
         olv.ClearValue(OrderListView.ScaleXProperty);
         olv.ClearValue(OrderListView.ScaleYProperty);
-        // olv.ClickedEventCommand = null;
+            olv.StyleClass = null;
+            olv.Margin = Thickness.Zero;
+            // olv.ClickedEventCommand = null;
 
-        if (Pooling == true && listOrderListView.Count < 100 && StoreMode == true)
+            if (Pooling == true && listOrderListView.Count < 100 && StoreMode == true)
                 listOrderListView.Add(olv);
         }
         catch (Exception ex)
@@ -700,6 +745,8 @@ public static class UIElement
                 }
             }
 
+            sv.ClearValue(Grid.ColumnProperty);
+            sv.ClearValue(Grid.RowProperty);
             sv.ClearValue(ScrollView.BackgroundColorProperty);
             sv.ClearValue(ScrollView.BackgroundProperty);
             sv.ClearValue(ScrollView.BindingContextProperty);
@@ -734,6 +781,8 @@ public static class UIElement
 
             sv.Content = null;
             sv.Parent = null;
+            sv.StyleClass = null;
+            sv.Margin = Thickness.Zero;
 
 
             if (Pooling == true && listScrollView.Count < 100 && StoreMode == true)
@@ -756,6 +805,8 @@ public static class UIElement
                 }
             }
 
+            b.ClearValue(Grid.ColumnProperty);
+            b.ClearValue(Grid.RowProperty);
             b.ClearValue(IDButton.BackgroundColorProperty);
             b.ClearValue(IDButton.BackgroundProperty);
             b.ClearValue(IDButton.BindingContextProperty);
@@ -802,11 +853,16 @@ public static class UIElement
             b.ClearValue(IDButton.ScaleXProperty);
             b.ClearValue(IDButton.ScaleYProperty);
             b.ClearValue(IDButton.TextProperty);
+            b.StyleClass = null;
+            b.Margin = Thickness.Zero;
+            b.Text = null;
+            b.ClearValue(IDButton.LineBreakModeProperty);
+            b.Padding = Thickness.Zero;
 
 
 
 
-           if (Pooling == true && listIDButton.Count < 100 && StoreMode == true)
+            if (Pooling == true && listIDButton.Count < 100 && StoreMode == true)
                 listIDButton.Add(b);
         }
         catch (Exception ex)
@@ -826,7 +882,9 @@ public static class UIElement
             }
         }
 
-        l.ClearValue(IDLabel.BackgroundColorProperty);
+            l.ClearValue(Grid.ColumnProperty);
+            l.ClearValue(Grid.RowProperty);
+            l.ClearValue(IDLabel.BackgroundColorProperty);
         l.ClearValue(IDLabel.BackgroundProperty);
         l.ClearValue(IDLabel.BindingContextProperty);
         l.ClearValue(IDLabel.HeightRequestProperty);
@@ -864,10 +922,19 @@ public static class UIElement
         l.ClearValue(IDLabel.ScaleXProperty);
         l.ClearValue(IDLabel.ScaleYProperty);
         l.ClearValue(IDLabel.TextProperty);
+            l.ClearValue(IDLabel.LineBreakModeProperty);
+            l.ClearValue(IDLabel.FormattedTextProperty);
+            l.ClearValue(IDLabel.HorizontalTextAlignmentProperty);
+            l.ClearValue(IDLabel.VerticalTextAlignmentProperty);
+            l.Padding = Thickness.Zero;
 
-        l.Parent = null;
+            l.Parent = null;
+            l.StyleClass = null;
+            l.Margin = Thickness.Zero;
+            l.Text = null;
 
-        if (Pooling == true && listIDLabel.Count < 100 && StoreMode == true)
+
+            if (Pooling == true && listIDLabel.Count < 100 && StoreMode == true)
                 listIDLabel.Add(l);
         }
         catch (Exception ex)
@@ -886,7 +953,9 @@ public static class UIElement
                 return;
             }
         }
-        b.ClearValue(Button.BackgroundColorProperty);
+            b.ClearValue(Grid.ColumnProperty);
+            b.ClearValue(Grid.RowProperty);
+            b.ClearValue(Button.BackgroundColorProperty);
         b.ClearValue(Button.BackgroundProperty);
         b.ClearValue(Button.BindingContextProperty);
         b.ClearValue(Button.HeightRequestProperty);
@@ -931,9 +1000,14 @@ public static class UIElement
         b.ClearValue(Button.ScaleXProperty);
         b.ClearValue(Button.ScaleYProperty);
         b.ClearValue(Button.TextProperty);
+            b.ClearValue(Button.LineBreakModeProperty);
+            b.Padding = Thickness.Zero;
 
+            b.StyleClass = null;
+            b.Margin = Thickness.Zero;
+            b.Text = null;
 
-        if (Pooling == true && listButton.Count < 100 && StoreMode == true)
+            if (Pooling == true && listButton.Count < 100 && StoreMode == true)
                 listButton.Add(b);
         }
         catch (Exception ex)
@@ -961,6 +1035,8 @@ public static class UIElement
             {
             }
 
+            l.ClearValue(Grid.ColumnProperty);
+            l.ClearValue(Grid.RowProperty);
             l.ClearValue(Label.BackgroundColorProperty);
             l.ClearValue(Label.BackgroundProperty);
             l.ClearValue(Label.BindingContextProperty);
@@ -1000,13 +1076,26 @@ public static class UIElement
             l.ClearValue(Label.ScaleXProperty);
             l.ClearValue(Label.ScaleYProperty);
             l.ClearValue(Label.TextProperty);
+            l.ClearValue(Label.LineBreakModeProperty);
+            l.ClearValue(Label.FormattedTextProperty);
+            l.ClearValue(Label.HorizontalTextAlignmentProperty);
+            l.ClearValue(Label.VerticalTextAlignmentProperty);
+            l.Padding = Thickness.Zero;
+
 
             l.WidthRequest = -1;
             l.HeightRequest = -1;
+            l.StyleClass = null;
+            l.Margin = Thickness.Zero;
 
-             if (Pooling == true && listLabel.Count < 100 && StoreMode == true)
+            l.Text = null;
+
+
+            if (Pooling == true && listLabel.Count < 100 && StoreMode == true)
                 listLabel.Add(l);
-        }
+
+
+         }
         catch (Exception ex)
         {
             GlobalData.AddLog("StoreLabel: " + ex.Message, IGlobalData.protMode.crisp);
@@ -1022,7 +1111,6 @@ public static class UIElement
         if ( listGrid.Count > 0)
         {
             Grid g2 = listGrid[0];
-            Grid g3 = new();
             listGrid.RemoveAt(0);
             g2.IsVisible = true;
             g2.WidthRequest = -1;
@@ -1133,8 +1221,6 @@ public static class UIElement
         // return new TreeView();
         if ( listTreeView.Count > 0)
         {
-            TreeView tvx = new();
-
             TreeView tv2 = listTreeView[0];
             listTreeView.RemoveAt(0);
             tv2.IsVisible = true;
@@ -1174,8 +1260,6 @@ public static class UIElement
 
         if ( listTreeViewItem.Count > 0)
         {
-            TreeView tvx = new();
-
             TreeViewItem tvi2 = listTreeViewItem[0];
             listTreeViewItem.RemoveAt(0);
             tvi2.IsVisible = true;
@@ -1226,7 +1310,7 @@ public static class UIElement
             b2!.ClearValue(Button.BackgroundColorProperty);
             // b2.BackgroundColor = Colors.Transparent;
             b2!.ClearValue(Button.BackgroundProperty);
-            // b2.Background = Colors.Transparent;
+            b2.Background = Colors.Transparent;
             b2!.FontFamily = null;
             b2!.ClearValue( Button.FontFamilyProperty);
 
@@ -1269,7 +1353,7 @@ public static class UIElement
             b2!.Opacity = 1;
             b2!.ClearValue( Button.BackgroundColorProperty);
             b2!.ClearValue(Button.BackgroundProperty);
-            // b2.Background = Colors.Transparent;
+            b2!.Background = Colors.Transparent;
             b2!.FontFamily = null;
             b2!.ClearValue(Button.FontFamilyProperty);
 
@@ -1314,7 +1398,7 @@ public static class UIElement
             l2.ClearValue(Label.BackgroundColorProperty);
             // l2.BackgroundColor = Colors.Transparent;
             l2.ClearValue(Label.BackgroundProperty);
-            l2.Background = Colors.Transparent;
+            // l2.Background = Colors.Transparent;
             l2.FontFamily = null;
             l2.ClearValue(Label.FontFamilyProperty);
 
@@ -1355,7 +1439,7 @@ public static class UIElement
             l2.ClearValue(Label.BackgroundColorProperty);
             // l2.BackgroundColor = Colors.Transparent;
             l2.ClearValue(Label.BackgroundProperty);
-            l2.Background = Colors.Transparent;
+            // l2.Background = Colors.Transparent;
             l2.FontFamily = null;
             l2.ClearValue(Label.FontFamilyProperty);
 
@@ -1444,12 +1528,14 @@ public class TreeView : TreeViewItem
     }
 
 
-    public static void EmptyTreeViewItem(  Microsoft.Maui.IView tv, bool Pooling = true, bool DeleteInitialElement = true )
+    public static void EmptyTreeViewItem(  Microsoft.Maui.IView? tv, bool Pooling = true, bool DeleteInitialElement = true, bool InitialCall = false )
     {
-        // return;
+        if( tv == null )
+          return;
 
 #if ANDROID
-        int grefCount = (int) Java.Lang.Runtime.GetRuntime()!.TotalMemory();
+        int grefCountStart = Java.Interop.JniRuntime.CurrentRuntime.GlobalReferenceCount;
+        int wgrefCountStart = Java.Interop.JniRuntime.CurrentRuntime.WeakGlobalReferenceCount;
 #endif
         try
         {
@@ -1554,13 +1640,35 @@ public class TreeView : TreeViewItem
                     {
                         Label l1 = (Label)iv;
 
+                        /*
                         while (l1.Behaviors.Count > 0)
                         {
+                            if(l1.Behaviors[0].GetType() == typeof( TouchBehavior) )
+                            {
+                                TouchBehavior tb = (l1.Behaviors[0] as TouchBehavior);
+                                tb.ClearValue(TouchBehavior.HoveredOpacityProperty);
+                                tb.ClearValue(TouchBehavior.PressedOpacityProperty);
+
+                            }
+                            l1.Behaviors[0].ClearValue(Behavior.BindingContextProperty);
                             l1.Behaviors[0].BindingContext = null;
                             l1.Behaviors.RemoveAt(0);
                             destroyed++;
 
                         }
+                        */
+
+                        Behavior toRemove = l1.Behaviors.FirstOrDefault(b => b is MyTouchBehavior);
+                        if (toRemove != null)
+                        {
+                            l1.Behaviors.Remove(toRemove);
+                        }
+
+                        if ( l1.Behaviors.Count > 0 )
+                        {
+                            l1.Behaviors.Remove(touchBehaviorB1);
+                        }
+
                         l1.Behaviors.Clear();
 
                         l1.ResetCursors();
@@ -1585,6 +1693,7 @@ public class TreeView : TreeViewItem
                                 // UIElement.RemoveEventHandler((l1.GestureRecognizers[0] as TapGestureRecognizer), (l1.GestureRecognizers[0] as TapGestureRecognizer).Tapped);
                                 (l1.GestureRecognizers[0] as TapGestureRecognizer)!.Command = null;
                                 (l1.GestureRecognizers[0] as TapGestureRecognizer)!.Parent = null;
+                                (l1.GestureRecognizers[0] as TapGestureRecognizer)!.ClearValue(TapGestureRecognizer.CommandProperty);
                             }
                             else if (l1.GestureRecognizers[0] is PointerGestureRecognizer)
                             {
@@ -1620,6 +1729,15 @@ public class TreeView : TreeViewItem
 
                         while (l1.Behaviors.Count > 0)
                         {
+                            if (l1.Behaviors[0].GetType() == typeof(MyTouchBehavior))
+                            {
+                                MyTouchBehavior tb = (l1.Behaviors[0] as MyTouchBehavior);
+                                tb.ClearValue(MyTouchBehavior.HoveredOpacityProperty);
+                                tb.ClearValue(MyTouchBehavior.PressedOpacityProperty);
+
+                            }
+
+                            l1.Behaviors[0].ClearValue(MyTouchBehavior.BindingContextProperty);
                             l1.Behaviors[0].BindingContext = null;
                             l1.Behaviors.RemoveAt(0);
                             destroyed++;
@@ -1633,6 +1751,7 @@ public class TreeView : TreeViewItem
                             {
                                 (l1.GestureRecognizers[0] as TapGestureRecognizer)!.Command = null;
                                 (l1.GestureRecognizers[0] as TapGestureRecognizer)!.Parent = null;
+                                (l1.GestureRecognizers[0] as TapGestureRecognizer)!.ClearValue(TapGestureRecognizer.CommandProperty);
                             }
                             else if (l1.GestureRecognizers[0] is PointerGestureRecognizer)
                             {
@@ -1671,6 +1790,16 @@ public class TreeView : TreeViewItem
                 while (tv2.Behaviors.Count > 0)
                 {
                     GlobalData.AddLog("Ausgewertet: " + tv2.GetType().ToString(), IGlobalData.protMode.crisp);
+
+                    if (tv2.Behaviors[0].GetType() == typeof(MyTouchBehavior))
+                    {
+                        MyTouchBehavior tb = (tv2.Behaviors[0] as MyTouchBehavior);
+                        tb.ClearValue(MyTouchBehavior.HoveredOpacityProperty);
+                        tb.ClearValue(MyTouchBehavior.PressedOpacityProperty);
+
+                    }
+
+                    tv2.Behaviors[0].ClearValue(Behavior.BindingContextProperty);
                     tv2.Behaviors[0].BindingContext = null;
                     tv2.Behaviors.RemoveAt(0);
                     destroyed++;
@@ -1683,6 +1812,7 @@ public class TreeView : TreeViewItem
                     {
                         (tv2.GestureRecognizers[0] as TapGestureRecognizer)!.Command = null;
                         (tv2.GestureRecognizers[0] as TapGestureRecognizer)!.Parent = null;
+                        (tv2.GestureRecognizers[0] as TapGestureRecognizer)!.ClearValue(TapGestureRecognizer.CommandProperty);
                     }
                     else if (tv2.GestureRecognizers[0] is PointerGestureRecognizer)
                     {
@@ -1853,6 +1983,14 @@ public class TreeView : TreeViewItem
                 while (tv2.Behaviors.Count > 0)
                 {
                     GlobalData.AddLog("Ausgewertet: " + tv2.GetType().ToString(), IGlobalData.protMode.crisp);
+                    if (tv2.Behaviors[0].GetType() == typeof(MyTouchBehavior))
+                    {
+                        MyTouchBehavior tb = (tv2.Behaviors[0] as MyTouchBehavior);
+                        tb.ClearValue(MyTouchBehavior.HoveredOpacityProperty);
+                        tb.ClearValue(MyTouchBehavior.PressedOpacityProperty);
+
+                    }
+                    tv2.Behaviors[0].ClearValue(Behavior.BindingContextProperty);
                     tv2.Behaviors[0].BindingContext = null;
                     tv2.Behaviors.RemoveAt(0);
                     destroyed++;
@@ -1866,6 +2004,7 @@ public class TreeView : TreeViewItem
                     {
                         (tv2.GestureRecognizers[0] as TapGestureRecognizer)!.Command = null;
                         (tv2.GestureRecognizers[0] as TapGestureRecognizer)!.Parent = null;
+                        (tv2.GestureRecognizers[0] as TapGestureRecognizer)!.ClearValue(TapGestureRecognizer.CommandProperty);
                     }
                     else if (tv2.GestureRecognizers[0] is PointerGestureRecognizer)
                     {
@@ -1911,6 +2050,13 @@ public class TreeView : TreeViewItem
                 while (tv2!.Behaviors.Count > 0)
                 {
                     GlobalData.AddLog("Ausgewertet: " + tv2!.GetType().ToString(), IGlobalData.protMode.crisp);
+                    if (tv2.Behaviors[0].GetType() == typeof(MyTouchBehavior))
+                    {
+                        MyTouchBehavior tb = (tv2.Behaviors[0] as MyTouchBehavior);
+                        tb.ClearValue(MyTouchBehavior.HoveredOpacityProperty);
+                        tb.ClearValue(MyTouchBehavior.PressedOpacityProperty);
+
+                    }
                     tv2.Behaviors[0].BindingContext = null;
                     tv2.Behaviors.RemoveAt(0);
                     destroyed++;
@@ -1924,6 +2070,7 @@ public class TreeView : TreeViewItem
                     {
                         (tv2!.GestureRecognizers[0] as TapGestureRecognizer)!.Command = null;
                         (tv2!.GestureRecognizers[0] as TapGestureRecognizer)!.Parent = null;
+                        (tv2!.GestureRecognizers[0] as TapGestureRecognizer)!.ClearValue(TapGestureRecognizer.CommandProperty);
                     }
                     else if (tv2!.GestureRecognizers[0] is PointerGestureRecognizer)
                     {
@@ -1957,6 +2104,14 @@ public class TreeView : TreeViewItem
 
                 while (l1.Behaviors.Count > 0)
                 {
+                    if (l1.Behaviors[0].GetType() == typeof(MyTouchBehavior))
+                    {
+                        MyTouchBehavior tb = (l1.Behaviors[0] as MyTouchBehavior);
+                        tb.ClearValue(MyTouchBehavior.HoveredOpacityProperty);
+                        tb.ClearValue(MyTouchBehavior.PressedOpacityProperty);
+
+                    }
+
                     l1.Behaviors[0].BindingContext = null;
                     l1.Behaviors.RemoveAt(0);
 
@@ -1971,6 +2126,7 @@ public class TreeView : TreeViewItem
                     {
                         (l1!.GestureRecognizers[0] as TapGestureRecognizer)!.Command = null;
                         (l1!.GestureRecognizers[0] as TapGestureRecognizer)!.Parent = null;
+                        (l1!.GestureRecognizers[0] as TapGestureRecognizer)!.ClearValue(TapGestureRecognizer.CommandProperty);
                     }
                     else if (l1.GestureRecognizers[0] is PointerGestureRecognizer)
                     {
@@ -2009,10 +2165,23 @@ public class TreeView : TreeViewItem
         }
 
 #if ANDROID
-        grefCount -= (int)  Java.Lang.Runtime.GetRuntime()!.TotalMemory();
+        /*
+        int grefCountEnd= Java.Interop.JniRuntime.CurrentRuntime.GlobalReferenceCount;
+        int wgrefCountEnd = Java.Interop.JniRuntime.CurrentRuntime.WeakGlobalReferenceCount;
 
-        if( grefCount > 0 )
-            GlobalData.AddLog("EmptyTreeViewItem freed: " + grefCount.ToString() + " von " + grefCount.ToString(), IGlobalData.protMode.crisp);
+        if ( grefCountEnd >= grefCountStart)
+        {
+            // GC.Collect();
+            grefCountEnd = Java.Interop.JniRuntime.CurrentRuntime.GlobalReferenceCount;
+            wgrefCountEnd = Java.Interop.JniRuntime.CurrentRuntime.WeakGlobalReferenceCount;
+        }
+
+        if (grefCountStart > 0 && InitialCall == true)
+        {
+            GlobalData.AddLog("EmptyTreeViewItem freed: Gref " + ( grefCountStart - grefCountEnd).ToString() + " von " + grefCountStart.ToString(), IGlobalData.protMode.crisp);
+            GlobalData.AddLog("EmptyTreeViewItem freed: WGref " + (wgrefCountStart - wgrefCountEnd).ToString() + " von " + wgrefCountStart.ToString(), IGlobalData.protMode.crisp);
+        }
+        */
 #endif
     }
     public void CloseTreeViewItem(TreeViewItem tvi)
@@ -2518,7 +2687,7 @@ public class TreeView : TreeViewItem
             b1.SetValue( Button.OpacityProperty, 1.0f);
             b1.Opacity = 1;
             b1.BorderWidth = 0;
-            b1.Background = Colors.Transparent;
+            // b1.Background = Colors.Transparent;
             b1.HeightRequest = -1;
             b1.ClearValue(Button.HeightRequestProperty);
             b1.TextColor = Colors.Cyan;
@@ -2547,9 +2716,10 @@ public class TreeView : TreeViewItem
             l1.TextColor = GlobalSpecs.CurrentGlobalSpecs.GetCurrentTheme()!.Col_FG;
 
             // Debug
-            l1.BackgroundColor = Colors.Red;
-            l1.Background = Colors.Red;
-            l1.SetValue( Label.BackgroundColorProperty, Colors.Red);
+            // l1.BackgroundColor = Colors.Red;
+            // l1.Background = Colors.Red;
+            
+            // l1.SetValue( Label.BackgroundColorProperty, Colors.Red);
 
  
             Columns.Clear();
@@ -2618,7 +2788,10 @@ public class TreeViewItem : Grid, INotifyPropertyChanged, IDisposable
     new public void OnPropertyChanged([CallerMemberName] string? name = null)
     {
         if (CurrentOrderListTable != null )
-            TextLabel!.Text = CurrentOrderListTable.Name;
+        { 
+            if( TextLabel != null )
+                TextLabel!.Text = CurrentOrderListTable.Name;
+        }
         /*
         else 
             TextLabel.Text = "Bla bla bla";
@@ -2671,8 +2844,11 @@ public class TreeViewItem : Grid, INotifyPropertyChanged, IDisposable
         TextButton = null;
         _orderTable = null;
         _userDefinedObject = null;
+        UserDefinedObject = null;
         ClickedEvent = null;
         ClickedData = null;
+        Clicked -= TreeCallback;
+
         TreeCallback = null;
         Clicked = null;
     }
@@ -2775,10 +2951,25 @@ public class TreeViewItem : Grid, INotifyPropertyChanged, IDisposable
 
     public string? Text
     {
-        get => TextLabel!.Text;
+        get
+        {
+            if( TextLabel != null )
+                return TextLabel!.Text;
+            else
+            {
+                return "";
+            }
+        }
         set
         {
-            TextLabel!.Text = value;
+            if (TextLabel != null)
+            {
+                TextLabel!.Text = value;
+            }
+            else
+            {
+
+            }
         }
     }
     /*
@@ -3152,26 +3343,22 @@ public class TreeViewItem : Grid, INotifyPropertyChanged, IDisposable
         this.Clicked += eh;
         this.TreeCallback = eh;
     }
-    public void SetupTreeViewItem()
-    { 
-        // ClickedDataCommand = new Command( OnClickedData );
 
+    public static MyTouchBehavior? touchBehaviorB1 = null;
+    public void SetupTreeViewItem()
+    {
         RowDefinitionCollection Rows = new();
         RowDefinition rd1 = new();
-        // rd1.Height = new GridLength(TreeHeight, GridUnitType.Absolute);
-        rd1.Height = GridLength.Auto; 
+        rd1.Height = GridLength.Auto;
         Rows.Add(rd1);
         RowDefinition rd2 = new();
-        // rd2.Height = new GridLength(200, GridUnitType.Absolute);
-        rd2.Height = GridLength.Auto; 
+        rd2.Height = GridLength.Auto;
         Rows.Add(rd2);
         this.RowDefinitions = Rows;
 
         Grid g1 = UIElement.NewGrid();
         this.Add(g1);
         this.SetRow(g1, 0);
-        // this.SetValue(Label.BackgroundProperty, Colors.Purple);
-
 
         Grid g2 = UIElement.NewGrid();
         this.Add(g2);
@@ -3181,25 +3368,13 @@ public class TreeViewItem : Grid, INotifyPropertyChanged, IDisposable
 
         ColumnDefinition cd1 = new();
         cd1.Width = new GridLength(20, GridUnitType.Absolute);
-        Columns.Add( cd1 );
+        Columns.Add(cd1);
         ColumnDefinition cd2 = new();
         cd2.Width = new GridLength(5, GridUnitType.Star);
-        Columns.Add( cd2 );
+        Columns.Add(cd2);
         g1.ColumnDefinitions = Columns;
 
-        /*
-        Grid g3 = new();
-        g3.WidthRequest = 20;
-        g1.Add(g3);
-        g1.SetColumn(g3, 0);
-
-        Grid g4 = new();
-        g1.Add(g4);
-        g1.SetColumn(g4, 1);
-        */
-
         Button b1 = UIElement.NewButton();
-        // b1.StyleClass = UIElement.Get_Button_NoBackground_NoBorder(); 
         b1.TextColor = GlobalSpecs.CurrentGlobalSpecs!.GetCurrentTheme()!.Col_FG;
         b1.Text = FaSolid.CaretRight;
         b1.FontFamily = "Fa-Solid";
@@ -3212,26 +3387,10 @@ public class TreeViewItem : Grid, INotifyPropertyChanged, IDisposable
         b1.Opacity = 1;
         b1.BorderWidth = 0;
         b1.SetValue(Button.OpacityProperty, 1.0f);
-        // b1.BackgroundColor = Colors.Red;
         b1.Background = Colors.Transparent;
         b1.HeightRequest = -1;
         b1.ClearValue(Button.HeightRequestProperty);
-        // b1.TextColor = Colors.Red;
 
-
-        /*
-        Button l1 = new();
-        l1.Text = "Labeltext";
-        List<string> styleClasses = new();
-        styleClasses.Add("Button_Label_Normal");
-        l1.StyleClass = styleClasses;
-        l1.VerticalOptions = LayoutOptions.Start;
-        l1.HorizontalOptions = LayoutOptions.Start;
-        l1.Command = ClickedEventCommand;
-        g1.SetColumn(l1, 1);
-        g1.Add(l1);
-        TextLabel = l1;
-        */
         Label l1 = UIElement.NewLabel();
         l1.Text = "Labeltext";
         l1.StyleClass = UIElement.Get_Label_Normal();
@@ -3239,54 +3398,54 @@ public class TreeViewItem : Grid, INotifyPropertyChanged, IDisposable
         l1.HorizontalOptions = LayoutOptions.Start;
         l1.HorizontalTextAlignment = TextAlignment.Start;
         l1.LineBreakMode = LineBreakMode.TailTruncation;
-        // l1.Command = ClickedEventCommand;
         g1.SetColumn(l1, 1);
         g1.Add(l1);
         TextLabel = l1;
+
+        Thickness margin = new Thickness(0, GlobalSpecs.CurrentGlobalSpecs!.GetClickMarginPixel(), 0, GlobalSpecs.CurrentGlobalSpecs.GetClickMarginPixel());
+        l1.Margin = margin;
+        l1.Opacity = 1;
+        l1.SetValue(Label.OpacityProperty, 1.0f);
+        l1.TextColor = GlobalSpecs.CurrentGlobalSpecs.GetCurrentTheme()!.Col_FG;
+        l1.HeightRequest = -1;
+        l1.WidthRequest = -1;
+
+#if WINDOWS
+        if (touchBehaviorB1 == null)
+        {
+            touchBehaviorB1 = new MyTouchBehavior
+            {
+                HoveredOpacity = 0.7,
+                PressedOpacity = 0.7
+
+            };
+        }
+        
+        l1.Behaviors.Add(touchBehaviorB1);
+#endif
+
         TapGestureRecognizer tgr = new();
         tgr.Command = ClickedEventCommand;
         l1.GestureRecognizers.Add(tgr);
         l1.SetCursorHand();
-        Thickness margin = new Thickness(0, GlobalSpecs.CurrentGlobalSpecs!.GetClickMarginPixel(), 0, GlobalSpecs.CurrentGlobalSpecs.GetClickMarginPixel());
-        l1.Margin = margin;
-        l1.Opacity = 1;
-        l1.SetValue( Label.OpacityProperty, 1.0f );
-        l1.TextColor = GlobalSpecs.CurrentGlobalSpecs.GetCurrentTheme()!.Col_FG;
-        l1.HeightRequest = -1;
-        l1.WidthRequest = -1;
-        // l1.BackgroundColor = Colors.Red;
-        // l1.Background = Colors.Green;
-        // l1.SetValue(Label.BackgroundColorProperty, Colors.Blue);
-        // l1.SetValue(Label.BackgroundProperty, Colors.Yellow);
 
-        var touchBehaviorB1 = new TouchBehavior
-        {
-            HoveredOpacity = 0.7,
-            PressedOpacity = 0.7
 
-        };
-        l1.Behaviors.Add(touchBehaviorB1);
-        
-        Columns.Clear();
+        ColumnDefinitionCollection Columns2 = new();
         ColumnDefinition cd3 = new();
         cd3.Width = new GridLength(20, GridUnitType.Absolute);
-        Columns.Add(cd3);
+        Columns2.Add(cd3);
 
         ColumnDefinition cd4 = new();
         cd4.Width = new GridLength(5, GridUnitType.Star);
-        Columns.Add(cd4);
-        g2.ColumnDefinitions = Columns;
+        Columns2.Add(cd4);
+        g2.ColumnDefinitions = Columns2;
 
         Grid g5 = UIElement.NewGrid();
         g2.Add(g5);
         g2.SetColumn(g5, 1);
 
-        // CalcToggles();
-
-        ParentSubTree = g2;
         SubTree = g5;
-
-
+        ParentSubTree = g2;
     }
 
     public void Add(TreeViewItem tvi )
@@ -4320,7 +4479,7 @@ public class OrderListView : TreeViewItem, INotifyPropertyChanged
         List<string> styleClasses = new();
         styleClasses.Add("Button_Normal_Large");
         b2.StyleClass = styleClasses;
-        b2.BackgroundColor = Colors.AliceBlue; 
+        // b2.BackgroundColor = Colors.AliceBlue; 
         b2.VerticalOptions = LayoutOptions.Center;
         b2.HorizontalOptions = LayoutOptions.Start;
         b2.HorizontalTextAlignment = TextAlignment.Start;
@@ -4396,7 +4555,7 @@ public class TabItem: Grid, INotifyPropertyChanged
         HeadlineSV = new();
         HeadlineSV.Orientation = ScrollOrientation.Horizontal;
         this.Add(HeadlineSV);
-        this.BackgroundColor = Colors.Yellow;
+        // this.BackgroundColor = Colors.Yellow;
 
         Headline = new();
         // Headline.Background = Colors.Red;
@@ -4662,8 +4821,9 @@ public partial class AppShell : Shell
                     break;
                }
             }
-            catch
+            catch (Exception e)
             {
+                GlobalData.AddLog("ChangeTheme: " + e.Message, IGlobalData.protMode.crisp);
 
             }
         }
@@ -4682,8 +4842,9 @@ public partial class AppShell : Shell
                     break;
                 }
             }
-            catch
+            catch ( Exception e )
             {
+                GlobalData.AddLog("ChangeFont: " + e.Message, IGlobalData.protMode.crisp);
 
             }
         }
@@ -4702,8 +4863,9 @@ public partial class AppShell : Shell
                     break;
                 }
             }
-            catch
+            catch (Exception e)
             {
+                GlobalData.AddLog("ChangeFontSize: " + e.Message, IGlobalData.protMode.crisp);
 
             }
         }

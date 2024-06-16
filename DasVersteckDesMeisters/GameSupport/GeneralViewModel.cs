@@ -44,61 +44,93 @@ public class GeneralViewModel : BaseViewModel, INotifyPropertyChanged
 
     public GeneralViewModel(IGlobalSpecs globalSpecs, IDataService dataService, IDeviceData deviceData, IUIServices uiservices )
     {
-        if (GlobalData.CurrentGlobalData!.UIS == null)
+        try
         {
-            GlobalData.CurrentGlobalData!.UIS = uiservices;
-        }
-        _globalSpecs = (GlobalSpecs) globalSpecs;
-        _uiServices = (UIServices)uiservices;
-        LoadDataCommand = new Command(async () => await LoadData());
-        Title = "Start";
+            if (GlobalData.CurrentGlobalData!.UIS == null)
+            {
+                GlobalData.CurrentGlobalData!.UIS = uiservices;
+            }
+            _globalSpecs = (GlobalSpecs)globalSpecs;
+            _uiServices = (UIServices)uiservices;
+            LoadDataCommand = new Command(async () => await LoadData());
+            Title = "Start";
 
-        GlobalSpecs.CurrentOrderList = new OrderList( );
-        GlobalSpecs.CurrentOrderList = dataService.ReadOrderTable();
-        TrimOrderLists(10);
+            GlobalSpecs.CurrentOrderList = new OrderList();
+            GlobalSpecs.CurrentOrderList = dataService.ReadOrderTable();
+            TrimOrderLists(10);
+        }
+        catch (Exception ex)
+        {
+            Phoney_MAUI.Core.GlobalData.AddLog("GeneralViewModel Konstruktor: " + ex.Message, IGlobalData.protMode.crisp);
+        }
 
     }
     public void SetCallbackResize( IGlobalData._callbackResize callbackResize)
     {
-        _globalSpecs.GetGlobalData()!.SetCallbackResize(callbackResize);
-        // CallbackResize = callbackResize;
+        try
+        {
+            _globalSpecs.GetGlobalData()!.SetCallbackResize(callbackResize);
+            // CallbackResize = callbackResize;
+        }
+        catch (Exception ex)
+        {
+            Phoney_MAUI.Core.GlobalData.AddLog("SetCallbackResize: " + ex.Message, IGlobalData.protMode.crisp);
+        }
+
     }
     public void SetCallbackChangeOrientation(IGlobalData._callbackChangeOrientation callbackChangeOrientation)
     {
-        _globalSpecs.GetGlobalData()!.SetCallbackChangeOrientation(callbackChangeOrientation);
+        try
+        {
+            _globalSpecs.GetGlobalData()!.SetCallbackChangeOrientation(callbackChangeOrientation);
+        }
+        catch (Exception ex)
+        {
+            Phoney_MAUI.Core.GlobalData.AddLog("SetCallbackChangeOrientation: " + ex.Message, IGlobalData.protMode.crisp);
+        }
+
         // CallbackResize = callbackResize;
     }
 
     public int TrimOrderLists(int keep)
     {
-        int deleted = 0;
-        // SetOrderListInfo.jsonIndex
-        // Ignores: 001
-        string? pathName = GlobalData.CurrentPath();
-        string? pathfileName = pathName;
-
-        string[] fileEntries = Directory.GetFiles(pathfileName!);
-
-        foreach (string fName in fileEntries)
+        try
         {
-            string fName2 = System.IO.Path.GetFileName(fName);
-            if (fName2.StartsWith(loca.OrderList_TrimOrderLists_16194))
-            {
-                int no;
+            int deleted = 0;
+            // SetOrderListInfo.jsonIndex
+            // Ignores: 001
+            string? pathName = GlobalData.CurrentPath();
+            string? pathfileName = pathName;
 
-                if (Int32.TryParse(fName2.Substring(10, 4), out no) == true)
+            string[] fileEntries = Directory.GetFiles(pathfileName!);
+
+            foreach (string fName in fileEntries)
+            {
+                string fName2 = System.IO.Path.GetFileName(fName);
+                if (fName2.StartsWith(loca.OrderList_TrimOrderLists_16194))
                 {
-                    if (no <= (GD!.OrderList!.SetOrderListInfo!.jsonIndex - keep))
+                    int no;
+
+                    if (Int32.TryParse(fName2.Substring(10, 4), out no) == true)
                     {
-                        File.Delete(fName);
-                        deleted++;
+                        if (no <= (GD!.OrderList!.SetOrderListInfo!.jsonIndex - keep))
+                        {
+                            File.Delete(fName);
+                            deleted++;
+                        }
+
                     }
 
                 }
-
             }
+            return deleted;
         }
-        return deleted;
+        catch (Exception ex)
+        {
+            Phoney_MAUI.Core.GlobalData.AddLog("TrimOrderLists: " + ex.Message, IGlobalData.protMode.crisp);
+            return 0;
+        }
+
     }
 
     private async Task LoadData()
@@ -122,49 +154,74 @@ public class GeneralViewModel : BaseViewModel, INotifyPropertyChanged
 
     public async Task CheckSize(double width, double height)
     {
-        GlobalData? gd = (GlobalData) _globalSpecs.GetGlobalData()!;
-
-        if ( width != _width || height != _height )
+        try
         {
-            if( width > height && gd!.LayoutDescription.ScreenMode != IGlobalData.screenMode.landscape)
-            {
-                // Event für Umschaltung auf 
-                gd.LayoutDescription.ScreenMode = IGlobalData.screenMode.landscape;
-            }
-            else if ( height > width && gd!.LayoutDescription.ScreenMode != IGlobalData.screenMode.portrait)
-            {
-                // Event für Umschaltung auf 
+            GlobalData? gd = (GlobalData)_globalSpecs.GetGlobalData()!;
 
-                gd.LayoutDescription.ScreenMode = IGlobalData.screenMode.portrait;
-            }
+            if (width != _width || height != _height)
+            {
+                if (width > height && gd!.LayoutDescription.ScreenMode != IGlobalData.screenMode.landscape)
+                {
+                    // Event für Umschaltung auf 
+                    gd.LayoutDescription.ScreenMode = IGlobalData.screenMode.landscape;
+                }
+                else if (height > width && gd!.LayoutDescription.ScreenMode != IGlobalData.screenMode.portrait)
+                {
+                    // Event für Umschaltung auf 
 
-            gd!.DoResize(width, height);
+                    gd.LayoutDescription.ScreenMode = IGlobalData.screenMode.portrait;
+                }
+
+                gd!.DoResize(width, height);
+            }
+            _width = width;
+            _height = height;
         }
-        _width = width;
-        _height = height;
+        catch (Exception ex)
+        {
+            Phoney_MAUI.Core.GlobalData.AddLog("CheckSize: " + ex.Message, IGlobalData.protMode.crisp);
+        }
+
     }
 
     public async void InitResize( double width, double height )
     {
-        // double width = DeviceDisplay.Current.MainDisplayInfo.Width;
-        // double height = DeviceDisplay.Current.MainDisplayInfo.Height;
+        try
+        {
+            // double width = DeviceDisplay.Current.MainDisplayInfo.Width;
+            // double height = DeviceDisplay.Current.MainDisplayInfo.Height;
 
-        _width = 0;
-        _height = 0;
+            _width = 0;
+            _height = 0;
 
-        GlobalData? gd = (GlobalData)_globalSpecs.GetGlobalData()!;
-        // gd!.LayoutDescription.ScreenMode = IGlobalData.screenMode.unclear;
-        if (width > height)
-            gd!.LayoutDescription.ScreenMode = IGlobalData.screenMode.landscape;
-        else if( width < height)
-            gd!.LayoutDescription.ScreenMode = IGlobalData.screenMode.portrait;
+            GlobalData? gd = (GlobalData)_globalSpecs.GetGlobalData()!;
+            // gd!.LayoutDescription.ScreenMode = IGlobalData.screenMode.unclear;
+            if (width > height)
+                gd!.LayoutDescription.ScreenMode = IGlobalData.screenMode.landscape;
+            else if (width < height)
+                gd!.LayoutDescription.ScreenMode = IGlobalData.screenMode.portrait;
 
-        await CheckSize(width, height);
+            await CheckSize(width, height);
+        }
+        catch (Exception ex)
+        {
+            Phoney_MAUI.Core.GlobalData.AddLog("InitResize: " + ex.Message, IGlobalData.protMode.crisp);
+        }
+
+
     }
 
     public void ChangeTheme(ResourceDictionary theme)
     {
-        AppShell._mainAppShell!.ChangeTheme(theme);
+        try
+        {
+            AppShell._mainAppShell!.ChangeTheme(theme);
+        }
+        catch (Exception ex)
+        {
+            Phoney_MAUI.Core.GlobalData.AddLog("ChangeTheme: " + ex.Message, IGlobalData.protMode.crisp);
+        }
+
     }
 
     public void InitZerogame()
@@ -293,8 +350,10 @@ public class GeneralViewModel : BaseViewModel, INotifyPropertyChanged
             }
 
         }
-        catch // (Exception e)
+        catch (Exception e)
         {
+            Phoney_MAUI.Core.GlobalData.AddLog("InitZerogame: " + e.Message, IGlobalData.protMode.crisp);
+
             // int a;
         }
     }

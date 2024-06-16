@@ -1,8 +1,11 @@
 <?xml version = "1.0" encoding = "UTF-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Phoney_MAUI.Menu.ReplayPage"
-               xmlns:local="clr-namespace:Phoney_MAUI"
+                 xmlns:local="clr-namespace:Phoney_MAUI"
+                  xmlns:replay="clr-namespace:Phoney_MAUI.Menu"
+          xmlns:game="clr-namespace:Phoney_MAUI.Game.General"
+           x:Class="Phoney_MAUI.Menu.ReplayPage"
+             x:DataType="game:MainViewModel"
              xmlns:core="clr-namespace:Phoney_MAUI.Core"
               xmlns:model="clr-namespace:Phoney_MAUI.Model"
                 xmlns:genx="clr-namespace:Phoney_MAUI.Game.General"
@@ -85,10 +88,10 @@
                                                 </Entry>
                                             </Grid>
                                         </Grid>
-                                        <Button x:Name="SearchBackward" Grid.Column="3" Margin="6,7,3,7" StyleClass="Button_Normal_NoBorder" Text="{x:Static core:FaSolid.CaretLeft}" FontFamily="Fa-Solid" Clicked="SearchBackwardHandler" Command="{Binding SearchCommand}">
+                                        <Button x:Name="SearchBackward" Grid.Column="3" Margin="6,7,3,7" StyleClass="Button_Normal_NoBorder" Text="{x:Static core:FaSolid.CaretLeft}" FontFamily="Fa-Solid" Clicked="SearchBackwardHandler" Command= "{Binding Path=BindingContext.SearchCommand, Source={RelativeSource AncestorType={x:Type replay:ReplayPage}}}">
 
                                         </Button>
-                                        <Button x:Name="SearchForward" Grid.Column="4" Margin="3,7,6,7" StyleClass="Button_Normal_NoBorder" Text="{x:Static core:FaSolid.CaretRight}" FontFamily="Fa-Solid" Clicked="SearchForwardHandler" Command="{Binding SearchCommand}">
+                                        <Button x:Name="SearchForward" Grid.Column="4" Margin="3,7,6,7" StyleClass="Button_Normal_NoBorder" Text="{x:Static core:FaSolid.CaretRight}" FontFamily="Fa-Solid" Clicked="SearchForwardHandler" Command="{Binding Path=BindingContext.SearchCommand, Source={RelativeSource AncestorType={x:Type replay:ReplayPage}}}">
                                         </Button>
                                     </Grid>
   
@@ -195,10 +198,10 @@
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
 
-                            <Button x:Name="SearchBackwardPT" Grid.Row="0" Margin="0,12,10,12" StyleClass="Button_Normal" Text="{x:Static core:FaSolid.CaretLeft}" FontFamily="Fa-Solid" Clicked="SearchBackwardHandlerPT" Command="{Binding SearchCommand}">
+                            <Button x:Name="SearchBackwardPT" Grid.Row="0" Margin="0,12,10,12" StyleClass="Button_Normal" Text="{x:Static core:FaSolid.CaretLeft}" FontFamily="Fa-Solid" Clicked="SearchBackwardHandlerPT" Command="{Binding Path=BindingContext.SearchCommand, Source={RelativeSource AncestorType={x:Type replay:ReplayPage}}}">
 
                             </Button>
-                            <Button x:Name="SearchForwardPT"  Grid.Row="1" Margin="0,12,10,12" StyleClass="Button_Normal" Text="{x:Static core:FaSolid.CaretRight}" FontFamily="Fa-Solid" Clicked="SearchForwardHandlerPT" Command="{Binding SearchCommand}">
+                            <Button x:Name="SearchForwardPT"  Grid.Row="1" Margin="0,12,10,12" StyleClass="Button_Normal" Text="{x:Static core:FaSolid.CaretRight}" FontFamily="Fa-Solid" Clicked="SearchForwardHandlerPT" Command="{Binding Path=BindingContext.SearchCommand, Source={RelativeSource AncestorType={x:Type replay:ReplayPage}}}">
                             </Button>
                         </Grid>
                     </Grid>
