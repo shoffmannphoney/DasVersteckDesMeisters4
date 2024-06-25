@@ -18,21 +18,23 @@ public partial class SettingsPage : ContentPage, IMenuExtension
 
     public SettingsPage(MainViewModel viewModelMain, GeneralViewModel viewModelGeneral, MenuExtension menuExtension, IUIServices iuis)
     {
-        InitializeComponent();
-        BindingContext = _viewModelMain = viewModelMain;
-        _viewModelGeneral = viewModelGeneral;
-        _menuExtension = menuExtension;
+        try
+        {
+            InitializeComponent();
+            BindingContext = _viewModelMain = viewModelMain;
+            _viewModelGeneral = viewModelGeneral;
+            _menuExtension = menuExtension;
 
-        GD = GlobalData.CurrentGlobalData!;
-        UIS = iuis;
+            GD = GlobalData.CurrentGlobalData!;
+            UIS = iuis;
 
-        _menuExtension!.SetMenuExtension(GetMenuGridLeft, GetMenuGridTotal, GetMenuGridMenu, WebView_Grid, Page_Grid, GetMenuButton, GetUIServices, GetAbsoluteLayout, GetMenuTitle, nameof(SettingsPage));
+            _menuExtension!.SetMenuExtension(GetMenuGridLeft, GetMenuGridTotal, GetMenuGridMenu, WebView_Grid, Page_Grid, GetMenuButton, GetUIServices, GetAbsoluteLayout, GetMenuTitle, nameof(SettingsPage));
 
-        Collection<int> p = new() { 0, 1, 2, 3 };
+            Collection<int> p = new() { 0, 1, 2, 3 };
 
-        Themes = _viewModelMain.Themes;
+            Themes = _viewModelMain.Themes;
 
-        ResourceDictionary rd3 = ((Collection<ResourceDictionary>)App.Current!.MainPage!.Resources.MergedDictionaries)[1];
+            ResourceDictionary rd3 = ((Collection<ResourceDictionary>)App.Current!.MainPage!.Resources.MergedDictionaries)[1];
 
 #if WINDOWS
         // Custom-Mauszeiger einstellen
@@ -89,30 +91,36 @@ public partial class SettingsPage : ContentPage, IMenuExtension
         MenuButton.SetCursorHand();
 #endif
 
-        // Delegate d = _menuExtension!.B_ME1.Clicked.GetInvocationList[0];
-        /*
-                            var rd1 = App.Current.MainPage.Resources.MergedDictionaries.First( );
-                            var rd2 = App.Current.MainPage.Resources["Phoney_MAUI.Resources.Styles.ThemeC"];
+            // Delegate d = _menuExtension!.B_ME1.Clicked.GetInvocationList[0];
+            /*
+                                var rd1 = App.Current.MainPage.Resources.MergedDictionaries.First( );
+                                var rd2 = App.Current.MainPage.Resources["Phoney_MAUI.Resources.Styles.ThemeC"];
 
 
-                            foreach ( var rdx in App.Current.MainPage.Resources.MergedDictionaries )
-                            {
-                                int B = 5;
-                            }
-                            // s => s.Keys == "Phoney_MAUI.Resources.Styles.ThemeC"
-                            var rd = App.Current.Resources.MergedDictionaries.First();
+                                foreach ( var rdx in App.Current.MainPage.Resources.MergedDictionaries )
+                                {
+                                    int B = 5;
+                                }
+                                // s => s.Keys == "Phoney_MAUI.Resources.Styles.ThemeC"
+                                var rd = App.Current.Resources.MergedDictionaries.First();
 
-                            try
-                            {
-                                Color BG = (Color)rd["BG"];
-                            }
-                            catch
-                            {
-                                int b = 7;
-                            }
+                                try
+                                {
+                                    Color BG = (Color)rd["BG"];
+                                }
+                                catch
+                                {
+                                    int b = 7;
+                                }
 
-                            int a = 5;
-                            */
+                                int a = 5;
+                                */
+        }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("SettingsPage: " + ex.Message, Phoney_MAUI.Model.IGlobalData.protMode.crisp);
+        }
+
     }
     void OnCollectionViewSelectionChanged(object? sender, SelectionChangedEventArgs e)
     {
@@ -170,74 +178,81 @@ public partial class SettingsPage : ContentPage, IMenuExtension
 
     private void SetLanguage()
     {
-        WindowTitle.Text = loca.MAUI_UI_Settings_WindowTitle;
+        try
+        {
+            WindowTitle.Text = loca.MAUI_UI_Settings_WindowTitle;
 
-        GlobalSpecs? gs = GlobalSpecs.CurrentGlobalSpecs;
+            GlobalSpecs? gs = GlobalSpecs.CurrentGlobalSpecs;
 
-        _viewModelMain.Themes[0].Name = loca.MAUI_UI_Theme_A;
-        _viewModelMain.Themes[1].Name = loca.MAUI_UI_Theme_B;
-        _viewModelMain.Themes[2].Name = loca.MAUI_UI_Theme_C;
-        _viewModelMain.Themes[3].Name = loca.MAUI_UI_Theme_D;
-        _viewModelMain.Themes[4].Name = loca.MAUI_UI_Theme_E;
-        _viewModelMain.Themes[5].Name = loca.MAUI_UI_Theme_F;
-        _viewModelMain.Themes[6].Name = loca.MAUI_UI_Theme_G;
-        _viewModelMain.Themes[7].Name = loca.MAUI_UI_Theme_H;
+            _viewModelMain.Themes[0].Name = loca.MAUI_UI_Theme_A;
+            _viewModelMain.Themes[1].Name = loca.MAUI_UI_Theme_B;
+            _viewModelMain.Themes[2].Name = loca.MAUI_UI_Theme_C;
+            _viewModelMain.Themes[3].Name = loca.MAUI_UI_Theme_D;
+            _viewModelMain.Themes[4].Name = loca.MAUI_UI_Theme_E;
+            _viewModelMain.Themes[5].Name = loca.MAUI_UI_Theme_F;
+            _viewModelMain.Themes[6].Name = loca.MAUI_UI_Theme_G;
+            _viewModelMain.Themes[7].Name = loca.MAUI_UI_Theme_H;
 
-        _viewModelMain.Themes[0].RefreshAfterSelectionChange();
-        _viewModelMain.Themes[1].RefreshAfterSelectionChange();
-        _viewModelMain.Themes[2].RefreshAfterSelectionChange();
-        _viewModelMain.Themes[3].RefreshAfterSelectionChange();
-        _viewModelMain.Themes[4].RefreshAfterSelectionChange();
-        _viewModelMain.Themes[5].RefreshAfterSelectionChange();
-        _viewModelMain.Themes[6].RefreshAfterSelectionChange();
-        _viewModelMain.Themes[7].RefreshAfterSelectionChange();
+            _viewModelMain.Themes[0].RefreshAfterSelectionChange();
+            _viewModelMain.Themes[1].RefreshAfterSelectionChange();
+            _viewModelMain.Themes[2].RefreshAfterSelectionChange();
+            _viewModelMain.Themes[3].RefreshAfterSelectionChange();
+            _viewModelMain.Themes[4].RefreshAfterSelectionChange();
+            _viewModelMain.Themes[5].RefreshAfterSelectionChange();
+            _viewModelMain.Themes[6].RefreshAfterSelectionChange();
+            _viewModelMain.Themes[7].RefreshAfterSelectionChange();
 
-        _viewModelMain.Fonts[0].Name = loca.MAUI_UI_Font_A;
-        _viewModelMain.Fonts[1].Name = loca.MAUI_UI_Font_B;
-        _viewModelMain.Fonts[2].Name = loca.MAUI_UI_Font_C;
-        _viewModelMain.Fonts[3].Name = loca.MAUI_UI_Font_D;
-        _viewModelMain.Fonts[4].Name = loca.MAUI_UI_Font_E;
-        _viewModelMain.Fonts[5].Name = loca.MAUI_UI_Font_F;
+            _viewModelMain.Fonts[0].Name = loca.MAUI_UI_Font_A;
+            _viewModelMain.Fonts[1].Name = loca.MAUI_UI_Font_B;
+            _viewModelMain.Fonts[2].Name = loca.MAUI_UI_Font_C;
+            _viewModelMain.Fonts[3].Name = loca.MAUI_UI_Font_D;
+            _viewModelMain.Fonts[4].Name = loca.MAUI_UI_Font_E;
+            _viewModelMain.Fonts[5].Name = loca.MAUI_UI_Font_F;
 
-        _viewModelMain.Fonts[0].RefreshAfterSelectionChange();
-        _viewModelMain.Fonts[1].RefreshAfterSelectionChange();
-        _viewModelMain.Fonts[2].RefreshAfterSelectionChange();
-        _viewModelMain.Fonts[3].RefreshAfterSelectionChange();
-        _viewModelMain.Fonts[4].RefreshAfterSelectionChange();
-        _viewModelMain.Fonts[5].RefreshAfterSelectionChange();
+            _viewModelMain.Fonts[0].RefreshAfterSelectionChange();
+            _viewModelMain.Fonts[1].RefreshAfterSelectionChange();
+            _viewModelMain.Fonts[2].RefreshAfterSelectionChange();
+            _viewModelMain.Fonts[3].RefreshAfterSelectionChange();
+            _viewModelMain.Fonts[4].RefreshAfterSelectionChange();
+            _viewModelMain.Fonts[5].RefreshAfterSelectionChange();
 
-        _viewModelMain.FontSizes[0].Name = loca.MAUI_UI_Fontsize_A;
-        _viewModelMain.FontSizes[1].Name = loca.MAUI_UI_Fontsize_B;
-        _viewModelMain.FontSizes[2].Name = loca.MAUI_UI_Fontsize_C;
-        _viewModelMain.FontSizes[3].Name = loca.MAUI_UI_Fontsize_D;
-        _viewModelMain.FontSizes[4].Name = loca.MAUI_UI_Fontsize_E;
+            _viewModelMain.FontSizes[0].Name = loca.MAUI_UI_Fontsize_A;
+            _viewModelMain.FontSizes[1].Name = loca.MAUI_UI_Fontsize_B;
+            _viewModelMain.FontSizes[2].Name = loca.MAUI_UI_Fontsize_C;
+            _viewModelMain.FontSizes[3].Name = loca.MAUI_UI_Fontsize_D;
+            _viewModelMain.FontSizes[4].Name = loca.MAUI_UI_Fontsize_E;
 
-        _viewModelMain.FontSizes[0].RefreshAfterSelectionChange();
-        _viewModelMain.FontSizes[1].RefreshAfterSelectionChange();
-        _viewModelMain.FontSizes[2].RefreshAfterSelectionChange();
-        _viewModelMain.FontSizes[3].RefreshAfterSelectionChange();
-        _viewModelMain.FontSizes[4].RefreshAfterSelectionChange();
+            _viewModelMain.FontSizes[0].RefreshAfterSelectionChange();
+            _viewModelMain.FontSizes[1].RefreshAfterSelectionChange();
+            _viewModelMain.FontSizes[2].RefreshAfterSelectionChange();
+            _viewModelMain.FontSizes[3].RefreshAfterSelectionChange();
+            _viewModelMain.FontSizes[4].RefreshAfterSelectionChange();
 
-        ThemesLabel.Text = loca.MAUI_UI_ThemesLabel;
-        FontsLabel.Text = loca.MAUI_UI_FontsLabel;
-        FontSizeLabel.Text = loca.MAUI_UI_FontSizeLabel;
+            ThemesLabel.Text = loca.MAUI_UI_ThemesLabel;
+            FontsLabel.Text = loca.MAUI_UI_FontsLabel;
+            FontSizeLabel.Text = loca.MAUI_UI_FontSizeLabel;
 
-        LanguageLabel.Text = loca.MAUI_UI_LanguageLabel;
-        IllustrationLabel.Text = loca.MAUI_UI_IllustrationLabel;
-        TextAttributesLabel.Text = loca.MAUI_UI_TextattributesLabel;
-        SimpleMCLabel.Text = loca.MAUI_UI_SimpleMCLabel;
-        OrderColumnLabel.Text = loca.MAUI_UI_OrderColumnLabel;
-        ItemsLocLabel.Text = loca.MAUI_UI_ItemsLocLabel;
-        ItemsInvLabel.Text = loca.MAUI_UI_ItemsInvLabel;
-        OrderColumnLabelPortrait.Text = loca.MAUI_UI_OrderColumnLabelPortrait;
-        ItemsLocLabelPortrait.Text = loca.MAUI_UI_ItemsLocLabelPortrait;
-        ItemsInvLabelPortrait.Text = loca.MAUI_UI_ItemsInvLabelPortrait;
-        RowMargin.Text = loca.MAUI_Listrow_Height;
-        STTMode.Text = loca.MAUI_STT;
+            LanguageLabel.Text = loca.MAUI_UI_LanguageLabel;
+            IllustrationLabel.Text = loca.MAUI_UI_IllustrationLabel;
+            TextAttributesLabel.Text = loca.MAUI_UI_TextattributesLabel;
+            SimpleMCLabel.Text = loca.MAUI_UI_SimpleMCLabel;
+            OrderColumnLabel.Text = loca.MAUI_UI_OrderColumnLabel;
+            ItemsLocLabel.Text = loca.MAUI_UI_ItemsLocLabel;
+            ItemsInvLabel.Text = loca.MAUI_UI_ItemsInvLabel;
+            OrderColumnLabelPortrait.Text = loca.MAUI_UI_OrderColumnLabelPortrait;
+            ItemsLocLabelPortrait.Text = loca.MAUI_UI_ItemsLocLabelPortrait;
+            ItemsInvLabelPortrait.Text = loca.MAUI_UI_ItemsInvLabelPortrait;
+            RowMargin.Text = loca.MAUI_Listrow_Height;
+            STTMode.Text = loca.MAUI_STT;
             ParagraphMode.Text = loca.MAUI_Paragraphmode;
 
-        SetButtonStates();
-        _menuExtension!.SetLanguage();
+            SetButtonStates();
+            _menuExtension!.SetLanguage();
+        }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("SetLanguage: " + ex.Message, Phoney_MAUI.Model.IGlobalData.protMode.crisp);
+        }
     }
 
     private void SetButtonStates()
@@ -647,31 +662,39 @@ public partial class SettingsPage : ContentPage, IMenuExtension
 
     protected override async void OnNavigatedTo(NavigatedToEventArgs args)
     {
-        // Diese Menüpunkte werden für "Das Versteck des Meisters" zunächst nicht angeboten
-        MGMInner.RowDefinitions[0].Height = new GridLength(0);
-        MGMInner.RowDefinitions[1].Height = new GridLength(0);
-        MGMInner.RowDefinitions[2].Height = new GridLength(0);
-        MGMInner.RowDefinitions[3].Height = new GridLength(0);
+        try
+        {
+            // Diese Menüpunkte werden für "Das Versteck des Meisters" zunächst nicht angeboten
+            MGMInner.RowDefinitions[0].Height = new GridLength(0);
+            MGMInner.RowDefinitions[1].Height = new GridLength(0);
+            MGMInner.RowDefinitions[2].Height = new GridLength(0);
+            MGMInner.RowDefinitions[3].Height = new GridLength(0);
 
-        IllustrationLabel_old.IsVisible = false;
-        IllustrationGrid_old.IsVisible = false;
+            IllustrationLabel_old.IsVisible = false;
+            IllustrationGrid_old.IsVisible = false;
 
-        LanguageLabel.IsVisible = false;
-        LanguageGrid.IsVisible = false;
+            LanguageLabel.IsVisible = false;
+            LanguageGrid.IsVisible = false;
 
-        _viewModelGeneral.SetCallbackChangeOrientation((IGlobalData._callbackChangeOrientation)ChangeOrientation);
-        _viewModelGeneral!.SetCallbackResize((IGlobalData._callbackResize)DoResize);
-        base.OnNavigatedTo(args);
+            _viewModelGeneral.SetCallbackChangeOrientation((IGlobalData._callbackChangeOrientation)ChangeOrientation);
+            _viewModelGeneral!.SetCallbackResize((IGlobalData._callbackResize)DoResize);
+            base.OnNavigatedTo(args);
 
-        await _viewModelMain.Initialize();
+            await _viewModelMain.Initialize();
 
-        _viewModelGeneral.InitResize(this.Width, this.Height);
+            _viewModelGeneral.InitResize(this.Width, this.Height);
 
-        _menuExtension!.ResetLayout();
+            _menuExtension!.ResetLayout();
 
-        SetLanguage();
-        _menuExtension!.QuitMethod = PressEndLocal;
-        IllustrationButton_Small.Clicked += OnClickIlluSmall;
+            SetLanguage();
+            _menuExtension!.QuitMethod = PressEndLocal;
+            IllustrationButton_Small.Clicked += OnClickIlluSmall;
+        }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("OnNavigatedTo: " + ex.Message, Phoney_MAUI.Model.IGlobalData.protMode.crisp);
+        }
+
     }
 
     protected override void OnNavigatingFrom(NavigatingFromEventArgs args)
@@ -1076,165 +1099,181 @@ public partial class SettingsPage : ContentPage, IMenuExtension
     }
     void CompactPortraitColumns()
     {
-        bool again = true;
-
-        do
+        try
         {
-            again = false;
-            if (FirstColumnUsed() == false && (SecondColumnUsed() == true || ThirdColumnUsed() == true))
-            {
-                SecondToFirst();
-                ThirdToSecond();
-                again = true;
-            }
-        } while (again == true );
+            bool again = true;
 
-        do
-        {
-            again = false;
-            if (SecondColumnUsed() == false && (ThirdColumnUsed() == true))
+            do
             {
-                ThirdToSecond();
-                again = true;
-            }
-        } while (again == true);
+                again = false;
+                if (FirstColumnUsed() == false && (SecondColumnUsed() == true || ThirdColumnUsed() == true))
+                {
+                    SecondToFirst();
+                    ThirdToSecond();
+                    again = true;
+                }
+            } while (again == true);
+
+            do
+            {
+                again = false;
+                if (SecondColumnUsed() == false && (ThirdColumnUsed() == true))
+                {
+                    ThirdToSecond();
+                    again = true;
+                }
+            } while (again == true);
+        }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("CompactPortraitColumns: " + ex.Message, Phoney_MAUI.Model.IGlobalData.protMode.crisp);
+        }
+
     }
 
 
     public void SetPTOrder(int ID, int Ix)
     {
-        /*
         try
         {
+            /*
+            try
+            {
 
-            GD.LayoutDescription.PTOrder.Remove(ID);
-        }
-        catch // (Exception e)
-        {
-            // int a = 5;
-        }
-
-        try
-        {
-            if (Ix != -1)
-                GD.LayoutDescription.PTOrder.Insert(Ix, ID);
-        }
-        catch // (Exception e)
-        {
-            // int a = 5;
-        }
-        */
-
-  
-        // Order
-        if( ID == 1)
-        {
-            if( Ix == 0)
-            {
-                GD.LayoutDescription.OrderListPosPT = ILayoutDescription.selectedPositionPT.first;
+                GD.LayoutDescription.PTOrder.Remove(ID);
             }
-            else if (Ix == 1)
+            catch // (Exception e)
             {
-                GD.LayoutDescription.OrderListPosPT = ILayoutDescription.selectedPositionPT.second;
-            }
-            else if (Ix == 2)
-            {
-                GD.LayoutDescription.OrderListPosPT = ILayoutDescription.selectedPositionPT.third;
-            }
-            else
-            {
-                GD.LayoutDescription.OrderListPosPT = ILayoutDescription.selectedPositionPT.off;
-            }
-            
-        }
-        if (ID == 2)
-        {
-            if (Ix == 0)
-            {
-                GD.LayoutDescription.ItemsLocListPosPT= ILayoutDescription.selectedPositionPT.first;
-            }
-            else if (Ix == 1)
-            {
-                GD.LayoutDescription.ItemsLocListPosPT = ILayoutDescription.selectedPositionPT.second;
-            }
-            else if (Ix == 2)
-            {
-                GD.LayoutDescription.ItemsLocListPosPT = ILayoutDescription.selectedPositionPT.third;
-            }
-            else             
-            {
-                GD.LayoutDescription.ItemsLocListPosPT = ILayoutDescription.selectedPositionPT.off;
-            }
-        }
-        if (ID == 3)
-        {
-            if (Ix == 0)
-            {
-                GD.LayoutDescription.ItemsInvListPosPT = ILayoutDescription.selectedPositionPT.first;
-            }
-            else if (Ix == 1)
-            {
-                GD.LayoutDescription.ItemsInvListPosPT = ILayoutDescription.selectedPositionPT.second;
-            }
-            else if (Ix == 2)
-            {
-                GD.LayoutDescription.ItemsInvListPosPT = ILayoutDescription.selectedPositionPT.third;
-            }
-            else            
-            {
-                GD.LayoutDescription.ItemsInvListPosPT = ILayoutDescription.selectedPositionPT.off;
+                // int a = 5;
             }
 
+            try
+            {
+                if (Ix != -1)
+                    GD.LayoutDescription.PTOrder.Insert(Ix, ID);
+            }
+            catch // (Exception e)
+            {
+                // int a = 5;
+            }
+            */
+
+
+            // Order
+            if (ID == 1)
+            {
+                if (Ix == 0)
+                {
+                    GD.LayoutDescription.OrderListPosPT = ILayoutDescription.selectedPositionPT.first;
+                }
+                else if (Ix == 1)
+                {
+                    GD.LayoutDescription.OrderListPosPT = ILayoutDescription.selectedPositionPT.second;
+                }
+                else if (Ix == 2)
+                {
+                    GD.LayoutDescription.OrderListPosPT = ILayoutDescription.selectedPositionPT.third;
+                }
+                else
+                {
+                    GD.LayoutDescription.OrderListPosPT = ILayoutDescription.selectedPositionPT.off;
+                }
+
+            }
+            if (ID == 2)
+            {
+                if (Ix == 0)
+                {
+                    GD.LayoutDescription.ItemsLocListPosPT = ILayoutDescription.selectedPositionPT.first;
+                }
+                else if (Ix == 1)
+                {
+                    GD.LayoutDescription.ItemsLocListPosPT = ILayoutDescription.selectedPositionPT.second;
+                }
+                else if (Ix == 2)
+                {
+                    GD.LayoutDescription.ItemsLocListPosPT = ILayoutDescription.selectedPositionPT.third;
+                }
+                else
+                {
+                    GD.LayoutDescription.ItemsLocListPosPT = ILayoutDescription.selectedPositionPT.off;
+                }
+            }
+            if (ID == 3)
+            {
+                if (Ix == 0)
+                {
+                    GD.LayoutDescription.ItemsInvListPosPT = ILayoutDescription.selectedPositionPT.first;
+                }
+                else if (Ix == 1)
+                {
+                    GD.LayoutDescription.ItemsInvListPosPT = ILayoutDescription.selectedPositionPT.second;
+                }
+                else if (Ix == 2)
+                {
+                    GD.LayoutDescription.ItemsInvListPosPT = ILayoutDescription.selectedPositionPT.third;
+                }
+                else
+                {
+                    GD.LayoutDescription.ItemsInvListPosPT = ILayoutDescription.selectedPositionPT.off;
+                }
+
+            }
+
+            CompactPortraitColumns();
+            /*
+            if (GD.LayoutDescription.PTOrder.Count > 0)
+            {
+                if (GD.LayoutDescription.PTOrder[0] == 1)
+                {
+                    GD.LayoutDescription.OrderListPosPT = ILayoutDescription.selectedPositionPT.first;
+                }
+                else if (GD.LayoutDescription.PTOrder[0] == 2)
+                {
+                    GD.LayoutDescription.ItemsLocListPosPT = ILayoutDescription.selectedPositionPT.first;
+                }
+                else if (GD.LayoutDescription.PTOrder[0] == 3)
+                {
+                    GD.LayoutDescription.ItemsInvListPosPT = ILayoutDescription.selectedPositionPT.first;
+                }
+            }
+            if (GD.LayoutDescription.PTOrder.Count > 1)
+            {
+                if (GD.LayoutDescription.PTOrder[1] == 1)
+                {
+                    GD.LayoutDescription.OrderListPosPT = ILayoutDescription.selectedPositionPT.second;
+                }
+                else if (GD.LayoutDescription.PTOrder[1] == 2)
+                {
+                    GD.LayoutDescription.ItemsLocListPosPT = ILayoutDescription.selectedPositionPT.second;
+                }
+                else if (GD.LayoutDescription.PTOrder[1] == 3)
+                {
+                    GD.LayoutDescription.ItemsInvListPosPT = ILayoutDescription.selectedPositionPT.second;
+                }
+            }
+            if (GD.LayoutDescription.PTOrder.Count > 2)
+            {
+                if (GD.LayoutDescription.PTOrder[2] == 1)
+                {
+                    GD.LayoutDescription.OrderListPosPT = ILayoutDescription.selectedPositionPT.third;
+                }
+                else if (GD.LayoutDescription.PTOrder[2] == 2)
+                {
+                    GD.LayoutDescription.ItemsLocListPosPT = ILayoutDescription.selectedPositionPT.third;
+                }
+                else if (GD.LayoutDescription.PTOrder[2] == 3)
+                {
+                    GD.LayoutDescription.ItemsInvListPosPT = ILayoutDescription.selectedPositionPT.third;
+                }
+            }
+            */
+        }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("SetPTOrder: " + ex.Message, Phoney_MAUI.Model.IGlobalData.protMode.crisp);
         }
 
-        CompactPortraitColumns();
-        /*
-        if (GD.LayoutDescription.PTOrder.Count > 0)
-        {
-            if (GD.LayoutDescription.PTOrder[0] == 1)
-            {
-                GD.LayoutDescription.OrderListPosPT = ILayoutDescription.selectedPositionPT.first;
-            }
-            else if (GD.LayoutDescription.PTOrder[0] == 2)
-            {
-                GD.LayoutDescription.ItemsLocListPosPT = ILayoutDescription.selectedPositionPT.first;
-            }
-            else if (GD.LayoutDescription.PTOrder[0] == 3)
-            {
-                GD.LayoutDescription.ItemsInvListPosPT = ILayoutDescription.selectedPositionPT.first;
-            }
-        }
-        if (GD.LayoutDescription.PTOrder.Count > 1)
-        {
-            if (GD.LayoutDescription.PTOrder[1] == 1)
-            {
-                GD.LayoutDescription.OrderListPosPT = ILayoutDescription.selectedPositionPT.second;
-            }
-            else if (GD.LayoutDescription.PTOrder[1] == 2)
-            {
-                GD.LayoutDescription.ItemsLocListPosPT = ILayoutDescription.selectedPositionPT.second;
-            }
-            else if (GD.LayoutDescription.PTOrder[1] == 3)
-            {
-                GD.LayoutDescription.ItemsInvListPosPT = ILayoutDescription.selectedPositionPT.second;
-            }
-        }
-        if (GD.LayoutDescription.PTOrder.Count > 2)
-        {
-            if (GD.LayoutDescription.PTOrder[2] == 1)
-            {
-                GD.LayoutDescription.OrderListPosPT = ILayoutDescription.selectedPositionPT.third;
-            }
-            else if (GD.LayoutDescription.PTOrder[2] == 2)
-            {
-                GD.LayoutDescription.ItemsLocListPosPT = ILayoutDescription.selectedPositionPT.third;
-            }
-            else if (GD.LayoutDescription.PTOrder[2] == 3)
-            {
-                GD.LayoutDescription.ItemsInvListPosPT = ILayoutDescription.selectedPositionPT.third;
-            }
-        }
-        */
     }
     public AbsoluteLayout GetAbsoluteLayout()
     {
@@ -1242,170 +1281,200 @@ public partial class SettingsPage : ContentPage, IMenuExtension
     }
     public void DebugMenuOpen()
     {
-        Rect pd = new();
-        pd.X = (GlobalSpecs.CurrentGlobalSpecs!.GetScreenWidth() / 2) - 200;
-        pd.Y = (GlobalSpecs.CurrentGlobalSpecs!.GetScreenHeight() / 2) - 100;
-        pd.Width = 400;
-        pd.Height = 200;
-
-        pd = _menuExtension!.CalcBounds(pd);
-
-
-        string Text = loca.MAUI_UI_DEBUG_ON_INFO;
-
-        _menuExtension!.OpenShowMenu(true, pd, false, Text);
-
-
-        if (_menuExtension!.MEMenus[_menuExtension!.MEMenus.Count - 1].InnerView != null)
+        try
         {
-            SetDebugMenu(_menuExtension!.MEMenus[_menuExtension!.MEMenus.Count - 1].InnerView!);
+            Rect pd = new();
+            pd.X = (GlobalSpecs.CurrentGlobalSpecs!.GetScreenWidth() / 2) - 200;
+            pd.Y = (GlobalSpecs.CurrentGlobalSpecs!.GetScreenHeight() / 2) - 100;
+            pd.Width = 400;
+            pd.Height = 200;
+
+            pd = _menuExtension!.CalcBounds(pd);
+
+
+            string Text = loca.MAUI_UI_DEBUG_ON_INFO;
+
+            _menuExtension!.OpenShowMenu(true, pd, false, Text);
+
+
+            if (_menuExtension!.MEMenus[_menuExtension!.MEMenus.Count - 1].InnerView != null)
+            {
+                SetDebugMenu(_menuExtension!.MEMenus[_menuExtension!.MEMenus.Count - 1].InnerView!);
+            }
+            // BlueBox.IsVisible = true;
+            // AbsoluteLayout.SetLayoutBounds(BlueBox, new Rect(p3.X, p3.Y, 400, 200));
         }
-        // BlueBox.IsVisible = true;
-        // AbsoluteLayout.SetLayoutBounds(BlueBox, new Rect(p3.X, p3.Y, 400, 200));
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("DebugMenuOpen: " + ex.Message, Phoney_MAUI.Model.IGlobalData.protMode.crisp);
+        }
+
     }
     public void PressEndLocal(object? sender, EventArgs ea)
     {
-        // bool doCont = true;
-        Button? b;
-        Point p3 = new();
-
-        if (sender!.GetType() == typeof(Button))
+        try
         {
-            b = (sender as Button);
-            p3 = ScreenCoords.GetScreenCoords(b);
+            // bool doCont = true;
+            Button? b;
+            Point p3 = new();
+
+            if (sender!.GetType() == typeof(Button))
+            {
+                b = (sender as Button);
+                p3 = ScreenCoords.GetScreenCoords(b);
+            }
+            else
+            {
+                b = new();
+                // int a = 5;
+            }
+
+            p3.Y += b!.Height + 3;
+
+            Rect pd = new();
+            pd.X = (GlobalSpecs.CurrentGlobalSpecs!.GetScreenWidth() / 2) - 200;
+            pd.Y = (GlobalSpecs.CurrentGlobalSpecs!.GetScreenHeight() / 2) - 100;
+            pd.Width = 400;
+            pd.Height = 200;
+
+
+            pd = _menuExtension!.CalcBounds(pd);
+
+            int val;
+
+            if (ea.GetType() == typeof(TreeViewEventArgs))
+
+                val = (int)((ea as TreeViewEventArgs)!.UserDefinedObject)!;
+            else if (ea.GetType() == typeof(OrderTableEventArgs))
+                val = (int)((ea as OrderTableEventArgs)!.UserDefinedObject)!;
+            else
+                val = 1;
+
+            string Text = loca.OrderFeedback_Quit_Person_Self_13991a;
+
+            _menuExtension!.OpenShowMenu(true, pd, false, Text);
+
+
+            if (_menuExtension!.MEMenus[_menuExtension!.MEMenus.Count - 1].InnerView != null)
+            {
+                SetQuitMenu(_menuExtension!.MEMenus[_menuExtension!.MEMenus.Count - 1].InnerView!);
+            }
+            // BlueBox.IsVisible = true;
+            // AbsoluteLayout.SetLayoutBounds(BlueBox, new Rect(p3.X, p3.Y, 400, 200));
         }
-        else
+        catch (Exception ex)
         {
-            b = new();
-            // int a = 5;
+            GlobalData.AddLog("PressEndLocal: " + ex.Message, Phoney_MAUI.Model.IGlobalData.protMode.crisp);
         }
 
-        p3.Y += b!.Height + 3;
-
-        Rect pd = new();
-        pd.X = ( GlobalSpecs.CurrentGlobalSpecs!.GetScreenWidth() / 2 ) - 200;
-        pd.Y = ( GlobalSpecs.CurrentGlobalSpecs!.GetScreenHeight() / 2) - 100 ;
-        pd.Width = 400;
-        pd.Height = 200;
-
-
-        pd = _menuExtension!.CalcBounds(pd);
-
-        int val;
-
-        if (ea.GetType() == typeof(TreeViewEventArgs))
-
-            val = (int)((ea as TreeViewEventArgs)!.UserDefinedObject)!;
-        else if (ea.GetType() == typeof(OrderTableEventArgs))
-            val = (int)((ea as OrderTableEventArgs)!.UserDefinedObject)!;
-        else
-            val = 1;
-
-        string Text = loca.OrderFeedback_Quit_Person_Self_13991a;
-
-        _menuExtension!.OpenShowMenu(true, pd, false, Text);
-
-
-        if (_menuExtension!.MEMenus[_menuExtension!.MEMenus.Count - 1].InnerView != null)
-        {
-            SetQuitMenu(_menuExtension!.MEMenus[_menuExtension!.MEMenus.Count - 1].InnerView!);
-        }
-        // BlueBox.IsVisible = true;
-        // AbsoluteLayout.SetLayoutBounds(BlueBox, new Rect(p3.X, p3.Y, 400, 200));
     }
     public void SetQuitMenu(Grid contextGrid)
     {
-        contextGrid.Children.Clear();
+        try
+        {
+            contextGrid.Children.Clear();
 
-        RowDefinitionCollection rdc = new();
-        RowDefinition rd1 = new();
-        rd1.Height = new GridLength(1, GridUnitType.Star);
+            RowDefinitionCollection rdc = new();
+            RowDefinition rd1 = new();
+            rd1.Height = new GridLength(1, GridUnitType.Star);
 
-        RowDefinition rd2 = new();
-        rd2.Height = new GridLength(40);
-        rdc.Add(rd1);
-        rdc.Add(rd2);
+            RowDefinition rd2 = new();
+            rd2.Height = new GridLength(40);
+            rdc.Add(rd1);
+            rdc.Add(rd2);
 
-        Grid TextGrid = new();
-        contextGrid.Add(TextGrid);
+            Grid TextGrid = new();
+            contextGrid.Add(TextGrid);
 
-        List<string> LabelStyle = new();
-        LabelStyle.Add("Label_Normal");
+            List<string> LabelStyle = new();
+            LabelStyle.Add("Label_Normal");
 
-        Label l1 = new();
-        l1.Text = loca.OrderFeedback_Quit_Person_Self_13991; // "Wirklich löschen?";
-        l1.VerticalOptions = LayoutOptions.Center;
-        l1.HorizontalOptions = LayoutOptions.Center;
-        l1.HorizontalTextAlignment = TextAlignment.Center;
-        TextGrid.Add(l1);
-        l1.StyleClass = LabelStyle;
+            Label l1 = new();
+            l1.Text = loca.OrderFeedback_Quit_Person_Self_13991; // "Wirklich löschen?";
+            l1.VerticalOptions = LayoutOptions.Center;
+            l1.HorizontalOptions = LayoutOptions.Center;
+            l1.HorizontalTextAlignment = TextAlignment.Center;
+            TextGrid.Add(l1);
+            l1.StyleClass = LabelStyle;
 
-        contextGrid.RowDefinitions = rdc;
+            contextGrid.RowDefinitions = rdc;
 
-        Grid ButtonGrid = new();
-        contextGrid.SetRow(ButtonGrid, 1);
-        contextGrid.Add(ButtonGrid);
-        ColumnDefinitionCollection cdc = new();
-        ColumnDefinition cd1 = new();
-        cd1.Width = new GridLength(1, GridUnitType.Star);
-        ColumnDefinition cd2 = new();
-        cd2.Width = new GridLength(4, GridUnitType.Star);
-        cdc.Add(cd1);
-        cdc.Add(cd2);
-        cdc.Add(cd1);
-        cdc.Add(cd2);
-        cdc.Add(cd1);
-        ButtonGrid.ColumnDefinitions = cdc;
+            Grid ButtonGrid = new();
+            contextGrid.SetRow(ButtonGrid, 1);
+            contextGrid.Add(ButtonGrid);
+            ColumnDefinitionCollection cdc = new();
+            ColumnDefinition cd1 = new();
+            cd1.Width = new GridLength(1, GridUnitType.Star);
+            ColumnDefinition cd2 = new();
+            cd2.Width = new GridLength(4, GridUnitType.Star);
+            cdc.Add(cd1);
+            cdc.Add(cd2);
+            cdc.Add(cd1);
+            cdc.Add(cd2);
+            cdc.Add(cd1);
+            ButtonGrid.ColumnDefinitions = cdc;
 
 
-        CreateButtonXY(ButtonGrid, loca.OrderFeedback_Quit_Person_Self_13992, 1, 1, DoQuit);
-        CreateButtonXY(ButtonGrid, loca.OrderFeedback_Quit_Person_Self_13993, 3, 1, DoCancel);
+            CreateButtonXY(ButtonGrid, loca.OrderFeedback_Quit_Person_Self_13992, 1, 1, DoQuit);
+            CreateButtonXY(ButtonGrid, loca.OrderFeedback_Quit_Person_Self_13993, 3, 1, DoCancel);
+        }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("SetQuitMenu: " + ex.Message, Phoney_MAUI.Model.IGlobalData.protMode.crisp);
+        }
 
     }
     public void SetDebugMenu(Grid contextGrid)
     {
-        contextGrid.Children.Clear();
+        try
+        {
+            contextGrid.Children.Clear();
 
-        RowDefinitionCollection rdc = new();
-        RowDefinition rd1 = new();
-        rd1.Height = new GridLength(1, GridUnitType.Star);
+            RowDefinitionCollection rdc = new();
+            RowDefinition rd1 = new();
+            rd1.Height = new GridLength(1, GridUnitType.Star);
 
-        RowDefinition rd2 = new();
-        rd2.Height = new GridLength(40);
-        rdc.Add(rd1);
-        rdc.Add(rd2);
+            RowDefinition rd2 = new();
+            rd2.Height = new GridLength(40);
+            rdc.Add(rd1);
+            rdc.Add(rd2);
 
-        Grid TextGrid = new();
-        contextGrid.Add(TextGrid);
+            Grid TextGrid = new();
+            contextGrid.Add(TextGrid);
 
-        List<string> LabelStyle = new();
-        LabelStyle.Add("Label_Normal");
+            List<string> LabelStyle = new();
+            LabelStyle.Add("Label_Normal");
 
-        Label l1 = new();
-        l1.Text = loca.MAUI_UI_DEBUG_ON; // "Wirklich löschen?";
-        l1.VerticalOptions = LayoutOptions.Center;
-        l1.HorizontalOptions = LayoutOptions.Center;
-        l1.HorizontalTextAlignment = TextAlignment.Center;
-        TextGrid.Add(l1);
-        l1.StyleClass = LabelStyle;
+            Label l1 = new();
+            l1.Text = loca.MAUI_UI_DEBUG_ON; // "Wirklich löschen?";
+            l1.VerticalOptions = LayoutOptions.Center;
+            l1.HorizontalOptions = LayoutOptions.Center;
+            l1.HorizontalTextAlignment = TextAlignment.Center;
+            TextGrid.Add(l1);
+            l1.StyleClass = LabelStyle;
 
-        contextGrid.RowDefinitions = rdc;
+            contextGrid.RowDefinitions = rdc;
 
-        Grid ButtonGrid = new();
-        contextGrid.SetRow(ButtonGrid, 1);
-        contextGrid.Add(ButtonGrid);
-        ColumnDefinitionCollection cdc = new();
-        ColumnDefinition cd1 = new();
-        cd1.Width = new GridLength(1, GridUnitType.Star);
-        ColumnDefinition cd2 = new();
-        cd2.Width = new GridLength(4, GridUnitType.Star);
-        cdc.Add(cd1);
-        cdc.Add(cd2);
-        cdc.Add(cd1);
-       ButtonGrid.ColumnDefinitions = cdc;
+            Grid ButtonGrid = new();
+            contextGrid.SetRow(ButtonGrid, 1);
+            contextGrid.Add(ButtonGrid);
+            ColumnDefinitionCollection cdc = new();
+            ColumnDefinition cd1 = new();
+            cd1.Width = new GridLength(1, GridUnitType.Star);
+            ColumnDefinition cd2 = new();
+            cd2.Width = new GridLength(4, GridUnitType.Star);
+            cdc.Add(cd1);
+            cdc.Add(cd2);
+            cdc.Add(cd1);
+            ButtonGrid.ColumnDefinitions = cdc;
 
 
-        CreateButtonXY(ButtonGrid, loca.MAUI_UI_CME_Ok, 1, 1, DoCancel);
+            CreateButtonXY(ButtonGrid, loca.MAUI_UI_CME_Ok, 1, 1, DoCancel);
+        }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("SetDebugMenu: " + ex.Message, Phoney_MAUI.Model.IGlobalData.protMode.crisp);
+        }
 
     }
     public void CreateButtonXY(Grid g, string text, int xoff, int yoff, EventHandler ev)

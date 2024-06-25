@@ -39,29 +39,39 @@ public class BridgedWebView : View, IBridgedWebView
     */
       public async Task<string?> EvaluateJavaScriptAsync(string script)
     {
-        string? result = null;
-        await MainThread.InvokeOnMainThreadAsync( async () =>
+        try
         {
-            var handler = this.Handler;
-            try
+            string? result = null;
+            await MainThread.InvokeOnMainThreadAsync(async () =>
             {
-                while (handler == null)
+                var handler = this.Handler;
+                try
                 {
-                    await Task.Delay(100);
-                    handler = this.Handler;
+                    while (handler == null)
+                    {
+                        await Task.Delay(100);
+                        handler = this.Handler;
+                    }
+                    result = await (handler as BridgedWebViewHandler)!.GetBridge()!.EvaluateJavascriptAsync(script)!;
+
+                    // return result;
                 }
-                result = await (handler as BridgedWebViewHandler)!.GetBridge()!.EvaluateJavascriptAsync(script)!;
+                catch (Exception ex)
+                {
+                    if (_addProtocol != null)
+                        _addProtocol("Execution JS failed: " + ex.Message.ToString(), protMode.crisp);
 
-                // return result;
-            }
-            catch (Exception ex)
-            {
-                if( _addProtocol != null )
-                     _addProtocol("Execution JS failed: " + ex.Message.ToString(), protMode.crisp);
+                }
+            });
+            return result;
+        }
+        catch (Exception ex)
+        {
+            if (_addProtocol != null)
+                _addProtocol("Exception webView_NavigationCompleted: " + ex.Message.ToString(), protMode.crisp);
+            return null;
+        }
 
-            }
-        });
-        return result;
     }
 
     public void NavigateToString(string htmlPage)

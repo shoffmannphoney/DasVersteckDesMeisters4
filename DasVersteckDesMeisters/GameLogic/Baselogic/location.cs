@@ -125,102 +125,127 @@ namespace GameCore
             LocExitBlocker = new int[11];
         }
 
-        public static location locationLoca(int Index, string Name, string Description, int N, int NE, int E, int SE, int S, int SW, int W, int NW, int U, int D)
+        public static location? locationLoca(int Index, string Name, string Description, int N, int NE, int E, int SE, int S, int SW, int W, int NW, int U, int D)
         {
-            location l = new();
+            try
+            {
+                location l = new();
 
-            l.LocaLocName = Name;
-            l.ID = Index;
-            l.locadd = new List<locationAdd>();
+                l.LocaLocName = Name;
+                l.ID = Index;
+                l.locadd = new List<locationAdd>();
 
-            l.LocDescRaw = Description;
-            l.LocDescription = Helper.Insert(loca.GetLoca( l.LocDescRaw) );
+                l.LocDescRaw = Description;
+                l.LocDescription = Helper.Insert(loca.GetLoca(l.LocDescRaw));
 
-            l. LocExit = new int[11];
-            l.LocPicture = null;
+                l.LocExit = new int[11];
+                l.LocPicture = null;
 
-            l.LocExit[Co.DIR_N] = N;
-            l.LocExit[Co.DIR_NE] = NE;
-            l.LocExit[Co.DIR_E] = E;
-            l.LocExit[Co.DIR_SE] = SE;
-            l.LocExit[Co.DIR_S] = S;
-            l.LocExit[Co.DIR_SW] = SW;
-            l.LocExit[Co.DIR_W] = W;
-            l.LocExit[Co.DIR_NW] = NW;
-            l.LocExit[Co.DIR_U] = U;
-            l.LocExit[Co.DIR_D] = D;
+                l.LocExit[Co.DIR_N] = N;
+                l.LocExit[Co.DIR_NE] = NE;
+                l.LocExit[Co.DIR_E] = E;
+                l.LocExit[Co.DIR_SE] = SE;
+                l.LocExit[Co.DIR_S] = S;
+                l.LocExit[Co.DIR_SW] = SW;
+                l.LocExit[Co.DIR_W] = W;
+                l.LocExit[Co.DIR_NW] = NW;
+                l.LocExit[Co.DIR_U] = U;
+                l.LocExit[Co.DIR_D] = D;
 
-            l.LocExitBlocker = new int[11];
+                l.LocExitBlocker = new int[11];
 
-            for (int i = 0; i <= 10; i++)
-                l.LocExitBlocker[i] = 0;
+                for (int i = 0; i <= 10; i++)
+                    l.LocExitBlocker[i] = 0;
 
-            return (l);
+                return (l);
+            }
+            catch (Exception e)
+            {
+                GlobalData.AddLog("location.locationLoca: " + e.Message.ToString(), IGlobalData.protMode.crisp);
+                return null;
+            }
+
         }
-        public static location locationLocaLoca(int Index, string NameHandle, string Name, string DescriptionHandle, string Description, int N, int NE, int E, int SE, int S, int SW, int W, int NW, int U, int D)
+        public static location? locationLocaLoca(int Index, string NameHandle, string Name, string DescriptionHandle, string Description, int N, int NE, int E, int SE, int S, int SW, int W, int NW, int U, int D)
         {
-            location l = new();
+            try
+            {
+                location l = new();
 
-            l.LocaLocNameHandle = NameHandle;
-            l.LocaLocName = Name;
+                l.LocaLocNameHandle = NameHandle;
+                l.LocaLocName = Name;
 
-            l.ID = Index;
-            l.locadd = new List<locationAdd>();
+                l.ID = Index;
+                l.locadd = new List<locationAdd>();
 
-            l._locDescRawHandle = DescriptionHandle;
-            l.LocDescRaw = Description;
-            l.LocDescription = Helper.Insert(l._locDescRawHandle);
+                l._locDescRawHandle = DescriptionHandle;
+                l.LocDescRaw = Description;
+                l.LocDescription = Helper.Insert(l._locDescRawHandle);
 
-            l.LocExit = new int[11];
-            l.LocPicture = null;
+                l.LocExit = new int[11];
+                l.LocPicture = null;
 
-            l.LocExit[Co.DIR_N] = N;
-            l.LocExit[Co.DIR_NE] = NE;
-            l.LocExit[Co.DIR_E] = E;
-            l.LocExit[Co.DIR_SE] = SE;
-            l.LocExit[Co.DIR_S] = S;
-            l.LocExit[Co.DIR_SW] = SW;
-            l.LocExit[Co.DIR_W] = W;
-            l.LocExit[Co.DIR_NW] = NW;
-            l.LocExit[Co.DIR_U] = U;
-            l.LocExit[Co.DIR_D] = D;
+                l.LocExit[Co.DIR_N] = N;
+                l.LocExit[Co.DIR_NE] = NE;
+                l.LocExit[Co.DIR_E] = E;
+                l.LocExit[Co.DIR_SE] = SE;
+                l.LocExit[Co.DIR_S] = S;
+                l.LocExit[Co.DIR_SW] = SW;
+                l.LocExit[Co.DIR_W] = W;
+                l.LocExit[Co.DIR_NW] = NW;
+                l.LocExit[Co.DIR_U] = U;
+                l.LocExit[Co.DIR_D] = D;
 
-            l.LocExitBlocker = new int[11];
+                l.LocExitBlocker = new int[11];
 
-            for (int i = 0; i <= 10; i++)
-                l.LocExitBlocker[i] = 0;
+                for (int i = 0; i <= 10; i++)
+                    l.LocExitBlocker[i] = 0;
 
-            return (l);
+                return (l);
+            }
+            catch (Exception e)
+            {
+                GlobalData.AddLog("location.locationLocaLoca: " + e.Message.ToString(), IGlobalData.protMode.crisp);
+                return null;
+            }
+
         }
 
         public location(int Index, string Name, string Description, int N, int NE, int E, int SE, int S, int SW, int W, int NW, int U, int D)
         {
-            LocName = Name;
-            ID = Index;
-            locadd = new List<locationAdd>();
+            try
+            {
+                LocName = Name;
+                ID = Index;
+                locadd = new List<locationAdd>();
 
-            LocDescription = Helper.Insert(Description);
-            // LocDescription = Description;
+                LocDescription = Helper.Insert(Description);
+                // LocDescription = Description;
 
-            LocExit = new int[11];
-            LocPicture = null;
+                LocExit = new int[11];
+                LocPicture = null;
 
-            LocExit[Co.DIR_N] = N;
-            LocExit[Co.DIR_NE] = NE;
-            LocExit[Co.DIR_E] = E;
-            LocExit[Co.DIR_SE] = SE;
-            LocExit[Co.DIR_S] = S;
-            LocExit[Co.DIR_SW] = SW;
-            LocExit[Co.DIR_W] = W;
-            LocExit[Co.DIR_NW] = NW;
-            LocExit[Co.DIR_U] = U;
-            LocExit[Co.DIR_D] = D;
+                LocExit[Co.DIR_N] = N;
+                LocExit[Co.DIR_NE] = NE;
+                LocExit[Co.DIR_E] = E;
+                LocExit[Co.DIR_SE] = SE;
+                LocExit[Co.DIR_S] = S;
+                LocExit[Co.DIR_SW] = SW;
+                LocExit[Co.DIR_W] = W;
+                LocExit[Co.DIR_NW] = NW;
+                LocExit[Co.DIR_U] = U;
+                LocExit[Co.DIR_D] = D;
 
-            LocExitBlocker = new int[11];
+                LocExitBlocker = new int[11];
 
-            for (int i = 0; i <= 10; i++)
-                LocExitBlocker[i] = 0;
+                for (int i = 0; i <= 10; i++)
+                    LocExitBlocker[i] = 0;
 
+            }
+            catch (Exception e)
+            {
+                GlobalData.AddLog("location.location: " + e.Message.ToString(), IGlobalData.protMode.crisp);
+            }
 
         }
 
@@ -436,69 +461,86 @@ namespace GameCore
 
         public bool RestoreLocationAdds( location l)
         {
-            if( l.locadd != null )
+            try
             {
-                List<locationAdd>? l2 = new List<locationAdd>();
-
-                foreach ( locationAdd la in l.locadd)
+                if (l.locadd != null)
                 {
-                    l2.Add(la);
-                    if( la.Loca != null )
-                        l2[l2.Count - 1].Text = Helper.Insert(la.Loca);
-                }
+                    List<locationAdd>? l2 = new List<locationAdd>();
 
-                l.locadd = l2;
-                l2 = null;
+                    foreach (locationAdd la in l.locadd)
+                    {
+                        l2.Add(la);
+                        if (la.Loca != null)
+                            l2[l2.Count - 1].Text = Helper.Insert(la.Loca);
+                    }
+
+                    l.locadd = l2;
+                    l2 = null;
+                }
+                return true;
             }
-            return true;
+            catch (Exception e)
+            {
+                GlobalData.AddLog("location.RestoreLocationAdds: " + e.Message.ToString(), IGlobalData.protMode.crisp);
+                return false;
+            }
+
         }
 
         public bool RestoreLocations()
         {
-
-            IDictionary<int, location>? TList2 = new Dictionary<int, location>();
-
-            foreach (var ele in List!.Values)
+            try
             {
-                location ele2 = (location)ele;
+                IDictionary<int, location>? TList2 = new Dictionary<int, location>();
 
-                TypeInfo x = typeof(loca).GetTypeInfo();
-                if (ele.LocaLocName != null)
+                foreach (var ele in List!.Values)
                 {
-                    PropertyInfo? pi = x.GetProperty(ele.LocaLocName);
+                    location ele2 = (location)ele;
 
-                    string? s = (string?)pi!.GetValue(null);
+                    TypeInfo x = typeof(loca).GetTypeInfo();
+                    if (ele.LocaLocName != null)
+                    {
+                        PropertyInfo? pi = x.GetProperty(ele.LocaLocName);
 
-                    ele2.LocaLocNameHandle = s;
+                        string? s = (string?)pi!.GetValue(null);
+
+                        ele2.LocaLocNameHandle = s;
+                    }
+                    if (ele2.LocaLocName != null)
+                        ele2.LocName = Helper.Insert(loca.GetLoca(ele2.LocaLocName));
+
+                    if (ele2.LocDescRaw != null)
+                        ele2.LocDescription = Helper.Insert(loca.GetLoca(ele2.LocDescRaw));
+
+                    TList2.Add(key: ele2.ID!, value: ele2);
+                    // TList2.Add(key: ele2.Name, value: ele2);
+                    RestoreLocationAdds(ele2);
                 }
-                if (ele2.LocaLocName != null)
-                    ele2.LocName = Helper.Insert(loca.GetLoca( ele2.LocaLocName ) );
 
-                if (ele2.LocDescRaw != null)
-                    ele2.LocDescription = Helper.Insert(loca.GetLoca(ele2.LocDescRaw ) );
 
-                TList2.Add(key: ele2.ID!, value: ele2);
-                // TList2.Add(key: ele2.Name, value: ele2);
-                RestoreLocationAdds(ele2);
+                /*
+                foreach (var ele in List.Values)
+                {
+                    location ele2 = (location)ele;
+
+                    if( ele2._locDescRawHandle != null )
+                        ele2.LocDescription = Helper.Insert(ele2._locDescRawHandle);
+
+                    TList2.Add(key: ele2.ID, value: ele2);
+
+                    RestoreLocationAdds(ele2);
+                }
+                */
+                List = (Dictionary<int, location>)TList2;
+                TList2 = null;
+
+                return true;
             }
-
-            /*
-            foreach (var ele in List.Values)
+            catch (Exception e)
             {
-                location ele2 = (location)ele;
-
-                if( ele2._locDescRawHandle != null )
-                    ele2.LocDescription = Helper.Insert(ele2._locDescRawHandle);
-
-                TList2.Add(key: ele2.ID, value: ele2);
-
-                RestoreLocationAdds(ele2);
+                GlobalData.AddLog("location.RestoreLocations: " + e.Message.ToString(), IGlobalData.protMode.crisp);
+                return false;
             }
-            */
-            List = (Dictionary<int, location>) TList2;
-            TList2 = null;
-
-            return true;
         }
 
 
@@ -527,73 +569,91 @@ namespace GameCore
 
         public bool FindRouteStep( int locationID, int tActLoc, int From, List<int> Route, List<string> RouteName, List<int> Visited, bool OnlyKnownLocs )
         {
-            bool found = false;
-
-            for (int i = 1; i <= 10; i++)
+            try
             {
-                if ( ( Find(tActLoc)!.LocExit[i] == locationID ) && (Find(tActLoc)!.LocExitBlocker[i] == 0 ) )
+                bool found = false;
+
+                for (int i = 1; i <= 10; i++)
                 {
-                    if ((Find(Find(tActLoc)!.LocExit[i])!.Visited) || (OnlyKnownLocs == false))
+                    if ((Find(tActLoc)!.LocExit[i] == locationID) && (Find(tActLoc)!.LocExitBlocker[i] == 0))
                     {
-                        RouteName.Insert(0, Find(locationID)!.LocName!);
-                        RouteName.Insert(0, Find(Find(tActLoc)!.LocExit[i]!)!.LocName!);
-                        Route.Insert(0, i);
-                        return (true);
+                        if ((Find(Find(tActLoc)!.LocExit[i])!.Visited) || (OnlyKnownLocs == false))
+                        {
+                            RouteName.Insert(0, Find(locationID)!.LocName!);
+                            RouteName.Insert(0, Find(Find(tActLoc)!.LocExit[i]!)!.LocName!);
+                            Route.Insert(0, i);
+                            return (true);
+                        }
                     }
-                }
-                else if ( ( Find(tActLoc!)!.LocExit[i] == From ) && (Find(tActLoc!)!.LocExitBlocker[i] == 0))
-                {
+                    else if ((Find(tActLoc!)!.LocExit[i] == From) && (Find(tActLoc!)!.LocExitBlocker[i] == 0))
+                    {
 #pragma warning disable CS0219 // Die Variable "a" ist zugewiesen, ihr Wert wird aber nie verwendet.
-                    int a = 4;
+                        int a = 4;
 #pragma warning restore CS0219 // Die Variable "a" ist zugewiesen, ihr Wert wird aber nie verwendet.
-                    // Richtig, hier passiert gar nix
-                }
-                else if ( ( Find(tActLoc)!.LocExit[i]! != 0 ) && (Find(tActLoc)!.LocExitBlocker[i]! == 0))
-                {
-                    if ((Find(Find(tActLoc)!.LocExit[i])!.Visited) || (OnlyKnownLocs == false))
+                        // Richtig, hier passiert gar nix
+                    }
+                    else if ((Find(tActLoc)!.LocExit[i]! != 0) && (Find(tActLoc)!.LocExitBlocker[i]! == 0))
                     {
-                        bool WasThere = false;
-
-                        for (int j = 0; j < Visited.Count; j++)
+                        if ((Find(Find(tActLoc)!.LocExit[i])!.Visited) || (OnlyKnownLocs == false))
                         {
-                            if (Find(tActLoc)!.LocExit[i]! == Visited[j])
+                            bool WasThere = false;
+
+                            for (int j = 0; j < Visited.Count; j++)
                             {
-                                WasThere = true;
-                                break;
+                                if (Find(tActLoc)!.LocExit[i]! == Visited[j])
+                                {
+                                    WasThere = true;
+                                    break;
+                                }
                             }
-                        }
 
-                        if (!WasThere)
-                        {
-                            Visited.Add(Find(tActLoc)!.LocExit[i]!);
-
-                            found = FindRouteStep(locationID, Find(tActLoc)!.LocExit[i], tActLoc, Route, RouteName, Visited, OnlyKnownLocs);
-                            if (found)
+                            if (!WasThere)
                             {
-                                RouteName.Insert(0, Find(Find(tActLoc)!.LocExit[i])!.LocName!);
-                                Route.Insert(0, i);
-                                return (found);
+                                Visited.Add(Find(tActLoc)!.LocExit[i]!);
+
+                                found = FindRouteStep(locationID, Find(tActLoc)!.LocExit[i], tActLoc, Route, RouteName, Visited, OnlyKnownLocs);
+                                if (found)
+                                {
+                                    RouteName.Insert(0, Find(Find(tActLoc)!.LocExit[i])!.LocName!);
+                                    Route.Insert(0, i);
+                                    return (found);
+                                }
                             }
                         }
                     }
                 }
+                return found;
             }
-            return found; 
+            catch (Exception e)
+            {
+                GlobalData.AddLog("location.FindRouteStep: " + e.Message.ToString(), IGlobalData.protMode.crisp);
+                return false;
+            }
+
         }
 
 
-        public List<int> FindRoute( Person? PersonID, int locationID, bool OnlyKnowLocs = false )
+        public List<int>? FindRoute( Person? PersonID, int locationID, bool OnlyKnowLocs = false )
         {
-            bool found = false;
-            List<int> Visited = new List<int>();
+            try
+            {
+                bool found = false;
+                List<int> Visited = new List<int>();
 
-            List<int> Route = new List<int>() ;
-            List<string> RouteName = new List<string>();
+                List<int> Route = new List<int>();
+                List<string> RouteName = new List<string>();
 
-            Visited.Add(Persons!.Find( PersonID! )!.locationID!);
-            found = FindRouteStep(locationID, Persons!.Find(PersonID!)!.locationID, Persons!.Find(PersonID!)!.locationID, Route, RouteName, Visited, OnlyKnowLocs);
+                Visited.Add(Persons!.Find(PersonID!)!.locationID!);
+                found = FindRouteStep(locationID, Persons!.Find(PersonID!)!.locationID, Persons!.Find(PersonID!)!.locationID, Route, RouteName, Visited, OnlyKnowLocs);
 
-            return (Route);
+                return (Route);
+            }
+            catch (Exception e)
+            {
+                GlobalData.AddLog("location.FindRoute: " + e.Message.ToString(), IGlobalData.protMode.crisp);
+                return null;
+            }
+
         }
 
         public location Act( )
@@ -609,22 +669,31 @@ namespace GameCore
 
         public bool Dolocations()
         {
-            bool success = true;
-
-            foreach (location l in this.List.Values)
+            try
             {
-                if (l.GetController() == null && l.GetControllerName() != null)
+                bool success = true;
+
+                foreach (location l in this.List.Values)
                 {
-                    l.SetControllerByName(l!.GetControllerName()!, AdvGame!);
-                }
+                    if (l.GetController() == null && l.GetControllerName() != null)
+                    {
+                        l.SetControllerByName(l!.GetControllerName()!, AdvGame!);
+                    }
 
 
-                if ((l.GetController() != null) && (!l.ActivityBlocked))
-                {
-                    l.GetController()(l.ID);
+                    if ((l.GetController() != null) && (!l.ActivityBlocked))
+                    {
+                        l.GetController()(l.ID);
+                    }
                 }
+                return (success);
             }
-            return (success);
+            catch (Exception e)
+            {
+                GlobalData.AddLog("location.Dolocations: " + e.Message.ToString(), IGlobalData.protMode.crisp);
+                return false;
+            }
+
         }
 
 
@@ -656,18 +725,27 @@ namespace GameCore
 
         public bool ListPersons(int LocType, int LocID)
         {
-            foreach (Person tPerson in Persons!.List!.Values)
+            try
             {
-                if (tPerson.locationType == LocType && tPerson.locationID == LocID && tPerson.ID != A!.ActPerson && tPerson.IsBackground == false)
+                foreach (Person tPerson in Persons!.List!.Values)
                 {
-                    if ((tPerson.HereText != "") && (tPerson.HereText != null))
-                        AdvGame!.StoryOutput( LocID, null, Persons!.GetPersonNameLink(tPerson.HereText, tPerson));
-                    else if( tPerson.IsHidden == false)
-                        AdvGame!.StoryOutput(LocID, null,  Helper.Insert(loca.locationList_ListPersons_16136, tPerson ));
+                    if (tPerson.locationType == LocType && tPerson.locationID == LocID && tPerson.ID != A!.ActPerson && tPerson.IsBackground == false)
+                    {
+                        if ((tPerson.HereText != "") && (tPerson.HereText != null))
+                            AdvGame!.StoryOutput(LocID, null, Persons!.GetPersonNameLink(tPerson.HereText, tPerson));
+                        else if (tPerson.IsHidden == false)
+                            AdvGame!.StoryOutput(LocID, null, Helper.Insert(loca.locationList_ListPersons_16136, tPerson));
 
+                    }
                 }
+                return (true);
             }
-            return (true);
+            catch (Exception e)
+            {
+                GlobalData.AddLog("location.ListPersons: " + e.Message.ToString(), IGlobalData.protMode.crisp);
+                return false;
+            }
+
         }
 
 
@@ -686,15 +764,17 @@ namespace GameCore
 
         public void ShowLocationFull( int locationID )
         {
-            List<Item> itemShowOn = new();
-            List<Item> itemShowIn = new();
-            int anzahlGefunden = 0;
+            try
+            {
+                List<Item> itemShowOn = new();
+                List<Item> itemShowIn = new();
+                int anzahlGefunden = 0;
 
-            // int x = 4;
+                // int x = 4;
 
-            // MW.TextOutput( " <a href =\"#\" onclick=\"document.getElementById('#eof').scrollIntoView(true);window.external.JSCallback('ActLoc');\">" + "<b>" + LOC[A!.ActLoc].LocName + "</b></a>");
-            // Ignores: 003
-            // AdvGame.StoryOutput(locationID, 0, " <a style=\"cursor:pointer\" onclick=\"document.getElementById('#eof').scrollntoView(true);window.external.JSCallback('ActLoc');\">" + "<b>" + this.Find( locationID ).LocName + "</b></a>");
+                // MW.TextOutput( " <a href =\"#\" onclick=\"document.getElementById('#eof').scrollIntoView(true);window.external.JSCallback('ActLoc');\">" + "<b>" + LOC[A!.ActLoc].LocName + "</b></a>");
+                // Ignores: 003
+                // AdvGame.StoryOutput(locationID, 0, " <a style=\"cursor:pointer\" onclick=\"document.getElementById('#eof').scrollntoView(true);window.external.JSCallback('ActLoc');\">" + "<b>" + this.Find( locationID ).LocName + "</b></a>");
 #if CHROMIUM
             // Noloca: 007
             string scr = System.Web.HttpUtility.HtmlEncode( "boundAsync.JSCallback(\"ActLoc\");");
@@ -728,92 +808,69 @@ namespace GameCore
             }
             */
 #elif MAUI
-            // Noloca: 007
-            string scr = System.Web.HttpUtility.HtmlEncode("window.location.href = 'https://defineobject.Actloc/");
-            // Ignores: 005 
-            AdvGame!.StoryOutput(locationID, null, " <a style='cursor:pointer' onclick='" + scr + "'><b></b></a>");
+                // Noloca: 007
+                string scr = System.Web.HttpUtility.HtmlEncode("window.location.href = 'https://defineobject.Actloc/");
+                // Ignores: 005 
+                AdvGame!.StoryOutput(locationID, null, " <a style='cursor:pointer' onclick='" + scr + "'><b></b></a>");
 
 
-            AdvGame!.UIS!.LoadPicToHtml(this.Find(locationID)!.LocPicture!);
+                AdvGame!.UIS!.LoadPicToHtml(this.Find(locationID)!.LocPicture!);
 
-            /*
-            // Noloca: 007
-            string scr = System.Web.HttpUtility.HtmlEncode("window.location.href = 'https://defineobject.Actloc/" );
-            // Ignores: 005 
-            AdvGame.StoryOutput(locationID, null, " <a style='cursor:pointer' onclick='" + scr + "'><b></b></a>");
-
-
-            if (AdvGame.A!.PicSize != AdvData.picSize.none && this.Find(locationID!)!.LocPicture != null)
-            {
-                string size = "20%";
-                if (AdvGame.A!.PicSize == AdvData.picSize.medium)
-                    size = "40%";
-                if (AdvGame.A!.PicSize == AdvData.picSize.large)
-                    size = "60%";
-
-                string s1 = this.Find(locationID)!.LocPicture!;
+                /*
+                // Noloca: 007
+                string scr = System.Web.HttpUtility.HtmlEncode("window.location.href = 'https://defineobject.Actloc/" );
+                // Ignores: 005 
+                AdvGame.StoryOutput(locationID, null, " <a style='cursor:pointer' onclick='" + scr + "'><b></b></a>");
 
 
-                // string s = string.Format( "<center><img src=\"localfolder:./{0}\" width=\"{1}\" align=\"middle\" /> </center>", this.Find( locationID ).LocPicture, size );
-                string s = string.Format("<center><img src=\"customfileprotocol:./{0}\" width=\"{1}\" align=\"middle\" /> </center>", s1, size);
+                if (AdvGame.A!.PicSize != AdvData.picSize.none && this.Find(locationID!)!.LocPicture != null)
+                {
+                    string size = "20%";
+                    if (AdvGame.A!.PicSize == AdvData.picSize.medium)
+                        size = "40%";
+                    if (AdvGame.A!.PicSize == AdvData.picSize.large)
+                        size = "60%";
 
-                AdvGame.StoryOutput(locationID, null, s);
-            }
-            */
+                    string s1 = this.Find(locationID)!.LocPicture!;
+
+
+                    // string s = string.Format( "<center><img src=\"localfolder:./{0}\" width=\"{1}\" align=\"middle\" /> </center>", this.Find( locationID ).LocPicture, size );
+                    string s = string.Format("<center><img src=\"customfileprotocol:./{0}\" width=\"{1}\" align=\"middle\" /> </center>", s1, size);
+
+                    AdvGame.StoryOutput(locationID, null, s);
+                }
+                */
 #else
             // Ignores: 004
             AdvGame.StoryOutput(locationID, null, loca.locationList_ShowlocationFull_16137);
 #endif
-            string sFull = GetLocName(this.Find(locationID!)!.LocDescription!)!;
-            AdvGame.StoryOutput(locationID, null, sFull);
-            for( int i = 0; i < this.Find( locationID! )!.locadd.Count; i++)
-            {
-                if( Stats!.Find( this.Find(locationID!)!.locadd[ i ].Stat)!.Val == this.Find(locationID!)!.locadd[i].Val )
+                string sFull = GetLocName(this.Find(locationID!)!.LocDescription!)!;
+                AdvGame.StoryOutput(locationID, null, sFull);
+                for (int i = 0; i < this.Find(locationID!)!.locadd.Count; i++)
                 {
-                    AdvGame.StoryOutput(locationID, null, this.Find(locationID)!.locadd[i].Text);
+                    if (Stats!.Find(this.Find(locationID!)!.locadd[i].Stat)!.Val == this.Find(locationID!)!.locadd[i].Val)
+                    {
+                        AdvGame.StoryOutput(locationID, null, this.Find(locationID)!.locadd[i].Text);
 
+                    }
                 }
-            }
-            AdvGame.HeadlineOutput(GetLocName(this.Find(locationID!)!.LocName!));
-            AdvGame.UIS.DoUIUpdate();
-            ListPersons(AdvGame.CB!.LocType_Loc, locationID);
+                AdvGame.HeadlineOutput(GetLocName(this.Find(locationID!)!.LocName!));
+                AdvGame.UIS.DoUIUpdate();
+                ListPersons(AdvGame.CB!.LocType_Loc, locationID);
 
-            foreach( Item item in Items!.List!.Values )
-            {
-                if ((item.locationType == AdvGame.CB!.LocType_Loc) && (item.locationID == A!.ActLoc) && (item.IsBackground == false))
-                {
-                    anzahlGefunden++;
-                }
-                if( item.locationType == AdvGame.CB!.LocType_Loc && item.locationID == A!.ActLoc && item.ShowStorageOn )
-                {
-                    itemShowOn.Add(item);
-                }
-                if (item.locationType == AdvGame.CB!.LocType_Loc && item.locationID == A!.ActLoc && item.ShowStorageIn && item.IsClosed == false )
-                {
-                    itemShowIn.Add(item);
-                }
-
-            }
-            /*
-            for (int i = 0; i < Items!.List.Count; i++)
-            {
-                if ((Items!.List[i].locationType == AdvGame.CB!.LocType_Loc) && (Items!.List[i].locationID == A!.ActLoc) && (Items!.List[i].IsBackground == false))
-                {
-                    anzahlGefunden++;
-                }
-
-            }
-            */
-            if (anzahlGefunden > 0)
-            {
-                AdvGame.StoryOutput(locationID, null, Persons!.GetPersonVerbLink(Persons!.Find( A!.ActPerson! )!, Co.CASE_AKK, AdvGame.CB!.VT_sehen, AdvGame.CurrentNouns, A.Tense) + loca.locationList_ShowlocationFull_16138);
-
-                foreach( Item item in Items!.List.Values )
+                foreach (Item item in Items!.List!.Values)
                 {
                     if ((item.locationType == AdvGame.CB!.LocType_Loc) && (item.locationID == A!.ActLoc) && (item.IsBackground == false))
                     {
-                        AdvGame.StoryOutput(locationID, null,  Helper.Insert(loca.locationList_ShowlocationFull_16139, item.ID ));
                         anzahlGefunden++;
+                    }
+                    if (item.locationType == AdvGame.CB!.LocType_Loc && item.locationID == A!.ActLoc && item.ShowStorageOn)
+                    {
+                        itemShowOn.Add(item);
+                    }
+                    if (item.locationType == AdvGame.CB!.LocType_Loc && item.locationID == A!.ActLoc && item.ShowStorageIn && item.IsClosed == false)
+                    {
+                        itemShowIn.Add(item);
                     }
 
                 }
@@ -822,78 +879,84 @@ namespace GameCore
                 {
                     if ((Items!.List[i].locationType == AdvGame.CB!.LocType_Loc) && (Items!.List[i].locationID == A!.ActLoc) && (Items!.List[i].IsBackground == false))
                     {
-                        AdvGame.StoryOutput(locationID, null,  Helper.Insert("- [Il1,Nomu]", Items!.List[i].ID ));
                         anzahlGefunden++;
                     }
 
                 }
                 */
-            }
+                if (anzahlGefunden > 0)
+                {
+                    AdvGame.StoryOutput(locationID, null, Persons!.GetPersonVerbLink(Persons!.Find(A!.ActPerson!)!, Co.CASE_AKK, AdvGame.CB!.VT_sehen, AdvGame.CurrentNouns, A.Tense) + loca.locationList_ShowlocationFull_16138);
 
-            foreach( Item i in itemShowOn)
+                    foreach (Item item in Items!.List.Values)
+                    {
+                        if ((item.locationType == AdvGame.CB!.LocType_Loc) && (item.locationID == A!.ActLoc) && (item.IsBackground == false))
+                        {
+                            AdvGame.StoryOutput(locationID, null, Helper.Insert(loca.locationList_ShowlocationFull_16139, item.ID));
+                            anzahlGefunden++;
+                        }
+
+                    }
+                    /*
+                    for (int i = 0; i < Items!.List.Count; i++)
+                    {
+                        if ((Items!.List[i].locationType == AdvGame.CB!.LocType_Loc) && (Items!.List[i].locationID == A!.ActLoc) && (Items!.List[i].IsBackground == false))
+                        {
+                            AdvGame.StoryOutput(locationID, null,  Helper.Insert("- [Il1,Nomu]", Items!.List[i].ID ));
+                            anzahlGefunden++;
+                        }
+
+                    }
+                    */
+                }
+
+                foreach (Item i in itemShowOn)
+                {
+                    AdvGame!.Orders!.ListItemsPersons(Helper.Insert(loca.locationList_ShowlocationFull_16140, i.ID, AdvGame!.CA!.Person_3rdperson!), AdvGame!.CA!.Person_I!, CB!.LocType_On_Item, i.ID, false, true, Co.CASE_AKK_UNDEF);
+
+                }
+                foreach (Item i in itemShowIn)
+                {
+                    AdvGame!.Orders!.ListItemsPersons(Helper.Insert(loca.locationList_ShowlocationFull_Person_I_16141, i.ID, AdvGame!.CA!.Person_3rdperson!), AdvGame!.CA!.Person_I!, CB!.LocType_In_Item, i.ID, false, true, Co.CASE_AKK_UNDEF);
+                }
+
+
+
+                this.Find(locationID)!.Visited = true;
+            }
+            catch (Exception e)
             {
-                AdvGame!.Orders!.ListItemsPersons(  Helper.Insert(loca.locationList_ShowlocationFull_16140, i.ID, AdvGame!.CA!.Person_3rdperson! ), AdvGame!.CA!.Person_I!, CB!.LocType_On_Item, i.ID, false, true, Co.CASE_AKK_UNDEF);
-
-            }
-            foreach (Item i in itemShowIn)
-            {
-                AdvGame!.Orders!.ListItemsPersons(  Helper.Insert(loca.locationList_ShowlocationFull_Person_I_16141, i.ID, AdvGame!.CA!.Person_3rdperson! ), AdvGame!.CA!.Person_I!, CB!.LocType_In_Item, i.ID, false, true, Co.CASE_AKK_UNDEF);
+                GlobalData.AddLog("location.ShowLocationFull: " + e.Message.ToString(), IGlobalData.protMode.crisp);
             }
 
-
-
-            this.Find(locationID)!.Visited = true;
         }
 
         public void ShowLocationShort(int locationID)
         {
-
-            int anzahlGefunden = 0;
+            try
+            {
+                int anzahlGefunden = 0;
 
 #if CHROMIUM
             // Noloca: 003
             string scr = System.Web.HttpUtility.HtmlEncode( "boundAsync.JSCallback(\"ActLoc\");");
             AdvGame.StoryOutput(locationID, null, " <a style='cursor:pointer' onclick='" +scr + "'><b>" + this.Find(locationID)!.LocName + "</b></a>");
 #elif MAUI
-            // Noloca: 003
-            string scr = System.Web.HttpUtility.HtmlEncode("window.location.href = 'https://defineobject.ActLoc/");
-             AdvGame!.StoryOutput(locationID, null, " <a style='cursor:pointer' onclick='" + scr + "'><b>" + this.Find(locationID)!.LocName + "</b></a>");
+                // Noloca: 003
+                string scr = System.Web.HttpUtility.HtmlEncode("window.location.href = 'https://defineobject.ActLoc/");
+                AdvGame!.StoryOutput(locationID, null, " <a style='cursor:pointer' onclick='" + scr + "'><b>" + this.Find(locationID)!.LocName + "</b></a>");
 #else
             // Noloca: 002
             AdvGame.StoryOutput(locationID, null, " <a style=\"cursor:pointer\" onclick=\"window.external.JSCallback('ActLoc');\"><b></b></a>");
 #endif
-            // AdvGame.StoryOutput(locationID, null, " <a style=\"cursor:pointer\" onclick=\"document.getElementById('#eof').scrollIntoView(true);window.external.JSCallback('ActLoc');\">" + "<b>" + this.Find(locationID).LocName + "</b></a>");
-            AdvGame.HeadlineOutput(GetLocName(this.Find(locationID)!.LocName!));
-            ListPersons(AdvGame.CB!.LocType_Loc, locationID);
+                // AdvGame.StoryOutput(locationID, null, " <a style=\"cursor:pointer\" onclick=\"document.getElementById('#eof').scrollIntoView(true);window.external.JSCallback('ActLoc');\">" + "<b>" + this.Find(locationID).LocName + "</b></a>");
+                AdvGame.HeadlineOutput(GetLocName(this.Find(locationID)!.LocName!));
+                ListPersons(AdvGame.CB!.LocType_Loc, locationID);
 
-            foreach( Item item in Items!.List!.Values )
-            {
-                if ((item.locationType == AdvGame.CB!.LocType_Loc) && (item.locationID == A!.ActLoc) && (item.IsBackground == false))
-                {
-                    anzahlGefunden++;
-                }
-
-            }
-            /*
-            for (int i = 0; i < Items!.List.Count; i++)
-            {
-                if ((Items!.List[i].locationType == AdvGame.CB!.LocType_Loc) && (Items!.List[i].locationID == A!.ActLoc) && (Items!.List[i].IsBackground == false))
-                {
-                    anzahlGefunden++;
-                }
-
-            }
-            */
-            if (anzahlGefunden > 0)
-            {
-                AdvGame.StoryOutput(locationID, null, Persons!.GetPersonVerbLink( Persons!.Find( A!.ActPerson )!, Co.CASE_AKK, AdvGame.CB!.VT_sehen, AdvGame.CurrentNouns, A.Tense) + loca.locationList_ShowlocationFull_16138 );
-
-                foreach( Item item in Items!.List.Values )
+                foreach (Item item in Items!.List!.Values)
                 {
                     if ((item.locationType == AdvGame.CB!.LocType_Loc) && (item.locationID == A!.ActLoc) && (item.IsBackground == false))
                     {
-                        // Noloca: 001
-                        AdvGame.StoryOutput(locationID, null,  Helper.Insert("- [Il1,Nomu]", item.ID ));
                         anzahlGefunden++;
                     }
 
@@ -903,13 +966,43 @@ namespace GameCore
                 {
                     if ((Items!.List[i].locationType == AdvGame.CB!.LocType_Loc) && (Items!.List[i].locationID == A!.ActLoc) && (Items!.List[i].IsBackground == false))
                     {
-                        AdvGame.StoryOutput(locationID, null,  Helper.Insert("- [Il1,Nomu]", Items!.List[i].ID ));
                         anzahlGefunden++;
                     }
 
                 }
                 */
+                if (anzahlGefunden > 0)
+                {
+                    AdvGame.StoryOutput(locationID, null, Persons!.GetPersonVerbLink(Persons!.Find(A!.ActPerson)!, Co.CASE_AKK, AdvGame.CB!.VT_sehen, AdvGame.CurrentNouns, A.Tense) + loca.locationList_ShowlocationFull_16138);
+
+                    foreach (Item item in Items!.List.Values)
+                    {
+                        if ((item.locationType == AdvGame.CB!.LocType_Loc) && (item.locationID == A!.ActLoc) && (item.IsBackground == false))
+                        {
+                            // Noloca: 001
+                            AdvGame.StoryOutput(locationID, null, Helper.Insert("- [Il1,Nomu]", item.ID));
+                            anzahlGefunden++;
+                        }
+
+                    }
+                    /*
+                    for (int i = 0; i < Items!.List.Count; i++)
+                    {
+                        if ((Items!.List[i].locationType == AdvGame.CB!.LocType_Loc) && (Items!.List[i].locationID == A!.ActLoc) && (Items!.List[i].IsBackground == false))
+                        {
+                            AdvGame.StoryOutput(locationID, null,  Helper.Insert("- [Il1,Nomu]", Items!.List[i].ID ));
+                            anzahlGefunden++;
+                        }
+
+                    }
+                    */
+                }
             }
+            catch (Exception e)
+            {
+                GlobalData.AddLog("location.ShowLocationShort: " + e.Message.ToString(), IGlobalData.protMode.crisp);
+            }
+
         }
 
         public string GetLocName(string Description)
@@ -1077,196 +1170,223 @@ namespace GameCore
 
         public bool SaveItemsFromlocation( locationList ll, ItemList il, int sourcelocation, int destlocation)
         {
-            // Alle mobilen Objekte aus der sourcelocation werden in der destlocation abgelegt, aktuell übrigens auch, wenn 
-            // sie im Safe verschlossen lägen. Das hier ist eine Absicherung gegen Dead Ends.
-            foreach (Item it in il.List!.Values)
+            try
             {
-                (int _iType, int _iID) loc;
-                loc = Items!.GetItemLoc(it);
-                if (loc._iID == sourcelocation && loc._iType == CB!.LocType_Loc && (it.CanBeTaken == true || it.IsMovable))
+                // Alle mobilen Objekte aus der sourcelocation werden in der destlocation abgelegt, aktuell übrigens auch, wenn 
+                // sie im Safe verschlossen lägen. Das hier ist eine Absicherung gegen Dead Ends.
+                foreach (Item it in il.List!.Values)
                 {
-                    it.locationID = destlocation;
-                    it.locationType = CB!.LocType_Loc;
-                }
+                    (int _iType, int _iID) loc;
+                    loc = Items!.GetItemLoc(it);
+                    if (loc._iID == sourcelocation && loc._iType == CB!.LocType_Loc && (it.CanBeTaken == true || it.IsMovable))
+                    {
+                        it.locationID = destlocation;
+                        it.locationType = CB!.LocType_Loc;
+                    }
 
+                }
+                return true;
             }
-            return true;
+            catch (Exception e)
+            {
+                GlobalData.AddLog("location.SaveItemsFromlocation: " + e.Message.ToString(), IGlobalData.protMode.crisp);
+                return false;
+            }
+
         }
 
         public bool Replacelocation(locationList ll, ItemList il, PersonList pl, int sourcelocation, int destlocation, bool exchangeItems = true)
         {
-            bool setActLoc = false;
-            string source = String.Format( loca.locationList_Replacelocation_16142, sourcelocation);
-            string dest = String.Format( loca.locationList_Replacelocation_16143, destlocation);
-
-            if (AdvGame!.CA!.Person_I!.locationID == sourcelocation)
-                setActLoc = true;
-
-            foreach (location loc in ll.List.Values)
+            try
             {
-                for (int dir = 1; dir < 11; dir++)
+                bool setActLoc = false;
+                string source = String.Format(loca.locationList_Replacelocation_16142, sourcelocation);
+                string dest = String.Format(loca.locationList_Replacelocation_16143, destlocation);
+
+                if (AdvGame!.CA!.Person_I!.locationID == sourcelocation)
+                    setActLoc = true;
+
+                foreach (location loc in ll.List.Values)
                 {
-                    if (loc.LocExit[dir] == sourcelocation)
+                    for (int dir = 1; dir < 11; dir++)
                     {
-                        loc.LocExit[dir] = destlocation;
-                        ll.Find(destlocation)!.LocExit[Co.CounterDir(dir)!] = loc.ID;
+                        if (loc.LocExit[dir] == sourcelocation)
+                        {
+                            loc.LocExit[dir] = destlocation;
+                            ll.Find(destlocation)!.LocExit[Co.CounterDir(dir)!] = loc.ID;
+                        }
+                    }
+
+                    int pos = loc!.LocDescription!.IndexOf(source)!;
+                    if (pos > -1)
+                    {
+                        loc.LocDescription = loc.LocDescription.Replace(source, dest);
                     }
                 }
 
-                int pos = loc!.LocDescription!.IndexOf(source)!;
-                if( pos > -1 )
+                // Alle mobilen Objekte aus der alten location werden in der neuen location abgelegt, aktuell übrigens auch, wenn 
+                // sie im Safe verschlossen lägen. Das hier ist eine Absicherung gegen Dead Ends.
+                foreach (Item it in il.List!.Values)
                 {
-                    loc.LocDescription = loc.LocDescription.Replace(source, dest);
-                }
-            }
+                    (int _iType, int _iID) loc;
+                    loc = Items!.GetItemLoc(it);
+                    if (loc._iID == sourcelocation && loc._iType == CB!.LocType_Loc && (it.CanBeTaken == true || it.IsMovable))
+                    {
+                        it.locationID = destlocation;
+                        it.locationType = CB!.LocType_Loc;
+                    }
 
-            // Alle mobilen Objekte aus der alten location werden in der neuen location abgelegt, aktuell übrigens auch, wenn 
-            // sie im Safe verschlossen lägen. Das hier ist eine Absicherung gegen Dead Ends.
-            foreach (Item it in il.List!.Values)
+                }
+                foreach (Person pe in pl!.List!.Values!)
+                {
+                    (int _iType, int _iID) loc;
+                    loc = Persons!.GetPersonLoc(pe, true);
+                    if (loc._iID == sourcelocation && loc._iType == CB!.LocType_Loc)
+                    {
+                        pe.locationID = destlocation;
+                        pe.locationType = CB!.LocType_Loc;
+                    }
+                    /*
+                    if (pe.locationID == sourcelocation && pe.locationType == CB!.LocType_Loc)
+                    {
+                        pe.locationID = destlocation;
+                    }
+                    */
+                }
+
+
+                if (setActLoc)
+                {
+                    AdvGame.A!.ActLoc = destlocation;
+                }
+                return true;
+            }
+            catch (Exception e)
             {
-                (int _iType, int _iID) loc;
-                loc = Items!.GetItemLoc(it);
-                if( loc._iID == sourcelocation && loc._iType == CB!.LocType_Loc && ( it.CanBeTaken == true || it.IsMovable) )
-                {
-                    it.locationID = destlocation;
-                    it.locationType = CB!.LocType_Loc;
-                }
-
-            }
-            foreach (Person pe in pl!.List!.Values!)
-            {
-                (int _iType, int _iID) loc;
-                loc = Persons!.GetPersonLoc(pe, true);
-                if (loc._iID == sourcelocation && loc._iType == CB!.LocType_Loc )
-                {
-                    pe.locationID = destlocation;
-                    pe.locationType = CB!.LocType_Loc;
-                }
-                /*
-                if (pe.locationID == sourcelocation && pe.locationType == CB!.LocType_Loc)
-                {
-                    pe.locationID = destlocation;
-                }
-                */
+                GlobalData.AddLog("location.Replacelocation: " + e.Message.ToString(), IGlobalData.protMode.crisp);
+                return false;
             }
 
-
-            if( setActLoc )
-            {
-                AdvGame.A!.ActLoc = destlocation;
-            }
-            return true;
         }
 
-        public string ConvertlocationInserts(string sIn)
+        public string? ConvertlocationInserts(string sIn)
         {
-            string sOut = "";
-
-            int ix = 0;
-
-            while (ix < sIn.Length)
+            try
             {
-                int ix2 = ix;
-                int itemID = 0;
-                int locationID = 0;
-                int dirID = 0;
-                while (ix2 < sIn.Length && sIn[ix2] != '[')
+                string sOut = "";
+
+                int ix = 0;
+
+                while (ix < sIn.Length)
                 {
-                    ix2++;
-                }
-
-                sOut += sIn.Substring(ix, ix2 - ix);
-
-                ix = ix2;
-
-                if (ix2 < sIn.Length)
-                {
-                    if (sIn[ix] == '[')
+                    int ix2 = ix;
+                    int itemID = 0;
+                    int locationID = 0;
+                    int dirID = 0;
+                    while (ix2 < sIn.Length && sIn[ix2] != '[')
                     {
-                        if( sIn.Substring(ix, 4) == loca.locationList_ConvertlocationInserts_16144)
+                        ix2++;
+                    }
+
+                    sOut += sIn.Substring(ix, ix2 - ix);
+
+                    ix = ix2;
+
+                    if (ix2 < sIn.Length)
+                    {
+                        if (sIn[ix] == '[')
                         {
-                            ix += 4;
-                        }
-                        else if (sIn.Substring(ix, 4) == loca.locationList_ConvertlocationInserts_16145)
-                        {
-                            ix += 4;
-                        }
-                        else if (sIn.Substring(ix, 3) == loca.locationList_ConvertlocationInserts_16146)
-                        {
-                            int pos = sIn.Substring(ix + 3).IndexOf(']');
-                            if (pos != -1)
+                            if (sIn.Substring(ix, 4) == loca.locationList_ConvertlocationInserts_16144)
                             {
-                                string pString = sIn.Substring(ix + 3, pos);
-                                itemID = SearchItemID(pString);
-                                // Link
-                                // sOut += itemID.ToString();
-
-                                ix += 4 + pos;
-
-                                int pos2 = sIn.Substring(ix ).IndexOf('[');
-                                if (pos2 != -1)
-                                {
-                                    string pString2 = sIn.Substring(ix, pos2);
-                                    sOut += loca.locationList_ConvertlocationInserts_16147 +itemID.ToString( loca.locationList_ConvertlocationInserts_16148) + loca.locationList_ConvertlocationInserts_16149 +pString2 + loca.locationList_ConvertlocationInserts_16150;
-                                    ix += pos2;
-                                }
+                                ix += 4;
                             }
-                            else
-                                ix += 1;
-                        }
-                        else if (sIn.Substring(ix, 3) == loca.locationList_ConvertlocationInserts_16151)
-                        {
-                            int pos = sIn.Substring(ix + 3).IndexOf(']');
-                            if (pos != -1)
+                            else if (sIn.Substring(ix, 4) == loca.locationList_ConvertlocationInserts_16145)
                             {
-                                string pString = sIn.Substring(ix + 3, pos);
-                                locationID = SearchlocationID(pString);
-                                // Link
-                                // sOut += locationID.ToString();
-
-                                ix += 4 + pos;
-
-                                int pos2 = sIn.Substring(ix).IndexOf('[');
-                                if (pos2 != -1)
-                                {
-                                    string pString2 = sIn.Substring(ix, pos2);
-                                    // Ignores: 004
-                                    sOut += loca.locationList_ConvertlocationInserts_16152 +locationID.ToString( loca.locationList_ConvertlocationInserts_16153) + loca.locationList_ConvertlocationInserts_16154 +pString2 + loca.locationList_ConvertlocationInserts_16155;
-                                    ix += pos2;
-                                }
+                                ix += 4;
                             }
-                            else
-                                ix += 1;
-                        }
-                        else if (sIn.Substring(ix, 3) == loca.locationList_ConvertlocationInserts_16156)
-                        {
-                            int pos = sIn.Substring(ix + 3).IndexOf(']');
-                            if (pos != -1)
+                            else if (sIn.Substring(ix, 3) == loca.locationList_ConvertlocationInserts_16146)
                             {
-                                string pString = sIn.Substring(ix + 3, pos);
-                                dirID = SearchDir(pString);
-                                // Link
-                                // sOut += locationID.ToString();
-
-                                ix += 4 + pos;
-
-                                int pos2 = sIn.Substring(ix).IndexOf('[');
-                                if (pos2 != -1)
+                                int pos = sIn.Substring(ix + 3).IndexOf(']');
+                                if (pos != -1)
                                 {
-                                    string pString2 = sIn.Substring(ix, pos2);
-                                    sOut += loca.locationList_ConvertlocationInserts_16157 +locationID.ToString( loca.locationList_ConvertlocationInserts_16158) + loca.locationList_ConvertlocationInserts_16159 +pString2 + loca.locationList_ConvertlocationInserts_16160;
-                                    ix += pos2;
+                                    string pString = sIn.Substring(ix + 3, pos);
+                                    itemID = SearchItemID(pString);
+                                    // Link
+                                    // sOut += itemID.ToString();
+
+                                    ix += 4 + pos;
+
+                                    int pos2 = sIn.Substring(ix).IndexOf('[');
+                                    if (pos2 != -1)
+                                    {
+                                        string pString2 = sIn.Substring(ix, pos2);
+                                        sOut += loca.locationList_ConvertlocationInserts_16147 + itemID.ToString(loca.locationList_ConvertlocationInserts_16148) + loca.locationList_ConvertlocationInserts_16149 + pString2 + loca.locationList_ConvertlocationInserts_16150;
+                                        ix += pos2;
+                                    }
                                 }
+                                else
+                                    ix += 1;
                             }
-                            else
-                                ix += 1;
+                            else if (sIn.Substring(ix, 3) == loca.locationList_ConvertlocationInserts_16151)
+                            {
+                                int pos = sIn.Substring(ix + 3).IndexOf(']');
+                                if (pos != -1)
+                                {
+                                    string pString = sIn.Substring(ix + 3, pos);
+                                    locationID = SearchlocationID(pString);
+                                    // Link
+                                    // sOut += locationID.ToString();
+
+                                    ix += 4 + pos;
+
+                                    int pos2 = sIn.Substring(ix).IndexOf('[');
+                                    if (pos2 != -1)
+                                    {
+                                        string pString2 = sIn.Substring(ix, pos2);
+                                        // Ignores: 004
+                                        sOut += loca.locationList_ConvertlocationInserts_16152 + locationID.ToString(loca.locationList_ConvertlocationInserts_16153) + loca.locationList_ConvertlocationInserts_16154 + pString2 + loca.locationList_ConvertlocationInserts_16155;
+                                        ix += pos2;
+                                    }
+                                }
+                                else
+                                    ix += 1;
+                            }
+                            else if (sIn.Substring(ix, 3) == loca.locationList_ConvertlocationInserts_16156)
+                            {
+                                int pos = sIn.Substring(ix + 3).IndexOf(']');
+                                if (pos != -1)
+                                {
+                                    string pString = sIn.Substring(ix + 3, pos);
+                                    dirID = SearchDir(pString);
+                                    // Link
+                                    // sOut += locationID.ToString();
+
+                                    ix += 4 + pos;
+
+                                    int pos2 = sIn.Substring(ix).IndexOf('[');
+                                    if (pos2 != -1)
+                                    {
+                                        string pString2 = sIn.Substring(ix, pos2);
+                                        sOut += loca.locationList_ConvertlocationInserts_16157 + locationID.ToString(loca.locationList_ConvertlocationInserts_16158) + loca.locationList_ConvertlocationInserts_16159 + pString2 + loca.locationList_ConvertlocationInserts_16160;
+                                        ix += pos2;
+                                    }
+                                }
+                                else
+                                    ix += 1;
+                            }
                         }
                     }
                 }
+
+
+                return sOut;
+            }
+            catch (Exception e)
+            {
+                GlobalData.AddLog("location.ConvertlocationInserts: " + e.Message.ToString(), IGlobalData.protMode.crisp);
+                return null;
             }
 
-
-            return sOut;
         }
 
 

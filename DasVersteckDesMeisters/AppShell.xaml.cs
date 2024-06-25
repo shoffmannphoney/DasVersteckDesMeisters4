@@ -874,13 +874,13 @@ public static class UIElement
     {
         try
         { 
-        foreach (IDLabel lx in listIDLabel)
-        {
-            if (lx == l)
+            foreach (IDLabel lx in listIDLabel)
             {
-                return;
+                if (lx == l)
+                {
+                    return;
+                }
             }
-        }
 
             l.ClearValue(Grid.ColumnProperty);
             l.ClearValue(Grid.RowProperty);
@@ -926,12 +926,15 @@ public static class UIElement
             l.ClearValue(IDLabel.FormattedTextProperty);
             l.ClearValue(IDLabel.HorizontalTextAlignmentProperty);
             l.ClearValue(IDLabel.VerticalTextAlignmentProperty);
-            l.Padding = Thickness.Zero;
+            l.ClearValue(IDLabel.HeightProperty);
+            l.ClearValue(IDLabel.WidthProperty);
 
             l.Parent = null;
             l.StyleClass = null;
             l.Margin = Thickness.Zero;
             l.Text = null;
+            l.Padding = Thickness.Zero;
+            l.LineBreakMode = LineBreakMode.TailTruncation;
 
 
             if (Pooling == true && listIDLabel.Count < 100 && StoreMode == true)
@@ -1066,6 +1069,7 @@ public static class UIElement
 
             l.ClearValue(Label.FontAttributesProperty);
             l.ClearValue(Label.HeightRequestProperty);
+            l.ClearValue(Label.HeightProperty);
             l.ClearValue(Label.InputTransparentProperty);
             l.ClearValue(Label.InputTransparentProperty);
             l.ClearValue(Label.IsEnabledProperty);
@@ -1080,6 +1084,8 @@ public static class UIElement
             l.ClearValue(Label.FormattedTextProperty);
             l.ClearValue(Label.HorizontalTextAlignmentProperty);
             l.ClearValue(Label.VerticalTextAlignmentProperty);
+            l.ClearValue(Label.HeightProperty);
+            l.ClearValue(Label.WidthProperty);
             l.Padding = Thickness.Zero;
 
 
@@ -1640,7 +1646,6 @@ public class TreeView : TreeViewItem
                     {
                         Label l1 = (Label)iv;
 
-                        /*
                         while (l1.Behaviors.Count > 0)
                         {
                             if(l1.Behaviors[0].GetType() == typeof( TouchBehavior) )
@@ -1656,7 +1661,6 @@ public class TreeView : TreeViewItem
                             destroyed++;
 
                         }
-                        */
 
                         Behavior toRemove = l1.Behaviors.FirstOrDefault(b => b is MyTouchBehavior);
                         if (toRemove != null)
@@ -1666,7 +1670,7 @@ public class TreeView : TreeViewItem
 
                         if ( l1.Behaviors.Count > 0 )
                         {
-                            l1.Behaviors.Remove(touchBehaviorB1);
+                            l1.Behaviors.RemoveAt(0);
                         }
 
                         l1.Behaviors.Clear();
@@ -2190,7 +2194,7 @@ public class TreeView : TreeViewItem
         {
             if (tvi.SubTree!.Children.Count > 0)
             {
-                foreach (object  ovi2 in tvi.SubTree!.Children )
+                foreach (object  ovi2 in tvi.SubTree!.Children ) 
                 {
                     if (ovi2.GetType() == typeof(TreeViewItem))
                     {
@@ -2692,6 +2696,8 @@ public class TreeView : TreeViewItem
             b1.ClearValue(Button.HeightRequestProperty);
             b1.TextColor = Colors.Cyan;
             b1.SetValue(Label.BackgroundColorProperty, Colors.Green);
+            // b1.FontSize = 20;
+            b1.FontAttributes = FontAttributes.None;
 
             Label l1 = UIElement.NewLabel();
             l1.Text = "Labeltext";
@@ -2714,14 +2720,16 @@ public class TreeView : TreeViewItem
             l1.Opacity = 1;
             l1.SetValue(Label.OpacityProperty, 1.0f);
             l1.TextColor = GlobalSpecs.CurrentGlobalSpecs.GetCurrentTheme()!.Col_FG;
+            // l1.FontSize = 20;
+            l1.FontAttributes = FontAttributes.None;
 
             // Debug
             // l1.BackgroundColor = Colors.Red;
             // l1.Background = Colors.Red;
-            
+
             // l1.SetValue( Label.BackgroundColorProperty, Colors.Red);
 
- 
+
             Columns.Clear();
             ColumnDefinition cd3 = new();
             cd3.Width = new GridLength(20, GridUnitType.Absolute);
@@ -3390,6 +3398,8 @@ public class TreeViewItem : Grid, INotifyPropertyChanged, IDisposable
         b1.Background = Colors.Transparent;
         b1.HeightRequest = -1;
         b1.ClearValue(Button.HeightRequestProperty);
+        // b1.FontSize = 24;
+        b1.FontAttributes = FontAttributes.None;
 
         Label l1 = UIElement.NewLabel();
         l1.Text = "Labeltext";
@@ -3398,30 +3408,48 @@ public class TreeViewItem : Grid, INotifyPropertyChanged, IDisposable
         l1.HorizontalOptions = LayoutOptions.Start;
         l1.HorizontalTextAlignment = TextAlignment.Start;
         l1.LineBreakMode = LineBreakMode.TailTruncation;
+        // l1.FontSize = 24;
         g1.SetColumn(l1, 1);
         g1.Add(l1);
         TextLabel = l1;
+        l1.FontAttributes = FontAttributes.None;
 
         Thickness margin = new Thickness(0, GlobalSpecs.CurrentGlobalSpecs!.GetClickMarginPixel(), 0, GlobalSpecs.CurrentGlobalSpecs.GetClickMarginPixel());
         l1.Margin = margin;
+        Thickness padding = new Thickness(5);
+        l1.Padding = padding;
+
+
         l1.Opacity = 1;
         l1.SetValue(Label.OpacityProperty, 1.0f);
         l1.TextColor = GlobalSpecs.CurrentGlobalSpecs.GetCurrentTheme()!.Col_FG;
         l1.HeightRequest = -1;
         l1.WidthRequest = -1;
+        // l1.DesiredSize = new Size(-1, -1);
+        l1.ClearValue(IDLabel.HeightProperty);
+        l1.ClearValue(IDLabel.WidthProperty);
 
 #if WINDOWS
-        if (touchBehaviorB1 == null)
+        MyTouchBehavior mtb = new MyTouchBehavior
         {
-            touchBehaviorB1 = new MyTouchBehavior
+            HoveredOpacity = 0.7,
+            PressedOpacity = 0.7
+
+        };
+        
+        l1.Behaviors.Add(mtb);
+#elif ANDROID
+        int grefCount = Java.Interop.JniRuntime.CurrentRuntime.GlobalReferenceCount;
+        if (grefCount < 10000)
+        {
+            TouchBehavior tb1 = new MyTouchBehavior
             {
-                HoveredOpacity = 0.7,
-                PressedOpacity = 0.7
+                HoveredOpacity = 0.5,
+                PressedOpacity = 0.5
 
             };
+            l1.Behaviors.Add(tb1);
         }
-        
-        l1.Behaviors.Add(touchBehaviorB1);
 #endif
 
         TapGestureRecognizer tgr = new();
@@ -3446,6 +3474,9 @@ public class TreeViewItem : Grid, INotifyPropertyChanged, IDisposable
 
         SubTree = g5;
         ParentSubTree = g2;
+
+        l1.HeightRequest = -1;
+        l1.WidthRequest = -1;
     }
 
     public void Add(TreeViewItem tvi )

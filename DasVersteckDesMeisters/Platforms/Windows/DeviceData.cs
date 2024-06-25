@@ -16,7 +16,7 @@ public class DeviceData : IDeviceData
     public string GetSavePath()
     {
         string? up = System.Environment.GetEnvironmentVariable("USERPROFILE");
-        string? pathName = up + "\\documents\\My Games\\Das Versteck des Meisters";
+        string? pathName = up + "\\documents\\My Games\\The Masters Lair";
 
         return pathName;
     }
@@ -24,7 +24,7 @@ public class DeviceData : IDeviceData
     public static string GetSavePathStatic()
     {
         string? up = System.Environment.GetEnvironmentVariable("USERPROFILE");
-        string? pathName = up + "\\documents\\My Games\\Das Versteck des Meisters";
+        string? pathName = up + "\\documents\\My Games\\The Masters Lair";
 
         return pathName;
     }

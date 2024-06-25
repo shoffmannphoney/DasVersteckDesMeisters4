@@ -4018,6 +4018,7 @@ namespace GameCore
             CA!.Noun_Abdeckung = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Abdeckung, "Noun_Abdeckung"));
             CA!.Noun_Deckel = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Deckel, "Noun_Deckel"));
             CA!.Noun_Verbandskasten = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Verbandskasten, "Noun_Verbandskasten"));
+            CA!.Noun_Kit = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Kit, "Noun_Kit"));
             CA!.Noun_Plastik = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Plastik, "Noun_Plastik"));
             CA!.Noun_Pilz = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Pilz, "Noun_Pilz"));
             CA!.Noun_Funghi = Nouns!.Add(Noun.NounLocaLoca(loca.Noun_Funghi, "Noun_Funghi"));
@@ -12959,6 +12960,7 @@ namespace GameCore
         public Noun? Noun_Abdeckung;
         public Noun? Noun_Deckel;
         public Noun? Noun_Verbandskasten;
+        public Noun? Noun_Kit;
         public Noun? Noun_Plastik;
         public Noun? Noun_Pilz;
         public Noun? Noun_Funghi;

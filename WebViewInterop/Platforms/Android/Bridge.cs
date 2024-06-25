@@ -117,7 +117,7 @@ public partial class Bridge : Java.Lang.Object
             if (len > 100)
                 len = 100;
 
-            AddLog( script.Substring(0, len), protMode.extensive);
+            AddLog( "JS Call: " + script.Substring(0, len), protMode.extensive);
             var javascriptResult = new StringCallback();
 
             Context!.RunOnUiThread(() =>
@@ -130,7 +130,7 @@ public partial class Bridge : Java.Lang.Object
         }
         catch (Exception ex)
         {
-            AddLog(ex.Message, protMode.crisp);
+            AddLog("Exception EvaluateJavascriptAsync: " + ex.Message, protMode.crisp);
             return null;
         }
 
@@ -146,7 +146,7 @@ public partial class Bridge : Java.Lang.Object
         }
         catch (Exception ex)
         {
-            AddLog(ex.Message, protMode.crisp);
+            AddLog( "NavigateToStrign: " + ex.Message, protMode.crisp);
 
         }
     }   

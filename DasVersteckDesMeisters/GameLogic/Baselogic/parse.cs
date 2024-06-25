@@ -422,177 +422,258 @@ namespace GameCore
 
         public Person? GetFirstPerson()
         {
-            int i;
-            Person? person = null;
-
-            for (i = 0; i < this.Count(); i++)
+            try
             {
-                if (this.Index(i)!.O!.GetType() == typeof(Person))
+                int i;
+                Person? person = null;
+
+                for (i = 0; i < this.Count(); i++)
                 {
-                    person = (Person)this.Index(i)!.O!;
+                    if (this.Index(i)!.O!.GetType() == typeof(Person))
+                    {
+                        person = (Person)this.Index(i)!.O!;
+                    }
+                    if (person != null) break;
                 }
-                if (person != null) break;
+                return (person);
             }
-            return (person);
+            catch (Exception e)
+            {
+                GlobalData.AddLog("Parse.GetFirstPerson: " + e.Message, IGlobalData.protMode.crisp);
+                return null;
+            }
+
         }
 
         public Person? GetSecondPerson()
         {
-            int i;
-            int ct = 0;
-            Person? person = null;
-
-            for (i = 0; i < this.Count(); i++)
+            try
             {
-                if (this.Index(i)!.O!.GetType() == typeof(Person))
+                int i;
+                int ct = 0;
+                Person? person = null;
+
+                for (i = 0; i < this.Count(); i++)
                 {
-                    ct++;
-                    if (ct == 2)
+                    if (this.Index(i)!.O!.GetType() == typeof(Person))
                     {
-                        person = (Person)this.Index(i)!.O!;
+                        ct++;
+                        if (ct == 2)
+                        {
+                            person = (Person)this.Index(i)!.O!;
+                        }
                     }
+                    if (person != null) break;
                 }
-                if (person != null) break;
+                return (person);
             }
-            return (person);
+            catch (Exception e)
+            {
+                GlobalData.AddLog("Parse.GetSecondPerson: " + e.Message, IGlobalData.protMode.crisp);
+                return null;
+            }
+
         }
 
         public Person? GetThirdPerson()
         {
-            int i;
-            int ct = 0;
-            Person? person = null;
-
-            for (i = 0; i < this.Count(); i++)
+            try
             {
-                if (this!.Index(i)!.O!.GetType() == typeof(Person))
+                int i;
+                int ct = 0;
+                Person? person = null;
+
+                for (i = 0; i < this.Count(); i++)
                 {
-                    ct++;
-                    if (ct == 3)
+                    if (this!.Index(i)!.O!.GetType() == typeof(Person))
                     {
-                        person = (Person)this.Index(i)!.O!;
+                        ct++;
+                        if (ct == 3)
+                        {
+                            person = (Person)this.Index(i)!.O!;
+                        }
                     }
+                    if (person != null) break;
                 }
-                if (person != null) break;
+                return (person);
             }
-            return (person);
+            catch (Exception e)
+            {
+                GlobalData.AddLog("Parse.GetThirdPerson: " + e.Message, IGlobalData.protMode.crisp);
+                return null;
+            }
+
         }
 
         public Item? GetFirstItem()
         {
-            int i;
-            Item? item = null;
-
-            for (i = 0; i < this.Count(); i++)
+            try
             {
-                if (this.Index(i)!.O!.GetType()! == typeof(Item))
+                int i;
+                Item? item = null;
+
+                for (i = 0; i < this.Count(); i++)
                 {
-                    item = (Item)this.Index(i)!.O!;
+                    if (this.Index(i)!.O!.GetType()! == typeof(Item))
+                    {
+                        item = (Item)this.Index(i)!.O!;
+                    }
+                    if (item != null) break;
                 }
-                if (item != null) break;
+                return (item);
             }
-            return (item);
+            catch (Exception e)
+            {
+                GlobalData.AddLog("Parse.GetFirstItem: " + e.Message, IGlobalData.protMode.crisp);
+                return null;
+            }
+
         }
 
         public Item? GetSecondItem()
         {
-            int i;
-            int ct = 0;
-            Item? item = null;
-
-            for (i = 0; i < this.Count(); i++)
+            try
             {
-                if (this.Index(i)!.O!.GetType()! == typeof(Item))
+                int i;
+                int ct = 0;
+                Item? item = null;
+
+                for (i = 0; i < this.Count(); i++)
                 {
-                    ct++;
-                    if (ct == 2)
+                    if (this.Index(i)!.O!.GetType()! == typeof(Item))
                     {
-                        item = (Item)this.Index(i)!.O!;
+                        ct++;
+                        if (ct == 2)
+                        {
+                            item = (Item)this.Index(i)!.O!;
+                        }
                     }
+                    if (item != null) break;
                 }
-                if (item != null) break;
+                return (item);
             }
-            return (item);
+            catch (Exception e)
+            {
+                GlobalData.AddLog("Parse.GetSecondItem: " + e.Message, IGlobalData.protMode.crisp);
+                return null;
+            }
+
         }
 
         public Item? GetThirdItem()
         {
-            int i;
-            int ct = 0;
-            Item? item = null;
-
-            for (i = 0; i < this.Count(); i++)
+            try
             {
-                if (this.Index(i)!.O!.GetType()! == typeof(Item))
+                int i;
+                int ct = 0;
+                Item? item = null;
+
+                for (i = 0; i < this.Count(); i++)
                 {
-                    ct++;
-                    if (ct == 3)
+                    if (this.Index(i)!.O!.GetType()! == typeof(Item))
                     {
-                        item = (Item)this.Index(i)!.O!;
+                        ct++;
+                        if (ct == 3)
+                        {
+                            item = (Item)this.Index(i)!.O!;
+                        }
                     }
+                    if (item != null) break;
                 }
-                if (item != null) break;
+                return (item);
             }
-            return (item);
+            catch (Exception e)
+            {
+                GlobalData.AddLog("Parse.GetThirdItem: " + e.Message, IGlobalData.protMode.crisp);
+                return null;
+            }
+
         }
 
 
         public Topic? GetFirstTopic()
         {
-            int i;
-            Topic? topic = null;
-
-            for (i = 0; i < this.Count(); i++)
+            try
             {
-                if (this.Index(i)!.O!.GetType()! == typeof(Topic))
+                int i;
+                Topic? topic = null;
+
+                for (i = 0; i < this.Count(); i++)
                 {
-                    topic = (Topic)this.Index(i)!.O!;
+                    if (this.Index(i)!.O!.GetType()! == typeof(Topic))
+                    {
+                        topic = (Topic)this.Index(i)!.O!;
+                    }
+                    if (topic != null) break;
                 }
-                if (topic != null) break;
+                return (topic);
             }
-            return (topic);
+            catch (Exception e)
+            {
+                GlobalData.AddLog("Parse.GetFirstTopic: " + e.Message, IGlobalData.protMode.crisp);
+                return null;
+            }
+
         }
 
         public Topic? GetSecondTopic()
         {
-            int i;
-            int ct = 0;
-            Topic? topic = null;
-
-            for (i = 0; i < this.Count(); i++)
+            try
             {
-                if (this.Index(i)!.O!.GetType()! == typeof(Topic))
+                int i;
+                int ct = 0;
+                Topic? topic = null;
+
+                for (i = 0; i < this.Count(); i++)
                 {
-                    ct++;
-                    if (ct == 2)
+                    if (this.Index(i)!.O!.GetType()! == typeof(Topic))
                     {
-                        topic = (Topic)this.Index(i)!.O!;
+                        ct++;
+                        if (ct == 2)
+                        {
+                            topic = (Topic)this.Index(i)!.O!;
+                        }
                     }
+                    if (topic != null) break;
                 }
-                if (topic != null) break;
+                return (topic);
             }
-            return (topic);
+            catch (Exception e)
+            {
+                GlobalData.AddLog("Parse.GetSecondTopic: " + e.Message, IGlobalData.protMode.crisp);
+                return null;
+            }
+
         }
 
         public Topic? GetThirdTopic()
         {
-            int i;
-            int ct = 0;
-            Topic? topic = null;
-
-            for (i = 0; i < this.Count(); i++)
+            try
             {
-                if (this.Index(i)!.O!.GetType() == typeof(Topic))
+                int i;
+                int ct = 0;
+                Topic? topic = null;
+
+                for (i = 0; i < this.Count(); i++)
                 {
-                    ct++;
-                    if (ct == 3)
+                    if (this.Index(i)!.O!.GetType() == typeof(Topic))
                     {
-                        topic = (Topic)this.Index(i)!.O!;
+                        ct++;
+                        if (ct == 3)
+                        {
+                            topic = (Topic)this.Index(i)!.O!;
+                        }
                     }
+                    if (topic != null) break;
                 }
-                if (topic != null) break;
+                return (topic);
             }
-            return (topic);
+            catch (Exception e)
+            {
+                GlobalData.AddLog("Parse.GetThirdTopic: " + e.Message, IGlobalData.protMode.crisp);
+                return null;
+            }
+
         }
     }
     [Serializable]
@@ -650,21 +731,31 @@ namespace GameCore
 
 
 
-        public static ParseLine Copy( ParseLine plSource )
+        public static ParseLine? Copy( ParseLine plSource )
         {
-            ParseLine plDest = new ParseLine(plSource.ParseID, null, plSource.ParseMethod);
-            plDest.PTL = plSource.PTL!.Clone( );
-            plDest.CollectIt = plSource.CollectIt;
-
-            plDest.PTL!.PList = new List<ParseToken>();
-            foreach( ParseToken pt in plSource.PTL!.PList! )
+            try
             {
-                plDest.PTL!.PList.Add(new ParseToken());
-                plDest.PTL!.PList[plDest.PTL!.PList.Count - 1].O = pt.O;
-                plDest.PTL!.PList[plDest.PTL!.PList.Count - 1].RangeInfo = pt.RangeInfo;
+
+                ParseLine plDest = new ParseLine(plSource.ParseID, null, plSource.ParseMethod);
+                plDest.PTL = plSource.PTL!.Clone();
+                plDest.CollectIt = plSource.CollectIt;
+
+                plDest.PTL!.PList = new List<ParseToken>();
+                foreach (ParseToken pt in plSource.PTL!.PList!)
+                {
+                    plDest.PTL!.PList.Add(new ParseToken());
+                    plDest.PTL!.PList[plDest.PTL!.PList.Count - 1].O = pt.O;
+                    plDest.PTL!.PList[plDest.PTL!.PList.Count - 1].RangeInfo = pt.RangeInfo;
+                }
+                // plSource.PTL!.PList);
+                return (plDest);
             }
-            // plSource.PTL!.PList);
-            return (plDest);
+            catch (Exception e)
+            {
+                GlobalData.AddLog("Parse.Copy: " + e.Message, IGlobalData.protMode.crisp);
+                return null;
+            }
+
         }
 
         public void SetParseMethodByString( Object o )
@@ -844,51 +935,59 @@ namespace GameCore
 
         public string? StringVersion(ParseTokenList ptl)
         {
-
-            string? s = "";
-
-
-            foreach (ParseToken pt in ptl.PList!)
+            try
             {
-                if (pt.O?.GetType() == typeof(Verb))
-                {
-                    s = s + (pt.O as Verb)!.Name + " ";
-                }
-                else if (pt.O?.GetType() == typeof(Prep))
-                {
-                    s = s + (pt.O as Prep)!.Name + " ";
-                }
-                else if (pt.O?.GetType() == typeof(Pronoun))
-                {
-                    s = s + (pt.O as Pronoun)!.Name + " ";
-                }
-                else if (pt.O?.GetType() == typeof(Fill))
-                {
-                    s = s + (pt.O as Fill)!.Name + " ";
-                }
-                else if (pt.O?.GetType() == typeof(Noun))
-                {
-                    s = s + (pt.O as Noun)!.Name + " ";
-                }
-                else if (pt.O?.GetType() == typeof(Adj))
-                {
-                    s = s + (pt.O as Adj)!.Name + " ";
-                }
-                else if (pt.O?.GetType() == typeof(Item))
-                {
-                    int caseVal = pt.CaseVal;
+                string? s = "";
 
-                    if (caseVal == 0)
-                        caseVal = Co.CASE_NOM;
-                    s = s + Items!.GetName((pt.O as Item)!.ID, caseVal, AdvGame!.CurrentNouns!) + " ";
-                }
-                else if (pt.O?.GetType() == typeof(Person))
+
+                foreach (ParseToken pt in ptl.PList!)
                 {
-                    s = s + Persons!.GetPersonName((pt.O as Person), pt.CaseVal, AdvGame!.CurrentNouns!) + " ";
+                    if (pt.O?.GetType() == typeof(Verb))
+                    {
+                        s = s + (pt.O as Verb)!.Name + " ";
+                    }
+                    else if (pt.O?.GetType() == typeof(Prep))
+                    {
+                        s = s + (pt.O as Prep)!.Name + " ";
+                    }
+                    else if (pt.O?.GetType() == typeof(Pronoun))
+                    {
+                        s = s + (pt.O as Pronoun)!.Name + " ";
+                    }
+                    else if (pt.O?.GetType() == typeof(Fill))
+                    {
+                        s = s + (pt.O as Fill)!.Name + " ";
+                    }
+                    else if (pt.O?.GetType() == typeof(Noun))
+                    {
+                        s = s + (pt.O as Noun)!.Name + " ";
+                    }
+                    else if (pt.O?.GetType() == typeof(Adj))
+                    {
+                        s = s + (pt.O as Adj)!.Name + " ";
+                    }
+                    else if (pt.O?.GetType() == typeof(Item))
+                    {
+                        int caseVal = pt.CaseVal;
+
+                        if (caseVal == 0)
+                            caseVal = Co.CASE_NOM;
+                        s = s + Items!.GetName((pt.O as Item)!.ID, caseVal, AdvGame!.CurrentNouns!) + " ";
+                    }
+                    else if (pt.O?.GetType() == typeof(Person))
+                    {
+                        s = s + Persons!.GetPersonName((pt.O as Person), pt.CaseVal, AdvGame!.CurrentNouns!) + " ";
+                    }
                 }
+
+                return s;
+            }
+            catch (Exception e)
+            {
+                GlobalData.AddLog("Parse.StringVersion: " + e.Message, IGlobalData.protMode.crisp);
+                return null;
             }
 
-            return s;
         }
 
 
@@ -934,406 +1033,416 @@ namespace GameCore
 
         private bool StringToParseTokens(string s, ParseTokenList PTL, ref string ErrorText)
         {
-            string[] separatedWords;
-            char[] charSeparators = new char[] { ',', ' ', '.', ';' };
-            separatedWords = s.Split(charSeparators, StringSplitOptions.RemoveEmptyEntries);
-            bool found = false;
-            Item? itemsFound = null;
-            int personsFound = 0;
-            int topicsFound = 0;
-            ErrorText = "";
-
-            foreach (string element in separatedWords)
+            try
             {
-                found = false;
-                if (!found)
+                string[] separatedWords;
+                char[] charSeparators = new char[] { ',', ' ', '.', ';' };
+                separatedWords = s.Split(charSeparators, StringSplitOptions.RemoveEmptyEntries);
+                bool found = false;
+                Item? itemsFound = null;
+                int personsFound = 0;
+                int topicsFound = 0;
+                ErrorText = "";
+
+                foreach (string element in separatedWords)
                 {
-                    Noun n = Nouns!.Find(element)!;
-                    if (n != null)
+                    found = false;
+                    if (!found)
                     {
-                        PTL!.AddNoun(n.ID);
-                        found = true;
-                    }
-                }
-                if (!found)
-                {
-                    Adj a = Adjs!.FindAdj(element)!;
-                    if (a != null)
-                    {
-                        PTL!.AddAdj(a.ID);
-                        found = true;
-                    }
-                }
-                if (!found)
-                {
-                    Verb v = Verbs!.Find(element)!;
-                    if (v != null)
-                    {
-                        PTL!.AddVerb(v);
-                        found = true;
-                    }
-                }
-                if (!found)
-                {
-                    Prep p = Preps!.Find(element)!;
-                    if (p != null)
-                    {
-                        PTL!.AddPrep(p);
-                        found = true;
-                    }
-                }
-                if (!found)
-                {
-                    Fill f = Fills!.Find(element)!;
-                    if (f != null)
-                    {
-                        PTL!.AddFill(f.ID);
-                        found = true;
-                    }
-                }
-                if (!found)
-                {
-                    ErrorText = String.Format( loca.Parse_StringToParseTokens_16223, element);
-
-                    break;
-                }
-            }
-            // Adj + Nouns zu Items
-            if (found)
-            {
-                int i, j;
-
-                for (i = 0; i < PTL!.Count(); i++)
-                {
-                    
-                    List<Item> possibleItems = new List<Item>();
-                    List<Person> possiblePersons = new List<Person>();
-                    List<Topic> possibleTopics = new List<Topic>();
-
-                    // Hier wird ein Item eingeleitet
-                    if ((PTL!.Index(i)!.O!.GetType()! == typeof(Adj)) || (PTL!.Index(i)!.O!.GetType()! == typeof(Noun)))
-                    {
-                        for (j = i + 1; j < PTL!.Count(); j++)
+                        Noun n = Nouns!.Find(element)!;
+                        if (n != null)
                         {
-                            // Hier wird ein Item eingeleitet
-                            if ((PTL!.Index(j)!.O!.GetType()! != typeof(Adj)) && (PTL!.Index(j)!.O!.GetType() != typeof(Noun)))
-                                break;
-
-                        }
-
-
-                        // soviel kann man nun festhalten: Das Item reicht von i bis j-1
-                        /*
-                        for (int li = 0; li < Items!.List.Count; li++)
-                        {
-                            int k, l;
-                            bool identical = false;
-                            bool foundItem = Items!.IsItemHere(Items!.List[li], Co.Range_Active);
-
-                            if (foundItem)
-                            {
-                                // jetzt werden alle Einträge abgeglichen
-                                for (k = i; k < j; k++)
-                                {
-                                    identical = false;
-                                    if (PTL!.Index(k).O.GetType() == typeof(Noun))
-                                    {
-                                        for (l = 0; l < Items!.List[li].Names.Count; l++)
-                                        {
-                                            if (((Noun)PTL!.Index(k).O).ID == Items!.List[li].Names[l].ID)
-                                            {
-                                                identical = true;
-                                            }
-                                        }
-                                        for (l = 0; l < Items!.List[li].SynNames!.Count; l++)
-                                        {
-                                            if (((Noun)PTL!.Index(k).O).ID == Items!.List[li].SynNames[l].ID)
-                                            {
-                                                identical = true;
-                                            }
-                                        }
-                                    }
-                                    else if (PTL!.Index(k).O.GetType() == typeof(Adj))
-                                    {
-                                        for (l = 0; l < Items!.List[li].Adjectives.Count; l++)
-                                        {
-                                            if (((Adj)PTL!.Index(k).O).ID == Items!.List[li].Adjectives[l].ID)
-                                            {
-                                                identical = true;
-                                            }
-                                        }
-                                        for (l = 0; l < Items!.List[li].SynAdjectives.Count; l++)
-                                        {
-                                            if (((Adj)PTL!.Index(k).O).ID == Items!.List[li].SynAdjectives[l].ID)
-                                            {
-                                                identical = true;
-                                            }
-                                        }
-                                    }
-                                    if (!identical) break;
-                                }
-                            }
-                            // Ja, dieses Item könnte es sein. 
-                            if (identical)
-                            {
-                                possibleItems!.Add(Items!.List[li]);
-                                itemsFound = li;
-                            }
-                        }
-                        */
-                        foreach (Item liItem in Items!.List!.Values)
-                        {
-                            int k, l;
-                            bool identical = false;
-                            bool foundItem = Items!.IsItemHere(liItem, Co.Range_Active);
-
-                            if (foundItem)
-                            {
-                                // jetzt werden alle Einträge abgeglichen
-                                for (k = i; k < j; k++)
-                                {
-                                    identical = false;
-                                    if (PTL!.Index(k)!.O!.GetType() == typeof(Noun))
-                                    {
-                                        for (l = 0; l < liItem!.Names!.Count; l++)
-                                        {
-                                            if (((Noun)PTL!.Index(k)!.O!)!.ID! == liItem!.Names![l]!.ID)
-                                            {
-                                                identical = true;
-                                            }
-                                        }
-                                        for (l = 0; l < liItem.SynNames!.Count; l++)
-                                        {
-                                            if (((Noun)PTL!.Index(k)!.O!)!.ID! == liItem!.SynNames![l]!.ID)
-                                            {
-                                                identical = true;
-                                            }
-                                        }
-                                    }
-                                    else if (PTL!.Index(k)!.O!.GetType() == typeof(Adj))
-                                    {
-                                        for (l = 0; l < liItem!.Adjectives!.Count; l++)
-                                        {
-                                            if (((Adj)PTL!.Index(k)!.O!)!.ID! == liItem!.Adjectives![l]!.ID)
-                                            {
-                                                identical = true;
-                                            }
-                                        }
-                                        for (l = 0; l < liItem!.SynAdjectives!.Count; l++)
-                                        {
-                                            if (((Adj)PTL!.Index(k)!.O!)!.ID! == liItem!.SynAdjectives![l]!.ID!)
-                                            {
-                                                identical = true;
-                                            }
-                                        }
-                                    }
-                                    if (!identical) break;
-                                }
-                            }
-                            // Ja, dieses Item könnte es sein. 
-                            if (identical)
-                            {
-                                possibleItems!.Add(liItem);
-                                itemsFound = liItem;
-                            }
-
-                        }
-
-
-                        // Jetzt suchen wir noch nach Personen
-                        for (int li = 0; li < Persons!.List!.Count; li++)
-                        {
-                            int k, l;
-                            bool identical = false;
-                            bool foundPerson = Persons!.IsPersonHere(Persons!.List[li], Co.Range_Active);
-
-                            if (foundPerson)
-                            {
-                                // jetzt werden alle Einträge abgeglichen
-                                for (k = i; k < j; k++)
-                                {
-                                    identical = false;
-                                    if (PTL!.Index(k)!.O!.GetType() == typeof(Noun))
-                                    {
-                                        for (l = 0; l < Persons!.List![li]!.Names!.Count; l++)
-                                        {
-                                            if (((Noun)PTL!.Index(k)!.O!)!.ID! == Persons!.List![li!]!.Names![l!]!.ID!)
-                                            {
-                                                identical = true;
-                                            }
-                                        }
-                                        for (l = 0; l < Persons!.List[li].SynNames!.Count; l++)
-                                        {
-                                            if (((Noun)PTL!.Index(k)!.O!)!.ID! == Persons!.List![li!]!.SynNames![l!]!.ID!)
-                                            {
-                                                identical = true;
-                                            }
-                                        }
-                                    }
-                                    else if (PTL!.Index(k)!.O!.GetType() == typeof(Adj))
-                                    {
-                                        for (l = 0; l < Persons!.List[li]!.Adjectives!.Count; l++)
-                                        {
-                                            if (((Adj)PTL!.Index(k)!.O!)!.ID! == Persons!.List![li!].Adjectives![l]!.ID!)
-                                            {
-                                                identical = true;
-                                            }
-                                        }
-                                        for (l = 0; l < Persons!.List[li].SynAdjectives!.Count; l++)
-                                        {
-                                            if (((Adj)PTL!.Index(k)!.O!)!.ID == Persons!.List![li]!.SynAdjectives![l]!.ID!)
-                                            {
-                                                identical = true;
-                                            }
-                                        }
-                                    }
-                                    if (!identical) break;
-                                }
-                            }
-                            // Ja, dieses Item könnte es sein. 
-                            if (identical)
-                            {
-                                possiblePersons!.Add(Persons!.List[li]);
-                                personsFound = li;
-                            }
-                        }
-                        // Jetzt suchen wir noch nach Topics
-                        for (int li = 0; li < Topics!.List!.Count!; li++)
-                        {
-                            int k, l;
-                            bool identical = false;
-                            bool foundTopic = Topics.IsTopicHere(Topics.List[li], Co.Range_Active);
-
-                            if (foundTopic)
-                            {
-                                // jetzt werden alle Einträge abgeglichen
-                                for (k = i; k < j; k++)
-                                {
-                                    identical = false;
-                                    if (PTL!.Index(k)!.O!.GetType() == typeof(Noun))
-                                    {
-                                        for (l = 0; l < Topics.List[li].Names!.Count!; l++)
-                                        {
-                                            if (((Noun)PTL!.Index(k)!.O!)!.ID! == Topics!.List![li]!.Names![l]!.ID!)
-                                            {
-                                                identical = true;
-                                            }
-                                        }
-                                        for (l = 0; l < Topics.List[li].SynNames!.Count; l++)
-                                        {
-                                            if (((Noun)PTL!.Index(k)!.O!)!.ID! == Topics!.List[li]!.SynNames![l]!.ID!)
-                                            {
-                                                identical = true;
-                                            }
-                                        }
-                                    }
-                                    else if (PTL!.Index(k)!.O!.GetType() == typeof(Adj))
-                                    {
-                                        for (l = 0; l < Topics.List[li].Adjectives!.Count!; l++)
-                                        {
-                                            if (((Adj)PTL!.Index(k)!.O!)!.ID == Topics!.List[li]!.Adjectives![l]!.ID)
-                                            {
-                                                identical = true;
-                                            }
-                                        }
-                                        for (l = 0; l < Topics.List[li].SynAdjectives!.Count!; l++)
-                                        {
-                                            if (((Adj)PTL!.Index(k)!.O!)!.ID == Topics.List[li].SynAdjectives![l]!.ID)
-                                            {
-                                                identical = true;
-                                            }
-                                        }
-                                    }
-                                    if (!identical) break;
-                                }
-                            }
-                            // Ja, dieses Item könnte es sein. 
-                            if (identical)
-                            {
-                                possibleTopics.Add(Topics.List[li]);
-                                topicsFound = li;
-                            }
-                        }
-
-                        int itemPersonTopicCount = possibleItems!.Count + possiblePersons!.Count + possibleTopics.Count;
-                        if (itemPersonTopicCount == 0)
-                        {
-                            ErrorText = loca.Parse_StringToParseTokens_16224;
-                            found = false;
-                        }
-                        else if (itemPersonTopicCount >= 2)
-                        {
-                            int l = i;
-                            int ct = 0;
-                            PTL!.Insert(l++, new ParseToken((IParseElement)new Variety(), Co.Range_Overall));
-                            PTL!.Index(l - 1)!.RangeInfo = itemPersonTopicCount;
-
-                            ct = possibleItems!.Count;
-                            while (ct > 0)
-                            {
-                                ct--;
-                                PTL!.Insert(l++, new ParseToken(Items!.List[Items!.GetItemIx(possibleItems[ct].ID)], Co.Range_Overall));
-                                // ((Item)PTL!.Index(l - 1).O).ID = PossibleItems[Ct].ID;
-                            }
-                            ct = possiblePersons!.Count;
-                            while (ct > 0)
-                            {
-                                ct--;
-                                PTL!.Insert(l++, new ParseToken((IParseElement)Persons!.List[Persons!.GetPersonIx(possiblePersons[ct].ID)], Co.Range_Overall));
-                            }
-                            ct = possibleTopics.Count;
-                            while (ct > 0)
-                            {
-                                ct--;
-                                PTL!.Insert(l++, new ParseToken((IParseElement)Topics.List[Topics.GetTopicIx(possibleTopics[ct].ID)], Co.Range_Overall));
-                            }
+                            PTL!.AddNoun(n.ID);
                             found = true;
-                            for (int k = i + itemPersonTopicCount; k < j + itemPersonTopicCount; k++)
-                            {
-                                PTL!.RemoveAt(l);
-                            }
                         }
-                        else
+                    }
+                    if (!found)
+                    {
+                        Adj a = Adjs!.FindAdj(element)!;
+                        if (a != null)
                         {
-                            // Keine Ahnung, wofür dieser Codeblock gut ist
-                            if (possibleItems!.Count == 1)
+                            PTL!.AddAdj(a.ID);
+                            found = true;
+                        }
+                    }
+                    if (!found)
+                    {
+                        Verb v = Verbs!.Find(element)!;
+                        if (v != null)
+                        {
+                            PTL!.AddVerb(v);
+                            found = true;
+                        }
+                    }
+                    if (!found)
+                    {
+                        Prep p = Preps!.Find(element)!;
+                        if (p != null)
+                        {
+                            PTL!.AddPrep(p);
+                            found = true;
+                        }
+                    }
+                    if (!found)
+                    {
+                        Fill f = Fills!.Find(element)!;
+                        if (f != null)
+                        {
+                            PTL!.AddFill(f.ID);
+                            found = true;
+                        }
+                    }
+                    if (!found)
+                    {
+                        ErrorText = String.Format(loca.Parse_StringToParseTokens_16223, element);
+
+                        break;
+                    }
+                }
+                // Adj + Nouns zu Items
+                if (found)
+                {
+                    int i, j;
+
+                    for (i = 0; i < PTL!.Count(); i++)
+                    {
+
+                        List<Item> possibleItems = new List<Item>();
+                        List<Person> possiblePersons = new List<Person>();
+                        List<Topic> possibleTopics = new List<Topic>();
+
+                        // Hier wird ein Item eingeleitet
+                        if ((PTL!.Index(i)!.O!.GetType()! == typeof(Adj)) || (PTL!.Index(i)!.O!.GetType()! == typeof(Noun)))
+                        {
+                            for (j = i + 1; j < PTL!.Count(); j++)
                             {
-                                PTL!.Insert(i, new ParseToken((IParseElement)itemsFound!, Co.Range_Overall)!);
-                                for (int k = i; k < j; k++)
+                                // Hier wird ein Item eingeleitet
+                                if ((PTL!.Index(j)!.O!.GetType()! != typeof(Adj)) && (PTL!.Index(j)!.O!.GetType() != typeof(Noun)))
+                                    break;
+
+                            }
+
+
+                            // soviel kann man nun festhalten: Das Item reicht von i bis j-1
+                            /*
+                            for (int li = 0; li < Items!.List.Count; li++)
+                            {
+                                int k, l;
+                                bool identical = false;
+                                bool foundItem = Items!.IsItemHere(Items!.List[li], Co.Range_Active);
+
+                                if (foundItem)
                                 {
-                                    PTL!.RemoveAt(i + 1);
+                                    // jetzt werden alle Einträge abgeglichen
+                                    for (k = i; k < j; k++)
+                                    {
+                                        identical = false;
+                                        if (PTL!.Index(k).O.GetType() == typeof(Noun))
+                                        {
+                                            for (l = 0; l < Items!.List[li].Names.Count; l++)
+                                            {
+                                                if (((Noun)PTL!.Index(k).O).ID == Items!.List[li].Names[l].ID)
+                                                {
+                                                    identical = true;
+                                                }
+                                            }
+                                            for (l = 0; l < Items!.List[li].SynNames!.Count; l++)
+                                            {
+                                                if (((Noun)PTL!.Index(k).O).ID == Items!.List[li].SynNames[l].ID)
+                                                {
+                                                    identical = true;
+                                                }
+                                            }
+                                        }
+                                        else if (PTL!.Index(k).O.GetType() == typeof(Adj))
+                                        {
+                                            for (l = 0; l < Items!.List[li].Adjectives.Count; l++)
+                                            {
+                                                if (((Adj)PTL!.Index(k).O).ID == Items!.List[li].Adjectives[l].ID)
+                                                {
+                                                    identical = true;
+                                                }
+                                            }
+                                            for (l = 0; l < Items!.List[li].SynAdjectives.Count; l++)
+                                            {
+                                                if (((Adj)PTL!.Index(k).O).ID == Items!.List[li].SynAdjectives[l].ID)
+                                                {
+                                                    identical = true;
+                                                }
+                                            }
+                                        }
+                                        if (!identical) break;
+                                    }
+                                }
+                                // Ja, dieses Item könnte es sein. 
+                                if (identical)
+                                {
+                                    possibleItems!.Add(Items!.List[li]);
+                                    itemsFound = li;
                                 }
                             }
-                            else if (possibleTopics.Count == 1)
+                            */
+                            foreach (Item liItem in Items!.List!.Values)
                             {
-                                PTL!.Insert(i, new ParseToken((IParseElement)Topics.List[topicsFound], Co.Range_Overall));
-                                for (int k = i; k < j; k++)
+                                int k, l;
+                                bool identical = false;
+                                bool foundItem = Items!.IsItemHere(liItem, Co.Range_Active);
+
+                                if (foundItem)
                                 {
-                                    PTL!.RemoveAt(i + 1);
+                                    // jetzt werden alle Einträge abgeglichen
+                                    for (k = i; k < j; k++)
+                                    {
+                                        identical = false;
+                                        if (PTL!.Index(k)!.O!.GetType() == typeof(Noun))
+                                        {
+                                            for (l = 0; l < liItem!.Names!.Count; l++)
+                                            {
+                                                if (((Noun)PTL!.Index(k)!.O!)!.ID! == liItem!.Names![l]!.ID)
+                                                {
+                                                    identical = true;
+                                                }
+                                            }
+                                            for (l = 0; l < liItem.SynNames!.Count; l++)
+                                            {
+                                                if (((Noun)PTL!.Index(k)!.O!)!.ID! == liItem!.SynNames![l]!.ID)
+                                                {
+                                                    identical = true;
+                                                }
+                                            }
+                                        }
+                                        else if (PTL!.Index(k)!.O!.GetType() == typeof(Adj))
+                                        {
+                                            for (l = 0; l < liItem!.Adjectives!.Count; l++)
+                                            {
+                                                if (((Adj)PTL!.Index(k)!.O!)!.ID! == liItem!.Adjectives![l]!.ID)
+                                                {
+                                                    identical = true;
+                                                }
+                                            }
+                                            for (l = 0; l < liItem!.SynAdjectives!.Count; l++)
+                                            {
+                                                if (((Adj)PTL!.Index(k)!.O!)!.ID! == liItem!.SynAdjectives![l]!.ID!)
+                                                {
+                                                    identical = true;
+                                                }
+                                            }
+                                        }
+                                        if (!identical) break;
+                                    }
+                                }
+                                // Ja, dieses Item könnte es sein. 
+                                if (identical)
+                                {
+                                    possibleItems!.Add(liItem);
+                                    itemsFound = liItem;
+                                }
+
+                            }
+
+
+                            // Jetzt suchen wir noch nach Personen
+                            for (int li = 0; li < Persons!.List!.Count; li++)
+                            {
+                                int k, l;
+                                bool identical = false;
+                                bool foundPerson = Persons!.IsPersonHere(Persons!.List[li], Co.Range_Active);
+
+                                if (foundPerson)
+                                {
+                                    // jetzt werden alle Einträge abgeglichen
+                                    for (k = i; k < j; k++)
+                                    {
+                                        identical = false;
+                                        if (PTL!.Index(k)!.O!.GetType() == typeof(Noun))
+                                        {
+                                            for (l = 0; l < Persons!.List![li]!.Names!.Count; l++)
+                                            {
+                                                if (((Noun)PTL!.Index(k)!.O!)!.ID! == Persons!.List![li!]!.Names![l!]!.ID!)
+                                                {
+                                                    identical = true;
+                                                }
+                                            }
+                                            for (l = 0; l < Persons!.List[li].SynNames!.Count; l++)
+                                            {
+                                                if (((Noun)PTL!.Index(k)!.O!)!.ID! == Persons!.List![li!]!.SynNames![l!]!.ID!)
+                                                {
+                                                    identical = true;
+                                                }
+                                            }
+                                        }
+                                        else if (PTL!.Index(k)!.O!.GetType() == typeof(Adj))
+                                        {
+                                            for (l = 0; l < Persons!.List[li]!.Adjectives!.Count; l++)
+                                            {
+                                                if (((Adj)PTL!.Index(k)!.O!)!.ID! == Persons!.List![li!].Adjectives![l]!.ID!)
+                                                {
+                                                    identical = true;
+                                                }
+                                            }
+                                            for (l = 0; l < Persons!.List[li].SynAdjectives!.Count; l++)
+                                            {
+                                                if (((Adj)PTL!.Index(k)!.O!)!.ID == Persons!.List![li]!.SynAdjectives![l]!.ID!)
+                                                {
+                                                    identical = true;
+                                                }
+                                            }
+                                        }
+                                        if (!identical) break;
+                                    }
+                                }
+                                // Ja, dieses Item könnte es sein. 
+                                if (identical)
+                                {
+                                    possiblePersons!.Add(Persons!.List[li]);
+                                    personsFound = li;
+                                }
+                            }
+                            // Jetzt suchen wir noch nach Topics
+                            for (int li = 0; li < Topics!.List!.Count!; li++)
+                            {
+                                int k, l;
+                                bool identical = false;
+                                bool foundTopic = Topics.IsTopicHere(Topics.List[li], Co.Range_Active);
+
+                                if (foundTopic)
+                                {
+                                    // jetzt werden alle Einträge abgeglichen
+                                    for (k = i; k < j; k++)
+                                    {
+                                        identical = false;
+                                        if (PTL!.Index(k)!.O!.GetType() == typeof(Noun))
+                                        {
+                                            for (l = 0; l < Topics.List[li].Names!.Count!; l++)
+                                            {
+                                                if (((Noun)PTL!.Index(k)!.O!)!.ID! == Topics!.List![li]!.Names![l]!.ID!)
+                                                {
+                                                    identical = true;
+                                                }
+                                            }
+                                            for (l = 0; l < Topics.List[li].SynNames!.Count; l++)
+                                            {
+                                                if (((Noun)PTL!.Index(k)!.O!)!.ID! == Topics!.List[li]!.SynNames![l]!.ID!)
+                                                {
+                                                    identical = true;
+                                                }
+                                            }
+                                        }
+                                        else if (PTL!.Index(k)!.O!.GetType() == typeof(Adj))
+                                        {
+                                            for (l = 0; l < Topics.List[li].Adjectives!.Count!; l++)
+                                            {
+                                                if (((Adj)PTL!.Index(k)!.O!)!.ID == Topics!.List[li]!.Adjectives![l]!.ID)
+                                                {
+                                                    identical = true;
+                                                }
+                                            }
+                                            for (l = 0; l < Topics.List[li].SynAdjectives!.Count!; l++)
+                                            {
+                                                if (((Adj)PTL!.Index(k)!.O!)!.ID == Topics.List[li].SynAdjectives![l]!.ID)
+                                                {
+                                                    identical = true;
+                                                }
+                                            }
+                                        }
+                                        if (!identical) break;
+                                    }
+                                }
+                                // Ja, dieses Item könnte es sein. 
+                                if (identical)
+                                {
+                                    possibleTopics.Add(Topics.List[li]);
+                                    topicsFound = li;
+                                }
+                            }
+
+                            int itemPersonTopicCount = possibleItems!.Count + possiblePersons!.Count + possibleTopics.Count;
+                            if (itemPersonTopicCount == 0)
+                            {
+                                ErrorText = loca.Parse_StringToParseTokens_16224;
+                                found = false;
+                            }
+                            else if (itemPersonTopicCount >= 2)
+                            {
+                                int l = i;
+                                int ct = 0;
+                                PTL!.Insert(l++, new ParseToken((IParseElement)new Variety(), Co.Range_Overall));
+                                PTL!.Index(l - 1)!.RangeInfo = itemPersonTopicCount;
+
+                                ct = possibleItems!.Count;
+                                while (ct > 0)
+                                {
+                                    ct--;
+                                    PTL!.Insert(l++, new ParseToken(Items!.List[Items!.GetItemIx(possibleItems[ct].ID)], Co.Range_Overall));
+                                    // ((Item)PTL!.Index(l - 1).O).ID = PossibleItems[Ct].ID;
+                                }
+                                ct = possiblePersons!.Count;
+                                while (ct > 0)
+                                {
+                                    ct--;
+                                    PTL!.Insert(l++, new ParseToken((IParseElement)Persons!.List[Persons!.GetPersonIx(possiblePersons[ct].ID)], Co.Range_Overall));
+                                }
+                                ct = possibleTopics.Count;
+                                while (ct > 0)
+                                {
+                                    ct--;
+                                    PTL!.Insert(l++, new ParseToken((IParseElement)Topics.List[Topics.GetTopicIx(possibleTopics[ct].ID)], Co.Range_Overall));
+                                }
+                                found = true;
+                                for (int k = i + itemPersonTopicCount; k < j + itemPersonTopicCount; k++)
+                                {
+                                    PTL!.RemoveAt(l);
                                 }
                             }
                             else
                             {
-                                PTL!.Insert(i, new ParseToken((IParseElement)Persons!.List[personsFound], Co.Range_Overall));
-                                for (int k = i; k < j; k++)
+                                // Keine Ahnung, wofür dieser Codeblock gut ist
+                                if (possibleItems!.Count == 1)
                                 {
-                                    PTL!.RemoveAt(i + 1);
+                                    PTL!.Insert(i, new ParseToken((IParseElement)itemsFound!, Co.Range_Overall)!);
+                                    for (int k = i; k < j; k++)
+                                    {
+                                        PTL!.RemoveAt(i + 1);
+                                    }
                                 }
+                                else if (possibleTopics.Count == 1)
+                                {
+                                    PTL!.Insert(i, new ParseToken((IParseElement)Topics.List[topicsFound], Co.Range_Overall));
+                                    for (int k = i; k < j; k++)
+                                    {
+                                        PTL!.RemoveAt(i + 1);
+                                    }
+                                }
+                                else
+                                {
+                                    PTL!.Insert(i, new ParseToken((IParseElement)Persons!.List[personsFound], Co.Range_Overall));
+                                    for (int k = i; k < j; k++)
+                                    {
+                                        PTL!.RemoveAt(i + 1);
+                                    }
 
+                                }
+                                found = true;
                             }
-                            found = true;
                         }
-                    }
-                    else if (PTL!.Index(i)!.O!.GetType() == typeof(Fill))
-                    {
-                        PTL!.RemoveAt(i);
-                        i--;
-                    }
+                        else if (PTL!.Index(i)!.O!.GetType() == typeof(Fill))
+                        {
+                            PTL!.RemoveAt(i);
+                            i--;
+                        }
 
-                    if (!found) break;
+                        if (!found) break;
+                    }
                 }
+                return (found);
             }
-            return (found);
+            catch (Exception e)
+            {
+                GlobalData.AddLog("Parse.StringToParseTokens: " + e.Message, IGlobalData.protMode.crisp);
+                return false;
+            }
+
+
         }
 
 
@@ -1352,100 +1461,127 @@ namespace GameCore
 
         private bool ValidParseToken(ParseToken PT, ParseToken PT2)
         {
-            if (PT2 == null)
+            try
+            {
+                if (PT2 == null)
+                    return (false);
+
+                if ((PT.O!.GetType() == typeof(Item)) && (PT2.O!.GetType() == typeof(Item)) && (PT2.RangeInfo == Co.Range_Here))
+                    return (Items!.IsItemHere((Item)PT.O, PT2.RangeInfo));
+                if ((PT.O!.GetType() == typeof(Person)) && (PT2.O!.GetType() == typeof(Person)) && (PT2.RangeInfo == Co.Range_Here))
+                    return (Persons!.IsPersonHere((Person)PT.O, PT2.RangeInfo));
+                if ((PT.O!.GetType() == typeof(Item)) && (PT2.O!.GetType() == typeof(Item)) && (PT2.RangeInfo == Co.Range_Active))
+                    return (((Item)PT.O).Active);
+                if ((PT.O!.GetType() == typeof(Person)) && (PT2.O!.GetType() == typeof(Person)) && (PT2.RangeInfo == Co.Range_Active))
+                    return (((Person)PT.O).Active);
+                if ((PT.O!.GetType() == typeof(Item)) && (PT2.O!.GetType() == typeof(Item)))
+                    return (true);
+                if ((PT.O!.GetType() == typeof(Person)) && (PT2.O!.GetType() == typeof(Person)))
+                    return (true);
+                /*
+                            if ((PT.O.GetType() == typeof(Item)))
+                                return (true);
+                            if ((PT.O.GetType() == typeof(Person)))
+                                return (true);
+                */
+                if ((PT.O.GetType() == typeof(Topic)) && (PT2.O!.GetType() == typeof(Topic)) && (PT2.RangeInfo == Co.Range_Active))
+                    return (((Topic)PT.O).Active);
+                if ((PT.O.GetType() == typeof(Topic)))
+                    return (true);
+
                 return (false);
+            }
+            catch (Exception e)
+            {
+                GlobalData.AddLog("Parse.ValidParseToken: " + e.Message, IGlobalData.protMode.crisp);
+                return false;
+            }
 
-            if ((PT.O!.GetType() == typeof(Item)) && (PT2.O!.GetType() == typeof(Item)) && (PT2.RangeInfo == Co.Range_Here))
-                return (Items!.IsItemHere((Item)PT.O, PT2.RangeInfo));
-            if ((PT.O!.GetType() == typeof(Person)) && (PT2.O!.GetType() == typeof(Person)) && (PT2.RangeInfo == Co.Range_Here))
-                return (Persons!.IsPersonHere((Person)PT.O, PT2.RangeInfo));
-            if ((PT.O!.GetType() == typeof(Item)) && (PT2.O!.GetType() == typeof(Item)) && (PT2.RangeInfo == Co.Range_Active))
-                return (((Item)PT.O).Active);
-            if ((PT.O!.GetType() == typeof(Person)) && (PT2.O!.GetType() == typeof(Person)) && (PT2.RangeInfo == Co.Range_Active))
-                return (((Person)PT.O).Active);
-            if ((PT.O!.GetType() == typeof(Item)) && (PT2.O!.GetType() == typeof(Item)))
-                return (true);
-            if ((PT.O!.GetType() == typeof(Person)) && (PT2.O!.GetType() == typeof(Person)))
-                return (true);
-            /*
-                        if ((PT.O.GetType() == typeof(Item)))
-                            return (true);
-                        if ((PT.O.GetType() == typeof(Person)))
-                            return (true);
-            */
-            if ((PT.O.GetType() == typeof(Topic)) && (PT2.O!.GetType() == typeof(Topic)) && (PT2.RangeInfo == Co.Range_Active))
-                return (((Topic)PT.O).Active);
-            if ((PT.O.GetType() == typeof(Topic)))
-                return (true);
-
-            return (false);
         }
 
         private int CountAmbiguousEntryObjects(ParseTokenList PTL, int ParseID, int Ix)
         {
-            int ct = 0;
-            int parseIx = -1;
-
-            for (int i = 0; i < PLL!.List!.Count!; i++)
+            try
             {
-                if (PLL.List[i].ParseID == ParseID)
+                int ct = 0;
+                int parseIx = -1;
+
+                for (int i = 0; i < PLL!.List!.Count!; i++)
                 {
-                    parseIx = i;
-                    break;
+                    if (PLL.List[i].ParseID == ParseID)
+                    {
+                        parseIx = i;
+                        break;
+                    }
                 }
-            }
-            if (parseIx >= 0)
-            {
-                int aObj = (PTL!.Index(Ix)!.RangeInfo + Ix + 1)!;
-                // In der WordID ist die Anzahl an folgenden Objekten kodiert. 
-                for (int i = Ix + 1; i < aObj; i++)
+                if (parseIx >= 0)
                 {
-                    ParseToken PT = PTL!.Index(i)!;
+                    int aObj = (PTL!.Index(Ix)!.RangeInfo + Ix + 1)!;
+                    // In der WordID ist die Anzahl an folgenden Objekten kodiert. 
+                    for (int i = Ix + 1; i < aObj; i++)
+                    {
+                        ParseToken PT = PTL!.Index(i)!;
 
-                    if (ValidParseToken(PT, PLL!.List![parseIx]!.PTL!.Index(Ix)!) == true)
-                        ct++;
+                        if (ValidParseToken(PT, PLL!.List![parseIx]!.PTL!.Index(Ix)!) == true)
+                            ct++;
+                    }
                 }
-            }
 
-            if( ct >= 2)
+                if (ct >= 2)
+                {
+
+                }
+
+                return (ct);
+            }
+            catch (Exception e)
             {
-
+                GlobalData.AddLog("Parse.CountAmbiguousEntryObjects: " + e.Message, IGlobalData.protMode.crisp);
+                return 0;
             }
 
-            return (ct);
         }
 
         private int GetAmbiguousEntryObjectIx(ParseTokenList PTL, int ParseID, int Ix)
         {
-            int ct = -1;
-            int parseIx = -1;
-            int i = 0;
-            for (i = 0; i < PLL!.List!.Count!; i++)
+            try
             {
-                if (PLL.List[i].ParseID == ParseID)
+                int ct = -1;
+                int parseIx = -1;
+                int i = 0;
+                for (i = 0; i < PLL!.List!.Count!; i++)
                 {
-                    parseIx = i;
-                    break;
-                }
-            }
-
-            if (parseIx >= 0)
-            {
-                int aObj = (PTL!.Index(Ix)!.RangeInfo + Ix + 1)!;
-                // In der WordID ist die Anzahl an folgenden Objekten kodiert. 
-                for (i = Ix + 1; i < aObj; i++)
-                {
-                    ParseToken pt = PTL!.Index(i)!;
-
-                    // if (ValidParseToken(PT, PTL!.Index(ParseIx)) == true)
-                    if (ValidParseToken(pt, PLL!.List![parseIx]!.PTL!.Index(Ix)!) == true)
+                    if (PLL.List[i].ParseID == ParseID)
                     {
-                        ct = (i - Ix);
+                        parseIx = i;
                         break;
                     }
                 }
+
+                if (parseIx >= 0)
+                {
+                    int aObj = (PTL!.Index(Ix)!.RangeInfo + Ix + 1)!;
+                    // In der WordID ist die Anzahl an folgenden Objekten kodiert. 
+                    for (i = Ix + 1; i < aObj; i++)
+                    {
+                        ParseToken pt = PTL!.Index(i)!;
+
+                        // if (ValidParseToken(PT, PTL!.Index(ParseIx)) == true)
+                        if (ValidParseToken(pt, PLL!.List![parseIx]!.PTL!.Index(Ix)!) == true)
+                        {
+                            ct = (i - Ix);
+                            break;
+                        }
+                    }
+                }
+                return (ct);
             }
-            return (ct);
+            catch (Exception e)
+            {
+                GlobalData.AddLog("Parse.GetAmbiguousEntryObjectIx: " + e.Message, IGlobalData.protMode.crisp);
+                return 0;
+            }
+
         }
 
 
@@ -1465,78 +1601,24 @@ namespace GameCore
 
         private bool RequestFirstAmbiguous(MCMenu MCM2, ParseTokenList PTL, int ParseID)
         {
-            for (int i = 0; i < PTL!.Count(); i++)
+            try
             {
-                if (PTL!.Index(i)!.O!.GetType() == typeof(Variety))
+                for (int i = 0; i < PTL!.Count(); i++)
                 {
-                    // Erst mal durchzählen, wie viele in Frage kommende Objekte es gibt
-                    int numItems = CountAmbiguousEntryObjects(PTL!, ParseID!, i);
-
-                    // Fall 1: Es gibt überhaupt kein Item mehr. Damit ist die Suche gescheitert und die ganze ParseLine kann abgeschossen werden
-                    if (numItems == 0)
+                    if (PTL!.Index(i)!.O!.GetType() == typeof(Variety))
                     {
-                        AdvGame!.FeedbackOutput(AdvGame!.CA!.Person_Everyone!, loca.Parse_RequestFirstAmbiguous_Person_Everyone_16225);
-                        AdvGame!.OutputExit(MCM2);
-                        // Unklar, ob das so einfach geht. 
-                        return (false);
-                    }
-                    else if (numItems == 1)
-                    {
-                        int Ix = GetAmbiguousEntryObjectIx(PTL, ParseID, i);
-
-                        CallbackAmbiguous(MCM2, Ix + 1);
-                    }
-                    else
-                    {
-                        MCMenu mcM = AdvGame!.AdvMCMenu(AdvGame!.CA!.Person_I!, false, 1 + AdvGame.CB!.MCE_Choice_Off);
-                        List<int> follower;
-                        int count = PTL!.Index(i)!.RangeInfo!;
-                        int idCt = 1;
-
-                        // 1
-                        follower = new List<int>();
-                        follower.Add(-1);
-                        mcM.Add(new MCMenuEntry(AdvGame.CB!.MCE_Text, null, loca.Parse_RequestFirstAmbiguous_Person_I_16226, idCt++, follower, null, 0, false, false, false, null, null));
-
-                        // Jetzt wird geprüft, wie viele Objekte tatsächlich verfügbar sind
-                        // Auch hier kann die Anzahl auf 0 oder 1 sinken, dann wird entsprechend kein Entscheidungsmenü aufgerufen.
-                        for (int j = i + 1; j <= i + count; j++)
-                        {
-                            int ix = GetParseIxFromID(ParseID);
-                            int wordType = PLL!.List![ix]!.PTL!.Index(i)!.RangeInfo!;
-                            if ((PTL!.Index(j)!.O!.GetType() == typeof(Person)) && (!Persons!.IsPersonHere((Person)PTL!.Index(j)!.O!, wordType)))
-                            {
-                                PTL!.RemoveAt(j);
-                                j--;
-                                count--;
-                                (PTL!.Index(i)!.RangeInfo)--;
-                            }
-                            else if ((PTL!.Index(j)!.O!.GetType() == typeof(Item)) && (!Items!.IsItemHere((Item)PTL!.Index(j)!.O!, wordType)))
-                            {
-                                PTL!.RemoveAt(j);
-                                j--;
-                                count--;
-                                PTL!.Index(i)!.RangeInfo--;
-                            }
-                            else if ((PTL!.Index(j)!.O!.GetType() == typeof(Topic)) && (!Topics!.IsTopicHere((Topic)PTL!.Index(j)!.O!, wordType)))
-                            {
-                                PTL!.RemoveAt(j);
-                                j--;
-                                count--;
-                                PTL!.Index(i)!.RangeInfo--;
-                            }
-
-                        }
+                        // Erst mal durchzählen, wie viele in Frage kommende Objekte es gibt
+                        int numItems = CountAmbiguousEntryObjects(PTL!, ParseID!, i);
 
                         // Fall 1: Es gibt überhaupt kein Item mehr. Damit ist die Suche gescheitert und die ganze ParseLine kann abgeschossen werden
-                        if (count == 0)
+                        if (numItems == 0)
                         {
-                            AdvGame!.FeedbackOutput(AdvGame!.CA!.Person_Everyone!, loca.Parse_RequestFirstAmbiguous_Person_Everyone_16227);
+                            AdvGame!.FeedbackOutput(AdvGame!.CA!.Person_Everyone!, loca.Parse_RequestFirstAmbiguous_Person_Everyone_16225);
                             AdvGame!.OutputExit(MCM2);
                             // Unklar, ob das so einfach geht. 
                             return (false);
                         }
-                        else if (count == 1)
+                        else if (numItems == 1)
                         {
                             int Ix = GetAmbiguousEntryObjectIx(PTL, ParseID, i);
 
@@ -1544,194 +1626,368 @@ namespace GameCore
                         }
                         else
                         {
+                            MCMenu mcM = AdvGame!.AdvMCMenu(AdvGame!.CA!.Person_I!, false, 1 + AdvGame.CB!.MCE_Choice_Off);
+                            List<int> follower;
+                            int count = PTL!.Index(i)!.RangeInfo!;
+                            int idCt = 1;
+
+                            // 1
+                            follower = new List<int>();
+                            follower.Add(-1);
+                            mcM.Add(new MCMenuEntry(AdvGame.CB!.MCE_Text, null, loca.Parse_RequestFirstAmbiguous_Person_I_16226, idCt++, follower, null, 0, false, false, false, null, null));
+
+                            // Jetzt wird geprüft, wie viele Objekte tatsächlich verfügbar sind
+                            // Auch hier kann die Anzahl auf 0 oder 1 sinken, dann wird entsprechend kein Entscheidungsmenü aufgerufen.
                             for (int j = i + 1; j <= i + count; j++)
                             {
                                 int ix = GetParseIxFromID(ParseID);
-                                int wordType = PLL!.List![ix].PTL!.Index(i)!.RangeInfo!;
+                                int wordType = PLL!.List![ix]!.PTL!.Index(i)!.RangeInfo!;
+                                if ((PTL!.Index(j)!.O!.GetType() == typeof(Person)) && (!Persons!.IsPersonHere((Person)PTL!.Index(j)!.O!, wordType)))
+                                {
+                                    PTL!.RemoveAt(j);
+                                    j--;
+                                    count--;
+                                    (PTL!.Index(i)!.RangeInfo)--;
+                                }
+                                else if ((PTL!.Index(j)!.O!.GetType() == typeof(Item)) && (!Items!.IsItemHere((Item)PTL!.Index(j)!.O!, wordType)))
+                                {
+                                    PTL!.RemoveAt(j);
+                                    j--;
+                                    count--;
+                                    PTL!.Index(i)!.RangeInfo--;
+                                }
+                                else if ((PTL!.Index(j)!.O!.GetType() == typeof(Topic)) && (!Topics!.IsTopicHere((Topic)PTL!.Index(j)!.O!, wordType)))
+                                {
+                                    PTL!.RemoveAt(j);
+                                    j--;
+                                    count--;
+                                    PTL!.Index(i)!.RangeInfo--;
+                                }
 
-                                // Schritt 1: Alle nicht sichtbaren Personen, Items und Topics werden aus der Liste geworfen
-                                if ((PTL!.Index(j)!.O!.GetType() == typeof(Person)) && (Persons!.IsPersonHere((Person)PTL!.Index(j)!.O!, wordType)))
-                                {
-                                    follower = new List<int>();
-                                    follower.Add(-1);
-                                    mcM.Add(new MCMenuEntry(AdvGame!.CB!.MCE_Text, AdvGame!.CA!.Person_I, Persons!.GetPersonName(((Person)PTL!.Index(j)!.O!), Co.CASE_NOM, AdvGame.CurrentNouns!), idCt++, follower, null, 0, false, false, false, null, null));
-                                }
-                                if ((PTL!.Index(j)!.O!.GetType() == typeof(Item)) && (Items!.IsItemHere((Item)PTL!.Index(j)!.O!, wordType)))
-                                {
-                                    follower = new List<int>();
-                                    follower.Add(-1);
-                                    mcM.Add(new MCMenuEntry(AdvGame!.CB!.MCE_Text, AdvGame.CA!.Person_I, Items!.GetName(((Item)PTL!.Index(j)!.O!).ID!, Co.CASE_NOM, AdvGame.CurrentNouns!), idCt++, follower, null, 0, false, false, false, null, null));
-                                }
-                                if ((PTL!.Index(j)!.O!.GetType() == typeof(Topic)) && (Topics!.IsTopicHere((Topic)PTL!.Index(j)!.O!, wordType)))
-                                {
-                                    follower = new List<int>();
-                                    follower.Add(-1);
-                                    mcM.Add(new MCMenuEntry(AdvGame!.CB!.MCE_Text, AdvGame!.CA!.Person_I, Topics!.GetTopicName(((Topic)PTL!.Index(j)!.O!).ID!, Co.CASE_NOM, AdvGame.CurrentNouns!), idCt++, follower, null, 0, false, false, false, null, null));
-                                }
                             }
-                            follower = new List<int>();
-                            follower.Add(1);
-                            for (int j = i + 1; j <= i + count; j++)
+
+                            // Fall 1: Es gibt überhaupt kein Item mehr. Damit ist die Suche gescheitert und die ganze ParseLine kann abgeschossen werden
+                            if (count == 0)
                             {
-                                follower.Add(j - i + 1);
-
+                                AdvGame!.FeedbackOutput(AdvGame!.CA!.Person_Everyone!, loca.Parse_RequestFirstAmbiguous_Person_Everyone_16227);
+                                AdvGame!.OutputExit(MCM2);
+                                // Unklar, ob das so einfach geht. 
+                                return (false);
                             }
-                            mcM.Add(new MCMenuEntry(AdvGame.CB!.MCE_Choice, null, "", 1 + AdvGame.CB!.MCE_Choice_Off, follower, null, 0, false, false, false, null, null));
-                            mcM.MCS = mcM.MenuShow();
-                            mcM.Set(0);
-                            mcM.MCS.MCOutput(mcM, CallbackAmbiguous, false);
-                            AdvGame.Orders!.temporaryMCMenu = mcM;
-                            AdvGame.Orders!.persistentMCMenu = null;
+                            else if (count == 1)
+                            {
+                                int Ix = GetAmbiguousEntryObjectIx(PTL, ParseID, i);
+
+                                CallbackAmbiguous(MCM2, Ix + 1);
+                            }
+                            else
+                            {
+                                for (int j = i + 1; j <= i + count; j++)
+                                {
+                                    int ix = GetParseIxFromID(ParseID);
+                                    int wordType = PLL!.List![ix].PTL!.Index(i)!.RangeInfo!;
+
+                                    // Schritt 1: Alle nicht sichtbaren Personen, Items und Topics werden aus der Liste geworfen
+                                    if ((PTL!.Index(j)!.O!.GetType() == typeof(Person)) && (Persons!.IsPersonHere((Person)PTL!.Index(j)!.O!, wordType)))
+                                    {
+                                        follower = new List<int>();
+                                        follower.Add(-1);
+                                        mcM.Add(new MCMenuEntry(AdvGame!.CB!.MCE_Text, AdvGame!.CA!.Person_I, Persons!.GetPersonName(((Person)PTL!.Index(j)!.O!), Co.CASE_NOM, AdvGame.CurrentNouns!), idCt++, follower, null, 0, false, false, false, null, null));
+                                    }
+                                    if ((PTL!.Index(j)!.O!.GetType() == typeof(Item)) && (Items!.IsItemHere((Item)PTL!.Index(j)!.O!, wordType)))
+                                    {
+                                        follower = new List<int>();
+                                        follower.Add(-1);
+                                        mcM.Add(new MCMenuEntry(AdvGame!.CB!.MCE_Text, AdvGame.CA!.Person_I, Items!.GetName(((Item)PTL!.Index(j)!.O!).ID!, Co.CASE_NOM, AdvGame.CurrentNouns!), idCt++, follower, null, 0, false, false, false, null, null));
+                                    }
+                                    if ((PTL!.Index(j)!.O!.GetType() == typeof(Topic)) && (Topics!.IsTopicHere((Topic)PTL!.Index(j)!.O!, wordType)))
+                                    {
+                                        follower = new List<int>();
+                                        follower.Add(-1);
+                                        mcM.Add(new MCMenuEntry(AdvGame!.CB!.MCE_Text, AdvGame!.CA!.Person_I, Topics!.GetTopicName(((Topic)PTL!.Index(j)!.O!).ID!, Co.CASE_NOM, AdvGame.CurrentNouns!), idCt++, follower, null, 0, false, false, false, null, null));
+                                    }
+                                }
+                                follower = new List<int>();
+                                follower.Add(1);
+                                for (int j = i + 1; j <= i + count; j++)
+                                {
+                                    follower.Add(j - i + 1);
+
+                                }
+                                mcM.Add(new MCMenuEntry(AdvGame.CB!.MCE_Choice, null, "", 1 + AdvGame.CB!.MCE_Choice_Off, follower, null, 0, false, false, false, null, null));
+                                mcM.MCS = mcM.MenuShow();
+                                mcM.Set(0);
+                                mcM.MCS.MCOutput(mcM, CallbackAmbiguous, false);
+                                AdvGame.Orders!.temporaryMCMenu = mcM;
+                                AdvGame.Orders!.persistentMCMenu = null;
+                            }
                         }
                     }
                 }
+                return true;
             }
-            return true;
+            catch (Exception e)
+            {
+                GlobalData.AddLog("Parse.RequestFirstAmbiguous: " + e.Message, IGlobalData.protMode.crisp);
+                return false;
+            }
+
         }
 
 
         private bool CallbackAmbiguous(MCMenu MCM, int Selection)
         {
-            bool found = false;
-
-            // Selection = 1 ist immer die Titelzeile, die müssen wir abziehen
-            Selection--;
-
-            for (int i = 0; i < tPTL!.Count(); i++)
+            try
             {
-                int removeCt = tPTL!.Index(i)!.RangeInfo + 1;
+                bool found = false;
 
-                if (tPTL!.Index(i)!.O!.GetType() == typeof(Variety))
+                // Selection = 1 ist immer die Titelzeile, die müssen wir abziehen
+                Selection--;
+
+                for (int i = 0; i < tPTL!.Count(); i++)
                 {
-                    if (tPTL!.Index(i + Selection)!.O!.GetType() == typeof(Item))
-                    {
-                        tPTL!.Insert(i, new ParseToken((IParseElement)tPTL!.Index(i + Selection)!.O!, Co.Range_Here));
-                    }
-                    else if (tPTL!.Index(i + Selection)!.O!.GetType() == typeof(Person))
-                    {
-                        tPTL!.Insert(i, new ParseToken((IParseElement)tPTL!.Index(i + Selection)!.O!, Co.Range_Here));
-                    }
-                    else if (tPTL!.Index(i + Selection)!.O!.GetType() == typeof(Topic))
-                    {
-                        tPTL!.Insert(i, new ParseToken((IParseElement)tPTL!.Index(i + Selection)!.O!, Co.Range_Here));
-                    }
+                    int removeCt = tPTL!.Index(i)!.RangeInfo + 1;
 
-                    while (removeCt > 0)
+                    if (tPTL!.Index(i)!.O!.GetType() == typeof(Variety))
                     {
-                        tPTL!.RemoveAt(i + 1);
-                        removeCt--;
+                        if (tPTL!.Index(i + Selection)!.O!.GetType() == typeof(Item))
+                        {
+                            tPTL!.Insert(i, new ParseToken((IParseElement)tPTL!.Index(i + Selection)!.O!, Co.Range_Here));
+                        }
+                        else if (tPTL!.Index(i + Selection)!.O!.GetType() == typeof(Person))
+                        {
+                            tPTL!.Insert(i, new ParseToken((IParseElement)tPTL!.Index(i + Selection)!.O!, Co.Range_Here));
+                        }
+                        else if (tPTL!.Index(i + Selection)!.O!.GetType() == typeof(Topic))
+                        {
+                            tPTL!.Insert(i, new ParseToken((IParseElement)tPTL!.Index(i + Selection)!.O!, Co.Range_Here));
+                        }
+
+                        while (removeCt > 0)
+                        {
+                            tPTL!.RemoveAt(i + 1);
+                            removeCt--;
+                        }
+                        found = true;
+                        break;
                     }
-                    found = true;
-                    break;
                 }
+
+                if (found)
+                {
+                    // Noch weitere unterschiedliche Items in der Liste?
+                    int parseID = FindInitialParseline(tPTL);
+
+                    if (CountAmbiguousEntries(tPTL) > 0)
+                    {
+                        RequestFirstAmbiguous(MCM, tPTL, parseID);
+                        found = false;
+                    }
+                    else
+                    {
+                        AdvGame!.OutputExit(MCM);
+                        found = FindFinalParseline(tPTL);
+                    }
+                }
+                return found;
+            }
+            catch (Exception e)
+            {
+                GlobalData.AddLog("Parse.CallbackAmbiguous: " + e.Message, IGlobalData.protMode.crisp);
+                return false;
             }
 
-            if (found)
-            {
-                // Noch weitere unterschiedliche Items in der Liste?
-                int parseID = FindInitialParseline(tPTL);
-
-                if (CountAmbiguousEntries(tPTL) > 0)
-                {
-                    RequestFirstAmbiguous(MCM, tPTL, parseID);
-                    found = false;
-                }
-                else
-                {
-                    AdvGame!.OutputExit(MCM);
-                    found = FindFinalParseline(tPTL);
-                }
-            }
-            return found;
         }
 
 
 
         private int FindInitialParseline(ParseTokenList PTL)
         {
-            int i, j;
-            int iPL;
-            int found_PT;
-            int found_PL = -1;
-            int found_ParseID = -1;
+            try
+            {
+                int i, j;
+                int iPL;
+                int found_PT;
+                int found_PL = -1;
+                int found_ParseID = -1;
 
 #pragma warning disable CS0219 // Die Variable "found" ist zugewiesen, ihr Wert wird aber nie verwendet.
-            bool found = true;
+                bool found = true;
 #pragma warning restore CS0219 // Die Variable "found" ist zugewiesen, ihr Wert wird aber nie verwendet.
 
-            for (j = 0; j < PLL!.List!.Count!; j++)
-            {
-                found_PT = 0;
-                for (i = 0, iPL = 0; i < PLL.List[j].PTL!.Count(); i++)
+                for (j = 0; j < PLL!.List!.Count!; j++)
                 {
-                    /*
-                    if (PLL.List[j].PTL!.Index(i)?.O.GetType() == typeof(Verb))
+                    found_PT = 0;
+                    for (i = 0, iPL = 0; i < PLL.List[j].PTL!.Count(); i++)
                     {
-                        Verb v = (Verb)PLL.List[j].PTL!.Index(i)?.O;
-                        if (v.Name == "benutze")
-                            v.Name = "benutze";
-                    }
-                    */
+                        /*
+                        if (PLL.List[j].PTL!.Index(i)?.O.GetType() == typeof(Verb))
+                        {
+                            Verb v = (Verb)PLL.List[j].PTL!.Index(i)?.O;
+                            if (v.Name == "benutze")
+                                v.Name = "benutze";
+                        }
+                        */
 
-                    if (iPL >= PTL!.Count()) break;
+                        if (iPL >= PTL!.Count()) break;
 
-                    if ((PLL!.List[j]!.PTL!.Index(i)!.O!.GetType() == typeof(Item))
-                        )
-                    {
-                        if (PTL!.Index(iPL)!.O!.GetType() == typeof(Item))
+                        if ((PLL!.List[j]!.PTL!.Index(i)!.O!.GetType() == typeof(Item))
+                            )
+                        {
+                            if (PTL!.Index(iPL)!.O!.GetType() == typeof(Item))
+                            {
+                                found_PT++;
+                                iPL++;
+                            }
+                            else if (PTL!.Index(iPL)!.O!.GetType() == typeof(Variety) && PTL!.VarietyCheckItem(iPL))
+                            {
+                                int Num = PTL!.Index(iPL)!.RangeInfo!; //  Adv_PL[iPL].WordID;
+                                found_PT += Num + 1;
+                                iPL += Num + 1;
+                            }
+                            else
+                                iPL++;
+
+                        }
+                        else if ((PLL.List[j].PTL!.Index(i)!.O!.GetType() == typeof(Person))
+                            )
+                        {
+                            if (PTL!.Index(iPL)!.O!.GetType() == typeof(Person))
+                            {
+                                found_PT++;
+                                iPL++;
+                            }
+                            else if (PTL!.Index(iPL)!.O!.GetType() == typeof(Variety) && PTL!.VarietyCheckPerson(iPL))
+                            {
+                                int Num = PTL!.Index(iPL)!.RangeInfo;
+                                found_PT += Num + 1;
+                                iPL += Num + 1;
+                            }
+                            else
+                                iPL++;
+                        }
+                        else if ((PLL.List[j].PTL!.Index(i)!.O!.GetType() == typeof(Topic))
+                            )
+                        {
+                            if (PTL!.Index(iPL)!.O!.GetType() == typeof(Topic))
+                            {
+                                found_PT++;
+                                iPL++;
+                            }
+                            else if (PTL!.Index(iPL)!.O!.GetType() == typeof(Variety) && PTL!.VarietyCheckTopic(iPL))
+                            {
+                                int Num = PTL!.Index(iPL)!.RangeInfo;
+                                found_PT += Num + 1;
+                                iPL += Num + 1;
+                            }
+                            else
+                                iPL++;
+                        }
+                        else if (PLL.List[j].PTL!.Index(i)!.O!.GetType() == typeof(Prep))
+                        {
+                            if (PTL!.Index(iPL)!.O!.GetType() == typeof(Prep))
+                            {
+                                if ((PLL!.List![j]!.PTL!.Index(i)!.O as Prep)!.ID == (PTL!.Index(iPL)!.O as Prep)!.ID)
+                                {
+                                    found_PT++;
+                                    iPL++;
+                                }
+                                else
+                                    iPL++;
+                            }
+                            else
+                                iPL++;
+                        }
+                        else if ((PLL!.List[j]!.PTL!.Index(i)!.O!.GetType() == PTL!.Index(iPL)!.O!.GetType())
+                                    && (PLL!.List[j]!.PTL!.Index(i)!.O == PTL!.Index(iPL)!.O)
+                                )
                         {
                             found_PT++;
                             iPL++;
                         }
-                        else if (PTL!.Index(iPL)!.O!.GetType() == typeof(Variety) && PTL!.VarietyCheckItem(iPL))
-                        {
-                            int Num = PTL!.Index(iPL)!.RangeInfo!; //  Adv_PL[iPL].WordID;
-                            found_PT += Num + 1;
-                            iPL += Num + 1;
-                        }
                         else
+                        {
                             iPL++;
+                        }
+                    }
+                    if (found_PT == PTL!.Count())
+                    {
+                        found_PL = j;
+                        break;
+                    }
+                }
+                // yeah, ich habs gefunden
+                if (found_PL >= 0)
+                {
+                    found = true;
+                    found_ParseID = PLL.List[found_PL].ParseID;
+                }
+                else
+                {
+                    AdvGame!.FeedbackOutput(AdvGame!.CA!.Person_Everyone!, String.Format(loca.Parse_FindInitialParseline_Person_Everyone_16228, LastParseLine));
+                    found = false;
+                }
 
-                    }
-                    else if ((PLL.List[j].PTL!.Index(i)!.O!.GetType() == typeof(Person))
-                        )
+                return found_ParseID;
+            }
+            catch (Exception e)
+            {
+                GlobalData.AddLog("Parse.FindInitialParseline: " + e.Message, IGlobalData.protMode.crisp);
+                return -1;
+            }
+
+        }
+
+
+        private bool FindFinalParseline(ParseTokenList PTL)
+        {
+            try
+            {
+                int i, j;
+                int found_PT;
+                int found_PL = -1;
+                bool found = true;
+                int iPL;
+
+                for (j = 0; j < PLL!.List!.Count!; j++)
+                {
+                    found_PT = 0;
+                    for (i = 0, iPL = 0; i < PLL.List[j].PTL!.Count(); i++)
                     {
-                        if (PTL!.Index(iPL)!.O!.GetType() == typeof(Person))
+                        if (i >= PTL!.Count()) break;
+
+                        if ((PLL!.List[j]!.PTL!.Index(i)!.O!.GetType() == typeof(Item))
+                            )
                         {
-                            found_PT++;
-                            iPL++;
+                            if (PTL!.Index(iPL)!.O!.GetType() == typeof(Item))
+                            {
+                                if (Items!.IsItemHere((Item)PTL!.Index(iPL)!.O!, PLL.List[j].PTL!.Index(i)!.RangeInfo))
+                                {
+                                    found_PT++;
+                                }
+                                iPL++;
+                            }
+                            else
+                                iPL++;
+
                         }
-                        else if (PTL!.Index(iPL)!.O!.GetType() == typeof(Variety) && PTL!.VarietyCheckPerson(iPL))
+                        else if ((PLL!.List[j]!.PTL!.Index(i)!.O!.GetType() == typeof(Person))
+                            )
                         {
-                            int Num = PTL!.Index(iPL)!.RangeInfo;
-                            found_PT += Num + 1;
-                            iPL += Num + 1;
+                            if (PTL!.Index(iPL)!.O!.GetType() == typeof(Person))
+                            {
+                                if (Persons!.IsPersonHere((Person)PTL!.Index(iPL)!.O!, PLL!.List[j]!.PTL!.Index(i)!.RangeInfo))
+                                {
+                                    found_PT++;
+                                }
+                                iPL++;
+                            }
+                            else
+                                iPL++;
                         }
-                        else
-                            iPL++;
-                    }
-                    else if ((PLL.List[j].PTL!.Index(i)!.O!.GetType() == typeof(Topic))
-                        )
-                    {
-                        if (PTL!.Index(iPL)!.O!.GetType() == typeof(Topic))
+                        else if (PLL!.List[j]!.PTL!.Index(i)!.O!.GetType() == typeof(Topic))
                         {
-                            found_PT++;
-                            iPL++;
-                        }
-                        else if (PTL!.Index(iPL)!.O!.GetType() == typeof(Variety) && PTL!.VarietyCheckTopic(iPL))
-                        {
-                            int Num = PTL!.Index(iPL)!.RangeInfo;
-                            found_PT += Num + 1;
-                            iPL += Num + 1;
-                        }
-                        else
-                            iPL++;
-                    }
-                    else if (PLL.List[j].PTL!.Index(i)!.O!.GetType() == typeof(Prep))
-                    {
-                        if (PTL!.Index(iPL)!.O!.GetType() == typeof(Prep))
-                        {
-                            if ((PLL!.List![j]!.PTL!.Index(i)!.O as Prep)!.ID == (PTL!.Index(iPL)!.O as Prep)!.ID)
+                            if (PTL!.Index(iPL)!.O!.GetType() == typeof(Topic))
                             {
                                 found_PT++;
                                 iPL++;
@@ -1739,144 +1995,60 @@ namespace GameCore
                             else
                                 iPL++;
                         }
-                        else
-                            iPL++;
-                    }
-                    else if ((PLL!.List[j]!.PTL!.Index(i)!.O!.GetType() == PTL!.Index(iPL)!.O!.GetType())
-                                && (PLL!.List[j]!.PTL!.Index(i)!.O == PTL!.Index(iPL)!.O)
-                            )
-                    {
-                        found_PT++;
-                        iPL++;
-                    }
-                    else
-                    {
-                        iPL++;
-                    }
-                }
-                if (found_PT == PTL!.Count())
-                {
-                    found_PL = j;
-                    break;
-                }
-            }
-            // yeah, ich habs gefunden
-            if (found_PL >= 0)
-            {
-                found = true;
-                found_ParseID = PLL.List[found_PL].ParseID;
-            }
-            else
-            {
-                AdvGame!.FeedbackOutput(AdvGame!.CA!.Person_Everyone!, String.Format( loca.Parse_FindInitialParseline_Person_Everyone_16228, LastParseLine) );
-                found = false;
-            }
-
-            return found_ParseID;
-        }
-
-
-        private bool FindFinalParseline(ParseTokenList PTL)
-        {
-            int i, j;
-            int found_PT;
-            int found_PL = -1;
-            bool found = true;
-            int iPL;
-
-            for (j = 0; j < PLL!.List!.Count!; j++)
-            {
-                found_PT = 0;
-                for (i = 0, iPL = 0; i < PLL.List[j].PTL!.Count(); i++)
-                {
-                    if (i >= PTL!.Count()) break;
-
-                    if ((PLL!.List[j]!.PTL!.Index(i)!.O!.GetType() == typeof(Item))
-                        )
-                    {
-                        if (PTL!.Index(iPL)!.O!.GetType() == typeof(Item))
+                        else if ((PLL!.List[j]!.PTL!.Index(i)!.O!.GetType() == PTL!.Index(iPL)!.O!.GetType())
+                                    && (PLL!.List[j]!.PTL!.Index(i)!.O == PTL!.Index(iPL)!.O)
+                                )
                         {
-                            if (Items!.IsItemHere((Item)PTL!.Index(iPL)!.O!, PLL.List[j].PTL!.Index(i)!.RangeInfo))
+                            if (PTL!.Index(iPL)!.O!.GetType() == typeof(Verb))
                             {
-                                found_PT++;
+                                if (((Verb)PTL!.Index(iPL)!.O!).ID == ((Verb)PLL!.List[j].PTL!.Index(i)!.O!).ID)
+                                    found_PT++;
+                            }
+                            else if (PTL!.Index(iPL)!.O!.GetType() == typeof(Prep))
+                            {
+                                if (((Prep)PTL!.Index(iPL)!.O!).ID == ((Prep)PLL!.List[j].PTL!.Index(i)!.O!).ID)
+                                    found_PT++;
+
+                            }
+                            else if (PTL!.Index(iPL)!.O!.GetType() == typeof(Fill))
+                            {
+                                if (((Fill)PTL!.Index(iPL)!.O!).ID == ((Fill)PLL!.List[j].PTL!.Index(i)!.O!).ID)
+                                    found_PT++;
                             }
                             iPL++;
                         }
                         else
+                        {
                             iPL++;
+                        }
 
                     }
-                    else if ((PLL!.List[j]!.PTL!.Index(i)!.O!.GetType() == typeof(Person))
-                        )
+                    if ((found_PT == PTL!.Count()) && (found_PT == PLL!.List[j].PTL!.Count()))
                     {
-                        if (PTL!.Index(iPL)!.O!.GetType() == typeof(Person))
-                        {
-                            if (Persons!.IsPersonHere((Person)PTL!.Index(iPL)!.O!, PLL!.List[j]!.PTL!.Index(i)!.RangeInfo))
-                            {
-                                found_PT++;
-                            }
-                            iPL++;
-                        }
-                        else
-                            iPL++;
+                        found_PL = j;
+                        break;
                     }
-                    else if (PLL!.List[j]!.PTL!.Index(i)!.O!.GetType() == typeof(Topic))
-                    {
-                        if (PTL!.Index(iPL)!.O!.GetType() == typeof(Topic))
-                        {
-                            found_PT++;
-                            iPL++;
-                        }
-                        else
-                            iPL++;
-                    }
-                    else if ((PLL!.List[j]!.PTL!.Index(i)!.O!.GetType() == PTL!.Index(iPL)!.O!.GetType())
-                                && (PLL!.List[j]!.PTL!.Index(i)!.O == PTL!.Index(iPL)!.O)
-                            )
-                    {
-                        if (PTL!.Index(iPL)!.O!.GetType() == typeof(Verb))
-                        {
-                            if (((Verb)PTL!.Index(iPL)!.O!).ID == ((Verb)PLL!.List[j].PTL!.Index(i)!.O!).ID)
-                                found_PT++;
-                        }
-                        else if (PTL!.Index(iPL)!.O!.GetType() == typeof(Prep))
-                        {
-                            if (((Prep)PTL!.Index(iPL)!.O!).ID == ((Prep)PLL!.List[j].PTL!.Index(i)!.O!).ID)
-                                found_PT++;
-
-                        }
-                        else if (PTL!.Index(iPL)!.O!.GetType() == typeof(Fill))
-                        {
-                            if (((Fill)PTL!.Index(iPL)!.O!).ID == ((Fill)PLL!.List[j].PTL!.Index(i)!.O!).ID)
-                                found_PT++;
-                        }
-                        iPL++;
-                    }
-                    else
-                    {
-                        iPL++;
-                    }
-
                 }
-                if ((found_PT == PTL!.Count()) && (found_PT == PLL!.List[j].PTL!.Count()))
+                // yeah, ich habs gefunden
+                if (found_PL >= 0)
                 {
-                    found_PL = j;
-                    break;
+                    // Hier erfolgt dann auch sogleich der Aufruf der Delegate.
+                    PLL!.List![found_PL!]!.ParseMethod!(Persons!.Find(AdvGame!.A!.ActPerson!)!, PTL!);
                 }
+                else
+                {
+                    AdvGame!.FeedbackOutput(AdvGame!.CA!.Person_Everyone!, String.Format(loca.Parse_FindFinalParseline_Person_Everyone_16229, LastParseLine));
+                    found = false;
+                }
+
+                return found;
             }
-            // yeah, ich habs gefunden
-            if (found_PL >= 0)
+            catch (Exception e)
             {
-                // Hier erfolgt dann auch sogleich der Aufruf der Delegate.
-                PLL!.List![found_PL!]!.ParseMethod!(Persons!.Find(AdvGame!.A!.ActPerson!)!, PTL!);
-            }
-            else
-            {
-                AdvGame!.FeedbackOutput(AdvGame!.CA!.Person_Everyone!, String.Format(loca.Parse_FindFinalParseline_Person_Everyone_16229, LastParseLine));
-                found = false;
+                GlobalData.AddLog("Parse.FindFinalParseline: " + e.Message, IGlobalData.protMode.crisp);
+                return false;
             }
 
-            return found;
         }
 
         public void DoParse(string s)

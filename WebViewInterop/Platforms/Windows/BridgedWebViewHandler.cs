@@ -25,26 +25,33 @@ public class BridgedWebViewHandler : ViewHandler<IBridgedWebView, WebView2>
      {
      }
 
-  protected override WebView2 CreatePlatformView()
-  {
-        var webView = new WebView2();
+    protected override WebView2? CreatePlatformView()
+    {
+        try
+        {
+            var webView = new WebView2();
 
-        _bridge = new Bridge();
-        _webView = webView;
-        InitializeWebView(webView);
-        webView.DefaultBackgroundColor = Windows.UI.Color.FromArgb(255, 0, 0, 0);
-        webView.RequestedTheme = Microsoft.UI.Xaml.ElementTheme.Dark;
+            _bridge = new Bridge();
+            _webView = webView;
+            InitializeWebView(webView);
+            webView.DefaultBackgroundColor = Windows.UI.Color.FromArgb(255, 0, 0, 0);
+            webView.RequestedTheme = Microsoft.UI.Xaml.ElementTheme.Dark;
 
-        webView.NavigationStarting += webView_NavigationStarting;
-        webView.NavigationCompleted += webView_NavigationCompleted;
+            webView.NavigationStarting += webView_NavigationStarting;
+            webView.NavigationCompleted += webView_NavigationCompleted;
 
-        _bridgeWebView = this.VirtualView;
+            _bridgeWebView = this.VirtualView;
 
-        return webView;
+            return webView;
+        }
+        catch (Exception ex)
+        {
+            BridgedWebViewHandler.GetAddProt()!("CreatePlatformView" + ex.Message, protMode.crisp);
+            return null;
+        }
+    }
 
-  }
-
-  private void InitializeWebView(WebView2 webView)
+    private void InitializeWebView(WebView2 webView)
   {
   }
 
@@ -69,17 +76,24 @@ public class BridgedWebViewHandler : ViewHandler<IBridgedWebView, WebView2>
     // Windows
     protected override async void ConnectHandler(WebView2 platformView)
   {
-        base.ConnectHandler(platformView);
+        try
+        {
+            base.ConnectHandler(platformView);
 
-        await _bridge!.Connect(platformView);
+            await _bridge!.Connect(platformView);
 
-        //platformView.Source = new Uri("https://www.google.com");
+            //platformView.Source = new Uri("https://www.google.com");
 
-        platformView.CoreWebView2.SetVirtualHostNameToFolderMapping("wwwroot", "WebApp", CoreWebView2HostResourceAccessKind.Allow);
-        platformView.CoreWebView2.Navigate("https://wwwroot/Index.html");
+            platformView.CoreWebView2.SetVirtualHostNameToFolderMapping("wwwroot", "WebApp", CoreWebView2HostResourceAccessKind.Allow);
+            platformView.CoreWebView2.Navigate("https://wwwroot/Index.html");
+        }
+        catch (Exception ex)
+        {
+            BridgedWebViewHandler.GetAddProt()!("ConnectHandler: " + ex.Message, protMode.crisp);
+        }
 
 
-     }
+    }
 
     // Überschreibe das NavigationStarting Event, um die Navigation zu überprüfen
     protected override void DisconnectHandler(WebView2 platformView)
@@ -91,48 +105,70 @@ public class BridgedWebViewHandler : ViewHandler<IBridgedWebView, WebView2>
     {
         return _bridge;
     }
+
+    public static DelVoidStringProtMode? GetAddProt()
+    {
+        return Bridge._addProtocol;
+    }
+
     public void webView_NavigationStarting(object sender, CoreWebView2NavigationStartingEventArgs e)
     {
-        // Wenn die Navigation nicht von der Anwendung ausgelöst wurde, breche sie ab
-        if (!isAppInitiatedNavigation)
+        try
         {
-            e.Cancel = true;
-        }
-
-        isAppInitiatedNavigation = true;
-
-        if (_bridgeWebView!.Navigating != null)
-        {
-            WebNavigatingEventArgs wnea = new(WebNavigationEvent.Refresh, null, e.Uri);
-
-            _bridgeWebView.Navigating(sender, wnea);
-
-            if( wnea.Cancel == true )
+            // Wenn die Navigation nicht von der Anwendung ausgelöst wurde, breche sie ab
+            if (!isAppInitiatedNavigation)
             {
                 e.Cancel = true;
             }
-            else
+
+            isAppInitiatedNavigation = true;
+
+            if (_bridgeWebView!.Navigating != null)
             {
-                e.Cancel = false;
+                WebNavigatingEventArgs wnea = new(WebNavigationEvent.Refresh, null, e.Uri);
+
+                _bridgeWebView.Navigating(sender, wnea);
+
+                if (wnea.Cancel == true)
+                {
+                    e.Cancel = true;
+                }
+                else
+                {
+                    e.Cancel = false;
+                }
             }
+            // Setze die Variable für die nächste Navigation zurück
+            isAppInitiatedNavigation = false;
         }
-        // Setze die Variable für die nächste Navigation zurück
-        isAppInitiatedNavigation = false;
+        catch (Exception ex)
+        {
+            BridgedWebViewHandler.GetAddProt()!("webView_NavigationStarting: " + ex.Message, protMode.crisp);
+        }
+
     }
     public void webView_NavigationCompleted(object sender, CoreWebView2NavigationCompletedEventArgs e)
     {
-        // Wenn die Navigation nicht von der Anwendung ausgelöst wurde, breche sie ab
-        isAppCompletingNavigation = true;
-
-        if (_bridgeWebView!.Navigating != null)
+        try
         {
-            WebNavigationResult res = new();
-            WebNavigatedEventArgs wnea = new(WebNavigationEvent.Refresh, null, null, res);
+            // Wenn die Navigation nicht von der Anwendung ausgelöst wurde, breche sie ab
+            isAppCompletingNavigation = true;
 
-            _bridgeWebView.Navigated(sender, wnea);
+            if (_bridgeWebView!.Navigating != null)
+            {
+                WebNavigationResult res = new();
+                WebNavigatedEventArgs wnea = new(WebNavigationEvent.Refresh, null, null, res);
 
+                _bridgeWebView.Navigated(sender, wnea);
+
+            }
+            // Setze die Variable für die nächste Navigation zurück
+            isAppCompletingNavigation = false;
         }
-        // Setze die Variable für die nächste Navigation zurück
-        isAppCompletingNavigation = false;
+        catch (Exception ex)
+        {
+            BridgedWebViewHandler.GetAddProt()!("webView_NavigationCompleted: " + ex.Message, protMode.crisp);
+        }
+
     }
 }

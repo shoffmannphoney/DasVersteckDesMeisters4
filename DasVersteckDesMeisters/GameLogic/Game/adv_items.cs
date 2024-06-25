@@ -486,7 +486,8 @@ public partial class Adv: AdvBase
         Items!.Last().StorageIn = 30;
 
         CA!.I10_First_Aid_Kit = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Erstehilfekasten! }, new List<Adj> { CA!.Adj_modern! }, Co.SEX_MALE, CB!.LocType_Loc, CA!.L10_Laboratory, loca.Adv_I10_First_Aid_Kit, "Adv_I10_First_Aid_Kit", Co.SZ_small, true, false, Nouns, Adjs));
-        Items!.Last().SynNames = new List<Noun> { CA!.Noun_Kasten!, CA!.Noun_Verbandskasten! };
+        Items!.Last().SynNames = new List<Noun> { CA!.Noun_Kasten!, CA!.Noun_Verbandskasten};
+        Items!.Last().NamesEng= new List<Noun> { CA!.Noun_Kasten!, CA!.Noun_Verbandskasten, CA!.Noun_Kit };
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
@@ -652,6 +653,7 @@ public partial class Adv: AdvBase
 
         CA!.I13_Cupboard = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Schrank! }, null, Co.SEX_MALE, CB!.LocType_Loc, CA!.L13_Kitchen, loca.Adv_I13_Cupboard, "Adv_I13_Cupboard", Co.SZ_small, true, false, Nouns, Adjs));
         Items!.Last().SynNames = new List<Noun> { CA!.Noun_Kuechenschrank! };
+        Items!.Last().NamesEng = new List<Noun> { CA!.Noun_Kuechenschrank! };
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_UsableWith));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));
@@ -866,6 +868,7 @@ public partial class Adv: AdvBase
 
         CA!.I00_Squeaky_Duck = Items!.Add(Item.ItemLocaLoca(new List<Noun> { CA!.Noun_Quietscheentchen! }, new List<Adj> { CA!.Adj_gelb! }, Co.SEX_NEUTER, CB!.LocType_On_Item, CA!.I14_Bathtub.ID, loca.Adv_I00_Squeaky_Duck, "Adv_I00_Squeaky_Duck", Co.SZ_small, false, true, Nouns, Adjs));
         Items!.Last().SynNames = new List<Noun> { CA!.Noun_Ente!, CA!.Noun_Entchen!, CA!.Noun_Gummiente! };
+        Items!.Last().NamesEng = new List<Noun> { CA!.Noun_Gummiente!, CA!.Noun_Ente };
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Smellable));
         Items!.Last().Categories?.Add(Categories?.Find(A.Cat_Usable));
         Items!.Last().Categories?.Add(Categories?.Find(A.CounterCat_UsableWith));

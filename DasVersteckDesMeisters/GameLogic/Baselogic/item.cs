@@ -560,19 +560,29 @@ namespace GameCore
         }
 
 
-        public List<Item> ListItems( int LocType, int LocID )
+        public List<Item>? ListItems( int LocType, int LocID )
         {
-            List<Item> itemList = new List<Item>();
-
-            foreach( Item item in List!.Values )
+            try
             {
-                if( item.locationType == LocType && item.locationID == LocID )
+                List<Item> itemList = new List<Item>();
+
+                foreach (Item item in List!.Values)
                 {
-                    itemList.Add(item);
+                    if (item.locationType == LocType && item.locationID == LocID)
+                    {
+                        itemList.Add(item);
+                    }
                 }
+                return itemList;
             }
-            return itemList;
-       }
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("Item.ListItems: " + ex.Message, IGlobalData.protMode.crisp);
+                return null;
+
+            }
+
+        }
 
 
         public int GetItemLoc( int ItemID )
@@ -606,52 +616,65 @@ namespace GameCore
 
         public (int lType, int lID) GetItemLoc( Item? item )
         {
-            (int _lType, int _lID) loc;
+            try
+            {
+                (int _lType, int _lID) loc;
 
-            if( item!.IsRegular == false)
-            {
-                loc._lType = Co.CB!.LocType_Loc;
-                loc._lID = -1;
-            }
-            else if (item.locationType == Co.CB!.LocType_In_Item )
-            {
-                loc = this.GetItemLoc( this.Find( item.locationID ) );
-            }
-            else if (item.locationType == Co.CB!.LocType_Behind_Item)
-            {
-                loc = this.GetItemLoc(this.Find(item.locationID) );
-            }
-            else if (item.locationType == Co.CB!.LocType_Below_Item)
-            {
-                loc = this.GetItemLoc(this.Find(item.locationID)) ;
-            }
-            else if (item.locationType == Co.CB!.LocType_Beside_Item)
-            {
-                loc = this.GetItemLoc(this.Find(item.locationID)) ;
-            }
-            else if (item.locationType == Co.CB!.LocType_On_Item)
-            {
-                loc = this.GetItemLoc(this.Find(item.locationID)) ;
-            }
-            else if (item.locationType == Co.CB!.LocType_In_Person)
-            {
-                loc = this.Persons!.GetPersonLoc(this.Persons!.Find(item.locationID)) ;
-            }
-            else if (item.locationType == Co.CB!.LocType_Person)
-            {
-                loc = this.Persons!.GetPersonLoc(this.Persons!.Find(item.locationID)) ;
-            }
-            else if (item.locationType == Co.CB!.LocType_To_Person)
-            {
-                loc = this.Persons!.GetPersonLoc(this.Persons!.Find( item.locationID) );
-            }
-            else
-            {
-                loc._lType = Co.CB!.LocType_Loc;
-                loc._lID = item.locationID;
-            }
+                if (item!.IsRegular == false)
+                {
+                    loc._lType = Co.CB!.LocType_Loc;
+                    loc._lID = -1;
+                }
+                else if (item.locationType == Co.CB!.LocType_In_Item)
+                {
+                    loc = this.GetItemLoc(this.Find(item.locationID));
+                }
+                else if (item.locationType == Co.CB!.LocType_Behind_Item)
+                {
+                    loc = this.GetItemLoc(this.Find(item.locationID));
+                }
+                else if (item.locationType == Co.CB!.LocType_Below_Item)
+                {
+                    loc = this.GetItemLoc(this.Find(item.locationID));
+                }
+                else if (item.locationType == Co.CB!.LocType_Beside_Item)
+                {
+                    loc = this.GetItemLoc(this.Find(item.locationID));
+                }
+                else if (item.locationType == Co.CB!.LocType_On_Item)
+                {
+                    loc = this.GetItemLoc(this.Find(item.locationID));
+                }
+                else if (item.locationType == Co.CB!.LocType_In_Person)
+                {
+                    loc = this.Persons!.GetPersonLoc(this.Persons!.Find(item.locationID));
+                }
+                else if (item.locationType == Co.CB!.LocType_Person)
+                {
+                    loc = this.Persons!.GetPersonLoc(this.Persons!.Find(item.locationID));
+                }
+                else if (item.locationType == Co.CB!.LocType_To_Person)
+                {
+                    loc = this.Persons!.GetPersonLoc(this.Persons!.Find(item.locationID));
+                }
+                else
+                {
+                    loc._lType = Co.CB!.LocType_Loc;
+                    loc._lID = item.locationID;
+                }
 
-            return ( loc );
+                return (loc);
+            }
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("Item.GetItemLoc: " + ex.Message, IGlobalData.protMode.crisp);
+                (int _lType, int _lID) loc2; 
+
+                loc2._lType = Co.CB!.LocType_Loc;
+                loc2._lID = -1;
+                return loc2;
+
+            }
 
         }
 
@@ -662,130 +685,150 @@ namespace GameCore
 
         public bool IsItemHere(Item? I, int Mode)
         {
-            bool foundItem = false;
-
-            if (Mode == Co.Range_Here)
+            try
             {
-                if (I!.locationType == Co.CB!.LocType_Person)
-                { 
-                    if (I!.locationID == A!.ActPerson)
-                        foundItem = true;
-                }
-                else if (I!.locationType == Co.CB!.LocType_Loc)
-                {
-                    if (I!.locationID == A!.ActLoc)
-                        foundItem = true;
+                bool foundItem = false;
 
-                }
-                else // if (!foundItem)
+                if (Mode == Co.Range_Here)
                 {
-                    if (I!.locationType == Co.CB!.LocType_In_Item)
+                    if (I!.locationType == Co.CB!.LocType_Person)
                     {
-                        Item I2 = this.Find(I!.locationID)!;
-
-                        if ((I2 != null) && ((I2.CanBeClosed == false) || (I2.IsClosed == false)) && (!I2.InvisibleIn))
-                        {
-                            foundItem = IsItemHere(I2, Mode);
-                        }
+                        if (I!.locationID == A!.ActPerson)
+                            foundItem = true;
                     }
-                    else
+                    else if (I!.locationType == Co.CB!.LocType_Loc)
                     {
-                        Item I2 = this.Find(I!.locationID)!;
-                        if (((I.locationType == Co.CB!.LocType_Below_Item) && (!I2.InvisibleBelow))
-                                || ((I!.locationType == Co.CB!.LocType_On_Item) && (!I2.InvisibleOn))
-                                || ((I!.locationType == Co.CB!.LocType_Beside_Item) && (!I2.InvisibleBeside))
-                                || ((I!.locationType == Co.CB!.LocType_Behind_Item) && (!I2.InvisibleBehind))
-                            )
-                        {
-                            // Item I2 = this.Find(I.locationID);
-                            foundItem = IsItemHere(I2, Mode);
-                        }
-                        else if ((I.locationType == Co.CB!.LocType_In_Person)
-                                    || (I.locationType == Co.CB!.LocType_To_Person)
-                                )
-                        {
-                            Person P2 = Persons!.Find(I.locationID)!;
-                            foundItem = Persons!.IsPersonHere(P2, Co.Range_Here);
-                        }
+                        if (I!.locationID == A!.ActLoc)
+                            foundItem = true;
+
                     }
-                }
-            }
-            else if (Mode == Co.Range_Visible)
-            {
-                if (I!.IsHidden == false)
-                {
-                    if ((I!.locationType == Co.CB!.LocType_Person) && (I.locationID == A!.ActPerson))
-                        foundItem = true;
-
-                    if ((I!.locationType == Co.CB!.LocType_Loc) && (I.locationID == A!.ActLoc))
-                        foundItem = true;
-
-                    if (!foundItem)
+                    else // if (!foundItem)
                     {
                         if (I!.locationType == Co.CB!.LocType_In_Item)
                         {
-                            Item I2 = this.Find(I.locationID)!;
+                            Item I2 = this.Find(I!.locationID)!;
 
-                            if ( ((I2.CanBeClosed == false) || (I2.IsClosed == false) || (I2.IsCage))&& (!I2.InvisibleIn) )
+                            if ((I2 != null) && ((I2.CanBeClosed == false) || (I2.IsClosed == false)) && (!I2.InvisibleIn))
                             {
                                 foundItem = IsItemHere(I2, Mode);
                             }
                         }
-                        else if (((I.locationType == Co.CB!.LocType_Below_Item) && (!this.Find(I.locationID)!.InvisibleBelow))
-                                    || ((I.locationType == Co.CB!.LocType_On_Item) && (!this.Find(I.locationID)!.InvisibleOn))
-                                    || ((I.locationType == Co.CB!.LocType_Beside_Item) && (!this.Find(I.locationID)!.InvisibleBeside))
-                                    || ((I.locationType == Co.CB!.LocType_Behind_Item) && (!this.Find(I.locationID)!.InvisibleBehind))
-                                )
+                        else
                         {
-                            Item I2 = this.Find(I.locationID)!;
-                            foundItem = IsItemHere(I2, Mode);
-                        }
-                        else if ((I.locationType == Co.CB!.LocType_In_Person)
-                                    || (I.locationType == Co.CB!.LocType_To_Person)
+                            Item I2 = this.Find(I!.locationID)!;
+                            if (((I.locationType == Co.CB!.LocType_Below_Item) && (!I2.InvisibleBelow))
+                                    || ((I!.locationType == Co.CB!.LocType_On_Item) && (!I2.InvisibleOn))
+                                    || ((I!.locationType == Co.CB!.LocType_Beside_Item) && (!I2.InvisibleBeside))
+                                    || ((I!.locationType == Co.CB!.LocType_Behind_Item) && (!I2.InvisibleBehind))
                                 )
-                        {
-                            Person P2 = Persons!.Find(I.locationID)!;
-                            foundItem = Persons!.IsPersonHere(P2, Co.Range_Here);
+                            {
+                                // Item I2 = this.Find(I.locationID);
+                                foundItem = IsItemHere(I2, Mode);
+                            }
+                            else if ((I.locationType == Co.CB!.LocType_In_Person)
+                                        || (I.locationType == Co.CB!.LocType_To_Person)
+                                    )
+                            {
+                                Person P2 = Persons!.Find(I.locationID)!;
+                                foundItem = Persons!.IsPersonHere(P2, Co.Range_Here);
+                            }
                         }
                     }
                 }
-            }
-            else if (Mode == Co.Range_Known)
-            {
-                if (I!.Known)
+                else if (Mode == Co.Range_Visible)
+                {
+                    if (I!.IsHidden == false)
+                    {
+                        if ((I!.locationType == Co.CB!.LocType_Person) && (I.locationID == A!.ActPerson))
+                            foundItem = true;
+
+                        if ((I!.locationType == Co.CB!.LocType_Loc) && (I.locationID == A!.ActLoc))
+                            foundItem = true;
+
+                        if (!foundItem)
+                        {
+                            if (I!.locationType == Co.CB!.LocType_In_Item)
+                            {
+                                Item I2 = this.Find(I.locationID)!;
+
+                                if (((I2.CanBeClosed == false) || (I2.IsClosed == false) || (I2.IsCage)) && (!I2.InvisibleIn))
+                                {
+                                    foundItem = IsItemHere(I2, Mode);
+                                }
+                            }
+                            else if (((I.locationType == Co.CB!.LocType_Below_Item) && (!this.Find(I.locationID)!.InvisibleBelow))
+                                        || ((I.locationType == Co.CB!.LocType_On_Item) && (!this.Find(I.locationID)!.InvisibleOn))
+                                        || ((I.locationType == Co.CB!.LocType_Beside_Item) && (!this.Find(I.locationID)!.InvisibleBeside))
+                                        || ((I.locationType == Co.CB!.LocType_Behind_Item) && (!this.Find(I.locationID)!.InvisibleBehind))
+                                    )
+                            {
+                                Item I2 = this.Find(I.locationID)!;
+                                foundItem = IsItemHere(I2, Mode);
+                            }
+                            else if ((I.locationType == Co.CB!.LocType_In_Person)
+                                        || (I.locationType == Co.CB!.LocType_To_Person)
+                                    )
+                            {
+                                Person P2 = Persons!.Find(I.locationID)!;
+                                foundItem = Persons!.IsPersonHere(P2, Co.Range_Here);
+                            }
+                        }
+                    }
+                }
+                else if (Mode == Co.Range_Known)
+                {
+                    if (I!.Known)
+                        foundItem = true;
+                }
+                else if (Mode == Co.Range_Active)
+                {
+                    if (I!.Active)
+                        foundItem = true;
+                }
+                else
+                {
                     foundItem = true;
+                }
+                return (foundItem);
             }
-            else if (Mode == Co.Range_Active)
+            catch (Exception e)
             {
-                if (I!.Active)
-                    foundItem = true;
+                GlobalData.AddLog("Item.IsItemHere: " + e.Message + I.ToString(), IGlobalData.protMode.crisp);
+                return false;
+
             }
-            else
-            {
-                foundItem = true;
-            }
-            return (foundItem);
+
         }
 
         public bool IsItemInv(Item? I)
         {
-            bool foundItem = false;
-
-            if ((I!.locationType == Co.CB!.LocType_Person) && (I.locationID == A!.ActPerson))
-                foundItem = true;
-            else
+            try
             {
-                if (I.locationType == Co.CB!.LocType_In_Item)
+                bool foundItem = false;
+
+                if ((I!.locationType == Co.CB!.LocType_Person) && (I.locationID == A!.ActPerson))
+                    foundItem = true;
+                else
                 {
-                    if( Find(I!.locationID!)!.CanBeClosed == false || Find(I!.locationID!)!.IsClosed == false )
+                    if (I.locationType == Co.CB!.LocType_In_Item)
                     {
-                        foundItem = IsItemInv(Find(I!.locationID));
+                        if (Find(I!.locationID!)!.CanBeClosed == false || Find(I!.locationID!)!.IsClosed == false)
+                        {
+                            foundItem = IsItemInv(Find(I!.locationID));
+                        }
+
+
                     }
-
-
                 }
+                return (foundItem);
             }
-            return (foundItem);
+            catch (Exception e)
+            {
+                GlobalData.AddLog("Item.IsItemInv: " + e.Message + I.ToString(), IGlobalData.protMode.crisp);
+                return false;
+
+            }
+
         }
 
         public bool TransferItem( int ItemID, int plocationType, int plocationID)
@@ -813,92 +856,103 @@ namespace GameCore
 
         private bool TransferItem(Item? I, int plocationType, int plocationID)
         {
-            if (I!.locationType == Co.CB!.LocType_In_Item!)
+            try
             {
-                Item I2 = this.Find(I.locationID)!;
-                if( I2 != null )
-                if( I2 != null )
-                    I2.StorageIn += I.Size;
+                if (I!.locationType == Co.CB!.LocType_In_Item!)
+                {
+                    Item I2 = this.Find(I.locationID)!;
+                    if (I2 != null)
+                        if (I2 != null)
+                            I2.StorageIn += I.Size;
+                }
+                else if (I.locationType == Co.CB!.LocType_On_Item)
+                {
+                    Item I2 = this.Find(I.locationID)!;
+                    if (I2 != null)
+                        I2.StorageOn += I.Size;
+                }
+                else if (I.locationType == Co.CB!.LocType_Below_Item)
+                {
+                    Item I2 = this.Find(I.locationID)!;
+                    if (I2 != null)
+                        I2.StorageBelow += I.Size;
+                }
+                else if (I.locationType == Co.CB!.LocType_Behind_Item)
+                {
+                    Item I2 = this.Find(I.locationID)!;
+                    if (I2 != null)
+                        I2.StorageBehind += I.Size;
+                }
+                else if (I.locationType == Co.CB!.LocType_Beside_Item)
+                {
+                    Item I2 = this.Find(I.locationID)!;
+                    if (I2 != null)
+                        I2.StorageBeside += I.Size;
+                }
+                else if (I.locationType == Co.CB!.LocType_In_Person)
+                {
+                    Person P2 = Persons!.Find(I.locationID)!;
+                    if (P2 != null)
+                        P2.StorageIn += I.Size;
+                }
+                else if (I.locationType == Co.CB!.LocType_To_Person)
+                {
+                    Person P2 = Persons!.Find(I.locationID)!;
+                    if (P2 != null)
+                        P2.Storage += I.Size;
+                }
+
+                I.locationType = plocationType;
+                I.locationID = plocationID;
+
+                if (I.locationType == Co.CB!.LocType_In_Item)
+                {
+                    Item I2 = this.Find(plocationID)!;
+                    I2.StorageIn -= I.Size;
+                }
+                else if (I.locationType == Co.CB!.LocType_On_Item)
+                {
+                    Item I2 = this.Find(plocationID)!;
+                    I2.StorageOn -= I.Size;
+                }
+                else if (I.locationType == Co.CB!.LocType_Below_Item)
+                {
+                    Item I2 = this.Find(plocationID)!;
+                    I2.StorageBelow -= I.Size;
+                }
+                else if (I.locationType == Co.CB!.LocType_Behind_Item)
+                {
+                    Item I2 = this.Find(plocationID)!;
+                    I2.StorageBehind -= I.Size;
+                }
+                else if (I.locationType == Co.CB!.LocType_Beside_Item)
+                {
+                    Item I2 = this.Find(plocationID)!;
+                    I2!.StorageBeside -= I.Size;
+                }
+                else if (I.locationType == Co.CB!.LocType_In_Person)
+                {
+                    Person P2 = Persons!.Find(plocationID)!;
+                    P2!.StorageIn -= I.Size;
+                }
+                else if (I.locationType == Co.CB!.LocType_To_Person)
+                {
+                    Person P2 = Persons!.Find(plocationID)!;
+                    P2!.Storage -= I.Size;
+                }
+
+                AdvGame!.DoUIUpdate();
+
+                return (true);
             }
-            else if (I.locationType == Co.CB!.LocType_On_Item)
+            catch (Exception e)
             {
-                Item I2 = this.Find(I.locationID)!;
-                if (I2 != null)
-                    I2.StorageOn += I.Size;
-            }
-            else if (I.locationType == Co.CB!.LocType_Below_Item)
-            {
-                Item I2 = this.Find(I.locationID)!;
-                if (I2 != null)
-                    I2.StorageBelow += I.Size;
-            }
-            else if (I.locationType == Co.CB!.LocType_Behind_Item)
-            {
-                Item I2 = this.Find(I.locationID)!;
-                if (I2 != null)
-                    I2.StorageBehind += I.Size;
-            }
-            else if (I.locationType == Co.CB!.LocType_Beside_Item)
-            {
-                Item I2 = this.Find(I.locationID)!;
-                if (I2 != null)
-                    I2.StorageBeside += I.Size;
-            }
-            else if (I.locationType == Co.CB!.LocType_In_Person)
-            {
-                Person P2 = Persons!.Find(I.locationID)!;
-                if (P2 != null)
-                    P2.StorageIn += I.Size;
-            }
-            else if (I.locationType == Co.CB!.LocType_To_Person)
-            {
-                Person P2 = Persons!.Find(I.locationID)!;
-                if (P2 != null)
-                    P2.Storage += I.Size;
+                GlobalData.AddLog("Item.TransferItem: " + e.Message + I.ToString(), IGlobalData.protMode.crisp);
+                return false;
+
             }
 
-            I.locationType = plocationType;
-            I.locationID = plocationID;
 
-            if (I.locationType == Co.CB!.LocType_In_Item)
-            {
-                Item I2 = this.Find(plocationID)!;
-                I2.StorageIn -= I.Size;
-            }
-            else if (I.locationType == Co.CB!.LocType_On_Item)
-            {
-                Item I2 = this.Find(plocationID)!;
-                I2.StorageOn -= I.Size;
-            }
-            else if (I.locationType == Co.CB!.LocType_Below_Item)
-            {
-                Item I2 = this.Find(plocationID)!;
-                I2.StorageBelow -= I.Size;
-            }
-            else if (I.locationType == Co.CB!.LocType_Behind_Item)
-            {
-                Item I2 = this.Find(plocationID)!;
-                I2.StorageBehind -= I.Size;
-            }
-            else if (I.locationType == Co.CB!.LocType_Beside_Item)
-            {
-                Item I2 = this.Find(plocationID)!;
-                I2!.StorageBeside -= I.Size;
-            }
-            else if (I.locationType == Co.CB!.LocType_In_Person)
-            {
-                Person P2 = Persons!.Find(plocationID)!;
-                P2!.StorageIn -= I.Size;
-            }
-            else if (I.locationType == Co.CB!.LocType_To_Person)
-            {
-                Person P2 = Persons!.Find(plocationID)!;
-                P2!.Storage -= I.Size;
-            }
-
-            AdvGame!.DoUIUpdate();
-
-            return (true);
         }
 
         public int GetItemIx(int ItemID)
@@ -998,139 +1052,159 @@ namespace GameCore
 
         public int FindContainers(int Loc, int Where, List<PI> il)
         {
-            int Ct = 0;
-
-            for (int i = 0; i < List!.Count; i++)
+            try
             {
-                Item item = Find(List[i].ID)!;
-                if ((Where == AdvGame!.CB!.LocType_In_Item) && ( Loc == Co.GenerateLoc(item ) ) && (item!.CanPutIn) && ((item!.CanBeClosed == false) || (item!.IsClosed == false)))
+                int Ct = 0;
+
+                for (int i = 0; i < List!.Count; i++)
                 {
-                    Ct++;
-                    il.Add(new PI( PI.TypeVal.Item, item.ID ) );
-                    FindContainers(Co.GenerateLoc(AdvGame.CB!.LocType_In_Item, item.ID), AdvGame.CB!.LocType_In_Item, il );
+                    Item item = Find(List[i].ID)!;
+                    if ((Where == AdvGame!.CB!.LocType_In_Item) && (Loc == Co.GenerateLoc(item)) && (item!.CanPutIn) && ((item!.CanBeClosed == false) || (item!.IsClosed == false)))
+                    {
+                        Ct++;
+                        il.Add(new PI(PI.TypeVal.Item, item.ID));
+                        FindContainers(Co.GenerateLoc(AdvGame.CB!.LocType_In_Item, item.ID), AdvGame.CB!.LocType_In_Item, il);
+                    }
+                    else if ((Where == AdvGame.CB!.LocType_Behind_Item) && (item.CanPutBehind))
+                    {
+                        Ct++;
+                        il.Add(new PI(PI.TypeVal.Item, item.ID));
+                        FindContainers(Co.GenerateLoc(AdvGame.CB!.LocType_Behind_Item, item.ID), AdvGame.CB!.LocType_Behind_Item, il);
+                    }
+                    else if ((Where == AdvGame.CB!.LocType_On_Item) && (item.CanPutOn))
+                    {
+                        Ct++;
+                        il.Add(new PI(PI.TypeVal.Item, item.ID));
+                        FindContainers(Co.GenerateLoc(AdvGame.CB!.LocType_On_Item, item.ID), AdvGame.CB!.LocType_On_Item, il);
+                    }
+                    else if ((Where == AdvGame.CB!.LocType_Beside_Item) && (item.CanPutBeside))
+                    {
+                        Ct++;
+                        il.Add(new PI(PI.TypeVal.Item, item.ID));
+                        FindContainers(Co.GenerateLoc(AdvGame.CB!.LocType_Beside_Item, item.ID), AdvGame.CB!.LocType_Beside_Item, il);
+                    }
+                    else if ((Where == AdvGame.CB!.LocType_Below_Item) && (item.CanPutBelow))
+                    {
+                        Ct++;
+                        il.Add(new PI(PI.TypeVal.Item, item.ID));
+                        FindContainers(Co.GenerateLoc(AdvGame.CB!.LocType_Below_Item, item.ID), AdvGame.CB!.LocType_Below_Item, il);
+                    }
                 }
-                else if ((Where == AdvGame.CB!.LocType_Behind_Item) && (item.CanPutBehind))
-                {
-                    Ct++;
-                    il.Add(new PI(PI.TypeVal.Item, item.ID));
-                    FindContainers(Co.GenerateLoc(AdvGame.CB!.LocType_Behind_Item, item.ID), AdvGame.CB!.LocType_Behind_Item, il);
-                }
-                else if ((Where == AdvGame.CB!.LocType_On_Item) && (item.CanPutOn))
-                {
-                    Ct++;
-                    il.Add(new PI(PI.TypeVal.Item, item.ID));
-                    FindContainers(Co.GenerateLoc(AdvGame.CB!.LocType_On_Item, item.ID), AdvGame.CB!.LocType_On_Item, il);
-                }
-                else if ((Where == AdvGame.CB!.LocType_Beside_Item) && (item.CanPutBeside))
-                {
-                    Ct++;
-                    il.Add(new PI(PI.TypeVal.Item, item.ID));
-                    FindContainers(Co.GenerateLoc(AdvGame.CB!.LocType_Beside_Item, item.ID), AdvGame.CB!.LocType_Beside_Item, il);
-                }
-                else if ((Where == AdvGame.CB!.LocType_Below_Item) && (item.CanPutBelow))
-                {
-                    Ct++;
-                    il.Add(new PI(PI.TypeVal.Item, item.ID));
-                    FindContainers(Co.GenerateLoc(AdvGame.CB!.LocType_Below_Item, item.ID), AdvGame.CB!.LocType_Below_Item, il);
-                }
+                return Ct;
             }
-            return Ct;
+            catch (Exception e)
+            {
+                GlobalData.AddLog("Item.FindContainers: " + e.Message , IGlobalData.protMode.crisp);
+                return 0;
+
+            }
+
         }
-        public static ItemList CloneItemList(ItemList source)
+        public static ItemList? CloneItemList(ItemList source)
         {
-            ItemList dest = new();
-
-            dest.List = new Dictionary<int,Item>();
-            // dest.A = source.A
-            foreach (Item it in source!.List!.Values)
+            try
             {
-                Item itDest = new();
-                itDest.CanBeClosed = it.CanBeClosed;
-                itDest.CanBeLocked = it.CanBeLocked;
-                itDest.CanBeTaken = it.CanBeTaken;
-                itDest.CanPutBehind = it.CanPutBehind;
-                itDest.CanPutBelow = it.CanPutBelow;
-                itDest.CanPutBeside = it.CanPutBeside;
-                itDest.CanPutIn = it.CanPutIn;
-                itDest.CanPutOn = it.CanPutOn;
-                itDest.Dressable = it.Dressable;
-                itDest.InvisibleBehind = it.InvisibleBehind;
-                itDest.InvisibleBelow = it.InvisibleBelow;
-                itDest.InvisibleBeside = it.InvisibleBeside;
-                itDest.IsBackground = it.IsBackground;
-                itDest.InvisibleIn = it.InvisibleIn;
-                itDest.InvisibleOn = it.InvisibleOn;
-                itDest.IsCage = it.IsCage;
-                itDest.IsClosed = it.IsClosed;
-                itDest.IsCountable = it.IsCountable;
-                itDest.IsDressed = it.IsDressed;
-                itDest.IsHidden = it.IsHidden;
-                itDest.IsLessImportant = it.IsLessImportant;
-                itDest.IsLocked = it.IsLocked;
-                itDest.IsMovable = it.IsMovable;
-                itDest.IsMentionable = it.IsMentionable;
-                itDest.IsRegular = it.IsRegular;
-                itDest.ListInsideItems = it.ListInsideItems;
-                itDest.ShowStorageIn = it.ShowStorageIn;
-                itDest.ShowStorageOn = it.ShowStorageOn;
-                itDest.IsCountable = it.IsCountable;
-                itDest.locationStatic = it.locationStatic;
-                itDest.Active = it.Active;
+                ItemList dest = new();
 
-                itDest.Size = it.Size;
-                itDest.StorageBehind = it.StorageBehind;
-                itDest.StorageBelow = it.StorageBelow;
-                itDest.StorageBeside = it.StorageBeside;
-                itDest.StorageIn = it.StorageIn;
-                itDest.StorageOn = it.StorageOn;
-                itDest.locationID = it.locationID;
-                itDest.locationType = it.locationType;
-
-                itDest.Appendix = it.Appendix;
-                itDest.ID = it.ID;
-                itDest.AppendixLoca = it.AppendixLoca;
-                itDest.Description = it.Description;
-                itDest.Known = it.Known;
-                itDest.LocaDescription = it.LocaDescription;
-                itDest.Sex = it.Sex;
-                itDest.SexEng = it.SexEng;
-                itDest.Picture = it.Picture;
-
-                itDest.controllerName = it.controllerName;
-                itDest.controller = it.controller;
-
-                itDest.SL = new();
-                itDest.SL.List = new();
-                foreach (Status sSource in it!.SL!.List)
+                dest.List = new Dictionary<int, Item>();
+                // dest.A = source.A
+                foreach (Item it in source!.List!.Values)
                 {
-                    Status sDest = new Status(sSource.ID, sSource.Val);
-                    itDest.SL.List.Add(sDest);
-                }
+                    Item itDest = new();
+                    itDest.CanBeClosed = it.CanBeClosed;
+                    itDest.CanBeLocked = it.CanBeLocked;
+                    itDest.CanBeTaken = it.CanBeTaken;
+                    itDest.CanPutBehind = it.CanPutBehind;
+                    itDest.CanPutBelow = it.CanPutBelow;
+                    itDest.CanPutBeside = it.CanPutBeside;
+                    itDest.CanPutIn = it.CanPutIn;
+                    itDest.CanPutOn = it.CanPutOn;
+                    itDest.Dressable = it.Dressable;
+                    itDest.InvisibleBehind = it.InvisibleBehind;
+                    itDest.InvisibleBelow = it.InvisibleBelow;
+                    itDest.InvisibleBeside = it.InvisibleBeside;
+                    itDest.IsBackground = it.IsBackground;
+                    itDest.InvisibleIn = it.InvisibleIn;
+                    itDest.InvisibleOn = it.InvisibleOn;
+                    itDest.IsCage = it.IsCage;
+                    itDest.IsClosed = it.IsClosed;
+                    itDest.IsCountable = it.IsCountable;
+                    itDest.IsDressed = it.IsDressed;
+                    itDest.IsHidden = it.IsHidden;
+                    itDest.IsLessImportant = it.IsLessImportant;
+                    itDest.IsLocked = it.IsLocked;
+                    itDest.IsMovable = it.IsMovable;
+                    itDest.IsMentionable = it.IsMentionable;
+                    itDest.IsRegular = it.IsRegular;
+                    itDest.ListInsideItems = it.ListInsideItems;
+                    itDest.ShowStorageIn = it.ShowStorageIn;
+                    itDest.ShowStorageOn = it.ShowStorageOn;
+                    itDest.IsCountable = it.IsCountable;
+                    itDest.locationStatic = it.locationStatic;
+                    itDest.Active = it.Active;
 
-                itDest.UnlockItems = new();
-                foreach (int uItem in it!.UnlockItems!)
-                {
-                    itDest.UnlockItems.Add(uItem);
-                }
+                    itDest.Size = it.Size;
+                    itDest.StorageBehind = it.StorageBehind;
+                    itDest.StorageBelow = it.StorageBelow;
+                    itDest.StorageBeside = it.StorageBeside;
+                    itDest.StorageIn = it.StorageIn;
+                    itDest.StorageOn = it.StorageOn;
+                    itDest.locationID = it.locationID;
+                    itDest.locationType = it.locationType;
 
-                itDest.Names = new();
-                foreach (Noun n in it!.Names!)
-                {
-                    itDest.Names.Add(n);
-                }
-                // itDest.SynNames
-                // itDest.Adjectives
-                // itDest.SynAdjectives
-                // itDest.NamesEng
-                // itDest.SynNamesEng
-                // itDest.AdjectivesEng
-                // itDest.SynAdjectivesEng
-                // itDest.Categories
-                // itDest.Relevance
+                    itDest.Appendix = it.Appendix;
+                    itDest.ID = it.ID;
+                    itDest.AppendixLoca = it.AppendixLoca;
+                    itDest.Description = it.Description;
+                    itDest.Known = it.Known;
+                    itDest.LocaDescription = it.LocaDescription;
+                    itDest.Sex = it.Sex;
+                    itDest.SexEng = it.SexEng;
+                    itDest.Picture = it.Picture;
 
-                dest.Add(itDest);
+                    itDest.controllerName = it.controllerName;
+                    itDest.controller = it.controller;
+
+                    itDest.SL = new();
+                    itDest.SL.List = new();
+                    foreach (Status sSource in it!.SL!.List)
+                    {
+                        Status sDest = new Status(sSource.ID, sSource.Val);
+                        itDest.SL.List.Add(sDest);
+                    }
+
+                    itDest.UnlockItems = new();
+                    foreach (int uItem in it!.UnlockItems!)
+                    {
+                        itDest.UnlockItems.Add(uItem);
+                    }
+
+                    itDest.Names = new();
+                    foreach (Noun n in it!.Names!)
+                    {
+                        itDest.Names.Add(n);
+                    }
+                    // itDest.SynNames
+                    // itDest.Adjectives
+                    // itDest.SynAdjectives
+                    // itDest.NamesEng
+                    // itDest.SynNamesEng
+                    // itDest.AdjectivesEng
+                    // itDest.SynAdjectivesEng
+                    // itDest.Categories
+                    // itDest.Relevance
+
+                    dest.Add(itDest);
+                }
+                return dest;
             }
-            return dest;
+            catch (Exception e)
+            {
+                GlobalData.AddLog("Item.CloneItemList: " + e.Message, IGlobalData.protMode.crisp);
+                return null;
+
+            }
+
         }
     }
     [Serializable]

@@ -144,415 +144,446 @@ public partial class GamePage : ContentPage, IMenuExtension
     }
     public  void GamePage_KeyDown(object? sender, KeyRoutedEventArgs ea )
     {
-        if (keyUpRequest == true)
-            return;
-
-        if( Grid_More.IsVisible == true )
+        try
         {
-            GlobalData.AddLog("PageDown by Keyboard", IGlobalData.protMode.crisp);
+            if (keyUpRequest == true)
+                return;
 
-            UIS!.Scr.PageDown();
-
-            ea.Handled = true;
-        }
-        else if ( UIS!.MCMVVisible == true )
-        {
-            int code = 48;
-
-            switch (ea.Key)
+            if (Grid_More.IsVisible == true)
             {
-                case Windows.System.VirtualKey.Number1:
-                    {
-                        code = 49;
-                        break;
-                    }
-                case Windows.System.VirtualKey.Number2:
-                    {
-                        code = 50;
-                        break;
-                    }
-                case Windows.System.VirtualKey.Number3:
-                    {
-                        code = 51;
-                        break;
-                    }
-                case Windows.System.VirtualKey.Number4:
-                    {
-                        code = 52;
-                        break;
-                    }
-                case Windows.System.VirtualKey.Number5:
-                    {
-                        code = 53;
-                        break;
-                    }
-                case Windows.System.VirtualKey.Number6:
-                    {
-                        code = 54;
-                        break;
-                    }
-                case Windows.System.VirtualKey.Number7:
-                    {
-                        code = 55;
-                        break;
-                    }
-                case Windows.System.VirtualKey.Number8:
-                    {
-                        code = 56;
-                        break;
-                    }
-                case Windows.System.VirtualKey.Number9:
-                    {
-                        code = 57;
-                        break;
-                    }
-                case Windows.System.VirtualKey.Number0:
-                    {
-                        code = 48;
-                        break;
-                    }
-                case Windows.System.VirtualKey.A:
-                    {
-                        code = 97;
-                        break;
-                    }
-                case Windows.System.VirtualKey.B:
-                    {
-                        code = 98;
-                        break;
-                    }
-                case Windows.System.VirtualKey.C:
-                    {
-                        code = 99;
-                        break;
-                    }
-                case Windows.System.VirtualKey.D:
-                    {
-                        code = 100;
-                        break;
-                    }
-                case Windows.System.VirtualKey.E:
-                    {
-                        code = 101;
-                        break;
-                    }
-                case Windows.System.VirtualKey.F:
-                    {
-                        code = 102;
-                        break;
-                    }
-                case Windows.System.VirtualKey.G:
-                    {
-                        code = 103;
-                        break;
-                    }
-                case Windows.System.VirtualKey.H:
-                    {
-                        code = 104;
-                        break;
-                    }
-                case Windows.System.VirtualKey.I:
-                    {
-                        code = 105;
-                        break;
-                    }
-                case Windows.System.VirtualKey.J:
-                    {
-                        code = 106;
-                        break;
-                    }
-                case Windows.System.VirtualKey.K:
-                    {
-                        code = 107;
-                        break;
-                    }
-                case Windows.System.VirtualKey.L:
-                    {
-                        code = 108;
-                        break;
-                    }
-                case Windows.System.VirtualKey.M:
-                    {
-                        code = 109;
-                        break;
-                    }
-                case Windows.System.VirtualKey.N:
-                    {
-                        code = 110;
-                        break;
-                    }
-                case Windows.System.VirtualKey.O:
-                    {
-                        code = 111;
-                        break;
-                    }
-                case Windows.System.VirtualKey.P:
-                    {
-                        code = 112;
-                        break;
-                    }
-                case Windows.System.VirtualKey.Q:
-                    {
-                        code = 113;
-                        break;
-                    }
-                case Windows.System.VirtualKey.R:
-                    {
-                        code = 114;
-                        break;
-                    }
-                case Windows.System.VirtualKey.S:
-                    {
-                        code = 115;
-                        break;
-                    }
-                case Windows.System.VirtualKey.T:
-                    {
-                        code = 116;
-                        break;
-                    }
-                case Windows.System.VirtualKey.U:
-                    {
-                        code = 117;
-                        break;
-                    }
-                case Windows.System.VirtualKey.V:
-                    {
-                        code = 118;
-                        break;
-                    }
-                case Windows.System.VirtualKey.W:
-                    {
-                        code = 119;
-                        break;
-                    }
-                case Windows.System.VirtualKey.X:
-                    {
-                        code = 120;
-                        break;
-                    }
-                case Windows.System.VirtualKey.Y:
-                    {
-                        code = 121;
-                        break;
-                    }
-                case Windows.System.VirtualKey.Z:
-                    {
-                        code = 122;
-                        break;
-                    }
-                case Windows.System.VirtualKey.Escape:
-                    {
-                        code = 27;
-                        break;
-                    }
+                GlobalData.AddLog("PageDown by Keyboard", IGlobalData.protMode.crisp);
+
+                UIS!.Scr.PageDown();
+
+                ea.Handled = true;
             }
-
-            CallMCByKey(code);
-
-            /*
-            foreach (MCMenuEntry me in UIS.MCM!List)
+            else if (UIS!.MCMVVisible == true)
             {
-                if (me.Keys.Count > 0)
+                int code = 48;
+
+                switch (ea.Key)
                 {
-                    if (me.Keys[0] == (int)code && me.Hidden == MCMenuEntry.HiddenType.visible )
+                    case Windows.System.VirtualKey.Number1:
+                        {
+                            code = 49;
+                            break;
+                        }
+                    case Windows.System.VirtualKey.Number2:
+                        {
+                            code = 50;
+                            break;
+                        }
+                    case Windows.System.VirtualKey.Number3:
+                        {
+                            code = 51;
+                            break;
+                        }
+                    case Windows.System.VirtualKey.Number4:
+                        {
+                            code = 52;
+                            break;
+                        }
+                    case Windows.System.VirtualKey.Number5:
+                        {
+                            code = 53;
+                            break;
+                        }
+                    case Windows.System.VirtualKey.Number6:
+                        {
+                            code = 54;
+                            break;
+                        }
+                    case Windows.System.VirtualKey.Number7:
+                        {
+                            code = 55;
+                            break;
+                        }
+                    case Windows.System.VirtualKey.Number8:
+                        {
+                            code = 56;
+                            break;
+                        }
+                    case Windows.System.VirtualKey.Number9:
+                        {
+                            code = 57;
+                            break;
+                        }
+                    case Windows.System.VirtualKey.Number0:
+                        {
+                            code = 48;
+                            break;
+                        }
+                    case Windows.System.VirtualKey.A:
+                        {
+                            code = 97;
+                            break;
+                        }
+                    case Windows.System.VirtualKey.B:
+                        {
+                            code = 98;
+                            break;
+                        }
+                    case Windows.System.VirtualKey.C:
+                        {
+                            code = 99;
+                            break;
+                        }
+                    case Windows.System.VirtualKey.D:
+                        {
+                            code = 100;
+                            break;
+                        }
+                    case Windows.System.VirtualKey.E:
+                        {
+                            code = 101;
+                            break;
+                        }
+                    case Windows.System.VirtualKey.F:
+                        {
+                            code = 102;
+                            break;
+                        }
+                    case Windows.System.VirtualKey.G:
+                        {
+                            code = 103;
+                            break;
+                        }
+                    case Windows.System.VirtualKey.H:
+                        {
+                            code = 104;
+                            break;
+                        }
+                    case Windows.System.VirtualKey.I:
+                        {
+                            code = 105;
+                            break;
+                        }
+                    case Windows.System.VirtualKey.J:
+                        {
+                            code = 106;
+                            break;
+                        }
+                    case Windows.System.VirtualKey.K:
+                        {
+                            code = 107;
+                            break;
+                        }
+                    case Windows.System.VirtualKey.L:
+                        {
+                            code = 108;
+                            break;
+                        }
+                    case Windows.System.VirtualKey.M:
+                        {
+                            code = 109;
+                            break;
+                        }
+                    case Windows.System.VirtualKey.N:
+                        {
+                            code = 110;
+                            break;
+                        }
+                    case Windows.System.VirtualKey.O:
+                        {
+                            code = 111;
+                            break;
+                        }
+                    case Windows.System.VirtualKey.P:
+                        {
+                            code = 112;
+                            break;
+                        }
+                    case Windows.System.VirtualKey.Q:
+                        {
+                            code = 113;
+                            break;
+                        }
+                    case Windows.System.VirtualKey.R:
+                        {
+                            code = 114;
+                            break;
+                        }
+                    case Windows.System.VirtualKey.S:
+                        {
+                            code = 115;
+                            break;
+                        }
+                    case Windows.System.VirtualKey.T:
+                        {
+                            code = 116;
+                            break;
+                        }
+                    case Windows.System.VirtualKey.U:
+                        {
+                            code = 117;
+                            break;
+                        }
+                    case Windows.System.VirtualKey.V:
+                        {
+                            code = 118;
+                            break;
+                        }
+                    case Windows.System.VirtualKey.W:
+                        {
+                            code = 119;
+                            break;
+                        }
+                    case Windows.System.VirtualKey.X:
+                        {
+                            code = 120;
+                            break;
+                        }
+                    case Windows.System.VirtualKey.Y:
+                        {
+                            code = 121;
+                            break;
+                        }
+                    case Windows.System.VirtualKey.Z:
+                        {
+                            code = 122;
+                            break;
+                        }
+                    case Windows.System.VirtualKey.Escape:
+                        {
+                            code = 27;
+                            break;
+                        }
+                }
+
+                CallMCByKey(code);
+
+                /*
+                foreach (MCMenuEntry me in UIS.MCM!List)
+                {
+                    if (me.Keys.Count > 0)
                     {
-                        UIS.MCMV!.CallBackMCMenuView(me.ID);
-                        break;
+                        if (me.Keys[0] == (int)code && me.Hidden == MCMenuEntry.HiddenType.visible )
+                        {
+                            UIS.MCMV!.CallBackMCMenuView(me.ID);
+                            break;
+                        }
                     }
                 }
+                */
+                ea.Handled = true;
             }
-            */
-            ea.Handled = true;
-        }
-        else
-        {
-            if (ea.Key == Windows.System.VirtualKey.Up)
+            else
             {
-                if (GD!.Adventure!.LatestInputPt > 0)
+                if (ea.Key == Windows.System.VirtualKey.Up)
                 {
-                    if (GD!.Adventure!.LatestInputPt > GD!.Adventure!.LI.Count)
-                        GD!.Adventure!.LatestInputPt = GD!.Adventure!.LI.Count;
+                    if (GD!.Adventure!.LatestInputPt > 0)
+                    {
+                        if (GD!.Adventure!.LatestInputPt > GD!.Adventure!.LI.Count)
+                            GD!.Adventure!.LatestInputPt = GD!.Adventure!.LI.Count;
 
-                    if (GD!.Adventure!.LatestInputPt == GD!.Adventure!.LI.Count)
-                    {
-                        GD!.Adventure!.tLastParseString = Inputline.Text;
-                    }
-                    else
-                    {
-                        GD!.Adventure!.LI[GD!.Adventure!.LatestInputPt].Text = Inputline.Text;
-                    }
+                        if (GD!.Adventure!.LatestInputPt == GD!.Adventure!.LI.Count)
+                        {
+                            GD!.Adventure!.tLastParseString = Inputline.Text;
+                        }
+                        else
+                        {
+                            GD!.Adventure!.LI[GD!.Adventure!.LatestInputPt].Text = Inputline.Text;
+                        }
 
                         GD!.Adventure!.LatestInputPt--;
-                    Inputline.Text = GD!.Adventure!.LI[GD!.Adventure!.LatestInputPt].Text;
-                     // Inputline.Select(Inputline.Text.Length, 0);
-                }
-                else
-                {
-                    GD!.Adventure!.LatestInputPt = GD!.Adventure!.LI.Count;
-                    Inputline.Text = GD!.Adventure!.tLastParseString;
-                }
-            }
-            if (ea.Key == Windows.System.VirtualKey.Down)
-            {
-                // UIS.Scr.PageDown();
-                if(GD!.Adventure!.LatestInputPt <= 0 )
-                {
-
-                }
-                else if (GD!.Adventure!.LatestInputPt < GD!.Adventure!.LI.Count)
-                {
-                    GD!.Adventure!.LI[GD!.Adventure!.LatestInputPt].Text = Inputline.Text;
-                    GD!.Adventure!.LatestInputPt++;
-
-
-                    if (GD!.Adventure!.LatestInputPt == GD!.Adventure!.LI.Count)
-                    {
-                        Inputline.Text = GD!.Adventure!.tLastParseString;
+                        Inputline.Text = GD!.Adventure!.LI[GD!.Adventure!.LatestInputPt].Text;
+                        // Inputline.Select(Inputline.Text.Length, 0);
                     }
                     else
                     {
-                        Inputline.Text = GD!.Adventure!.LI[GD!.Adventure!.LatestInputPt].Text;
+                        GD!.Adventure!.LatestInputPt = GD!.Adventure!.LI.Count;
+                        Inputline.Text = GD!.Adventure!.tLastParseString;
                     }
-                    // Inputline.Select(Inputline.Text.Length, 0);
                 }
-                else
+                if (ea.Key == Windows.System.VirtualKey.Down)
                 {
-                    GD!.Adventure!.LatestInputPt = 0;
-                    Inputline.Text = GD!.Adventure!.LI[GD!.Adventure!.LatestInputPt].Text;
+                    // UIS.Scr.PageDown();
+                    if (GD!.Adventure!.LatestInputPt <= 0)
+                    {
 
+                    }
+                    else if (GD!.Adventure!.LatestInputPt < GD!.Adventure!.LI.Count)
+                    {
+                        GD!.Adventure!.LI[GD!.Adventure!.LatestInputPt].Text = Inputline.Text;
+                        GD!.Adventure!.LatestInputPt++;
+
+
+                        if (GD!.Adventure!.LatestInputPt == GD!.Adventure!.LI.Count)
+                        {
+                            Inputline.Text = GD!.Adventure!.tLastParseString;
+                        }
+                        else
+                        {
+                            Inputline.Text = GD!.Adventure!.LI[GD!.Adventure!.LatestInputPt].Text;
+                        }
+                        // Inputline.Select(Inputline.Text.Length, 0);
+                    }
+                    else
+                    {
+                        GD!.Adventure!.LatestInputPt = 0;
+                        Inputline.Text = GD!.Adventure!.LI[GD!.Adventure!.LatestInputPt].Text;
+
+                    }
                 }
+                Inputline.Focus();
             }
-            Inputline.Focus();
+            keyUpRequest = true;
         }
-        keyUpRequest = true;
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("GamePage_KeyDown: " + ex.Message, IGlobalData.protMode.crisp);
+        }
+
     }
 
 
     public void ResetKeyboardHandler()
     {
-        var handler = CurrentPage.Handler;
-        handler = PageGrid.Handler;
-        Microsoft.UI.Xaml.UIElement? nativeView;
-        nativeView = handler?.PlatformView as Microsoft.UI.Xaml.UIElement;
-        if (nativeView != null)
+        try
         {
-            nativeView.KeyUp -= this.GamePage_KeyUp;
-            nativeView.KeyDown -= this.GamePage_KeyDown;
+            var handler = CurrentPage.Handler;
+            handler = PageGrid.Handler;
+            Microsoft.UI.Xaml.UIElement? nativeView;
+            nativeView = handler?.PlatformView as Microsoft.UI.Xaml.UIElement;
+            if (nativeView != null)
+            {
+                nativeView.KeyUp -= this.GamePage_KeyUp;
+                nativeView.KeyDown -= this.GamePage_KeyDown;
+            }
         }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("ResetKeyboardHandler: " + ex.Message, IGlobalData.protMode.crisp);
+        }
+
 
     }
     public void SetupKeyboardHandler()
     {
-        var handler = this.Handler;
-        Microsoft.UI.Xaml.UIElement? nativeView;
-        /*
-          Microsoft.UI.Xaml.UIElement? nativeView = handler?.PlatformView as Microsoft.UI.Xaml.UIElement;
-          if (nativeView != null)
-          {
-              nativeView.KeyDown += this.GamePage_KeyDown;
-              // nativeView.KeyUp += this.PlatformView_KeyUp;
-              // nativeView.PreviewKeyDown += this.PlatformView_PreviewKeyDown;
-          }
-
-
-          handler = GameOut.Handler;
-          // Microsoft.UI.Xaml.UIElement? 
-          nativeView = handler?.PlatformView as Microsoft.UI.Xaml.UIElement;
-          if (nativeView != null)
-          {
-              nativeView.KeyDown += this.GamePage_KeyDown;
-              // nativeView.KeyUp += this.PlatformView_KeyUp;
-              // nativeView.PreviewKeyDown += this.PlatformView_PreviewKeyDown;
-          }
-          */
-
-
-        handler = this.Handler;
-        // Microsoft.UI.Xaml.UIElement? 
-        nativeView = handler?.PlatformView as Microsoft.UI.Xaml.UIElement;
-        if (nativeView != null)
+        try
         {
-            nativeView.KeyDown -= this.GamePage_KeyDown;
-            nativeView.KeyUp -= this.GamePage_KeyUp;
-            nativeView.KeyDown += this.GamePage_KeyDown;
-            nativeView.KeyUp += this.GamePage_KeyUp;
-            // nativeView.KeyUp += this.PlatformView_KeyUp;
-            // nativeView.PreviewKeyDown += this.PlatformView_PreviewKeyDown;
+            var handler = this.Handler;
+            Microsoft.UI.Xaml.UIElement? nativeView;
+            /*
+              Microsoft.UI.Xaml.UIElement? nativeView = handler?.PlatformView as Microsoft.UI.Xaml.UIElement;
+              if (nativeView != null)
+              {
+                  nativeView.KeyDown += this.GamePage_KeyDown;
+                  // nativeView.KeyUp += this.PlatformView_KeyUp;
+                  // nativeView.PreviewKeyDown += this.PlatformView_PreviewKeyDown;
+              }
+
+
+              handler = GameOut.Handler;
+              // Microsoft.UI.Xaml.UIElement? 
+              nativeView = handler?.PlatformView as Microsoft.UI.Xaml.UIElement;
+              if (nativeView != null)
+              {
+                  nativeView.KeyDown += this.GamePage_KeyDown;
+                  // nativeView.KeyUp += this.PlatformView_KeyUp;
+                  // nativeView.PreviewKeyDown += this.PlatformView_PreviewKeyDown;
+              }
+              */
+
+
+            handler = this.Handler;
+            // Microsoft.UI.Xaml.UIElement? 
+            nativeView = handler?.PlatformView as Microsoft.UI.Xaml.UIElement;
+            if (nativeView != null)
+            {
+                nativeView.KeyDown -= this.GamePage_KeyDown;
+                nativeView.KeyUp -= this.GamePage_KeyUp;
+                nativeView.KeyDown += this.GamePage_KeyDown;
+                nativeView.KeyUp += this.GamePage_KeyUp;
+                // nativeView.KeyUp += this.PlatformView_KeyUp;
+                // nativeView.PreviewKeyDown += this.PlatformView_PreviewKeyDown;
+            }
+            /*
+            handler = ToplineGrid.Handler;
+            if (nativeView != null)
+            {
+                nativeView.KeyDown += this.GamePage_KeyDown;
+                // nativeView.KeyUp += this.PlatformView_KeyUp;
+                // nativeView.PreviewKeyDown += this.PlatformView_PreviewKeyDown;
+            }
+
+            handler = Grid_More.Handler;
+            if (nativeView != null)
+            {
+                nativeView.KeyDown += this.GamePage_KeyDown;
+                // nativeView.KeyUp += this.PlatformView_KeyUp;
+                // nativeView.PreviewKeyDown += this.PlatformView_PreviewKeyDown;
+            }
+            */
         }
-        /*
-        handler = ToplineGrid.Handler;
-        if (nativeView != null)
+        catch (Exception ex)
         {
-            nativeView.KeyDown += this.GamePage_KeyDown;
-            // nativeView.KeyUp += this.PlatformView_KeyUp;
-            // nativeView.PreviewKeyDown += this.PlatformView_PreviewKeyDown;
+            GlobalData.AddLog("SetupKeyboardHandler: " + ex.Message, IGlobalData.protMode.crisp);
         }
 
-        handler = Grid_More.Handler;
-        if (nativeView != null)
-        {
-            nativeView.KeyDown += this.GamePage_KeyDown;
-            // nativeView.KeyUp += this.PlatformView_KeyUp;
-            // nativeView.PreviewKeyDown += this.PlatformView_PreviewKeyDown;
-        }
-        */
     }
 #endif
     public void CallMCByKey(int code)
     {
-        if (code == 27)
+        try
         {
-            int ix = 0;
-            bool found = false;
-
-            for (ix = UIS!.MCM!.Current!.Count - 1; ix >= 0; ix++)
+            if (code == 27)
             {
-                if (UIS!.MCM.Current[ix] > 0)
+                int ix = 0;
+                bool found = false;
+
+                for (ix = UIS!.MCM!.Current!.Count - 1; ix >= 0; ix++)
                 {
-                    MCMenuEntry? me = UIS.MCM.FindID(UIS.MCM.Current[ix]);
-
-                    if (me!.Keys!.Count > 0)
+                    if (UIS!.MCM.Current[ix] > 0)
                     {
-                        if ((me!.Follower!.Count == 1 && me!.Follower[0] == -1 && me.Hidden == MCMenuEntry.HiddenType.visible)
-                                || (me!.DefaultBreak == true)
-                             )
+                        MCMenuEntry? me = UIS.MCM.FindID(UIS.MCM.Current[ix]);
+
+                        if (me!.Keys!.Count > 0)
                         {
-                            UIS.MCMV!.CallBackMCMenuView(me.ID);
-                            found = true;
+                            if ((me!.Follower!.Count == 1 && me!.Follower[0] == -1 && me.Hidden == MCMenuEntry.HiddenType.visible)
+                                    || (me!.DefaultBreak == true)
+                                 )
+                            {
+                                UIS.MCMV!.CallBackMCMenuView(me.ID);
+                                found = true;
+                            }
                         }
+
                     }
-
+                    if (found)
+                        break;
                 }
-                if (found)
-                    break;
-            }
 
+            }
+            else if (code > 0)
+            {
+                int ix = 0;
+                bool found = false;
+                for (ix = 0; ix < UIS!.MCM!.Current!.Count; ix++)
+                {
+                    if (UIS.MCM.Current[ix] > 0)
+                    {
+                        MCMenuEntry? me = UIS.MCM.FindID(UIS.MCM.Current[ix]);
+
+
+                        if (me!.Keys!.Count > 0)
+                        {
+                            if (me.Keys[0] == (int)code && me.Hidden == MCMenuEntry.HiddenType.visible)
+                            {
+                                UIS.MCMV!.CallBackMCMenuView(me.ID);
+                                found = true;
+                            }
+                        }
+
+                    }
+                    if (found)
+                        break;
+                }
+            }
         }
-        else if (code > 0)
+        catch (Exception ex)
         {
-            int ix = 0;
-            bool found = false;
-            for (ix = 0; ix < UIS!.MCM!.Current!.Count; ix++)
-            {
-                if (UIS.MCM.Current[ix] > 0)
-                {
-                    MCMenuEntry? me = UIS.MCM.FindID(UIS.MCM.Current[ix]);
-
-
-                    if (me!.Keys!.Count > 0)
-                    {
-                        if (me.Keys[0] == (int)code && me.Hidden == MCMenuEntry.HiddenType.visible)
-                        {
-                            UIS.MCMV!.CallBackMCMenuView(me.ID);
-                            found = true;
-                        }
-                    }
-
-                }
-                if (found)
-                    break;
-            }
+            GlobalData.AddLog("CallMCByKey: " + ex.Message, IGlobalData.protMode.crisp);
         }
 
     }
@@ -585,407 +616,466 @@ public partial class GamePage : ContentPage, IMenuExtension
 
     public void AdaptGridHeights()
     {
-        // Mike.FontSize = 25;
-        // Mike.FontSize = 25;
-
-        RowDefinitionCollection rdc = Grid_Output.RowDefinitions;
-        GridWebView.HeightRequest = rdc[0].Height.Value;
-        Grid_Inter.HeightRequest = rdc[2].Height.Value;
-        GameOut.HeightRequest = rdc[0].Height.Value;
-
-        GridWebView.RowDefinitions[0].Height = rdc[0].Height;
-
-        double gesHeightOutIn = rdc[0].Height.Value + rdc[1].Height.Value + rdc[2].Height.Value;
-        double gesHeightOutInMC = gesHeightOutIn;
-
-        LayoutDescription ld = (LayoutDescription)GlobalData.CurrentGlobalData!.LayoutDescription!;
-
-        if (GlobalData.CurrentGlobalData!.LayoutDescription.ScreenMode == IGlobalData.screenMode.portrait && IsPortraitColVisible(0))
-            gesHeightOutInMC += ld.PortraitColumnsHeight;
-
-
-        Grid_Output.HeightRequest = gesHeightOutIn;
-
-        MenuGridMenuVertical.HeightRequest = gesHeightOutInMC;  // PageGrid.Height - 40;
-        MenuGridMenuVertical.RowDefinitions[0].Height = new GridLength(gesHeightOutIn);
-        MenuGridMenu.HeightRequest = gesHeightOutInMC;
-        MenuGridMenu.RowDefinitions[0].Height = new GridLength(gesHeightOutInMC);
-        // MenuGridMenuBackground.HeightRequest = gesHeightOutIn + Grid_Inter.HeightRequest;
-        // MenuGridMenuBackground.RowDefinitions[1].Height = new GridLength(gesHeightOutIn + Grid_Inter.HeightRequest);
-        MenuGridMenuBackground.HeightRequest = gesHeightOutInMC;
-        MenuGridMenuBackground.RowDefinitions[1].Height = new GridLength(gesHeightOutInMC);
-
-
-        MGM0.HeightRequest = PageGrid.Height - 40;
-        MenuGridMenuInner.HeightRequest = gesHeightOutIn;
-        /*
-        if ( UIS != null && UIS.Scr != null )
+        try
         {
-            UIS.Scr.HTMLViewHeight = rdc[2].Height.Value;
+            // Mike.FontSize = 25;
+            // Mike.FontSize = 25;
+
+            RowDefinitionCollection rdc = Grid_Output.RowDefinitions;
+            GridWebView.HeightRequest = rdc[0].Height.Value;
+            Grid_Inter.HeightRequest = rdc[2].Height.Value;
+            GameOut.HeightRequest = rdc[0].Height.Value;
+
+            GridWebView.RowDefinitions[0].Height = rdc[0].Height;
+
+            double gesHeightOutIn = rdc[0].Height.Value + rdc[1].Height.Value + rdc[2].Height.Value;
+            double gesHeightOutInMC = gesHeightOutIn;
+
+            LayoutDescription ld = (LayoutDescription)GlobalData.CurrentGlobalData!.LayoutDescription!;
+
+            if (GlobalData.CurrentGlobalData!.LayoutDescription.ScreenMode == IGlobalData.screenMode.portrait && IsPortraitColVisible(0))
+                gesHeightOutInMC += ld.PortraitColumnsHeight;
+
+
+            Grid_Output.HeightRequest = gesHeightOutIn;
+
+            MenuGridMenuVertical.HeightRequest = gesHeightOutInMC;  // PageGrid.Height - 40;
+            MenuGridMenuVertical.RowDefinitions[0].Height = new GridLength(gesHeightOutIn);
+            MenuGridMenu.HeightRequest = gesHeightOutInMC;
+            MenuGridMenu.RowDefinitions[0].Height = new GridLength(gesHeightOutInMC);
+            // MenuGridMenuBackground.HeightRequest = gesHeightOutIn + Grid_Inter.HeightRequest;
+            // MenuGridMenuBackground.RowDefinitions[1].Height = new GridLength(gesHeightOutIn + Grid_Inter.HeightRequest);
+            MenuGridMenuBackground.HeightRequest = gesHeightOutInMC;
+            MenuGridMenuBackground.RowDefinitions[1].Height = new GridLength(gesHeightOutInMC);
+
+
+            MGM0.HeightRequest = PageGrid.Height - 40;
+            MenuGridMenuInner.HeightRequest = gesHeightOutIn;
+            /*
+            if ( UIS != null && UIS.Scr != null )
+            {
+                UIS.Scr.HTMLViewHeight = rdc[2].Height.Value;
+            }
+            */
         }
-        */
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("AdaptGridHeights: " + ex.Message, IGlobalData.protMode.crisp);
+        }
+
     }
     public bool SetMCHeight()
     {
-        RowDefinitionCollection rdc = Grid_Output.RowDefinitions;
-
-        double target = _mcGridHeight;
-        if( Grid_MC.IsVisible == false )
-            target = _inputGridHeight;
-
-
-        if (rdc[2].Height.Value < target)
+        try
         {
-            if (_mcSpeed < 0)
-                _mcSpeed = 0;
+            RowDefinitionCollection rdc = Grid_Output.RowDefinitions;
 
-            _mcSpeed += 5;
-            double maxSpeed = (target - rdc[2].Height.Value) / 5;
-            if (maxSpeed < 5)
-                maxSpeed = 5;
-
-            if( _mcSpeed > maxSpeed )
-                _mcSpeed = maxSpeed;
+            double target = _mcGridHeight;
+            if (Grid_MC.IsVisible == false)
+                target = _inputGridHeight;
 
 
-            if (_mcSpeed + rdc[2].Height.Value > target)
-                _mcSpeed = target - rdc[2].Height.Value;
+            if (rdc[2].Height.Value < target)
+            {
+                if (_mcSpeed < 0)
+                    _mcSpeed = 0;
+
+                _mcSpeed += 5;
+                double maxSpeed = (target - rdc[2].Height.Value) / 5;
+                if (maxSpeed < 5)
+                    maxSpeed = 5;
+
+                if (_mcSpeed > maxSpeed)
+                    _mcSpeed = maxSpeed;
+
+
+                if (_mcSpeed + rdc[2].Height.Value > target)
+                    _mcSpeed = target - rdc[2].Height.Value;
+            }
+            else
+            {
+                if (_mcSpeed > 0)
+                    _mcSpeed = 0;
+
+                _mcSpeed -= 1;
+                double maxSpeed = (target - rdc[2].Height.Value) / 5;
+                if (maxSpeed > -1)
+                    maxSpeed = -1;
+
+                if (_mcSpeed < maxSpeed)
+                    _mcSpeed = maxSpeed;
+
+
+                if (rdc[2].Height.Value - _mcSpeed < target)
+                    _mcSpeed = rdc[2].Height.Value - target;
+            }
+
+
+            // _mcGridHeight = new GridLength( 300 );
+
+            /*
+            rdc[0].Height = new GridLength(Grid_Output.Height - _mcGridHeight);
+            rdc[2].Height = new GridLength(_mcGridHeight);
+            */
+            rdc[0].Height = new GridLength(rdc[0].Height.Value - _mcSpeed);
+            rdc[2].Height = new GridLength(rdc[2].Height.Value + _mcSpeed);
+
+            AdaptGridHeights();
+
+            if (rdc[2].Height.Value == target)
+            {
+                UIS!.Scr.ScrollEndWait(2);
+                _menuExtension!.RemoveListCall(SetMCHeight);
+            }
+            /*
+              bool stopExpansion = false;
+
+              RowDefinitionCollection rdc = Grid_Output.RowDefinitions;
+
+              double ylen = 10;
+
+              if(rdc[2].Height.Value + ylen > _mcGridHeight)
+              {
+                  ylen = _mcGridHeight - rdc[2].Height.Value;
+                  stopExpansion = true;
+              }
+              rdc[0].Height = new GridLength(rdc[0].Height.Value - ylen);
+              rdc[2].Height = new GridLength(rdc[2].Height.Value + ylen);
+
+              if( stopExpansion)
+              {
+                  _menuExtension.RemoveListCall(SetMCOnHeight);
+              }
+              */
+            /*
+            Device.BeginInvokeOnMainThread(SetMCOnHeightMT);
+            */
+            return true;
         }
-        else
+        catch (Exception ex)
         {
-            if (_mcSpeed > 0)
-                _mcSpeed = 0;
-
-            _mcSpeed -= 1;
-            double maxSpeed = (target - rdc[2].Height.Value) / 5;
-            if (maxSpeed > -1)
-                maxSpeed = -1;
-
-            if (_mcSpeed < maxSpeed)
-                _mcSpeed = maxSpeed;
-
-
-            if ( rdc[2].Height.Value - _mcSpeed < target)
-                _mcSpeed = rdc[2].Height.Value - target;
+            GlobalData.AddLog("SetMCHeight: " + ex.Message, IGlobalData.protMode.crisp);
+            return false;
         }
 
-
-        // _mcGridHeight = new GridLength( 300 );
-
-        /*
-        rdc[0].Height = new GridLength(Grid_Output.Height - _mcGridHeight);
-        rdc[2].Height = new GridLength(_mcGridHeight);
-        */
-        rdc[0].Height = new GridLength(rdc[0].Height.Value - _mcSpeed);
-        rdc[2].Height = new GridLength(rdc[2].Height.Value + _mcSpeed);
-
-        AdaptGridHeights();
-
-        if (rdc[2].Height.Value == target)
-        {
-            UIS!.Scr.ScrollEndWait(2);
-            _menuExtension!.RemoveListCall(SetMCHeight);
-        }
-        /*
-          bool stopExpansion = false;
-
-          RowDefinitionCollection rdc = Grid_Output.RowDefinitions;
-
-          double ylen = 10;
-
-          if(rdc[2].Height.Value + ylen > _mcGridHeight)
-          {
-              ylen = _mcGridHeight - rdc[2].Height.Value;
-              stopExpansion = true;
-          }
-          rdc[0].Height = new GridLength(rdc[0].Height.Value - ylen);
-          rdc[2].Height = new GridLength(rdc[2].Height.Value + ylen);
-
-          if( stopExpansion)
-          {
-              _menuExtension.RemoveListCall(SetMCOnHeight);
-          }
-          */
-        /*
-        Device.BeginInvokeOnMainThread(SetMCOnHeightMT);
-        */
-        return true;
     }
     public bool SetMCOnHeight()
     {
-        RowDefinitionCollection rdc = Grid_Output.RowDefinitions;
-        double ylen = _inputGridHeight - rdc[2].Height.Value;
+        try
+        {
+            RowDefinitionCollection rdc = Grid_Output.RowDefinitions;
+            double ylen = _inputGridHeight - rdc[2].Height.Value;
 
 
 
-        // _mcGridHeight = new GridLength( 300 );
+            // _mcGridHeight = new GridLength( 300 );
 
-        /*
-        rdc[0].Height = new GridLength(Grid_Output.Height - _mcGridHeight);
-        rdc[2].Height = new GridLength(_mcGridHeight);
-        */
-        rdc[0].Height = new GridLength(rdc[0].Height.Value - ylen);
-        rdc[2].Height = new GridLength(rdc[2].Height.Value + ylen);
+            /*
+            rdc[0].Height = new GridLength(Grid_Output.Height - _mcGridHeight);
+            rdc[2].Height = new GridLength(_mcGridHeight);
+            */
+            rdc[0].Height = new GridLength(rdc[0].Height.Value - ylen);
+            rdc[2].Height = new GridLength(rdc[2].Height.Value + ylen);
 
-        AdaptGridHeights();
+            AdaptGridHeights();
 
-        _menuExtension!.RemoveListCall(SetMCOnHeight);
+            _menuExtension!.RemoveListCall(SetMCOnHeight);
 
-        /*
-          bool stopExpansion = false;
+            /*
+              bool stopExpansion = false;
 
-          RowDefinitionCollection rdc = Grid_Output.RowDefinitions;
+              RowDefinitionCollection rdc = Grid_Output.RowDefinitions;
 
-          double ylen = 10;
+              double ylen = 10;
 
-          if(rdc[2].Height.Value + ylen > _mcGridHeight)
-          {
-              ylen = _mcGridHeight - rdc[2].Height.Value;
-              stopExpansion = true;
-          }
-          rdc[0].Height = new GridLength(rdc[0].Height.Value - ylen);
-          rdc[2].Height = new GridLength(rdc[2].Height.Value + ylen);
+              if(rdc[2].Height.Value + ylen > _mcGridHeight)
+              {
+                  ylen = _mcGridHeight - rdc[2].Height.Value;
+                  stopExpansion = true;
+              }
+              rdc[0].Height = new GridLength(rdc[0].Height.Value - ylen);
+              rdc[2].Height = new GridLength(rdc[2].Height.Value + ylen);
 
-          if( stopExpansion)
-          {
-              _menuExtension.RemoveListCall(SetMCOnHeight);
-          }
-          */
-        /*
-        Device.BeginInvokeOnMainThread(SetMCOnHeightMT);
-        */
-        return true;
+              if( stopExpansion)
+              {
+                  _menuExtension.RemoveListCall(SetMCOnHeight);
+              }
+              */
+            /*
+            Device.BeginInvokeOnMainThread(SetMCOnHeightMT);
+            */
+            return true;
+        }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("SetMCOnHeight: " + ex.Message, IGlobalData.protMode.crisp);
+            return false;
+        }
+
     }
     public bool SetMCOffHeight()
     {
-        RowDefinitionCollection rdc = Grid_Output.RowDefinitions;
-        double ylen = _inputGridHeight - rdc[2].Height.Value;
+        try
+        {
+            RowDefinitionCollection rdc = Grid_Output.RowDefinitions;
+            double ylen = _inputGridHeight - rdc[2].Height.Value;
 
-        // rdc[0].Height = new GridLength(Grid_Output.Height - _inputGridHeight);
-        // rdc[2].Height = new GridLength(_inputGridHeight);
+            // rdc[0].Height = new GridLength(Grid_Output.Height - _inputGridHeight);
+            // rdc[2].Height = new GridLength(_inputGridHeight);
 
-        rdc[0].Height = new GridLength(rdc[0].Height.Value - ylen);
-        rdc[2].Height = new GridLength(rdc[2].Height.Value + ylen);
-        AdaptGridHeights();
-        // UIS!.FinishBrowserUpdate();
-        return true;
+            rdc[0].Height = new GridLength(rdc[0].Height.Value - ylen);
+            rdc[2].Height = new GridLength(rdc[2].Height.Value + ylen);
+            AdaptGridHeights();
+            // UIS!.FinishBrowserUpdate();
+            return true;
+        }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("SetMCOffHeight: " + ex.Message, IGlobalData.protMode.crisp);
+            return false;
+        }
+
     }
     public Grid? ProvideMCGrid( bool Activate, int Height )
     {
-        Grid? mcMenuGrid = null;
-        if( Activate == true )
+        try
         {
-            Grid_Input.IsVisible = false;
-            Grid_More.IsVisible = false;
-            Grid_MC.IsVisible = true;
-            RowDefinitionCollection rdc = Grid_Output.RowDefinitions;
-
-            if (rdc[0].Height.IsAbsolute)
+            Grid? mcMenuGrid = null;
+            if (Activate == true)
             {
+                Grid_Input.IsVisible = false;
+                Grid_More.IsVisible = false;
+                Grid_MC.IsVisible = true;
+                RowDefinitionCollection rdc = Grid_Output.RowDefinitions;
 
-                _menuExtension!.ListCalls.Add( new ListCall( SetMCHeight, -1 ) );
-                // Test: Grid
+                if (rdc[0].Height.IsAbsolute)
+                {
 
-                // double xlen = 200 - rdc[2].Height.Value;
-                // rdc[0].Height = new GridLength(rdc[0].Height.Value - xlen);
-                // rdc[2].Height = new GridLength(rdc[2].Height.Value + xlen);
+                    _menuExtension!.ListCalls.Add(new ListCall(SetMCHeight, -1));
+                    // Test: Grid
+
+                    // double xlen = 200 - rdc[2].Height.Value;
+                    // rdc[0].Height = new GridLength(rdc[0].Height.Value - xlen);
+                    // rdc[2].Height = new GridLength(rdc[2].Height.Value + xlen);
+                }
+                mcMenuGrid = Grid_MC_Inner;
             }
-            mcMenuGrid = Grid_MC_Inner;
+            else
+            {
+                Grid_Input.IsVisible = true;
+                Grid_More.IsVisible = false;
+                Grid_MC.IsVisible = false;
+                RowDefinitionCollection rdc = Grid_Output.RowDefinitions;
+
+                if (rdc[0].Height.IsAbsolute)
+                {
+                    _menuExtension!.ListCalls.Add(new ListCall(SetMCHeight, -1));
+                    // Test: Grid
+
+                }
+                SetInputFocus();
+
+            }
+            return mcMenuGrid;
         }
-        else
+        catch (Exception ex)
         {
-            Grid_Input.IsVisible = true;
-            Grid_More.IsVisible = false;
-            Grid_MC.IsVisible = false;
-            RowDefinitionCollection rdc = Grid_Output.RowDefinitions;
-
-            if (rdc[0].Height.IsAbsolute)
-            {
-                _menuExtension!.ListCalls.Add(new ListCall(SetMCHeight, -1) );
-                // Test: Grid
-
-            }
-            SetInputFocus();
-
+            GlobalData.AddLog("ProvideMCGrid: " + ex.Message, IGlobalData.protMode.crisp);
+            return null;
         }
-        return mcMenuGrid;
+
     }
-    public Grid ProvideMoreGrid(bool Activate, int Height)
+    public Grid? ProvideMoreGrid(bool Activate, int Height)
     {
         return Grid_More;
     }
 
     public void SelectOutput(ILayoutDescription.selectedOutput output )
     {
-        if( output == ILayoutDescription.selectedOutput.input && Grid_Input.IsVisible == false )
+        try
         {
-            Grid_Input.IsVisible = true;
-            Grid_More.IsVisible = false;
-            Grid_MC.IsVisible = false;
-            RowDefinitionCollection rdc = Grid_Output.RowDefinitions;
-
-            if (rdc[0].Height.IsAbsolute)
+            if (output == ILayoutDescription.selectedOutput.input && Grid_Input.IsVisible == false)
             {
-                double xlen = 50 - rdc[2].Height.Value;
-                rdc[0].Height = new GridLength(rdc[0].Height.Value - xlen);
-                rdc[2].Height = new GridLength(rdc[2].Height.Value + xlen);
-                AdaptGridHeights();
-            }
-            // rdc[2].Height = 50;
+                Grid_Input.IsVisible = true;
+                Grid_More.IsVisible = false;
+                Grid_MC.IsVisible = false;
+                RowDefinitionCollection rdc = Grid_Output.RowDefinitions;
 
+                if (rdc[0].Height.IsAbsolute)
+                {
+                    double xlen = 50 - rdc[2].Height.Value;
+                    rdc[0].Height = new GridLength(rdc[0].Height.Value - xlen);
+                    rdc[2].Height = new GridLength(rdc[2].Height.Value + xlen);
+                    AdaptGridHeights();
+                }
+                // rdc[2].Height = 50;
+
+            }
+            else if (output == ILayoutDescription.selectedOutput.mc && Grid_MC.IsVisible == false)
+            {
+                Grid_Input.IsVisible = false;
+                Grid_More.IsVisible = false;
+                Grid_MC.IsVisible = true;
+                RowDefinitionCollection rdc = Grid_Output.RowDefinitions;
+
+                if (rdc[0].Height.IsAbsolute)
+                {
+
+                    double xlen = 200 - rdc[2].Height.Value;
+                    rdc[0].Height = new GridLength(rdc[0].Height.Value - xlen);
+                    rdc[2].Height = new GridLength(rdc[2].Height.Value + xlen);
+                    AdaptGridHeights();
+                }
+                // rdc[2].Height = 200;
+
+            }
+            else if (output == ILayoutDescription.selectedOutput.more && Grid_More.IsVisible == false)
+            {
+                Grid_Input.IsVisible = false;
+                Grid_More.IsVisible = true;
+                Grid_MC.IsVisible = false;
+                RowDefinitionCollection rdc = Grid_Output.RowDefinitions;
+
+                if (rdc[0].Height.IsAbsolute)
+                {
+                    double xlen = 50 - rdc[2].Height.Value;
+                    rdc[0].Height = new GridLength(rdc[0].Height.Value - xlen);
+                    rdc[2].Height = new GridLength(rdc[2].Height.Value + xlen);
+                    AdaptGridHeights();
+                }
+                // rdc[2].Height = 50;
+                Grid_More.Focus();
+            }
         }
-        else if ( output == ILayoutDescription.selectedOutput.mc && Grid_MC.IsVisible == false )
+        catch (Exception ex)
         {
-            Grid_Input.IsVisible = false;
-            Grid_More.IsVisible = false;
-            Grid_MC.IsVisible = true;
-            RowDefinitionCollection rdc = Grid_Output.RowDefinitions;
-
-            if (rdc[0].Height.IsAbsolute)
-            {
-
-                double xlen = 200 - rdc[2].Height.Value;
-                rdc[0].Height = new GridLength(rdc[0].Height.Value - xlen);
-                rdc[2].Height = new GridLength(rdc[2].Height.Value + xlen);
-                AdaptGridHeights();
-            }
-            // rdc[2].Height = 200;
-
+            GlobalData.AddLog("SelectOutput: " + ex.Message, IGlobalData.protMode.crisp);
         }
-        else if ( output == ILayoutDescription.selectedOutput.more && Grid_More.IsVisible == false)
-        {
-            Grid_Input.IsVisible = false;
-            Grid_More.IsVisible = true;
-            Grid_MC.IsVisible = false;
-            RowDefinitionCollection rdc = Grid_Output.RowDefinitions;
 
-            if (rdc[0].Height.IsAbsolute)
-            {
-                double xlen = 50 - rdc[2].Height.Value;
-                rdc[0].Height = new GridLength(rdc[0].Height.Value - xlen);
-                rdc[2].Height = new GridLength(rdc[2].Height.Value + xlen);
-                AdaptGridHeights();
-            }
-            // rdc[2].Height = 50;
-            Grid_More.Focus();
-        }
     }
 
 
-     protected override void OnSizeAllocated(double width, double height)
+    protected override void OnSizeAllocated(double width, double height)
      {
-        _viewModelGeneral!.CheckSize(width, height).Wait();
-
-        if (AbsoluteLayer.InputTransparent == false)
-         {
-             int ix = 0;
-             for (ix = 0; ix < AbsoluteLayer.Children.Count; ix++)
-             {
-                 View v = (View) AbsoluteLayer.Children[ix];
-                 if (v != BlueBox)
-                 {
-                     AbsoluteLayer.Remove(v);
-                     ix--;
-                 }
-             }
-
-            // AbsoluteLayer.Remove(gridx);
-             // AbsoluteLayer.Remove(f);
-             AbsoluteLayer.InputTransparent = true;
-         }
-
-         LayoutDescription ld = (LayoutDescription)GlobalData.CurrentGlobalData!.LayoutDescription!;
-         if (ld.PortraitColumn1Width > 0)
-         {
-             int ctColumns = 0;
-             if (ld.PortraitColumns[0,0] != ILayoutDescription.PortraitColumn.none || ld.PortraitColumns[0, 1] != ILayoutDescription.PortraitColumn.none || ld.PortraitColumns[0, 2] != ILayoutDescription.PortraitColumn.none)
-                ctColumns++;
-             if (ld.PortraitColumns[1,0] != ILayoutDescription.PortraitColumn.none || ld.PortraitColumns[1, 1] != ILayoutDescription.PortraitColumn.none || ld.PortraitColumns[1, 2] != ILayoutDescription.PortraitColumn.none)
-                ctColumns++;
-             if (ld.PortraitColumns[2,0] != ILayoutDescription.PortraitColumn.none || ld.PortraitColumns[2, 1] != ILayoutDescription.PortraitColumn.none || ld.PortraitColumns[2, 2] != ILayoutDescription.PortraitColumn.none)
-                ctColumns++;
-
-
-             if (ctColumns == 3)
-             {
-                 double totalWidth = ld.PortraitColumn1Width + ld.PortraitColumn2Width + ld.PortraitColumn3Width + _paddingWidth;
-                 if (totalWidth != width)
-                 {
-                     double scale = width/ totalWidth;
-                     ld.PortraitColumn1Width *= scale;
-                     ld.PortraitColumn2Width *= scale;
-                     ld.PortraitColumn3Width *= scale;
-                 }
-             }
-             else if (ctColumns == 2)
-             {
-                 double totalWidth = ld.PortraitColumn1Width + ld.PortraitColumn2Width;
-                 if (totalWidth != width)
-                 {
-                     double scale = width / totalWidth;
-                     ld.PortraitColumn1Width *= scale;
-                     ld.PortraitColumn2Width *= scale;
-                 }
-
-            }
-             else if (ctColumns == 1)
-             {
-                 double totalWidth = ld.PortraitColumn1Width ;
-                 if (totalWidth != width)
-                 {
-                     ld.PortraitColumn1Width = width;
-                 }
-
-             }
-        }
-
-
-        if (width > height && GlobalData.CurrentGlobalData!.LayoutDescription.ScreenMode != IGlobalData.screenMode.landscape)
+        try
         {
-             GlobalData.CurrentGlobalData!.LayoutDescription.ScreenMode = IGlobalData.screenMode.landscape;
-            ChangeOrientation(IGlobalData.screenMode.landscape );
-         }
-         else if (width < height && GlobalData.CurrentGlobalData!.LayoutDescription.ScreenMode != IGlobalData.screenMode.portrait)
-         {
-            GlobalData.CurrentGlobalData!.LayoutDescription.ScreenMode = IGlobalData.screenMode.portrait;
-             ChangeOrientation(IGlobalData.screenMode.portrait);
+            _viewModelGeneral!.CheckSize(width, height).Wait();
 
-         }
-         else
-         {
-             SetGamePageLayout();
-
-        }
-
-        base.OnSizeAllocated(width, height);
-        /*
-        if (MenuGridMenuInner.ColumnDefinitions[0].Width.IsAbsolute == false && Grid_MC_Left.Width > 0)
-        {
-            SetStarToAbsolute();
-        }
-
-        if (Grid_MC_Left.Width > 0)
-        {
-            double widthOld = MenuGridMenuInner.ColumnDefinitions[0].Width.Value + MenuGridMenuInner.ColumnDefinitions[2].Width.Value + MenuGridMenuInner.ColumnDefinitions[4].Width.Value;
-
-            double widthNew = width - MenuGridMenuInner.ColumnDefinitions[1].Width.Value - MenuGridMenuInner.ColumnDefinitions[3].Width.Value;
-
-            double x1 = Math.Round((MenuGridMenuInner.ColumnDefinitions[0].Width.Value * widthNew) / widthOld);
-            double x3 = Math.Round((MenuGridMenuInner.ColumnDefinitions[2].Width.Value * widthNew) / widthOld);
-            double x5 = Math.Round((MenuGridMenuInner.ColumnDefinitions[4].Width.Value * widthNew) / widthOld);
-
-            try
+            if (AbsoluteLayer.InputTransparent == false)
             {
-                MenuGridMenuInner.ColumnDefinitions[0].Width = new GridLength(x1);
-                MenuGridMenuInner.ColumnDefinitions[2].Width = new GridLength(x3);
-                MenuGridMenuInner.ColumnDefinitions[4].Width = new GridLength(x5);
+                int ix = 0;
+                for (ix = 0; ix < AbsoluteLayer.Children.Count; ix++)
+                {
+                    View v = (View)AbsoluteLayer.Children[ix];
+                    if (v != BlueBox)
+                    {
+                        AbsoluteLayer.Remove(v);
+                        ix--;
+                    }
+                }
+
+                // AbsoluteLayer.Remove(gridx);
+                // AbsoluteLayer.Remove(f);
+                AbsoluteLayer.InputTransparent = true;
             }
-            catch( Exception e)
+
+            LayoutDescription ld = (LayoutDescription)GlobalData.CurrentGlobalData!.LayoutDescription!;
+            if (ld.PortraitColumn1Width > 0)
             {
-                int a = 5;
+                int ctColumns = 0;
+                if (ld.PortraitColumns[0, 0] != ILayoutDescription.PortraitColumn.none || ld.PortraitColumns[0, 1] != ILayoutDescription.PortraitColumn.none || ld.PortraitColumns[0, 2] != ILayoutDescription.PortraitColumn.none)
+                    ctColumns++;
+                if (ld.PortraitColumns[1, 0] != ILayoutDescription.PortraitColumn.none || ld.PortraitColumns[1, 1] != ILayoutDescription.PortraitColumn.none || ld.PortraitColumns[1, 2] != ILayoutDescription.PortraitColumn.none)
+                    ctColumns++;
+                if (ld.PortraitColumns[2, 0] != ILayoutDescription.PortraitColumn.none || ld.PortraitColumns[2, 1] != ILayoutDescription.PortraitColumn.none || ld.PortraitColumns[2, 2] != ILayoutDescription.PortraitColumn.none)
+                    ctColumns++;
+
+
+                if (ctColumns == 3)
+                {
+                    double totalWidth = ld.PortraitColumn1Width + ld.PortraitColumn2Width + ld.PortraitColumn3Width + _paddingWidth;
+                    if (totalWidth != width)
+                    {
+                        double scale = width / totalWidth;
+                        ld.PortraitColumn1Width *= scale;
+                        ld.PortraitColumn2Width *= scale;
+                        ld.PortraitColumn3Width *= scale;
+                    }
+                }
+                else if (ctColumns == 2)
+                {
+                    double totalWidth = ld.PortraitColumn1Width + ld.PortraitColumn2Width;
+                    if (totalWidth != width)
+                    {
+                        double scale = width / totalWidth;
+                        ld.PortraitColumn1Width *= scale;
+                        ld.PortraitColumn2Width *= scale;
+                    }
+
+                }
+                else if (ctColumns == 1)
+                {
+                    double totalWidth = ld.PortraitColumn1Width;
+                    if (totalWidth != width)
+                    {
+                        ld.PortraitColumn1Width = width;
+                    }
+
+                }
             }
+
+
+            if (width > height && GlobalData.CurrentGlobalData!.LayoutDescription.ScreenMode != IGlobalData.screenMode.landscape)
+            {
+                GlobalData.CurrentGlobalData!.LayoutDescription.ScreenMode = IGlobalData.screenMode.landscape;
+                ChangeOrientation(IGlobalData.screenMode.landscape);
+            }
+            else if (width < height && GlobalData.CurrentGlobalData!.LayoutDescription.ScreenMode != IGlobalData.screenMode.portrait)
+            {
+                GlobalData.CurrentGlobalData!.LayoutDescription.ScreenMode = IGlobalData.screenMode.portrait;
+                ChangeOrientation(IGlobalData.screenMode.portrait);
+
+            }
+            else
+            {
+                SetGamePageLayout();
+
+            }
+
+            base.OnSizeAllocated(width, height);
+            /*
+            if (MenuGridMenuInner.ColumnDefinitions[0].Width.IsAbsolute == false && Grid_MC_Left.Width > 0)
+            {
+                SetStarToAbsolute();
+            }
+
+            if (Grid_MC_Left.Width > 0)
+            {
+                double widthOld = MenuGridMenuInner.ColumnDefinitions[0].Width.Value + MenuGridMenuInner.ColumnDefinitions[2].Width.Value + MenuGridMenuInner.ColumnDefinitions[4].Width.Value;
+
+                double widthNew = width - MenuGridMenuInner.ColumnDefinitions[1].Width.Value - MenuGridMenuInner.ColumnDefinitions[3].Width.Value;
+
+                double x1 = Math.Round((MenuGridMenuInner.ColumnDefinitions[0].Width.Value * widthNew) / widthOld);
+                double x3 = Math.Round((MenuGridMenuInner.ColumnDefinitions[2].Width.Value * widthNew) / widthOld);
+                double x5 = Math.Round((MenuGridMenuInner.ColumnDefinitions[4].Width.Value * widthNew) / widthOld);
+
+                try
+                {
+                    MenuGridMenuInner.ColumnDefinitions[0].Width = new GridLength(x1);
+                    MenuGridMenuInner.ColumnDefinitions[2].Width = new GridLength(x3);
+                    MenuGridMenuInner.ColumnDefinitions[4].Width = new GridLength(x5);
+                }
+                catch( Exception e)
+                {
+                    int a = 5;
+                }
+            }
+            */
         }
-        */
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("OnSizeAllocated: " + ex.Message, IGlobalData.protMode.crisp);
+        }
 
     }
 
@@ -1030,38 +1120,47 @@ public partial class GamePage : ContentPage, IMenuExtension
 
     bool CompareEmptyTreeViews(EmptyTreeViewItem tv1, EmptyTreeViewItem tv2)
     {
-        bool identical = true;
+        try
+        {
+            bool identical = true;
 
-        if (tv1.ID != tv2.ID)
-        {
-            identical = false;
-        }
-        else
-        {
-            int ix;
-            if (tv1.Children.Count > 0)
-            {
-                for (ix = 0; ix < tv1.Children.Count; ix++)
-                {
-                    if (tv1.Children.Count != tv2.Children.Count)
-                    {
-                        identical = false;
-                        break;
-                    }
-                    else if (CompareEmptyTreeViews(tv1.Children[ix], tv2.Children[ix]) == false)
-                    {
-                        identical = false;
-                        break;
-                    }
-                }
-            }
-            else if (tv2.Children.Count > 0)
+            if (tv1.ID != tv2.ID)
             {
                 identical = false;
-
             }
+            else
+            {
+                int ix;
+                if (tv1.Children.Count > 0)
+                {
+                    for (ix = 0; ix < tv1.Children.Count; ix++)
+                    {
+                        if (tv1.Children.Count != tv2.Children.Count)
+                        {
+                            identical = false;
+                            break;
+                        }
+                        else if (CompareEmptyTreeViews(tv1.Children[ix], tv2.Children[ix]) == false)
+                        {
+                            identical = false;
+                            break;
+                        }
+                    }
+                }
+                else if (tv2.Children.Count > 0)
+                {
+                    identical = false;
+
+                }
+            }
+            return identical;
         }
-        return identical;
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("CompareEmptyTreeViews: " + ex.Message, IGlobalData.protMode.crisp);
+            return false;
+        }
+
     }
     // int count = 0;
 
@@ -1071,141 +1170,175 @@ public partial class GamePage : ContentPage, IMenuExtension
 
     public bool IsPortraitVisible()
     {
-        LayoutDescription ld = (LayoutDescription)GlobalData.CurrentGlobalData!.LayoutDescription;
-        bool visible = false;
-
-        for(int ix = 0; ix < 3; ix++)
+        try
         {
-            for(int ix2 = 0; ix2 < 3; ix2++)
+            LayoutDescription ld = (LayoutDescription)GlobalData.CurrentGlobalData!.LayoutDescription;
+            bool visible = false;
+
+            for (int ix = 0; ix < 3; ix++)
             {
-                if (ld.PortraitColumns[ix, ix2] != ILayoutDescription.PortraitColumn.none)
+                for (int ix2 = 0; ix2 < 3; ix2++)
+                {
+                    if (ld.PortraitColumns[ix, ix2] != ILayoutDescription.PortraitColumn.none)
+                    {
+                        visible = true;
+                        break;
+                    }
+                }
+            }
+            return visible;
+        }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("IsPortraitVisible: " + ex.Message, IGlobalData.protMode.crisp);
+            return false;
+        }
+
+    }
+    public bool IsPortraitColVisible( int col )
+    {
+        try
+        {
+            LayoutDescription ld = (LayoutDescription)GlobalData.CurrentGlobalData!.LayoutDescription;
+            bool visible = false;
+
+            for (int ix2 = 0; ix2 < 3; ix2++)
+            {
+                if (ld.PortraitColumns[col, ix2] != ILayoutDescription.PortraitColumn.none)
                 {
                     visible = true;
                     break;
                 }
             }
+            return visible;
         }
-        return visible;
-    }
-    public bool IsPortraitColVisible( int col )
-    {
-        LayoutDescription ld = (LayoutDescription)GlobalData.CurrentGlobalData!.LayoutDescription;
-        bool visible = false;
-
-        for (int ix2 = 0; ix2 < 3; ix2++)
+        catch (Exception ex)
         {
-            if (ld.PortraitColumns[col, ix2] != ILayoutDescription.PortraitColumn.none)
-            {
-                visible = true;
-                break;
-            }
+            GlobalData.AddLog("IsPortraitColVisible: " + ex.Message, IGlobalData.protMode.crisp);
+            return false;
         }
-        return visible;
+
     }
 
     public void SetPortraitGridDimensions()
     {
-        LayoutDescription ld = (LayoutDescription)GlobalData.CurrentGlobalData!.LayoutDescription;
-        MenuGridMenuInner.ColumnDefinitions[0].Width = new GridLength(0);
-        MenuGridMenuInner.ColumnDefinitions[1].Width = new GridLength(0);
-
-        double x = GlobalSpecs.CurrentGlobalSpecs!.GetScreenWidth() - _paddingWidth;
-        
-        // RotateProblem
-        MenuGridMenuInner.ColumnDefinitions[2].Width = new GridLength(x);
-        /*
-        MenuGridMenu.ColumnDefinitions[1].Width = new GridLength(x );
-        Grid_Output.WidthRequest = x;
-        GameOut.WidthRequest = x;
-        MenuGridMenuInner.WidthRequest = x;
-        MenuGridMenu.WidthRequest = x;
-        MenuGridTotal.ColumnDefinitions[1].Width = new GridLength(x);
-        */
-
-        MenuGridMenuInner.ColumnDefinitions[3].Width = new GridLength(0);
-        MenuGridMenuInner.ColumnDefinitions[4].Width = new GridLength(0);
-
-        if ( IsPortraitVisible() )
+        try
         {
-            MenuGridMenuVertical.RowDefinitions[0].Height = new GridLength(GlobalSpecs.CurrentGlobalSpecs!.GetScreenHeight() - ld.PortraitColumnsHeight - PageGrid.RowDefinitions[0].Height.Value - 10);
-            MenuGridMenuVertical.RowDefinitions[1].Height = new GridLength(10);
-            MenuGridMenuVertical.RowDefinitions[2].Height = new GridLength(ld.PortraitColumnsHeight);
-            PageGrid.RowDefinitions[2].Height = new GridLength(MenuGridMenuVertical.RowDefinitions[0].Height.Value + MenuGridMenuVertical.RowDefinitions[2].Height.Value);
-            Grid_Output.RowDefinitions[0].Height = new GridLength(MenuGridMenuVertical.RowDefinitions[0].Height.Value - Grid_Output.RowDefinitions[2].Height.Value);
-            AdaptGridHeights();
-            // Grid_Output.RowDefinitions[2].Height = new GridLength( 50 ) ;
+            LayoutDescription ld = (LayoutDescription)GlobalData.CurrentGlobalData!.LayoutDescription;
+            MenuGridMenuInner.ColumnDefinitions[0].Width = new GridLength(0);
+            MenuGridMenuInner.ColumnDefinitions[1].Width = new GridLength(0);
 
+            double x = GlobalSpecs.CurrentGlobalSpecs!.GetScreenWidth() - _paddingWidth;
 
-            double xLen = GlobalSpecs.CurrentGlobalSpecs!.GetScreenWidth() - _paddingWidth;
+            // RotateProblem
+            MenuGridMenuInner.ColumnDefinitions[2].Width = new GridLength(x);
+            /*
+            MenuGridMenu.ColumnDefinitions[1].Width = new GridLength(x );
+            Grid_Output.WidthRequest = x;
+            GameOut.WidthRequest = x;
+            MenuGridMenuInner.WidthRequest = x;
+            MenuGridMenu.WidthRequest = x;
+            MenuGridTotal.ColumnDefinitions[1].Width = new GridLength(x);
+            */
 
-            // Nur 1 Spalte?
-            if (!IsPortraitColVisible(1) ) 
+            MenuGridMenuInner.ColumnDefinitions[3].Width = new GridLength(0);
+            MenuGridMenuInner.ColumnDefinitions[4].Width = new GridLength(0);
+
+            if (IsPortraitVisible())
             {
-                OrderItemGrid.ColumnDefinitions[0].Width = new GridLength(GlobalSpecs.CurrentGlobalSpecs!.GetScreenWidth() - _paddingWidth);
-                OrderItemGrid.ColumnDefinitions[1].Width = 0;
-                OrderItemGrid.ColumnDefinitions[2].Width = 0;
-                OrderItemGrid.ColumnDefinitions[3].Width = 0;
-                OrderItemGrid.ColumnDefinitions[4].Width = 0;
-            }
-            else if (!IsPortraitColVisible(2))
-            {
-                if (ld.PortraitColumn1Width + 10 > xLen)
+                MenuGridMenuVertical.RowDefinitions[0].Height = new GridLength(GlobalSpecs.CurrentGlobalSpecs!.GetScreenHeight() - ld.PortraitColumnsHeight - PageGrid.RowDefinitions[0].Height.Value - 10);
+                MenuGridMenuVertical.RowDefinitions[1].Height = new GridLength(10);
+                MenuGridMenuVertical.RowDefinitions[2].Height = new GridLength(ld.PortraitColumnsHeight);
+                PageGrid.RowDefinitions[2].Height = new GridLength(MenuGridMenuVertical.RowDefinitions[0].Height.Value + MenuGridMenuVertical.RowDefinitions[2].Height.Value);
+                Grid_Output.RowDefinitions[0].Height = new GridLength(MenuGridMenuVertical.RowDefinitions[0].Height.Value - Grid_Output.RowDefinitions[2].Height.Value);
+                AdaptGridHeights();
+                // Grid_Output.RowDefinitions[2].Height = new GridLength( 50 ) ;
+
+
+                double xLen = GlobalSpecs.CurrentGlobalSpecs!.GetScreenWidth() - _paddingWidth;
+
+                // Nur 1 Spalte?
+                if (!IsPortraitColVisible(1))
                 {
-                    ld.PortraitColumn1Width = (xLen - 10) / 2;
+                    OrderItemGrid.ColumnDefinitions[0].Width = new GridLength(GlobalSpecs.CurrentGlobalSpecs!.GetScreenWidth() - _paddingWidth);
+                    OrderItemGrid.ColumnDefinitions[1].Width = 0;
+                    OrderItemGrid.ColumnDefinitions[2].Width = 0;
+                    OrderItemGrid.ColumnDefinitions[3].Width = 0;
+                    OrderItemGrid.ColumnDefinitions[4].Width = 0;
+                }
+                else if (!IsPortraitColVisible(2))
+                {
+                    if (ld.PortraitColumn1Width + 10 > xLen)
+                    {
+                        ld.PortraitColumn1Width = (xLen - 10) / 2;
+
+                    }
+
+
+                    OrderItemGrid.ColumnDefinitions[0].Width = new GridLength(ld.PortraitColumn1Width);
+                    xLen -= ld.PortraitColumn1Width;
+                    OrderItemGrid.ColumnDefinitions[1].Width = 10;
+                    xLen -= 10;
+                    OrderItemGrid.ColumnDefinitions[2].Width = new GridLength(xLen);
+                    OrderItemGrid.ColumnDefinitions[3].Width = 0;
+                    OrderItemGrid.ColumnDefinitions[4].Width = 0;
 
                 }
+                else
+                {
+                    if (ld.PortraitColumn1Width + ld.PortraitColumn2Width + 20 > xLen)
+                    {
+                        ld.PortraitColumn1Width = (xLen - 20) / 3;
+                        ld.PortraitColumn2Width = (xLen - 20) / 3;
 
+                    }
 
-                OrderItemGrid.ColumnDefinitions[0].Width = new GridLength(ld.PortraitColumn1Width);
-                xLen -= ld.PortraitColumn1Width;
-                OrderItemGrid.ColumnDefinitions[1].Width = 10;
-                xLen -= 10;
-                OrderItemGrid.ColumnDefinitions[2].Width = new GridLength(xLen);
-                OrderItemGrid.ColumnDefinitions[3].Width = 0;
-                OrderItemGrid.ColumnDefinitions[4].Width = 0;
+                    OrderItemGrid.ColumnDefinitions[0].Width = new GridLength(ld.PortraitColumn1Width);
+                    xLen -= ld.PortraitColumn1Width;
+                    OrderItemGrid.ColumnDefinitions[1].Width = 10;
+                    xLen -= 10;
+                    OrderItemGrid.ColumnDefinitions[2].Width = new GridLength(ld.PortraitColumn2Width);
+                    xLen -= ld.PortraitColumn2Width;
+                    OrderItemGrid.ColumnDefinitions[3].Width = 10;
+                    xLen -= 10;
+                    OrderItemGrid.ColumnDefinitions[4].Width = new GridLength(xLen);
 
+                }
             }
             else
             {
-                if (ld.PortraitColumn1Width + ld.PortraitColumn2Width + 20 > xLen)
-                {
-                    ld.PortraitColumn1Width = (xLen - 20) / 3;
-                    ld.PortraitColumn2Width = (xLen - 20) / 3;
+                MenuGridMenuVertical.RowDefinitions[0].Height = new GridLength(GlobalSpecs.CurrentGlobalSpecs!.GetScreenHeight() - PageGrid.RowDefinitions[0].Height.Value - 10);
+                MenuGridMenuVertical.RowDefinitions[2].Height = new GridLength(0);
+                PageGrid.RowDefinitions[2].Height = new GridLength(MenuGridMenuVertical.RowDefinitions[0].Height.Value + MenuGridMenuVertical.RowDefinitions[2].Height.Value);
 
-                }
-
-                OrderItemGrid.ColumnDefinitions[0].Width = new GridLength(ld.PortraitColumn1Width);
-                xLen -= ld.PortraitColumn1Width;
-                OrderItemGrid.ColumnDefinitions[1].Width = 10;
-                xLen -= 10;
-                OrderItemGrid.ColumnDefinitions[2].Width = new GridLength(ld.PortraitColumn2Width);
-                xLen -= ld.PortraitColumn2Width;
-                OrderItemGrid.ColumnDefinitions[3].Width = 10;
-                xLen -= 10;
-                OrderItemGrid.ColumnDefinitions[4].Width = new GridLength(xLen);
+                Grid_Output.RowDefinitions[0].Height = new GridLength(MenuGridMenuVertical.RowDefinitions[0].Height.Value - Grid_Output.RowDefinitions[2].Height.Value);
+                AdaptGridHeights();
 
             }
         }
-        else
+        catch (Exception ex)
         {
-            MenuGridMenuVertical.RowDefinitions[0].Height = new GridLength(GlobalSpecs.CurrentGlobalSpecs!.GetScreenHeight() - PageGrid.RowDefinitions[0].Height.Value - 10);
-            MenuGridMenuVertical.RowDefinitions[2].Height = new GridLength(0);
-            PageGrid.RowDefinitions[2].Height = new GridLength(MenuGridMenuVertical.RowDefinitions[0].Height.Value + MenuGridMenuVertical.RowDefinitions[2].Height.Value);
-
-            Grid_Output.RowDefinitions[0].Height = new GridLength(MenuGridMenuVertical.RowDefinitions[0].Height.Value - Grid_Output.RowDefinitions[2].Height.Value);
-            AdaptGridHeights();
-
+            GlobalData.AddLog("SetPortraitGridDimensions: " + ex.Message, IGlobalData.protMode.crisp);
         }
 
     }
 
     public bool SetGamePageLayout()
     {
-        if (GlobalSpecs.CurrentGlobalSpecs!.InitRunning == IGlobalSpecs.initRunning.started)
-            return false;
+        try
+        {
+            if (GlobalSpecs.CurrentGlobalSpecs!.InitRunning == IGlobalSpecs.initRunning.started)
+                return false;
 
-        UIS!.AddUICycle();
-        return true;
+            UIS!.AddUICycle();
+            return true;
+        }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("SetGamePageLayout: " + ex.Message, IGlobalData.protMode.crisp);
+            return false;
+        }
+
     }
 
     bool gplUpdate = false;
@@ -2900,33 +3033,51 @@ public partial class GamePage : ContentPage, IMenuExtension
         }
     }
 
-    TreeViewItem AddTreeViewItem( TreeViewItem tv, string? Name, string? CallString )
+    TreeViewItem? AddTreeViewItem( TreeViewItem tv, string? Name, string? CallString )
     {
-        TreeViewItem tv1 = UIElement.NewTreeViewItem();
-        tv1.SetupTreeViewItem();
-        tv1.UserDefinedObject = CallString!;
-        tv1.Text = Name!;
-        tv.Add(tv1);
-        tv1.SetCursorHand();
-        tv1.SetClicked(SelectTreeViewItem);
-        tv1.HorizontalOptions = LayoutOptions.Start;
-        tv1.CascadeInputTransparent = false;
-        tv1.InputTransparent = false;
-        // tv1.Background = Colors.Blue;
+        try
+        {
+            TreeViewItem tv1 = UIElement.NewTreeViewItem();
+            tv1.SetupTreeViewItem();
+            tv1.UserDefinedObject = CallString!;
+            tv1.Text = Name!;
+            tv.Add(tv1);
+            tv1.SetCursorHand();
+            tv1.SetClicked(SelectTreeViewItem);
+            tv1.HorizontalOptions = LayoutOptions.Start;
+            tv1.CascadeInputTransparent = false;
+            tv1.InputTransparent = false;
+            // tv1.Background = Colors.Blue;
 
-        /*
-        var tap = new TapGestureRecognizer();
-        tap.Tapped += SelectTreeViewItem; 
-        tv1.GestureRecognizers.Add(tap);
-        */
-        // tv1.CurrentTreeState = TreeViewItem.TreeState.open;
-        return tv1;
+            /*
+            var tap = new TapGestureRecognizer();
+            tap.Tapped += SelectTreeViewItem; 
+            tv1.GestureRecognizers.Add(tap);
+            */
+            // tv1.CurrentTreeState = TreeViewItem.TreeState.open;
+            return tv1;
+        }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("AddTreeViewItem: " + ex.Message, IGlobalData.protMode.crisp);
+            return null;
+        }
+
     }
-    EmptyTreeViewItem AddTreeViewItemEmpty( EmptyTreeViewItem tv)
+    EmptyTreeViewItem? AddTreeViewItemEmpty( EmptyTreeViewItem tv)
     {
-        EmptyTreeViewItem tv1 = new();
-        tv.Children.Add(tv1);
-        return tv1;
+        try
+        {
+            EmptyTreeViewItem tv1 = new();
+            tv.Children.Add(tv1);
+            return tv1;
+        }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("AddTreeViewItemEmpty: " + ex.Message, IGlobalData.protMode.crisp);
+            return null;
+        }
+
     }
 
     public class EmptyTreeViewItem
@@ -2943,197 +3094,361 @@ public partial class GamePage : ContentPage, IMenuExtension
     {
     }
   
-    TreeView CreateItemLocTree()
+    TreeView? CreateItemLocTree()
     {
-        TreeView tv = UIElement.NewTreeView();
-        tv.SetupTreeView();
-        tv.CurrentTreeState = TreeViewItem.TreeState.open;
-
-        if (GD!.Adventure == null)
-            return tv;
-
-        location l = GD.Adventure!.locations!.Find(GD.Adventure!.A!.ActLoc!)!;
-
-
-        foreach (Item item in GD.Adventure!.Items!.List!.Values)
+        try
         {
-            if ((item.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_Loc, GD.Adventure!.A!.ActLoc)) && (item.IsHidden == false) && (item.Active == true))
-            {
-                if (item.IsMentionable == true && (!item.IsLessImportant || GD.LayoutDescription.SimpleMC == false))
-                {
-                    TreeViewItem newChild = AddTreeViewItem(tv, item.FullName(Case: Co.CASE_AKK, GD.Adventure.CurrentNouns!, ShowAppendix: true), item.FullName(Case: Co.CASE_AKK, CurrentNouns: GD.Adventure.CurrentNouns! ));
-                    AddSiblings(newChild, item);
+            TreeView tv = UIElement.NewTreeView();
+            tv.SetupTreeView();
+            tv.CurrentTreeState = TreeViewItem.TreeState.open;
 
+            if (GD!.Adventure == null)
+                return tv;
+
+            location l = GD.Adventure!.locations!.Find(GD.Adventure!.A!.ActLoc!)!;
+
+
+            foreach (Item item in GD.Adventure!.Items!.List!.Values)
+            {
+                if ((item.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_Loc, GD.Adventure!.A!.ActLoc)) && (item.IsHidden == false) && (item.Active == true))
+                {
+                    if (item.IsMentionable == true && (!item.IsLessImportant || GD.LayoutDescription.SimpleMC == false))
+                    {
+                        TreeViewItem newChild = AddTreeViewItem(tv, item.FullName(Case: Co.CASE_AKK, GD.Adventure.CurrentNouns!, ShowAppendix: true), item.FullName(Case: Co.CASE_AKK, CurrentNouns: GD.Adventure.CurrentNouns!));
+                        AddSiblings(newChild, item);
+
+                    }
                 }
             }
-        }
-        foreach (Person person in GD.Adventure!.Persons!.List!.Values!)
-        {
-            if ((person.ID != GD.Adventure!.CA!.Person_I!.ID) && (person.ID != GD.Adventure!.CA!.Person_You!.ID))
+            foreach (Person person in GD.Adventure!.Persons!.List!.Values!)
             {
-                if ((person.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_Loc, GD.Adventure!.A!.ActLoc)) && (person.Active == true) && (person.IsHidden == false))
+                if ((person.ID != GD.Adventure!.CA!.Person_I!.ID) && (person.ID != GD.Adventure!.CA!.Person_You!.ID))
+                {
+                    if ((person.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_Loc, GD.Adventure!.A!.ActLoc)) && (person.Active == true) && (person.IsHidden == false))
+                    {
+                        TreeViewItem newChild = AddTreeViewItem(tv, person.FullName(Co.CASE_AKK, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns!), person.FullName(Case: Co.CASE_AKK, CurrentNouns: GD.Adventure.CurrentNouns!));
+                        AddSiblings(newChild, person);
+
+                    }
+                }
+            }
+
+
+            // Die Background-Items werden alle nachgelagert addiert
+            TreeViewItem BackgroundChild = UIElement.NewTreeViewItem();
+            BackgroundChild.SetupTreeViewItem();
+
+            foreach (Item item in GD.Adventure!.Items!.List.Values)
+            {
+                if ((item.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_Loc, GD.Adventure!.A!.ActLoc)) && (item.IsHidden == false) && (item.Active == true))
+                {
+                    if (item.IsMentionable == false && (!item.IsLessImportant || GD.LayoutDescription.SimpleMC == false))
+                    {
+                        TreeViewItem newChild = AddTreeViewItem(BackgroundChild, item.FullName(Case: Co.CASE_AKK, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns!), item.FullName(Case: Co.CASE_AKK, CurrentNouns: GD.Adventure.CurrentNouns!));
+                        AddSiblings(newChild, item);
+
+                    }
+                }
+            }
+            if ((BackgroundChild.Children.Count > 0) && (GD.Adventure!.A.Difficulty == GD.Adventure!.A.Difficulty_Easy))
+            {
+                tv.Add(BackgroundChild);
+            }
+
+            return tv;
+        }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("CreateItemLocTree: " + ex.Message, IGlobalData.protMode.crisp);
+            return null;
+        }
+
+    }
+    EmptyTreeView? CreateItemLocTree_Empty()
+    {
+        try
+        {
+            EmptyTreeView tv = new();
+            tv.Children = new();
+
+            if (GD!.Adventure == null)
+                return tv;
+
+            location l = GD.Adventure!.locations!.Find(GD.Adventure!.A!.ActLoc!)!;
+
+
+            foreach (Item item in GD.Adventure!.Items!.List!.Values)
+            {
+                if ((item.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_Loc, GD.Adventure!.A!.ActLoc)) && (item.IsHidden == false) && (item.Active == true))
+                {
+                    if (item.IsMentionable == true && (!item.IsLessImportant || GD.LayoutDescription.SimpleMC == false))
+                    {
+                        EmptyTreeViewItem newChild = new();
+                        tv.Children.Add(newChild);
+                        newChild.ID = item.ID;
+                        AddSiblingsEmpty(newChild, item);
+
+                    }
+                }
+            }
+            foreach (Person person in GD.Adventure!.Persons!.List!.Values!)
+            {
+                if ((person.ID != GD.Adventure!.CA!.Person_I!.ID) && (person.ID != GD.Adventure!.CA!.Person_You!.ID))
+                {
+                    if ((person.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_Loc, GD.Adventure!.A!.ActLoc)) && (person.Active == true) && (person.IsHidden == false))
+                    {
+                        EmptyTreeViewItem newChild = new();
+                        tv.Children.Add(newChild);
+                        AddSiblingsEmpty(newChild, person);
+
+                    }
+                }
+            }
+
+            // Die Background-Items werden alle nachgelagert addiert
+            EmptyTreeViewItem BackgroundChild = new EmptyTreeViewItem();
+
+            foreach (Item item in GD.Adventure!.Items!.List.Values)
+            {
+                if ((item.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_Loc, GD.Adventure!.A!.ActLoc)) && (item.IsHidden == false) && (item.Active == true))
+                {
+                    if (item.IsMentionable == false && (!item.IsLessImportant || GD.LayoutDescription.SimpleMC == false))
+                    {
+                        EmptyTreeViewItem newChild = new();
+                        BackgroundChild.Children.Add(newChild);
+                        newChild.ID = item.ID;
+                        AddSiblingsEmpty(newChild, item);
+
+                    }
+                }
+            }
+            if ((BackgroundChild.Children.Count > 0) && (GD.Adventure!.A.Difficulty == GD.Adventure!.A.Difficulty_Easy))
+            {
+                tv.Children.Add(BackgroundChild);
+            }
+
+            return tv;
+        }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("CreateItemLocTree_Empty: " + ex.Message, IGlobalData.protMode.crisp);
+            return null;
+        }
+
+    }
+
+    TreeView? CreateItemInvTree()
+    {
+        try
+        {
+            TreeView tv = UIElement.NewTreeView();
+            tv.SetupTreeView();
+            tv.CurrentTreeState = TreeViewItem.TreeState.open;
+
+            if (GD!.Adventure == null)
+                return tv;
+
+            location l = GD.Adventure!.locations!.Find(GD.Adventure!.A!.ActLoc!)!;
+
+
+            foreach (Item item in GD.Adventure!.Items!.List!.Values)
+            {
+                if ((item.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_Person, GD.Adventure!.A!.ActPerson)) && (item.IsHidden == false) && (item.Active == true))
+                {
+                    TreeViewItem newChild = AddTreeViewItem(tv, item!.FullName(Case: Co.CASE_AKK, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns!), item.FullName(Case: Co.CASE_AKK, CurrentNouns: GD.Adventure.CurrentNouns!));
+                    AddSiblings(newChild, item);
+                }
+            }
+            foreach (Person person in GD.Adventure!.Persons!.List!.Values!)
+            {
+                if ((person.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_Person, GD.Adventure!.A!.ActPerson)) && (person.Active == true) && (person.IsHidden == false))
                 {
                     TreeViewItem newChild = AddTreeViewItem(tv, person.FullName(Co.CASE_AKK, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns!), person.FullName(Case: Co.CASE_AKK, CurrentNouns: GD.Adventure.CurrentNouns!));
                     AddSiblings(newChild, person);
-  
                 }
             }
-        }
-
-        
-        // Die Background-Items werden alle nachgelagert addiert
-        TreeViewItem BackgroundChild = UIElement.NewTreeViewItem();
-        BackgroundChild.SetupTreeViewItem();
-
-        foreach (Item item in GD.Adventure!.Items!.List.Values)
-        {
-            if ((item.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_Loc, GD.Adventure!.A!.ActLoc)) && (item.IsHidden == false) && (item.Active == true))
-            {
-                if (item.IsMentionable == false && (!item.IsLessImportant || GD.LayoutDescription.SimpleMC == false))
-                {
-                    TreeViewItem newChild = AddTreeViewItem(BackgroundChild, item.FullName(Case: Co.CASE_AKK, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns!), item.FullName(Case: Co.CASE_AKK, CurrentNouns: GD.Adventure.CurrentNouns!));
-                    AddSiblings(newChild, item);
-
-                }
-            }
-        }
-        if ((BackgroundChild.Children.Count > 0) && (GD.Adventure!.A.Difficulty == GD.Adventure!.A.Difficulty_Easy))
-        {
-            tv.Add(BackgroundChild);
-        }
-
-        return tv;
-    }
-    EmptyTreeView CreateItemLocTree_Empty()
-    {
-        EmptyTreeView tv = new();
-        tv.Children = new();
-
-        if (GD!.Adventure == null)
             return tv;
-
-        location l = GD.Adventure!.locations!.Find(GD.Adventure!.A!.ActLoc!)!;
-
-
-        foreach (Item item in GD.Adventure!.Items!.List!.Values)
+        }
+        catch (Exception ex)
         {
-            if ((item.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_Loc, GD.Adventure!.A!.ActLoc)) && (item.IsHidden == false) && (item.Active == true))
-            {
-                if (item.IsMentionable == true && (!item.IsLessImportant || GD.LayoutDescription.SimpleMC == false))
-                {
-                    EmptyTreeViewItem newChild = new();
-                    tv.Children.Add(newChild);
-                    newChild.ID = item.ID; 
-                    AddSiblingsEmpty(newChild, item);
+            GlobalData.AddLog("CreateItemInvTree: " + ex.Message, IGlobalData.protMode.crisp);
+            return null;
+        }
 
+    }
+    EmptyTreeView? CreateItemInvTree_Empty()
+    {
+        try
+        {
+            EmptyTreeView tv = new();
+
+            if (GD!.Adventure == null)
+                return tv;
+
+            location l = GD.Adventure!.locations!.Find(GD.Adventure!.A!.ActLoc!)!;
+
+
+            foreach (Item item in GD.Adventure!.Items!.List!.Values)
+            {
+                if ((item.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_Person, GD.Adventure!.A!.ActPerson)) &&
+                    (item.IsHidden == false) && (item.Active == true))
+                {
+                    EmptyTreeViewItem newChild = AddTreeViewItemEmpty(tv);
+                    newChild.ID = item.ID;
+                    AddSiblingsEmpty(newChild, item);
                 }
             }
-        }
-        foreach (Person person in GD.Adventure!.Persons!.List!.Values!)
-        {
-            if ((person.ID != GD.Adventure!.CA!.Person_I!.ID) && (person.ID != GD.Adventure!.CA!.Person_You!.ID))
+            foreach (Person person in GD.Adventure!.Persons!.List!.Values!)
             {
-                if ((person.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_Loc, GD.Adventure!.A!.ActLoc)) && (person.Active == true) && (person.IsHidden == false))
+                if ((person.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_Person, GD.Adventure!.A!.ActPerson)) && (person.Active == true) && (person.IsHidden == false))
                 {
-                    EmptyTreeViewItem newChild = new(); 
-                    tv.Children.Add(newChild);
+                    EmptyTreeViewItem newChild = AddTreeViewItemEmpty(tv);
                     AddSiblingsEmpty(newChild, person);
-
                 }
             }
-        }
-        
-        // Die Background-Items werden alle nachgelagert addiert
-        EmptyTreeViewItem BackgroundChild = new EmptyTreeViewItem();
- 
-        foreach (Item item in GD.Adventure!.Items!.List.Values)
-        {
-            if ((item.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_Loc, GD.Adventure!.A!.ActLoc)) && (item.IsHidden == false) && (item.Active == true))
-            {
-                if (item.IsMentionable == false && (!item.IsLessImportant || GD.LayoutDescription.SimpleMC == false))
-                {
-                    EmptyTreeViewItem newChild = new();
-                    BackgroundChild.Children.Add(newChild);
-                    newChild.ID = item.ID; 
-                    AddSiblingsEmpty(newChild, item);
-
-                }
-            }
-        }
-        if ((BackgroundChild.Children.Count > 0) && (GD.Adventure!.A.Difficulty == GD.Adventure!.A.Difficulty_Easy))
-        {
-            tv.Children.Add(BackgroundChild);
-        }
-
-        return tv;
-    }
-
-    TreeView CreateItemInvTree()
-    {
-        TreeView tv = UIElement.NewTreeView();
-        tv.SetupTreeView();
-        tv.CurrentTreeState = TreeViewItem.TreeState.open;
-
-        if (GD!.Adventure == null)
             return tv;
-
-        location l = GD.Adventure!.locations!.Find(GD.Adventure!.A!.ActLoc!)!;
-
-
-        foreach (Item item in GD.Adventure!.Items!.List!.Values)
-        {
-            if ((item.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_Person, GD.Adventure!.A!.ActPerson)) && (item.IsHidden == false) && (item.Active == true))
-            {
-                TreeViewItem newChild = AddTreeViewItem(tv, item!.FullName(Case: Co.CASE_AKK, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns!), item.FullName(Case: Co.CASE_AKK, CurrentNouns: GD.Adventure.CurrentNouns!));
-                AddSiblings(newChild, item);
-            }
         }
-        foreach (Person person in GD.Adventure!.Persons!.List!.Values!)
+        catch (Exception ex)
         {
-            if ((person.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_Person, GD.Adventure!.A!.ActPerson)) && (person.Active == true) && (person.IsHidden == false))
-            {
-                TreeViewItem newChild = AddTreeViewItem(tv, person.FullName(Co.CASE_AKK, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns!), person.FullName(Case: Co.CASE_AKK, CurrentNouns: GD.Adventure.CurrentNouns!));
-                AddSiblings(newChild, person);
-            }
+            GlobalData.AddLog("CreateItemInvTree_Empty: " + ex.Message, IGlobalData.protMode.crisp);
+            return null;
         }
-        return tv;
-    }
-    EmptyTreeView CreateItemInvTree_Empty()
-    {
-        EmptyTreeView tv = new();
 
-        if (GD!.Adventure == null)
-            return tv;
-
-        location l = GD.Adventure!.locations!.Find(GD.Adventure!.A!.ActLoc!)!;
-
-
-        foreach (Item item in GD.Adventure!.Items!.List!.Values)
-        {
-            if ((item.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_Person, GD.Adventure!.A!.ActPerson)) &&
-                (item.IsHidden == false) && (item.Active == true))
-            {
-                EmptyTreeViewItem newChild = AddTreeViewItemEmpty(tv);
-                newChild.ID = item.ID;
-                AddSiblingsEmpty(newChild, item);
-            }
-        }
-        foreach (Person person in GD.Adventure!.Persons!.List!.Values!)
-        {
-            if ((person.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_Person, GD.Adventure!.A!.ActPerson)) && (person.Active == true) && (person.IsHidden == false))
-            {
-                EmptyTreeViewItem newChild = AddTreeViewItemEmpty(tv); 
-                AddSiblingsEmpty(newChild, person);
-            }
-        }
-        return tv;
     }
 
     void AddSiblings(TreeViewItem currentChild, Item item)
     {
-        if (item != null)
+        try
         {
-            if ((item.CanPutIn || item.ListInsideItems) && ((item.CanBeClosed == false) || (item.IsClosed == false)) && (item.IsHidden == false) && (item.Active == true) && (item.InvisibleIn == false))
+            if (item != null)
+            {
+                if ((item.CanPutIn || item.ListInsideItems) && ((item.CanBeClosed == false) || (item.IsClosed == false)) && (item.IsHidden == false) && (item.Active == true) && (item.InvisibleIn == false))
+                {
+                    TreeViewItem PutInChild = UIElement.NewTreeViewItem();
+                    PutInChild.SetupTreeViewItem();
+                    int sysChildren = PutInChild.Children.Count;
+
+                    foreach (Item item2 in GD!.Adventure!.Items!.List!.Values)
+                    {
+                        if ((item2.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_In_Item, item.ID)) && (item2.IsHidden == false) && (item2.Active == true))
+                        {
+                            TreeViewItem newChild = AddTreeViewItem(PutInChild, item2.FullName(Case: Co.CASE_AKK, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns!), item2.FullName(Case: Co.CASE_AKK, CurrentNouns: GD.Adventure.CurrentNouns!));
+                            if (item2.InvisibleIn == false)
+                                AddSiblings(newChild, item2);
+                        }
+                    }
+                    foreach (Person person2 in GD.Adventure!.Persons!.List!.Values!)
+                    {
+                        if ((person2.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_In_Item, item.ID)) && (person2.Active == true) && (person2.IsHidden == false))
+                        {
+                            TreeViewItem newChild = AddTreeViewItem(PutInChild, person2.FullName(Co.CASE_AKK, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns!), person2.FullName(Case: Co.CASE_AKK, CurrentNouns: GD.Adventure.CurrentNouns!));
+                            AddSiblings(newChild, person2);
+
+                        }
+                    }
+
+                    if (PutInChild!.SubTree!.Count > 0)
+                    {
+                        PutInChild.Text = String.Format(loca.CustomRequestHandler_DoUIUpdate_Person_You_16300, item.FullName(Co.CASE_DAT, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns!));
+                        currentChild.Add(PutInChild);
+                    }
+                }
+                if ((item.CanPutOn) && (item.InvisibleOn == false))
+                {
+                    TreeViewItem PutInChild = UIElement.NewTreeViewItem();
+                    PutInChild.SetupTreeViewItem();
+                    int sysChildren = PutInChild.Children.Count;
+
+                    foreach (Item item2 in GD!.Adventure!.Items!.List!.Values)
+                    {
+                        if ((item2.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_On_Item, item.ID)) && (item2.IsHidden == false) && (item2.Active == true))
+                        {
+                            TreeViewItem newChild = AddTreeViewItem(PutInChild, item2.FullName(Case: Co.CASE_AKK, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns!), item2.FullName(Case: Co.CASE_AKK, CurrentNouns: GD.Adventure.CurrentNouns!));
+                            if (item2.InvisibleIn == false)
+                                AddSiblings(newChild, item2);
+                        }
+                    }
+                    foreach (Person person2 in GD.Adventure!.Persons!.List!.Values)
+                    {
+                        if ((person2.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_On_Item, item.ID)) && (person2.Active == true) && (person2.IsHidden == false))
+                        {
+                            TreeViewItem newChild = AddTreeViewItem(PutInChild, person2.FullName(Co.CASE_AKK, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns!), person2.FullName(Case: Co.CASE_AKK, CurrentNouns: GD.Adventure.CurrentNouns!));
+                            AddSiblings(newChild, person2);
+                        }
+                    }
+
+                    if (PutInChild.SubTree!.Count > 0)
+                    {
+
+                        PutInChild.Text = String.Format(loca.CustomRequestHandler_DoUIUpdate_Person_You_16301, item.FullName(Co.CASE_DAT, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns!));
+                        currentChild.Add(PutInChild);
+                    }
+                }
+                if ((item.CanPutBehind) && (item.InvisibleBehind == false))
+                {
+                    TreeViewItem PutInChild = UIElement.NewTreeViewItem();
+                    PutInChild.SetupTreeViewItem();
+                    int sysChildren = PutInChild.Children.Count;
+
+                    foreach (Item item2 in GD!.Adventure!.Items!.List!.Values)
+                    {
+                        if ((item2.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_Behind_Item, item.ID)) && (item2.IsHidden == false) && (item2.Active == true))
+                        {
+                            TreeViewItem newChild = AddTreeViewItem(PutInChild, item2.FullName(Case: Co.CASE_AKK, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns!), item2.FullName(Case: Co.CASE_AKK, CurrentNouns: GD.Adventure.CurrentNouns!));
+                            if (item2.InvisibleIn == false)
+                                AddSiblings(newChild, item2);
+                        }
+                    }
+                    foreach (Person person2 in GD.Adventure!.Persons!.List!.Values)
+                    {
+                        if ((person2.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_Behind_Item, item.ID)) && (person2.Active == true) && (person2.IsHidden == false))
+                        {
+                            TreeViewItem newChild = AddTreeViewItem(PutInChild, person2.FullName(Co.CASE_AKK, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns!), person2.FullName(Case: Co.CASE_AKK, CurrentNouns: GD.Adventure.CurrentNouns!));
+                            AddSiblings(newChild, person2);
+                        }
+                    }
+
+                    if (PutInChild.SubTree!.Count > 0)
+                    {
+                        PutInChild.Text = String.Format(loca.CustomRequestHandler_DoUIUpdate_Person_You_16302, item.FullName(Co.CASE_DAT, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns!));
+                        currentChild.Add(PutInChild);
+                    }
+                }
+                if ((item.CanPutBelow) && (item.InvisibleBelow == false))
+                {
+                    TreeViewItem PutInChild = UIElement.NewTreeViewItem();
+                    PutInChild.SetupTreeViewItem();
+                    int sysChildren = PutInChild.Children.Count;
+
+                    foreach (Item item2 in GD!.Adventure!.Items!.List!.Values)
+                    {
+                        if ((item2.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_Below_Item, item.ID)) && (item2.IsHidden == false) && (item2.Active == true))
+                        {
+                            TreeViewItem newChild = AddTreeViewItem(PutInChild, item2.FullName(Case: Co.CASE_AKK, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns!), item2.FullName(Case: Co.CASE_AKK, CurrentNouns: GD.Adventure.CurrentNouns!));
+                            if (item2.InvisibleIn == false)
+                                AddSiblings(newChild, item2);
+                        }
+                    }
+                    foreach (Person person2 in GD.Adventure!.Persons!.List!.Values!)
+                    {
+                        if ((person2.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_Below_Item, item.ID)) && (person2.Active == true) && (person2.IsHidden == false))
+                        {
+                            TreeViewItem newChild = AddTreeViewItem(PutInChild, person2.FullName(Co.CASE_AKK, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns!), person2.FullName(Case: Co.CASE_AKK, CurrentNouns: GD.Adventure.CurrentNouns!));
+                            AddSiblings(newChild, person2);
+                        }
+                    }
+
+
+                    if (PutInChild.SubTree!.Count > 0)
+                    {
+                        PutInChild.Text = String.Format(loca.CustomRequestHandler_DoUIUpdate_Person_You_16303, item.FullName(Co.CASE_DAT, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns!));
+                        currentChild.Add(PutInChild);
+                        // currentChild.CurrentTreeState = TreeViewItem.TreeState.open;
+                        // PutInChild.CurrentTreeState = TreeViewItem.TreeState.open;
+                    }
+                }
+            }
+            if ((item!.CanPutBeside) && (item!.InvisibleBeside == false))
             {
                 TreeViewItem PutInChild = UIElement.NewTreeViewItem();
                 PutInChild.SetupTreeViewItem();
@@ -3141,489 +3456,402 @@ public partial class GamePage : ContentPage, IMenuExtension
 
                 foreach (Item item2 in GD!.Adventure!.Items!.List!.Values)
                 {
-                    if ((item2.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_In_Item, item.ID)) && (item2.IsHidden == false) && (item2.Active == true))
+                    if ((item2.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_Beside_Item, item.ID)) && (item2.IsHidden == false) && (item2.Active == true))
                     {
-                        TreeViewItem newChild = AddTreeViewItem(PutInChild, item2.FullName(Case: Co.CASE_AKK, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns!), item2.FullName(Case: Co.CASE_AKK, CurrentNouns: GD.Adventure.CurrentNouns!));
+                        TreeViewItem newChild = AddTreeViewItem(PutInChild, item2.FullName(Case: Co.CASE_AKK, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns!), item2.FullName(Case: Co.CASE_AKK, CurrentNouns: GD!.Adventure.CurrentNouns!));
                         if (item2.InvisibleIn == false)
                             AddSiblings(newChild, item2);
                     }
                 }
                 foreach (Person person2 in GD.Adventure!.Persons!.List!.Values!)
                 {
-                    if ((person2.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_In_Item, item.ID)) && (person2.Active == true) && (person2.IsHidden == false))
+                    if ((person2.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_Beside_Item, item.ID)) && (person2.Active == true) && (person2.IsHidden == false))
                     {
-                        TreeViewItem newChild = AddTreeViewItem(PutInChild, person2.FullName(Co.CASE_AKK, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns!), person2.FullName(Case: Co.CASE_AKK, CurrentNouns: GD.Adventure.CurrentNouns!));
-                        AddSiblings(newChild, person2);
-
-                     }
-                }
-
-                if (PutInChild!.SubTree!.Count > 0)
-                {
-                    PutInChild.Text = String.Format(loca.CustomRequestHandler_DoUIUpdate_Person_You_16300, item.FullName(Co.CASE_DAT, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns!));
-                    currentChild.Add(PutInChild);
-                }
-            }
-            if ((item.CanPutOn) && (item.InvisibleOn == false))
-            {
-                TreeViewItem PutInChild = UIElement.NewTreeViewItem();
-                PutInChild.SetupTreeViewItem();
-                int sysChildren = PutInChild.Children.Count;
-
-                foreach (Item item2 in GD!.Adventure!.Items!.List!.Values)
-                {
-                    if ((item2.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_On_Item, item.ID)) && (item2.IsHidden == false) && (item2.Active == true))
-                    {
-                        TreeViewItem newChild = AddTreeViewItem(PutInChild, item2.FullName(Case: Co.CASE_AKK, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns!), item2.FullName(Case: Co.CASE_AKK, CurrentNouns: GD.Adventure.CurrentNouns!));
-                        if (item2.InvisibleIn == false)
-                            AddSiblings(newChild, item2);
-                    }
-                }
-                foreach (Person person2 in GD.Adventure!.Persons!.List!.Values)
-                {
-                    if ((person2.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_On_Item, item.ID)) && (person2.Active == true) && (person2.IsHidden == false))
-                    {
-                        TreeViewItem newChild = AddTreeViewItem(PutInChild, person2.FullName(Co.CASE_AKK, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns!), person2.FullName(Case: Co.CASE_AKK, CurrentNouns: GD.Adventure.CurrentNouns!));
-                        AddSiblings(newChild, person2);
-                    }
-                }
-
-                if (PutInChild.SubTree!.Count > 0)
-                {
-
-                    PutInChild.Text = String.Format(loca.CustomRequestHandler_DoUIUpdate_Person_You_16301, item.FullName(Co.CASE_DAT, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns!));
-                    currentChild.Add(PutInChild);
-                }
-           }
-            if ((item.CanPutBehind) && (item.InvisibleBehind == false))
-            {
-                TreeViewItem PutInChild = UIElement.NewTreeViewItem();
-                PutInChild.SetupTreeViewItem();
-                int sysChildren = PutInChild.Children.Count;
-
-                foreach (Item item2 in GD!.Adventure!.Items!.List!.Values)
-                {
-                    if ((item2.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_Behind_Item, item.ID)) && (item2.IsHidden == false) && (item2.Active == true))
-                    {
-                        TreeViewItem newChild = AddTreeViewItem(PutInChild, item2.FullName(Case: Co.CASE_AKK, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns!), item2.FullName(Case: Co.CASE_AKK, CurrentNouns: GD.Adventure.CurrentNouns!));
-                        if (item2.InvisibleIn == false)
-                            AddSiblings(newChild, item2);
-                    }
-                }
-                foreach (Person person2 in GD.Adventure!.Persons!.List!.Values)
-                {
-                    if ((person2.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_Behind_Item, item.ID)) && (person2.Active == true) && (person2.IsHidden == false))
-                    {
-                        TreeViewItem newChild = AddTreeViewItem(PutInChild, person2.FullName(Co.CASE_AKK, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns!), person2.FullName(Case: Co.CASE_AKK, CurrentNouns: GD.Adventure.CurrentNouns!));
-                        AddSiblings(newChild, person2);
-                    }
-                }
-
-                if (PutInChild.SubTree!.Count > 0)
-                {
-                    PutInChild.Text = String.Format(loca.CustomRequestHandler_DoUIUpdate_Person_You_16302, item.FullName(Co.CASE_DAT, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns!));
-                    currentChild.Add(PutInChild);
-                }
-            }
-            if ((item.CanPutBelow) && (item.InvisibleBelow == false))
-            {
-                TreeViewItem PutInChild = UIElement.NewTreeViewItem();
-                PutInChild.SetupTreeViewItem();
-                int sysChildren = PutInChild.Children.Count;
-
-                foreach (Item item2 in GD!.Adventure!.Items!.List!.Values)
-                {
-                    if ((item2.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_Below_Item, item.ID)) && (item2.IsHidden == false) && (item2.Active == true))
-                    {
-                        TreeViewItem newChild = AddTreeViewItem(PutInChild, item2.FullName(Case: Co.CASE_AKK, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns!), item2.FullName(Case: Co.CASE_AKK, CurrentNouns: GD.Adventure.CurrentNouns!));
-                        if (item2.InvisibleIn == false)
-                            AddSiblings(newChild, item2);
-                    }
-                }
-                foreach (Person person2 in GD.Adventure!.Persons!.List!.Values!)
-                {
-                    if ((person2.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_Below_Item, item.ID)) && (person2.Active == true) && (person2.IsHidden == false))
-                    {
-                        TreeViewItem newChild = AddTreeViewItem(PutInChild, person2.FullName(Co.CASE_AKK, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns!), person2.FullName(Case: Co.CASE_AKK, CurrentNouns: GD.Adventure.CurrentNouns!));
+                        TreeViewItem newChild = AddTreeViewItem(PutInChild, person2.FullName(Co.CASE_AKK, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns!), person2.FullName(Case: Co.CASE_AKK, CurrentNouns: GD!.Adventure.CurrentNouns!));
                         AddSiblings(newChild, person2);
                     }
                 }
 
 
-                if ( PutInChild.SubTree!.Count > 0)
+                if (PutInChild.SubTree!.Count > sysChildren)
                 {
-                    PutInChild.Text = String.Format(loca.CustomRequestHandler_DoUIUpdate_Person_You_16303, item.FullName(Co.CASE_DAT, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns!));
+                    PutInChild.Text = String.Format(loca.CustomRequestHandler_DoUIUpdate_Person_You_16305, item.FullName(Co.CASE_DAT, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns!));
                     currentChild.Add(PutInChild);
-                    // currentChild.CurrentTreeState = TreeViewItem.TreeState.open;
-                    // PutInChild.CurrentTreeState = TreeViewItem.TreeState.open;
                 }
             }
         }
-        if ((item!.CanPutBeside) && (item!.InvisibleBeside == false))
+        catch (Exception ex)
         {
-            TreeViewItem PutInChild = UIElement.NewTreeViewItem();
-            PutInChild.SetupTreeViewItem();
-            int sysChildren = PutInChild.Children.Count;
-
-            foreach (Item item2 in GD!.Adventure!.Items!.List!.Values)
-            {
-                if ((item2.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_Beside_Item, item.ID)) && (item2.IsHidden == false) && (item2.Active == true))
-                {
-                    TreeViewItem newChild = AddTreeViewItem(PutInChild, item2.FullName(Case: Co.CASE_AKK, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns!), item2.FullName(Case: Co.CASE_AKK, CurrentNouns: GD!.Adventure.CurrentNouns!));
-                    if (item2.InvisibleIn == false)
-                        AddSiblings(newChild, item2);
-                }
-            }
-            foreach (Person person2 in GD.Adventure!.Persons!.List!.Values!)
-            {
-                if ((person2.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_Beside_Item, item.ID)) && (person2.Active == true) && (person2.IsHidden == false))
-                {
-                    TreeViewItem newChild = AddTreeViewItem(PutInChild, person2.FullName(Co.CASE_AKK, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns!), person2.FullName(Case: Co.CASE_AKK, CurrentNouns: GD!.Adventure.CurrentNouns!));
-                    AddSiblings(newChild, person2);
-                }
-            }
-
-
-            if (PutInChild.SubTree!.Count > sysChildren)
-            {
-                PutInChild.Text = String.Format(loca.CustomRequestHandler_DoUIUpdate_Person_You_16305, item.FullName(Co.CASE_DAT, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns!));
-                currentChild.Add(PutInChild);
-            }
+            GlobalData.AddLog("AddSiblings: " + ex.Message, IGlobalData.protMode.crisp);
         }
+
     }
     void AddSiblings(TreeViewItem currentChild, Person person)
     {
-        if (person != null)
+        try
         {
-            if ((person.CanPutIn) && ((person.CanBeClosed == false) || (person.IsClosed == false)) && (person.Active == true))
+
+            if (person != null)
             {
-                TreeViewItem PutInChild = UIElement.NewTreeViewItem();
-                PutInChild.SetupTreeViewItem();
+                if ((person.CanPutIn) && ((person.CanBeClosed == false) || (person.IsClosed == false)) && (person.Active == true))
+                {
+                    TreeViewItem PutInChild = UIElement.NewTreeViewItem();
+                    PutInChild.SetupTreeViewItem();
 
-                foreach (Item item2 in GD!.Adventure!.Items!.List!.Values)
-                {
-                    if ((item2.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_In_Item, person.ID)) && (item2.IsHidden == false) && (item2.Active == true))
+                    foreach (Item item2 in GD!.Adventure!.Items!.List!.Values)
                     {
-                        TreeViewItem newChild = AddTreeViewItem(PutInChild, item2.FullName(Case: Co.CASE_AKK, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns!)!, item2.FullName(Case: Co.CASE_AKK, CurrentNouns: GD.Adventure.CurrentNouns!));
-                        if (item2.InvisibleIn == false)
-                            AddSiblings(newChild, item2);
+                        if ((item2.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_In_Item, person.ID)) && (item2.IsHidden == false) && (item2.Active == true))
+                        {
+                            TreeViewItem newChild = AddTreeViewItem(PutInChild, item2.FullName(Case: Co.CASE_AKK, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns!)!, item2.FullName(Case: Co.CASE_AKK, CurrentNouns: GD.Adventure.CurrentNouns!));
+                            if (item2.InvisibleIn == false)
+                                AddSiblings(newChild, item2);
+                        }
                     }
-                }
-                foreach (Person person2 in GD.Adventure!.Persons!.List!.Values!)
-                {
-                    if ((person2.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_In_Item, person.ID)) && (person2.Active == true) && (person2.IsHidden == false))
+                    foreach (Person person2 in GD.Adventure!.Persons!.List!.Values!)
                     {
-                        TreeViewItem newChild = AddTreeViewItem(PutInChild, person2.FullName(Co.CASE_AKK, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns!)!, person2.FullName(Case: Co.CASE_AKK, CurrentNouns: GD.Adventure.CurrentNouns!)!);
-                        AddSiblings(newChild, person2);
+                        if ((person2.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_In_Item, person.ID)) && (person2.Active == true) && (person2.IsHidden == false))
+                        {
+                            TreeViewItem newChild = AddTreeViewItem(PutInChild, person2.FullName(Co.CASE_AKK, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns!)!, person2.FullName(Case: Co.CASE_AKK, CurrentNouns: GD.Adventure.CurrentNouns!)!);
+                            AddSiblings(newChild, person2);
+                        }
                     }
-                }
 
-                if (PutInChild.Children.Count > 0)
-                {
-                    PutInChild.Text = String.Format(loca.CustomRequestHandler_OrderListPlayTo_16306, person.FullName(Co.CASE_DAT, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns!));
-                    currentChild.Add(PutInChild);
+                    if (PutInChild.Children.Count > 0)
+                    {
+                        PutInChild.Text = String.Format(loca.CustomRequestHandler_OrderListPlayTo_16306, person.FullName(Co.CASE_DAT, ShowAppendix: true, CurrentNouns: GD.Adventure.CurrentNouns!));
+                        currentChild.Add(PutInChild);
+                    }
                 }
             }
         }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("AddSiblings: " + ex.Message, IGlobalData.protMode.crisp);
+        }
+
     }
 
     void AddSiblingsEmpty(EmptyTreeViewItem currentChild, Item item)
     {
-        if (item != null)
+        try
         {
-            if ((item.CanPutIn || item.ListInsideItems) && ((item.CanBeClosed == false) || (item.IsClosed == false)) && (item.IsHidden == false) && (item.Active == true) && (item.InvisibleIn == false))
+            if (item != null)
+            {
+                if ((item.CanPutIn || item.ListInsideItems) && ((item.CanBeClosed == false) || (item.IsClosed == false)) && (item.IsHidden == false) && (item.Active == true) && (item.InvisibleIn == false))
+                {
+                    EmptyTreeViewItem PutInChild = new EmptyTreeViewItem();
+                    PutInChild.ID = item.ID;
+
+                    foreach (Item item2 in GD!.Adventure!.Items!.List!.Values)
+                    {
+                        if ((item2.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_In_Item, item.ID)) && (item2.IsHidden == false) && (item2.Active == true))
+                        {
+                            EmptyTreeViewItem newChild = AddTreeViewItemEmpty(PutInChild);
+                            newChild.ID = item2.ID;
+                            if (item2.InvisibleIn == false)
+                                AddSiblingsEmpty(newChild, item2);
+                        }
+                    }
+                    foreach (Person person2 in GD.Adventure!.Persons!.List!.Values!)
+                    {
+                        if ((person2.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_In_Item, item.ID)) && (person2.Active == true) && (person2.IsHidden == false))
+                        {
+                            EmptyTreeViewItem newChild = AddTreeViewItemEmpty(PutInChild);
+                            newChild.ID = person2.ID;
+                            AddSiblingsEmpty(newChild, person2);
+
+                        }
+                    }
+
+                    if (PutInChild!.Children!.Count > 0)
+                    {
+                        currentChild.Children.Add(PutInChild);
+                    }
+                }
+                if ((item.CanPutOn) && (item.InvisibleOn == false))
+                {
+                    EmptyTreeViewItem PutInChild = new EmptyTreeViewItem();
+                    PutInChild.ID = item.ID;
+
+                    foreach (Item item2 in GD!.Adventure!.Items!.List!.Values)
+                    {
+                        if ((item2.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_On_Item, item.ID)) && (item2.IsHidden == false) && (item2.Active == true))
+                        {
+                            EmptyTreeViewItem newChild = AddTreeViewItemEmpty(PutInChild);
+                            if (item2.InvisibleIn == false)
+                                AddSiblingsEmpty(newChild, item2);
+                        }
+                    }
+                    foreach (Person person2 in GD.Adventure!.Persons!.List!.Values)
+                    {
+                        if ((person2.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_On_Item, item.ID)) && (person2.Active == true) && (person2.IsHidden == false))
+                        {
+                            EmptyTreeViewItem newChild = AddTreeViewItemEmpty(PutInChild);
+                            AddSiblingsEmpty(newChild, person2);
+                        }
+                    }
+
+                    if (PutInChild.Children!.Count > 0)
+                    {
+                        currentChild.Children.Add(PutInChild);
+                    }
+                }
+                if ((item.CanPutBehind) && (item.InvisibleBehind == false))
+                {
+                    EmptyTreeViewItem PutInChild = new EmptyTreeViewItem();
+                    PutInChild.ID = item.ID;
+
+                    foreach (Item item2 in GD!.Adventure!.Items!.List!.Values)
+                    {
+                        if ((item2.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_Behind_Item, item.ID)) && (item2.IsHidden == false) && (item2.Active == true))
+                        {
+                            EmptyTreeViewItem newChild = AddTreeViewItemEmpty(PutInChild);
+                            if (item2.InvisibleIn == false)
+                                AddSiblingsEmpty(newChild, item2);
+                        }
+                    }
+                    foreach (Person person2 in GD.Adventure!.Persons!.List!.Values)
+                    {
+                        if ((person2.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_Behind_Item, item.ID)) && (person2.Active == true) && (person2.IsHidden == false))
+                        {
+                            EmptyTreeViewItem newChild = AddTreeViewItemEmpty(PutInChild);
+                            AddSiblingsEmpty(newChild, person2);
+                        }
+                    }
+
+                    if (PutInChild.Children!.Count > 0)
+                    {
+                        currentChild.Children.Add(PutInChild);
+                    }
+                }
+                if ((item.CanPutBelow) && (item.InvisibleBelow == false))
+                {
+                    EmptyTreeViewItem PutInChild = new EmptyTreeViewItem();
+                    PutInChild.ID = item.ID;
+
+                    foreach (Item item2 in GD!.Adventure!.Items!.List!.Values)
+                    {
+                        if ((item2.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_Below_Item, item.ID)) && (item2.IsHidden == false) && (item2.Active == true))
+                        {
+                            EmptyTreeViewItem newChild = AddTreeViewItemEmpty(PutInChild); // 
+                            if (item2.InvisibleIn == false)
+                                AddSiblingsEmpty(newChild, item2);
+                        }
+                    }
+                    foreach (Person person2 in GD.Adventure!.Persons!.List!.Values!)
+                    {
+                        if ((person2.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_Below_Item, item.ID)) && (person2.Active == true) && (person2.IsHidden == false))
+                        {
+                            EmptyTreeViewItem newChild = AddTreeViewItemEmpty(PutInChild);
+                            AddSiblingsEmpty(newChild, person2);
+                        }
+                    }
+
+
+                    if (PutInChild.Children!.Count > 0)
+                    {
+                        currentChild.Children.Add(PutInChild);
+                    }
+                }
+            }
+            if ((item!.CanPutBeside) && (item!.InvisibleBeside == false))
             {
                 EmptyTreeViewItem PutInChild = new EmptyTreeViewItem();
                 PutInChild.ID = item.ID;
 
                 foreach (Item item2 in GD!.Adventure!.Items!.List!.Values)
                 {
-                    if ((item2.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_In_Item, item.ID)) && (item2.IsHidden == false) && (item2.Active == true))
+                    if ((item2.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_Beside_Item, item.ID)) && (item2.IsHidden == false) && (item2.Active == true))
                     {
-                        EmptyTreeViewItem newChild = AddTreeViewItemEmpty( PutInChild);
-                        newChild.ID = item2.ID;
+                        EmptyTreeViewItem newChild = AddTreeViewItemEmpty(PutInChild);
                         if (item2.InvisibleIn == false)
                             AddSiblingsEmpty(newChild, item2);
                     }
                 }
                 foreach (Person person2 in GD.Adventure!.Persons!.List!.Values!)
                 {
-                    if ((person2.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_In_Item, item.ID)) && (person2.Active == true) && (person2.IsHidden == false))
-                    {
-                        EmptyTreeViewItem newChild = AddTreeViewItemEmpty(PutInChild);
-                        newChild.ID = person2.ID;
-                        AddSiblingsEmpty(newChild, person2);
-
-                     }
-                }
-
-                if (PutInChild!.Children!.Count > 0)
-                {
-                    currentChild.Children.Add(PutInChild);
-                }
-            }
-            if ((item.CanPutOn) && (item.InvisibleOn == false))
-            {
-                EmptyTreeViewItem PutInChild = new EmptyTreeViewItem();
-                PutInChild.ID = item.ID;
-
-                foreach (Item item2 in GD!.Adventure!.Items!.List!.Values)
-                {
-                    if ((item2.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_On_Item, item.ID)) && (item2.IsHidden == false) && (item2.Active == true))
-                    {
-                        EmptyTreeViewItem newChild = AddTreeViewItemEmpty(PutInChild);
-                        if (item2.InvisibleIn == false)
-                            AddSiblingsEmpty(newChild, item2);
-                    }
-                }
-                foreach (Person person2 in GD.Adventure!.Persons!.List!.Values)
-                {
-                    if ((person2.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_On_Item, item.ID)) && (person2.Active == true) && (person2.IsHidden == false))
+                    if ((person2.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_Beside_Item, item.ID)) && (person2.Active == true) && (person2.IsHidden == false))
                     {
                         EmptyTreeViewItem newChild = AddTreeViewItemEmpty(PutInChild);
                         AddSiblingsEmpty(newChild, person2);
                     }
                 }
+
 
                 if (PutInChild.Children!.Count > 0)
-                {
-                    currentChild.Children.Add(PutInChild);
-                }
-           }
-            if ((item.CanPutBehind) && (item.InvisibleBehind == false))
-            {
-                EmptyTreeViewItem PutInChild = new EmptyTreeViewItem();
-                PutInChild.ID = item.ID;
-
-                foreach (Item item2 in GD!.Adventure!.Items!.List!.Values)
-                {
-                    if ((item2.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_Behind_Item, item.ID)) && (item2.IsHidden == false) && (item2.Active == true))
-                    {
-                        EmptyTreeViewItem newChild = AddTreeViewItemEmpty(PutInChild); 
-                        if (item2.InvisibleIn == false)
-                            AddSiblingsEmpty(newChild, item2);
-                    }
-                }
-                foreach (Person person2 in GD.Adventure!.Persons!.List!.Values)
-                {
-                    if ((person2.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_Behind_Item, item.ID)) && (person2.Active == true) && (person2.IsHidden == false))
-                    {
-                        EmptyTreeViewItem newChild = AddTreeViewItemEmpty(PutInChild ); 
-                        AddSiblingsEmpty(newChild, person2);
-                    }
-                }
-
-                if (PutInChild.Children!.Count > 0)
-                {
-                    currentChild.Children.Add(PutInChild);
-                }
-            }
-            if ((item.CanPutBelow) && (item.InvisibleBelow == false))
-            {
-                EmptyTreeViewItem PutInChild = new EmptyTreeViewItem();
-                PutInChild.ID = item.ID;
-
-                foreach (Item item2 in GD!.Adventure!.Items!.List!.Values)
-                {
-                    if ((item2.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_Below_Item, item.ID)) && (item2.IsHidden == false) && (item2.Active == true))
-                    {
-                        EmptyTreeViewItem newChild = AddTreeViewItemEmpty(PutInChild); // 
-                        if (item2.InvisibleIn == false)
-                            AddSiblingsEmpty(newChild, item2);
-                    }
-                }
-                foreach (Person person2 in GD.Adventure!.Persons!.List!.Values!)
-                {
-                    if ((person2.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_Below_Item, item.ID)) && (person2.Active == true) && (person2.IsHidden == false))
-                    {
-                        EmptyTreeViewItem newChild = AddTreeViewItemEmpty(PutInChild); 
-                        AddSiblingsEmpty(newChild, person2);
-                    }
-                }
-
-
-                if ( PutInChild.Children!.Count > 0)
                 {
                     currentChild.Children.Add(PutInChild);
                 }
             }
         }
-        if ((item!.CanPutBeside) && (item!.InvisibleBeside == false))
+        catch (Exception ex)
         {
-            EmptyTreeViewItem PutInChild = new EmptyTreeViewItem();
-            PutInChild.ID = item.ID;
-
-            foreach (Item item2 in GD!.Adventure!.Items!.List!.Values)
-            {
-                if ((item2.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_Beside_Item, item.ID)) && (item2.IsHidden == false) && (item2.Active == true))
-                {
-                    EmptyTreeViewItem newChild = AddTreeViewItemEmpty(PutInChild); 
-                    if (item2.InvisibleIn == false)
-                        AddSiblingsEmpty(newChild, item2);
-                }
-            }
-            foreach (Person person2 in GD.Adventure!.Persons!.List!.Values!)
-            {
-                if ((person2.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_Beside_Item, item.ID)) && (person2.Active == true) && (person2.IsHidden == false))
-                {
-                    EmptyTreeViewItem newChild = AddTreeViewItemEmpty(PutInChild); 
-                    AddSiblingsEmpty(newChild, person2);
-                }
-            }
-
-
-            if (PutInChild.Children!.Count > 0 )
-            {
-                currentChild.Children.Add(PutInChild);
-            }
+            GlobalData.AddLog("AddSiblingsEmpty: " + ex.Message, IGlobalData.protMode.crisp);
         }
+
     }
     void AddSiblingsEmpty(EmptyTreeViewItem currentChild, Person person)
     {
-        if (person != null)
+        try
         {
-            if ((person.CanPutIn) && ((person.CanBeClosed == false) || (person.IsClosed == false)) && (person.Active == true))
+            if (person != null)
             {
-                EmptyTreeViewItem PutInChild = new EmptyTreeViewItem();
-                PutInChild.ID = person.ID;
+                if ((person.CanPutIn) && ((person.CanBeClosed == false) || (person.IsClosed == false)) && (person.Active == true))
+                {
+                    EmptyTreeViewItem PutInChild = new EmptyTreeViewItem();
+                    PutInChild.ID = person.ID;
 
-                foreach (Item item2 in GD!.Adventure!.Items!.List!.Values)
-                {
-                    if ((item2.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_In_Item, person.ID)) && (item2.IsHidden == false) && (item2.Active == true))
+                    foreach (Item item2 in GD!.Adventure!.Items!.List!.Values)
                     {
-                        EmptyTreeViewItem newChild = AddTreeViewItemEmpty(PutInChild); 
-                        if (item2.InvisibleIn == false)
-                            AddSiblingsEmpty(newChild, item2);
+                        if ((item2.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_In_Item, person.ID)) && (item2.IsHidden == false) && (item2.Active == true))
+                        {
+                            EmptyTreeViewItem newChild = AddTreeViewItemEmpty(PutInChild);
+                            if (item2.InvisibleIn == false)
+                                AddSiblingsEmpty(newChild, item2);
+                        }
                     }
-                }
-                foreach (Person person2 in GD.Adventure!.Persons!.List!.Values!)
-                {
-                    if ((person2.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_In_Item, person.ID)) && (person2.Active == true) && (person2.IsHidden == false))
+                    foreach (Person person2 in GD.Adventure!.Persons!.List!.Values!)
                     {
-                        EmptyTreeViewItem newChild = AddTreeViewItemEmpty(PutInChild ); 
-                        AddSiblingsEmpty(newChild, person2);
+                        if ((person2.GetLoc() == Co.GenerateLoc(GD.Adventure!.CB!.LocType_In_Item, person.ID)) && (person2.Active == true) && (person2.IsHidden == false))
+                        {
+                            EmptyTreeViewItem newChild = AddTreeViewItemEmpty(PutInChild);
+                            AddSiblingsEmpty(newChild, person2);
+                        }
                     }
-                }
 
-                if (PutInChild.Children.Count > 0)
-                {
-                    currentChild.Children.Add(PutInChild);
+                    if (PutInChild.Children.Count > 0)
+                    {
+                        currentChild.Children.Add(PutInChild);
+                    }
                 }
             }
         }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("AddSiblingsEmpty: " + ex.Message, IGlobalData.protMode.crisp);
+        }
+
     }
 
-    TreeView CreateOrderTree()
+    TreeView? CreateOrderTree()
     {
-        TreeViewItem tv1;
-        TreeView tv = UIElement.NewTreeView();
-        tv.SetupTreeView();
-        tv.CurrentTreeState = TreeViewItem.TreeState.open;
-
-        if (GD!.Adventure == null)
-            return tv;
-        
-        
-
-        location l = GD.Adventure!.locations!.Find(GD.Adventure!.A!.ActLoc!)!;
-        if (l == null)
-            return tv;
-
-        // Wir ermitteln, welche Befehle �berhaupt angezeigt werden
-        bool climbable = false;
-        bool climbupable = false;
-        bool climbdownable = false;
-        bool enterable = false;
-        bool gothroughable = false;
-        bool gotoable = false;
-
-        if (GD.LayoutDescription.SimpleMC == false)
+        try
         {
-            foreach (Item i in GD.Adventure!.Items!.List!.Values)
+            TreeViewItem tv1;
+            TreeView tv = UIElement.NewTreeView();
+            tv.SetupTreeView();
+            tv.CurrentTreeState = TreeViewItem.TreeState.open;
+
+            if (GD!.Adventure == null)
+                return tv;
+
+
+
+            location l = GD.Adventure!.locations!.Find(GD.Adventure!.A!.ActLoc!)!;
+            if (l == null)
+                return tv;
+
+            // Wir ermitteln, welche Befehle �berhaupt angezeigt werden
+            bool climbable = false;
+            bool climbupable = false;
+            bool climbdownable = false;
+            bool enterable = false;
+            bool gothroughable = false;
+            bool gotoable = false;
+
+            if (GD.LayoutDescription.SimpleMC == false)
             {
-                if (GD.Adventure!.Items!.IsItemHere(i, Co.Range_Here))
+                foreach (Item i in GD.Adventure!.Items!.List!.Values)
                 {
-                    if (i.Categories!.Find(GD.Adventure!.A.Cat_GoToable) != null)
-                        gotoable = true;
-                    if (i.Categories!.Find(GD.Adventure!.A.Cat_GoThroughable) != null)
-                        gothroughable = true;
-                    if (i.Categories!.Find(GD.Adventure!.A.Cat_Climbable) != null)
-                        climbable = true;
-                    if (i.Categories!.Find(GD.Adventure!.A.Cat_Climbupable) != null)
-                        climbupable = true;
-                    if (i.Categories!.Find(GD.Adventure!.A.Cat_Climbdownable) != null)
-                        climbdownable = true;
-                    if (i.Categories!.Find(GD.Adventure!.A.Cat_Enterable) != null)
-                        enterable = true;
+                    if (GD.Adventure!.Items!.IsItemHere(i, Co.Range_Here))
+                    {
+                        if (i.Categories!.Find(GD.Adventure!.A.Cat_GoToable) != null)
+                            gotoable = true;
+                        if (i.Categories!.Find(GD.Adventure!.A.Cat_GoThroughable) != null)
+                            gothroughable = true;
+                        if (i.Categories!.Find(GD.Adventure!.A.Cat_Climbable) != null)
+                            climbable = true;
+                        if (i.Categories!.Find(GD.Adventure!.A.Cat_Climbupable) != null)
+                            climbupable = true;
+                        if (i.Categories!.Find(GD.Adventure!.A.Cat_Climbdownable) != null)
+                            climbdownable = true;
+                        if (i.Categories!.Find(GD.Adventure!.A.Cat_Enterable) != null)
+                            enterable = true;
+                    }
                 }
             }
+
+
+
+
+
+            tv1 = AddTreeViewItem(tv, loca.MAUI_UI_Menu_Movement, null);
+            tv1.CurrentTreeState = TreeViewItem.TreeState.open;
+            // AddTreeViewItem(tv1, loca.MAUI_UI_Menu_Go, loca.MAUI_UI_Menu_Order_Go);
+            if (l!.LocExit[1] > 0)
+                AddTreeViewItem(tv1, loca.MAUI_UI_Menu_GoN, loca.MAUI_UI_Menu_Order_GoN);
+            if (l!.LocExit[2] > 0)
+                AddTreeViewItem(tv1, loca.MAUI_UI_Menu_GoNE, loca.MAUI_UI_Menu_Order_GoNE);
+            if (l!.LocExit[3] > 0)
+                AddTreeViewItem(tv1, loca.MAUI_UI_Menu_GoE, loca.MAUI_UI_Menu_Order_GoE);
+            if (l!.LocExit[4] > 0)
+                AddTreeViewItem(tv1, loca.MAUI_UI_Menu_GoSE, loca.MAUI_UI_Menu_Order_GoSE);
+            if (l!.LocExit[5] > 0)
+                AddTreeViewItem(tv1, loca.MAUI_UI_Menu_GoS, loca.MAUI_UI_Menu_Order_GoS);
+            if (l!.LocExit[6] > 0)
+                AddTreeViewItem(tv1, loca.MAUI_UI_Menu_GoSW, loca.MAUI_UI_Menu_Order_GoSW);
+            if (l!.LocExit[7] > 0)
+                AddTreeViewItem(tv1, loca.MAUI_UI_Menu_GoW, loca.MAUI_UI_Menu_Order_GoW);
+            if (l!.LocExit[8] > 0)
+                AddTreeViewItem(tv1, loca.MAUI_UI_Menu_GoNW, loca.MAUI_UI_Menu_Order_GoNW);
+            if (l!.LocExit[9] > 0)
+                AddTreeViewItem(tv1, loca.MAUI_UI_Menu_GoUp, loca.MAUI_UI_Menu_Order_GoUp);
+            if (l!.LocExit[10] > 0)
+                AddTreeViewItem(tv1, loca.MAUI_UI_Menu_GoDown, loca.MAUI_UI_Menu_Order_GoDown);
+
+            if (climbable)
+                AddTreeViewItem(tv1, loca.MAUI_UI_Menu_Climb, loca.MAUI_UI_Menu_Order_Climb);
+            if (climbupable)
+                AddTreeViewItem(tv1, loca.MAUI_UI_Menu_ClimbUp, loca.MAUI_UI_Menu_Order_ClimbUp);
+            if (climbdownable)
+                AddTreeViewItem(tv1, loca.MAUI_UI_Menu_ClimbDown, loca.MAUI_UI_Menu_Order_ClimbDown);
+            if (enterable)
+                AddTreeViewItem(tv1, loca.MAUI_UI_Menu_Enter, loca.MAUI_UI_Menu_Order_Enter);
+            if (gothroughable)
+                AddTreeViewItem(tv1, loca.MAUI_UI_Menu_GoThrough, loca.MAUI_UI_Menu_Order_GoThrough);
+            if (gotoable)
+                AddTreeViewItem(tv1, loca.MAUI_UI_Menu_GoTo, loca.MAUI_UI_Menu_Order_GoTo);
+
+            tv1 = AddTreeViewItem(tv, loca.MAUI_UI_Menu_Manual, null);
+            tv1.CurrentTreeState = TreeViewItem.TreeState.open;
+            AddTreeViewItem(tv1, loca.MAUI_UI_Menu_Info, loca.MAUI_UI_Menu_Order_Info);
+            AddTreeViewItem(tv1, loca.MAUI_UI_Menu_Manual, loca.MAUI_UI_Menu_Order_Manual);
+            AddTreeViewItem(tv1, loca.MAUI_UI_Menu_Help, loca.MAUI_UI_Menu_Order_Help);
+            AddTreeViewItem(tv1, loca.MAUI_UI_Menu_Score, loca.MAUI_UI_Menu_Order_Score);
+            // AddTreeViewItem(tv1, loca.MAUI_UI_Menu_Info, loca.MAUI_UI_Menu_Order_Info);
+
+            tv1 = AddTreeViewItem(tv, loca.MAUI_UI_Menu_General, null);
+            tv1.CurrentTreeState = TreeViewItem.TreeState.open;
+            AddTreeViewItem(tv1, loca.MAUI_UI_Menu_Inv, loca.MAUI_UI_Menu_Order_Inv);
+            AddTreeViewItem(tv1, loca.MAUI_UI_Menu_Loc, loca.MAUI_UI_Menu_Order_Loc);
+            AddTreeViewItem(tv1, loca.MAUI_UI_Menu_Wait, loca.MAUI_UI_Menu_Order_Wait);
+            AddTreeViewItem(tv1, loca.MAUI_UI_Menu_Load, loca.MAUI_UI_Menu_Order_Load);
+            AddTreeViewItem(tv1, loca.MAUI_UI_Menu_Save, loca.MAUI_UI_Menu_Order_Save);
+            AddTreeViewItem(tv1, loca.MAUI_UI_Menu_Restart, loca.MAUI_UI_Menu_Order_Restart);
+
+            // (TreeView.GetRootTree(tv) as TreeView)?.CalcToggles();
+
+            // tv.CalcToggles();
+            return tv;
+        }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("CreateOrderTree: " + ex.Message, IGlobalData.protMode.crisp);
+            return null;
         }
 
-
-
-
-
-        tv1 = AddTreeViewItem(tv, loca.MAUI_UI_Menu_Movement, null);
-        tv1.CurrentTreeState = TreeViewItem.TreeState.open;
-        // AddTreeViewItem(tv1, loca.MAUI_UI_Menu_Go, loca.MAUI_UI_Menu_Order_Go);
-        if (l!.LocExit[1] > 0)
-            AddTreeViewItem(tv1, loca.MAUI_UI_Menu_GoN, loca.MAUI_UI_Menu_Order_GoN);
-        if (l!.LocExit[2] > 0)
-            AddTreeViewItem(tv1, loca.MAUI_UI_Menu_GoNE, loca.MAUI_UI_Menu_Order_GoNE);
-        if (l!.LocExit[3] > 0)
-            AddTreeViewItem(tv1, loca.MAUI_UI_Menu_GoE, loca.MAUI_UI_Menu_Order_GoE);
-        if (l!.LocExit[4] > 0)
-            AddTreeViewItem(tv1, loca.MAUI_UI_Menu_GoSE, loca.MAUI_UI_Menu_Order_GoSE);
-        if (l!.LocExit[5] > 0)
-            AddTreeViewItem(tv1, loca.MAUI_UI_Menu_GoS, loca.MAUI_UI_Menu_Order_GoS);
-        if (l!.LocExit[6] > 0)
-            AddTreeViewItem(tv1, loca.MAUI_UI_Menu_GoSW, loca.MAUI_UI_Menu_Order_GoSW);
-        if (l!.LocExit[7] > 0)
-            AddTreeViewItem(tv1, loca.MAUI_UI_Menu_GoW, loca.MAUI_UI_Menu_Order_GoW);
-        if (l!.LocExit[8] > 0)
-            AddTreeViewItem(tv1, loca.MAUI_UI_Menu_GoNW, loca.MAUI_UI_Menu_Order_GoNW);
-        if (l!.LocExit[9] > 0)
-            AddTreeViewItem(tv1, loca.MAUI_UI_Menu_GoUp, loca.MAUI_UI_Menu_Order_GoUp);
-        if (l!.LocExit[10] > 0)
-            AddTreeViewItem(tv1, loca.MAUI_UI_Menu_GoDown, loca.MAUI_UI_Menu_Order_GoDown);
-
-        if (climbable)
-            AddTreeViewItem(tv1, loca.MAUI_UI_Menu_Climb, loca.MAUI_UI_Menu_Order_Climb);
-        if (climbupable)
-            AddTreeViewItem(tv1, loca.MAUI_UI_Menu_ClimbUp, loca.MAUI_UI_Menu_Order_ClimbUp);
-        if (climbdownable)
-            AddTreeViewItem(tv1, loca.MAUI_UI_Menu_ClimbDown, loca.MAUI_UI_Menu_Order_ClimbDown);
-        if (enterable)
-            AddTreeViewItem(tv1, loca.MAUI_UI_Menu_Enter, loca.MAUI_UI_Menu_Order_Enter);
-        if (gothroughable)
-            AddTreeViewItem(tv1, loca.MAUI_UI_Menu_GoThrough, loca.MAUI_UI_Menu_Order_GoThrough);
-        if (gotoable)
-            AddTreeViewItem(tv1, loca.MAUI_UI_Menu_GoTo, loca.MAUI_UI_Menu_Order_GoTo);
-
-        tv1 = AddTreeViewItem(tv, loca.MAUI_UI_Menu_Manual, null);
-        tv1.CurrentTreeState = TreeViewItem.TreeState.open;
-        AddTreeViewItem(tv1, loca.MAUI_UI_Menu_Info, loca.MAUI_UI_Menu_Order_Info);
-        AddTreeViewItem(tv1, loca.MAUI_UI_Menu_Manual, loca.MAUI_UI_Menu_Order_Manual);
-        AddTreeViewItem(tv1, loca.MAUI_UI_Menu_Help, loca.MAUI_UI_Menu_Order_Help);
-        AddTreeViewItem(tv1, loca.MAUI_UI_Menu_Score, loca.MAUI_UI_Menu_Order_Score);
-        // AddTreeViewItem(tv1, loca.MAUI_UI_Menu_Info, loca.MAUI_UI_Menu_Order_Info);
-
-        tv1 = AddTreeViewItem(tv, loca.MAUI_UI_Menu_General, null);
-        tv1.CurrentTreeState = TreeViewItem.TreeState.open;
-        AddTreeViewItem(tv1, loca.MAUI_UI_Menu_Inv, loca.MAUI_UI_Menu_Order_Inv);
-        AddTreeViewItem(tv1, loca.MAUI_UI_Menu_Loc, loca.MAUI_UI_Menu_Order_Loc);
-        AddTreeViewItem(tv1, loca.MAUI_UI_Menu_Wait, loca.MAUI_UI_Menu_Order_Wait);
-        AddTreeViewItem(tv1, loca.MAUI_UI_Menu_Load, loca.MAUI_UI_Menu_Order_Load);
-        AddTreeViewItem(tv1, loca.MAUI_UI_Menu_Save, loca.MAUI_UI_Menu_Order_Save);
-        AddTreeViewItem(tv1, loca.MAUI_UI_Menu_Restart, loca.MAUI_UI_Menu_Order_Restart);
-
-        // (TreeView.GetRootTree(tv) as TreeView)?.CalcToggles();
-
-        // tv.CalcToggles();
-        return tv;
-
     }
-    EmptyTreeView CreateOrderTreeEmpty()
+    EmptyTreeView? CreateOrderTreeEmpty()
     {
         EmptyTreeView tv = new();
 
@@ -3821,27 +4049,35 @@ public partial class GamePage : ContentPage, IMenuExtension
     }
     void SelectTreeViewItem(object? sender, EventArgs e)
     {
-        if (GlobalData.CurrentGlobalData!.Adventure!.UIS!.MCMVVisible == true)
-            return;
+        try
+        {
+            if (GlobalData.CurrentGlobalData!.Adventure!.UIS!.MCMVVisible == true)
+                return;
 
-        (sender as Phoney_MAUI.TreeViewItem).BackgroundColor = Colors.AliceBlue;
+            (sender as Phoney_MAUI.TreeViewItem).BackgroundColor = Colors.AliceBlue;
 
-        // if (FeedbackTextObj.FeedbackModeMC == true || FlushText == true) return;
+            // if (FeedbackTextObj.FeedbackModeMC == true || FlushText == true) return;
 
-        TreeViewItem? tvi = (TreeViewItem)sender!;
-        string? ParseText = (tvi!.UserDefinedObject as string)!;
+            TreeViewItem? tvi = (TreeViewItem)sender!;
+            string? ParseText = (tvi!.UserDefinedObject as string)!;
 
-        UIS!.UpdateBrowserCallsPerCycle = 0;
+            UIS!.UpdateBrowserCallsPerCycle = 0;
 
-        GD!.OrderList!.DisableTempOrderList();
-        GD!.Adventure!.SetStoryLine = false;
-        GD!.Adventure!.DoGameLoop(ParseText!);
-        UIS!.StoryTextObj!.AdvTextRefresh();
+            GD!.OrderList!.DisableTempOrderList();
+            GD!.Adventure!.SetStoryLine = false;
+            GD!.Adventure!.DoGameLoop(ParseText!);
+            UIS!.StoryTextObj!.AdvTextRefresh();
 #if !NEWSCROLL
 
         UIS!.Scr.SetScrollerToEnd();
 #endif
-        SetInputFocus();
+            SetInputFocus();
+        }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("SelectTreeViewItem: " + ex.Message, IGlobalData.protMode.crisp);
+        }
+
     }
 
     private static GridLength lastMenuGridMenuVerticalRow0Height =  GridLength.Star;
@@ -3854,69 +4090,105 @@ public partial class GamePage : ContentPage, IMenuExtension
         
     public void SetGridDimensions()
     {
-        LayoutDescription ld = (LayoutDescription) GlobalData.CurrentGlobalData!.LayoutDescription;
-        double totalHeight = GlobalSpecs.CurrentGlobalSpecs!.GetScreenHeight();
-
-        // Die Headline wird hier gleich abgezogen, weil sie hier auch nicht verarbeitet wird
-        totalHeight -= _headlineHeight;
-
-        // Wird im Portrait-Modus gespielt? Dann schauen, ob unten eines der Panel aktiviert ist. In dem Fall
-        // dessen H�he ber�cksichtigen
-        if (ld.ScreenMode == IGlobalData.screenMode.portrait)
+        try
         {
-            if (IsPortraitVisible() == true )
+            LayoutDescription ld = (LayoutDescription)GlobalData.CurrentGlobalData!.LayoutDescription;
+            double totalHeight = GlobalSpecs.CurrentGlobalSpecs!.GetScreenHeight();
+
+            // Die Headline wird hier gleich abgezogen, weil sie hier auch nicht verarbeitet wird
+            totalHeight -= _headlineHeight;
+
+            // Wird im Portrait-Modus gespielt? Dann schauen, ob unten eines der Panel aktiviert ist. In dem Fall
+            // dessen H�he ber�cksichtigen
+            if (ld.ScreenMode == IGlobalData.screenMode.portrait)
             {
-                GridLength gl1 = new GridLength(GlobalSpecs.CurrentGlobalSpecs!.GetScreenHeight() - ld.PortraitColumnsHeight - _headlineHeight  );
-                if (lastMenuGridMenuVerticalRow0Height.Value != gl1.Value)
+                if (IsPortraitVisible() == true)
                 {
-                    MenuGridMenuVertical.RowDefinitions[0].Height = gl1; // new GridLength(GlobalSpecs.CurrentGlobalSpecs!.GetScreenHeight() - ld.PortraitColumnsHeight - _headlineHeight);
-                    lastMenuGridMenuVerticalRow0Height = gl1;
+                    GridLength gl1 = new GridLength(GlobalSpecs.CurrentGlobalSpecs!.GetScreenHeight() - ld.PortraitColumnsHeight - _headlineHeight);
+                    if (lastMenuGridMenuVerticalRow0Height.Value != gl1.Value)
+                    {
+                        MenuGridMenuVertical.RowDefinitions[0].Height = gl1; // new GridLength(GlobalSpecs.CurrentGlobalSpecs!.GetScreenHeight() - ld.PortraitColumnsHeight - _headlineHeight);
+                        lastMenuGridMenuVerticalRow0Height = gl1;
+                    }
+                    GridLength gl2 = new GridLength(ld.PortraitColumnsHeight);
+                    if (lastMenuGridMenuVerticalRow1Height.Value != gl2.Value)
+                    {
+                        MenuGridMenuVertical.RowDefinitions[2].Height = gl2; // new GridLength(ld.PortraitColumnsHeight);
+                        lastMenuGridMenuVerticalRow1Height = gl2;
+                    }
+
+                    GridLength gl3 = new GridLength(MenuGridMenuVertical.RowDefinitions[0].Height.Value + MenuGridMenuVertical.RowDefinitions[2].Height.Value + 10);
+                    if (lastMenuGridMenuBackgroundRow1Height.Value != gl3.Value)
+                    {
+                        MenuGridMenuBackground.RowDefinitions[1].Height = gl3; // new GridLength( MenuGridMenuVertical.RowDefinitions[0].Height.Value + MenuGridMenuVertical.RowDefinitions[1].Height.Value );
+                        lastMenuGridMenuBackgroundRow1Height = gl3;
+
+                        MenuGridMenu.HeightRequest = gl3.Value;
+                        MenuGridMenuInner.HeightRequest = gl3.Value;
+                        MenuGridMenuVertical.HeightRequest = gl3.Value;
+                        MenuGridMenuVertical.RowDefinitions[0].Height = gl3;
+                        Grid_Output.HeightRequest = gl3.Value;
+
+
+                    }
+                    // PageGrid.RowDefinitions[2].Height = new GridLength(MenuGridMenuVertical.RowDefinitions[0].Height.Value + MenuGridMenuVertical.RowDefinitions[1].Height.Value);
+                    // Grid_Output.RowDefinitions[0].Height = new GridLength(MenuGridMenuVertical.RowDefinitions[0].Height.Value - Grid_Output.RowDefinitions[2].Height.Value);
+                    totalHeight -= ld.PortraitColumnsHeight;
                 }
-                GridLength gl2 = new GridLength(ld.PortraitColumnsHeight);
-                if (lastMenuGridMenuVerticalRow1Height.Value != gl2.Value)
+                else
                 {
-                    MenuGridMenuVertical.RowDefinitions[2].Height = gl2; // new GridLength(ld.PortraitColumnsHeight);
-                    lastMenuGridMenuVerticalRow1Height = gl2;
+                    GridLength gl1 = new GridLength(GlobalSpecs.CurrentGlobalSpecs!.GetScreenHeight() - _headlineHeight);
+                    if (lastMenuGridMenuVerticalRow0Height.Value != gl1.Value)
+                    {
+                        MenuGridMenuVertical.RowDefinitions[0].Height = gl1; // new GridLength(GlobalSpecs.CurrentGlobalSpecs!.GetScreenHeight() - ld.PortraitColumnsHeight - _headlineHeight);
+                        lastMenuGridMenuVerticalRow0Height = gl1;
+                    }
+                    GridLength gl2 = new GridLength(0);
+                    if (lastMenuGridMenuVerticalRow1Height.Value != gl2.Value)
+                    {
+                        MenuGridMenuVertical.RowDefinitions[2].Height = gl2; // new GridLength(ld.PortraitColumnsHeight);
+                        lastMenuGridMenuVerticalRow1Height = gl2;
+
+                    }
+
+                    GridLength gl3 = new GridLength(MenuGridMenuVertical.RowDefinitions[0].Height.Value + 10);
+                    if (lastMenuGridMenuBackgroundRow1Height.Value != gl3.Value)
+                    {
+                        MenuGridMenuBackground.RowDefinitions[1].Height = gl3; // new GridLength( MenuGridMenuVertical.RowDefinitions[0].Height.Value + MenuGridMenuVertical.RowDefinitions[1].Height.Value );
+                        lastMenuGridMenuBackgroundRow1Height = gl3;
+
+                        MenuGridMenu.HeightRequest = gl3.Value;
+                        MenuGridMenuInner.HeightRequest = gl3.Value;
+                        MenuGridMenuVertical.HeightRequest = gl3.Value;
+                        MenuGridMenuVertical.RowDefinitions[0].Height = gl3;
+                        Grid_Output.HeightRequest = gl3.Value;
+                    }
+                    /*
+                    MenuGridMenuVertical.RowDefinitions[0].Height = new GridLength(GlobalSpecs.CurrentGlobalSpecs!.GetScreenHeight() - _headlineHeight);
+                    MenuGridMenuVertical.RowDefinitions[1].Height = new GridLength(0);
+                    MenuGridMenuBackground.RowDefinitions[1].Height = MenuGridMenuVertical.RowDefinitions[0].Height;
+                    */
                 }
-
-                GridLength gl3 = new GridLength( MenuGridMenuVertical.RowDefinitions[0].Height.Value + MenuGridMenuVertical.RowDefinitions[2].Height.Value + 10);
-                if( lastMenuGridMenuBackgroundRow1Height.Value != gl3.Value )
-                {
-                    MenuGridMenuBackground.RowDefinitions[1].Height = gl3; // new GridLength( MenuGridMenuVertical.RowDefinitions[0].Height.Value + MenuGridMenuVertical.RowDefinitions[1].Height.Value );
-                    lastMenuGridMenuBackgroundRow1Height = gl3;
-
-                    MenuGridMenu.HeightRequest = gl3.Value;
-                    MenuGridMenuInner.HeightRequest = gl3.Value;
-                    MenuGridMenuVertical.HeightRequest = gl3.Value;
-                    MenuGridMenuVertical.RowDefinitions[0].Height = gl3;
-                    Grid_Output.HeightRequest = gl3.Value;
-
-
-                }
-                // PageGrid.RowDefinitions[2].Height = new GridLength(MenuGridMenuVertical.RowDefinitions[0].Height.Value + MenuGridMenuVertical.RowDefinitions[1].Height.Value);
-                // Grid_Output.RowDefinitions[0].Height = new GridLength(MenuGridMenuVertical.RowDefinitions[0].Height.Value - Grid_Output.RowDefinitions[2].Height.Value);
-                totalHeight -= ld.PortraitColumnsHeight;
             }
             else
             {
-                 GridLength gl1 = new GridLength(GlobalSpecs.CurrentGlobalSpecs!.GetScreenHeight() - _headlineHeight);
+                GridLength gl1 = new GridLength(GlobalSpecs.CurrentGlobalSpecs!.GetScreenHeight());
                 if (lastMenuGridMenuVerticalRow0Height.Value != gl1.Value)
                 {
-                    MenuGridMenuVertical.RowDefinitions[0].Height = gl1; // new GridLength(GlobalSpecs.CurrentGlobalSpecs!.GetScreenHeight() - ld.PortraitColumnsHeight - _headlineHeight);
+                    MenuGridMenuVertical.RowDefinitions[0].Height = gl1;
                     lastMenuGridMenuVerticalRow0Height = gl1;
                 }
                 GridLength gl2 = new GridLength(0);
                 if (lastMenuGridMenuVerticalRow1Height.Value != gl2.Value)
                 {
-                    MenuGridMenuVertical.RowDefinitions[2].Height = gl2; // new GridLength(ld.PortraitColumnsHeight);
+                    MenuGridMenuVertical.RowDefinitions[2].Height = gl2;
                     lastMenuGridMenuVerticalRow1Height = gl2;
-
                 }
 
-                GridLength gl3 = new GridLength( MenuGridMenuVertical.RowDefinitions[0].Height.Value + 10 );
-                 if( lastMenuGridMenuBackgroundRow1Height.Value != gl3.Value )
+                GridLength gl3 = MenuGridMenuVertical.RowDefinitions[0].Height;
+                if (lastMenuGridMenuBackgroundRow1Height.Value != gl3.Value)
                 {
-                    MenuGridMenuBackground.RowDefinitions[1].Height = gl3; // new GridLength( MenuGridMenuVertical.RowDefinitions[0].Height.Value + MenuGridMenuVertical.RowDefinitions[1].Height.Value );
+                    MenuGridMenuBackground.RowDefinitions[1].Height = gl3;
                     lastMenuGridMenuBackgroundRow1Height = gl3;
 
                     MenuGridMenu.HeightRequest = gl3.Value;
@@ -3926,163 +4198,159 @@ public partial class GamePage : ContentPage, IMenuExtension
                     Grid_Output.HeightRequest = gl3.Value;
                 }
                 /*
-                MenuGridMenuVertical.RowDefinitions[0].Height = new GridLength(GlobalSpecs.CurrentGlobalSpecs!.GetScreenHeight() - _headlineHeight);
-                MenuGridMenuVertical.RowDefinitions[1].Height = new GridLength(0);
-                MenuGridMenuBackground.RowDefinitions[1].Height = MenuGridMenuVertical.RowDefinitions[0].Height;
+                            MenuGridMenuVertical.RowDefinitions[0].Height = new GridLength(GlobalSpecs.CurrentGlobalSpecs!.GetScreenHeight() - _headlineHeight);
+                            MenuGridMenuVertical.RowDefinitions[1].Height = new GridLength(0);
+                            MenuGridMenuBackground.RowDefinitions[1].Height = MenuGridMenuVertical.RowDefinitions[0].Height;
                 */
             }
-        }
-        else
-        {
-            GridLength gl1 = new GridLength(GlobalSpecs.CurrentGlobalSpecs!.GetScreenHeight() );
-            if (lastMenuGridMenuVerticalRow0Height.Value != gl1.Value)
+
+            if (UIS!.MCMVVisible)
             {
-                MenuGridMenuVertical.RowDefinitions[0].Height = gl1; 
-                lastMenuGridMenuVerticalRow0Height = gl1;
-            }
-            GridLength gl2 = new GridLength(0);
-            if (lastMenuGridMenuVerticalRow1Height.Value != gl2.Value)
-            {
-                MenuGridMenuVertical.RowDefinitions[2].Height = gl2; 
-                lastMenuGridMenuVerticalRow1Height = gl2;
-            }
+                GridLength gl1 = new GridLength(_mcGridHeight);
+                if (lastGrid_OutputRowHeight2.Equals(gl1) == false)
+                // if (lastGrid_OutputRowHeight2 != gl1)
+                {
 
-            GridLength gl3 = MenuGridMenuVertical.RowDefinitions[0].Height;
-            if( lastMenuGridMenuBackgroundRow1Height.Value != gl3.Value )
-            {
-                MenuGridMenuBackground.RowDefinitions[1].Height = gl3; 
-                lastMenuGridMenuBackgroundRow1Height = gl3;
+                    // Grid_Output.RowDefinitions[2].Height = gl1;
+                    // lastGrid_OutputRowHeight2 = gl1;
+                    AdaptGridHeights();
+                }
 
-                MenuGridMenu.HeightRequest = gl3.Value;
-                MenuGridMenuInner.HeightRequest = gl3.Value;
-                MenuGridMenuVertical.HeightRequest = gl3.Value;
-                MenuGridMenuVertical.RowDefinitions[0].Height = gl3;
-                Grid_Output.HeightRequest = gl3.Value;
-            }
-            /*
-                        MenuGridMenuVertical.RowDefinitions[0].Height = new GridLength(GlobalSpecs.CurrentGlobalSpecs!.GetScreenHeight() - _headlineHeight);
-                        MenuGridMenuVertical.RowDefinitions[1].Height = new GridLength(0);
-                        MenuGridMenuBackground.RowDefinitions[1].Height = MenuGridMenuVertical.RowDefinitions[0].Height;
-            */
-        }
-
-        if (UIS!.MCMVVisible)
-        {
-            GridLength gl1 = new GridLength(_mcGridHeight);
-            if( lastGrid_OutputRowHeight2.Equals( gl1 ) == false )
-            // if (lastGrid_OutputRowHeight2 != gl1)
-            {
-
-                // Grid_Output.RowDefinitions[2].Height = gl1;
-                // lastGrid_OutputRowHeight2 = gl1;
-                AdaptGridHeights();
-            }
-
-            GridLength gl2 = new GridLength( totalHeight - _mcGridHeight );
-            if (lastGrid_OutputRowHeight0.Equals(gl2) == false ) 
-            // if (lastGrid_OutputRowHeight0 != gl2)
-            {
-                // Grid_Output.RowDefinitions[0].Height = gl2;
-                // lastGrid_OutputRowHeight0 = gl2;
-                AdaptGridHeights();
-            }
-
-
-        }
-        else
-        {
-            GridLength gl1 = new GridLength(_inputGridHeight);
-            // if (lastGrid_OutputRowHeight2 != gl1)
-            if (lastGrid_OutputRowHeight2.Equals(gl1) == false )
-            {
-                Grid_Output.RowDefinitions[2].Height = gl1;
-                lastGrid_OutputRowHeight2 = gl1;
-                AdaptGridHeights();
-            }
-
-            GridLength gl2 = new GridLength(totalHeight - _inputGridHeight);
-            if (lastGrid_OutputRowHeight0.Equals( gl2 ) == false ) 
+                GridLength gl2 = new GridLength(totalHeight - _mcGridHeight);
+                if (lastGrid_OutputRowHeight0.Equals(gl2) == false)
                 // if (lastGrid_OutputRowHeight0 != gl2)
+                {
+                    // Grid_Output.RowDefinitions[0].Height = gl2;
+                    // lastGrid_OutputRowHeight0 = gl2;
+                    AdaptGridHeights();
+                }
+
+
+            }
+            else
             {
-                Grid_Output.RowDefinitions[0].Height = gl2;
-                lastGrid_OutputRowHeight0 = gl2;
-                AdaptGridHeights();
+                GridLength gl1 = new GridLength(_inputGridHeight);
+                // if (lastGrid_OutputRowHeight2 != gl1)
+                if (lastGrid_OutputRowHeight2.Equals(gl1) == false)
+                {
+                    Grid_Output.RowDefinitions[2].Height = gl1;
+                    lastGrid_OutputRowHeight2 = gl1;
+                    AdaptGridHeights();
+                }
+
+                GridLength gl2 = new GridLength(totalHeight - _inputGridHeight);
+                if (lastGrid_OutputRowHeight0.Equals(gl2) == false)
+                // if (lastGrid_OutputRowHeight0 != gl2)
+                {
+                    Grid_Output.RowDefinitions[0].Height = gl2;
+                    lastGrid_OutputRowHeight0 = gl2;
+                    AdaptGridHeights();
+                }
+
+                /*
+                Grid_Output.RowDefinitions[2].Height = new GridLength(_inputGridHeight);
+                Grid_Output.RowDefinitions[0].Height = new GridLength(totalHeight - _inputGridHeight);
+                */
             }
 
-            /*
-            Grid_Output.RowDefinitions[2].Height = new GridLength(_inputGridHeight);
-            Grid_Output.RowDefinitions[0].Height = new GridLength(totalHeight - _inputGridHeight);
-            */
+            GridLength glPD = new GridLength(GlobalSpecs.CurrentGlobalSpecs!.GetScreenHeight() - _headlineHeight);
+
+            // if (lastPageGridRowHeight2 != glPD)
+            if (lastPageGridRowHeight2.Equals(glPD) == false)
+            {
+                PageGrid.RowDefinitions[2].Height = glPD;
+                lastPageGridRowHeight2 = glPD;
+            }
         }
-
-        GridLength glPD = new GridLength(GlobalSpecs.CurrentGlobalSpecs!.GetScreenHeight() - _headlineHeight);
-
-        // if (lastPageGridRowHeight2 != glPD)
-        if (lastPageGridRowHeight2.Equals( glPD ) == false )
+        catch (Exception ex)
         {
-            PageGrid.RowDefinitions[2].Height = glPD;
-            lastPageGridRowHeight2 = glPD;
+            GlobalData.AddLog("SetGridDimensions: " + ex.Message, IGlobalData.protMode.crisp);
         }
     }
 
     public int rotateWait = 0;
     public void ChangeOrientation(IGlobalData.screenMode sm)
     {
-        /*
-        if( sm == IGlobalData.screenMode.landscape)
-            DebugText.Text = "Landscape";
-        else
-            DebugText.Text = "Portrait";
-        */
-        if (sm == lastSM) return;
+        try
+        {
+            /*
+            if( sm == IGlobalData.screenMode.landscape)
+                DebugText.Text = "Landscape";
+            else
+                DebugText.Text = "Portrait";
+            */
+            if (sm == lastSM) return;
 
-        PageGrid.IsEnabled = false;
-        PageGrid.IsVisible = false;
-        // Shell.Current.IsVisible = false;
-        rotateWait = 5;
+            PageGrid.IsEnabled = false;
+            PageGrid.IsVisible = false;
+            // Shell.Current.IsVisible = false;
+            rotateWait = 5;
 
-        // MenuGridMenuInner.MeasureInvalidated = true;
+            // MenuGridMenuInner.MeasureInvalidated = true;
 
 #if ANDROID
-        Thickness p = MenuGridTotal.Padding;
-        p.Left = p.Left - 1;
+            Thickness p = MenuGridTotal.Padding;
+            p.Left = p.Left - 1;
 
-        MenuGridTotal.Padding = p;
-        p.Left = p.Left + 1;
-        MenuGridTotal.Padding = p;
+            MenuGridTotal.Padding = p;
+            p.Left = p.Left + 1;
+            MenuGridTotal.Padding = p;
 
-        OnSizeAllocated(GlobalSpecs.CurrentGlobalSpecs!.GetScreenWidth(), GlobalSpecs.CurrentGlobalSpecs.GetScreenHeight());
+            OnSizeAllocated(GlobalSpecs.CurrentGlobalSpecs!.GetScreenWidth(), GlobalSpecs.CurrentGlobalSpecs.GetScreenHeight());
 #endif
 
-        // GlobalData.CurrentGlobalData!.LayoutDescription.ScreenMode = sm;
-        SetGamePageLayout();
-        AdaptGridHeights();
+            // GlobalData.CurrentGlobalData!.LayoutDescription.ScreenMode = sm;
+            SetGamePageLayout();
+            AdaptGridHeights();
 
-        UIS!.Scr.SetToEnd();  
+            UIS!.Scr.SetToEnd();
 
-        lastSM = sm;
+            lastSM = sm;
+        }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("ChangeOrientation: " + ex.Message, IGlobalData.protMode.crisp);
+        }
+
     }
     public void DoResize( double width, double height)
     {
-        UIS!.Scr.SetRescale();
- 
-        SetGamePageLayout();
-        AdaptGridHeights();
+        try
+        {
+            UIS!.Scr.SetRescale();
+
+            SetGamePageLayout();
+            AdaptGridHeights();
+        }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("DoResize: " + ex.Message, IGlobalData.protMode.crisp);
+        }
+
     }
 
     public bool SetLanguage()
     {
-        WindowTitle.Text = loca.MAUI_UI_Game;
-        LabelEpisode.Text = loca.MAUI_UI_Episode;
-        LabelGesamt.Text = loca.MAUI_UI_Gesamt;
-        Button_More_Inner.Text = loca.MAUI_UI_More;
-        SendButton.Text = loca.MAUI_UI_Send;
+        try
+        {
+            WindowTitle.Text = loca.MAUI_UI_Game;
+            LabelEpisode.Text = loca.MAUI_UI_Episode;
+            LabelGesamt.Text = loca.MAUI_UI_Gesamt;
+            Button_More_Inner.Text = loca.MAUI_UI_More;
+            SendButton.Text = loca.MAUI_UI_Send;
 
-        _menuExtension!.SetLanguage();
+            _menuExtension!.SetLanguage();
 
-        SetScoreEpisode();
+            SetScoreEpisode();
 
-        return true;
+            return true;
+        }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("SetLanguage: " + ex.Message, IGlobalData.protMode.crisp);
+            return false;
+        }
+
     }
 
     public bool SetScoreEpisode()
@@ -4101,54 +4369,62 @@ public partial class GamePage : ContentPage, IMenuExtension
 
    
     public bool SetScore(double cscore, double ctotalscore, double score, double totalscore)
-    { 
-        if (GD != null)
+    {
+        try
         {
-            if (GD.Adventure != null)
+            if (GD != null)
             {
-                /*
-                double val1 = cscore / 100;
-                if (val1 < 0.1)
-                    val1 = 0.1;
-                double val2 = (ctotalscore - cscore) / 100;
-                if (val2 < 0.1)
-                    val2 = 0.1;
+                if (GD.Adventure != null)
+                {
+                    /*
+                    double val1 = cscore / 100;
+                    if (val1 < 0.1)
+                        val1 = 0.1;
+                    double val2 = (ctotalscore - cscore) / 100;
+                    if (val2 < 0.1)
+                        val2 = 0.1;
 
-                if ( val1 == 0)
-                    PB1.ColumnDefinitions[0].Width = new GridLength(0, GridUnitType.Absolute);
-                else
-                    PB1.ColumnDefinitions[0].Width = new GridLength( 0, GridUnitType.Absolute);
+                    if ( val1 == 0)
+                        PB1.ColumnDefinitions[0].Width = new GridLength(0, GridUnitType.Absolute);
+                    else
+                        PB1.ColumnDefinitions[0].Width = new GridLength( 0, GridUnitType.Absolute);
 
-                PB1.ColumnDefinitions[1].Width = new GridLength( 0, GridUnitType.Absolute);
-                */
-                double val1;
-                double val2;
+                    PB1.ColumnDefinitions[1].Width = new GridLength( 0, GridUnitType.Absolute);
+                    */
+                    double val1;
+                    double val2;
 
-                val1 = score / 100;
-                if (val1 < 0.1)
-                    val1 = 0.1;
-                val2 = (totalscore - score) / 100;
-                if (val2 < 0.1)
-                    val2 = 0.1;
+                    val1 = score / 100;
+                    if (val1 < 0.1)
+                        val1 = 0.1;
+                    val2 = (totalscore - score) / 100;
+                    if (val2 < 0.1)
+                        val2 = 0.1;
 
-                if (val1 == 0)
-                    PB2.ColumnDefinitions[0].Width = new GridLength(0, GridUnitType.Absolute);
-                else
-                    PB2.ColumnDefinitions[0].Width = new GridLength(val1, GridUnitType.Star);
-                PB2.ColumnDefinitions[1].Width = new GridLength(val2, GridUnitType.Star);
+                    if (val1 == 0)
+                        PB2.ColumnDefinitions[0].Width = new GridLength(0, GridUnitType.Absolute);
+                    else
+                        PB2.ColumnDefinitions[0].Width = new GridLength(val1, GridUnitType.Star);
+                    PB2.ColumnDefinitions[1].Width = new GridLength(val2, GridUnitType.Star);
 
-                // ToolTipProperties.SetText(PB1, cscore + "/" + ctotalscore);
-                // ToolTipProperties.SetText(PB2, score + "/" + totalscore);
+                    // ToolTipProperties.SetText(PB1, cscore + "/" + ctotalscore);
+                    // ToolTipProperties.SetText(PB2, score + "/" + totalscore);
 
-                // PB2.ColumnDefinitions[0].Width = new GridLength(20, GridUnitType.Star);
-                // PB2.ColumnDefinitions[1].Width = new GridLength(50.22, GridUnitType.Star);
+                    // PB2.ColumnDefinitions[0].Width = new GridLength(20, GridUnitType.Star);
+                    // PB2.ColumnDefinitions[1].Width = new GridLength(50.22, GridUnitType.Star);
 
-                // _mw.PB1.Value = (double)((cscore * 100) / ctotalscore);
-                //     _mw.PB2.Value = (double)((score * 100) / totalscore);
-                // _mw.PB1.ToolTip = string.Format(loca.AdvBase_SetScoreOutput_16088, val, (double)((cscore * 100) / ctotalscore));
-                // _mw.PB2.ToolTip = string.Format(loca.AdvBase_SetScoreOutput_16089, (double)((score * 100) / totalscore));
-                return true;
+                    // _mw.PB1.Value = (double)((cscore * 100) / ctotalscore);
+                    //     _mw.PB2.Value = (double)((score * 100) / totalscore);
+                    // _mw.PB1.ToolTip = string.Format(loca.AdvBase_SetScoreOutput_16088, val, (double)((cscore * 100) / ctotalscore));
+                    // _mw.PB2.ToolTip = string.Format(loca.AdvBase_SetScoreOutput_16089, (double)((score * 100) / totalscore));
+                    return true;
+                }
             }
+        }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("SetScore: " + ex.Message, IGlobalData.protMode.crisp);
+            return false;
         }
         return false;
     }
@@ -4182,224 +4458,255 @@ public partial class GamePage : ContentPage, IMenuExtension
             
         }
         */
-        if ( active == true )
+        try
         {
-            List<string> GridActive = new();
-            GridActive.Add("Grid_Normal");
-
-            List<string> ButtonActive = new();
-            ButtonActive.Add("IDButton");
-
-            List<string> ButtonActiveActive = new();
-            ButtonActiveActive.Add("IDButton_Invers");
-
-            if (g.Children.Count > 0)
+            if (active == true)
             {
-                TabItem? ti = (g.Children[0] as TabItem)!;
+                List<string> GridActive = new();
+                GridActive.Add("Grid_Normal");
 
-                int ctPanels = ti!.TabPanels.Count;
+                List<string> ButtonActive = new();
+                ButtonActive.Add("IDButton");
 
-                ti.AddTabButtonStyleSelected("IDButton");
-                ti.AddTabButtonStyleUnselected("IDButton_Invers");
+                List<string> ButtonActiveActive = new();
+                ButtonActiveActive.Add("IDButton_Invers");
 
-                int ix = 0;
-                foreach (TabItem.TabPanel tp in ti.TabPanels)
+                if (g.Children.Count > 0)
                 {
-                    tp.TabPanelGrid!.StyleClass = GridActive;
+                    TabItem? ti = (g.Children[0] as TabItem)!;
 
-                    if (ix == ti.SelectedTabPanel)
-                        tp.SelectButton!.StyleClass = ButtonActive;
-                    else
-                        tp.SelectButton!.StyleClass = ButtonActiveActive;
+                    int ctPanels = ti!.TabPanels.Count;
 
-                    if (tp.TabPanelGrid.Children[0] != null)
+                    ti.AddTabButtonStyleSelected("IDButton");
+                    ti.AddTabButtonStyleUnselected("IDButton_Invers");
+
+                    int ix = 0;
+                    foreach (TabItem.TabPanel tp in ti.TabPanels)
                     {
+                        tp.TabPanelGrid!.StyleClass = GridActive;
+
+                        if (ix == ti.SelectedTabPanel)
+                            tp.SelectButton!.StyleClass = ButtonActive;
+                        else
+                            tp.SelectButton!.StyleClass = ButtonActiveActive;
+
+                        if (tp.TabPanelGrid.Children[0] != null)
+                        {
+                            Object o = tp.TabPanelGrid.Children[0];
+
+                            if (o.GetType() == typeof(TreeView))
+                            {
+                                TreeView? tv = o as TreeView;
+                                tv!.CallbackAll(DoSetTextActive);
+                            }
+                            ix++;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+                }
+
+            }
+            else
+            {
+
+
+                List<string> GridInactive = new();
+                GridInactive.Add("Grid_Normal_Inactive");
+
+                List<string> ButtonInactive = new();
+                ButtonInactive.Add("IDButton_Normal_Inactive");
+
+                List<string> ButtonInactiveInactive = new();
+                ButtonInactiveInactive.Add("IDButton_BGBG_Inactive");
+
+
+
+                if (g.Children.Count > 0)
+                {
+                    TabItem? ti = (g.Children[0] as TabItem)!;
+
+                    int ctPanels = ti.TabPanels.Count;
+
+                    ti.AddTabButtonStyleSelected("IDButton_Normal_Inactive");
+                    ti.AddTabButtonStyleUnselected("IDButton_BGBG_Inactive");
+
+                    int ix = 0;
+                    foreach (TabItem.TabPanel tp in ti.TabPanels)
+                    {
+                        tp.TabPanelGrid!.StyleClass = GridInactive;
+
+                        if (ix == ti.SelectedTabPanel)
+                            tp.SelectButton!.StyleClass = ButtonInactive;
+                        else
+                            tp.SelectButton!.StyleClass = ButtonInactiveInactive;
+
                         Object o = tp.TabPanelGrid.Children[0];
 
                         if (o.GetType() == typeof(TreeView))
                         {
                             TreeView? tv = o as TreeView;
-                            tv!.CallbackAll(DoSetTextActive);
+                            tv!.CallbackAll(DoSetTextInactive);
                         }
                         ix++;
                     }
-                    else
-                    {
-                        break;
-                    }
                 }
             }
-
         }
-        else
+        catch (Exception ex)
         {
-
-
-            List<string> GridInactive = new();
-            GridInactive.Add("Grid_Normal_Inactive");
-
-            List<string> ButtonInactive = new();
-            ButtonInactive.Add("IDButton_Normal_Inactive");
-
-            List<string> ButtonInactiveInactive = new();
-            ButtonInactiveInactive.Add("IDButton_BGBG_Inactive");
-
-
-
-            if (g.Children.Count > 0)
-            {
-                TabItem? ti = (g.Children[0] as TabItem)!;
-
-                int ctPanels = ti.TabPanels.Count;
-
-                ti.AddTabButtonStyleSelected("IDButton_Normal_Inactive");
-                ti.AddTabButtonStyleUnselected("IDButton_BGBG_Inactive");
-
-                int ix = 0;
-                foreach (TabItem.TabPanel tp in ti.TabPanels)
-                {
-                    tp.TabPanelGrid!.StyleClass = GridInactive;
-
-                    if (ix == ti.SelectedTabPanel)
-                        tp.SelectButton!.StyleClass = ButtonInactive;
-                    else
-                        tp.SelectButton!.StyleClass = ButtonInactiveInactive;
-
-                    Object o = tp.TabPanelGrid.Children[0];
-
-                    if (o.GetType() == typeof(TreeView))
-                    {
-                        TreeView? tv = o as TreeView;
-                        tv!.CallbackAll(DoSetTextInactive);
-                    }
-                    ix++;
-                }
-            }
+            GlobalData.AddLog("SetGridActive: " + ex.Message, IGlobalData.protMode.crisp);
         }
+
     }
 
 
     private bool DoToggleMCMV()
     {
-        // Pr�fen: Ist diese Umschaltung informant?
-        // Aktuell wird sie deutlich zu oft aufgerufen und k�nnte optimiert werden
-        if (UIS!.MCMVVisible == false)
+        try
         {
-            SetGridActive(GridLU, true);
-            SetGridActive(GridLD, true);
-            SetGridActive(GridRU, true);
-            SetGridActive(GridRD, true);
-        }
-        else
-        {
-            SetGridActive(GridLU, false);
-            SetGridActive(GridLD, false);
-            SetGridActive(GridRU, false);
-            SetGridActive(GridRD, false);
-
-        }
-         /* OLD
-        if (UIS.MCMVVisible == false)
-        {
-            List<string> GridActive = new();
-            GridActive.Add("Grid_Normal");
-
-            List<string> ButtonActive = new();
-            ButtonActive.Add("IDButton");
-
-            List<string> ButtonActiveActive = new();
-            ButtonActiveActive.Add("IDButton_Invers");
-
-            if (GridLU.Children.Count > 0)
+            // Pr�fen: Ist diese Umschaltung informant?
+            // Aktuell wird sie deutlich zu oft aufgerufen und k�nnte optimiert werden
+            if (UIS!.MCMVVisible == false)
             {
-                TabItem ti = (GridLU.Children[0] as TabItem);
-
-                int ctPanels = ti.TabPanels.Count;
-
-                ti.AddTabButtonStyleSelected("IDButton");
-                ti.AddTabButtonStyleUnselected("IDButton_Invers");
-
-                int ix = 0;
-                foreach (TabItem.TabPanel tp in ti.TabPanels)
-                {
-                    tp.TabPanelGrid.StyleClass = GridActive;
-
-                    if (ix == ti.SelectedTabPanel)
-                        tp.SelectButton!.StyleClass = ButtonActive;
-                    else
-                        tp.SelectButton!.StyleClass = ButtonActiveActive;
-
-                    Object o = tp.TabPanelGrid.Children[0];
-
-                    TreeView tv = o as TreeView;
-                    tv.CallbackAll(DoSetTextActive);
-
-                    ix++;
-                }
+                SetGridActive(GridLU, true);
+                SetGridActive(GridLD, true);
+                SetGridActive(GridRU, true);
+                SetGridActive(GridRD, true);
             }
-
-        }
-        else
-        {
-
-
-            List<string> GridInactive = new();
-            GridInactive.Add("Grid_Normal_Inactive");
-
-            List<string> ButtonInactive = new();
-            ButtonInactive.Add("IDButton_Normal_Inactive");
-
-            List<string> ButtonInactiveInactive = new();
-            ButtonInactiveInactive.Add("IDButton_BGBG_Inactive");
-
-
-
-            if (GridLU.Children.Count > 0)
+            else
             {
-                TabItem ti = (GridLU.Children[0] as TabItem);
+                SetGridActive(GridLU, false);
+                SetGridActive(GridLD, false);
+                SetGridActive(GridRU, false);
+                SetGridActive(GridRD, false);
 
-                int ctPanels = ti.TabPanels.Count;
-
-                ti.AddTabButtonStyleSelected("IDButton_Normal_Inactive");
-                ti.AddTabButtonStyleUnselected("IDButton_BGBG_Inactive");
-
-                int ix = 0;
-                foreach (TabItem.TabPanel tp in ti.TabPanels)
-                {
-                    tp.TabPanelGrid.StyleClass = GridInactive;
-
-                    if (ix == ti.SelectedTabPanel)
-                        tp.SelectButton!.StyleClass = ButtonInactive;
-                    else
-                        tp.SelectButton!.StyleClass = ButtonInactiveInactive;
-
-                    Object o = tp.TabPanelGrid.Children[0];
-
-                    TreeView tv = o as TreeView;
-                    tv.CallbackAll(DoSetTextInactive);
-
-                    ix++;
-                }
             }
+            /* OLD
+           if (UIS.MCMVVisible == false)
+           {
+               List<string> GridActive = new();
+               GridActive.Add("Grid_Normal");
+
+               List<string> ButtonActive = new();
+               ButtonActive.Add("IDButton");
+
+               List<string> ButtonActiveActive = new();
+               ButtonActiveActive.Add("IDButton_Invers");
+
+               if (GridLU.Children.Count > 0)
+               {
+                   TabItem ti = (GridLU.Children[0] as TabItem);
+
+                   int ctPanels = ti.TabPanels.Count;
+
+                   ti.AddTabButtonStyleSelected("IDButton");
+                   ti.AddTabButtonStyleUnselected("IDButton_Invers");
+
+                   int ix = 0;
+                   foreach (TabItem.TabPanel tp in ti.TabPanels)
+                   {
+                       tp.TabPanelGrid.StyleClass = GridActive;
+
+                       if (ix == ti.SelectedTabPanel)
+                           tp.SelectButton!.StyleClass = ButtonActive;
+                       else
+                           tp.SelectButton!.StyleClass = ButtonActiveActive;
+
+                       Object o = tp.TabPanelGrid.Children[0];
+
+                       TreeView tv = o as TreeView;
+                       tv.CallbackAll(DoSetTextActive);
+
+                       ix++;
+                   }
+               }
+
+           }
+           else
+           {
+
+
+               List<string> GridInactive = new();
+               GridInactive.Add("Grid_Normal_Inactive");
+
+               List<string> ButtonInactive = new();
+               ButtonInactive.Add("IDButton_Normal_Inactive");
+
+               List<string> ButtonInactiveInactive = new();
+               ButtonInactiveInactive.Add("IDButton_BGBG_Inactive");
+
+
+
+               if (GridLU.Children.Count > 0)
+               {
+                   TabItem ti = (GridLU.Children[0] as TabItem);
+
+                   int ctPanels = ti.TabPanels.Count;
+
+                   ti.AddTabButtonStyleSelected("IDButton_Normal_Inactive");
+                   ti.AddTabButtonStyleUnselected("IDButton_BGBG_Inactive");
+
+                   int ix = 0;
+                   foreach (TabItem.TabPanel tp in ti.TabPanels)
+                   {
+                       tp.TabPanelGrid.StyleClass = GridInactive;
+
+                       if (ix == ti.SelectedTabPanel)
+                           tp.SelectButton!.StyleClass = ButtonInactive;
+                       else
+                           tp.SelectButton!.StyleClass = ButtonInactiveInactive;
+
+                       Object o = tp.TabPanelGrid.Children[0];
+
+                       TreeView tv = o as TreeView;
+                       tv.CallbackAll(DoSetTextInactive);
+
+                       ix++;
+                   }
+               }
+           }
+   */
+            return true;
         }
-*/
-        return true;
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("DoToggleMCMV: " + ex.Message, IGlobalData.protMode.crisp);
+            return false;
+        }
     }
 
     public void DoSetTextInactive( object? o)
     {
-        TreeViewItem? tvi = o as TreeViewItem;
-        Label? l1 = tvi!.TextLabel;
+        try
+        {
+            TreeViewItem? tvi = o as TreeViewItem;
+            Label? l1 = tvi!.TextLabel;
 
-        l1!.StyleClass = UIElement.Get_Label_Normal_Inactive();
-   }
+            l1!.StyleClass = UIElement.Get_Label_Normal_Inactive();
+        }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("DoSetTextInactive: " + ex.Message, IGlobalData.protMode.crisp);
+        }
+
+    }
 
     public void DoSetTextActive(object? o)
     {
-        TreeViewItem? tvi = (o as TreeViewItem)!;
-        Label? l1 = tvi!.TextLabel;
+        try
+        {
+            TreeViewItem? tvi = (o as TreeViewItem)!;
+            Label? l1 = tvi!.TextLabel;
 
-        l1!.StyleClass = UIElement.Get_Label_Normal();
+            l1!.StyleClass = UIElement.Get_Label_Normal();
+        }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("DoSetTextActive: " + ex.Message, IGlobalData.protMode.crisp);
+        }
 
     }
 
@@ -4608,7 +4915,7 @@ public partial class GamePage : ContentPage, IMenuExtension
                         UIS.MCM.MCS.MCOutput(UIS.MCM, UIS.MCM.MCS.GetCallbackSelection(), false);
 
 
-                    UIS.Scr.PageToEnd();
+                    UIS.Scr.ScrollEnd();
                 }
             }
             GD.UIS!.RecalcPictures(true);
@@ -4641,19 +4948,27 @@ public partial class GamePage : ContentPage, IMenuExtension
 
     public void SetMicrophone(Phoney_MAUI.Model.IUIServices.sttListeningMode mode )
     {
-        if( mode == IUIServices.sttListeningMode.off)
+        try
         {
-            UIS!.NewMikeColor = Colors.White;
-        }
-        else if ( mode == IUIServices.sttListeningMode.on)
-        {
-            UIS!.NewMikeColor = Colors.LightGreen;
+            if (mode == IUIServices.sttListeningMode.off)
+            {
+                UIS!.NewMikeColor = GlobalSpecs.CurrentGlobalSpecs.GetCurrentTheme()!.Col_FG;
+            }
+            else if (mode == IUIServices.sttListeningMode.on)
+            {
+                UIS!.NewMikeColor = Colors.LightGreen;
 
+            }
+            else if (mode == IUIServices.sttListeningMode.continuous)
+            {
+                UIS!.NewMikeColor = Colors.Red;
+            }
         }
-        else if ( mode == IUIServices.sttListeningMode.continuous)
+        catch (Exception ex)
         {
-            UIS!.NewMikeColor = Colors.Red;
+            GlobalData.AddLog("SetMicrophone: " + ex.Message, IGlobalData.protMode.crisp);
         }
+
     }
 
 
@@ -5259,29 +5574,35 @@ public partial class GamePage : ContentPage, IMenuExtension
 
     protected  override void OnNavigatingFrom(NavigatingFromEventArgs args)
     {
-
+        try
+        {
 #if WINDOWS
         ResetKeyboardHandler();
 #endif
-        _menuExtension!.RemoveListCall(DoSpeech);
+            _menuExtension!.RemoveListCall(DoSpeech);
 
-        UIS!.STTStopListening();
-        if (Inputline.IsSoftKeyboardShowing() == true)
-            Inputline.HideKeyboardAsync(CancellationToken.None);
+            UIS!.STTStopListening();
+            if (Inputline.IsSoftKeyboardShowing() == true)
+                Inputline.HideKeyboardAsync(CancellationToken.None);
 
-        GD!.SetDelProvideMCGrid(null!);
-        GD!.SetDelProvideMoreGrid(null);
-        GD!.SetDelSelectOutput(null);
+            GD!.SetDelProvideMCGrid(null!);
+            GD!.SetDelProvideMoreGrid(null);
+            GD!.SetDelSelectOutput(null);
 
-        UIS!.SetMCMVVisibleCallback(null!);
-        UIS!.SetScoreMethod(null!);
-        UIS!.SetScoreEpisode(null!);
-        UIS!.SetLocalUIUpdate(null!);
-        UIS.STTListenigModeChangeCB = null;
+            UIS!.SetMCMVVisibleCallback(null!);
+            UIS!.SetScoreMethod(null!);
+            UIS!.SetScoreEpisode(null!);
+            UIS!.SetLocalUIUpdate(null!);
+            UIS.STTListenigModeChangeCB = null;
 
-        GlobalSpecs.CurrentGlobalSpecs!.SetCurrentPage(null!);
-        GlobalData.CurrentGlobalData!.FocusMethod = null;
-        _menuExtension!.RemoveLocalMethod(DoGamePageMenu);
+            GlobalSpecs.CurrentGlobalSpecs!.SetCurrentPage(null!);
+            GlobalData.CurrentGlobalData!.FocusMethod = null;
+            _menuExtension!.RemoveLocalMethod(DoGamePageMenu);
+        }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("OnNavigatingFrom: " + ex.Message, IGlobalData.protMode.crisp);
+        }
     }
 #if WINDOWS
     private static readonly System.Lazy<bool> _isPackagedAppLazy = new System.Lazy<bool>(() =>
@@ -5310,34 +5631,42 @@ public partial class GamePage : ContentPage, IMenuExtension
 #endif
     private void UpdateMessage(object? sender, EventArgs e)
     {
-         if (Inputline.Text != null && Inputline.Text != "" )
+        try
         {
-            try
+            if (Inputline.Text != null && Inputline.Text != "")
             {
-                GD!.OrderList!.DisableTempOrderList();
-                if( GD!.LayoutDescription.ParagraphClusterMode != ILayoutDescription.ParagraphClusters.none)
-                    UIS!.StoryTextObj!.DividingLine();
-                else
-                    UIS!.StoryTextObj!.NotDividingLine();
+                try
+                {
+                    GD!.OrderList!.DisableTempOrderList();
+                    if (GD!.LayoutDescription.ParagraphClusterMode != ILayoutDescription.ParagraphClusters.none)
+                        UIS!.StoryTextObj!.DividingLine();
+                    else
+                        UIS!.StoryTextObj!.NotDividingLine();
 
-                UIS!.UpdateBrowserCallsPerCycle = 0;
-                GlobalData.CurrentGlobalData!.Adventure!.DoGameLoop(Inputline.Text!);
-                // UIS!.Scr.PageDown();
+                    UIS!.UpdateBrowserCallsPerCycle = 0;
+                    GlobalData.CurrentGlobalData!.Adventure!.DoGameLoop(Inputline.Text!);
+                    // UIS!.Scr.PageDown();
+                }
+                catch (Exception ex)
+                {
+                    Phoney_MAUI.Core.GlobalData.AddLog("UpdateMessage: " + ex.Message, IGlobalData.protMode.crisp);
+
+                    // int a = 5;
+                }
+
+                // GlobalData.CurrentGlobalData!.Adventure!.UIS.Scr.ScrollPageFinal();
+                // GlobalData.CurrentGlobalData!.Adventure!.UIS.UpdateBrowser();
+
+                if (GlobalData.CurrentGlobalData!.FocusMethod != null)
+                    GlobalData.CurrentGlobalData!.FocusMethod();
+                Inputline.Text = "";
             }
-            catch ( Exception ex)
-            {
-                Phoney_MAUI.Core.GlobalData.AddLog("UpdateMessage: " + ex.Message, IGlobalData.protMode.crisp);
-
-                // int a = 5;
-            }
-
-            // GlobalData.CurrentGlobalData!.Adventure!.UIS.Scr.ScrollPageFinal();
-            // GlobalData.CurrentGlobalData!.Adventure!.UIS.UpdateBrowser();
-
-            if ( GlobalData.CurrentGlobalData!.FocusMethod != null )
-                GlobalData.CurrentGlobalData!.FocusMethod();
-            Inputline.Text = "";
         }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("UpdateMessage: " + ex.Message, IGlobalData.protMode.crisp);
+        }
+
     }
     private bool CanUpdateMessage()
     {
@@ -5654,364 +5983,510 @@ public partial class GamePage : ContentPage, IMenuExtension
 
     void SetStarToAbsolute()
     {
-        if( GlobalSpecs.CurrentGlobalSpecs!.GetScreenWidth() > GlobalSpecs.CurrentGlobalSpecs!.GetScreenHeight() )
+        try
         {
-            GlobalData.CurrentGlobalData!.LayoutDescription.ScreenMode = (IGlobalData.screenMode) IGlobalData.screenMode.landscape;
-        }
-        else
-        {
-            GlobalData.CurrentGlobalData!.LayoutDescription.ScreenMode = (IGlobalData.screenMode)IGlobalData.screenMode.portrait;
+            if (GlobalSpecs.CurrentGlobalSpecs!.GetScreenWidth() > GlobalSpecs.CurrentGlobalSpecs!.GetScreenHeight())
+            {
+                GlobalData.CurrentGlobalData!.LayoutDescription.ScreenMode = (IGlobalData.screenMode)IGlobalData.screenMode.landscape;
+            }
+            else
+            {
+                GlobalData.CurrentGlobalData!.LayoutDescription.ScreenMode = (IGlobalData.screenMode)IGlobalData.screenMode.portrait;
 
-        }
-        if (GlobalSpecs.CurrentGlobalSpecs.GetScreenMode() == IGlobalData.screenMode.landscape)
-        {
-            ColumnDefinitionCollection cdc = MenuGridMenuInner.ColumnDefinitions;
-            if (cdc[2].Width.IsAbsolute == true)
+            }
+            if (GlobalSpecs.CurrentGlobalSpecs.GetScreenMode() == IGlobalData.screenMode.landscape)
+            {
+                ColumnDefinitionCollection cdc = MenuGridMenuInner.ColumnDefinitions;
+                if (cdc[2].Width.IsAbsolute == true)
+                    return;
+
+
+                double x1 = 200;
+                double x2 = GlobalSpecs.CurrentGlobalSpecs!.GetScreenWidth() - _paddingWidth - 400;
+                double x3 = 200;
+
+                cdc[0].Width = new GridLength(x1, GridUnitType.Absolute);
+                cdc[2].Width = new GridLength(x2, GridUnitType.Absolute);
+                cdc[4].Width = new GridLength(x3, GridUnitType.Absolute);
+
+                RowDefinitionCollection rdc = PageGrid.RowDefinitions;
+                rdc[2].Height = new GridLength(GlobalSpecs.CurrentGlobalSpecs!.GetScreenHeight() - _headlineHeight);
+
+                rdc = MenuGridMenuBackground.RowDefinitions;
+                rdc[1].Height = new GridLength(PageGrid.RowDefinitions[2].Height.Value);
+
+                rdc = MenuGridMenuVertical.RowDefinitions;
+                rdc[1].Height = new GridLength(PageGrid.RowDefinitions[2].Height.Value);
+
+                rdc = Grid_Output.RowDefinitions;
+                rdc[0].Height = new GridLength(PageGrid.RowDefinitions[2].Height.Value - _inputGridHeight);
+                AdaptGridHeights();
+            }
+            else
+            {
                 return;
+                /*
+                ColumnDefinitionCollection cdc = MenuGridMenuInner.ColumnDefinitions;
+                if (cdc[2].Width.IsAbsolute == true)
+                    return;
 
 
-            double x1 = 200;
-            double x2 = GlobalSpecs.CurrentGlobalSpecs!.GetScreenWidth() - _paddingWidth - 400;
-            double x3 = 200;
+                double x1 = 200;
+                double x2 = GlobalSpecs.CurrentGlobalSpecs!.GetScreenWidth() - _paddingWidth - 400;
+                double x3 = 200;
 
-            cdc[0].Width = new GridLength(x1, GridUnitType.Absolute);
-            cdc[2].Width = new GridLength(x2, GridUnitType.Absolute);
-            cdc[4].Width = new GridLength(x3, GridUnitType.Absolute);
+                cdc[0].Width = new GridLength(x1, GridUnitType.Absolute);
+                cdc[2].Width = new GridLength(x2, GridUnitType.Absolute);
+                cdc[4].Width = new GridLength(x3, GridUnitType.Absolute);
 
-            RowDefinitionCollection rdc = PageGrid.RowDefinitions;
-            rdc[2].Height = new GridLength(GlobalSpecs.CurrentGlobalSpecs!.GetScreenHeight() - _headlineHeight);
+                RowDefinitionCollection rdc = PageGrid.RowDefinitions;
+                rdc[2].Height = new GridLength(GlobalSpecs.CurrentGlobalSpecs!.GetScreenHeight() - _headlineHeight);
 
-            rdc = MenuGridMenuBackground.RowDefinitions;
-            rdc[1].Height = new GridLength(PageGrid.RowDefinitions[2].Height.Value);
+                rdc = MenuGridMenuBackground.RowDefinitions;
+                rdc[1].Height = new GridLength(PageGrid.RowDefinitions[2].Height.Value);
 
-            rdc = MenuGridMenuVertical.RowDefinitions;
-            rdc[1].Height = new GridLength(PageGrid.RowDefinitions[2].Height.Value);
+                rdc = MenuGridMenuVertical.RowDefinitions;
+                rdc[1].Height = new GridLength(PageGrid.RowDefinitions[2].Height.Value);
 
-            rdc = Grid_Output.RowDefinitions;
-            rdc[0].Height = new GridLength(PageGrid.RowDefinitions[2].Height.Value - _inputGridHeight);
-            AdaptGridHeights();
+                rdc = Grid_Output.RowDefinitions;
+                rdc[0].Height = new GridLength(PageGrid.RowDefinitions[2].Height.Value - _inputGridHeight);
+                */
+            }
         }
-        else
+        catch (Exception ex)
         {
-            return;
-            /*
-            ColumnDefinitionCollection cdc = MenuGridMenuInner.ColumnDefinitions;
-            if (cdc[2].Width.IsAbsolute == true)
-                return;
-
-
-            double x1 = 200;
-            double x2 = GlobalSpecs.CurrentGlobalSpecs!.GetScreenWidth() - _paddingWidth - 400;
-            double x3 = 200;
-
-            cdc[0].Width = new GridLength(x1, GridUnitType.Absolute);
-            cdc[2].Width = new GridLength(x2, GridUnitType.Absolute);
-            cdc[4].Width = new GridLength(x3, GridUnitType.Absolute);
-
-            RowDefinitionCollection rdc = PageGrid.RowDefinitions;
-            rdc[2].Height = new GridLength(GlobalSpecs.CurrentGlobalSpecs!.GetScreenHeight() - _headlineHeight);
-
-            rdc = MenuGridMenuBackground.RowDefinitions;
-            rdc[1].Height = new GridLength(PageGrid.RowDefinitions[2].Height.Value);
-
-            rdc = MenuGridMenuVertical.RowDefinitions;
-            rdc[1].Height = new GridLength(PageGrid.RowDefinitions[2].Height.Value);
-
-            rdc = Grid_Output.RowDefinitions;
-            rdc[0].Height = new GridLength(PageGrid.RowDefinitions[2].Height.Value - _inputGridHeight);
-            */
+            GlobalData.AddLog("SetStarToAbsolute: " + ex.Message, IGlobalData.protMode.crisp);
         }
+
     }
 
 
     void OnTappedGridLeft( object? sender, TappedEventArgs tea )
     {
-        Grid g = new();
-        OnTappedGridHorizontal(sender, tea, onPanGridSplitterButtonLeft!);
+        try
+        {
+            OnTappedGridHorizontal(sender, tea, onPanGridSplitterButtonLeft!);
+        }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("OnTappedGridLeft: " + ex.Message, IGlobalData.protMode.crisp);
+        }
+
     }
     void OnTappedGridRight(object? sender, TappedEventArgs tea)
     {
-        OnTappedGridHorizontal(sender, tea, onPanGridSplitterButtonRight!);
+        try
+        {
+            OnTappedGridHorizontal(sender, tea, onPanGridSplitterButtonRight!);
+        }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("OnTappedGridRight: " + ex.Message, IGlobalData.protMode.crisp);
+        }
+
     }
     void OnTappedGridVLeft(object? sender, TappedEventArgs tea)
     {
-        OnTappedGridVertical(sender, tea, onPanVGridSplitterButtonLeft!);
+        try
+        {
+            OnTappedGridVertical(sender, tea, onPanVGridSplitterButtonLeft!);
+        }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("OnTappedGridVLeft: " + ex.Message, IGlobalData.protMode.crisp);
+        }
+
     }
 
     void OnEnterGrid( object? sender, Microsoft.Maui.Controls.PointerEventArgs pea)
     {
+        try
+        {
 #if WINDOWS
-        var nativeElement = (sender as Grid)!.Handler!.GetNativeElement();
-        (nativeElement as Microsoft.UI.Xaml.UIElement)!.ChangeCursor(Microsoft.UI.Input.InputSystemCursor.Create(Microsoft.UI.Input.InputSystemCursorShape.SizeNorthSouth));
+            var nativeElement = (sender as Grid)!.Handler!.GetNativeElement();
+            (nativeElement as Microsoft.UI.Xaml.UIElement)!.ChangeCursor(Microsoft.UI.Input.InputSystemCursor.Create(Microsoft.UI.Input.InputSystemCursorShape.SizeNorthSouth));
 #endif
+        }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("OnEnterGrid: " + ex.Message, IGlobalData.protMode.crisp);
+        }
+
     }
     void OnEnterGridVertical(object? sender, Microsoft.Maui.Controls.PointerEventArgs pea)
     {
+        try
+        { 
 #if WINDOWS
         var nativeElement = (sender as Grid)!.Handler!.GetNativeElement();
         (nativeElement as Microsoft.UI.Xaml.UIElement)!.ChangeCursor(Microsoft.UI.Input.InputSystemCursor.Create(Microsoft.UI.Input.InputSystemCursorShape.SizeNorthSouth));
 #endif
+        }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("OnEnterGridVertical: " + ex.Message, IGlobalData.protMode.crisp);
+        }
+
     }
     void OnEnterGridHorizontal(object? sender, Microsoft.Maui.Controls.PointerEventArgs pea)
     {
+        try
+        {
 #if WINDOWS
-        var nativeElement = (sender as Grid)!.Handler!.GetNativeElement();
-        (nativeElement as Microsoft.UI.Xaml.UIElement)!.ChangeCursor(Microsoft.UI.Input.InputSystemCursor.Create(Microsoft.UI.Input.InputSystemCursorShape.SizeWestEast));
+            var nativeElement = (sender as Grid)!.Handler!.GetNativeElement();
+            (nativeElement as Microsoft.UI.Xaml.UIElement)!.ChangeCursor(Microsoft.UI.Input.InputSystemCursor.Create(Microsoft.UI.Input.InputSystemCursorShape.SizeWestEast));
 #endif
+        }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("OnEnterGridHorizontal: " + ex.Message, IGlobalData.protMode.crisp);
+        }
+
     }
     void OnExitGrid(object? sender, Microsoft.Maui.Controls.PointerEventArgs pea)
     {
+        try
+        {
 #if WINDOWS
-        var nativeElement = (sender as Grid)!.Handler!.GetNativeElement();
-        (nativeElement as Microsoft.UI.Xaml.UIElement)!.ChangeCursor(Microsoft.UI.Input.InputSystemCursor.Create(Microsoft.UI.Input.InputSystemCursorShape.Arrow));
+            var nativeElement = (sender as Grid)!.Handler!.GetNativeElement();
+            (nativeElement as Microsoft.UI.Xaml.UIElement)!.ChangeCursor(Microsoft.UI.Input.InputSystemCursor.Create(Microsoft.UI.Input.InputSystemCursorShape.Arrow));
 #endif
+        }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("OnExitGrid: " + ex.Message, IGlobalData.protMode.crisp);
+        }
+
     }
     void OnEnterButtonCross(object? sender, Microsoft.Maui.Controls.PointerEventArgs pea)
     {
+        try
+        {
 #if WINDOWS
-        var nativeElement = (sender as Button)!.Handler!.GetNativeElement();
-        (nativeElement as Microsoft.UI.Xaml.UIElement)!.ChangeCursor(Microsoft.UI.Input.InputSystemCursor.Create(Microsoft.UI.Input.InputSystemCursorShape.Cross));
+            var nativeElement = (sender as Button)!.Handler!.GetNativeElement();
+            (nativeElement as Microsoft.UI.Xaml.UIElement)!.ChangeCursor(Microsoft.UI.Input.InputSystemCursor.Create(Microsoft.UI.Input.InputSystemCursorShape.Cross));
 #endif
+        }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("OnEnterButtonCross: " + ex.Message, IGlobalData.protMode.crisp);
+        }
+
     }
     void OnEnterButtonHand(object? sender, Microsoft.Maui.Controls.PointerEventArgs pea)
     {
+        try
+        {
 #if WINDOWS
-        var nativeElement = (sender as Button)!.Handler!.GetNativeElement();
-        (nativeElement as Microsoft.UI.Xaml.UIElement)!.ChangeCursor(Microsoft.UI.Input.InputSystemCursor.Create(Microsoft.UI.Input.InputSystemCursorShape.Hand));
+            var nativeElement = (sender as Button)!.Handler!.GetNativeElement();
+            (nativeElement as Microsoft.UI.Xaml.UIElement)!.ChangeCursor(Microsoft.UI.Input.InputSystemCursor.Create(Microsoft.UI.Input.InputSystemCursorShape.Hand));
 #endif
+        }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("OnEnterButtonHand: " + ex.Message, IGlobalData.protMode.crisp);
+        }
+
     }
     void OnExitButton(object? sender, Microsoft.Maui.Controls.PointerEventArgs pea)
     {
+        try
+        {
 #if WINDOWS
-        var nativeElement = (sender as Button)!.Handler!.GetNativeElement();
-        (nativeElement as Microsoft.UI.Xaml.UIElement)!.ChangeCursor(Microsoft.UI.Input.InputSystemCursor.Create(Microsoft.UI.Input.InputSystemCursorShape.Arrow));
+            var nativeElement = (sender as Button)!.Handler!.GetNativeElement();
+            (nativeElement as Microsoft.UI.Xaml.UIElement)!.ChangeCursor(Microsoft.UI.Input.InputSystemCursor.Create(Microsoft.UI.Input.InputSystemCursorShape.Arrow));
 #endif
+        }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("OnExitButton: " + ex.Message, IGlobalData.protMode.crisp);
+        }
+
     }
 
     void SetButtonCursorHand(Button b)
     {
+        try
+        {
 #if WINDOWS
-        PointerGestureRecognizer pgr = new();
-        // pgr.PointerEntered -= OnEnterButtonHand;
-        // pgr.PointerExited -= OnExitButton;
-        pgr.PointerEntered += OnEnterButtonHand;
-        pgr.PointerExited += OnExitButton;
-        b.GestureRecognizers.Add(pgr);
+            PointerGestureRecognizer pgr = new();
+            // pgr.PointerEntered -= OnEnterButtonHand;
+            // pgr.PointerExited -= OnExitButton;
+            pgr.PointerEntered += OnEnterButtonHand;
+            pgr.PointerExited += OnExitButton;
+            b.GestureRecognizers.Add(pgr);
 #endif
+        }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("SetButtonCursorHand: " + ex.Message, IGlobalData.protMode.crisp);
+        }
+
     }
     void SetButtonCursorCross(Button b)
     {
+        try
+        {
 #if WINDOWS
-        PointerGestureRecognizer pgr = new();
-        pgr.PointerEntered += OnEnterButtonCross;
-        pgr.PointerExited += OnExitButton;
-        b.GestureRecognizers.Add(pgr);
+            PointerGestureRecognizer pgr = new();
+            pgr.PointerEntered += OnEnterButtonCross;
+            pgr.PointerExited += OnExitButton;
+            b.GestureRecognizers.Add(pgr);
 #endif
+        }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("SetButtonCursorCross: " + ex.Message, IGlobalData.protMode.crisp);
+        }
+
     }
     void OnTappedGridPortrait(object? sender, TappedEventArgs tea)
     {
-        OnTappedGridVertical(sender, tea, onGridSplitterButtonPortrait);
+        try
+        {
+            OnTappedGridVertical(sender, tea, onGridSplitterButtonPortrait);
+        }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("OnTappedGridPortrait: " + ex.Message, IGlobalData.protMode.crisp);
+        }
     }
-     void OnTappedGridVRight(object? sender, TappedEventArgs tea)
+    void OnTappedGridVRight(object? sender, TappedEventArgs tea)
      {
-       OnTappedGridVertical(sender, tea, onPanVGridSplitterButtonRight);
+        try
+        {
+            OnTappedGridVertical(sender, tea, onPanVGridSplitterButtonRight);
+        }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("OnTappedGridVRight: " + ex.Message, IGlobalData.protMode.crisp);
+        }
     }
-     void OnTappedGridCol12(object? sender, TappedEventArgs tea)
+    void OnTappedGridCol12(object? sender, TappedEventArgs tea)
      {
-         OnTappedGridHorizontal(sender, tea, onPanCol12GridSplitterButtonRight);
-     }
-     void OnTappedGridCol23(object? sender, TappedEventArgs tea)
+        try
+        {
+            OnTappedGridHorizontal(sender, tea, onPanCol12GridSplitterButtonRight);
+        }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("OnTappedGridCol12: " + ex.Message, IGlobalData.protMode.crisp);
+        }
+    }
+    void OnTappedGridCol23(object? sender, TappedEventArgs tea)
      {
-        OnTappedGridHorizontal(sender, tea, onPanCol23GridSplitterButtonRight);
-     }
+        try
+        {
+            OnTappedGridHorizontal(sender, tea, onPanCol23GridSplitterButtonRight);
+        }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("OnTappedGridCol23: " + ex.Message, IGlobalData.protMode.crisp);
+        }
+    }
 
     void OnTappedGridVertical(object? sender, TappedEventArgs tea, EventHandler<PanUpdatedEventArgs> pueh)
     {
-        Point? p = tea.GetPosition(sender as Element);
-        Rect? r = (sender as Grid)!.GetAbsoluteBounds();
-
-        if (p.HasValue && r.HasValue)
+        try
         {
-            List<string> styleLabel = new();
-            styleLabel.Add("Label_Big");
+            Point? p = tea.GetPosition(sender as Element);
+            Rect? r = (sender as Grid)!.GetAbsoluteBounds();
 
-            Label l1 = new();
-            l1.StyleClass = styleLabel;
-            l1.Text = FaSolid.ArrowsAltV;
-            l1.TextColor = Colors.White;
-            l1.FontFamily = "Fa-Solid";
-            l1.VerticalOptions = LayoutOptions.Center;
-            l1.HorizontalOptions = LayoutOptions.Center;
-            l1.FontSize = 17;
-
-            Frame f = new();
-            List<string> style = new();
-            style.Add("Frame_BGBG_FG");
-
-            Thickness m = new();
-            m.Bottom = 0;
-            m.Top = 0;
-            m.Left = 0;
-            m.Right = 0;
-            l1.Margin = m;
-            l1.Padding = m;
-
-            f.StyleClass = style;
-            f.CornerRadius = 90;
-            f.Content = l1;
-            f.ZIndex = 300;
-            f.VerticalOptions = LayoutOptions.FillAndExpand;
-            f.HorizontalOptions = LayoutOptions.FillAndExpand;
-
-            Rect lb = new();
-            lb.Left = p.Value.X + r.Value.Left - 30;
-            lb.Right = p.Value.X + r.Value.Left + 30;
-            lb.Top = p.Value.Y + r.Value.Top - 30;
-            lb.Bottom = p.Value.Y + r.Value.Top + 30;
-
-
-            Grid gridx = new Grid();
-            gridx.IsVisible = true;
-            gridx.BackgroundColor = Colors.Black;
-            gridx.Opacity = 0.3;
-            gridx.VerticalOptions = LayoutOptions.FillAndExpand;
-            gridx.HorizontalOptions = LayoutOptions.FillAndExpand;
-            gridx.WidthRequest = PageGrid.Width;
-            gridx.HeightRequest = PageGrid.Height;
-            gridx.ZIndex = 200;
-
-
-            TapGestureRecognizer tgr = new();
-            tgr.NumberOfTapsRequired = 1;
-            tgr.Tapped += (s, e) =>
+            if (p.HasValue && r.HasValue)
             {
-                AbsoluteLayer.Remove(gridx);
-                AbsoluteLayer.Remove(f);
-                AbsoluteLayer.InputTransparent = true;
+                List<string> styleLabel = new();
+                styleLabel.Add("Label_Big");
+
+                Label l1 = new();
+                l1.StyleClass = styleLabel;
+                l1.Text = FaSolid.ArrowsAltV;
+                l1.TextColor = Colors.White;
+                l1.FontFamily = "Fa-Solid";
+                l1.VerticalOptions = LayoutOptions.Center;
+                l1.HorizontalOptions = LayoutOptions.Center;
+                l1.FontSize = 17;
+
+                Frame f = new();
+                List<string> style = new();
+                style.Add("Frame_BGBG_FG");
+
+                Thickness m = new();
+                m.Bottom = 0;
+                m.Top = 0;
+                m.Left = 0;
+                m.Right = 0;
+                l1.Margin = m;
+                l1.Padding = m;
+
+                f.StyleClass = style;
+                f.CornerRadius = 90;
+                f.Content = l1;
+                f.ZIndex = 300;
+                f.VerticalOptions = LayoutOptions.FillAndExpand;
+                f.HorizontalOptions = LayoutOptions.FillAndExpand;
+
+                Rect lb = new();
+                lb.Left = p.Value.X + r.Value.Left - 30;
+                lb.Right = p.Value.X + r.Value.Left + 30;
+                lb.Top = p.Value.Y + r.Value.Top - 30;
+                lb.Bottom = p.Value.Y + r.Value.Top + 30;
 
 
-                // Handle the tap
-            };
-            gridx.GestureRecognizers.Add(tgr);
-            TapGestureRecognizer tgr2 = new();
-            tgr2.NumberOfTapsRequired = 1;
-            tgr2.Tapped += (s, e) =>
-            {
-                AbsoluteLayer.Remove(gridx);
-                AbsoluteLayer.Remove(f);
-                AbsoluteLayer.InputTransparent = true;
+                Grid gridx = new Grid();
+                gridx.IsVisible = true;
+                gridx.BackgroundColor = Colors.Black;
+                gridx.Opacity = 0.3;
+                gridx.VerticalOptions = LayoutOptions.FillAndExpand;
+                gridx.HorizontalOptions = LayoutOptions.FillAndExpand;
+                gridx.WidthRequest = PageGrid.Width;
+                gridx.HeightRequest = PageGrid.Height;
+                gridx.ZIndex = 200;
 
 
-                // Handle the tap
-            };
-            f.GestureRecognizers.Add(tgr2);
+                TapGestureRecognizer tgr = new();
+                tgr.NumberOfTapsRequired = 1;
+                tgr.Tapped += (s, e) =>
+                {
+                    AbsoluteLayer.Remove(gridx);
+                    AbsoluteLayer.Remove(f);
+                    AbsoluteLayer.InputTransparent = true;
 
-            AbsoluteLayer.Add(gridx);
 
-            AbsoluteLayer.Add(f);
-            AbsoluteLayer.SetLayoutBounds(f, lb);
-            AbsoluteLayer.InputTransparent = false;
+                    // Handle the tap
+                };
+                gridx.GestureRecognizers.Add(tgr);
+                TapGestureRecognizer tgr2 = new();
+                tgr2.NumberOfTapsRequired = 1;
+                tgr2.Tapped += (s, e) =>
+                {
+                    AbsoluteLayer.Remove(gridx);
+                    AbsoluteLayer.Remove(f);
+                    AbsoluteLayer.InputTransparent = true;
 
-            PanGestureRecognizer pgr = new();
-            pgr.PanUpdated += pueh;
-            f.GestureRecognizers.Add(pgr);
+
+                    // Handle the tap
+                };
+                f.GestureRecognizers.Add(tgr2);
+
+                AbsoluteLayer.Add(gridx);
+
+                AbsoluteLayer.Add(f);
+                AbsoluteLayer.SetLayoutBounds(f, lb);
+                AbsoluteLayer.InputTransparent = false;
+
+                PanGestureRecognizer pgr = new();
+                pgr.PanUpdated += pueh;
+                f.GestureRecognizers.Add(pgr);
+            }
         }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("OnTappedGridVertical: " + ex.Message, IGlobalData.protMode.crisp);
+        }
+
     }
 
     void OnTappedGridHorizontal(object? sender, TappedEventArgs tea, EventHandler<PanUpdatedEventArgs>? pueh)
     {
-
-        Point? p = tea.GetPosition(sender as Element);
-        Rect? r = (sender as Grid)!.GetAbsoluteBounds();
-
-        if (p.HasValue && r.HasValue)
+        try
         {
-            List<string> styleLabel = new();
-            styleLabel.Add("Label_Big");
+            Point? p = tea.GetPosition(sender as Element);
+            Rect? r = (sender as Grid)!.GetAbsoluteBounds();
 
-            Label l1 = new();
-            l1.StyleClass = styleLabel;
-            l1.Text = FaSolid.ArrowsAltH;
-            l1.TextColor = Colors.White;
-            l1.FontFamily = "Fa-Solid";
-            l1.VerticalOptions = LayoutOptions.Center;
-            l1.HorizontalOptions = LayoutOptions.Center;
-            l1.FontSize = 17;
-
-            Frame f = new();
-            List<string> style = new();
-            style.Add("Frame_BGBG_FG");
-
-            Thickness m = new();
-            m.Bottom = 0;
-            m.Top = 0;
-            m.Left = 0;
-            m.Right = 0;
-            l1.Margin = m;
-            l1.Padding = m;
-
-            f.StyleClass = style;
-            f.CornerRadius = 50;
-            f.Content = l1;
-            f.ZIndex = 300;
-            f.VerticalOptions = LayoutOptions.FillAndExpand;
-            f.HorizontalOptions = LayoutOptions.FillAndExpand;
-            f.InputTransparent = false;
-
-            Rect lb = new();
-            lb.Left = p.Value.X + r.Value.Left - 30;
-            lb.Right = p.Value.X + r.Value.Left + 30;
-            lb.Top = p.Value.Y + r.Value.Top - 30;
-            lb.Bottom = p.Value.Y + r.Value.Top + 30;
-
-
-            Grid gridx = new Grid();
-            gridx.IsVisible = true;
-            gridx.InputTransparent = false;
-            gridx.BackgroundColor = Colors.Black;
-            gridx.Opacity = 0.3;
-            gridx.VerticalOptions = LayoutOptions.FillAndExpand;
-            gridx.HorizontalOptions = LayoutOptions.FillAndExpand;
-            gridx.WidthRequest = PageGrid.Width;
-            gridx.HeightRequest = PageGrid.Height;
-            gridx.ZIndex = 200;
-
-
-            TapGestureRecognizer tgr = new();
-            tgr.NumberOfTapsRequired = 1;
-            tgr.Tapped += (s, e) =>
+            if (p.HasValue && r.HasValue)
             {
-                AbsoluteLayer.Remove(gridx);
-                AbsoluteLayer.Remove(f);
-                AbsoluteLayer.InputTransparent = true;
+                List<string> styleLabel = new();
+                styleLabel.Add("Label_Big");
+
+                Label l1 = new();
+                l1.StyleClass = styleLabel;
+                l1.Text = FaSolid.ArrowsAltH;
+                l1.TextColor = Colors.White;
+                l1.FontFamily = "Fa-Solid";
+                l1.VerticalOptions = LayoutOptions.Center;
+                l1.HorizontalOptions = LayoutOptions.Center;
+                l1.FontSize = 17;
+
+                Frame f = new();
+                List<string> style = new();
+                style.Add("Frame_BGBG_FG");
+
+                Thickness m = new();
+                m.Bottom = 0;
+                m.Top = 0;
+                m.Left = 0;
+                m.Right = 0;
+                l1.Margin = m;
+                l1.Padding = m;
+
+                f.StyleClass = style;
+                f.CornerRadius = 50;
+                f.Content = l1;
+                f.ZIndex = 300;
+                f.VerticalOptions = LayoutOptions.FillAndExpand;
+                f.HorizontalOptions = LayoutOptions.FillAndExpand;
+                f.InputTransparent = false;
+
+                Rect lb = new();
+                lb.Left = p.Value.X + r.Value.Left - 30;
+                lb.Right = p.Value.X + r.Value.Left + 30;
+                lb.Top = p.Value.Y + r.Value.Top - 30;
+                lb.Bottom = p.Value.Y + r.Value.Top + 30;
 
 
-                // Handle the tap
-            };
-            gridx.GestureRecognizers.Add(tgr);
-            TapGestureRecognizer tgr2 = new();
-            tgr2.NumberOfTapsRequired = 1;
-            tgr2.Tapped += (s, e) =>
-            {
-                AbsoluteLayer.Remove(gridx);
-                AbsoluteLayer.Remove(f);
-                AbsoluteLayer.InputTransparent = true;
+                Grid gridx = new Grid();
+                gridx.IsVisible = true;
+                gridx.InputTransparent = false;
+                gridx.BackgroundColor = Colors.Black;
+                gridx.Opacity = 0.3;
+                gridx.VerticalOptions = LayoutOptions.FillAndExpand;
+                gridx.HorizontalOptions = LayoutOptions.FillAndExpand;
+                gridx.WidthRequest = PageGrid.Width;
+                gridx.HeightRequest = PageGrid.Height;
+                gridx.ZIndex = 200;
 
 
-                // Handle the tap
-            };
-            f.GestureRecognizers.Add(tgr2);
+                TapGestureRecognizer tgr = new();
+                tgr.NumberOfTapsRequired = 1;
+                tgr.Tapped += (s, e) =>
+                {
+                    AbsoluteLayer.Remove(gridx);
+                    AbsoluteLayer.Remove(f);
+                    AbsoluteLayer.InputTransparent = true;
 
-            AbsoluteLayer.Add(gridx);
 
-            AbsoluteLayer.Add(f);
-            AbsoluteLayer.SetLayoutBounds(f, lb);
-            AbsoluteLayer.InputTransparent = false;
+                    // Handle the tap
+                };
+                gridx.GestureRecognizers.Add(tgr);
+                TapGestureRecognizer tgr2 = new();
+                tgr2.NumberOfTapsRequired = 1;
+                tgr2.Tapped += (s, e) =>
+                {
+                    AbsoluteLayer.Remove(gridx);
+                    AbsoluteLayer.Remove(f);
+                    AbsoluteLayer.InputTransparent = true;
 
-            PanGestureRecognizer pgr = new();
-            pgr.PanUpdated += pueh;
-            f.GestureRecognizers.Add(pgr);
+
+                    // Handle the tap
+                };
+                f.GestureRecognizers.Add(tgr2);
+
+                AbsoluteLayer.Add(gridx);
+
+                AbsoluteLayer.Add(f);
+                AbsoluteLayer.SetLayoutBounds(f, lb);
+                AbsoluteLayer.InputTransparent = false;
+
+                PanGestureRecognizer pgr = new();
+                pgr.PanUpdated += pueh;
+                f.GestureRecognizers.Add(pgr);
+            }
         }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("OnTappedGridHorizontal: " + ex.Message, IGlobalData.protMode.crisp);
+        }
+
     }
 
     double xSplitter = 0;
@@ -6028,109 +6503,127 @@ public partial class GamePage : ContentPage, IMenuExtension
 
     void onPanGridSplitterButtonLeft(object? sender, PanUpdatedEventArgs puea)
     {
-        LayoutDescription ld = (LayoutDescription)GlobalData.CurrentGlobalData!.LayoutDescription!;
-        DoHorizontalSplitterButton(sender, puea, MenuGridMenuInner, 2, 0, ld.SetLeftColumnWidth);
+        try
+        {
+            LayoutDescription ld = (LayoutDescription)GlobalData.CurrentGlobalData!.LayoutDescription!;
+            DoHorizontalSplitterButton(sender, puea, MenuGridMenuInner, 2, 0, ld.SetLeftColumnWidth);
+        }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("onPanGridSplitterButtonLeft: " + ex.Message, IGlobalData.protMode.crisp);
+        }
+
     }
     void onPanGridSplitterButtonRight(object? sender, PanUpdatedEventArgs puea)
     {
-        LayoutDescription ld = (LayoutDescription) GlobalData.CurrentGlobalData!.LayoutDescription!;
-        DoHorizontalSplitterButton(sender, puea, MenuGridMenuInner, 2, 4, ld.SetRightColumnWidth);
+        try
+        {
+            LayoutDescription ld = (LayoutDescription)GlobalData.CurrentGlobalData!.LayoutDescription!;
+            DoHorizontalSplitterButton(sender, puea, MenuGridMenuInner, 2, 4, ld.SetRightColumnWidth);
+        }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("onPanGridSplitterButtonRight: " + ex.Message, IGlobalData.protMode.crisp);
+        }
+
     }
 
-    
+
     void DoHorizontalSplitterButton(object? sender, PanUpdatedEventArgs puea, Grid SplitRow, int colMain, int colSplit, DelDouble SetWidth)
     {
-        // Rect lb;
-        ColumnDefinitionCollection cdc;
-        double xMove;
-        double x;
-        double widthStar;
-        double xShare;
-        double xTotal;
-        GridLength xMainNew;
-        GridLength xSplitNew;
-        // Thickness m;
-
-        switch (puea.StatusType)
+        try
         {
-            case GestureStatus.Started:
+            // Rect lb;
+            ColumnDefinitionCollection cdc;
+            double xMove;
+            double x;
+            double widthStar;
+            double xShare;
+            double xTotal;
+            GridLength xMainNew;
+            GridLength xSplitNew;
+            // Thickness m;
 
-                SetStarToAbsolute();
+            switch (puea.StatusType)
+            {
+                case GestureStatus.Started:
 
-                Rect? r = (sender as View)!.GetAbsoluteBounds();
+                    SetStarToAbsolute();
 
-                if (r.HasValue)
-                {
-                    xSplitter = r.Value.Left;
-                    ySplitter = r.Value.Top;
+                    Rect? r = (sender as View)!.GetAbsoluteBounds();
 
-                    xSplitterStart = r.Value.Left;
-                    ySplitterStart = r.Value.Top;
-                }
-                // cdc = MenuGridMenuInner.ColumnDefinitions;
-                cdc = SplitRow.ColumnDefinitions;
-                GridMainShare = cdc[colMain].Width.Value;
-                GridSplitShare = cdc[colSplit].Width.Value;
-                break;
-            case GestureStatus.Running:
-                {
+                    if (r.HasValue)
+                    {
+                        xSplitter = r.Value.Left;
+                        ySplitter = r.Value.Top;
+
+                        xSplitterStart = r.Value.Left;
+                        ySplitterStart = r.Value.Top;
+                    }
+                    // cdc = MenuGridMenuInner.ColumnDefinitions;
+                    cdc = SplitRow.ColumnDefinitions;
+                    GridMainShare = cdc[colMain].Width.Value;
+                    GridSplitShare = cdc[colSplit].Width.Value;
+                    break;
+                case GestureStatus.Running:
+                    {
 #if WINDOWS
-                    Rect r2 = AbsoluteLayer.GetLayoutBounds(sender as View);
+                        Rect r2 = AbsoluteLayer.GetLayoutBounds(sender as View);
 
-                    r2.X = xSplitter + puea.TotalX;
-                    r2.Y = ySplitter + puea.TotalY;
-                    AbsoluteLayer.SetLayoutBounds(sender as View, r2);
-                    try
-                    {
-                        xMove = puea.TotalX;
-
-                        if (colMain > colSplit)
+                        r2.X = xSplitter + puea.TotalX;
+                        r2.Y = ySplitter + puea.TotalY;
+                        AbsoluteLayer.SetLayoutBounds(sender as View, r2);
+                        try
                         {
-                            xMove *= -1;
+                            xMove = puea.TotalX;
+
+                            if (colMain > colSplit)
+                            {
+                                xMove *= -1;
+                            }
+
+                            // cdc = MenuGridMenuInner.ColumnDefinitions;
+                            cdc = SplitRow.ColumnDefinitions;
+
+                            x = GlobalSpecs.CurrentGlobalSpecs!.GetScreenWidth() - _paddingWidth - 30;
+
+                            widthStar = cdc[0].Width.Value + cdc[colMain].Width.Value + cdc[colSplit].Width.Value;
+
+                            xShare = (xMove / x) * widthStar;
+
+                            xMainNew = new GridLength(GridMainShare + xShare, GridUnitType.Absolute);
+                            xSplitNew = new GridLength(GridSplitShare - xShare, GridUnitType.Absolute);
+
+                            xTotal = xMainNew.Value + xSplitNew.Value;
+
+                            if (xMainNew.Value < 500)
+                            {
+                                xMainNew = new GridLength(500, GridUnitType.Absolute);
+                                xSplitNew = new GridLength(xTotal - xMainNew.Value, GridUnitType.Absolute);
+                            }
+                            if (xSplitNew.Value < 100)
+                            {
+                                xSplitNew = new GridLength(100, GridUnitType.Absolute);
+                                xMainNew = new GridLength(xTotal - xSplitNew.Value, GridUnitType.Absolute);
+                            }
+
+
+                            // XValues3.Add(xMainNew.Value);
+                            // XValues5.Add(xSplitNew.Value);
+                            // XValuesTotal.Add(xTotal);
+                            // XValuesMove.Add(xMove);
+
+                            cdc[colMain].Width = xMainNew;
+                            cdc[colSplit].Width = xSplitNew;
+
+                            SetWidth(xSplitNew.Value);
                         }
-
-                        // cdc = MenuGridMenuInner.ColumnDefinitions;
-                        cdc = SplitRow.ColumnDefinitions;
-
-                        x = GlobalSpecs.CurrentGlobalSpecs!.GetScreenWidth() - _paddingWidth - 30;
-
-                        widthStar = cdc[0].Width.Value + cdc[colMain].Width.Value + cdc[colSplit].Width.Value;
-
-                        xShare = (xMove / x) * widthStar;
-
-                        xMainNew = new GridLength(GridMainShare + xShare, GridUnitType.Absolute);
-                        xSplitNew = new GridLength(GridSplitShare - xShare, GridUnitType.Absolute);
-
-                        xTotal = xMainNew.Value + xSplitNew.Value;
-
-                        if (xMainNew.Value < 500)
+                        catch (Exception e)
                         {
-                            xMainNew = new GridLength(500, GridUnitType.Absolute);
-                            xSplitNew = new GridLength(xTotal - xMainNew.Value, GridUnitType.Absolute);
+                            Phoney_MAUI.Core.GlobalData.AddLog("DoHorizontalSplitterButton: " + e.Message, IGlobalData.protMode.crisp);
+
+                            // int a = 5;
                         }
-                        if (xSplitNew.Value < 100)
-                        {
-                            xSplitNew = new GridLength(100, GridUnitType.Absolute);
-                            xMainNew = new GridLength(xTotal - xSplitNew.Value, GridUnitType.Absolute);
-                        }
-
-
-                        // XValues3.Add(xMainNew.Value);
-                        // XValues5.Add(xSplitNew.Value);
-                        // XValuesTotal.Add(xTotal);
-                        // XValuesMove.Add(xMove);
-
-                        cdc[colMain].Width = xMainNew;
-                        cdc[colSplit].Width = xSplitNew;
-
-                        SetWidth(xSplitNew.Value);
-                    }
-                    catch (Exception e)
-                    {
-                                Phoney_MAUI.Core.GlobalData.AddLog("DoHorizontalSplitterButton: " + e.Message, IGlobalData.protMode.crisp);
-
-                        // int a = 5;
-                    }
 
 #elif ANDROID
                     // Positionierung Button
@@ -6199,127 +6692,135 @@ public partial class GamePage : ContentPage, IMenuExtension
                     }
 #endif
 
-                }
-                break;
-            case GestureStatus.Completed:
-                {
+                    }
+                    break;
+                case GestureStatus.Completed:
+                    {
 
-                }
-                break;
+                    }
+                    break;
+            }
+
+            // Handle the pan
+        }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("DoHorizontalSplitterButton: " + ex.Message, IGlobalData.protMode.crisp);
         }
 
-        // Handle the pan
     }
 
-    
+
     void DoColumnSplitterButton(object? sender, PanUpdatedEventArgs puea, Grid SplitRow, int colMain, int colSplit, DelDouble SetWidth)
     {
-        // Rect lb;
-        ColumnDefinitionCollection cdc;
-        double xMove;
-        double x;
-        double widthStar;
-        double xShare;
-        double xTotal;
-        GridLength xMainNew;
-        GridLength xSplitNew;
-        // Thickness m;
-
-        switch (puea.StatusType)
+        try
         {
-            case GestureStatus.Started:
+            // Rect lb;
+            ColumnDefinitionCollection cdc;
+            double xMove;
+            double x;
+            double widthStar;
+            double xShare;
+            double xTotal;
+            GridLength xMainNew;
+            GridLength xSplitNew;
+            // Thickness m;
 
-                SetStarToAbsolute();
+            switch (puea.StatusType)
+            {
+                case GestureStatus.Started:
 
-                Rect? r = (sender as View)!.GetAbsoluteBounds();
+                    SetStarToAbsolute();
 
-                if (r.HasValue)
-                {
-                    xSplitter = r.Value.Left;
-                    ySplitter = r.Value.Top;
+                    Rect? r = (sender as View)!.GetAbsoluteBounds();
 
-                    xSplitterStart = r.Value.Left;
-                    ySplitterStart = r.Value.Top;
-                }
-                // cdc = MenuGridMenuInner.ColumnDefinitions;
-                cdc = SplitRow.ColumnDefinitions;
-                GridMainShare = cdc[colMain].Width.Value;
-                GridSplitShare = cdc[colSplit].Width.Value;
-                break;
-            case GestureStatus.Running:
-                {
+                    if (r.HasValue)
+                    {
+                        xSplitter = r.Value.Left;
+                        ySplitter = r.Value.Top;
+
+                        xSplitterStart = r.Value.Left;
+                        ySplitterStart = r.Value.Top;
+                    }
+                    // cdc = MenuGridMenuInner.ColumnDefinitions;
+                    cdc = SplitRow.ColumnDefinitions;
+                    GridMainShare = cdc[colMain].Width.Value;
+                    GridSplitShare = cdc[colSplit].Width.Value;
+                    break;
+                case GestureStatus.Running:
+                    {
 #if WINDOWS
-                    Rect r2 = AbsoluteLayer.GetLayoutBounds(sender as View);
+                        Rect r2 = AbsoluteLayer.GetLayoutBounds(sender as View);
 
-                    r2.X = xSplitter + puea.TotalX;
-                    r2.Y = ySplitter + puea.TotalY;
-                    AbsoluteLayer.SetLayoutBounds(sender as View, r2);
-                    try
-                    {
-                        xMove = puea.TotalX;
-
-                        if (colMain > colSplit)
+                        r2.X = xSplitter + puea.TotalX;
+                        r2.Y = ySplitter + puea.TotalY;
+                        AbsoluteLayer.SetLayoutBounds(sender as View, r2);
+                        try
                         {
-                            xMove *= -1;
+                            xMove = puea.TotalX;
+
+                            if (colMain > colSplit)
+                            {
+                                xMove *= -1;
+                            }
+
+                            // cdc = MenuGridMenuInner.ColumnDefinitions;
+                            cdc = SplitRow.ColumnDefinitions;
+
+                            x = GlobalSpecs.CurrentGlobalSpecs!.GetScreenWidth() - _paddingWidth - 30;
+
+                            widthStar = cdc[0].Width.Value + cdc[colMain].Width.Value + cdc[colSplit].Width.Value;
+
+                            xShare = (xMove / x) * widthStar;
+
+                            xMainNew = new GridLength(GridMainShare + xShare, GridUnitType.Absolute);
+                            xSplitNew = new GridLength(GridSplitShare - xShare, GridUnitType.Absolute);
+
+                            xTotal = xMainNew.Value + xSplitNew.Value;
+
+                            if (xMainNew.Value < 100)
+                            {
+                                xMainNew = new GridLength(100, GridUnitType.Absolute);
+                                xSplitNew = new GridLength(xTotal - xMainNew.Value, GridUnitType.Absolute);
+                            }
+                            if (xSplitNew.Value < 100)
+                            {
+                                xSplitNew = new GridLength(100, GridUnitType.Absolute);
+                                xMainNew = new GridLength(xTotal - xSplitNew.Value, GridUnitType.Absolute);
+                            }
+
+
+                            // XValues3.Add(xMainNew.Value);
+                            // XValues5.Add(xSplitNew.Value);
+                            // XValuesTotal.Add(xTotal);
+                            // XValuesMove.Add(xMove);
+
+                            cdc[colMain].Width = xMainNew;
+                            cdc[colSplit].Width = xSplitNew;
+
+                            if (colMain == 2 && colSplit == 0)
+                            {
+                                LayoutDescription ld = (LayoutDescription)GlobalData.CurrentGlobalData!.LayoutDescription!;
+                                ld.PortraitColumn1Width = xSplitNew.Value;
+                                ld.PortraitColumn2Width = xMainNew.Value;
+
+                            }
+                            else if (colMain == 2 && colSplit == 4)
+                            {
+                                LayoutDescription ld = (LayoutDescription)GlobalData.CurrentGlobalData!.LayoutDescription!;
+                                ld.PortraitColumn3Width = xSplitNew.Value;
+                                ld.PortraitColumn2Width = xMainNew.Value;
+
+                            }
+
+                            SetWidth(xSplitNew.Value);
                         }
-
-                        // cdc = MenuGridMenuInner.ColumnDefinitions;
-                        cdc = SplitRow.ColumnDefinitions;
-
-                        x = GlobalSpecs.CurrentGlobalSpecs!.GetScreenWidth() - _paddingWidth - 30;
-
-                        widthStar = cdc[0].Width.Value + cdc[colMain].Width.Value + cdc[colSplit].Width.Value;
-
-                        xShare = (xMove / x) * widthStar;
-
-                        xMainNew = new GridLength(GridMainShare + xShare, GridUnitType.Absolute);
-                        xSplitNew = new GridLength(GridSplitShare - xShare, GridUnitType.Absolute);
-
-                        xTotal = xMainNew.Value + xSplitNew.Value;
-
-                        if (xMainNew.Value < 100)
+                        catch (Exception e)
                         {
-                            xMainNew = new GridLength(100, GridUnitType.Absolute);
-                            xSplitNew = new GridLength(xTotal - xMainNew.Value, GridUnitType.Absolute);
+                            Phoney_MAUI.Core.GlobalData.AddLog("DoColumnSplitterButton: " + e.Message, IGlobalData.protMode.crisp);
+
+                            // int a = 5;
                         }
-                        if (xSplitNew.Value < 100)
-                        {
-                            xSplitNew = new GridLength(100, GridUnitType.Absolute);
-                            xMainNew = new GridLength(xTotal - xSplitNew.Value, GridUnitType.Absolute);
-                        }
-
-
-                        // XValues3.Add(xMainNew.Value);
-                        // XValues5.Add(xSplitNew.Value);
-                        // XValuesTotal.Add(xTotal);
-                        // XValuesMove.Add(xMove);
-
-                        cdc[colMain].Width = xMainNew;
-                        cdc[colSplit].Width = xSplitNew;
-
-                        if( colMain == 2 && colSplit == 0 )
-                        {
-                            LayoutDescription ld = (LayoutDescription)GlobalData.CurrentGlobalData!.LayoutDescription!;
-                            ld.PortraitColumn1Width = xSplitNew.Value;
-                            ld.PortraitColumn2Width = xMainNew.Value;
-
-                        }
-                        else if (colMain == 2 && colSplit == 4)
-                        {
-                            LayoutDescription ld = (LayoutDescription)GlobalData.CurrentGlobalData!.LayoutDescription!;
-                            ld.PortraitColumn3Width = xSplitNew.Value;
-                            ld.PortraitColumn2Width = xMainNew.Value;
-
-                        }
-
-                        SetWidth(xSplitNew.Value);
-                    }
-                    catch (Exception e)
-                    {
-                        Phoney_MAUI.Core.GlobalData.AddLog("DoColumnSplitterButton: " + e.Message, IGlobalData.protMode.crisp);
-
-                        // int a = 5;
-                    }
 
 #elif ANDROID
                     // Positionierung Button
@@ -6404,131 +6905,177 @@ public partial class GamePage : ContentPage, IMenuExtension
                     }
 #endif
 
-                }
-                break;
-            case GestureStatus.Completed:
-                {
+                    }
+                    break;
+                case GestureStatus.Completed:
+                    {
 
-                }
-                break;
+                    }
+                    break;
+            }
+
+            // Handle the pan
+        }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("DoColumnSplitterButton: " + ex.Message, IGlobalData.protMode.crisp);
         }
 
-        // Handle the pan
     }
-    
+
 
     void onGridSplitterButtonPortrait(object? sender, PanUpdatedEventArgs puea)
     {
-        LayoutDescription ld = (LayoutDescription)GlobalData.CurrentGlobalData!.LayoutDescription!;
-        DoPortraitSplitterButton(sender, puea, MenuGridMenuVertical, 2, 0, ld.SetPortraitHeight);
+        try
+        {
+            LayoutDescription ld = (LayoutDescription)GlobalData.CurrentGlobalData!.LayoutDescription!;
+            DoPortraitSplitterButton(sender, puea, MenuGridMenuVertical, 2, 0, ld.SetPortraitHeight);
+        }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("onGridSplitterButtonPortrait: " + ex.Message, IGlobalData.protMode.crisp);
+        }
     }
     void onPanVGridSplitterButtonLeft(object? sender, PanUpdatedEventArgs puea)
     {
-        LayoutDescription ld = (LayoutDescription)GlobalData.CurrentGlobalData!.LayoutDescription!;
-        DoVerticalSplitterButton(sender, puea, Grid_MC_Left, 2, 0, ld.SetLeftRowHeight);
+        try
+        {
+            LayoutDescription ld = (LayoutDescription)GlobalData.CurrentGlobalData!.LayoutDescription!;
+            DoVerticalSplitterButton(sender, puea, Grid_MC_Left, 2, 0, ld.SetLeftRowHeight);
+        }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("onPanVGridSplitterButtonLeft: " + ex.Message, IGlobalData.protMode.crisp);
+        }
+
     }
     void onPanVGridSplitterButtonRight(object? sender, PanUpdatedEventArgs puea)
     {
-        LayoutDescription ld = (LayoutDescription)GlobalData.CurrentGlobalData!.LayoutDescription!;
-        DoVerticalSplitterButton(sender, puea, Grid_MC_Right, 2, 0, ld.SetRightRowHeight);
+        try
+        {
+            LayoutDescription ld = (LayoutDescription)GlobalData.CurrentGlobalData!.LayoutDescription!;
+            DoVerticalSplitterButton(sender, puea, Grid_MC_Right, 2, 0, ld.SetRightRowHeight);
+        }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("onPanVGridSplitterButtonRight: " + ex.Message, IGlobalData.protMode.crisp);
+        }
+
     }
     void onPanCol12GridSplitterButtonRight(object? sender, PanUpdatedEventArgs puea)
     {
-        LayoutDescription ld = (LayoutDescription)GlobalData.CurrentGlobalData!.LayoutDescription!;
-        DoColumnSplitterButton(sender, puea, OrderItemGrid, 2, 0, ld.SetCol1Width);
+        try
+        {
+            LayoutDescription ld = (LayoutDescription)GlobalData.CurrentGlobalData!.LayoutDescription!;
+            DoColumnSplitterButton(sender, puea, OrderItemGrid, 2, 0, ld.SetCol1Width);
+        }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("onPanCol12GridSplitterButtonRight: " + ex.Message, IGlobalData.protMode.crisp);
+        }
     }
     void onPanCol23GridSplitterButtonRight(object? sender, PanUpdatedEventArgs puea)
     {
-        LayoutDescription ld = (LayoutDescription)GlobalData.CurrentGlobalData!.LayoutDescription!;
-        DoColumnSplitterButton(sender, puea, OrderItemGrid, 2, 4, ld.SetCol3Width);
+        try
+        {
+            LayoutDescription ld = (LayoutDescription)GlobalData.CurrentGlobalData!.LayoutDescription!;
+            DoColumnSplitterButton(sender, puea, OrderItemGrid, 2, 4, ld.SetCol3Width);
+        }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("onPanCol23GridSplitterButtonRight: " + ex.Message, IGlobalData.protMode.crisp);
+        }
+
     }
 
     void DoVerticalSplitterButton(object? sender, PanUpdatedEventArgs puea, Grid SplitColumn, int rowMain, int rowSplit, DelDouble SetHeight)
     {
-        // Rect lb;
-        RowDefinitionCollection rdc;
-        double yMove;
-        double y;
-        double heightStar;
-        double yShare;
-        double yTotal;
-        GridLength yMainNew;
-        GridLength ySplitNew;
-        // Thickness m;
-
-        switch (puea.StatusType)
+        try
         {
-            case GestureStatus.Started:
+            // Rect lb;
+            RowDefinitionCollection rdc;
+            double yMove;
+            double y;
+            double heightStar;
+            double yShare;
+            double yTotal;
+            GridLength yMainNew;
+            GridLength ySplitNew;
+            // Thickness m;
 
-                SetStarToAbsolute();
+            switch (puea.StatusType)
+            {
+                case GestureStatus.Started:
 
-                Rect? r = (sender as View)!.GetAbsoluteBounds();
+                    SetStarToAbsolute();
 
-                if (r.HasValue)
-                {
-                    xSplitter = r.Value.Left;
-                    ySplitter = r.Value.Top;
+                    Rect? r = (sender as View)!.GetAbsoluteBounds();
 
-                    xSplitterStart = r.Value.Left;
-                    ySplitterStart = r.Value.Top;
-                }
-                rdc = SplitColumn.RowDefinitions;
-                GridMainShare = rdc[rowMain].Height.Value;
-                GridSplitShare = rdc[rowSplit].Height.Value;
-                break;
-            case GestureStatus.Running:
-                {
+                    if (r.HasValue)
+                    {
+                        xSplitter = r.Value.Left;
+                        ySplitter = r.Value.Top;
+
+                        xSplitterStart = r.Value.Left;
+                        ySplitterStart = r.Value.Top;
+                    }
+                    rdc = SplitColumn.RowDefinitions;
+                    GridMainShare = rdc[rowMain].Height.Value;
+                    GridSplitShare = rdc[rowSplit].Height.Value;
+                    break;
+                case GestureStatus.Running:
+                    {
 #if WINDOWS
-                    Rect r2 = AbsoluteLayer.GetLayoutBounds(sender as View);
+                        Rect r2 = AbsoluteLayer.GetLayoutBounds(sender as View);
 
-                    r2.X = xSplitter + puea.TotalX;
-                    r2.Y = ySplitter + puea.TotalY;
-                    AbsoluteLayer.SetLayoutBounds(sender as View, r2);
-                    try
-                    {
-                        yMove = puea.TotalY;
-
-                        if (rowMain > rowSplit)
+                        r2.X = xSplitter + puea.TotalX;
+                        r2.Y = ySplitter + puea.TotalY;
+                        AbsoluteLayer.SetLayoutBounds(sender as View, r2);
+                        try
                         {
-                            yMove *= -1;
+                            yMove = puea.TotalY;
+
+                            if (rowMain > rowSplit)
+                            {
+                                yMove *= -1;
+                            }
+
+                            rdc = SplitColumn.RowDefinitions;
+
+                            y = GlobalSpecs.CurrentGlobalSpecs!.GetScreenHeight() - _headlineHeight - 10;
+
+                            heightStar = rdc[rowMain].Height.Value + rdc[rowSplit].Height.Value;
+
+                            yShare = (yMove / y) * heightStar;
+
+                            yMainNew = new GridLength(GridMainShare + yShare, GridUnitType.Absolute);
+                            ySplitNew = new GridLength(GridSplitShare - yShare, GridUnitType.Absolute);
+
+                            yTotal = yMainNew.Value + ySplitNew.Value;
+
+                            if (yMainNew.Value < 150)
+                            {
+                                yMainNew = new GridLength(150, GridUnitType.Absolute);
+                                ySplitNew = new GridLength(yTotal - yMainNew.Value, GridUnitType.Absolute);
+                            }
+                            if (ySplitNew.Value < 150)
+                            {
+                                ySplitNew = new GridLength(150, GridUnitType.Absolute);
+                                yMainNew = new GridLength(yTotal - ySplitNew.Value, GridUnitType.Absolute);
+                            }
+
+
+                            rdc[rowMain].Height = yMainNew;
+                            rdc[rowSplit].Height = ySplitNew;
+
+                            SetHeight(ySplitNew.Value);
                         }
-
-                        rdc = SplitColumn.RowDefinitions;
-
-                        y = GlobalSpecs.CurrentGlobalSpecs!.GetScreenHeight() - _headlineHeight - 10;
-
-                        heightStar = rdc[rowMain].Height.Value + rdc[rowSplit].Height.Value;
-
-                        yShare = (yMove / y) * heightStar;
-
-                        yMainNew = new GridLength(GridMainShare + yShare, GridUnitType.Absolute);
-                        ySplitNew = new GridLength(GridSplitShare - yShare, GridUnitType.Absolute);
-
-                        yTotal = yMainNew.Value + ySplitNew.Value;
-
-                         if (yMainNew.Value < 150)
+                        catch (Exception e)
                         {
-                            yMainNew = new GridLength(150, GridUnitType.Absolute);
-                            ySplitNew = new GridLength(yTotal - yMainNew.Value, GridUnitType.Absolute);
+                            Phoney_MAUI.Core.GlobalData.AddLog("DoVerticalSplitterButton: " + e.Message, IGlobalData.protMode.crisp);
+
+                            // int a = 5;
                         }
-                        if (ySplitNew.Value < 150)
-                        {
-                            ySplitNew = new GridLength(150, GridUnitType.Absolute);
-                            yMainNew = new GridLength(yTotal - ySplitNew.Value, GridUnitType.Absolute);
-                        }
-
-
-                        rdc[rowMain].Height = yMainNew;
-                        rdc[rowSplit].Height = ySplitNew;
-
-                        SetHeight(ySplitNew.Value);
-                    }
-                    catch (Exception e)
-                    {
-                                            Phoney_MAUI.Core.GlobalData.AddLog("DoVerticalSplitterButton: " + e.Message, IGlobalData.protMode.crisp);
-
-                        // int a = 5;
-                    }
 
 #elif ANDROID
                     // Positionierung Button
@@ -6592,105 +7139,113 @@ public partial class GamePage : ContentPage, IMenuExtension
                     }
 #endif
 
-                }
-                break;
-            case GestureStatus.Completed:
-                {
+                    }
+                    break;
+                case GestureStatus.Completed:
+                    {
 
-                }
-                break;
+                    }
+                    break;
+            }
+            // Handle the pan
         }
-        // Handle the pan
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("DoVerticalSplitterButton: " + ex.Message, IGlobalData.protMode.crisp);
+        }
+
     }
 
     void DoPortraitSplitterButton(object? sender, PanUpdatedEventArgs puea, Grid SplitColumn, int rowMain, int rowSplit, DelDouble SetHeight)
     {
-        // Rect lb;
-        RowDefinitionCollection rdc;
-        double yMove;
-        double y;
-        double heightStar;
-        double yShare;
-        double yTotal;
-        GridLength yMainNew;
-        GridLength ySplitNew;
-        // Thickness m;
-
-        switch (puea.StatusType)
+        try
         {
-            case GestureStatus.Started:
+            // Rect lb;
+            RowDefinitionCollection rdc;
+            double yMove;
+            double y;
+            double heightStar;
+            double yShare;
+            double yTotal;
+            GridLength yMainNew;
+            GridLength ySplitNew;
+            // Thickness m;
 
-                SetStarToAbsolute();
+            switch (puea.StatusType)
+            {
+                case GestureStatus.Started:
 
-                Rect? r = (sender as View)!.GetAbsoluteBounds();
+                    SetStarToAbsolute();
 
-                if (r.HasValue)
-                {
-                    xSplitter = r.Value.Left;
-                    ySplitter = r.Value.Top;
+                    Rect? r = (sender as View)!.GetAbsoluteBounds();
 
-                    xSplitterStart = r.Value.Left;
-                    ySplitterStart = r.Value.Top;
-                }
-                rdc = SplitColumn.RowDefinitions;
-                GridMainShare = rdc[rowMain].Height.Value;
-                GridSplitShare = rdc[rowSplit].Height.Value;
-                break;
-            case GestureStatus.Running:
-                {
+                    if (r.HasValue)
+                    {
+                        xSplitter = r.Value.Left;
+                        ySplitter = r.Value.Top;
+
+                        xSplitterStart = r.Value.Left;
+                        ySplitterStart = r.Value.Top;
+                    }
+                    rdc = SplitColumn.RowDefinitions;
+                    GridMainShare = rdc[rowMain].Height.Value;
+                    GridSplitShare = rdc[rowSplit].Height.Value;
+                    break;
+                case GestureStatus.Running:
+                    {
 #if WINDOWS
-                    Rect r2 = AbsoluteLayer.GetLayoutBounds(sender as View);
+                        Rect r2 = AbsoluteLayer.GetLayoutBounds(sender as View);
 
-                    r2.X = xSplitter + puea.TotalX;
-                    r2.Y = ySplitter + puea.TotalY;
-                    AbsoluteLayer.SetLayoutBounds(sender as View, r2);
-                    try
-                    {
-                        yMove = puea.TotalY;
-
-                        if (rowMain > rowSplit)
+                        r2.X = xSplitter + puea.TotalX;
+                        r2.Y = ySplitter + puea.TotalY;
+                        AbsoluteLayer.SetLayoutBounds(sender as View, r2);
+                        try
                         {
-                            yMove *= -1;
+                            yMove = puea.TotalY;
+
+                            if (rowMain > rowSplit)
+                            {
+                                yMove *= -1;
+                            }
+
+                            rdc = SplitColumn.RowDefinitions;
+
+                            y = GlobalSpecs.CurrentGlobalSpecs!.GetScreenHeight() - _headlineHeight - 10;
+
+                            heightStar = rdc[rowMain].Height.Value + rdc[rowSplit].Height.Value;
+
+                            yShare = (yMove / y) * heightStar;
+
+                            yMainNew = new GridLength(GridMainShare + yShare, GridUnitType.Absolute);
+                            ySplitNew = new GridLength(GridSplitShare - yShare, GridUnitType.Absolute);
+
+                            yTotal = yMainNew.Value + ySplitNew.Value;
+
+                            if (yMainNew.Value < 150)
+                            {
+                                yMainNew = new GridLength(150, GridUnitType.Absolute);
+                                ySplitNew = new GridLength(yTotal - yMainNew.Value, GridUnitType.Absolute);
+                            }
+                            if (ySplitNew.Value < 150)
+                            {
+                                ySplitNew = new GridLength(150, GridUnitType.Absolute);
+                                yMainNew = new GridLength(yTotal - ySplitNew.Value, GridUnitType.Absolute);
+                            }
+
+
+                            rdc[rowMain].Height = yMainNew;
+                            rdc[rowSplit].Height = ySplitNew;
+
+                            SetHeight(yMainNew.Value);
+                            SetGridDimensions();
+                            SetPortraitGridDimensions();
                         }
-
-                        rdc = SplitColumn.RowDefinitions;
-
-                        y = GlobalSpecs.CurrentGlobalSpecs!.GetScreenHeight() - _headlineHeight - 10;
-
-                        heightStar = rdc[rowMain].Height.Value + rdc[rowSplit].Height.Value;
-
-                        yShare = (yMove / y) * heightStar;
-
-                        yMainNew = new GridLength(GridMainShare + yShare, GridUnitType.Absolute);
-                        ySplitNew = new GridLength(GridSplitShare - yShare, GridUnitType.Absolute);
-
-                        yTotal = yMainNew.Value + ySplitNew.Value;
-
-                        if (yMainNew.Value < 150)
+                        catch (Exception e)
                         {
-                            yMainNew = new GridLength(150, GridUnitType.Absolute);
-                            ySplitNew = new GridLength(yTotal - yMainNew.Value, GridUnitType.Absolute);
+                            Phoney_MAUI.Core.GlobalData.AddLog("DoPortraitSplitterButton: " + e.Message, IGlobalData.protMode.crisp);
+
+                            // int a = 5;
                         }
-                        if (ySplitNew.Value < 150)
-                        {
-                            ySplitNew = new GridLength(150, GridUnitType.Absolute);
-                            yMainNew = new GridLength(yTotal - ySplitNew.Value, GridUnitType.Absolute);
-                        }
-
-
-                        rdc[rowMain].Height = yMainNew;
-                        rdc[rowSplit].Height = ySplitNew;
- 
-                        SetHeight(yMainNew.Value);
-                        SetGridDimensions();
-                        SetPortraitGridDimensions();
-                    }
-                    catch (Exception e)
-                    {
-                        Phoney_MAUI.Core.GlobalData.AddLog("DoPortraitSplitterButton: " + e.Message, IGlobalData.protMode.crisp);
-
-                        // int a = 5;
-                    }
 
 #elif ANDROID
                     // Positionierung Button
@@ -6756,36 +7311,51 @@ public partial class GamePage : ContentPage, IMenuExtension
                     }
 #endif
 
-                }
-                break;
-            case GestureStatus.Completed:
-                {
+                    }
+                    break;
+                case GestureStatus.Completed:
+                    {
 
-                }
-                break;
+                    }
+                    break;
+            }
+            // Handle the pan
         }
-        // Handle the pan
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("DoPortraitSplitterButton: " + ex.Message, IGlobalData.protMode.crisp);
+        }
+
     }
 
     void GridSplitter_R_Entered(object? sender, Microsoft.Maui.Controls.PointerEventArgs pea)
     {
-        if (lastSM == IGlobalData.screenMode.portrait) return;
+        try
+        {
+            if (lastSM == IGlobalData.screenMode.portrait) return;
 
-        SetStarToAbsolute();
+            SetStarToAbsolute();
 
-        /* OLD
-        Thickness m = new Thickness(-40, 0, -40, 0);
-        GridSplitter_R_Box.Margin = m;
-        */
-        /* OLD
-        ColumnDefinitionCollection cdc = MenuGridMenuInner.ColumnDefinitions;
-        cdc[2].Width = new GridLength(cdc[2].Width.Value - 10, GridUnitType.Absolute);
-        cdc[3].Width = new GridLength(30);
-        cdc[4].Width = new GridLength(cdc[4].Width.Value - 10, GridUnitType.Absolute);
-        */
+            /* OLD
+            Thickness m = new Thickness(-40, 0, -40, 0);
+            GridSplitter_R_Box.Margin = m;
+            */
+            /* OLD
+            ColumnDefinitionCollection cdc = MenuGridMenuInner.ColumnDefinitions;
+            cdc[2].Width = new GridLength(cdc[2].Width.Value - 10, GridUnitType.Absolute);
+            cdc[3].Width = new GridLength(30);
+            cdc[4].Width = new GridLength(cdc[4].Width.Value - 10, GridUnitType.Absolute);
+            */
+        }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("GridSplitter_R_Entered: " + ex.Message, IGlobalData.protMode.crisp);
+        }
+
     }
     void GridSplitter_R_Exited(object? sender, PointerEventArgs pea)
     {
+
         if (lastSM == IGlobalData.screenMode.portrait) return;
 
         Thickness m = new Thickness(0, 0, 0, 0);
@@ -6803,472 +7373,540 @@ public partial class GamePage : ContentPage, IMenuExtension
     // int panOverflow = 0;
     void GridSplitter_R_Pan(object? sender, PanUpdatedEventArgs puea)
     {
-        // Rect lb;
-        ColumnDefinitionCollection cdc;
-        double xMove;
-        double x;
-        double widthStar;
-        double xShare;
-        double xTotal;
-        GridLength x3New;
-        GridLength x5New;
-        Thickness m;
-
-       
-
-        switch (puea.StatusType)
+        try
         {
-            case GestureStatus.Started:
+            // Rect lb;
+            ColumnDefinitionCollection cdc;
+            double xMove;
+            double x;
+            double widthStar;
+            double xShare;
+            double xTotal;
+            GridLength x3New;
+            GridLength x5New;
+            Thickness m;
 
-                SetStarToAbsolute();
 
-                // GridSplitter_R_Entered(sender, null);
-                cdc = MenuGridMenuInner.ColumnDefinitions;
-                GridMainShare = cdc[2].Width.Value;
-                GridSplitShare = cdc[4].Width.Value;
-                // Xamarin-Test
-                // GridSplitter_R_Box.Color = Colors.Red;
+
+            switch (puea.StatusType)
+            {
+                case GestureStatus.Started:
+
+                    SetStarToAbsolute();
+
+                    // GridSplitter_R_Entered(sender, null);
+                    cdc = MenuGridMenuInner.ColumnDefinitions;
+                    GridMainShare = cdc[2].Width.Value;
+                    GridSplitShare = cdc[4].Width.Value;
+                    // Xamarin-Test
+                    // GridSplitter_R_Box.Color = Colors.Red;
 
 #if WINDOWS
-                try
-                {
-                    m = new Thickness(-20, 0, -20, 0);
-                    // Xamarin-Test
-                    // GridSplitter_R_Box.Margin = m;
-                }
-                catch ( Exception e)
-                {
-                        Phoney_MAUI.Core.GlobalData.AddLog("GridSplitter_R_Pan: " + e.Message, IGlobalData.protMode.crisp);
-                    // int a = 5;
-                }
-#endif
-                // _xStartPan = puea.TotalX;
-                // _yStartPan = puea.TotalY;
-                break;
-            case GestureStatus.Running:
-                {
-                    // Xamarin-Test
-                    // GridSplitter_R_Box.Color = Colors.Yellow;
-
                     try
                     {
-                        xMove = puea.TotalX;
-
-                        cdc = MenuGridMenuInner.ColumnDefinitions;
-
-                        x = GlobalSpecs.CurrentGlobalSpecs!.GetScreenWidth() - _paddingWidth - 30;
-
-                        widthStar = cdc[0].Width.Value + cdc[2].Width.Value + cdc[4].Width.Value;
-
-                        xShare = (xMove / x) * widthStar;
-
-                        x3New = new GridLength(GridMainShare + xShare, GridUnitType.Absolute);
-                        x5New = new GridLength(GridSplitShare - xShare, GridUnitType.Absolute);
-
-                        xTotal = x3New.Value + x5New.Value;
-
-                        if (x3New.Value < 500)
-                        {
-                            x3New = new GridLength(500, GridUnitType.Absolute);
-                            x5New = new GridLength(xTotal - x3New.Value, GridUnitType.Absolute);
-                        }
-                        if (x5New.Value < 100)
-                        {
-                            x5New = new GridLength(100, GridUnitType.Absolute);
-                            x3New = new GridLength(xTotal - x5New.Value, GridUnitType.Absolute);
-                        }
-
-
-                        // XValues3.Add(x3New.Value);
-                        // XValues5.Add(x5New.Value);
-                        // XValuesTotal.Add(xTotal);
-                        // XValuesMove.Add(xMove);
-
-                        cdc[2].Width = x3New;
-                        cdc[4].Width = x5New;
-                    }
-                    catch ( Exception e)
-                    {
-                        Phoney_MAUI.Core.GlobalData.AddLog("GridSplitter_R_Pan2: " + e.Message, IGlobalData.protMode.crisp);
-
-                        // int a = 5;
-                    }
-                    break;
-                }
-            case GestureStatus.Completed:
-                {
-#if ANDROID
-                   
-                      
-#endif
-                    try
-                    {
-                        // Xamarin-Test
-                        // GridSplitter_R_Box.Color = Colors.Black;
-                        xMove = puea.TotalX;
-
-                        cdc = MenuGridMenuInner.ColumnDefinitions;
-
-                        x = GlobalSpecs.CurrentGlobalSpecs!.GetScreenWidth() - _paddingWidth - 30;
-
-                        widthStar = cdc[0].Width.Value + cdc[2].Width.Value + cdc[4].Width.Value;
-                        xShare = (xMove / x) * widthStar;
-
-                        x3New = new GridLength(cdc[2].Width.Value + xShare, GridUnitType.Absolute);
-                        x5New = new GridLength(cdc[4].Width.Value - xShare, GridUnitType.Absolute);
-
-                        xTotal = x3New.Value + x5New.Value;
-
-                        if (x3New.Value < 500)
-                        {
-                            x3New = new GridLength(500, GridUnitType.Absolute);
-                            x5New = new GridLength(xTotal - x3New.Value, GridUnitType.Absolute);
-                        }
-                        if (x5New.Value < 100)
-                        {
-                            x5New = new GridLength(100, GridUnitType.Absolute);
-                            x3New = new GridLength(xTotal - x5New.Value, GridUnitType.Absolute);
-                        }
-
-                        cdc[2].Width = x3New;
-                        cdc[4].Width = x5New;
-                        // GridSplitter_R_Exited(sender, null);
-                        m = new Thickness(0, 0, 0, 0);
+                        m = new Thickness(-20, 0, -20, 0);
                         // Xamarin-Test
                         // GridSplitter_R_Box.Margin = m;
                     }
                     catch (Exception e)
                     {
-                        Phoney_MAUI.Core.GlobalData.AddLog("GridSplitter_R_Pan3: " + e.Message, IGlobalData.protMode.crisp);
-
+                        Phoney_MAUI.Core.GlobalData.AddLog("GridSplitter_R_Pan: " + e.Message, IGlobalData.protMode.crisp);
                         // int a = 5;
                     }
+#endif
+                    // _xStartPan = puea.TotalX;
+                    // _yStartPan = puea.TotalY;
+                    break;
+                case GestureStatus.Running:
+                    {
+                        // Xamarin-Test
+                        // GridSplitter_R_Box.Color = Colors.Yellow;
+
+                        try
+                        {
+                            xMove = puea.TotalX;
+
+                            cdc = MenuGridMenuInner.ColumnDefinitions;
+
+                            x = GlobalSpecs.CurrentGlobalSpecs!.GetScreenWidth() - _paddingWidth - 30;
+
+                            widthStar = cdc[0].Width.Value + cdc[2].Width.Value + cdc[4].Width.Value;
+
+                            xShare = (xMove / x) * widthStar;
+
+                            x3New = new GridLength(GridMainShare + xShare, GridUnitType.Absolute);
+                            x5New = new GridLength(GridSplitShare - xShare, GridUnitType.Absolute);
+
+                            xTotal = x3New.Value + x5New.Value;
+
+                            if (x3New.Value < 500)
+                            {
+                                x3New = new GridLength(500, GridUnitType.Absolute);
+                                x5New = new GridLength(xTotal - x3New.Value, GridUnitType.Absolute);
+                            }
+                            if (x5New.Value < 100)
+                            {
+                                x5New = new GridLength(100, GridUnitType.Absolute);
+                                x3New = new GridLength(xTotal - x5New.Value, GridUnitType.Absolute);
+                            }
+
+
+                            // XValues3.Add(x3New.Value);
+                            // XValues5.Add(x5New.Value);
+                            // XValuesTotal.Add(xTotal);
+                            // XValuesMove.Add(xMove);
+
+                            cdc[2].Width = x3New;
+                            cdc[4].Width = x5New;
+                        }
+                        catch (Exception e)
+                        {
+                            Phoney_MAUI.Core.GlobalData.AddLog("GridSplitter_R_Pan2: " + e.Message, IGlobalData.protMode.crisp);
+
+                            // int a = 5;
+                        }
+                        break;
+                    }
+                case GestureStatus.Completed:
+                    {
+#if ANDROID
+                   
+                      
+#endif
+                        try
+                        {
+                            // Xamarin-Test
+                            // GridSplitter_R_Box.Color = Colors.Black;
+                            xMove = puea.TotalX;
+
+                            cdc = MenuGridMenuInner.ColumnDefinitions;
+
+                            x = GlobalSpecs.CurrentGlobalSpecs!.GetScreenWidth() - _paddingWidth - 30;
+
+                            widthStar = cdc[0].Width.Value + cdc[2].Width.Value + cdc[4].Width.Value;
+                            xShare = (xMove / x) * widthStar;
+
+                            x3New = new GridLength(cdc[2].Width.Value + xShare, GridUnitType.Absolute);
+                            x5New = new GridLength(cdc[4].Width.Value - xShare, GridUnitType.Absolute);
+
+                            xTotal = x3New.Value + x5New.Value;
+
+                            if (x3New.Value < 500)
+                            {
+                                x3New = new GridLength(500, GridUnitType.Absolute);
+                                x5New = new GridLength(xTotal - x3New.Value, GridUnitType.Absolute);
+                            }
+                            if (x5New.Value < 100)
+                            {
+                                x5New = new GridLength(100, GridUnitType.Absolute);
+                                x3New = new GridLength(xTotal - x5New.Value, GridUnitType.Absolute);
+                            }
+
+                            cdc[2].Width = x3New;
+                            cdc[4].Width = x5New;
+                            // GridSplitter_R_Exited(sender, null);
+                            m = new Thickness(0, 0, 0, 0);
+                            // Xamarin-Test
+                            // GridSplitter_R_Box.Margin = m;
+                        }
+                        catch (Exception e)
+                        {
+                            Phoney_MAUI.Core.GlobalData.AddLog("GridSplitter_R_Pan3: " + e.Message, IGlobalData.protMode.crisp);
+
+                            // int a = 5;
+                        }
+
+                        break;
+                    }
+            }
+            // Handle the pan
+        }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("GridSplitter_R_Pan: " + ex.Message, IGlobalData.protMode.crisp);
+
+        }
+    }
+
+        /*
+        void GridSplitter_R_Pan( object? sender, PanUpdatedEventArgs puea )
+        {
+
+            Rect lb;
+            ColumnDefinitionCollection cdc;
+            double xMove;
+            double x;
+            double widthStar;
+            double xShare;
+            GridLength x3New;
+            GridLength x5New;
+
+            switch (puea.StatusType)
+            {
+                case GestureStatus.Started:
+                    cdc = MenuGridMenu.ColumnDefinitions;
+                    Grid3Share = cdc[3].Width.Value;
+                    Grid5Share = cdc[5].Width.Value;
+                    // _xStartPan = puea.TotalX;
+                    // _yStartPan = puea.TotalY;
+                    break;
+                case GestureStatus.Running:
+                    xMove = puea.TotalX;
+
+                    cdc = MenuGridMenu.ColumnDefinitions;
+
+                    x = GlobalSpecs.CurrentGlobalSpecs!.GetScreenWidth()  - _paddingWidth- 30;
+
+                    widthStar = 0;
+
+                    foreach (ColumnDefinition c in cdc)
+                    {
+                        if (c.Width.GridUnitType == GridUnitType.Star)
+                            widthStar += c.Width.Value;
+                    }
+                    xShare = (xMove / x) * widthStar;
+
+                    x3New = new GridLength(Grid3Share + xShare, GridUnitType.Star);
+                    x5New = new GridLength(Grid5Share - xShare, GridUnitType.Star);
+
+
+                    if ( x3New.Value < 3 )
+                    {
+                        x3New = new GridLength(3, GridUnitType.Star );
+                        x5New = new GridLength(6 - x3New.Value, GridUnitType.Star);
+                    }
+                    if (x5New.Value < 0.5)
+                    {
+                        x5New = new GridLength(0.5, GridUnitType.Star);
+                        x3New = new GridLength(6 - x5New.Value, GridUnitType.Star);
+                    }
+
+                    cdc[3].Width = x3New;
+                    cdc[5].Width = x5New;
+
 
                     break;
-                }
+
+                case GestureStatus.Completed:
+                    xMove = puea.TotalX;
+
+                    cdc = MenuGridMenu.ColumnDefinitions;
+
+                    x = GlobalSpecs.CurrentGlobalSpecs!.GetScreenWidth()  - _paddingWidth- 30;
+
+                    widthStar = 0;
+                    foreach (ColumnDefinition c in cdc)
+                    {
+                        if (c.Width.GridUnitType == GridUnitType.Star)
+                            widthStar += c.Width.Value;
+                    }
+                    xShare = ( xMove / x) * widthStar;
+
+                    x3New = new GridLength(cdc[3].Width.Value + xShare, GridUnitType.Star);
+                    x5New = new GridLength(cdc[5].Width.Value - xShare, GridUnitType.Star);
+
+                    if (x3New.Value < 3)
+                    {
+                        x3New = new GridLength(3, GridUnitType.Star);
+                        x5New = new GridLength(6 - x3New.Value, GridUnitType.Star);
+                    }
+                    if (x5New.Value < 0.5)
+                    {
+                        x5New = new GridLength(0.5, GridUnitType.Star);
+                        x3New = new GridLength(6 - x5New.Value, GridUnitType.Star);
+                    }
+
+                    cdc[3].Width = x3New;
+                    cdc[5].Width = x5New;
+
+                    break;
+            }
+
+            // Handle the pan
         }
-        // Handle the pan
-    }
+        */
 
-
-    /*
-    void GridSplitter_R_Pan( object? sender, PanUpdatedEventArgs puea )
-    {
-
-        Rect lb;
-        ColumnDefinitionCollection cdc;
-        double xMove;
-        double x;
-        double widthStar;
-        double xShare;
-        GridLength x3New;
-        GridLength x5New;
-
-        switch (puea.StatusType)
+        /*
+        void OnDragGridRight(object sender, DragStartingEventArgs e)
         {
-            case GestureStatus.Started:
-                cdc = MenuGridMenu.ColumnDefinitions;
-                Grid3Share = cdc[3].Width.Value;
-                Grid5Share = cdc[5].Width.Value;
-                // _xStartPan = puea.TotalX;
-                // _yStartPan = puea.TotalY;
-                break;
-            case GestureStatus.Running:
-                xMove = puea.TotalX;
-
-                cdc = MenuGridMenu.ColumnDefinitions;
-
-                x = GlobalSpecs.CurrentGlobalSpecs!.GetScreenWidth()  - _paddingWidth- 30;
-
-                widthStar = 0;
-
-                foreach (ColumnDefinition c in cdc)
-                {
-                    if (c.Width.GridUnitType == GridUnitType.Star)
-                        widthStar += c.Width.Value;
-                }
-                xShare = (xMove / x) * widthStar;
-
-                x3New = new GridLength(Grid3Share + xShare, GridUnitType.Star);
-                x5New = new GridLength(Grid5Share - xShare, GridUnitType.Star);
-
-         
-                if ( x3New.Value < 3 )
-                {
-                    x3New = new GridLength(3, GridUnitType.Star );
-                    x5New = new GridLength(6 - x3New.Value, GridUnitType.Star);
-                }
-                if (x5New.Value < 0.5)
-                {
-                    x5New = new GridLength(0.5, GridUnitType.Star);
-                    x3New = new GridLength(6 - x5New.Value, GridUnitType.Star);
-                }
-
-                cdc[3].Width = x3New;
-                cdc[5].Width = x5New;
-
-
-                break;
-
-            case GestureStatus.Completed:
-                xMove = puea.TotalX;
-
-                cdc = MenuGridMenu.ColumnDefinitions;
-
-                x = GlobalSpecs.CurrentGlobalSpecs!.GetScreenWidth()  - _paddingWidth- 30;
-
-                widthStar = 0;
-                foreach (ColumnDefinition c in cdc)
-                {
-                    if (c.Width.GridUnitType == GridUnitType.Star)
-                        widthStar += c.Width.Value;
-                }
-                xShare = ( xMove / x) * widthStar;
-
-                x3New = new GridLength(cdc[3].Width.Value + xShare, GridUnitType.Star);
-                x5New = new GridLength(cdc[5].Width.Value - xShare, GridUnitType.Star);
-
-                if (x3New.Value < 3)
-                {
-                    x3New = new GridLength(3, GridUnitType.Star);
-                    x5New = new GridLength(6 - x3New.Value, GridUnitType.Star);
-                }
-                if (x5New.Value < 0.5)
-                {
-                    x5New = new GridLength(0.5, GridUnitType.Star);
-                    x3New = new GridLength(6 - x5New.Value, GridUnitType.Star);
-                }
-
-                cdc[3].Width = x3New;
-                cdc[5].Width = x5New;
-
-                break;
+            int a = 5;
+            // Shape shape = (sender as Element).Parent as Shape;
         }
+        void OnDragDropGridRight(object sender, DragEventArgs e)
+        {
 
-        // Handle the pan
-    }
-    */
-
-    /*
-    void OnDragGridRight(object sender, DragStartingEventArgs e)
-    {
-        int a = 5;
-        // Shape shape = (sender as Element).Parent as Shape;
-    }
-    void OnDragDropGridRight(object sender, DragEventArgs e)
-    {
-       
-        // Shape shape = (sender as Element).Parent as Shape;
-    }
-    void OnDropGridRight(object sender, DropEventArgs e)
-    {
-        // Shape shape = (sender as Element).Parent as Shape;
-    }
-    */
+            // Shape shape = (sender as Element).Parent as Shape;
+        }
+        void OnDropGridRight(object sender, DropEventArgs e)
+        {
+            // Shape shape = (sender as Element).Parent as Shape;
+        }
+        */
     public void PressEndLocal(object? sender, EventArgs ea)
     {
-        // bool doCont = true;
-        Button? b;
-        Point p3 = new();
-
-        if (sender!.GetType() == typeof(Button))
+        try
         {
-            b = (sender as Button);
-            p3 = ScreenCoords.GetScreenCoords(b);
+            // bool doCont = true;
+            Button? b;
+            Point p3 = new();
+
+            if (sender!.GetType() == typeof(Button))
+            {
+                b = (sender as Button);
+                p3 = ScreenCoords.GetScreenCoords(b);
+            }
+            else
+            {
+                b = new();
+                // int a = 5;
+            }
+
+
+            p3.Y += b!.Height + 3;
+
+            Rect pd = new();
+            pd.X = (GlobalSpecs.CurrentGlobalSpecs!.GetScreenWidth() / 2) - 200;
+            pd.Y = (GlobalSpecs.CurrentGlobalSpecs!.GetScreenHeight() / 2) - 100;
+            pd.Width = 400;
+            pd.Height = 200;
+
+
+            pd = _menuExtension!.CalcBounds(pd);
+
+            int val;
+
+            if (ea.GetType() == typeof(TreeViewEventArgs))
+
+                val = (int)((ea as TreeViewEventArgs)!.UserDefinedObject)!;
+            else if (ea.GetType() == typeof(OrderTableEventArgs))
+                val = (int)((ea as OrderTableEventArgs)!.UserDefinedObject)!;
+            else
+                val = 1;
+
+            string Text = loca.OrderFeedback_Quit_Person_Self_13991a;
+
+            _menuExtension!.OpenShowMenu(true, pd, false, Text);
+
+
+            if (_menuExtension!.MEMenus[_menuExtension!.MEMenus.Count - 1].InnerView != null)
+            {
+                SetQuitMenu(_menuExtension!.MEMenus[_menuExtension!.MEMenus.Count - 1].InnerView!);
+            }
+            // BlueBox.IsVisible = true;
+            // AbsoluteLayout.SetLayoutBounds(BlueBox, new Rect(p3.X, p3.Y, 400, 200));
         }
-        else
+        catch (Exception ex)
         {
-            b = new();
-            // int a = 5;
+            GlobalData.AddLog("PressEndLocal: " + ex.Message, IGlobalData.protMode.crisp);
+
         }
 
-
-        p3.Y += b!.Height + 3;
-
-        Rect pd = new();
-        pd.X = (GlobalSpecs.CurrentGlobalSpecs!.GetScreenWidth() / 2) - 200;
-        pd.Y = (GlobalSpecs.CurrentGlobalSpecs!.GetScreenHeight() / 2) - 100;
-        pd.Width = 400;
-        pd.Height = 200;
-
-
-        pd = _menuExtension!.CalcBounds(pd);
-
-        int val;
-
-        if (ea.GetType() == typeof(TreeViewEventArgs))
-
-            val = (int)((ea as TreeViewEventArgs)!.UserDefinedObject)!;
-        else if (ea.GetType() == typeof(OrderTableEventArgs))
-            val = (int)((ea as OrderTableEventArgs)!.UserDefinedObject)!;
-        else
-            val = 1;
-
-        string Text = loca.OrderFeedback_Quit_Person_Self_13991a;
-
-        _menuExtension!.OpenShowMenu(true, pd, false, Text);
-
-
-        if (_menuExtension!.MEMenus[_menuExtension!.MEMenus.Count - 1].InnerView != null)
-        {
-            SetQuitMenu(_menuExtension!.MEMenus[_menuExtension!.MEMenus.Count - 1].InnerView!);
-        }
-        // BlueBox.IsVisible = true;
-        // AbsoluteLayout.SetLayoutBounds(BlueBox, new Rect(p3.X, p3.Y, 400, 200));
     }
     public void SetQuitMenu(Grid contextGrid)
     {
-        contextGrid.Children.Clear();
+        try
+        {
+            contextGrid.Children.Clear();
 
-        RowDefinitionCollection rdc = new();
-        RowDefinition rd1 = new();
-        rd1.Height = new GridLength(1, GridUnitType.Star);
+            RowDefinitionCollection rdc = new();
+            RowDefinition rd1 = new();
+            rd1.Height = new GridLength(1, GridUnitType.Star);
 
-        RowDefinition rd2 = new();
-        rd2.Height = new GridLength(40);
-        rdc.Add(rd1);
-        rdc.Add(rd2);
+            RowDefinition rd2 = new();
+            rd2.Height = new GridLength(40);
+            rdc.Add(rd1);
+            rdc.Add(rd2);
 
-        Grid TextGrid = new();
-        contextGrid.Add(TextGrid);
+            Grid TextGrid = new();
+            contextGrid.Add(TextGrid);
 
-        List<string> LabelStyle = new();
-        LabelStyle.Add("Label_Normal");
+            List<string> LabelStyle = new();
+            LabelStyle.Add("Label_Normal");
 
-        Label l1 = new();
-        l1.Text = loca.OrderFeedback_Quit_Person_Self_13991; // "Wirklich l�schen?";
-        l1.VerticalOptions = LayoutOptions.Center;
-        l1.HorizontalOptions = LayoutOptions.Center;
-        l1.HorizontalTextAlignment = TextAlignment.Center;
-        TextGrid.Add(l1);
-        l1.StyleClass = LabelStyle;
+            Label l1 = new();
+            l1.Text = loca.OrderFeedback_Quit_Person_Self_13991; // "Wirklich l�schen?";
+            l1.VerticalOptions = LayoutOptions.Center;
+            l1.HorizontalOptions = LayoutOptions.Center;
+            l1.HorizontalTextAlignment = TextAlignment.Center;
+            TextGrid.Add(l1);
+            l1.StyleClass = LabelStyle;
 
-        contextGrid.RowDefinitions = rdc;
+            contextGrid.RowDefinitions = rdc;
 
-        Grid ButtonGrid = new();
-        contextGrid.SetRow(ButtonGrid, 1);
-        contextGrid.Add(ButtonGrid);
-        ColumnDefinitionCollection cdc = new();
-        ColumnDefinition cd1 = new();
-        cd1.Width = new GridLength(1, GridUnitType.Star);
-        ColumnDefinition cd2 = new();
-        cd2.Width = new GridLength(4, GridUnitType.Star);
-        cdc.Add(cd1);
-        cdc.Add(cd2);
-        cdc.Add(cd1);
-        cdc.Add(cd2);
-        cdc.Add(cd1);
-        ButtonGrid.ColumnDefinitions = cdc;
+            Grid ButtonGrid = new();
+            contextGrid.SetRow(ButtonGrid, 1);
+            contextGrid.Add(ButtonGrid);
+            ColumnDefinitionCollection cdc = new();
+            ColumnDefinition cd1 = new();
+            cd1.Width = new GridLength(1, GridUnitType.Star);
+            ColumnDefinition cd2 = new();
+            cd2.Width = new GridLength(4, GridUnitType.Star);
+            cdc.Add(cd1);
+            cdc.Add(cd2);
+            cdc.Add(cd1);
+            cdc.Add(cd2);
+            cdc.Add(cd1);
+            ButtonGrid.ColumnDefinitions = cdc;
 
 
-        CreateButtonXY(ButtonGrid, loca.OrderFeedback_Quit_Person_Self_13992, 1, 1, DoQuit);
-        CreateButtonXY(ButtonGrid, loca.OrderFeedback_Quit_Person_Self_13993, 3, 1, DoCancel);
+            CreateButtonXY(ButtonGrid, loca.OrderFeedback_Quit_Person_Self_13992, 1, 1, DoQuit);
+            CreateButtonXY(ButtonGrid, loca.OrderFeedback_Quit_Person_Self_13993, 3, 1, DoCancel);
+        }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("SetQuitMenu: " + ex.Message, IGlobalData.protMode.crisp);
+
+        }
+
     }
     public void CreateButtonXY(Grid g, string text, int xoff, int yoff, EventHandler ev)
     {
-        ObjButton b = new();
-        b.Text = text;
-        g.Add(b);
-        g.SetRow(b, yoff);
+        try
+        {
+            ObjButton b = new();
+            b.Text = text;
+            g.Add(b);
+            g.SetRow(b, yoff);
 
-         g.SetColumn(b, xoff);
-        List<string> ButtonStyle = new();
-        ButtonStyle.Add("ObjButton_Invers");
-        b.StyleClass = ButtonStyle;
-        Thickness m = new(6, 6, 6, 0);
-        b.Margin = m;
-        b.Clicked += ev;
-        b.VerticalOptions = LayoutOptions.Center;
+            g.SetColumn(b, xoff);
+            List<string> ButtonStyle = new();
+            ButtonStyle.Add("ObjButton_Invers");
+            b.StyleClass = ButtonStyle;
+            Thickness m = new(6, 6, 6, 0);
+            b.Margin = m;
+            b.Clicked += ev;
+            b.VerticalOptions = LayoutOptions.Center;
+        }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("CreateButtonXY: " + ex.Message, IGlobalData.protMode.crisp);
+
+        }
+
     }
     public void DoCancel(object? o, EventArgs ea)
     {
-        _menuExtension!.CloseContextMenu();
+        try
+        {
+            _menuExtension!.CloseContextMenu();
+        }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("DoCancel: " + ex.Message, IGlobalData.protMode.crisp);
+
+        }
+
     }
     public void DoQuit(object? o, EventArgs ea)
     {
-        UIS!.QuitApplication();
-        // App.ThisApplication!.Quit();
-        _menuExtension!.CloseContextMenu();
+        try
+        {
+            UIS!.QuitApplication();
+            // App.ThisApplication!.Quit();
+            _menuExtension!.CloseContextMenu();
+        }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("DoQuit: " + ex.Message, IGlobalData.protMode.crisp);
+
+        }
+
     }
 
     public void ShowDialog(string ShowText)
     {
-        // bool doCont = true;
-        Button? b;
-        Point p3 = new();
-
-        b = new();
-
-
-        p3.Y += b!.Height + 3;
-
-        Rect pd = new();
-        pd.X = (GlobalSpecs.CurrentGlobalSpecs!.GetScreenWidth() / 2) - 200;
-        pd.Y = (GlobalSpecs.CurrentGlobalSpecs!.GetScreenHeight() / 2) - 100;
-        pd.Width = 400;
-        pd.Height = 200;
-
-
-        pd = _menuExtension!.CalcBounds(pd);
-
- 
-        string Text = loca.MAUI_Infodialog_Info;
-
-        _menuExtension!.OpenShowMenu(true, pd, true, Text);
-
-
-        if (_menuExtension!.MEMenus[_menuExtension!.MEMenus.Count - 1].InnerView != null)
+        try
         {
-            SetInfoMenu(_menuExtension!.MEMenus[_menuExtension!.MEMenus.Count - 1].InnerView, ShowText);
+            // bool doCont = true;
+            Button? b;
+            Point p3 = new();
+
+            b = new();
+
+
+            p3.Y += b!.Height + 3;
+
+            Rect pd = new();
+            pd.X = (GlobalSpecs.CurrentGlobalSpecs!.GetScreenWidth() / 2) - 200;
+            pd.Y = (GlobalSpecs.CurrentGlobalSpecs!.GetScreenHeight() / 2) - 100;
+            pd.Width = 400;
+            pd.Height = 200;
+
+
+            pd = _menuExtension!.CalcBounds(pd);
+
+
+            string Text = loca.MAUI_Infodialog_Info;
+
+            _menuExtension!.OpenShowMenu(true, pd, true, Text);
+
+
+            if (_menuExtension!.MEMenus[_menuExtension!.MEMenus.Count - 1].InnerView != null)
+            {
+                SetInfoMenu(_menuExtension!.MEMenus[_menuExtension!.MEMenus.Count - 1].InnerView, ShowText);
+            }
+            // BlueBox.IsVisible = true;
+            // AbsoluteLayout.SetLayoutBounds(BlueBox, new Rect(p3.X, p3.Y, 400, 200));
         }
-        // BlueBox.IsVisible = true;
-        // AbsoluteLayout.SetLayoutBounds(BlueBox, new Rect(p3.X, p3.Y, 400, 200));
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("ShowDialog: " + ex.Message, IGlobalData.protMode.crisp);
+
+        }
+
     }
     public void SetInfoMenu(Grid? contextGrid, string Text)
     {
-        contextGrid!.Children.Clear();
+        try
+        {
+            contextGrid!.Children.Clear();
 
-        RowDefinitionCollection rdc = new();
-        RowDefinition rd1 = new();
-        rd1.Height = new GridLength(1, GridUnitType.Star);
+            RowDefinitionCollection rdc = new();
+            RowDefinition rd1 = new();
+            rd1.Height = new GridLength(1, GridUnitType.Star);
 
-        RowDefinition rd2 = new();
-        rd2.Height = new GridLength(40);
-        rdc.Add(rd1);
-        rdc.Add(rd2);
+            RowDefinition rd2 = new();
+            rd2.Height = new GridLength(40);
+            rdc.Add(rd1);
+            rdc.Add(rd2);
 
-        Grid? TextGrid = new();
-        contextGrid.Add(TextGrid);
+            Grid? TextGrid = new();
+            contextGrid.Add(TextGrid);
 
-        List<string> LabelStyle = new();
-        LabelStyle.Add("Label_Normal");
+            List<string> LabelStyle = new();
+            LabelStyle.Add("Label_Normal");
 
-        Label l1 = new();
-        l1.Text = Text;
-        l1.VerticalOptions = LayoutOptions.Center;
-        l1.HorizontalOptions = LayoutOptions.Center;
-        l1.HorizontalTextAlignment = TextAlignment.Center;
-        TextGrid.Add(l1);
-        l1.StyleClass = LabelStyle;
+            Label l1 = new();
+            l1.Text = Text;
+            l1.VerticalOptions = LayoutOptions.Center;
+            l1.HorizontalOptions = LayoutOptions.Center;
+            l1.HorizontalTextAlignment = TextAlignment.Center;
+            TextGrid.Add(l1);
+            l1.StyleClass = LabelStyle;
 
-        contextGrid.RowDefinitions = rdc;
+            contextGrid.RowDefinitions = rdc;
 
-        Grid ButtonGrid = new();
-        contextGrid.SetRow(ButtonGrid, 1);
-        contextGrid.Add(ButtonGrid);
-        ColumnDefinitionCollection cdc = new();
-        ColumnDefinition cd1 = new();
-        cd1.Width = new GridLength(1, GridUnitType.Star);
-        ColumnDefinition cd2 = new();
-        cd2.Width = new GridLength(4, GridUnitType.Star);
-        cdc.Add(cd1);
-        cdc.Add(cd2);
-        cdc.Add(cd1);
-        ButtonGrid.ColumnDefinitions = cdc;
+            Grid ButtonGrid = new();
+            contextGrid.SetRow(ButtonGrid, 1);
+            contextGrid.Add(ButtonGrid);
+            ColumnDefinitionCollection cdc = new();
+            ColumnDefinition cd1 = new();
+            cd1.Width = new GridLength(1, GridUnitType.Star);
+            ColumnDefinition cd2 = new();
+            cd2.Width = new GridLength(4, GridUnitType.Star);
+            cdc.Add(cd1);
+            cdc.Add(cd2);
+            cdc.Add(cd1);
+            ButtonGrid.ColumnDefinitions = cdc;
 
 
-        CreateButtonXY(ButtonGrid, loca.MAUI_Infodialog_Ok, 1, 1, DoCancel);
+            CreateButtonXY(ButtonGrid, loca.MAUI_Infodialog_Ok, 1, 1, DoCancel);
+        }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("SetInfoMenu: " + ex.Message, IGlobalData.protMode.crisp);
 
+        }
     }
 
 }

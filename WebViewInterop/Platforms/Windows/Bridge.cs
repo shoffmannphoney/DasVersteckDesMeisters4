@@ -9,14 +9,20 @@ public partial class Bridge : IWebViewBridge
 {
     public static int BridgeAvail = 0;
     public DelVoid? _cbFullyLoaded = null;
-    public DelString? _initProtocol = null;
-    public DelStringProtMode? _addProtocol = null;
+    public static DelString? _initProtocol = null;
+    public static DelVoidStringProtMode? _addProtocol = null;
 
     private string? _currentStartupId;
 
     private WebView2? _webView;
 
-  public async Task Connect(WebView2 webView)
+    public static void AddLog(string s1, protMode pm = protMode.crisp)
+    {
+        if (_addProtocol != null)
+            _addProtocol(s1, pm);
+    }
+
+    public async Task Connect(WebView2 webView)
   {
         try
         {
@@ -45,11 +51,12 @@ public partial class Bridge : IWebViewBridge
             _currentStartupId = await webView.CoreWebView2.AddScriptToExecuteOnDocumentCreatedAsync(@"window.webViewBridge = chrome.webview.hostObjects.sync.bridge;");
 
         }
-        catch // ( Exception e)
+        catch ( Exception ex)
         {
+            AddLog("Connect" + ex.Message, protMode.crisp);
 
         }
-  }
+    }
 
   public void Disconnect(WebView2 webView)
   {
@@ -82,25 +89,34 @@ public partial class Bridge : IWebViewBridge
 
     List<string>? LatestCalls = null;
 
-  public async Task<string> EvaluateJavascriptAsync(string script)
+  public async Task<string>? EvaluateJavascriptAsync(string script)
   {
-        if( ( !script.StartsWith( "window.") || script.StartsWith("window.scrollTo") ) && !script.StartsWith( "document.") ) 
+        try
         {
-            script += " console.log( window.pageYOffset );";
-            script += " console.log( \"" + script + "\" );";
+            if ((!script.StartsWith("window.") || script.StartsWith("window.scrollTo")) && !script.StartsWith("document."))
+            {
+                script += " console.log( window.pageYOffset );";
+                script += " console.log( \"" + script + "\" );";
 
+            }
+            if (_webView!.CoreWebView2 == null)
+            {
+                await _webView!.EnsureCoreWebView2Async();
+            }
+            if (LatestCalls == null) LatestCalls = new();
+
+            LatestCalls.Add(script);
+
+            var result = await _webView.CoreWebView2!.ExecuteScriptAsync(script);
+            return result;
         }
-        if ( _webView!.CoreWebView2 == null )
+        catch (Exception ex)
         {
-            await _webView!.EnsureCoreWebView2Async();
+            AddLog("EvaluateJavascriptAsync Windows:" + ex.Message, protMode.crisp);
+            return null;
         }
-        if (LatestCalls == null) LatestCalls = new();
 
-        LatestCalls.Add(script);
-
-        var result = await _webView.CoreWebView2!.ExecuteScriptAsync(script);
-        return result;
-  }
+    }
 
     public async void NavigateToString(string htmlPage)
     {
@@ -138,8 +154,9 @@ public partial class Bridge : IWebViewBridge
         {
             _webView.NavigateToString(htmlPage);
         }
-        catch
+        catch (Exception ex)
         {
+            AddLog("NavigateToString:" + ex.Message, protMode.crisp);
         }
     }
     public void SetCBFullyLoaded( DelVoid cbFullyLoaded )

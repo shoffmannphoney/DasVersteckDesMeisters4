@@ -50,10 +50,11 @@ public partial class Order: AbstractOrder
             of.Handled = true;
             of.Action = true;
         }
-        if (item == CA!.I10_Hatch && handled == true )
+        if (item == CA!.I10_Hatch && success == true && handled == false )
         {
             Items!.TransferItem(CA!.I10_Opening!.ID, CB!.LocType_On_Item, CA!.I10_Darkness_Machine!.ID);
             AdvGame!.StoryOutput(loca.Open_L10_Flap);
+            handled = true;
         }
 
         if ((success) && (item.GetStatus(CA!.iStatus_Counter_Door) > 0))
@@ -133,7 +134,7 @@ public partial class Order: AbstractOrder
         if( person.ID == CA!.Person_Knights_Armor!.ID )
         {
             AdvGame!.StoryOutput(loca.Open_Knights_Armor);
-
+            success = true;
         }
         // Pre
         // Base

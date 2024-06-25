@@ -114,43 +114,74 @@ namespace GameCore
 
         public virtual T? Find(string name)
         {
-            T? Ret = null;
-
-            foreach (T ele in TList )
+            try
             {
-                if (String.Compare(ele.Name.ToLower(new CultureInfo( "de-DE", false)), name.ToLower(new CultureInfo( "de-DE", false))) == 0)
+                T? Ret = null;
+
+                foreach (T ele in TList)
                 {
-                    Ret = ele;
+                    if (String.Compare(ele.Name.ToLower(new CultureInfo("de-DE", false)), name.ToLower(new CultureInfo("de-DE", false))) == 0)
+                    {
+                        Ret = ele;
+                    }
+                    if (Ret != null) break;
                 }
-                if (Ret != null) break;
+                return Ret;
             }
-            return Ret;
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("advbase_oo.Find: " + ex.Message, IGlobalData.protMode.crisp);
+                return null;
+
+
+            }
 
         }
         public T? Find(int ID)
         {
-            T? Ret = null;
-
-            foreach (T ele in TList)
+            try
             {
-                if ( ele.ID == ID )
+                T? Ret = null;
+
+                foreach (T ele in TList)
                 {
-                    Ret = ele;
+                    if (ele.ID == ID)
+                    {
+                        Ret = ele;
+                    }
+                    if (Ret != null) break;
                 }
-                if (Ret != null) break;
+                return Ret;
             }
-            return Ret;
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("advbase_oo.Find: " + ex.Message, IGlobalData.protMode.crisp);
+                return null;
+
+
+            }
 
         }
-        public T Add( Word word )
+        public T? Add( Word word )
         {
-            if (TList == null)
+            try
             {
-                TList = new List<T>();
+                if (TList == null)
+                {
+                    TList = new List<T>();
+                }
+                // new this.GetType().GetConstructor();
+                TList.Add((T)word);
+                return (T)word;
             }
-            // new this.GetType().GetConstructor();
-            TList.Add( (T) word );
-            return (T) word;
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("advbase_oo.Add: " + ex.Message, IGlobalData.protMode.crisp);
+                return null;
+
+
+            }
+
         }
 
     }
@@ -381,34 +412,44 @@ namespace GameCore
         }
         public AbstractAdvObject( int ID, List<Noun>? Names, List<Noun>? SynNames, List<Adj>? Adjectives, List<Adj>? SynAdjectives, int Sex, string? Desc, bool Active, DelAdvObject? Controller, NounList? Nouns, AdjList? Adjs  )
         {
-            this.ID = ID;
-            this.Names = Names;
-            this.SynNames = SynNames;
-            this.Adjectives = Adjectives;
-            this.SynAdjectives = SynAdjectives;
-            this.Sex = Sex;
-            this.SexEng = Sex;
-            this.Description = Desc;
-            this.Active = Active;
-            this.controller = Controller;
-            this.Known = false;
-            this.Relevance = relTypes.r_essential;
-            if (Controller != null)
+            try
             {
-                this.controllerName = Controller.Method.Name;
-            }
-            else
-                this.controllerName = null;
-            this.Nouns = Nouns;
-            this.Adjs = Adjs;
-            this.Categories = new CategoryRelList();
-            this.SL= new StatusList();
-            this.IsCountable = true;
+                this.ID = ID;
+                this.Names = Names;
+                this.SynNames = SynNames;
+                this.Adjectives = Adjectives;
+                this.SynAdjectives = SynAdjectives;
+                this.Sex = Sex;
+                this.SexEng = Sex;
+                this.Description = Desc;
+                this.Active = Active;
+                this.controller = Controller;
+                this.Known = false;
+                this.Relevance = relTypes.r_essential;
+                if (Controller != null)
+                {
+                    this.controllerName = Controller.Method.Name;
+                }
+                else
+                    this.controllerName = null;
+                this.Nouns = Nouns;
+                this.Adjs = Adjs;
+                this.Categories = new CategoryRelList();
+                this.SL = new StatusList();
+                this.IsCountable = true;
 
-            if (this.Names == null) this.Names = new List<Noun>();
-            if (this.SynNames == null) this.SynNames = new List<Noun>();
-            if (this.Adjectives == null) this.Adjectives = new List<Adj>();
-            if (this.SynAdjectives== null) this.SynAdjectives= new List<Adj>();
+                if (this.Names == null) this.Names = new List<Noun>();
+                if (this.SynNames == null) this.SynNames = new List<Noun>();
+                if (this.Adjectives == null) this.Adjectives = new List<Adj>();
+                if (this.SynAdjectives == null) this.SynAdjectives = new List<Adj>();
+            }
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("AbstractAdvObject Constructor: " + ex.Message, IGlobalData.protMode.crisp);
+
+
+            }
+
         }
 
         public bool SetController( DelAdvObject Controller )
@@ -817,22 +858,32 @@ namespace GameCore
 
         public Status? FindStatus( int ID, bool findAndInsert = true )
         {
-            Status? statReturn = null;
+            try
+            {
+                Status? statReturn = null;
 
-            for (int i = 0; i < this.SL?.Count; i++ )
-            {
-                if( this.SL.FindIndex(i)!.ID == ID)
+                for (int i = 0; i < this.SL?.Count; i++)
                 {
-                    statReturn = this.SL.FindIndex(i);
-                    break;
+                    if (this.SL.FindIndex(i)!.ID == ID)
+                    {
+                        statReturn = this.SL.FindIndex(i);
+                        break;
+                    }
                 }
+                if (statReturn == null && findAndInsert)
+                {
+                    statReturn = new Status(ID, 0);
+                    this!.SL!.Add(statReturn);
+                }
+                return (statReturn);
             }
-            if (statReturn == null && findAndInsert )
+            catch (Exception ex)
             {
-                statReturn = new Status(ID, 0);
-                this!.SL!.Add( statReturn );
+                Phoney_MAUI.Core.GlobalData.AddLog("FindStatus: " + ex.Message, IGlobalData.protMode.crisp);
+                return null;
+
             }
-            return (statReturn);
+
         }
         public Status FindStatus( Status stat )
         {
@@ -884,17 +935,26 @@ namespace GameCore
 
        public T? Find(int ID)
         {
-            T? Ret = null;
-
-            foreach (T AOele in List)
+            try
             {
-                if (AOele.ID == ID)
+                T? Ret = null;
+
+                foreach (T AOele in List)
                 {
-                    Ret = AOele;
+                    if (AOele.ID == ID)
+                    {
+                        Ret = AOele;
+                    }
+                    if (Ret != null) break;
                 }
-                if (Ret != null) break;
+                return Ret;
             }
-            return Ret;
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("AbstractAdvObjectList.Find: " + ex.Message, IGlobalData.protMode.crisp);
+                return null;
+
+            }
 
         }
         /*
@@ -1131,35 +1191,53 @@ namespace GameCore
 
         public Category? Find(int ID)
         {
-            Category? Ret = null;
-
-            foreach (Category c in List!)
+            try
             {
-                
-                if (c.CategoryID == ID)
+                Category? Ret = null;
+
+                foreach (Category c in List!)
                 {
-                    Ret = c;
+
+                    if (c.CategoryID == ID)
+                    {
+                        Ret = c;
+                    }
+                    if (Ret != null) break;
                 }
-                if (Ret != null) break;
+                return Ret;
             }
-            return Ret;
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("CategoryList.Find: " + ex.Message, IGlobalData.protMode.crisp);
+                return null;
+
+            }
 
         }
         public CategoryRel? FindAsRel(int ID, relTypes rType = relTypes.r_essential )
         {
-            Category? Ret = null;
-
-            foreach (Category c in List!)
+            try
             {
+                Category? Ret = null;
 
-                if (c.CategoryID == ID)
+                foreach (Category c in List!)
                 {
-                    Ret = c;
+
+                    if (c.CategoryID == ID)
+                    {
+                        Ret = c;
+                    }
+                    if (Ret != null) break;
                 }
-                if (Ret != null) break;
+                CategoryRel? cRel = new CategoryRel(Ret, rType);
+                return cRel;
             }
-            CategoryRel? cRel = new CategoryRel(Ret, rType);
-            return cRel;
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("CategoryRel.FindAsRel: " + ex.Message, IGlobalData.protMode.crisp);
+                return null;
+
+            }
 
         }
 
@@ -1225,18 +1303,28 @@ namespace GameCore
 
         public bool RestoreCategoryRelList( )
         {
-            Dictionary<int, CategoryRel>? TList2 = new Dictionary<int, CategoryRel>();
-
-            foreach (KeyValuePair<int,CategoryRel> el in List!)
+            try
             {
-                TList2.Add(el.Key, el.Value );
+                Dictionary<int, CategoryRel>? TList2 = new Dictionary<int, CategoryRel>();
+
+                foreach (KeyValuePair<int, CategoryRel> el in List!)
+                {
+                    TList2.Add(el.Key, el.Value);
+
+                }
+                List = TList2;
+                TList2 = null;
+
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("CategoryRel.RestoreCategoryRelList: " + ex.Message, IGlobalData.protMode.crisp);
+                return false;
 
             }
-            List = TList2;
-            TList2 = null;
 
-
-            return true;
         }
 
         public CategoryRel? Find(int ID)
@@ -1290,33 +1378,51 @@ namespace GameCore
             */
         public void Add(CategoryRel? AO)
         {
-            if (AO == null)
-                return;
-
-            if (List == null)
+            try
             {
-                List = new Dictionary<int, CategoryRel>();
+                if (AO == null)
+                    return;
+
+                if (List == null)
+                {
+                    List = new Dictionary<int, CategoryRel>();
+                }
+                if (List.ContainsKey(AO.CategoryID) == true)
+                {
+
+                }
+                // new this.GetType().GetConstructor();
+                List.Add(AO.CategoryID, AO);
             }
-            if(List.ContainsKey(AO.CategoryID ) == true )
+            catch (Exception ex)
             {
+                Phoney_MAUI.Core.GlobalData.AddLog("CategoryRel.Add: " + ex.Message, IGlobalData.protMode.crisp);
 
             }
-            // new this.GetType().GetConstructor();
-            List.Add(AO.CategoryID, AO);
+
         }
         public void Add(CategoryRel? AO, relTypes rt)
         {
-            if (List == null)
+            try
             {
-                List = new Dictionary<int, CategoryRel>();
+                if (List == null)
+                {
+                    List = new Dictionary<int, CategoryRel>();
+                }
+                // new this.GetType().GetConstructor();
+                CategoryRel AO1 = new CategoryRel(AO!.Category, rt);
+                if (List.ContainsKey(AO1.CategoryID) == true)
+                {
+
+                }
+                List.Add(AO1.CategoryID, AO1);
             }
-            // new this.GetType().GetConstructor();
-            CategoryRel AO1 = new CategoryRel( AO!.Category, rt );
-            if (List.ContainsKey(AO1.CategoryID) == true)
+            catch (Exception ex)
             {
+                Phoney_MAUI.Core.GlobalData.AddLog("CategoryRel.Add: " + ex.Message, IGlobalData.protMode.crisp);
+
 
             }
-            List.Add(AO1.CategoryID, AO1);
         }
         public void Add(int CategoryID)
         {

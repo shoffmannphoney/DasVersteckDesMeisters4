@@ -323,12 +323,11 @@ public class UIServices : IUIServices
         {
             if (GD.LayoutDescription.PicMode != IGlobalData.picMode.off && picName != null)
             {
+                int pHeight, pWidth;
                 if (ExternalGameOut != null)
                 {
-                    int pHeight, pWidth;
-                    // string size = "100";
-                    pWidth = (int)((ExternalGameOut.Width * 20) / 100);
-                    pHeight = (int)((pWidth * 9) / 16);
+                    pWidth = (int)((ExternalGameOut.Width* 20) / 100);
+                    pHeight = (int)((ExternalGameOut.Width * 9) / 16);
                     if (GD.LayoutDescription.PicMode == IGlobalData.picMode.medium)
                     {
                         // size = "400";
@@ -341,8 +340,31 @@ public class UIServices : IUIServices
                         pWidth = (int)((ExternalGameOut.Width * 60) / 100);
                         pHeight = (int)((pWidth * 9) / 16);
                     }
+                }
+                else
+                {
+                    double pWidth2 = GlobalSpecs.CurrentGlobalSpecs.GetScreenWidth();
+                    double pHeight2 = GlobalSpecs.CurrentGlobalSpecs.GetScreenHeight();
+                    pWidth = (int)((pWidth2 * 20) / 100);
+                    pHeight = (int)((pWidth * 9) / 16);
 
-                    string s1 = picName; //  this.Find(locationID)!.LocPicture!;
+
+                    if (GD.LayoutDescription.PicMode == IGlobalData.picMode.medium)
+                    {
+                        // size = "400";
+                        pWidth = (int)((pWidth2 * 40) / 100);
+                        pHeight = (int)((pWidth * 9) / 16);
+                    }
+                    if (GD.LayoutDescription.PicMode == IGlobalData.picMode.big)
+                    {
+                        // size = "800";
+                        pWidth = (int)((pWidth2 * 60) / 100);
+                        pHeight = (int)((pWidth * 9) / 16);
+                    }
+                }
+                // string size = "100";
+
+                string s1 = picName; //  this.Find(locationID)!.LocPicture!;
 
 
                     // string s = string.Format( "<center><img src=\"localfolder:./{0}\" width=\"{1}\" align=\"middle\" /> </center>", this.Find( locationID ).LocPicture, size );
@@ -364,7 +386,8 @@ public class UIServices : IUIServices
 #endif
                     // <img src=\"l012.jpg\" width=\"50%\" height=\"50%\"/img>
                     GD!.Adventure!.StoryOutput(s);
-                }
+
+                /*
                 else
                 {
                     int pHeight, pWidth;
@@ -410,6 +433,7 @@ public class UIServices : IUIServices
                     GD!.Adventure!.StoryOutput(s);
 
                 }
+                */
             }
         }
         catch (Exception ex)
@@ -1954,7 +1978,9 @@ public class UIServices : IUIServices
                 // stopCount = 1;
                 await STTStopListening(false);
                 asyncSpeechRunning = false;
-                STTStartTime!.Stop();
+
+                if(STTStartTime != null )
+                    STTStartTime!.Stop();
                 STTStartTime = null;
             }
             // i = 1;
@@ -2749,7 +2775,7 @@ public class MCMenuView
         UIS!.DoUpdateBrowser = true;
     }
     */
-
+    public static MyTouchBehavior? touchBehaviorB1 = null;
     public void MCOutput(MCMenu MCM_par, Phoney_MAUI.Model.DelMCMSelection? callbackSelection_par, bool CanBeInterrupted_par)
     {
         try
@@ -2942,6 +2968,19 @@ public class MCMenuView
 
                             };
                             l.Behaviors.Add(touchBehaviorL);
+#elif ANDROID
+                            int grefCount = Java.Interop.JniRuntime.CurrentRuntime.GlobalReferenceCount;
+                            if (grefCount < 10000)
+                            {
+                                TouchBehavior tb1 = new MyTouchBehavior
+                                {
+                                    HoveredOpacity = 0.5,
+                                    PressedOpacity = 0.5
+
+                                };
+                                l.Behaviors.Add(tb1);
+                            }
+
 #endif
                         }
                         else
@@ -2986,6 +3025,19 @@ public class MCMenuView
 
                             };
                             l.Behaviors.Add(touchBehaviorL);
+#elif ANDROID
+                            int grefCount = Java.Interop.JniRuntime.CurrentRuntime.GlobalReferenceCount;
+                            if (grefCount < 10000)
+                            {
+                                TouchBehavior tb1 = new MyTouchBehavior
+                                {
+                                    HoveredOpacity = 0.5,
+                                    PressedOpacity = 0.5
+
+                                };
+                                l.Behaviors.Add(tb1);
+                            }
+
 #endif
                             string? s = null;
 
@@ -3209,74 +3261,100 @@ public class Scroller : IScroller
     // int CountFlushes = 0;
     public bool ResetWait()
     {
-        // CountFlushes = 0;
-        UIS!.BrowserRefreshOngoing = false;
-        FlushJavaScript();
-        InqScrollingAreaAsync().GetAwaiter();
-
-        // Wenn der Scrollbereich noch keine Höhe hat, dann scrollt er auch nicht.
-        // Wenn dieser Aufruf hier übersprungen wird, dann ruft ihn InqScrollingAreaAsync() auf
-        if( HTMLViewMaxYPos > 0 )
-            DoOnBrowserContentLoad();
-        else
+        try
         {
+            // CountFlushes = 0;
+            UIS!.BrowserRefreshOngoing = false;
+            FlushJavaScript();
+            InqScrollingAreaAsync().GetAwaiter();
 
+            // Wenn der Scrollbereich noch keine Höhe hat, dann scrollt er auch nicht.
+            // Wenn dieser Aufruf hier übersprungen wird, dann ruft ihn InqScrollingAreaAsync() auf
+            if (HTMLViewMaxYPos > 0)
+                DoOnBrowserContentLoad();
+            else
+            {
+
+            }
+            _scrollModeCountDown = 15;
+            HTMLViewWait = 0;
+            ctInqScrollArea = 20;
+            // PageDown();
+            return true;
         }
-        _scrollModeCountDown = 15;
-        HTMLViewWait = 0;
-        ctInqScrollArea = 20;
-        // PageDown();
-        return true;
+        catch (Exception e)
+        {
+            GlobalData.AddLog("ResetWait: " + e.Message, IGlobalData.protMode.crisp);
+            return false;
+        }
+
     }
 
     public void SetToPos(int yPos)
     {
-        if (Math.Abs(yPos - HTMLViewYPos) > 100)
+        try
         {
+            if (Math.Abs(yPos - HTMLViewYPos) > 100)
+            {
 
+            }
+            if (yPos > (int)HTMLViewMaxYPos)
+            {
+                yPos = (int)HTMLViewMaxYPos;
+            }
+            HTMLLastSet3 = HTMLLastSet2;
+            HTMLLastSet2 = HTMLLastSet;
+            HTMLLastSet = yPos;
+
+            // yPos = Double.Round(yPos, MidpointRounding.ToEven );
+            string s1 = "window.scrollTo({ top: " + yPos + " });";
+
+            // Action<string> a = delegate(string s1) { StartScrollOrder(s1); };
+            StartScrollOrder(s1).GetAwaiter();
+            /*
+            Task task = Task.Run(() => StartScrollOrder(s1));
+            task.Wait();
+            */
         }
-        if (yPos > (int) HTMLViewMaxYPos)
+        catch (Exception e)
         {
-            yPos = (int) HTMLViewMaxYPos;
+            GlobalData.AddLog("SetToPos: " + e.Message, IGlobalData.protMode.crisp);
         }
-        HTMLLastSet3 = HTMLLastSet2;
-        HTMLLastSet2 = HTMLLastSet;
-        HTMLLastSet = yPos;
 
-        // yPos = Double.Round(yPos, MidpointRounding.ToEven );
-        string s1 = "window.scrollTo({ top: " + yPos + " });";
 
-        // Action<string> a = delegate(string s1) { StartScrollOrder(s1); };
-        StartScrollOrder(s1).GetAwaiter();
-        /*
-        Task task = Task.Run(() => StartScrollOrder(s1));
-        task.Wait();
-        */
     }
 
     public async Task StartScrollOrder(string scrollOrder)
     {
-        if (UIS!.BrowserRefreshOngoing)
+        try
         {
-            jsCallbacks!.Add(scrollOrder);
-        }
-        else
-        {
-            try
+            if (UIS!.BrowserRefreshOngoing)
             {
-                // scrollOrder += " console.log( window.pageYOffset );";
-                // scrollOrder += " console.log( \"" + scrollOrder + "\" );";
-                var response2 = await UIS!.ExternalGameOut!.EvaluateJavaScriptAsync(scrollOrder);
-                if (response2 == null)
+                jsCallbacks!.Add(scrollOrder);
+            }
+            else
+            {
+                try
                 {
+                    // scrollOrder += " console.log( window.pageYOffset );";
+                    // scrollOrder += " console.log( \"" + scrollOrder + "\" );";
+                    var response2 = await UIS!.ExternalGameOut!.EvaluateJavaScriptAsync(scrollOrder);
+                    if (response2 == null)
+                    {
 
+                    }
+                }
+                catch (Exception e)
+                {
+                    Phoney_MAUI.Core.GlobalData.AddLog("StartScrollOrder: " + e.Message, IGlobalData.protMode.crisp);
                 }
             }
-            catch (Exception e)
-            {
-                Phoney_MAUI.Core.GlobalData.AddLog("StartScrollOrder: " + e.Message, IGlobalData.protMode.crisp);
-            }
         }
+        catch (Exception e)
+        {
+            GlobalData.AddLog("StartScrollOrder: " + e.Message, IGlobalData.protMode.crisp);
+        }
+
     }
 
     public void DelaySet( )
@@ -3306,28 +3384,42 @@ public class Scroller : IScroller
 
     public void ScrollToEnd()
     {
-        int yPos = (int)HTMLViewMaxYPos;
+        try
+        {
+            int yPos = (int)HTMLViewMaxYPos;
 
-        GlobalData.AddLog( "Endscroller: " + "window.scrollTo({ top: " + yPos + ", behavior: 'smooth' }", IGlobalData.protMode.crisp );
+            GlobalData.AddLog("Endscroller: " + "window.scrollTo({ top: " + yPos + ", behavior: 'smooth' }", IGlobalData.protMode.medium);
 
-        string s1 = "window.scrollTo({ top: " + yPos + ", behavior: 'smooth' });";
+            string s1 = "window.scrollTo({ top: " + yPos + ", behavior: 'smooth' });";
 
-        StartScrollOrder(s1).GetAwaiter();
+            StartScrollOrder(s1).GetAwaiter();
+        }
+        catch (Exception e)
+        {
+            GlobalData.AddLog("ScrollToEnd: " + e.Message, IGlobalData.protMode.crisp);
+        }
 
     }
     public void SetToEnd()
     {
-        int yPos = (int)HTMLViewMaxYPos;
+        try
+        {
+            int yPos = (int)HTMLViewMaxYPos;
 
-        GlobalData.AddLog("Endjumper: " + "window.scrollTo({ top: " + yPos + ", behavior: 'smooth' }", IGlobalData.protMode.medium);
+            GlobalData.AddLog("Endjumper: " + "window.scrollTo({ top: " + yPos + ", behavior: 'smooth' }", IGlobalData.protMode.medium);
 
-        string s1 = "window.scrollTo({ top: " + yPos + " });";
+            string s1 = "window.scrollTo({ top: " + yPos + " });";
 
-        StartScrollOrder(s1).GetAwaiter();
+            StartScrollOrder(s1).GetAwaiter();
+        }
+        catch (Exception e)
+        {
+            GlobalData.AddLog("SetToEnd: " + e.Message, IGlobalData.protMode.crisp);
+        }
 
     }
 
-        public void SetRescale()
+    public void SetRescale()
     {
         _rescalerMode = IScroller.rescalerMode.delayRescale;
         _rescalerModeCountDown = 30;
@@ -3349,24 +3441,31 @@ public class Scroller : IScroller
 
     public void PageDown()
     {
- 
-        double y = HTMLViewYPos + HTMLViewHeight - 30;
-
-        y = Double.Round(y, MidpointRounding.ToEven);
-
-        if( y < 1000)
+        try
         {
+            double y = HTMLViewYPos + HTMLViewHeight - 30;
 
+            y = Double.Round(y, MidpointRounding.ToEven);
+
+            if (y < 1000)
+            {
+
+            }
+            GlobalData.AddLog("PageDowner: " + "window.scrollTo({ top: " + y + ", behavior: 'smooth' }", IGlobalData.protMode.medium);
+            string s1 = "window.scrollTo({ top: " + y + ", behavior: 'smooth' });";
+
+            StartScrollOrder(s1).GetAwaiter();
+
+            /*
+            Task task = Task.Run(() => StartScrollOrder(s1));
+            task.Wait();
+            */
         }
-        GlobalData.AddLog("PageDowner: " + "window.scrollTo({ top: " + y + ", behavior: 'smooth' }", IGlobalData.protMode.medium);
-        string s1 = "window.scrollTo({ top: " + y + ", behavior: 'smooth' });";
+        catch (Exception e)
+        {
+            GlobalData.AddLog("PageDown: " + e.Message, IGlobalData.protMode.crisp);
+        }
 
-        StartScrollOrder(s1).GetAwaiter();
-
-        /*
-        Task task = Task.Run(() => StartScrollOrder(s1));
-        task.Wait();
-        */
     }
 
     public void ScrollPage()
@@ -3481,9 +3580,9 @@ public class Scroller : IScroller
                     var task = Task.Run(async () => await UIS!.ExternalGameOut!.EvaluateJavaScriptAsync(s1!));
                     // task.Wait();
                     // UIS!.ExternalGameOut!.EvaluateJavaScriptAsync(jsCallbacks[0]!);
-                    GlobalData.AddLog("Remove JS Ein", IGlobalData.protMode.crisp);
+                    GlobalData.AddLog("Remove JS On", IGlobalData.protMode.crisp);
                     jsCallbacks.RemoveAt(0);
-                    GlobalData.AddLog("Remove JS Aus", IGlobalData.protMode.crisp);
+                    GlobalData.AddLog("Remove JS Off", IGlobalData.protMode.crisp);
                 }
             }
         }
@@ -3497,171 +3596,184 @@ public class Scroller : IScroller
     List<string>? jsCallbacks = null;
     public void DoScroll()
     {
-        if( jsCallbacks == null )
-        {
-            jsCallbacks = new();
-        }
-
-        FlushJavaScript();
-        /*
         try
         {
-            var result = UIS!.ExternalGameOut.EvaluateJavaScriptAsync("Jehova").Result; // get the value of someVariable from JavaScript
-        }
-        catch (Exception e)
-        {
-
-        }
-        */
-
-        UIS!.UpdateBrowserCallsPerCycle = 0;
-
-        ctInqScrollArea++;
-        if(ctInqScrollArea >= 20 )
-        {
-            InqScrollingAreaAsync().GetAwaiter();
-            ctInqScrollArea = 0;
-        }
-        /*
-        if (ct >= 20 && (txx == null || txx.IsCompleted == true || txx.IsCanceled == true ||
-                         txx.IsCompletedSuccessfully == true || txx.IsFaulted == true))
-        {
-            TaskAwaiter tai = InqScrollingAreaAsync().GetAwaiter();
-
-       
-
-            txx = (System.Threading.Tasks.Task<bool>) InqScrollingAreaAsync().GetAwaiter().GetResult();
-            ct = 0;
-        }
-        */
-
-        // Der Bildrescaler muss aufgerufen werden?
-        if( _rescalerMode == IScroller.rescalerMode.delayRescale )
-        {
-            _rescalerModeCountDown--;
-            if( _rescalerModeCountDown <= 0 )
+            if (jsCallbacks == null)
             {
-                UIS!.RecalcPictures();
-                _rescalerMode = IScroller.rescalerMode.none;
+                jsCallbacks = new();
             }
-        }
 
-
-        // None: Hier tun wir nüschte
-        if (_scrollMode == IScroller.scrollMode.none)
-        {
-
-        }
-        else if (_scrollMode == IScroller.scrollMode.delaySet)
-        {
-            _scrollModeCountDown--;
-            if (_scrollModeCountDown <= 0)
+            FlushJavaScript();
+            /*
+            try
             {
-                SetToPos( (int) HTMLViewYRef);
-                _scrollModeCountDown = 15;
-                _scrollMode = IScroller.scrollMode.delayScroll;
+                var result = UIS!.ExternalGameOut.EvaluateJavaScriptAsync("Jehova").Result; // get the value of someVariable from JavaScript
             }
-        }
-        else if (_scrollMode == IScroller.scrollMode.delayScroll)
-        {
-            _scrollModeCountDown--;
-            if (_scrollModeCountDown <= 0 )
+            catch (Exception e)
             {
-                _screenRefreshed = false;
-                _scrollMode = IScroller.scrollMode.scrollToEnd;
+
             }
-        }
-        else if (_scrollMode == IScroller.scrollMode.delayJump)
-        {
-            _scrollModeCountDown--;
-            if (_scrollModeCountDown <= 0)
+            */
+
+            UIS!.UpdateBrowserCallsPerCycle = 0;
+
+            ctInqScrollArea++;
+            if (ctInqScrollArea >= 20)
             {
-                double y = HTMLViewMaxYPos;
-
-                y = Double.Round(y, MidpointRounding.ToEven);
-                string s1 = "window.scrollTo({ top: " + y + "});";
-
-                StartScrollOrder(s1).GetAwaiter();
-                /*
-                Task task = Task.Run(() => StartScrollOrder(s1));
-                task.Wait();
-                */
- 
-                _scrollMode = IScroller.scrollMode.none;
+                InqScrollingAreaAsync().GetAwaiter();
+                ctInqScrollArea = 0;
             }
-        }
-        else if (_scrollMode == IScroller.scrollMode.delayRefreshJump)
-        {
-            _scrollModeCountDown--;
-            if (_scrollModeCountDown <= 0)
+            /*
+            if (ct >= 20 && (txx == null || txx.IsCompleted == true || txx.IsCanceled == true ||
+                             txx.IsCompletedSuccessfully == true || txx.IsFaulted == true))
             {
-                UIS!.FinishBrowserUpdate();
-                _scrollMode = IScroller.scrollMode.delayJump;
-                _scrollModeCountDown = 30;
+                TaskAwaiter tai = InqScrollingAreaAsync().GetAwaiter();
+
+
+
+                txx = (System.Threading.Tasks.Task<bool>) InqScrollingAreaAsync().GetAwaiter().GetResult();
+                ct = 0;
             }
-        }
+            */
 
-
-
-        else if (_scrollMode == IScroller.scrollMode.scrollToEnd)
-        {
-            if (UIS.OnBrowserContentLoaded == IUIServices.onBrowserContentLoaded.nothing && HTMLViewMaxYPos > 0)
+            // Der Bildrescaler muss aufgerufen werden?
+            if (_rescalerMode == IScroller.rescalerMode.delayRescale)
             {
-                double yDest = HTMLViewMaxYPos;
-
-                // if( HTMLViewYPos == 0)
-                // {
-                // InqScrollingAreaAsync().GetAwaiter();
-                // }
-
-                // string s3 = UIS.ExternalGameOut.EvaluateJavaScriptAsync($"window.pageYOffset").GetAwaiter().GetResult();
-                // HTMLViewYPos = Double.Parse(s3);
-
-                if (yDest > HTMLViewYPos + HTMLViewHeight - 30)
+                _rescalerModeCountDown--;
+                if (_rescalerModeCountDown <= 0)
                 {
-                    yDest = HTMLViewYPos + HTMLViewHeight - 30;
+                    UIS!.RecalcPictures();
+                    _rescalerMode = IScroller.rescalerMode.none;
                 }
-                yDest = Double.Round(yDest, MidpointRounding.ToEven);
-
-                string s1 = "window.scrollTo({ top: " + yDest + ", behavior: 'smooth' });";
-
-                StartScrollOrder(s1).GetAwaiter();
-                /*
-                Task task = Task.Run(() => StartScrollOrder(s1));
-                task.Wait();
-                */
-
-                _scrollMode = IScroller.scrollMode.none;
-                // HTMTLViewYPos = HTMLViewMaxYPos;
             }
-        }
 
-        if (GD!.ProvideMoreGrid != null)
-        {
-            // ToDo: Ein/Ausblenden des More-Feldes
-            if ((HTMLViewYPos + HTMLViewHeight) < (HTMLViewMaxYPos - 5) &&
-                GD.ProvideMoreGrid(true, 1).IsVisible == false && UIS!.MCMVVisible == false)
+
+            // None: Hier tun wir nüschte
+            if (_scrollMode == IScroller.scrollMode.none)
             {
-                HTMLViewWait++;
-                if (HTMLViewWait > 70)
+
+            }
+            else if (_scrollMode == IScroller.scrollMode.delaySet)
+            {
+                _scrollModeCountDown--;
+                if (_scrollModeCountDown <= 0)
+                {
+                    SetToPos((int)HTMLViewYRef);
+                    _scrollModeCountDown = 15;
+                    _scrollMode = IScroller.scrollMode.delayScroll;
+                }
+            }
+            else if (_scrollMode == IScroller.scrollMode.delayScroll)
+            {
+                _scrollModeCountDown--;
+                if (_scrollModeCountDown <= 0)
+                {
+                    _screenRefreshed = false;
+                    _scrollMode = IScroller.scrollMode.scrollToEnd;
+                }
+            }
+            else if (_scrollMode == IScroller.scrollMode.delayJump)
+            {
+                _scrollModeCountDown--;
+                if (_scrollModeCountDown <= 0)
+                {
+                    double y = HTMLViewMaxYPos;
+
+                    y = Double.Round(y, MidpointRounding.ToEven);
+                    string s1 = "window.scrollTo({ top: " + y + "});";
+
+                    StartScrollOrder(s1).GetAwaiter();
+                    /*
+                    Task task = Task.Run(() => StartScrollOrder(s1));
+                    task.Wait();
+                    */
+
+                    _scrollMode = IScroller.scrollMode.none;
+                }
+            }
+            else if (_scrollMode == IScroller.scrollMode.delayRefreshJump)
+            {
+                _scrollModeCountDown--;
+                if (_scrollModeCountDown <= 0)
+                {
+                    UIS!.FinishBrowserUpdate();
+                    _scrollMode = IScroller.scrollMode.delayJump;
+                    _scrollModeCountDown = 30;
+                }
+            }
+
+
+
+            else if (_scrollMode == IScroller.scrollMode.scrollToEnd)
+            {
+                if (UIS.OnBrowserContentLoaded == IUIServices.onBrowserContentLoaded.nothing && HTMLViewMaxYPos > 0)
+                {
+                    double yDest = HTMLViewMaxYPos;
+
+                    // if( HTMLViewYPos == 0)
+                    // {
+                    // InqScrollingAreaAsync().GetAwaiter();
+                    // }
+
+                    // string s3 = UIS.ExternalGameOut. ($"window.pageYOffset").GetAwaiter().GetResult();
+                    // HTMLViewYPos = Double.Parse(s3);
+
+                    /*
+                    if (yDest > HTMLViewYPos + HTMLViewHeight - 30)
+                    {
+                        yDest = HTMLViewYPos + HTMLViewHeight - 30;
+                    }
+                    */
+                    yDest = Double.Round(yDest, MidpointRounding.ToEven);
+
+                    GlobalData.AddLog("scrollToEnd Call from DoScroll: " + HTMLViewYPos.ToString() + " " + HTMLViewHeight.ToString() + " " + HTMLViewMaxYPos.ToString(), IGlobalData.protMode.crisp);
+
+
+                    string s1 = "window.scrollTo({ top: " + yDest + ", behavior: 'smooth' });";
+
+                    StartScrollOrder(s1).GetAwaiter();
+                    /*
+                    Task task = Task.Run(() => StartScrollOrder(s1));
+                    task.Wait();
+                    */
+
+                    _scrollMode = IScroller.scrollMode.none;
+                    // HTMTLViewYPos = HTMLViewMaxYPos;
+                }
+            }
+
+            if (GD!.ProvideMoreGrid != null)
+            {
+                // ToDo: Ein/Ausblenden des More-Feldes
+                if ((HTMLViewYPos + HTMLViewHeight) < (HTMLViewMaxYPos - 5) &&
+                    GD.ProvideMoreGrid(true, 1).IsVisible == false && UIS!.MCMVVisible == false)
+                {
+                    HTMLViewWait++;
+                    if (HTMLViewWait > 70)
+                    {
+                        if (GD.SelectOutput != null)
+                            GD.SelectOutput(ILayoutDescription.selectedOutput.more);
+                    }
+                }
+                else if ((HTMLViewYPos + HTMLViewHeight) >= (HTMLViewMaxYPos - 5) &&
+                         GD.ProvideMoreGrid(true, 1).IsVisible == true && UIS!.MCMVVisible == false)
                 {
                     if (GD.SelectOutput != null)
-                        GD.SelectOutput(ILayoutDescription.selectedOutput.more);
-                }
-            }
-            else if ((HTMLViewYPos + HTMLViewHeight) >= (HTMLViewMaxYPos - 5) &&
-                     GD.ProvideMoreGrid(true, 1).IsVisible == true && UIS!.MCMVVisible == false)
-            {
-                if (GD.SelectOutput != null)
-                    GD.SelectOutput(ILayoutDescription.selectedOutput.input);
+                        GD.SelectOutput(ILayoutDescription.selectedOutput.input);
 
-                if (GlobalData.CurrentGlobalData!.FocusMethod != null)
-                    GlobalData.CurrentGlobalData!.FocusMethod();
-                HTMLViewWait = 0;
+                    if (GlobalData.CurrentGlobalData!.FocusMethod != null)
+                        GlobalData.CurrentGlobalData!.FocusMethod();
+                    HTMLViewWait = 0;
                     // _w.Inputline.Focus();
                     // ScrollToEnd = false;
                 }
+            }
         }
+        catch (Exception e)
+        {
+            GlobalData.AddLog("DoScroll: " + e.Message, IGlobalData.protMode.crisp);
+        }
+
     }
 
     public void Gedoens()
@@ -3771,7 +3883,7 @@ public class Scroller : IScroller
                     {
                         s = "(leer)";
                     }
-                    GlobalData.AddLog("Nicht parsebare HTMLViewHeight: " + s, IGlobalData.protMode.crisp);
+                    GlobalData.AddLog("Nicht parsebare HTMLViewHeight: " + viewHeight.ToString(), IGlobalData.protMode.crisp);
 
                 }
 
@@ -3803,7 +3915,7 @@ public class Scroller : IScroller
                 else
                 {
                     if (s == null) s = "(leer)";
-                    GlobalData.AddLog("Nicht parsebare HTMLViewMaxYPos: " + s, IGlobalData.protMode.crisp);
+                    GlobalData.AddLog("Nicht parsebare HTMLViewMaxYPos: " + maxYPos.ToString(), IGlobalData.protMode.crisp);
 
                 }
 
@@ -3848,6 +3960,7 @@ public class Scroller : IScroller
     }
 }
 
+/*
 [Serializable]
 public class ScrollerOld : IScroller
 {
@@ -3855,31 +3968,16 @@ public class ScrollerOld : IScroller
     public IScroller.scrollStep ScrollStep { get; set; }
 
     private double _yPos = 0;
-    // private double _yMaxPos = 0;
-    // private double _winHeight = 100;
-    // private double _yMaxPosClient = 0;
-    // private double _yMaxPosOffset = 0;
-    // private double _preCompactionY = -1;
-    // private double _preCompactionYMax = -1;
-    // private int _countWaitForScroll = 0;
 
     private static double currentY = -1;
     private static double targetY = -1;
-    // private static double speedY = 0;
     private static int framesWithoutMovement = 0;
 
-    // private bool _heightRefresh = true;
     private bool _pagingRunning = false;
-    // private bool _resizeRunning = false;
     private bool _targetAttached = false;
 
     private double _yMaxPosTargeted = 0;
-    // private double _yPosTargeted = 0;
-    // private bool _scrollToEnd = false;
-    // private bool _jumpToEnd = false;
-    // private bool _didCompaction = false;
     public int _jumpToEndWait = 0;
-    // private int _scrollToEndWait = 0;
 
     public enum _scrollphase
     {
@@ -3890,7 +3988,6 @@ public class ScrollerOld : IScroller
         four
     }
 
-    // public Scroller(advtest.MainWindow w);
     public bool SetNext { get; set; } = false;
 
     public double YPos 
@@ -3996,13 +4093,11 @@ public class ScrollerOld : IScroller
 
             ct = 0;
         }
-        // Task.WaitAll(t);
 
 
         if (_targetAttached && YMaxPos != _yMaxPosTargeted)
         {
             targetY = YMaxPos - WinHeight + 30;
-            // targetY += _yMaxPosTargeted - YMaxPos;
             _yMaxPosTargeted = YMaxPos;
         }
         else if (targetY == -1)
@@ -4056,7 +4151,6 @@ public class ScrollerOld : IScroller
         if (GD.ProvideMoreGrid == null)
             return;
     
-        // ToDo: Neuaufbau mit enuer Menüstruktur
         if ((YPos + WinHeight) < (YMaxPos-2) && GD.ProvideMoreGrid(true, 1).IsVisible == false && UIS!.MCMVVisible == false)
         {
             if( GD.SelectOutput != null )
@@ -4067,7 +4161,6 @@ public class ScrollerOld : IScroller
         {
             if (GD.SelectOutput != null)
                 GD.SelectOutput(ILayoutDescription.selectedOutput.input);
-            // _w.Inputline.Focus();
             ScrollToEnd = false;
             framesWithoutMovement = 0;
             if(GlobalData.CurrentGlobalData!.FocusMethod != null )
@@ -4085,114 +4178,7 @@ public class ScrollerOld : IScroller
             if (Math.Abs(targetY - YPos) > 1.0d)
                 SetToPos((int)(targetY));
 
-            // YPos = Target
-            // double acc = 3.0d;
-            // double speedMin = -50d;
-            // double speedMax = 50d;
-            // bool slowDown = true;
-
-            // Aktuell kennt der Scroller nur Pagen und was anderes wird bis auf weiteres auch nicht möglich sein
-
-
-            // acc = 1000d;
-            // speedMin = -80d;
-            // speedMax = 80d;
-            // slowDown = true;
-
-            // ToDo: Verknüpfung mit Scrollbutton
-            // _w.MoreButton.Visibility = Visibility.Hidden;
-            // framesWithoutMovement = 0;
-            // currentY = YPos;
-
-            // if (targetY > YMaxPos - WinHeight + 30)
-            // targetY = YMaxPos - WinHeight + 30;
-
-            // if (targetY < currentY)
-            // {
-            // speedY -= acc;
-            // if (speedY < speedMin)
-            // speedY = speedMin;
-
-            // if (currentY - targetY < 3)
-            // {
-            // speedY = 0;
-            // currentY = targetY;
-            // }
-            // else if (currentY - targetY < 100 && slowDown)
-            // {
-            // 
-            // double maxSpeedY = (targetY - currentY) / 5;
-            // if (speedY < maxSpeedY)
-            // {
-            // speedY = maxSpeedY;
-            // }
-            // }
-
-            // currentY += speedY;
-            // if (currentY < targetY)
-            // {
-            // currentY = targetY;
-            // targetY = -1;
-            // }
-            // } 
-            // else if (targetY > currentY)
-            // {
-            // speedY += acc;
-            // if (speedY > speedMax)
-            // speedY = speedMax;
-            // abbremsen
-            // if (targetY - currentY < 3)
-            // {
-            // speedY = 0;
-            // currentY = targetY;
-            // }
-            // else if (targetY - currentY < 100 && slowDown)
-            // {
-            // 
-            // double maxSpeedY = (targetY - currentY) / 5;
-            // if (speedY > maxSpeedY)
-            // {
-            // speedY = maxSpeedY;
-            // }
-            // }
-            // 
-            // currentY += speedY;
-            // if (currentY + 30 > targetY)
-            // {
-            // currentY = targetY;
-            // targetY = -1;
-            // if (_pagingRunning == true)
-            // {
-            // _pagingRunning = false;
-            // }
-            // else if (ScrollToEnd == true)
-            // {
-            // ScrollToEnd = false;
-            // 
-            // }
-            // CompactToEnd();
-            // }
-            // else if (currentY + 10 > YMaxPos - WinHeight + 30)
-            // {
-            // currentY = targetY;
-            // targetY = -1;
-            // if (_pagingRunning == true)
-            // {
-            // _pagingRunning = false;
-            // }
-            // else if (ScrollToEnd == true)
-            // {
-            // ScrollToEnd = false;
-            // 
-            // }
-            // CompactToEnd();
-            // }
-            // }
-            // Da das Ende der HTML-Datei möglicherweise nicht erreichbar ist (warum auch immer)
-            // wird SetToPos() immer wieder aufgerufen, weil YPos niemals den Wert von CurrentY annehmen wird. 
-            // if (Math.Abs(currentY - YPos) > 1.0d)
-            // SetToPos((int)(currentY));
-        }
+       }
         else if (ScrollToEnd == false )
         {
             framesWithoutMovement++;
@@ -4212,24 +4198,12 @@ public class ScrollerOld : IScroller
    
         try
         {
-            // string string2 = "alert (\"WTF!!!\")";
             var response2 = await UIS!.ExternalGameOut!.EvaluateJavaScriptAsync(scrollOrder);
 
-            /*
-            if (response2.Success != true)
-            {
-                latestScrollCommands.Add(scrollOrder + "(failed)");
-            }
-            else
-            {
-                latestScrollCommands.Add(scrollOrder + "(YPos: " + YPos.ToString() + ", YPosMax: " + YMaxPos.ToString() + ")");
-            }
-            */
-        }
+          }
         catch  ( Exception E )
         {
             GlobalData.AddLog("StartScrollOrder: " + E.Message, Phoney_MAUI.Model.IGlobalData.protMode.crisp);
-            //  int a = 5;
         }
 
     }
@@ -4238,7 +4212,6 @@ public class ScrollerOld : IScroller
     public void SetScrollerToEnd(double? yPosPre = null )
     {
         ScrollToEnd = true;
-        // ScrollToEndWait = 3;
         RenderState = renderState.hmtlSet;
 
     }
@@ -4264,7 +4237,6 @@ public class ScrollerOld : IScroller
         return false;
     }
 
-    // bool callAll = false;
 
     public bool InqScrollingArea()
     {
@@ -4278,7 +4250,6 @@ public class ScrollerOld : IScroller
         if (UIS!.ExternalGameOut == null)
             return false;
 
-        // string response2;
 
         try
         {
@@ -4302,27 +4273,7 @@ public class ScrollerOld : IScroller
             string response3 = await UIS!.ExternalGameOut.EvaluateJavaScriptAsync(scr);
 #elif MAUI
     
-            // if(!callAll)
             {
-                // callAll = true;
-
-                // if (UIS!.JSBoundObject.ctCalls > 5)
-                // {
-                // callAll = false;
-                // return false;
-                // }
-
-
-                // while( UIS!.JSBoundObject.ctCalls > 100 )
-                // {
-                // int val = UIS!.JSBoundObject.ctCalls;
-                // Thread.Sleep(1000);
-                // if (UIS!.JSBoundObject.ctCalls == val )
-                // {
-                // int a = 5;
-                // break;
-                // }
-                // }
 
                 string scr = "function callGetHtmlYPos() { window.location.href = 'https://runcsharp.GetHTMLYPos?' + window.pageYOffset; } callGetHtmlYPos(); ";
                 scr += "function callGetHtmlHeight() { window.location.href = 'https://runcsharp.GetHtmlHeight?' + window.innerHeight; } callGetHtmlHeight(); ";
@@ -4331,16 +4282,7 @@ public class ScrollerOld : IScroller
                 scr += "function callGetHtmlMaxYPosOffset() { window.location.href = 'https://runcsharp.GetHtmlMaxYPosOffset?' + document.body.offsetHeight; } callGetHtmlMaxYPosOffset(); ";
                 try
                 {
-                    // Task t = await UIS!.ExternalGameOut.EvaluateJavaScriptAsync(scr);
-
-                    // string s = t.
-                    // if ( t.Exception != null)
-                    // {
-                    // int a = 5;
-                    // UIS!.JSBoundObject.ctCalls -= 5;
-
-                    // }
-
+ 
 
                     string? s = await UIS!.ExternalGameOut.EvaluateJavaScriptAsync(scr).ConfigureAwait(false);
 
@@ -4348,77 +4290,20 @@ public class ScrollerOld : IScroller
                     {
 
                     }
-                    // int a = 5;
                 }
                 catch ( Exception e)
                 {
                     GlobalData.AddLog("InqScrollingAreaAsync: " + e.Message, IGlobalData.protMode.crisp);
 
-                    // int a = 5;
                     UIS!.JSBoundObject.ctCalls-=5;
                 }
                 UIS!.JSBoundObject.ctCalls+=5;
-
-                // scr = "function callGetHtmlHeight() { window.location.href = 'https://runcsharp.GetHtmlHeight?' + window.innerHeight; } callGetHtmlHeight();";
-                // try
-                // {
-                //     // response2 = await UIS!.ExternalGameOut.EvaluateJavaScriptAsync(scr);
-                    //  UIS!.ExternalGameOut.EvaluateJavaScriptAsync(scr);
-                // }
-                // catch (Exception e)
-                // {
-//                     int a = 5;
-   //                  UIS!.JSBoundObject.ctCalls--;
-      //           }
-                // UIS!.JSBoundObject.ctCalls++;
-
-                // scr = "function callGetHtmlMaxYPosClient() { window.location.href = 'https://runcsharp.GetHtmlMaxYPosClient?' + document.body.clientHeight; } callGetHtmlMaxYPosClient();";
-                // try
-                // {
-//                     // response2 = await UIS!.ExternalGameOut.EvaluateJavaScriptAsync(scr);
-   //                  UIS!.ExternalGameOut.EvaluateJavaScriptAsync(scr);
-      //           }
-         //        catch (Exception e)
-            //     {
-               //      int a = 5;
-                  //   UIS!.JSBoundObject.ctCalls--;
-                // }
-                // UIS!.JSBoundObject.ctCalls++;
-
-                // scr = "function callGetHtmlMaxYPos() { window.location.href = 'https://runcsharp.GetHtmlMaxYPos?' + document.body.scrollHeight; } callGetHtmlMaxYPos();";
-                // try
-                // {
-                    // response2 = await UIS!.ExternalGameOut.EvaluateJavaScriptAsync(scr);
-                // UIS!.ExternalGameOut.EvaluateJavaScriptAsync(scr);
-                // }
-                // catch (Exception e)
-                // {
-                //     int a = 5;
-                //     UIS!.JSBoundObject.ctCalls--;
-                // }
-                // UIS!.JSBoundObject.ctCalls++;
-
-                // scr = "function callGetHtmlMaxYPosOffset() { window.location.href = 'https://runcsharp.GetHtmlMaxYPosOffset?' + document.body.offsetHeight; } callGetHtmlMaxYPosOffset();";
-                // try
-                // {
-                //     // response2 = await UIS!.ExternalGameOut.EvaluateJavaScriptAsync(scr);
-                //     UIS!.ExternalGameOut.EvaluateJavaScriptAsync(scr);
-                // }
-                // catch (Exception e)
-                // {
-                //     int a = 5;
-                //     UIS!.JSBoundObject.ctCalls--;
-                // }
-                // UIS!.JSBoundObject.ctCalls++;
-                // callAll = false;
             }
 #endif
         }
         catch (Exception e)
         {
             GlobalData.AddLog("InqScrollingAreaAsyncNoReturn: " + e.Message, IGlobalData.protMode.crisp);
-            // int a = 5;
-            // callAll = false;
         }
 
         return true;
@@ -4429,7 +4314,6 @@ public class ScrollerOld : IScroller
         if (UIS!.ExternalGameOut == null)
             return ;
 
-        // string response2;
 
         try
         {
@@ -4453,7 +4337,6 @@ public class ScrollerOld : IScroller
             string response3 = await UIS!.ExternalGameOut.EvaluateJavaScriptAsync(scr);
 #elif MAUI
 
-            // callAll = true;
 
             string scr = "function callGetHtmlYPos() { window.location.href = 'https://runcsharp.GetHTMLYPos?' + window.pageYOffset; } callGetHtmlYPos(); ";
             scr += "function callGetHtmlHeight() { window.location.href = 'https://runcsharp.GetHtmlHeight?' + window.innerHeight; } callGetHtmlHeight(); ";
@@ -4480,8 +4363,6 @@ public class ScrollerOld : IScroller
         catch (Exception e)
         {
             GlobalData.AddLog("InqScrollingAreaAsyncNoReturn: " + e.Message, IGlobalData.protMode.crisp);
-            // int a = 5InqScrollingAreaAsyncNoReturn
-            // callAll = false;
         }
 
         return ;
@@ -4504,7 +4385,6 @@ public class ScrollerOld : IScroller
             // int a = 5;
         }
         string s1 = "window.scrollTo({ top: " + yPos + " });";
-        // string s1 = "window.scrollBy(0, " + ScrollHeight + ");";
         StartScrollOrder(s1);
 
     }
@@ -4512,7 +4392,6 @@ public class ScrollerOld : IScroller
     public void ResetYPos()
     {
         string s1 = "window.scrollBy({ top: 1 });";
-        // string s1 = "window.scrollBy(0, " + ScrollHeight + ");";
         StartScrollOrder(s1);
 
     }
@@ -4520,17 +4399,13 @@ public class ScrollerOld : IScroller
     public void SetToStart()
     {
         string s1 = "window.scrollTo({ top: 0 });";
-        // string s1 = "window.scrollBy(0, " + ScrollHeight + ");";
         StartScrollOrder(s1);
 
     }
 
     public void ScrollPageFinal()
     {
-        // string s1 = "window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });";
-        // string s1 = "window.scrollBy(0, " + ScrollHeight + ");";
-        // StartScrollOrder(s1);
-
+ 
         ScrollToEnd = true;
         ScrollToEndWait = 5;
         RenderState = renderState.hmtlSet;
@@ -4539,21 +4414,13 @@ public class ScrollerOld : IScroller
 
     public void CompactToEnd()
     {
-        // _preCompactionY = YPos;
-        // _preCompactionYMax = YMaxPos;
-
-
-        // _didCompaction = true;
-        UIS!.StoryTextObj!.RecalcLatest();
-        // _w.UIS!.StoryTextObj.AdvTextRefresh(true);
-        // UIS!.StoryTextObj.AdvTextRefresh();
-        // AdaptYPos = true;
+         UIS!.StoryTextObj!.RecalcLatest();
         InqScrollingArea();
 
     }
 
 }
-
+*/
 [Serializable]
 public class StoryText : IStoryText
 {
@@ -4589,88 +4456,121 @@ public class StoryText : IStoryText
 
     int lastEndLine = -1;
 
-    public IStoryText Clone()
+    public IStoryText? Clone()
     {
-        StoryText sto = new( this.UIS);
-
-        int ix = 0;
-
-        for( ix = 0; ix < Slines!.Count; ix++)
+        try
         {
-            sto.Slines!.Add(Slines![ix]);
+            StoryText sto = new(this.UIS);
+
+            int ix = 0;
+
+            for (ix = 0; ix < Slines!.Count; ix++)
+            {
+                sto.Slines!.Add(Slines![ix]);
+            }
+
+            return sto;
+        }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("IStoryText.Clone: " + ex.Message, IGlobalData.protMode.crisp);
+            return null;
         }
 
-        return sto;
     }
 
     public void RecalcLatest( bool doCompact = true )
     {
-        int endLine = 0;
-        if (Slines!.Count - 100 > 0)
-            endLine = Slines!.Count - 100;
-        LatestStory = new StringBuilder(); // .Clear();
-
-        // _lfMarker = "</div><div class=\"sansserif\" style=\"color:";
-
-        // doCompact == false: Modus für RecalcPictures. Hier geht es nicht darum, die LatestStory zusammen zu kürzen,
-        // sondern darum, die Größenänderungen anzuzeigen
-        if (doCompact == false && lastEndLine != -1)
-            endLine = lastEndLine;
-
-        for (int Line = Slines!.Count - 1; Line >= endLine; Line--)
+        try
         {
-            // if (Slines?[Line] == MainWindow.HtmlheadDivide)
-            //     LatestStory.Insert(0, Slines?[Line]);
+            int endLine = 0;
+            if (Slines!.Count - 100 > 0)
+                endLine = Slines!.Count - 100;
+            LatestStory = new StringBuilder(); // .Clear();
 
-            /*
-            if (Slines?[Line].StartsWith(LFMarker) == true)
-                LatestStory.Insert(0, GD.HTMLPageDivide);
-            else */ if (Slines[Line]!.StartsWith('>'))
-                // Noloca: 006
-                // Ignores: 001
-                LatestStory.Insert(0, "<p class=\"para\" style=\"margin-bottom:2px;margin-top:12px;\" >" + Slines[Line] + "</p>");
-            else if (Line == Slines.Count - 1)
-                // Ignores: 001
-                LatestStory.Append("<p class=\"para\" style=\"margin-bottom:2px;margin-top:0px;\" >" + Slines[Line] + "</p>");
-            else
-                // Ignores: 001
-                LatestStory.Insert(0, "<p class=\"para\" style=\"margin-bottom:2px;margin-top:0px;\" >" + Slines[Line] + "</p>");
+            // _lfMarker = "</div><div class=\"sansserif\" style=\"color:";
 
+            // doCompact == false: Modus für RecalcPictures. Hier geht es nicht darum, die LatestStory zusammen zu kürzen,
+            // sondern darum, die Größenänderungen anzuzeigen
+            if (doCompact == false && lastEndLine != -1)
+                endLine = lastEndLine;
+
+            for (int Line = Slines!.Count - 1; Line >= endLine; Line--)
+            {
+                // if (Slines?[Line] == MainWindow.HtmlheadDivide)
+                //     LatestStory.Insert(0, Slines?[Line]);
+
+                /*
+                if (Slines?[Line].StartsWith(LFMarker) == true)
+                    LatestStory.Insert(0, GD.HTMLPageDivide);
+                else */
+                if (Slines[Line]!.StartsWith('>'))
+                    // Noloca: 006
+                    // Ignores: 001
+                    LatestStory.Insert(0, "<p class=\"para\" style=\"margin-bottom:2px;margin-top:12px;\" >" + Slines[Line] + "</p>");
+                else if (Line == Slines.Count - 1)
+                    // Ignores: 001
+                    LatestStory.Append("<p class=\"para\" style=\"margin-bottom:2px;margin-top:0px;\" >" + Slines[Line] + "</p>");
+                else
+                    // Ignores: 001
+                    LatestStory.Insert(0, "<p class=\"para\" style=\"margin-bottom:2px;margin-top:0px;\" >" + Slines[Line] + "</p>");
+
+            }
+
+            lastEndLine = endLine;
+        }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("RecalcLatest.Clone: " + ex.Message, IGlobalData.protMode.crisp);
         }
 
-        lastEndLine = endLine;
     }
     public void ParagraphsToSmall()
     {
-        int Line;
-        if (Slines == null) return;
-
-        for (Line = Slines!.Count - 1; Line >= 0; Line--)
+        try
         {
-            if (Slines[Line] == GD.HTMLPageDivide)
+            int Line;
+            if (Slines == null) return;
+
+            for (Line = Slines!.Count - 1; Line >= 0; Line--)
             {
-                Slines[Line] = GD.HTMLPageNotDivide;
-                // Slines.RemoveAt(Line);
-                // break;
+                if (Slines[Line] == GD.HTMLPageDivide)
+                {
+                    Slines[Line] = GD.HTMLPageNotDivide;
+                    // Slines.RemoveAt(Line);
+                    // break;
+                }
             }
+            RecalcLatest(false);
         }
-        RecalcLatest(false);
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("ParagraphsToSmall: " + ex.Message, IGlobalData.protMode.crisp);
+        }
+
     }
     public void ParagraphsToLarge()
     {
-        int Line;
-        if (Slines == null) return;
-
-        for (Line = Slines!.Count - 1; Line >= 0; Line--)
+        try
         {
-            if (Slines[Line] == GD.HTMLPageNotDivide)
+            int Line;
+            if (Slines == null) return;
+
+            for (Line = Slines!.Count - 1; Line >= 0; Line--)
             {
-                Slines[Line] = GD.HTMLPageDivide;
-                // Slines.RemoveAt(Line);
-                // break;
+                if (Slines[Line] == GD.HTMLPageNotDivide)
+                {
+                    Slines[Line] = GD.HTMLPageDivide;
+                    // Slines.RemoveAt(Line);
+                    // break;
+                }
             }
+            RecalcLatest(false);
         }
-        RecalcLatest(false);
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("ParagraphsToLarge: " + ex.Message, IGlobalData.protMode.crisp);
+        }
 
     }
 
@@ -4740,31 +4640,30 @@ public class StoryText : IStoryText
 
     public async Task ExchangeAdvBrowserContent(string s, bool scrollToEnd = false)
     {
-        if ( UIS!.ExternalGameOut!.IsLoaded == false)
-            return;
-
-        string s3 = System.Web.HttpUtility.HtmlEncode("<a style='cursor:pointer' onclick='boundAsync.JSCallback(&quot;ActLoc&quot;);'><b>Eingangshalle</b></a>");
-        string script = "val4=document.body.scrollHeight; boundAsync.GetHtmlMaxYPosClientReady2(document.body.clientHeight); val1 = window.pageYOffset; document.getElementById('newbody').innerHTML = `" + GD.HTMLStyle + GD.HTMLPageShort + s + "</div>`; boundAsync.GetHtmlMaxYPosClientReady(document.body.clientHeight);val2 = window.pageYOffset; val3 = window.pageYOffset + val2 - val1; boundAsync.CalcHeight(val1, val2, val3); boundAsync.GetHtmlMaxYPos(document.body.scrollHeight);";
-        if (scrollToEnd)
-        {
-#if !NEWSCROLL
-            UIS!.Scr.ResizeRunning = true;
-#endif
-            script = "boundAsync.GetHtmlMaxYPosClientReady2(document.body.clientHeight); val1 = document.body.scrollHeight; document.getElementById('newbody').innerHTML = `" + GD.HTMLStyle + GD.HTMLPageShort + s + "</div>`; boundAsync.GetHtmlMaxYPosClientReady(document.body.clientHeight);val2 = document.body.scrollHeight; val3 = window.pageYOffset + val2 - val1; boundAsync.CalcHeight(val1, val2, val3); boundAsync.GetHtmlMaxYPos(document.body.scrollHeight);";
-            script += "function updateMessage(){ boundAsync.DoResize(window.pageYOffset, window.innerHeight, document.body.scrollHeight); aaa window.scrollTo(0, document.body.scrollHeight);} window.addEventListener(\"load\", updateMessage); window.addEventListener(\"resize\", updateMessage);";
-        }
-        else
-        {
-#if !NEWSCROLL
-            UIS!.Scr.ResizeRunning = true;
-#endif
-            script += "function updateMessage2(){ boundAsync.DoResize2(window.pageYOffset, window.innerHeight, document.body.scrollHeight, val4);} document.body.onresize=updateMessage2;";
-
-        }
-        latestHtmlOutput = script;
-
         try
         {
+            if (UIS!.ExternalGameOut!.IsLoaded == false)
+                return;
+
+            string s3 = System.Web.HttpUtility.HtmlEncode("<a style='cursor:pointer' onclick='boundAsync.JSCallback(&quot;ActLoc&quot;);'><b>Eingangshalle</b></a>");
+            string script = "val4=document.body.scrollHeight; boundAsync.GetHtmlMaxYPosClientReady2(document.body.clientHeight); val1 = window.pageYOffset; document.getElementById('newbody').innerHTML = `" + GD.HTMLStyle + GD.HTMLPageShort + s + "</div>`; boundAsync.GetHtmlMaxYPosClientReady(document.body.clientHeight);val2 = window.pageYOffset; val3 = window.pageYOffset + val2 - val1; boundAsync.CalcHeight(val1, val2, val3); boundAsync.GetHtmlMaxYPos(document.body.scrollHeight);";
+            if (scrollToEnd)
+            {
+#if !NEWSCROLL
+            UIS!.Scr.ResizeRunning = true;
+#endif
+                script = "boundAsync.GetHtmlMaxYPosClientReady2(document.body.clientHeight); val1 = document.body.scrollHeight; document.getElementById('newbody').innerHTML = `" + GD.HTMLStyle + GD.HTMLPageShort + s + "</div>`; boundAsync.GetHtmlMaxYPosClientReady(document.body.clientHeight);val2 = document.body.scrollHeight; val3 = window.pageYOffset + val2 - val1; boundAsync.CalcHeight(val1, val2, val3); boundAsync.GetHtmlMaxYPos(document.body.scrollHeight);";
+                script += "function updateMessage(){ boundAsync.DoResize(window.pageYOffset, window.innerHeight, document.body.scrollHeight); aaa window.scrollTo(0, document.body.scrollHeight);} window.addEventListener(\"load\", updateMessage); window.addEventListener(\"resize\", updateMessage);";
+            }
+            else
+            {
+#if !NEWSCROLL
+            UIS!.Scr.ResizeRunning = true;
+#endif
+                script += "function updateMessage2(){ boundAsync.DoResize2(window.pageYOffset, window.innerHeight, document.body.scrollHeight, val4);} document.body.onresize=updateMessage2;";
+
+            }
+            latestHtmlOutput = script;
             var response2 = await UIS!.ExternalGameOut.EvaluateJavaScriptAsync(script);
 
 
@@ -4821,36 +4720,52 @@ public class StoryText : IStoryText
 
     public void AddSlineWholeStory(string sline, int line)
     {
-        if (sline.Contains("<center><img src="))
-            return;
-
-        if (Slines![line]!.StartsWith(LFMarker) == true)
+        try
         {
-            if( GD.LayoutDescription.ParagraphClusterMode != ILayoutDescription.ParagraphClusters.none )
-                LatestStory!.Insert(0, UIS!.GD!.HTMLPageDivide);
-            else
-                LatestStory!.Insert(0, UIS!.GD!.HTMLPageNotDivide);
+            if (sline.Contains("<center><img src="))
+                return;
 
+            if (Slines![line]!.StartsWith(LFMarker) == true)
+            {
+                if (GD.LayoutDescription.ParagraphClusterMode != ILayoutDescription.ParagraphClusters.none)
+                    LatestStory!.Insert(0, UIS!.GD!.HTMLPageDivide);
+                else
+                    LatestStory!.Insert(0, UIS!.GD!.HTMLPageNotDivide);
+
+            }
+            else if (Slines![line]!.StartsWith('>'))
+                WholeStory!.Append("<p class=\"para\" style=\"margin-bottom:2px;margin-top:12px;\" >" + Slines![line] + "</p>");
+            else if (line == Slines!.Count - 1)
+                WholeStory!.Append("<p class=\"para\" style=\"margin-bottom:2px;margin-top:0px;\" >" + Slines![line] + "</p>");
+            else
+                WholeStory!.Append("<p class=\"para\" style=\"margin-bottom:2px;margin-top:0px;\" >" + Slines![line] + "</p>");
         }
-        else if (Slines![line]!.StartsWith('>'))
-            WholeStory!.Append("<p class=\"para\" style=\"margin-bottom:2px;margin-top:12px;\" >" + Slines![line] + "</p>");
-        else if (line == Slines!.Count - 1)
-            WholeStory!.Append("<p class=\"para\" style=\"margin-bottom:2px;margin-top:0px;\" >" + Slines![line] + "</p>");
-        else
-            WholeStory!.Append("<p class=\"para\" style=\"margin-bottom:2px;margin-top:0px;\" >" + Slines![line] + "</p>");
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("AddSlineWholeStory: " + ex.Message, IGlobalData.protMode.crisp);
+            // int a = 5;
+        }
 
     }
 
     public void AddSline(string? sline, int line = -1)
     {
-        if (line == -1) line = sline!.Length - 1;
+        try
+        {
+            if (line == -1) line = sline!.Length - 1;
 
-        if (sline!.StartsWith('>'))
-            LatestStory!.Append("<p class=\"para\" style=\"margin-bottom:2px;margin-top:12px;\" >" + sline + "</p>");
-        else if (line == Slines!.Count - 1)
-            LatestStory!.Append("<p class=\"para\" style=\"margin-bottom:2px;margin-top:0px;\" >" + sline + "</p>");
-        else
-            LatestStory!.Append("<p class=\"para\" style=\"margin-bottom:2px;margin-top:0px;\" >" + sline + "</p>");
+            if (sline!.StartsWith('>'))
+                LatestStory!.Append("<p class=\"para\" style=\"margin-bottom:2px;margin-top:12px;\" >" + sline + "</p>");
+            else if (line == Slines!.Count - 1)
+                LatestStory!.Append("<p class=\"para\" style=\"margin-bottom:2px;margin-top:0px;\" >" + sline + "</p>");
+            else
+                LatestStory!.Append("<p class=\"para\" style=\"margin-bottom:2px;margin-top:0px;\" >" + sline + "</p>");
+        }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("AddSline: " + ex.Message, IGlobalData.protMode.crisp);
+            // int a = 5;
+        }
 
     }
 
@@ -4858,55 +4773,64 @@ public class StoryText : IStoryText
 
     public void TextReFreshman()
     {
-        string s;
-
-        // WholeStory enthält die ganze Geschichte. Diese wird zwar gespeichert, aber nicht im HTMTL-Fenster angezeigt, weil das viel zu lahm geht
-        if (WholeStory == null)
+        try
         {
-            int endLine = 0;
-            WholeStory = new StringBuilder(); // .Clear();
-            for (int Line = Slines!.Count - 1; Line >= endLine; Line--)
-            {
-                // Noloca: 006
-                if (Slines?[Line]?.Contains("<center><img src=") == true)
-                {
+            string s;
 
+            // WholeStory enthält die ganze Geschichte. Diese wird zwar gespeichert, aber nicht im HTMTL-Fenster angezeigt, weil das viel zu lahm geht
+            if (WholeStory == null)
+            {
+                int endLine = 0;
+                WholeStory = new StringBuilder(); // .Clear();
+                for (int Line = Slines!.Count - 1; Line >= endLine; Line--)
+                {
+                    // Noloca: 006
+                    if (Slines?[Line]?.Contains("<center><img src=") == true)
+                    {
+
+                    }
+                    else if (Slines?[Line]!.StartsWith(LFMarker) == true)
+                        WholeStory.Insert(0, GD.HTMLPageDivide);
+                    // else if (Slines?[Line] == MainWindow.HtmlheadDivide)
+                    //     WholeStory.Insert(0, Slines?[Line]);
+                    else if (Slines![Line]!.StartsWith('>'))
+                        // Ignores: 002
+                        WholeStory.Insert(0, "<p class=\"para\" style=\"margin-bottom:2px;margin-top:12px;\" >" + Slines![Line] + "</p>");
+                    else if (Line == Slines!.Count - 1)
+                        // Ignores: 002
+                        WholeStory.Append("<p class=\"para\" style=\"margin-bottom:2px;margin-top:0px;\" >" + Slines![Line] + "</p>");
+                    else
+                        // Ignores: 002
+                        WholeStory.Insert(0, "<p class=\"para\" style=\"margin-bottom:2px;margin-top:0px;\" >" + Slines![Line] + "</p>");
+                    // WholeStory.Append( "<p class=\"para\" style=\"margin-bottom:2px;margin-top:0px;\" >" + Slines![Line] + "</p>");
                 }
-                else if (Slines?[Line]!.StartsWith(LFMarker) == true)
-                    WholeStory.Insert(0, GD.HTMLPageDivide );
-                // else if (Slines?[Line] == MainWindow.HtmlheadDivide)
-                //     WholeStory.Insert(0, Slines?[Line]);
-                else if (Slines![Line]!.StartsWith('>'))
-                    // Ignores: 002
-                    WholeStory.Insert(0, "<p class=\"para\" style=\"margin-bottom:2px;margin-top:12px;\" >" + Slines![Line] + "</p>");
-                else if (Line == Slines!.Count - 1)
-                    // Ignores: 002
-                    WholeStory.Append("<p class=\"para\" style=\"margin-bottom:2px;margin-top:0px;\" >" + Slines![Line] + "</p>");
-                else
-                    // Ignores: 002
-                    WholeStory.Insert(0, "<p class=\"para\" style=\"margin-bottom:2px;margin-top:0px;\" >" + Slines![Line] + "</p>");
-                // WholeStory.Append( "<p class=\"para\" style=\"margin-bottom:2px;margin-top:0px;\" >" + Slines![Line] + "</p>");
+
             }
 
+
+            s = "Noch ist nix da";
+            if (LatestStory != null)
+                s = LatestStory.ToString();
+
+            // s enthält jetzt den Text, der im Browser sichtbar sein soll
+            // GD.CurrentContent = GD.HTMLPage.Replace("[Body]", s); // s;
+
+            GD.CurrentContent = s;
+
+            /*
+            UIS!.ExternalGameOut.Source = new HtmlWebViewSource
+            {
+                Html = GlobalData.CurrentGlobalData!.WebViewContent
+            };
+            */
+        }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("TextReFreshman: " + ex.Message, IGlobalData.protMode.crisp);
+            // int a = 5;
         }
 
-
-        s = "Noch ist nix da";
-        if (LatestStory != null)
-            s = LatestStory.ToString();
-
-        // s enthält jetzt den Text, der im Browser sichtbar sein soll
-        // GD.CurrentContent = GD.HTMLPage.Replace("[Body]", s); // s;
-        
-        GD.CurrentContent = s;
-
-        /*
-        UIS!.ExternalGameOut.Source = new HtmlWebViewSource
-        {
-            Html = GlobalData.CurrentGlobalData!.WebViewContent
-        };
-        */
-     }
+    }
     public void SetMainWindow(object MW, IUIServices uis)
     {
 
@@ -5063,13 +4987,15 @@ public class JSBoundObject
 
     public void GetHtmlYPos(double ypos)
     {
-        if (ypos == -33)
+        try
         {
+            if (ypos == -33)
+            {
 
-        }
-        lock (UIS!.Scr)
-        {
-            ctCalls--;
+            }
+            lock (UIS!.Scr)
+            {
+                ctCalls--;
 #if !NEWSCROLL
             if (UIS!.Scr.ResizeRunning)
             {
@@ -5087,31 +5013,37 @@ public class JSBoundObject
 
             }
 #else
-            if (yposse == null)
-            {
-                yposse = new();
-                yposse.Add( 0 );
-            }
+                if (yposse == null)
+                {
+                    yposse = new();
+                    yposse.Add(0);
+                }
 
-            if (ypos != yposse[yposse.Count - 1])
-            {
-                yposse.Add(ypos);
-            }
+                if (ypos != yposse[yposse.Count - 1])
+                {
+                    yposse.Add(ypos);
+                }
 
 
-            if (UIS.Scr.ScrollStep == IScroller.scrollStep.none)
-            {
-                UIS!.Scr.HTMLViewYPos = ypos;
+                if (UIS.Scr.ScrollStep == IScroller.scrollStep.none)
+                {
+                    UIS!.Scr.HTMLViewYPos = ypos;
 
-            }
-            else
-            {
-                
+                }
+                else
+                {
 
-            }
+
+                }
 
 
 #endif
+            }
+        }
+        catch (Exception ex)
+        {
+            GlobalData.AddLog("GetHtmlYPos: " + ex.Message, IGlobalData.protMode.crisp);
+            // int a = 5;
         }
     }
     public void CalcHeight(double val1, double val2, double val3)

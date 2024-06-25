@@ -41,32 +41,42 @@ namespace GameCore
                 }
                 else 
                 */
-                if( LocaHandle != null)
+                try
                 {
-                    return LocaHandle;
-                }
-                else if (Loca != null)
-                {
-                    if (!string.IsNullOrEmpty(Loca))
+                    if (LocaHandle != null)
                     {
-                        Type? t = typeof(loca);
+                        return LocaHandle;
+                    }
+                    else if (Loca != null)
+                    {
+                        if (!string.IsNullOrEmpty(Loca))
+                        {
+                            Type? t = typeof(loca);
 
-                        PropertyInfo? pi = t.GetProperty(Loca);
+                            PropertyInfo? pi = t.GetProperty(Loca);
 
-                        // TypeInfo x = typeof(loca).GetTypeInfo();
-                        // x.GetPro
-                        // TypeInfo x = ((t as System.RuntimeType).DeclaredProperties.ElementAt(4).GetMethod as MethodInfo);
+                            // TypeInfo x = typeof(loca).GetTypeInfo();
+                            // x.GetPro
+                            // TypeInfo x = ((t as System.RuntimeType).DeclaredProperties.ElementAt(4).GetMethod as MethodInfo);
 
-                        // var prop = loca.GetType().GetProperty(Loca);
-                        var s = pi!.GetValue(null) as string;
+                            // var prop = loca.GetType().GetProperty(Loca);
+                            var s = pi!.GetValue(null) as string;
 
-                        return s;
+                            return s;
+                        }
+                        else
+                            return _name;
                     }
                     else
                         return _name;
                 }
-                else
-                    return _name;
+                catch (Exception ex)
+                {
+                    Phoney_MAUI.Core.GlobalData.AddLog("Noun.Name: " + ex.Message, Phoney_MAUI.Model.IGlobalData.protMode.crisp);
+                    return null;
+
+                }
+
             }
             set
             {
@@ -273,62 +283,72 @@ namespace GameCore
 
         public Noun? Find(string? name)
         {
-            Noun? Ret = null;
-            // Noloca: 004
-            string? name1 = name!.ToLower();
-            string? name2 = null;
+            try
+            {
+                Noun? Ret = null;
+                // Noloca: 004
+                string? name1 = name!.ToLower();
+                string? name2 = null;
 
-            if (name!.EndsWith( "en") || name!.EndsWith( "ern"))
-            {
-                name2 = name1!.Substring(0, name1!.Length - 1);
-            }
-            else if (name!.EndsWith( "eln") )
-            {
-                name2 = name1!.Substring(0, name1!.Length - 1);
-            }
-
-            if (name2 != null)
-            {
-                if (TList!.ContainsKey(name2))
+                if (name!.EndsWith("en") || name!.EndsWith("ern"))
                 {
-                    Ret = TList[name2];
+                    name2 = name1!.Substring(0, name1!.Length - 1);
+                }
+                else if (name!.EndsWith("eln"))
+                {
+                    name2 = name1!.Substring(0, name1!.Length - 1);
                 }
 
-            }
-            if (Ret == null && name1 != null)
-            {
-                if (TList!.ContainsKey(name1))
+                if (name2 != null)
                 {
-                    Ret = TList[name1];
+                    if (TList!.ContainsKey(name2))
+                    {
+                        Ret = TList[name2];
+                    }
+
                 }
+                if (Ret == null && name1 != null)
+                {
+                    if (TList!.ContainsKey(name1))
+                    {
+                        Ret = TList[name1];
+                    }
 
-            }
-            return Ret;
-            /*
-                        Noun Ret = null;
+                }
+                return Ret;
+                /*
+                            Noun Ret = null;
 
-                        string name2 = name;
-                        string add2 = "";
+                            string name2 = name;
+                            string add2 = "";
 
-                        char lastChar = name2[name2.Length - 1];
-                        if( lastChar == 'r' || lastChar == 'e') 
-                         {
-                            name2 = name2 + "n";
-                            add2 = "n";
-                        }
-
-                        foreach (Noun ele in TList)
-                        {
-                            if (        ( String.Compare(ele.Name.ToLower(new CultureInfo( "de-DE", false)), name.ToLower(new CultureInfo( "de-DE", false))) == 0)
-                                    ||  ( String.Compare(ele.Name.ToLower(new CultureInfo( "de-DE", false)) + add2, name2.ToLower(new CultureInfo( "de-DE", false))) == 0)
-                               )
-                            {
-                                Ret = ele;
+                            char lastChar = name2[name2.Length - 1];
+                            if( lastChar == 'r' || lastChar == 'e') 
+                             {
+                                name2 = name2 + "n";
+                                add2 = "n";
                             }
-                            if (Ret != null) break;
-                        }
-                        return Ret;
-                        */
+
+                            foreach (Noun ele in TList)
+                            {
+                                if (        ( String.Compare(ele.Name.ToLower(new CultureInfo( "de-DE", false)), name.ToLower(new CultureInfo( "de-DE", false))) == 0)
+                                        ||  ( String.Compare(ele.Name.ToLower(new CultureInfo( "de-DE", false)) + add2, name2.ToLower(new CultureInfo( "de-DE", false))) == 0)
+                                   )
+                                {
+                                    Ret = ele;
+                                }
+                                if (Ret != null) break;
+                            }
+                            return Ret;
+                            */
+            }
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("Noun.Find: " + ex.Message, Phoney_MAUI.Model.IGlobalData.protMode.crisp);
+                return null;
+
+            }
+
         }
 
         void CheckTList()
@@ -411,83 +431,93 @@ namespace GameCore
 
         public bool RestoreNouns()
         {
-            if (loca.GD!.Language == IGlobalData.language.english )
+            try
             {
-                if (TListD == null)
-                    TListD = TListE;
-
-                IDictionary<string, Noun>? TList2 = new Dictionary<string, Noun>(StringComparer.CurrentCultureIgnoreCase);
-
-                foreach (var ele in TListD!.Values)
+                if (loca.GD!.Language == IGlobalData.language.english)
                 {
-                    Noun ele2 = (Noun)ele;
-                    /*
-                    ele2.Loca = ele.Loca;
-                    ele2.ID = ele.ID;
-                    ele2.LocaHandle = ele.LocaHandle;
-                    ele2.Name = ele.Name;
-                    */
-                    TypeInfo x = typeof(loca).GetTypeInfo();
-                    PropertyInfo? pi = x.GetProperty(ele.Loca!); 
+                    if (TListD == null)
+                        TListD = TListE;
 
-                    string? s = (string?)pi!.GetValue(null);
+                    IDictionary<string, Noun>? TList2 = new Dictionary<string, Noun>(StringComparer.CurrentCultureIgnoreCase);
 
-                    ele2.LocaHandle = s;
+                    foreach (var ele in TListD!.Values)
+                    {
+                        Noun ele2 = (Noun)ele;
+                        /*
+                        ele2.Loca = ele.Loca;
+                        ele2.ID = ele.ID;
+                        ele2.LocaHandle = ele.LocaHandle;
+                        ele2.Name = ele.Name;
+                        */
+                        TypeInfo x = typeof(loca).GetTypeInfo();
+                        PropertyInfo? pi = x.GetProperty(ele.Loca!);
 
-                    TList2.Add(key: ele2.Name!, value: ele2);
-                    // TList2.Add(key: ele2.Name, value: ele2);
+                        string? s = (string?)pi!.GetValue(null);
+
+                        ele2.LocaHandle = s;
+
+                        TList2.Add(key: ele2.Name!, value: ele2);
+                        // TList2.Add(key: ele2.Name, value: ele2);
+                    }
+                    TListE = TList2;
+                    TList2 = null;
+
                 }
-                TListE = TList2;
-                TList2 = null;
+                else if (loca.GD!.Language == IGlobalData.language.german)
+                {
+                    IDictionary<string, Noun>? TList2 = new Dictionary<string, Noun>(StringComparer.CurrentCultureIgnoreCase);
+                    if (TListE == null)
+                        TListE = TListD;
+
+                    foreach (var ele in TListE!.Values)
+                    {
+                        Noun ele2 = (Noun)ele;
+                        /*
+                        ele2.Loca = ele.Loca;
+                        ele2.ID = ele.ID;
+                        ele2.LocaHandle = ele.LocaHandle;
+                        ele2.Name = ele.Name;
+                        */
+                        TypeInfo x = typeof(loca).GetTypeInfo();
+                        PropertyInfo? pi = x.GetProperty(ele.Loca!);
+
+                        string? s = (string?)pi!.GetValue(null);
+
+                        ele2.LocaHandle = s;
+
+                        TList2.Add(key: ele2.Name!, value: ele2);
+                        // TList2.Add(key: ele2.Name, value: ele2);
+                    }
+                    TListD = TList2;
+                    TList2 = null;
+
+                }
+
+                /*
+                // TList.Count, StringEqualityComparer.sComparer
+            IDictionary<string, Noun> TList2 = new Dictionary<string, Noun>( StringComparer.CurrentCultureIgnoreCase  );
+            CultureInfo ci = new CultureInfo("de-DE", false);
+
+            foreach (var ele in TList.Values)
+            {
+                Noun ele2 = (Noun)ele;
+
+                TList2.Add(key: ele2.Name.ToLower( ci ), value: ele2);
+                // TList2.Add(key: ele2.Name, value: ele2);
+            }
+            TList = TList2;
+            TList2 = null;
+                */
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("Noun.RestoreNouns: " + ex.Message, Phoney_MAUI.Model.IGlobalData.protMode.crisp);
+                return false;
 
             }
-            else if (loca.GD!.Language == IGlobalData.language.german )
-            {
-                IDictionary<string, Noun>? TList2 = new Dictionary<string, Noun>(StringComparer.CurrentCultureIgnoreCase);
-                if (TListE == null)
-                    TListE = TListD;
 
-                foreach (var ele in TListE!.Values)
-                {
-                    Noun ele2 = (Noun)ele;
-                    /*
-                    ele2.Loca = ele.Loca;
-                    ele2.ID = ele.ID;
-                    ele2.LocaHandle = ele.LocaHandle;
-                    ele2.Name = ele.Name;
-                    */
-                    TypeInfo x = typeof(loca).GetTypeInfo();
-                    PropertyInfo? pi = x.GetProperty(ele.Loca!);
-
-                    string? s = (string?)pi!.GetValue(null);
-
-                    ele2.LocaHandle = s;
-
-                    TList2.Add(key: ele2.Name!, value: ele2);
-                    // TList2.Add(key: ele2.Name, value: ele2);
-                }
-                TListD = TList2;
-                TList2 = null;
-
-            }
-
-            /*
-            // TList.Count, StringEqualityComparer.sComparer
-        IDictionary<string, Noun> TList2 = new Dictionary<string, Noun>( StringComparer.CurrentCultureIgnoreCase  );
-        CultureInfo ci = new CultureInfo("de-DE", false);
-
-        foreach (var ele in TList.Values)
-        {
-            Noun ele2 = (Noun)ele;
-
-            TList2.Add(key: ele2.Name.ToLower( ci ), value: ele2);
-            // TList2.Add(key: ele2.Name, value: ele2);
-        }
-        TList = TList2;
-        TList2 = null;
-            */
-
-            return true;
         }
     }
 }

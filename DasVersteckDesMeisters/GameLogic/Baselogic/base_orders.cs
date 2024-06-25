@@ -286,6 +286,7 @@ namespace GameCore
         */
 
 
+        /* Noch eine Insert-Variante, die keiner braucht???
         public string Insert(string s, params object[] obj)
         {
             string snew = "";
@@ -522,16 +523,27 @@ namespace GameCore
 
             return snew;
         }
+        */
 
         int SearchVT(string s)
         {
-            // Ignores: 001
-            s = loca.OrderFeedback_Insert_13897 + s;
-            System.Reflection.PropertyInfo? pi = typeof(CoBase).GetProperty(s, BindingFlags.Public | BindingFlags.Instance);
+            try
+            {
+                // Ignores: 001
+                s = loca.OrderFeedback_Insert_13897 + s;
+                System.Reflection.PropertyInfo? pi = typeof(CoBase).GetProperty(s, BindingFlags.Public | BindingFlags.Instance);
 
-            object o = pi!.GetValue(CB, null)!;
+                object o = pi!.GetValue(CB, null)!;
 
-            return (int)(o);
+                return (int)(o);
+            }
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.SearchVT: " + ex.Message, IGlobalData.protMode.crisp);
+                return 0;
+
+            }
+
         }
 
 
@@ -551,262 +563,352 @@ namespace GameCore
 
         public virtual bool Examine(Person PersonID, ParseTokenList PTL)
         {
-            OrderFeedback of = new OrderFeedback();
+            try
+            {
+                OrderFeedback of = new OrderFeedback();
 
-            Item item = PTL.GetFirstItem()!; // GetItemRef(Adv_PT[1].WordID);
+                Item item = PTL.GetFirstItem()!; // GetItemRef(Adv_PT[1].WordID);
 
-            // Ignores: 001
-            // MW.TextOutput( "<i>Du untersuchst " + Items!.GetItemNameLink(I!.ID, Co.CASE_NOM) + ". ( " + I!.ID + ")</i>");
-            if (AdvGame!.GD!.LayoutDescription.OrderRepeat == true)
-                AdvGame!.StoryOutput((int) Persons?.Find(PersonID)!.locationID!, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_Examine_Person_Everyone_13898, PersonID, item!.ID));
-            // AdvGame!.StoryOutput(Person!.Find(PersonID)!.locationID, CA!.Person_Everyone, Insert( "<i>[Plv1,betrachten,Akk] [Il2,Nom].</i>", CA!.Person_I, item ) );
-            of.Success = true;
-            of.Handled = true;
-            of.Action = true;
-            of.StoryOutput = true;
+                // Ignores: 001
+                // MW.TextOutput( "<i>Du untersuchst " + Items!.GetItemNameLink(I!.ID, Co.CASE_NOM) + ". ( " + I!.ID + ")</i>");
+                if (AdvGame!.GD!.LayoutDescription.OrderRepeat == true)
+                    AdvGame!.StoryOutput((int)Persons?.Find(PersonID)!.locationID!, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_Examine_Person_Everyone_13898, PersonID, item!.ID));
+                // AdvGame!.StoryOutput(Person!.Find(PersonID)!.locationID, CA!.Person_Everyone, Insert( "<i>[Plv1,betrachten,Akk] [Il2,Nom].</i>", CA!.Person_I, item ) );
+                of.Success = true;
+                of.Handled = true;
+                of.Action = true;
+                of.StoryOutput = true;
 
-            if (item.Picture != null)
-                AdvGame!.PictureOutput(item.Picture);
+                if (item.Picture != null)
+                    AdvGame!.PictureOutput(item.Picture);
 
-            AdvGame!.StoryOutput((int)Persons!.Find(PersonID)!.locationID, PersonID, item.Description);
-            if ((item.CanBeLocked) && (item.CanBeClosed))
-            {
-                if ((item.IsLocked) && (item.IsClosed))
+                AdvGame!.StoryOutput((int)Persons!.Find(PersonID)!.locationID, PersonID, item.Description);
+                if ((item.CanBeLocked) && (item.CanBeClosed))
                 {
-                    AdvGame!.StoryOutput((int)(Persons!.Find(PersonID)!.locationID), PersonID, Helper.Insert(loca.OrderFeedback_Examine_Person_Everyone_13899, item!.ID, item!.ID));
+                    if ((item.IsLocked) && (item.IsClosed))
+                    {
+                        AdvGame!.StoryOutput((int)(Persons!.Find(PersonID)!.locationID), PersonID, Helper.Insert(loca.OrderFeedback_Examine_Person_Everyone_13899, item!.ID, item!.ID));
+                    }
+                    else if ((!item.IsLocked) && (item.IsClosed))
+                    {
+                        AdvGame!.StoryOutput((int)(Persons!.Find(PersonID)!.locationID), PersonID, Helper.Insert(loca.OrderFeedback_Examine_Person_Everyone_13900, item!.ID, item!.ID));
+                    }
+                    else if ((item.IsLocked) && (!item.IsClosed))
+                    {
+                        AdvGame!.StoryOutput((int)(Persons!.Find(PersonID)!.locationID), PersonID, Helper.Insert(loca.OrderFeedback_Examine_Person_Everyone_13901, item!.ID, item!.ID));
+                    }
                 }
-                else if ((!item.IsLocked) && (item.IsClosed))
+                else if ((!item.CanBeLocked) && (item.CanBeClosed))
                 {
-                    AdvGame!.StoryOutput((int)(Persons!.Find(PersonID)!.locationID), PersonID, Helper.Insert(loca.OrderFeedback_Examine_Person_Everyone_13900, item!.ID, item!.ID));
+                    if (item.IsClosed)
+                    {
+                        AdvGame!.StoryOutput((int)(Persons?.Find(PersonID)!.locationID!), PersonID, Helper.Insert(loca.OrderFeedback_Examine_Person_Everyone_13902, item!.ID, item!.ID));
+                    }
+                    else if (!item.IsClosed)
+                    {
+                        AdvGame!.StoryOutput((int)(Persons?.Find(PersonID)!.locationID!), PersonID, Helper.Insert(loca.OrderFeedback_Examine_Person_Everyone_13903, item!.ID, item!.ID));
+                    }
                 }
-                else if ((item.IsLocked) && (!item.IsClosed))
+
+                if ((item.CanPutIn) && (!item.InvisibleIn) && ((!item.CanBeClosed) || (item.IsClosed == false)))
                 {
-                    AdvGame!.StoryOutput((int)(Persons!.Find(PersonID)!.locationID), PersonID, Helper.Insert(loca.OrderFeedback_Examine_Person_Everyone_13901, item!.ID, item!.ID));
+                    Persons?.ListPersons(AdvGame!.CB!.LocType_In_Item, item!.ID, (int)(Persons?.Find(PersonID)!.locationID!));
+                    ListItems(Helper.Insert(loca.OrderFeedback_Examine_Person_Everyone_13904, item!.ID, CA!.Person_3rdperson!), PersonID, CB!.LocType_In_Item, item!.ID, false, true, Co.CASE_AKK_UNDEF);
+                    item.InvisibleIn = false;
                 }
+                // In Cages kann man immer reingucken
+                if (item.IsCage)
+                {
+                    Persons?.ListPersons(AdvGame!.CB!.LocType_In_Item, item!.ID, (int)(Persons?.Find(PersonID)!.locationID!));
+                    ListItems(Helper.Insert(loca.OrderFeedback_Examine_Person_3rdperson_13905, item!.ID, CA!.Person_3rdperson!), PersonID, CB!.LocType_In_Item, item!.ID, false, true, Co.CASE_AKK_UNDEF);
+                    item.InvisibleIn = false;
+                }
+                if ((item.CanPutOn) && (!item.InvisibleOn))
+                {
+                    // Persons?.ListPersons(AdvGame!.CB!.LocType_On_Item, item!.ID, (int)(Persons?.Find(PersonID)!.locationID!));
+                    ListItems(Helper.Insert(loca.OrderFeedback_Examine_Person_3rdperson_13906, item!.ID, CA!.Person_3rdperson!), PersonID, CB!.LocType_On_Item, item!.ID, false, true, Co.CASE_AKK_UNDEF);
+                    item.InvisibleOn = false;
+                }
+                if ((item.CanPutBehind) && (!item.InvisibleBehind))
+                {
+                    ListItems(Helper.Insert(loca.OrderFeedback_Examine_Person_3rdperson_13907, item!.ID, CA!.Person_3rdperson!), PersonID, CB!.LocType_Behind_Item, item!.ID, false, true, Co.CASE_AKK_UNDEF);
+                    item.InvisibleBehind = false;
+                }
+                if ((item.CanPutBelow) && (!item.InvisibleBelow))
+                {
+                    ListItems(Helper.Insert(loca.OrderFeedback_Examine_Person_3rdperson_13908, item!.ID, CA!.Person_3rdperson!), PersonID, CB!.LocType_Below_Item, item!.ID, false, true, Co.CASE_AKK_UNDEF);
+                    item.InvisibleBelow = false;
+                }
+                if ((item.CanPutBeside) && (!item.InvisibleBeside))
+                {
+                    ListItems(Helper.Insert(loca.OrderFeedback_Examine_Person_3rdperson_13909, item!.ID, CA!.Person_3rdperson!), PersonID, CB!.LocType_Beside_Item, item!.ID, false, true, Co.CASE_AKK_UNDEF);
+                    item.InvisibleBeside = false;
+                }
+                return (true);
             }
-            else if ((!item.CanBeLocked) && (item.CanBeClosed))
+            catch (Exception ex)
             {
-                if (item.IsClosed)
-                {
-                    AdvGame!.StoryOutput((int)( Persons?.Find(PersonID)!.locationID!) , PersonID, Helper.Insert(loca.OrderFeedback_Examine_Person_Everyone_13902, item!.ID, item!.ID));
-                }
-                else if (!item.IsClosed)
-                {
-                    AdvGame!.StoryOutput((int)( Persons?.Find(PersonID)!.locationID!) , PersonID, Helper.Insert(loca.OrderFeedback_Examine_Person_Everyone_13903, item!.ID, item!.ID));
-                }
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.Examine: " + ex.Message, IGlobalData.protMode.crisp);
+                return false;
+
             }
 
-            if ((item.CanPutIn) && (!item.InvisibleIn) && ((!item.CanBeClosed) || (item.IsClosed == false)))
-            {
-                Persons?.ListPersons(AdvGame!.CB!.LocType_In_Item, item!.ID, (int)( Persons?.Find(PersonID)!.locationID!) );
-                ListItems(Helper.Insert(loca.OrderFeedback_Examine_Person_Everyone_13904, item!.ID, CA!.Person_3rdperson!), PersonID, CB!.LocType_In_Item, item!.ID, false, true, Co.CASE_AKK_UNDEF);
-                item.InvisibleIn = false;
-            }
-            // In Cages kann man immer reingucken
-            if (item.IsCage)
-            {
-                Persons?.ListPersons(AdvGame!.CB!.LocType_In_Item, item!.ID, (int)( Persons?.Find(PersonID)!.locationID!) );
-                ListItems(Helper.Insert(loca.OrderFeedback_Examine_Person_3rdperson_13905, item!.ID, CA!.Person_3rdperson!), PersonID, CB!.LocType_In_Item, item!.ID, false, true, Co.CASE_AKK_UNDEF);
-                item.InvisibleIn = false;
-            }
-            if ((item.CanPutOn) && (!item.InvisibleOn))
-            {
-                // Persons?.ListPersons(AdvGame!.CB!.LocType_On_Item, item!.ID, (int)(Persons?.Find(PersonID)!.locationID!));
-                ListItems(Helper.Insert(loca.OrderFeedback_Examine_Person_3rdperson_13906, item!.ID, CA!.Person_3rdperson!), PersonID, CB!.LocType_On_Item, item!.ID, false, true, Co.CASE_AKK_UNDEF);
-                item.InvisibleOn = false;
-            }
-            if ((item.CanPutBehind) && (!item.InvisibleBehind))
-            {
-                ListItems(Helper.Insert(loca.OrderFeedback_Examine_Person_3rdperson_13907, item!.ID, CA!.Person_3rdperson!), PersonID, CB!.LocType_Behind_Item, item!.ID, false, true, Co.CASE_AKK_UNDEF);
-                item.InvisibleBehind = false;
-            }
-            if ((item.CanPutBelow) && (!item.InvisibleBelow))
-            {
-                ListItems(Helper.Insert(loca.OrderFeedback_Examine_Person_3rdperson_13908, item!.ID, CA!.Person_3rdperson!), PersonID, CB!.LocType_Below_Item, item!.ID, false, true, Co.CASE_AKK_UNDEF);
-                item.InvisibleBelow = false;
-            }
-            if ((item.CanPutBeside) && (!item.InvisibleBeside))
-            {
-                ListItems(Helper.Insert(loca.OrderFeedback_Examine_Person_3rdperson_13909, item!.ID, CA!.Person_3rdperson!), PersonID, CB!.LocType_Beside_Item, item!.ID, false, true, Co.CASE_AKK_UNDEF);
-                item.InvisibleBeside = false;
-            }
-            return (true);
         }
 
         public void LayoutRefresh()
         {
-            bool x = AdvGame!.UIS!.UpdateBrowserBlocked;
-            AdvGame.UIS.UpdateBrowserBlocked = true;
-            AdvGame.UIS.DoUIUpdate();
-            AdvGame.UIS.UpdateBrowserBlocked = x;
-            // locations!.Showlocation(A!.ActLoc);
+            try
+            {
+                bool x = AdvGame!.UIS!.UpdateBrowserBlocked;
+                AdvGame.UIS.UpdateBrowserBlocked = true;
+                AdvGame.UIS.DoUIUpdate();
+                AdvGame.UIS.UpdateBrowserBlocked = x;
+                // locations!.Showlocation(A!.ActLoc);
+            }
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.LayoutRefresh: " + ex.Message, IGlobalData.protMode.crisp);
+
+            }
 
         }
         public virtual bool German(Person PersonID, ParseTokenList PTL)
         {
-            AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, loca.Order_Switch_German);
-            loca.GD!.Language = IGlobalData.language.german;
-            LayoutRefresh();
-            AdvGame.Orders!.Location( null, A!.ActLoc);
-            return true;
+            try
+            {
+                AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, loca.Order_Switch_German);
+                loca.GD!.Language = IGlobalData.language.german;
+                LayoutRefresh();
+                AdvGame.Orders!.Location(null, A!.ActLoc);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.German: " + ex.Message, IGlobalData.protMode.crisp);
+                return false;
+            }
+
         }
         public virtual bool English(Person PersonID, ParseTokenList PTL)
         {
-            AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, loca.Order_Switch_English_Fail);
-            AdvGame.Orders!.Location(null, A!.ActLoc);
-            // loca.GD!.Language = IGlobalData.language.english;
-            // LayoutRefresh();
-            // locations!.Showlocation(A!.ActLoc);
-            return true;
+            try
+            {
+                AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, loca.Order_Switch_English_Fail);
+                AdvGame.Orders!.Location(null, A!.ActLoc);
+                // loca.GD!.Language = IGlobalData.language.english;
+                // LayoutRefresh();
+                // locations!.Showlocation(A!.ActLoc);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.English: " + ex.Message, IGlobalData.protMode.crisp);
+                return false;
+            }
+
         }
         public virtual bool ExamineP(Person PersonID, ParseTokenList PTL)
         {
-            OrderFeedback of = new OrderFeedback();
-            Person person = PTL.GetFirstPerson()!; //  GetPersonRef(Adv_PT[1].WordID);
-
-            if (AdvGame!.GD!.LayoutDescription.OrderRepeat == true)
+            try
             {
-                if (person!.ID == CA!.Person_I!.ID)
-                    AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_ExamineP_Person_Me_13910, PersonID));
-                else
-                    AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_ExamineP_Person_Everyone_13910, PersonID, person));
+                OrderFeedback of = new OrderFeedback();
+                Person person = PTL.GetFirstPerson()!; //  GetPersonRef(Adv_PT[1].WordID);
+
+                if (AdvGame!.GD!.LayoutDescription.OrderRepeat == true)
+                {
+                    if (person!.ID == CA!.Person_I!.ID)
+                        AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_ExamineP_Person_Me_13910, PersonID));
+                    else
+                        AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_ExamineP_Person_Everyone_13910, PersonID, person));
+                }
+                if (person.Picture != null)
+                    AdvGame!.PictureOutput(person.Picture);
+
+                AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, PersonID, person.Description);
+
+
+                of.Success = true;
+                of.Handled = true;
+                of.Action = true;
+                of.StoryOutput = true;
+
+                if ((person.CanBeLocked) && (person.CanBeClosed))
+                {
+                    if ((person.IsLocked) && (person.IsClosed))
+                    {
+                        AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, PersonID, Helper.Insert(loca.OrderFeedback_ExamineP_Person_Everyone_13911, person!, CA!.Person_3rdperson!));
+                    }
+                    else if ((!person.IsLocked) && (person.IsClosed))
+                    {
+                        AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, PersonID, Helper.Insert(loca.OrderFeedback_ExamineP_Person_3rdperson_13912, person!, CA!.Person_3rdperson!));
+                    }
+                    else if ((person.IsLocked) && (!person.IsClosed))
+                    {
+                        AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, PersonID, Helper.Insert(loca.OrderFeedback_ExamineP_Person_3rdperson_13913, person!, CA!.Person_3rdperson!));
+                    }
+                }
+                else if ((!person.CanBeLocked) && (person.CanBeClosed))
+                {
+                    if (person.IsClosed)
+                    {
+                        AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, PersonID, Helper.Insert(loca.OrderFeedback_ExamineP_Person_3rdperson_13914, person!, CA!.Person_3rdperson!));
+                    }
+                    else if (!person.IsClosed)
+                    {
+                        AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, PersonID, Helper.Insert(loca.OrderFeedback_ExamineP_Person_3rdperson_13915, person!, CA!.Person_3rdperson!));
+                    }
+                }
+
+                if ((person.CanPutIn) && ((!person.CanBeClosed) || (person.IsClosed == false)))
+                {
+                    ListItems(Helper.Insert(loca.OrderFeedback_ExamineP_Person_3rdperson_13916, person!, CA!.Person_3rdperson!), PersonID, CB!.LocType_In_Person, person!.ID, false, true, Co.CASE_AKK_UNDEF);
+                }
+
+                return (true);
             }
-            if (person.Picture != null)
-                AdvGame!.PictureOutput(person.Picture);
-
-            AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, PersonID, person.Description);
-
-
-            of.Success = true;
-            of.Handled = true;
-            of.Action = true;
-            of.StoryOutput = true;
-
-            if ((person.CanBeLocked) && (person.CanBeClosed))
+            catch (Exception ex)
             {
-                if ((person.IsLocked) && (person.IsClosed))
-                {
-                    AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, PersonID, Helper.Insert(loca.OrderFeedback_ExamineP_Person_Everyone_13911, person!, CA!.Person_3rdperson!));
-                }
-                else if ((!person.IsLocked) && (person.IsClosed))
-                {
-                    AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, PersonID, Helper.Insert(loca.OrderFeedback_ExamineP_Person_3rdperson_13912, person!, CA!.Person_3rdperson!));
-                }
-                else if ((person.IsLocked) && (!person.IsClosed))
-                {
-                    AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, PersonID, Helper.Insert(loca.OrderFeedback_ExamineP_Person_3rdperson_13913, person!, CA!.Person_3rdperson!));
-                }
-            }
-            else if ((!person.CanBeLocked) && (person.CanBeClosed))
-            {
-                if (person.IsClosed)
-                {
-                    AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, PersonID, Helper.Insert(loca.OrderFeedback_ExamineP_Person_3rdperson_13914, person!, CA!.Person_3rdperson!));
-                }
-                else if (!person.IsClosed)
-                {
-                    AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, PersonID, Helper.Insert(loca.OrderFeedback_ExamineP_Person_3rdperson_13915, person!, CA!.Person_3rdperson!));
-                }
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.ExamineP: " + ex.Message, IGlobalData.protMode.crisp);
+                return false;
             }
 
-            if ((person.CanPutIn) && ((!person.CanBeClosed) || (person.IsClosed == false)))
-            {
-                ListItems(Helper.Insert(loca.OrderFeedback_ExamineP_Person_3rdperson_13916, person!, CA!.Person_3rdperson!), PersonID, CB!.LocType_In_Person, person!.ID, false, true, Co.CASE_AKK_UNDEF);
-            }
-
-            return (true);
         }
 
 
         public virtual bool Take(Person PersonID, ParseTokenList PTL)
         {
-            OrderFeedback of = new OrderFeedback();
+            try
+            {
+                OrderFeedback of = new OrderFeedback();
 
-            // Nach den gesamten Prüfungen von Adv_PT ist garantiert, dass sich die Werte an dieser Stelle befinden.
-            Item item = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[1].WordID);
+                // Nach den gesamten Prüfungen von Adv_PT ist garantiert, dass sich die Werte an dieser Stelle befinden.
+                Item item = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[1].WordID);
 
-            return (ProcessTake(item, PersonID, of));
+                return (ProcessTake(item, PersonID, of));
+            }
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.Take: " + ex.Message, IGlobalData.protMode.crisp);
+                return false;
+            }
+
 
 
         }
 
         public virtual bool TakeAll(Person PersonID, ParseTokenList PTL)
         {
-            OrderFeedback of = new OrderFeedback();
-
-            int ct = 0;
-            foreach (Item it in Items!.List!.Values)
+            try
             {
-                if (it.CanBeTaken && Items!.IsItemHere(it, Co.Range_Here) && !Items!.IsItemInv(it))
+                OrderFeedback of = new OrderFeedback();
+
+                int ct = 0;
+                foreach (Item it in Items!.List!.Values)
                 {
-                    ProcessTake(it, PersonID, of);
-                    ct++;
+                    if (it.CanBeTaken && Items!.IsItemHere(it, Co.Range_Here) && !Items!.IsItemInv(it))
+                    {
+                        ProcessTake(it, PersonID, of);
+                        ct++;
+                    }
+                }
+
+                if (ct > 0)
+                    return true;
+                else
+                {
+                    AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_TakeAll_Person_Everyone_13917, PersonID));
+                    return true;
                 }
             }
-
-            if (ct > 0)
-                return true;
-            else
+            catch (Exception ex)
             {
-                AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_TakeAll_Person_Everyone_13917, PersonID));
-                return true;
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.TakeAll: " + ex.Message, IGlobalData.protMode.crisp);
+                return false;
             }
+
         }
 
         public virtual bool TakeP(Person PersonID, ParseTokenList PTL)
         {
-            OrderFeedback of = new OrderFeedback();
+            try
+            {
+                OrderFeedback of = new OrderFeedback();
 
-            // Nach den gesamten Prüfungen von Adv_PT ist garantiert, dass sich die Werte an dieser Stelle befinden.
-            Person pers = PTL.GetFirstPerson()!; //  GetPersonRef(Adv_PT[1].WordID);
+                // Nach den gesamten Prüfungen von Adv_PT ist garantiert, dass sich die Werte an dieser Stelle befinden.
+                Person pers = PTL.GetFirstPerson()!; //  GetPersonRef(Adv_PT[1].WordID);
 
-            return (ProcessTakeP(pers, PersonID, of));
+                return (ProcessTakeP(pers, PersonID, of));
+            }
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.TakeP: " + ex.Message, IGlobalData.protMode.crisp);
+                return false;
+            }
+
 
         }
 
         public virtual bool Drop(Person PersonID, ParseTokenList PTL)
         {
-            OrderFeedback of = new OrderFeedback();
-            bool success = false;
-
-            // Nach den gesamten Prüfungen von Adv_PT ist garantiert, dass sich die Werte an dieser Stelle befinden.
-            Item item = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[1].WordID);
-
-            if ((item!.locationType == CB!.LocType_Person) && (item.locationID == PersonID!.ID))
+            try
             {
-                AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_Drop_Person_Everyone_13918, PersonID, item!.ID));
-                Items!.TransferItem(item!.ID, CB!.LocType_Loc, Persons!.Find(PersonID)!.locationID);
-                success = true;
-                // handled = true;
-                of.Success = true;
-                of.Handled = true;
-                of.StoryOutput = true;
+                OrderFeedback of = new OrderFeedback();
+                bool success = false;
+
+                // Nach den gesamten Prüfungen von Adv_PT ist garantiert, dass sich die Werte an dieser Stelle befinden.
+                Item item = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[1].WordID);
+
+                if ((item!.locationType == CB!.LocType_Person) && (item.locationID == PersonID!.ID))
+                {
+                    AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_Drop_Person_Everyone_13918, PersonID, item!.ID));
+                    Items!.TransferItem(item!.ID, CB!.LocType_Loc, Persons!.Find(PersonID)!.locationID);
+                    success = true;
+                    // handled = true;
+                    of.Success = true;
+                    of.Handled = true;
+                    of.StoryOutput = true;
+                }
+                else
+                {
+                    AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_Drop_Person_Everyone_13919, PersonID, PersonID));
+                    of.FeedbackOutput = true;
+                    success = true;
+                }
+                return (success);
             }
-            else
+            catch (Exception ex)
             {
-                AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_Drop_Person_Everyone_13919, PersonID, PersonID));
-                of.FeedbackOutput = true;
-                success = true;
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.Drop: " + ex.Message, IGlobalData.protMode.crisp);
+                return false;
             }
-            return (success);
+
         }
 
 
         public virtual bool Inventory(Person PersonID, ParseTokenList PTL)
         {
-            OrderFeedback of = new OrderFeedback();
-            AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_Inventory_Person_Everyone_13920, PersonID, PersonID, PersonID));
+            try
+            {
+                OrderFeedback of = new OrderFeedback();
+                AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_Inventory_Person_Everyone_13920, PersonID, PersonID, PersonID));
 
-            // if (AdvGame.GD.LayoutDescription.OrderRepeat == true)
-            //    ListItems(Helper.Insert(loca.OrderFeedback_Inventory_Person_Everyone_13921, PersonID), PersonID, CB!.LocType_Person, PersonID!.ID, false, false, Co.CASE_NOM);
-            // else
-                ListItems(null, PersonID, CB!.LocType_Person, PersonID!.ID, false, false, Co.CASE_NOM_UNDEF );
+                // if (AdvGame.GD.LayoutDescription.OrderRepeat == true)
+                //    ListItems(Helper.Insert(loca.OrderFeedback_Inventory_Person_Everyone_13921, PersonID), PersonID, CB!.LocType_Person, PersonID!.ID, false, false, Co.CASE_NOM);
+                // else
+                ListItems(null, PersonID, CB!.LocType_Person, PersonID!.ID, false, false, Co.CASE_NOM_UNDEF);
 
-            of.StoryOutput = true;
-            of.Success = true;
-            of.Handled = true;
-            of.Action = true;
-            return (true);
+                of.StoryOutput = true;
+                of.Success = true;
+                of.Handled = true;
+                of.Action = true;
+                return (true);
+            }
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.Inventory: " + ex.Message, IGlobalData.protMode.crisp);
+                return false;
+            }
+
         }
 
         public virtual bool Location(Person PersonID, ParseTokenList PTL)
@@ -828,46 +930,56 @@ namespace GameCore
 
         public virtual bool Go(Person PersonID, int Dir)
         {
-            OrderFeedback of = new OrderFeedback();
-            bool success = false;
-
-            if (locations!.LocPersonAct(PersonID).LocExit[Dir] > 0)
+            try
             {
+                OrderFeedback of = new OrderFeedback();
+                bool success = false;
 
-                if ( Dir == 9)
-                    AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_Go_Person_Everyone_13923_Up, PersonID, Dir));
-                else if (Dir == 10)
-                    AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_Go_Person_Everyone_13923_Down, PersonID, Dir));
+                if (locations!.LocPersonAct(PersonID).LocExit[Dir] > 0)
+                {
+
+                    if (Dir == 9)
+                        AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_Go_Person_Everyone_13923_Up, PersonID, Dir));
+                    else if (Dir == 10)
+                        AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_Go_Person_Everyone_13923_Down, PersonID, Dir));
+                    else
+                        AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_Go_Person_Everyone_13923, PersonID, Dir));
+                    Persons!.TransferPerson(PersonID!.ID, CB!.LocType_Loc, locations!.LocPersonAct(PersonID).LocExit[Dir]);
+
+
+                    // Persons!.Find(PersonID)!.locationID = locations!.LocPersonAct(PersonID).LocExit[Dir];
+                    // Persons!.Find(PersonID)!.locationType = CB!.LocType_Loc;
+
+                    if (PersonID!.ID == A!.ActPerson)
+                    {
+                        A!.ActLoc = Persons!.Find(PersonID)!.locationID;
+                        AdvGame.Orders!.Location(null, A!.ActLoc);
+                    }
+                    if ((PersonID!.ID != A!.ActPerson) && (Persons!.Find(PersonID)!.locationID == Persons!.Find(A!.ActPerson)!.locationID))
+                    {
+                        AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_Go_Person_Everyone_13924, PersonID));
+
+                    }
+                    success = true;
+                    of.StoryOutput = true;
+                    of.Success = true;
+                    of.Handled = true;
+                    of.Action = true;
+                }
                 else
-                    AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_Go_Person_Everyone_13923, PersonID, Dir));
-                Persons!.TransferPerson(PersonID!.ID, CB!.LocType_Loc, locations!.LocPersonAct(PersonID).LocExit[Dir]);
-
-
-                // Persons!.Find(PersonID)!.locationID = locations!.LocPersonAct(PersonID).LocExit[Dir];
-                // Persons!.Find(PersonID)!.locationType = CB!.LocType_Loc;
-
-                if (PersonID!.ID == A!.ActPerson)
                 {
-                    A!.ActLoc = Persons!.Find(PersonID)!.locationID;
-                    AdvGame.Orders!.Location(null, A!.ActLoc);
+                    AdvGame!.FeedbackOutput(PersonID, Helper.Insert(loca.OrderFeedback_Go_Person_Everyone_13925, Items!.Find(CA!.I00_Nullbehaelter!)!));
+                    of.FeedbackOutput = true;
                 }
-                if ((PersonID!.ID != A!.ActPerson) && (Persons!.Find(PersonID)!.locationID == Persons!.Find(A!.ActPerson)!.locationID))
-                {
-                    AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_Go_Person_Everyone_13924, PersonID));
-
-                }
-                success = true;
-                of.StoryOutput = true;
-                of.Success = true;
-                of.Handled = true;
-                of.Action = true;
+                return (success);
             }
-            else
+            catch (Exception ex)
             {
-                AdvGame!.FeedbackOutput(PersonID, Helper.Insert(loca.OrderFeedback_Go_Person_Everyone_13925, Items!.Find(CA!.I00_Nullbehaelter!)!));
-                of.FeedbackOutput = true;
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.Go: " + ex.Message, IGlobalData.protMode.crisp);
+                return false;
             }
-            return (success);
+
+
         }
 
         public virtual bool GoN(Person PersonID, ParseTokenList PTL)
@@ -922,364 +1034,436 @@ namespace GameCore
 
         public virtual bool Open(Person PersonID, ParseTokenList PTL)
         {
-            OrderFeedback of = new OrderFeedback();
-            bool succeed = true;
-            of.Success = true;
-
-            Item item = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[1].WordID);
-                                            // int ItemID = GetItemIx(Adv_PT[1].WordID);
-            if (item.CanBeClosed == false)
+            try
             {
-                AdvGame!.StoryOutput(PersonID.locationID, PersonID, Helper.Insert(loca.OrderFeedback_Open_13926, item!.ID, item));
-                succeed = false;
-                of.Success = false;
-                of.Handled = true;
-                of.FeedbackOutput = true;
-            }
-            else if ((item.CanBeClosed == true) && (item.CanBeLocked == true) && (item.IsLocked == true))
-            {
-                AdvGame!.StoryOutput(PersonID.locationID, PersonID, Helper.Insert(loca.OrderFeedback_Open_13927, item!.ID, CA!.Person_3rdperson!));
-                succeed = false;
-                of.Success = false;
-                of.Handled = true;
-                of.FeedbackOutput = true;
-            }
-            else if (item.IsClosed == false)
-            {
-                AdvGame!.StoryOutput(PersonID.locationID, PersonID, Helper.Insert(loca.OrderFeedback_Open_Person_3rdperson_13928, item!.ID, CA!.Person_3rdperson!));
-                succeed = false;
-                of.Success = false;
-                of.Handled = true;
-                of.FeedbackOutput = true;
-            }
-            else
-            {
-                AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_Open_Person_Everyone_13929, PersonID, item!.ID));
-                item.IsClosed = false;
+                OrderFeedback of = new OrderFeedback();
+                bool succeed = true;
                 of.Success = true;
-                of.Handled = true;
-                of.Action = true;
-                of.StoryOutput = true;
 
-                if (PTL.ConvenienceActionNotExamineAfter == false && item.CanPutIn )
+                Item item = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[1].WordID);
+                                                 // int ItemID = GetItemIx(Adv_PT[1].WordID);
+                if (item.CanBeClosed == false)
                 {
-                    PTL.ConvenienceActionNotOpenFirst = true;
-                    ExamineInBase(PersonID, PTL, false);
-                    PTL.ConvenienceActionNotOpenFirst = false;
+                    AdvGame!.StoryOutput(PersonID.locationID, PersonID, Helper.Insert(loca.OrderFeedback_Open_13926, item!.ID, item));
+                    succeed = false;
+                    of.Success = false;
+                    of.Handled = true;
+                    of.FeedbackOutput = true;
                 }
+                else if ((item.CanBeClosed == true) && (item.CanBeLocked == true) && (item.IsLocked == true))
+                {
+                    AdvGame!.StoryOutput(PersonID.locationID, PersonID, Helper.Insert(loca.OrderFeedback_Open_13927, item!.ID, CA!.Person_3rdperson!));
+                    succeed = false;
+                    of.Success = false;
+                    of.Handled = true;
+                    of.FeedbackOutput = true;
+                }
+                else if (item.IsClosed == false)
+                {
+                    AdvGame!.StoryOutput(PersonID.locationID, PersonID, Helper.Insert(loca.OrderFeedback_Open_Person_3rdperson_13928, item!.ID, CA!.Person_3rdperson!));
+                    succeed = false;
+                    of.Success = false;
+                    of.Handled = true;
+                    of.FeedbackOutput = true;
+                }
+                else
+                {
+                    AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_Open_Person_Everyone_13929, PersonID, item!.ID));
+                    item.IsClosed = false;
+                    of.Success = true;
+                    of.Handled = true;
+                    of.Action = true;
+                    of.StoryOutput = true;
+
+                    if (PTL.ConvenienceActionNotExamineAfter == false && item.CanPutIn)
+                    {
+                        PTL.ConvenienceActionNotOpenFirst = true;
+                        ExamineInBase(PersonID, PTL, false);
+                        PTL.ConvenienceActionNotOpenFirst = false;
+                    }
+                }
+                return (succeed);
             }
-            return (succeed);
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.Open: " + ex.Message, IGlobalData.protMode.crisp);
+                return false;
+            }
+
         }
 
         public virtual bool Close(Person PersonID, ParseTokenList PTL)
         {
-            OrderFeedback of = new OrderFeedback();
-            bool success = false;
+            try
+            {
+                OrderFeedback of = new OrderFeedback();
+                bool success = false;
 
-            Item item = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[1].WordID);
-                                            // int ItemID = GetItemIx(Adv_PT[1].WordID);
-            if (item.CanBeClosed == false)
-            {
-                AdvGame!.StoryOutput(PersonID.locationID, PersonID, Helper.Insert(loca.OrderFeedback_Close_13930, item!.ID, item));
-                of.FeedbackOutput = true;
-                success = true;
+                Item item = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[1].WordID);
+                                                 // int ItemID = GetItemIx(Adv_PT[1].WordID);
+                if (item.CanBeClosed == false)
+                {
+                    AdvGame!.StoryOutput(PersonID.locationID, PersonID, Helper.Insert(loca.OrderFeedback_Close_13930, item!.ID, item));
+                    of.FeedbackOutput = true;
+                    success = true;
+                }
+                else if (item.IsClosed == true)
+                {
+                    AdvGame!.StoryOutput(PersonID.locationID, PersonID, Helper.Insert(loca.OrderFeedback_Close_13931, item!.ID, CA!.Person_3rdperson!));
+                    of.FeedbackOutput = true;
+                    success = true;
+                }
+                else
+                {
+                    AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_Close_Person_Everyone_13932, PersonID, item!.ID));
+                    item.IsClosed = true;
+                    success = true;
+                    of.StoryOutput = true;
+                    of.Success = true;
+                    of.Handled = true;
+                    of.Action = true;
+                }
+                return (success);
             }
-            else if (item.IsClosed == true)
+            catch (Exception ex)
             {
-                AdvGame!.StoryOutput(PersonID.locationID, PersonID, Helper.Insert(loca.OrderFeedback_Close_13931, item!.ID, CA!.Person_3rdperson!));
-                of.FeedbackOutput = true;
-                success = true;
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.Close: " + ex.Message, IGlobalData.protMode.crisp);
+                return false;
             }
-            else
-            {
-                AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_Close_Person_Everyone_13932, PersonID, item!.ID));
-                item.IsClosed = true;
-                success = true;
-                of.StoryOutput = true;
-                of.Success = true;
-                of.Handled = true;
-                of.Action = true;
-            }
-            return (success);
+
         }
 
         public virtual bool OpenP(Person PersonID, ParseTokenList PTL)
         {
-            OrderFeedback of = new OrderFeedback();
-            bool succeed = true;
-            of.Success = true;
+            try
+            {
+                OrderFeedback of = new OrderFeedback();
+                bool succeed = true;
+                of.Success = true;
 
-            Person person = PTL.GetFirstPerson()!; //  GetPersonRef(Adv_PT[1].WordID);
-            if (person.CanBeClosed == false)
-            {
-                AdvGame!.StoryOutput(PersonID.locationID, PersonID, Helper.Insert(loca.OrderFeedback_OpenP_13933, person, person));
-                // succeed = false;
-                of.Success = false;
-                of.Handled = true;
-                of.FeedbackOutput = true;
+                Person person = PTL.GetFirstPerson()!; //  GetPersonRef(Adv_PT[1].WordID);
+                if (person.CanBeClosed == false)
+                {
+                    AdvGame!.StoryOutput(PersonID.locationID, PersonID, Helper.Insert(loca.OrderFeedback_OpenP_13933, person, person));
+                    // succeed = false;
+                    of.Success = false;
+                    of.Handled = true;
+                    of.FeedbackOutput = true;
+                }
+                else if ((person.CanBeClosed == true) && (person.CanBeLocked == true) && (person.IsLocked == true))
+                {
+                    AdvGame!.StoryOutput(PersonID.locationID, PersonID, Helper.Insert(loca.OrderFeedback_OpenP_13934, person, CA!.Person_3rdperson!));
+                    // succeed = false;
+                    of.Success = false;
+                    of.Handled = true;
+                    of.FeedbackOutput = true;
+                }
+                else if (person.IsClosed == false)
+                {
+                    AdvGame!.StoryOutput(PersonID.locationID, PersonID, Helper.Insert(loca.OrderFeedback_OpenP_Person_3rdperson_13935, person, CA!.Person_3rdperson!));
+                    of.Success = false;
+                    of.Handled = true;
+                    of.FeedbackOutput = true;
+                }
+                else
+                {
+                    AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_OpenP_Person_Everyone_13936, PersonID, person));
+                    person.IsClosed = false;
+                    of.StoryOutput = true;
+                    of.Handled = true;
+                    of.Action = true;
+                }
+                return (succeed);
             }
-            else if ((person.CanBeClosed == true) && (person.CanBeLocked == true) && (person.IsLocked == true))
+            catch (Exception ex)
             {
-                AdvGame!.StoryOutput(PersonID.locationID, PersonID, Helper.Insert(loca.OrderFeedback_OpenP_13934, person, CA!.Person_3rdperson!));
-                // succeed = false;
-                of.Success = false;
-                of.Handled = true;
-                of.FeedbackOutput = true;
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.OpenP: " + ex.Message, IGlobalData.protMode.crisp);
+                return false;
             }
-            else if (person.IsClosed == false)
-            {
-                AdvGame!.StoryOutput(PersonID.locationID, PersonID, Helper.Insert(loca.OrderFeedback_OpenP_Person_3rdperson_13935, person, CA!.Person_3rdperson!));
-                of.Success = false;
-                of.Handled = true;
-                of.FeedbackOutput = true;
-            }
-            else
-            {
-                AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_OpenP_Person_Everyone_13936, PersonID, person));
-                person.IsClosed = false;
-                of.StoryOutput = true;
-                of.Handled = true;
-                of.Action = true;
-            }
-            return (succeed);
+
         }
 
         public virtual bool CloseP(Person PersonID, ParseTokenList PTL)
         {
-            OrderFeedback of = new OrderFeedback();
-            bool success = false;
-            Person person = PTL.GetFirstPerson()!; //  GetPersonRef(Adv_PT[1].WordID);
-                                                  // int ItemID = GetItemIx(Adv_PT[1].WordID);
-            if (person.CanBeClosed == false)
+            try
             {
-                AdvGame!.StoryOutput(PersonID.locationID, PersonID, Helper.Insert(loca.OrderFeedback_CloseP_13937, person, person));
-                of.FeedbackOutput = true;
-                of.Handled = true;
-                success = true;
+                OrderFeedback of = new OrderFeedback();
+                bool success = false;
+                Person person = PTL.GetFirstPerson()!; //  GetPersonRef(Adv_PT[1].WordID);
+                                                       // int ItemID = GetItemIx(Adv_PT[1].WordID);
+                if (person.CanBeClosed == false)
+                {
+                    AdvGame!.StoryOutput(PersonID.locationID, PersonID, Helper.Insert(loca.OrderFeedback_CloseP_13937, person, person));
+                    of.FeedbackOutput = true;
+                    of.Handled = true;
+                    success = true;
+                }
+                else if (person.IsClosed == true)
+                {
+                    AdvGame!.StoryOutput(PersonID.locationID, PersonID, Helper.Insert(loca.OrderFeedback_CloseP_13938, person, CA!.Person_3rdperson!));
+                    of.FeedbackOutput = true;
+                    of.Handled = true;
+                    success = true;
+                }
+                else
+                {
+                    AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_CloseP_Person_Everyone_13939, PersonID, person));
+                    person.IsClosed = true;
+                    success = true;
+                    of.StoryOutput = true;
+                    of.Handled = true;
+                }
+                return (success);
             }
-            else if (person.IsClosed == true)
+            catch (Exception ex)
             {
-                AdvGame!.StoryOutput(PersonID.locationID, PersonID, Helper.Insert(loca.OrderFeedback_CloseP_13938, person, CA!.Person_3rdperson!));
-                of.FeedbackOutput = true;
-                of.Handled = true;
-                success = true;
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.CloseP: " + ex.Message, IGlobalData.protMode.crisp);
+                return false;
             }
-            else
-            {
-                AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_CloseP_Person_Everyone_13939, PersonID, person));
-                person.IsClosed = true;
-                success = true;
-                of.StoryOutput = true;
-                of.Handled = true;
-            }
-            return (success);
+
         }
 
         public virtual bool UnlockW(Person PersonID, ParseTokenList PTL)
         {
-            OrderFeedback of = new OrderFeedback();
-            bool found = false;
-            Item item1 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[1].WordID);
-            Item item2 = PTL.GetSecondItem()!; //  GetItemRef(Adv_PT[3].WordID);
-                                              // int ItemID1 = GetItemIx(Adv_PT[1].WordID);
-                                              // int ItemID2 = GetItemIx(Adv_PT[3].WordID);
+            try
+            {
+                OrderFeedback of = new OrderFeedback();
+                bool found = false;
+                Item item1 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[1].WordID);
+                Item item2 = PTL.GetSecondItem()!; //  GetItemRef(Adv_PT[3].WordID);
+                                                   // int ItemID1 = GetItemIx(Adv_PT[1].WordID);
+                                                   // int ItemID2 = GetItemIx(Adv_PT[3].WordID);
 
-            if (item1.CanBeLocked == false)
-            {
-                AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_UnlockW_13940, item1!.ID, item1));
-                of.FeedbackOutput = true;
-                of.Handled = true;
-                found = true;
-            }
-            else if (item1.IsLocked == false)
-            {
-                AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_UnlockW_Person_3rdperson_13941, item1!.ID, item1));
-                of.FeedbackOutput = true;
-                of.Handled = true;
-                found = true;
-            }
-            else
-            {
-
-                foreach (int i in item1.UnlockItems!)
+                if (item1.CanBeLocked == false)
                 {
-                    if (i == item2!.ID)
-                    {
-                        item1.IsLocked = false;
-                        AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_UnlockW_Person_Everyone_13942, PersonID, item1!.ID, item2!.ID));
-                        of.StoryOutput = true;
-                        of.Success = true;
-                        of.Action = true;
-                        of.Handled = true;
-                        found = true;
-                        break;
-                    }
-                }
-                if (found == false)
-                {
-                    AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_UnlockW_Person_Everyone_13943, item1!.ID, item1, item2!.ID));
+                    AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_UnlockW_13940, item1!.ID, item1));
                     of.FeedbackOutput = true;
                     of.Handled = true;
                     found = true;
                 }
+                else if (item1.IsLocked == false)
+                {
+                    AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_UnlockW_Person_3rdperson_13941, item1!.ID, item1));
+                    of.FeedbackOutput = true;
+                    of.Handled = true;
+                    found = true;
+                }
+                else
+                {
+
+                    foreach (int i in item1.UnlockItems!)
+                    {
+                        if (i == item2!.ID)
+                        {
+                            item1.IsLocked = false;
+                            AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_UnlockW_Person_Everyone_13942, PersonID, item1!.ID, item2!.ID));
+                            of.StoryOutput = true;
+                            of.Success = true;
+                            of.Action = true;
+                            of.Handled = true;
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (found == false)
+                    {
+                        AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_UnlockW_Person_Everyone_13943, item1!.ID, item1, item2!.ID));
+                        of.FeedbackOutput = true;
+                        of.Handled = true;
+                        found = true;
+                    }
+                }
+                return (found);
             }
-            return (found);
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.UnlockW: " + ex.Message, IGlobalData.protMode.crisp);
+                return false;
+            }
+
         }
 
         public virtual bool UnlockWP(Person PersonID, ParseTokenList PTL)
         {
-            OrderFeedback of = new OrderFeedback();
-            bool found = false;
-            Person person1 = PTL.GetFirstPerson()!; //  GetPersonRef(Adv_PT[1].WordID);
-            Item item2 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[3].WordID);
+            try
+            {
+                OrderFeedback of = new OrderFeedback();
+                bool found = false;
+                Person person1 = PTL.GetFirstPerson()!; //  GetPersonRef(Adv_PT[1].WordID);
+                Item item2 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[3].WordID);
 
-            if (person1.CanBeLocked == false)
-            {
-                AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_UnlockWP_13944, person1, person1));
-                of.FeedbackOutput = true;
-                of.Handled = true;
-                found = true;
-            }
-            else if (person1.IsLocked == false)
-            {
-                AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_UnlockWP_13945, person1, CA!.Person_3rdperson!));
-                of.FeedbackOutput = true;
-                of.Handled = true;
-                found = true;
-            }
-            else
-            {
-
-                foreach (int i in person1.UnlockItems!)
+                if (person1.CanBeLocked == false)
                 {
-                    if (i == item2!.ID)
-                    {
-                        person1.IsLocked = false;
-                        AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_UnlockWP_Person_Everyone_13946, PersonID, person1, item2!.ID));
-
-                        found = true;
-                        of.StoryOutput = true;
-                        of.Success = true;
-                        of.Action = true;
-                        of.Handled = true;
-                        break;
-                    }
-                }
-                if (found == false)
-                {
-                    AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_UnlockWP_Person_Everyone_13947, person1, person1, item2!.ID));
+                    AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_UnlockWP_13944, person1, person1));
                     of.FeedbackOutput = true;
+                    of.Handled = true;
                     found = true;
                 }
+                else if (person1.IsLocked == false)
+                {
+                    AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_UnlockWP_13945, person1, CA!.Person_3rdperson!));
+                    of.FeedbackOutput = true;
+                    of.Handled = true;
+                    found = true;
+                }
+                else
+                {
+
+                    foreach (int i in person1.UnlockItems!)
+                    {
+                        if (i == item2!.ID)
+                        {
+                            person1.IsLocked = false;
+                            AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_UnlockWP_Person_Everyone_13946, PersonID, person1, item2!.ID));
+
+                            found = true;
+                            of.StoryOutput = true;
+                            of.Success = true;
+                            of.Action = true;
+                            of.Handled = true;
+                            break;
+                        }
+                    }
+                    if (found == false)
+                    {
+                        AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_UnlockWP_Person_Everyone_13947, person1, person1, item2!.ID));
+                        of.FeedbackOutput = true;
+                        found = true;
+                    }
+                }
+                return (found);
             }
-            return (found);
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.UnlockWP: " + ex.Message, IGlobalData.protMode.crisp);
+                return false;
+            }
+
         }
 
         public virtual bool LockW(Person PersonID, ParseTokenList PTL)
         {
-            OrderFeedback of = new OrderFeedback();
-            bool found = false;
-
-            Item item1 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[1].WordID);
-            Item item2 = PTL.GetSecondItem()!; //  GetItemRef(Adv_PT[3].WordID);
-                                              // int ItemID1 = GetItemIx(Adv_PT[1].WordID);
-                                              // int ItemID2 = GetItemIx(Adv_PT[3].WordID);
-
-            if (item1.CanBeLocked == false)
+            try
             {
-                AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_LockW_13948, item1!.ID, CA!.Person_3rdperson!));
-                of.FeedbackOutput = true;
-                of.Handled = true;
-                found = true;
+                OrderFeedback of = new OrderFeedback();
+                bool found = false;
 
-            }
-            else if (item1.IsLocked == true)
-            {
-                AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_LockW_Person_3rdperson_13949, item1!.ID, CA!.Person_3rdperson!));
-                of.FeedbackOutput = true;
-                of.Handled = true;
-                found = true;
-            }
-            else
-            {
+                Item item1 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[1].WordID);
+                Item item2 = PTL.GetSecondItem()!; //  GetItemRef(Adv_PT[3].WordID);
+                                                   // int ItemID1 = GetItemIx(Adv_PT[1].WordID);
+                                                   // int ItemID2 = GetItemIx(Adv_PT[3].WordID);
 
-                foreach (int i in item1.UnlockItems!)
+                if (item1.CanBeLocked == false)
                 {
-                    if (i == item2!.ID)
-                    {
-                        item1.IsLocked = true;
-                        AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_LockW_Person_Everyone_13950, PersonID, item1!.ID, item2!.ID));
-
-                        found = true;
-                        of.StoryOutput = true;
-                        of.Success = true;
-                        of.Action = true;
-                        of.Handled = true;
-                        break;
-                    }
-                }
-                if (found == false)
-                {
-                    AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_LockW_Person_Everyone_13951, item1!.ID, item1, item2!.ID));
+                    AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_LockW_13948, item1!.ID, CA!.Person_3rdperson!));
                     of.FeedbackOutput = true;
                     of.Handled = true;
                     found = true;
 
                 }
+                else if (item1.IsLocked == true)
+                {
+                    AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_LockW_Person_3rdperson_13949, item1!.ID, CA!.Person_3rdperson!));
+                    of.FeedbackOutput = true;
+                    of.Handled = true;
+                    found = true;
+                }
+                else
+                {
+
+                    foreach (int i in item1.UnlockItems!)
+                    {
+                        if (i == item2!.ID)
+                        {
+                            item1.IsLocked = true;
+                            AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_LockW_Person_Everyone_13950, PersonID, item1!.ID, item2!.ID));
+
+                            found = true;
+                            of.StoryOutput = true;
+                            of.Success = true;
+                            of.Action = true;
+                            of.Handled = true;
+                            break;
+                        }
+                    }
+                    if (found == false)
+                    {
+                        AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_LockW_Person_Everyone_13951, item1!.ID, item1, item2!.ID));
+                        of.FeedbackOutput = true;
+                        of.Handled = true;
+                        found = true;
+
+                    }
+                }
+                return (false);
             }
-            return (false);
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.LockW: " + ex.Message, IGlobalData.protMode.crisp);
+                return false;
+            }
+
         }
 
         public virtual bool LockWP(Person PersonID, ParseTokenList PTL)
         {
-            OrderFeedback of = new OrderFeedback();
-            bool found = false;
-            Person person1 = PTL.GetFirstPerson()!; //  GetPersonRef(Adv_PT[1].WordID);
-            Item item2 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[3].WordID);
-                                             // int ItemID1 = GetItemIx(Adv_PT[1].WordID);
-                                             // int ItemID2 = GetItemIx(Adv_PT[3].WordID);
+            try
+            {
+                OrderFeedback of = new OrderFeedback();
+                bool found = false;
+                Person person1 = PTL.GetFirstPerson()!; //  GetPersonRef(Adv_PT[1].WordID);
+                Item item2 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[3].WordID);
+                                                  // int ItemID1 = GetItemIx(Adv_PT[1].WordID);
+                                                  // int ItemID2 = GetItemIx(Adv_PT[3].WordID);
 
-            if (person1!.CanBeLocked == false)
-            {
-                AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_LockWP_13952, person1, CA!.Person_3rdperson!));
-                of.FeedbackOutput = true;
-                of.Handled = true;
-                found = true;
-            }
-            else if (person1.IsLocked == true)
-            {
-                AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_LockWP_Person_3rdperson_13953, person1, CA!.Person_3rdperson!));
-                of.FeedbackOutput = true;
-                of.Handled = true;
-                found = true;
-            }
-            else
-            {
-
-                foreach (int i in person1.UnlockItems!)
+                if (person1!.CanBeLocked == false)
                 {
-                    if (i == item2!.ID)
-                    {
-                        person1.IsLocked = true;
-                        AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_LockWP_Person_Everyone_13954, PersonID, person1, item2!.ID));
-                        of.StoryOutput = true;
-                        of.Success = true;
-                        of.Action = true;
-                        of.Handled = true;
-
-                        found = true;
-                        break;
-                    }
-                }
-                if (found == false)
-                {
-                    AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_LockWP_Person_Everyone_13955, person1, person1, item2!.ID));
+                    AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_LockWP_13952, person1, CA!.Person_3rdperson!));
                     of.FeedbackOutput = true;
                     of.Handled = true;
                     found = true;
                 }
+                else if (person1.IsLocked == true)
+                {
+                    AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_LockWP_Person_3rdperson_13953, person1, CA!.Person_3rdperson!));
+                    of.FeedbackOutput = true;
+                    of.Handled = true;
+                    found = true;
+                }
+                else
+                {
+
+                    foreach (int i in person1.UnlockItems!)
+                    {
+                        if (i == item2!.ID)
+                        {
+                            person1.IsLocked = true;
+                            AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_LockWP_Person_Everyone_13954, PersonID, person1, item2!.ID));
+                            of.StoryOutput = true;
+                            of.Success = true;
+                            of.Action = true;
+                            of.Handled = true;
+
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (found == false)
+                    {
+                        AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_LockWP_Person_Everyone_13955, person1, person1, item2!.ID));
+                        of.FeedbackOutput = true;
+                        of.Handled = true;
+                        found = true;
+                    }
+                }
+                return (found);
             }
-            return (found);
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.LockWP: " + ex.Message, IGlobalData.protMode.crisp);
+                return false;
+            }
+
         }
 
         public virtual bool TakeUnder(Person PersonID, ParseTokenList PTL)
@@ -1309,981 +1493,1249 @@ namespace GameCore
 
         public virtual bool PlaceUnder(Person PersonID, ParseTokenList PTL)
         {
-            OrderFeedback of = new OrderFeedback();
-            bool handled = false;
-
-            Item item1 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[1].WordID);
-            Item item2 = PTL.GetSecondItem()!; //  GetItemRef(Adv_PT[3].WordID);
-
-            if (item2.CanPutBelow!)
+            try
             {
-                if (item1.Size > item2.StorageBelow)
+                OrderFeedback of = new OrderFeedback();
+                bool handled = false;
+
+                Item item1 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[1].WordID);
+                Item item2 = PTL.GetSecondItem()!; //  GetItemRef(Adv_PT[3].WordID);
+
+                if (item2.CanPutBelow!)
                 {
-                    AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_PlaceUnder_13956, item1!.ID, item1, item2!.ID));
+                    if (item1.Size > item2.StorageBelow)
+                    {
+                        AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_PlaceUnder_13956, item1!.ID, item1, item2!.ID));
+                        of.FeedbackOutput = true;
+                        of.Handled = true;
+                        handled = true;
+                    }
+                    else if (item1!.ID == item2!.ID)
+                    {
+                        AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_PlaceUnder_13957, item1!.ID, item2!.ID));
+                        of.FeedbackOutput = true;
+                        of.Handled = true;
+                        handled = true;
+                    }
+                    else
+                    {
+                        if (EnsureTake(item1, PersonID, true))
+                        {
+                            AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_PlaceUnder_Person_Everyone_13958, PersonID, item1!.ID, item2!.ID));
+                            Items!.TransferItem(item1!.ID, CB!.LocType_Below_Item, item2!.ID);
+                            of.StoryOutput = true;
+                            of.Success = true;
+                            of.Action = true;
+                            of.Handled = true;
+                        }
+                        handled = true;
+                    }
+                }
+                else
+                {
+                    AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_PlaceUnder_Person_Everyone_13959, item2!.ID, item2));
                     of.FeedbackOutput = true;
                     of.Handled = true;
                     handled = true;
                 }
-                else if (item1!.ID == item2!.ID)
+                return (handled);
+            }
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.PlaceUnder: " + ex.Message, IGlobalData.protMode.crisp);
+                return false;
+            }
+
+        }
+
+        public virtual bool PlaceIn(Person PersonID, ParseTokenList PTL)
+        {
+            try
+            {
+                OrderFeedback of = new OrderFeedback();
+                bool handled = false;
+                Item item1 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[1].WordID);
+                Item item2 = PTL.GetSecondItem()!; //  GetItemRef(Adv_PT[3].WordID);
+                                                   // bool doClose = false;
+
+                if (item1!.ID == item2!.ID)
                 {
-                    AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_PlaceUnder_13957, item1!.ID, item2!.ID));
+                    AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_PlaceIn_13960, item1!.ID, item2!.ID));
+                    of.FeedbackOutput = true;
+                    of.Handled = true;
+                    handled = true;
+                }
+                else if (item2.CanPutIn)
+                {
+                    bool AutoOpen = false;
+
+                    // Wenn ein Item geschlossen ist, wird versucht, es zu öffnen
+                    if ((item2.IsClosed) && (item2.CanBeClosed))
+                    {
+                        ParseTokenList PT = new ParseTokenList();
+                        PT.AddVerb(CB!.Verb_Open);
+                        PT.AddItem(item2);
+                        if (Open(PersonID, PT))
+                        {
+                            if (item2.IsClosed == false)
+                                AutoOpen = true;
+                        }
+                        // Wenn sich das Item nicht öffnen ließ, dann wurde hier ein Kommentar ausgegeben und diese Funktion muss nichts mehr schreiben.
+                    }
+                    if (((!item2.IsClosed) && (item2.CanBeClosed))
+                         || (!item2.CanBeClosed)
+                       )
+                    {
+                        if (item1.Size > item2.StorageIn)
+                        {
+                            AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_PlaceIn_13961, item1!.ID, item1, item2!.ID));
+                            of.FeedbackOutput = true;
+                            of.Handled = true;
+                            handled = true;
+                        }
+                        else
+                        {
+                            if (EnsureTake(item1, PersonID, true))
+                            {
+                                AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_PlaceIn_Person_Everyone_13962, PersonID, item1!.ID, item2!.ID));
+                                Items!.TransferItem(item1!.ID, CB!.LocType_In_Item, item2!.ID);
+                                of.StoryOutput = true;
+                                of.Success = true;
+                                of.Action = true;
+                                of.Handled = true;
+                            }
+                            handled = true;
+                        }
+                    }
+                    if (AutoOpen)
+                    {
+                        ParseTokenList PT = new ParseTokenList();
+                        PT.AddVerb(CB!.Verb_Open);
+                        PT.AddItem(item2);
+                        Close(PersonID, PT);
+                        AutoOpen = true;
+                        // Wenn sich das Item nicht öffnen ließ, dann wurde hier ein Kommentar ausgegeben und diese Funktion muss nichts mehr schreiben.
+                    }
+                }
+                else
+                {
+                    AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_PlaceIn_Person_Everyone_13963, item2!.ID, item2));
+                    of.FeedbackOutput = true;
+                    of.Handled = true;
+                    handled = true;
+                }
+                return (handled);
+            }
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.PlaceIn: " + ex.Message, IGlobalData.protMode.crisp);
+                return false;
+            }
+
+
+        }
+
+        public virtual bool PlaceInP(Person PersonID, ParseTokenList PTL)
+        {
+            try
+            {
+                OrderFeedback of = new OrderFeedback();
+                bool handled = false;
+                Item item1 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[1].WordID);
+                Person person2 = PTL.GetFirstPerson()!; //  GetPersonRef(Adv_PT[3].WordID);
+
+                if (person2.CanPutIn!)
+                {
+                    bool autoOpen = false;
+
+                    // Wenn ein Item geschlossen ist, wird versucht, es zu öffnen
+                    if ((person2.IsClosed) && (person2.CanBeClosed))
+                    {
+                        ParseTokenList PT = new ParseTokenList();
+                        PT.AddVerb(CB!.Verb_Open);
+                        PT.AddPerson(person2);
+                        if (Open(PersonID, PT))
+                            autoOpen = true;
+                        // Wenn sich das Item nicht öffnen ließ, dann wurde hier ein Kommentar ausgegeben und diese Funktion muss nichts mehr schreiben.
+                    }
+                    if ((!person2.IsClosed) && (person2.CanBeClosed))
+                    {
+                        if (item1.Size > person2.StorageIn)
+                        {
+                            AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_PlaceInP_13964, item1!.ID, item1, person2));
+                            of.FeedbackOutput = true;
+                            of.Handled = true;
+                            handled = true;
+                        }
+                        else
+                        {
+                            if (EnsureTake(item1, PersonID, true))
+                            {
+                                AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_PlaceInP_Person_Everyone_13965, PersonID, item1!.ID, person2));
+                                Items!.TransferItem(item1!.ID, CB!.LocType_In_Person, person2!.ID);
+                                of.StoryOutput = true;
+                                of.Success = true;
+                                of.Action = true;
+                                of.Handled = true;
+                            }
+                            handled = true;
+                        }
+                    }
+                    if (autoOpen)
+                    {
+                        ParseTokenList PT = new ParseTokenList();
+                        PT.AddVerb(CB!.Verb_Open);
+                        PT.AddPerson(person2);
+                        Close(PersonID, PT);
+                        autoOpen = true;
+                        // Wenn sich das Item nicht öffnen ließ, dann wurde hier ein Kommentar ausgegeben und diese Funktion muss nichts mehr schreiben.
+                    }
+                }
+                else
+                {
+                    AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_PlaceInP_Person_Everyone_13966, person2, item1));
+                    of.FeedbackOutput = true;
+                    of.Handled = true;
+                    handled = true;
+                }
+                return (handled);
+            }
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.PlaceInP: " + ex.Message, IGlobalData.protMode.crisp);
+                return false;
+            }
+
+        }
+
+        public virtual bool GiveToP(Person PersonID, ParseTokenList PTL)
+        {
+            try
+            {
+                OrderFeedback of = new OrderFeedback();
+                bool handled = false;
+
+                Item item1 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[1].WordID);
+                Person person2 = PTL.GetFirstPerson()!; //  GetPersonRef(Adv_PT[3].WordID);
+
+                if (item1.Size > person2.StorageIn)
+                {
+                    AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_GiveToP_13967, person2, item1, item1!.ID));
                     of.FeedbackOutput = true;
                     of.Handled = true;
                     handled = true;
                 }
                 else
                 {
-                    if (EnsureTake(item1, PersonID, true))
-                    {
-                        AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_PlaceUnder_Person_Everyone_13958, PersonID, item1!.ID, item2!.ID));
-                        Items!.TransferItem(item1!.ID, CB!.LocType_Below_Item, item2!.ID);
-                        of.StoryOutput = true;
-                        of.Success = true;
-                        of.Action = true;
-                        of.Handled = true;
-                    }
+                    AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_GiveToP_Person_Everyone_13968, PersonID, item1!.ID, person2));
+                    Items!.TransferItem(item1!.ID, CB!.LocType_To_Person, person2!.ID);
+                    of.StoryOutput = true;
+                    of.Success = true;
+                    of.Action = true;
+                    of.Handled = true;
                     handled = true;
                 }
+                return (handled);
             }
-            else
+            catch (Exception ex)
             {
-                AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_PlaceUnder_Person_Everyone_13959, item2!.ID, item2));
-                of.FeedbackOutput = true;
-                of.Handled = true;
-                handled = true;
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.GiveToP: " + ex.Message, IGlobalData.protMode.crisp);
+                return false;
             }
-            return (handled);
+
         }
 
-        public virtual bool PlaceIn(Person PersonID, ParseTokenList PTL)
+        public virtual bool ShowToP(Person PersonID, ParseTokenList PTL)
         {
-            OrderFeedback of = new OrderFeedback();
-            bool handled = false;
-            Item item1 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[1].WordID);
-            Item item2 = PTL.GetSecondItem()!; //  GetItemRef(Adv_PT[3].WordID);
-            // bool doClose = false;
-
-            if (item1!.ID == item2!.ID)
+            try
             {
-                AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_PlaceIn_13960, item1!.ID, item2!.ID));
-                of.FeedbackOutput = true;
-                of.Handled = true;
-                handled = true;
-            }
-            else if (item2.CanPutIn)
-            {
-                bool AutoOpen = false;
+                OrderFeedback of = new OrderFeedback();
+                bool handled = false;
 
-                // Wenn ein Item geschlossen ist, wird versucht, es zu öffnen
-                if ((item2.IsClosed) && (item2.CanBeClosed))
-                {
-                    ParseTokenList PT = new ParseTokenList();
-                    PT.AddVerb(CB!.Verb_Open);
-                    PT.AddItem(item2);
-                    if (Open(PersonID, PT))
-                    {
-                        if (item2.IsClosed == false)
-                            AutoOpen = true;
-                    }
-                    // Wenn sich das Item nicht öffnen ließ, dann wurde hier ein Kommentar ausgegeben und diese Funktion muss nichts mehr schreiben.
-                }
-                if (((!item2.IsClosed) && (item2.CanBeClosed))
-                     || (!item2.CanBeClosed)
-                   )
-                {
-                    if (item1.Size > item2.StorageIn)
-                    {
-                        AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_PlaceIn_13961, item1!.ID, item1, item2!.ID));
-                        of.FeedbackOutput = true;
-                        of.Handled = true;
-                        handled = true;
-                    }
-                    else
-                    {
-                        if (EnsureTake(item1, PersonID, true))
-                        {
-                            AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_PlaceIn_Person_Everyone_13962, PersonID, item1!.ID, item2!.ID));
-                            Items!.TransferItem(item1!.ID, CB!.LocType_In_Item, item2!.ID);
-                            of.StoryOutput = true;
-                            of.Success = true;
-                            of.Action = true;
-                            of.Handled = true;
-                        }
-                        handled = true;
-                    }
-                }
-                if (AutoOpen)
-                {
-                    ParseTokenList PT = new ParseTokenList();
-                    PT.AddVerb(CB!.Verb_Open);
-                    PT.AddItem(item2);
-                    Close(PersonID, PT);
-                    AutoOpen = true;
-                    // Wenn sich das Item nicht öffnen ließ, dann wurde hier ein Kommentar ausgegeben und diese Funktion muss nichts mehr schreiben.
-                }
-            }
-            else
-            {
-                AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_PlaceIn_Person_Everyone_13963, item2!.ID, item2));
-                of.FeedbackOutput = true;
-                of.Handled = true;
-                handled = true;
-            }
-            return (handled);
-        }
+                Item item1 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[1].WordID);
+                Person person2 = PTL.GetFirstPerson()!; //  GetPersonRef(Adv_PT[3].WordID);
 
-        public virtual bool PlaceInP(Person PersonID, ParseTokenList PTL)
-        {
-            OrderFeedback of = new OrderFeedback();
-            bool handled = false;
-            Item item1 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[1].WordID);
-            Person person2 = PTL.GetFirstPerson()!; //  GetPersonRef(Adv_PT[3].WordID);
-
-            if (person2.CanPutIn!)
-            {
-                bool autoOpen = false;
-
-                // Wenn ein Item geschlossen ist, wird versucht, es zu öffnen
-                if ((person2.IsClosed) && (person2.CanBeClosed))
-                {
-                    ParseTokenList PT = new ParseTokenList();
-                    PT.AddVerb(CB!.Verb_Open);
-                    PT.AddPerson(person2);
-                    if (Open(PersonID, PT))
-                        autoOpen = true;
-                    // Wenn sich das Item nicht öffnen ließ, dann wurde hier ein Kommentar ausgegeben und diese Funktion muss nichts mehr schreiben.
-                }
-                if ((!person2.IsClosed) && (person2.CanBeClosed))
-                {
-                    if (item1.Size > person2.StorageIn)
-                    {
-                        AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_PlaceInP_13964, item1!.ID, item1, person2));
-                        of.FeedbackOutput = true;
-                        of.Handled = true;
-                        handled = true;
-                    }
-                    else
-                    {
-                        if (EnsureTake(item1, PersonID, true))
-                        {
-                            AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_PlaceInP_Person_Everyone_13965, PersonID, item1!.ID, person2));
-                            Items!.TransferItem(item1!.ID, CB!.LocType_In_Person, person2!.ID);
-                            of.StoryOutput = true;
-                            of.Success = true;
-                            of.Action = true;
-                            of.Handled = true;
-                        }
-                        handled = true;
-                    }
-                }
-                if (autoOpen)
-                {
-                    ParseTokenList PT = new ParseTokenList();
-                    PT.AddVerb(CB!.Verb_Open);
-                    PT.AddPerson(person2);
-                    Close(PersonID, PT);
-                    autoOpen = true;
-                    // Wenn sich das Item nicht öffnen ließ, dann wurde hier ein Kommentar ausgegeben und diese Funktion muss nichts mehr schreiben.
-                }
-            }
-            else
-            {
-                AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_PlaceInP_Person_Everyone_13966, person2, item1));
-                of.FeedbackOutput = true;
-                of.Handled = true;
-                handled = true;
-            }
-            return (handled);
-        }
-
-        public virtual bool GiveToP(Person PersonID, ParseTokenList PTL)
-        {
-            OrderFeedback of = new OrderFeedback();
-            bool handled = false;
-
-            Item item1 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[1].WordID);
-            Person person2 = PTL.GetFirstPerson()!; //  GetPersonRef(Adv_PT[3].WordID);
-
-            if (item1.Size > person2.StorageIn)
-            {
-                AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_GiveToP_13967, person2, item1, item1!.ID));
-                of.FeedbackOutput = true;
-                of.Handled = true;
-                handled = true;
-            }
-            else
-            {
-                AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_GiveToP_Person_Everyone_13968, PersonID, item1!.ID, person2));
-                Items!.TransferItem(item1!.ID, CB!.LocType_To_Person, person2!.ID);
+                AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_ShowToP_Person_Everyone_13969, PersonID, item1!.ID, person2));
                 of.StoryOutput = true;
                 of.Success = true;
                 of.Action = true;
                 of.Handled = true;
                 handled = true;
+                return (handled);
             }
-            return (handled);
-        }
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.ShowToP: " + ex.Message, IGlobalData.protMode.crisp);
+                return false;
+            }
 
-        public virtual bool ShowToP(Person PersonID, ParseTokenList PTL)
-        {
-            OrderFeedback of = new OrderFeedback();
-            bool handled = false;
-
-            Item item1 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[1].WordID);
-            Person person2 = PTL.GetFirstPerson()!; //  GetPersonRef(Adv_PT[3].WordID);
-
-            AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_ShowToP_Person_Everyone_13969, PersonID, item1!.ID, person2));
-            of.StoryOutput = true;
-            of.Success = true;
-            of.Action = true;
-            of.Handled = true;
-            handled = true;
-            return (handled);
         }
 
         public virtual bool PlaceOn(Person PersonID, ParseTokenList PTL)
         {
-            OrderFeedback of = new OrderFeedback();
-            bool handled = false;
-            Item item1 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[1].WordID);
-            Item item2 = PTL.GetSecondItem()!; //  GetItemRef(Adv_PT[3].WordID);
-
-            if (item2.CanPutOn)
+            try
             {
-                if (item1.Size > item2.StorageOn)
+                OrderFeedback of = new OrderFeedback();
+                bool handled = false;
+                Item item1 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[1].WordID);
+                Item item2 = PTL.GetSecondItem()!; //  GetItemRef(Adv_PT[3].WordID);
+
+                if (item2.CanPutOn)
                 {
-                    AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_PlaceOn_13970, item1!.ID, item1, item2!.ID));
-                    of.FeedbackOutput = true;
-                    of.Handled = true;
-                    handled = true;
-                }
-                else if (item1!.ID == item2!.ID)
-                {
-                    AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_PlaceOn_13971, item1!.ID, item2!.ID));
-                    of.FeedbackOutput = true;
-                    of.Handled = true;
-                    handled = true;
+                    if (item1.Size > item2.StorageOn)
+                    {
+                        AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_PlaceOn_13970, item1!.ID, item1, item2!.ID));
+                        of.FeedbackOutput = true;
+                        of.Handled = true;
+                        handled = true;
+                    }
+                    else if (item1!.ID == item2!.ID)
+                    {
+                        AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_PlaceOn_13971, item1!.ID, item2!.ID));
+                        of.FeedbackOutput = true;
+                        of.Handled = true;
+                        handled = true;
+                    }
+                    else
+                    {
+                        if (EnsureTake(item1, PersonID, true))
+                        {
+                            AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_PlaceOn_Person_Everyone_13972, PersonID, item1!.ID, item2!.ID));
+                            Items!.TransferItem(item1!.ID, CB!.LocType_On_Item, item2!.ID);
+                            of.StoryOutput = true;
+                            of.Success = true;
+                            of.Action = true;
+                            of.Handled = true;
+                        }
+                        handled = true;
+                    }
                 }
                 else
                 {
-                    if (EnsureTake(item1, PersonID, true))
-                    {
-                        AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_PlaceOn_Person_Everyone_13972, PersonID, item1!.ID, item2!.ID));
-                        Items!.TransferItem(item1!.ID, CB!.LocType_On_Item, item2!.ID);
-                        of.StoryOutput = true;
-                        of.Success = true;
-                        of.Action = true;
-                        of.Handled = true;
-                    }
+                    AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_PlaceOn_Person_Everyone_13973, item2!.ID, item2));
+                    of.FeedbackOutput = true;
+                    of.Handled = true;
                     handled = true;
                 }
+                return (handled);
             }
-            else
+            catch (Exception ex)
             {
-                AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_PlaceOn_Person_Everyone_13973, item2!.ID, item2));
-                of.FeedbackOutput = true;
-                of.Handled = true;
-                handled = true;
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.PlaceOn: " + ex.Message, IGlobalData.protMode.crisp);
+                return false;
             }
-            return (handled);
+
         }
 
         public virtual bool PlaceBehind(Person PersonID, ParseTokenList PTL)
         {
-            OrderFeedback of = new OrderFeedback();
-            bool handled = false;
-
-            Item item1 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[1].WordID);
-            Item item2 = PTL.GetSecondItem()!; //  GetItemRef(Adv_PT[3].WordID);
-
-            if (item2.CanPutBehind)
+            try
             {
-                if (item1.Size > item2.StorageBehind)
+                OrderFeedback of = new OrderFeedback();
+                bool handled = false;
+
+                Item item1 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[1].WordID);
+                Item item2 = PTL.GetSecondItem()!; //  GetItemRef(Adv_PT[3].WordID);
+
+                if (item2.CanPutBehind)
                 {
-                    AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_PlaceBehind_13974, item1!.ID, item1, item2!.ID));
-                    of.FeedbackOutput = true;
-                    of.Handled = true;
-                    handled = true;
-                }
-                else if (item1!.ID == item2!.ID)
-                {
-                    AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_PlaceBehind_13975, item1!.ID, item2!.ID));
-                    of.FeedbackOutput = true;
-                    of.Handled = true;
-                    handled = true;
+                    if (item1.Size > item2.StorageBehind)
+                    {
+                        AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_PlaceBehind_13974, item1!.ID, item1, item2!.ID));
+                        of.FeedbackOutput = true;
+                        of.Handled = true;
+                        handled = true;
+                    }
+                    else if (item1!.ID == item2!.ID)
+                    {
+                        AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_PlaceBehind_13975, item1!.ID, item2!.ID));
+                        of.FeedbackOutput = true;
+                        of.Handled = true;
+                        handled = true;
+                    }
+                    else
+                    {
+                        if (EnsureTake(item1, PersonID, true))
+                        {
+                            AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_PlaceBehind_Person_Everyone_13976, PersonID, item1!.ID, item2!.ID));
+                            Items!.TransferItem(item1!.ID, CB!.LocType_Behind_Item, item2!.ID);
+                            of.StoryOutput = true;
+                            of.Success = true;
+                            of.Action = true;
+                            of.Handled = true;
+                        }
+                        handled = true;
+                    }
                 }
                 else
                 {
-                    if (EnsureTake(item1, PersonID, true))
-                    {
-                        AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_PlaceBehind_Person_Everyone_13976, PersonID, item1!.ID, item2!.ID));
-                        Items!.TransferItem(item1!.ID, CB!.LocType_Behind_Item, item2!.ID);
-                        of.StoryOutput = true;
-                        of.Success = true;
-                        of.Action = true;
-                        of.Handled = true;
-                    }
+                    AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_PlaceBehind_Person_Everyone_13977, item2!.ID, item2));
+                    of.FeedbackOutput = true;
+                    of.Handled = true;
                     handled = true;
                 }
+                return (handled);
             }
-            else
+            catch (Exception ex)
             {
-                AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_PlaceBehind_Person_Everyone_13977, item2!.ID, item2));
-                of.FeedbackOutput = true;
-                of.Handled = true;
-                handled = true;
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.PlaceBehind: " + ex.Message, IGlobalData.protMode.crisp);
+                return false;
             }
-            return (handled);
+
         }
 
         public virtual bool PlaceBeside(Person PersonID, ParseTokenList PTL)
         {
-            OrderFeedback of = new OrderFeedback();
-            bool handled = false;
-
-            Item item1 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[1].WordID);
-            Item item2 = PTL.GetSecondItem()!; //  GetItemRef(Adv_PT[3].WordID);
-
-            if (item2.CanPutBeside)
+            try
             {
-                if (item1.Size > item2.StorageBeside)
+                OrderFeedback of = new OrderFeedback();
+                bool handled = false;
+
+                Item item1 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[1].WordID);
+                Item item2 = PTL.GetSecondItem()!; //  GetItemRef(Adv_PT[3].WordID);
+
+                if (item2.CanPutBeside)
                 {
-                    AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_PlaceBeside_13978, item1!.ID, item1, item2!.ID));
-                    of.FeedbackOutput = true;
-                    of.Handled = true;
-                    handled = true;
-                }
-                else if (item1!.ID == item2!.ID)
-                {
-                    AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_PlaceBeside_13979, item1!.ID, item2!.ID));
-                    of.FeedbackOutput = true;
-                    of.Handled = true;
-                    handled = true;
+                    if (item1.Size > item2.StorageBeside)
+                    {
+                        AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_PlaceBeside_13978, item1!.ID, item1, item2!.ID));
+                        of.FeedbackOutput = true;
+                        of.Handled = true;
+                        handled = true;
+                    }
+                    else if (item1!.ID == item2!.ID)
+                    {
+                        AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_PlaceBeside_13979, item1!.ID, item2!.ID));
+                        of.FeedbackOutput = true;
+                        of.Handled = true;
+                        handled = true;
+                    }
+                    else
+                    {
+                        if (EnsureTake(item1, PersonID, true))
+                        {
+                            AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_PlaceBeside_Person_Everyone_13980, PersonID, item1!.ID, item2!.ID));
+                            Items!.TransferItem(item1!.ID, CB!.LocType_Beside_Item, item2!.ID);
+                            of.StoryOutput = true;
+                            of.Success = true;
+                            of.Action = true;
+                            of.Handled = true;
+                        }
+                        handled = true;
+                    }
                 }
                 else
                 {
-                    if (EnsureTake(item1, PersonID, true))
-                    {
-                        AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_PlaceBeside_Person_Everyone_13980, PersonID, item1!.ID, item2!.ID));
-                        Items!.TransferItem(item1!.ID, CB!.LocType_Beside_Item, item2!.ID);
-                        of.StoryOutput = true;
-                        of.Success = true;
-                        of.Action = true;
-                        of.Handled = true;
-                    }
+                    AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_PlaceBeside_Person_Everyone_13981, item2!.ID, item1));
+                    of.FeedbackOutput = true;
+                    of.Handled = true;
                     handled = true;
                 }
+                return (handled);
             }
-            else
+            catch (Exception ex)
             {
-                AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_PlaceBeside_Person_Everyone_13981, item2!.ID, item1));
-                of.FeedbackOutput = true;
-                of.Handled = true;
-                handled = true;
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.PlaceBeside: " + ex.Message, IGlobalData.protMode.crisp);
+                return false;
             }
-            return (handled);
+
         }
 
         public virtual bool ExamineBelow(Person PersonID, ParseTokenList PTL)
         {
-            OrderFeedback of = new OrderFeedback();
-            Item item1 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[2].WordID);
-            if (AdvGame!.GD!.LayoutDescription.OrderRepeat == true)
-                AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_ExamineBelow_Person_Everyone_13982, PersonID, item1!.ID));
-            ListItems(Helper.Insert(loca.OrderFeedback_ExamineBelow_Person_Everyone_13983, PersonID), PersonID, CB!.LocType_Below_Item, item1!.ID, true, false);
-            of.StoryOutput = true;
-            of.Success = true;
-            of.Action = true;
-            of.Handled = true;
-            return (true);
+            try
+            {
+                OrderFeedback of = new OrderFeedback();
+                Item item1 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[2].WordID);
+                if (AdvGame!.GD!.LayoutDescription.OrderRepeat == true)
+                    AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_ExamineBelow_Person_Everyone_13982, PersonID, item1!.ID));
+                ListItems(Helper.Insert(loca.OrderFeedback_ExamineBelow_Person_Everyone_13983, PersonID), PersonID, CB!.LocType_Below_Item, item1!.ID, true, false);
+                of.StoryOutput = true;
+                of.Success = true;
+                of.Action = true;
+                of.Handled = true;
+                return (true);
+            }
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.ExamineBelow: " + ex.Message, IGlobalData.protMode.crisp);
+                return false;
+            }
 
         }
 
         public virtual bool Taste(Person PersonID, ParseTokenList PTL)
         {
-            OrderFeedback of = new OrderFeedback();
-            Item item1 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[2].WordID);
-            AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_Taste_Person_Everyone_13984, PersonID, item1!.ID));
-            of.StoryOutput = true;
-            of.Success = true;
-            of.Action = true;
-            of.Handled = true;
-            return (true);
-        }
-
-        public virtual bool Smell(Person PersonID, ParseTokenList PTL)
-        {
-            OrderFeedback of = new OrderFeedback();
-            Item item1 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[2].WordID);
-            AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_Smell_Person_Everyone_13985, PersonID, item1!.ID));
-            of.StoryOutput = true;
-            of.Success = true;
-            of.Action = true;
-            of.Handled = true;
-            return (true);
-        }
-
-        public virtual bool SmellP(Person PersonID, ParseTokenList PTL)
-        {
-            OrderFeedback of = new OrderFeedback();
-            Person person1 = PTL.GetFirstPerson()!; //  GetItemRef(Adv_PT[2].WordID);
-            AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_SmellP_Person_Everyone_13986, PersonID, person1));
-            of.StoryOutput = true;
-            of.Success = true;
-            of.Action = true;
-            of.Handled = true;
-            return (true);
-        }
-
-        public virtual bool Wait(Person PersonID, ParseTokenList PTL)
-        {
-            OrderFeedback of = new OrderFeedback();
-            Item item1 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[2].WordID);
-            AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_Wait_Person_Everyone_13987, PersonID));
-            of.StoryOutput = true;
-            of.Success = true;
-            of.Action = true;
-            of.Handled = true;
-            return (true);
-        }
-
-        public virtual bool WaitFor(Person PersonID, ParseTokenList PTL)
-        {
-            OrderFeedback of = new OrderFeedback();
-            Person person1 = PTL.GetFirstPerson()!; //  GetItemRef(Adv_PT[2].WordID);
-
-            // Wenn die Person sich offensichtlich nicht bewegt, dann warten wir besser nciht.
-            if (person1.GetController(AdvGame!) != null)
+            try
             {
-                AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_WaitFor_13988, PersonID, person1));
+                OrderFeedback of = new OrderFeedback();
+                Item item1 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[2].WordID);
+                AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_Taste_Person_Everyone_13984, PersonID, item1!.ID));
                 of.StoryOutput = true;
                 of.Success = true;
                 of.Action = true;
                 of.Handled = true;
-
-                int ct = 0;
-
-                while (person1.locationID != A!.ActLoc)
-                {
-                    Persons!.DoNPCs();
-                    locations!.Dolocations();
-                    ct++;
-
-                    if (ct > 100)
-                    {
-                        AdvGame!.StoryOutput(loca.OrderFeedback_WaitFor_13989);
-                        break;
-                    }
-                }
-
+                return (true);
             }
-            return (false);
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.Taste: " + ex.Message, IGlobalData.protMode.crisp);
+                return false;
+            }
+
+        }
+
+        public virtual bool Smell(Person PersonID, ParseTokenList PTL)
+        {
+            try
+            {
+                OrderFeedback of = new OrderFeedback();
+                Item item1 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[2].WordID);
+                AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_Smell_Person_Everyone_13985, PersonID, item1!.ID));
+                of.StoryOutput = true;
+                of.Success = true;
+                of.Action = true;
+                of.Handled = true;
+                return (true);
+            }
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.Smell: " + ex.Message, IGlobalData.protMode.crisp);
+                return false;
+            }
+
+        }
+
+        public virtual bool SmellP(Person PersonID, ParseTokenList PTL)
+        {
+            try
+            {
+                OrderFeedback of = new OrderFeedback();
+                Person person1 = PTL.GetFirstPerson()!; //  GetItemRef(Adv_PT[2].WordID);
+                AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_SmellP_Person_Everyone_13986, PersonID, person1));
+                of.StoryOutput = true;
+                of.Success = true;
+                of.Action = true;
+                of.Handled = true;
+                return (true);
+            }
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.SmellP: " + ex.Message, IGlobalData.protMode.crisp);
+                return false;
+            }
+
+        }
+
+        public virtual bool Wait(Person PersonID, ParseTokenList PTL)
+        {
+            try
+            {
+                OrderFeedback of = new OrderFeedback();
+                Item item1 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[2].WordID);
+                AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_Wait_Person_Everyone_13987, PersonID));
+                of.StoryOutput = true;
+                of.Success = true;
+                of.Action = true;
+                of.Handled = true;
+                return (true);
+            }
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.Wait: " + ex.Message, IGlobalData.protMode.crisp);
+                return false;
+            }
+
+        }
+
+        public virtual bool WaitFor(Person PersonID, ParseTokenList PTL)
+        {
+            try
+            {
+                OrderFeedback of = new OrderFeedback();
+                Person person1 = PTL.GetFirstPerson()!; //  GetItemRef(Adv_PT[2].WordID);
+
+                // Wenn die Person sich offensichtlich nicht bewegt, dann warten wir besser nciht.
+                if (person1.GetController(AdvGame!) != null)
+                {
+                    AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_WaitFor_13988, PersonID, person1));
+                    of.StoryOutput = true;
+                    of.Success = true;
+                    of.Action = true;
+                    of.Handled = true;
+
+                    int ct = 0;
+
+                    while (person1.locationID != A!.ActLoc)
+                    {
+                        Persons!.DoNPCs();
+                        locations!.Dolocations();
+                        ct++;
+
+                        if (ct > 100)
+                        {
+                            AdvGame!.StoryOutput(loca.OrderFeedback_WaitFor_13989);
+                            break;
+                        }
+                    }
+
+                }
+                return (false);
+            }
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.WaitFor: " + ex.Message, IGlobalData.protMode.crisp);
+                return false;
+            }
+
         }
 
 
         public bool DoQuit(List<MCMenuEntry> MCMEntry)
         {
-            OrderFeedback of = new OrderFeedback();
-            AdvGame!.Autosave();
-            AdvGame!.A!.Finish = true;
-            AdvGame!.DialogOngoing = false;
-            AdvGame!.GD!.OrderList!.SaveOrderTable();
-            AdvGame!.Close();
-            return (false);
+            try
+            {
+                OrderFeedback of = new OrderFeedback();
+                AdvGame!.Autosave();
+                AdvGame!.A!.Finish = true;
+                AdvGame!.DialogOngoing = false;
+                AdvGame!.GD!.OrderList!.SaveOrderTable();
+                AdvGame!.Close();
+                return (false);
+            }
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.DoQuit: " + ex.Message, IGlobalData.protMode.crisp);
+                return false;
+            }
+
         }
 
         public virtual bool Quit(Person PersonID, ParseTokenList PTL)
         {
-            if (AdvGame!.GD!.SilentMode)
+            try
             {
-                AdvGame!.StoryOutput(loca.OrderFeedback_Quit_13990);
+                if (AdvGame!.GD!.SilentMode)
+                {
+                    AdvGame!.StoryOutput(loca.OrderFeedback_Quit_13990);
+                    return false;
+                }
+
+                OrderFeedback of = new OrderFeedback();
+                MCMenu mcM = new MCMenu(Stats!, Persons!, CA!.Person_Self!, A!, AdvGame!, true, 1 + CB!.MCE_Choice_Off, false);
+                List<int> cFollower;
+                cFollower = new List<int>();
+
+                // 1 
+                cFollower.Add(1);
+                mcM.Add(new MCMenuEntry(null, loca.OrderFeedback_Quit_Person_Self_13991, 1, 0, false));
+
+                // 2 
+                cFollower.Add(2);
+                mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.OrderFeedback_Quit_Person_Self_13992, 2, -1, false));
+                mcM.Last()!.SetDel(DoQuit);
+
+                // 3 
+                cFollower.Add(3);
+                mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.OrderFeedback_Quit_Person_Self_13993, 3, -1, false));
+
+                mcM.Add(new MCMenuEntry(1 + CB!.MCE_Choice_Off, cFollower));
+
+                mcM.MCS = mcM.MenuShow();
+
+                mcM.Set(0);
+                this.temporaryMCMenu = mcM;
+                this.persistentMCMenu = null;
+                mcM.MCS.MCOutput(mcM, mcM.MCSelection, false);
+
+
+                return (false);
+            }
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.Quit: " + ex.Message, IGlobalData.protMode.crisp);
                 return false;
             }
 
-            OrderFeedback of = new OrderFeedback();
-            MCMenu mcM = new MCMenu(Stats!, Persons!, CA!.Person_Self!, A!, AdvGame!, true, 1 + CB!.MCE_Choice_Off, false);
-            List<int> cFollower;
-            cFollower = new List<int>();
-
-            // 1 
-            cFollower.Add(1);
-            mcM.Add(new MCMenuEntry(null, loca.OrderFeedback_Quit_Person_Self_13991, 1, 0, false));
-
-            // 2 
-            cFollower.Add(2);
-            mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.OrderFeedback_Quit_Person_Self_13992, 2, -1, false));
-            mcM.Last()!.SetDel(DoQuit);
-
-            // 3 
-            cFollower.Add(3);
-            mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.OrderFeedback_Quit_Person_Self_13993, 3, -1, false));
-
-            mcM.Add(new MCMenuEntry(1 + CB!.MCE_Choice_Off, cFollower));
-
-            mcM.MCS = mcM.MenuShow();
-            
-            mcM.Set(0);
-            this.temporaryMCMenu = mcM;
-            this.persistentMCMenu = null;
-            mcM.MCS.MCOutput(mcM, mcM.MCSelection, false);
-
-
-            return (false);
         }
 
         public virtual bool Restart(Person PersonID, ParseTokenList PTL)
         {
-            if (AdvGame!.GD!.SilentMode)
+            try
             {
-                AdvGame!.StoryOutput(loca.OrderFeedback_Restart_13994);
+                if (AdvGame!.GD!.SilentMode)
+                {
+                    AdvGame!.StoryOutput(loca.OrderFeedback_Restart_13994);
+                    return false;
+                }
+                OrderFeedback of = new OrderFeedback();
+                MCMenu mcM = new MCMenu(Stats!, Persons!, CA!.Person_Self!, A!, AdvGame!, true, 1 + CB!.MCE_Choice_Off, false);
+                List<int> cFollower;
+                cFollower = new List<int>();
+
+                // 1 
+                cFollower.Add(1);
+                mcM.Add(new MCMenuEntry(null, loca.OrderFeedback_Restart_Person_Self_13995, 1, 0, false));
+
+
+                if (loca.GD?.Language == IGlobalData.language.german)
+                {
+                    cFollower.Add(2);
+                    mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.OrderFeedback_Restart_Person_Self_13996, 2, -1, false));
+                    mcM.Last()!.SetDel(AdvGame!.DoMCRestartDeutsch);
+
+                    /*
+                    cFollower.Add(3);
+                    mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.OrderFeedback_Restart_Person_Self_13996a, 3, -1, false));
+                    mcM.Last()!.SetDel(AdvGame!.DoMCRestartEnglisch);
+                    */
+                    // 4 
+                    cFollower.Add(4);
+                    mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.OrderFeedback_Restart_Person_Self_13997, 4, -1, false));
+
+                }
+                else
+                {
+                    cFollower.Add(2);
+                    mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.OrderFeedback_Restart_Person_Self_13996, 2, -1, false));
+                    mcM.Last()!.SetDel(AdvGame!.DoMCRestartEnglisch);
+                    /*
+                    cFollower.Add(3);
+                    mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.OrderFeedback_Restart_Person_Self_13996a, 3, -1, false));
+                    mcM.Last()!.SetDel(AdvGame!.DoMCRestartDeutsch);
+                    */
+                    // 4 
+                    cFollower.Add(4);
+                    mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.OrderFeedback_Restart_Person_Self_13997, 4, -1, false));
+
+                }
+
+                // 2 
+
+                mcM.Add(new MCMenuEntry(1 + CB!.MCE_Choice_Off, cFollower));
+
+                mcM.MCS = mcM.MenuShow();
+                mcM.Set(0);
+                this.temporaryMCMenu = mcM;
+                this.persistentMCMenu = null;
+                mcM.MCS.MCOutput(mcM, mcM.MCSelection, false);
+
+
+                return (false);
+            }
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.Restart: " + ex.Message, IGlobalData.protMode.crisp);
                 return false;
             }
-            OrderFeedback of = new OrderFeedback();
-            MCMenu mcM = new MCMenu(Stats!, Persons!, CA!.Person_Self!, A!, AdvGame!, true, 1 + CB!.MCE_Choice_Off, false);
-            List<int> cFollower;
-            cFollower = new List<int>();
 
-            // 1 
-            cFollower.Add(1);
-            mcM.Add(new MCMenuEntry(null, loca.OrderFeedback_Restart_Person_Self_13995, 1, 0, false));
-
-
-            if (loca.GD?.Language == IGlobalData.language.german)
-            {
-                cFollower.Add(2);
-                mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.OrderFeedback_Restart_Person_Self_13996, 2, -1, false));
-                mcM.Last()!.SetDel(AdvGame!.DoMCRestartDeutsch);
-
-                /*
-                cFollower.Add(3);
-                mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.OrderFeedback_Restart_Person_Self_13996a, 3, -1, false));
-                mcM.Last()!.SetDel(AdvGame!.DoMCRestartEnglisch);
-                */
-                // 4 
-                cFollower.Add(4);
-                mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.OrderFeedback_Restart_Person_Self_13997, 4, -1, false));
-
-            }
-            else
-            {
-                cFollower.Add(2);
-                mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.OrderFeedback_Restart_Person_Self_13996, 2, -1, false));
-                mcM.Last()!.SetDel(AdvGame!.DoMCRestartEnglisch);
-                /*
-                cFollower.Add(3);
-                mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.OrderFeedback_Restart_Person_Self_13996a, 3, -1, false));
-                mcM.Last()!.SetDel(AdvGame!.DoMCRestartDeutsch);
-                */
-                // 4 
-                cFollower.Add(4);
-                mcM.Add(new MCMenuEntry(CA!.Person_Self, loca.OrderFeedback_Restart_Person_Self_13997, 4, -1, false));
-
-            }
-
-            // 2 
-
-            mcM.Add(new MCMenuEntry(1 + CB!.MCE_Choice_Off, cFollower));
-
-            mcM.MCS = mcM.MenuShow();
-            mcM.Set(0);
-            this.temporaryMCMenu = mcM;
-            this.persistentMCMenu = null;
-            mcM.MCS.MCOutput(mcM, mcM.MCSelection, false);
-
-
-            return (false);
         }
 
 
         public virtual bool RestartNoAsk(Person PersonID, ParseTokenList PTL)
         {
-            if (AdvGame!.GD!.SilentMode == false)
+            try
             {
-                AdvGame!.FeedbackOutput(loca.OrderFeedback_RestartNoAsk_13998);
-                return true;
-            }
-            OrderFeedback of = new OrderFeedback();
-            loca.GD!.Language = IGlobalData.language.german;
-            AdvGame!.UIS!.ExecuteRestart();
+                if (AdvGame!.GD!.SilentMode == false)
+                {
+                    AdvGame!.FeedbackOutput(loca.OrderFeedback_RestartNoAsk_13998);
+                    return true;
+                }
+                OrderFeedback of = new OrderFeedback();
+                loca.GD!.Language = IGlobalData.language.german;
+                AdvGame!.UIS!.ExecuteRestart();
 
-            return (true);
+                return (true);
+            }
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.RestartNoAsk: " + ex.Message, IGlobalData.protMode.crisp);
+                return false;
+            }
+
+
         }
         public virtual bool RestartNoAskGerman(Person PersonID, ParseTokenList PTL)
         {
-            if (AdvGame!.GD!.SilentMode == false)
+            try
             {
-                AdvGame!.FeedbackOutput(loca.OrderFeedback_RestartNoAsk_13998);
-                return true;
-            }
-            OrderFeedback of = new OrderFeedback();
-            loca.GD!.Language = IGlobalData.language.german;
-            AdvGame!.UIS!.ExecuteRestart();
+                if (AdvGame!.GD!.SilentMode == false)
+                {
+                    AdvGame!.FeedbackOutput(loca.OrderFeedback_RestartNoAsk_13998);
+                    return true;
+                }
+                OrderFeedback of = new OrderFeedback();
+                loca.GD!.Language = IGlobalData.language.german;
+                AdvGame!.UIS!.ExecuteRestart();
 
-            return (true);
+                return (true);
+            }
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.RestartNoAskGerman: " + ex.Message, IGlobalData.protMode.crisp);
+                return false;
+            }
+
+
         }
         public virtual bool RestartNoAskEnglish(Person PersonID, ParseTokenList PTL)
         {
-            if (AdvGame!.GD!.SilentMode == false)
+            try
             {
-                AdvGame!.FeedbackOutput(loca.OrderFeedback_RestartNoAsk_13998);
-                return true;
-            }
-            OrderFeedback of = new OrderFeedback();
-            loca.GD!.Language = IGlobalData.language.english;
-            AdvGame!.UIS!.ExecuteRestart();
+                if (AdvGame!.GD!.SilentMode == false)
+                {
+                    AdvGame!.FeedbackOutput(loca.OrderFeedback_RestartNoAsk_13998);
+                    return true;
+                }
+                OrderFeedback of = new OrderFeedback();
+                loca.GD!.Language = IGlobalData.language.english;
+                AdvGame!.UIS!.ExecuteRestart();
 
-            return (true);
+                return (true);
+            }
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.RestartNoAskEnglish: " + ex.Message, IGlobalData.protMode.crisp);
+                return false;
+            }
+
         }
 
 
         public bool ExamineInBase(Person PersonID, ParseTokenList PTL, bool AlwaysOutput = true )
         {
-            bool handled = false;
-            bool success = true;
-            OrderFeedback of = new OrderFeedback();
-
-            Item item1 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[2].WordID);
-
-            if (item1.CanPutIn == false )
+            try
             {
-                if( AlwaysOutput == true )
-                    AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_ExamineIn_13999, item1!.ID));
-                handled = true;
-            }
-            else if (item1.CanBeClosed && item1.IsClosed)
-            {
-                if (item1.CanBeLocked && item1.IsLocked)
+                bool handled = false;
+                bool success = true;
+                OrderFeedback of = new OrderFeedback();
+
+                Item item1 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[2].WordID);
+
+                if (item1.CanPutIn == false)
                 {
                     if (AlwaysOutput == true)
-                        AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_ExamineIn_14000, item1!.ID, item1));
-
+                        AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_ExamineIn_13999, item1!.ID));
                     handled = true;
-                    success = false;
-                    of.FeedbackOutput = true;
-                    of.Handled = true;
-                    of.Success = false;
-                    of.Action = true;
                 }
-                else if (PTL.ConvenienceActionNotOpenFirst == false)
+                else if (item1.CanBeClosed && item1.IsClosed)
                 {
-                    ParseTokenList PT = new ParseTokenList();
-                    PT.AddVerb(CB!.Verb_Open);
-                    PT.AddItem(item1);
-                    PT.ConvenienceActionNotExamineAfter = true;
-                    success = Open(PersonID, PT);
-                    PT.ConvenienceActionNotExamineAfter = false;
+                    if (item1.CanBeLocked && item1.IsLocked)
+                    {
+                        if (AlwaysOutput == true)
+                            AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_ExamineIn_14000, item1!.ID, item1));
+
+                        handled = true;
+                        success = false;
+                        of.FeedbackOutput = true;
+                        of.Handled = true;
+                        of.Success = false;
+                        of.Action = true;
+                    }
+                    else if (PTL.ConvenienceActionNotOpenFirst == false)
+                    {
+                        ParseTokenList PT = new ParseTokenList();
+                        PT.AddVerb(CB!.Verb_Open);
+                        PT.AddItem(item1);
+                        PT.ConvenienceActionNotExamineAfter = true;
+                        success = Open(PersonID, PT);
+                        PT.ConvenienceActionNotExamineAfter = false;
+                        of.StoryOutput = true;
+                        of.Handled = true;
+                        of.Success = success;
+                        of.Action = true;
+                    }
+                }
+                if (!handled && success)
+                {
+                    if (AlwaysOutput == true)
+                    {
+                        AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_ExamineIn_Person_Everyone_14001, PersonID, item1!.ID));
+                        // ListItems( Helper.Insert(loca.OrderFeedback_ExamineIn_Person_Everyone_14002, PersonID ), PersonID, CB!.LocType_In_Item, item1!.ID, true, false, Co.CASE_NOM_UNDEF, null, loca.OrderFeedback_ExamineIn_Person_Everyone_14003 );
+                        ListItemsPersons(Helper.Insert(loca.ListItems_Basetext, PersonID), PersonID, CB!.LocType_In_Item, item1!.ID, true, false, Co.CASE_AKK_UNDEF);
+                    }
+                    else
+                    {
+                        ListItemsPersons(Helper.Insert(loca.ListItems_Basetext, PersonID), PersonID, CB!.LocType_In_Item, item1!.ID, true, true, Co.CASE_AKK_UNDEF);
+                    }
                     of.StoryOutput = true;
                     of.Handled = true;
-                    of.Success = success;
                     of.Action = true;
-                }
-            }
-            if (!handled && success)
-            {
-                if (AlwaysOutput == true)
-                {
-                    AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_ExamineIn_Person_Everyone_14001, PersonID, item1!.ID));
-                    // ListItems( Helper.Insert(loca.OrderFeedback_ExamineIn_Person_Everyone_14002, PersonID ), PersonID, CB!.LocType_In_Item, item1!.ID, true, false, Co.CASE_NOM_UNDEF, null, loca.OrderFeedback_ExamineIn_Person_Everyone_14003 );
-                    ListItemsPersons(Helper.Insert(loca.ListItems_Basetext, PersonID), PersonID, CB!.LocType_In_Item, item1!.ID, true, false, Co.CASE_AKK_UNDEF);
-                }
-                else
-                {
-                    ListItemsPersons(Helper.Insert(loca.ListItems_Basetext, PersonID), PersonID, CB!.LocType_In_Item, item1!.ID, true, true, Co.CASE_AKK_UNDEF);
-                }
-                of.StoryOutput = true;
-                of.Handled = true;
-                of.Action = true;
 
-                handled = true;
+                    handled = true;
+                }
+                return (handled);
             }
-            return (handled);
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.ExamineInBase: " + ex.Message, IGlobalData.protMode.crisp);
+                return false;
+            }
 
         }
 
         public virtual bool ExamineOn(Person PersonID, ParseTokenList PTL)
         {
-            OrderFeedback of = new OrderFeedback();
-            Item item1 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[2].WordID);
-            if (AdvGame!.GD!.LayoutDescription.OrderRepeat == true)
-                AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_ExamineOn_Person_Everyone_14004, PersonID, item1!.ID));
-            ListItems(Helper.Insert(loca.OrderFeedback_ExamineOn_Person_Everyone_14005, PersonID), PersonID, CB!.LocType_On_Item, item1!.ID, true, false);
-            of.StoryOutput = true;
-            of.Handled = true;
-            of.Success = true;
-            of.Action = true;
-            return (true);
+            try
+            {
+                OrderFeedback of = new OrderFeedback();
+                Item item1 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[2].WordID);
+                if (AdvGame!.GD!.LayoutDescription.OrderRepeat == true)
+                    AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_ExamineOn_Person_Everyone_14004, PersonID, item1!.ID));
+                ListItems(Helper.Insert(loca.OrderFeedback_ExamineOn_Person_Everyone_14005, PersonID), PersonID, CB!.LocType_On_Item, item1!.ID, true, false);
+                of.StoryOutput = true;
+                of.Handled = true;
+                of.Success = true;
+                of.Action = true;
+                return (true);
+            }
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.ExamineOn: " + ex.Message, IGlobalData.protMode.crisp);
+                return false;
+            }
 
         }
 
         public virtual bool ExamineBehind(Person PersonID, ParseTokenList PTL)
         {
-            OrderFeedback of = new OrderFeedback();
-            Item item1 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[2].WordID);
-            if (AdvGame!.GD!.LayoutDescription.OrderRepeat == true)
-                AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_ExamineBehind_Person_Everyone_14006, PersonID, item1!.ID));
-            ListItems(Helper.Insert(loca.OrderFeedback_ExamineBehind_Person_Everyone_14007, PersonID), PersonID, CB!.LocType_Behind_Item, item1!.ID, true, false);
-            of.StoryOutput = true;
-            of.Handled = true;
-            of.Success = true;
-            of.Action = true;
-            return (true);
+            try
+            {
+                OrderFeedback of = new OrderFeedback();
+                Item item1 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[2].WordID);
+                if (AdvGame!.GD!.LayoutDescription.OrderRepeat == true)
+                    AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_ExamineBehind_Person_Everyone_14006, PersonID, item1!.ID));
+                ListItems(Helper.Insert(loca.OrderFeedback_ExamineBehind_Person_Everyone_14007, PersonID), PersonID, CB!.LocType_Behind_Item, item1!.ID, true, false);
+                of.StoryOutput = true;
+                of.Handled = true;
+                of.Success = true;
+                of.Action = true;
+                return (true);
+            }
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.ExamineBehind: " + ex.Message, IGlobalData.protMode.crisp);
+                return false;
+            }
+
         }
 
         public virtual bool ExamineBeside(Person PersonID, ParseTokenList PTL)
         {
-            OrderFeedback of = new OrderFeedback();
-            Item item1 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[2].WordID);
-            if (AdvGame!.GD!.LayoutDescription.OrderRepeat == true)
-                AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_ExamineBeside_Person_Everyone_14008, PersonID, item1!.ID!));
-            ListItems(Helper.Insert(loca.OrderFeedback_ExamineBeside_Person_Everyone_14009, PersonID), PersonID, CB!.LocType_Beside_Item, item1!.ID!, true, false);
-            of.StoryOutput = true;
-            of.Handled = true;
-            of.Success = true;
-            of.Action = true;
-            return (true);
+            try
+            {
+                OrderFeedback of = new OrderFeedback();
+                Item item1 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[2].WordID);
+                if (AdvGame!.GD!.LayoutDescription.OrderRepeat == true)
+                    AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_ExamineBeside_Person_Everyone_14008, PersonID, item1!.ID!));
+                ListItems(Helper.Insert(loca.OrderFeedback_ExamineBeside_Person_Everyone_14009, PersonID), PersonID, CB!.LocType_Beside_Item, item1!.ID!, true, false);
+                of.StoryOutput = true;
+                of.Handled = true;
+                of.Success = true;
+                of.Action = true;
+                return (true);
+            }
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.ExamineBeside: " + ex.Message, IGlobalData.protMode.crisp);
+                return false;
+            }
+
         }
 
         public virtual bool KnockOn(Person PersonID, ParseTokenList PTL)
         {
-            OrderFeedback of = new OrderFeedback();
-            Item item1 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[2].WordID);
-            AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_KnockOn_Person_Everyone_14010, PersonID, item1!.ID));
-            of.StoryOutput = true;
-            of.Handled = true;
-            of.Success = true;
-            of.Action = true;
-            return (true);
+            try
+            {
+                OrderFeedback of = new OrderFeedback();
+                Item item1 = PTL.GetFirstItem()!; //  GetItemRef(Adv_PT[2].WordID);
+                AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_KnockOn_Person_Everyone_14010, PersonID, item1!.ID));
+                of.StoryOutput = true;
+                of.Handled = true;
+                of.Success = true;
+                of.Action = true;
+                return (true);
+            }
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.KnockOn: " + ex.Message, IGlobalData.protMode.crisp);
+                return false;
+            }
 
         }
         public virtual bool KnockOnP(Person PersonID, ParseTokenList PTL)
         {
-            OrderFeedback of = new OrderFeedback();
-            Person person1= PTL.GetFirstPerson()!; //  GetItemRef(Adv_PT[2].WordID);
-            AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_KnockOn_Person_Everyone_14010, PersonID, person1));
-            of.StoryOutput = true;
-            of.Handled = true;
-            of.Success = true;
-            of.Action = true;
-            return (true);
+            try
+            {
+                OrderFeedback of = new OrderFeedback();
+                Person person1 = PTL.GetFirstPerson()!; //  GetItemRef(Adv_PT[2].WordID);
+                AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_KnockOn_Person_Everyone_14010, PersonID, person1));
+                of.StoryOutput = true;
+                of.Handled = true;
+                of.Success = true;
+                of.Action = true;
+                return (true);
+            }
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.KnockOnP: " + ex.Message, IGlobalData.protMode.crisp);
+                return false;
+            }
 
         }
 
 
         public virtual bool SaveMC(Person PersonID, ParseTokenList PTL)
         {
-            if (AdvGame!.GD!.SilentMode)
+            try
             {
-                AdvGame!.StoryOutput(loca.OrderFeedback_SaveMC_14011);
+                if (AdvGame!.GD!.SilentMode)
+                {
+                    AdvGame!.StoryOutput(loca.OrderFeedback_SaveMC_14011);
+                    return false;
+                }
+
+                OrderFeedback of = new OrderFeedback();
+                int idCt = 1;
+                // char Key = '1';
+
+                MCMenu mcM = AdvGame!.AdvMCMenu(A!.Adventure!.CA!.Person_I!, false, 1 + CB!.MCE_Choice_Off);
+                List<int> follower;
+
+
+                follower = new List<int>();
+                follower.Add(-1);
+                mcM.Add(new MCMenuEntry(CB!.MCE_Text, null, loca.OrderFeedback_SaveMC_Person_I_14012, idCt++, follower, null, 0, false, false, false, null, null));
+
+                for (int i = 0; i < 10; i++)
+                {
+                    int Val = i + 1;
+
+                    // string? pathName = GlobalData.CurrentPath();
+                    // Ignores: 002
+                    string? fileName = loca.OrderFeedback_LoadMC_Person_I_14025 + Val + loca.OrderFeedback_LoadMC_Person_I_14026;
+
+                    if (!AdvGame.UIS!.ExistFile(fileName))
+                    {
+                        AdvGame!.GD!.SlotDescriptions!.SlotDescriptions![Val] = loca.SlotDescription_Init_16284;
+                        // mcM.Add(new MCMenuEntry(CB!.MCE_Text, CA!.Person_I, loca.OrderFeedback_SaveMC_Person_I_14013 + loca.OrderFeedback_SaveMC_Person_I_14014 + loca.OrderFeedback_SaveMC_Person_I_14015 + loca.OrderFeedback_SaveMC_Person_I_14016, idCt++, follower, null, 0, false, false, false, null, loca.OrderFeedback_SaveMC_Person_I_14017 + loca.OrderFeedback_SaveMC_Person_I_14018));
+                    }
+                    mcM.Add(new MCMenuEntry(CB!.MCE_Text, CA!.Person_I, "Slot " + $"{Val:00}" + ": " + $"{AdvGame!.GD!.SlotDescriptions!.SlotDescriptions![Val]}", idCt++, follower, null, 0, false, false, false, null, "speicher " + $"{Val:00}"));
+                }
+
+
+                mcM.Add(new MCMenuEntry(CB!.MCE_Text, CA!.Person_I, loca.OrderFeedback_SaveMC_Person_I_14019, idCt++, follower, null, 0, false, false, false, null, null));
+
+                follower = new List<int>();
+                for (int j = 1; j < idCt; j++)
+                {
+                    follower.Add(j);
+
+                }
+                mcM.Add(new MCMenuEntry(CB!.MCE_Choice, null, " ", CB!.MCE_Choice_Off + 1, follower, null, 0, false, false, false, null, null));
+
+                mcM.MCS = mcM.MenuShow();
+                mcM.Set(0);
+                this.temporaryMCMenu = mcM;
+                this.persistentMCMenu = null;
+                // MCM.AddCurrent(1);
+                mcM.MCS.MCOutput(mcM, SaveSelection, false);
+                of.Handled = true;
+                of.Success = false;
+                of.Action = false;
+                return (false);
+            }
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.SaveMC: " + ex.Message, IGlobalData.protMode.crisp);
                 return false;
             }
 
-            OrderFeedback of = new OrderFeedback();
-            int idCt = 1;
-            // char Key = '1';
-
-            MCMenu mcM = AdvGame!.AdvMCMenu(A!.Adventure!.CA!.Person_I!, false, 1 + CB!.MCE_Choice_Off);
-            List<int> follower;
-
-
-            follower = new List<int>();
-            follower.Add(-1);
-            mcM.Add(new MCMenuEntry(CB!.MCE_Text, null, loca.OrderFeedback_SaveMC_Person_I_14012, idCt++, follower, null, 0, false, false, false, null, null));
-
-            for (int i = 0; i < 10; i++)
-            {
-                int Val = i + 1;
-
-                // string? pathName = GlobalData.CurrentPath();
-                // Ignores: 002
-                string? fileName = loca.OrderFeedback_LoadMC_Person_I_14025 + Val + loca.OrderFeedback_LoadMC_Person_I_14026;
-
-                if (!AdvGame.UIS!.ExistFile( fileName))
-                {
-                    AdvGame!.GD!.SlotDescriptions!.SlotDescriptions![Val] = loca.SlotDescription_Init_16284;
-                    // mcM.Add(new MCMenuEntry(CB!.MCE_Text, CA!.Person_I, loca.OrderFeedback_SaveMC_Person_I_14013 + loca.OrderFeedback_SaveMC_Person_I_14014 + loca.OrderFeedback_SaveMC_Person_I_14015 + loca.OrderFeedback_SaveMC_Person_I_14016, idCt++, follower, null, 0, false, false, false, null, loca.OrderFeedback_SaveMC_Person_I_14017 + loca.OrderFeedback_SaveMC_Person_I_14018));
-                }
-                mcM.Add(new MCMenuEntry(CB!.MCE_Text, CA!.Person_I, "Slot " + $"{Val:00}" + ": " + $"{AdvGame!.GD!.SlotDescriptions!.SlotDescriptions![Val]}", idCt++, follower, null, 0, false, false, false, null, "speicher " + $"{Val:00}"));
-            }
-
-
-            mcM.Add(new MCMenuEntry(CB!.MCE_Text, CA!.Person_I, loca.OrderFeedback_SaveMC_Person_I_14019, idCt++, follower, null, 0, false, false, false, null, null));
-
-            follower = new List<int>();
-            for (int j = 1; j < idCt; j++)
-            {
-                follower.Add(j);
-
-            }
-            mcM.Add(new MCMenuEntry(CB!.MCE_Choice, null, " ", CB!.MCE_Choice_Off + 1, follower, null, 0, false, false, false, null, null));
-
-            mcM.MCS = mcM.MenuShow();
-            mcM.Set(0);
-            this.temporaryMCMenu = mcM;
-            this.persistentMCMenu = null;
-            // MCM.AddCurrent(1);
-            mcM.MCS.MCOutput(mcM, SaveSelection, false);
-            of.Handled = true;
-            of.Success = false;
-            of.Action = false;
-            return (false);
         }
 
         public bool SaveSelection(MCMenu MCM, int Selection)
         {
-            OrderFeedback of = new OrderFeedback();
-            if (Selection == -1)
+            try
             {
-                MCM.OutputExit();
-            }
-            else if (Selection == -2)
-            {
-                MCM.OutputExit();
-            }
-            else
-            {
-                ParseTokenList PT = new ParseTokenList();
-
-                PT.AddNothing(0);
-                switch (Selection - 1)
+                OrderFeedback of = new OrderFeedback();
+                if (Selection == -1)
                 {
-                    case 1: PT.AddPrep(CB!.Prep_Slot1); break;
-                    case 2: PT.AddPrep(CB!.Prep_Slot2); break;
-                    case 3: PT.AddPrep(CB!.Prep_Slot3); break;
-                    case 4: PT.AddPrep(CB!.Prep_Slot4); break;
-                    case 5: PT.AddPrep(CB!.Prep_Slot5); break;
-                    case 6: PT.AddPrep(CB!.Prep_Slot6); break;
-                    case 7: PT.AddPrep(CB!.Prep_Slot7); break;
-                    case 8: PT.AddPrep(CB!.Prep_Slot8); break;
-                    case 9: PT.AddPrep(CB!.Prep_Slot9); break;
-                    case 10: PT.AddPrep(CB!.Prep_Slot10); break;
+                    MCM.OutputExit();
                 }
-                // PT.AddPrep(Selection - 1 + CB!.Prep_Slot1 - 1);
-
-                if (Selection > 1 && Selection <= 11)
-                    Save(Persons!.Find(A!.ActPerson)!, PT);
-
-                MCM.OutputExit();
-            }
-            of.Handled = true;
-            of.Success = false;
-            of.Action = false;
-
-            return (false);
-        }
-
-        public bool LoadSelection(MCMenu MCM, int Selection)
-        {
-            OrderFeedback of = new OrderFeedback();
-            if (Selection == -1)
-            {
-                MCM.OutputExit();
-            }
-            else if (Selection == -2)
-            {
-                MCM.OutputExit();
-            }
-            else
-            {
-                ParseTokenList PT = new ParseTokenList();
-
-                if (MCM.FindID(Selection)!.Text!.Substring(0, 5) == loca.OrderFeedback_LoadSelection_14020)
+                else if (Selection == -2)
                 {
-                    int tSelection = Convert.ToInt32(MCM.FindID(Selection)!.Text!.Substring(5, 2));
-
-                    Prep SlotID = CB!.Prep_Slot1!;
-                    switch (tSelection)
-                    {
-                        case 1: SlotID = CB!.Prep_Slot1!; break;
-                        case 2: SlotID = CB!.Prep_Slot2!; break;
-                        case 3: SlotID = CB!.Prep_Slot3!; break;
-                        case 4: SlotID = CB!.Prep_Slot4!; break;
-                        case 5: SlotID = CB!.Prep_Slot5!; break;
-                        case 6: SlotID = CB!.Prep_Slot6!; break;
-                        case 7: SlotID = CB!.Prep_Slot7!; break;
-                        case 8: SlotID = CB!.Prep_Slot8!; break;
-                        case 9: SlotID = CB!.Prep_Slot9!; break;
-                        case 10: SlotID = CB!.Prep_Slot10!; break;
-                    }
-
-                    PT.AddNothing(0);
-                    PT.AddPrep(SlotID);
-
-                    Load(Persons!.Find(A!.ActPerson)!, PT);
-                    AdvGame!.DoUIUpdate();
-                    AdvGame!.SetScoreOutput();
                     MCM.OutputExit();
                 }
                 else
                 {
+                    ParseTokenList PT = new ParseTokenList();
+
+                    PT.AddNothing(0);
+                    switch (Selection - 1)
+                    {
+                        case 1: PT.AddPrep(CB!.Prep_Slot1); break;
+                        case 2: PT.AddPrep(CB!.Prep_Slot2); break;
+                        case 3: PT.AddPrep(CB!.Prep_Slot3); break;
+                        case 4: PT.AddPrep(CB!.Prep_Slot4); break;
+                        case 5: PT.AddPrep(CB!.Prep_Slot5); break;
+                        case 6: PT.AddPrep(CB!.Prep_Slot6); break;
+                        case 7: PT.AddPrep(CB!.Prep_Slot7); break;
+                        case 8: PT.AddPrep(CB!.Prep_Slot8); break;
+                        case 9: PT.AddPrep(CB!.Prep_Slot9); break;
+                        case 10: PT.AddPrep(CB!.Prep_Slot10); break;
+                    }
+                    // PT.AddPrep(Selection - 1 + CB!.Prep_Slot1 - 1);
+
+                    if (Selection > 1 && Selection <= 11)
+                        Save(Persons!.Find(A!.ActPerson)!, PT);
+
                     MCM.OutputExit();
                 }
+                of.Handled = true;
+                of.Success = false;
+                of.Action = false;
 
+                return (false);
             }
-            of.Handled = true;
-            of.Success = false;
-            of.Action = false;
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.SaveSelection: " + ex.Message, IGlobalData.protMode.crisp);
+                return false;
+            }
 
-            return (false);
+
+        }
+
+        public bool LoadSelection(MCMenu MCM, int Selection)
+        {
+            try
+            {
+                OrderFeedback of = new OrderFeedback();
+                if (Selection == -1)
+                {
+                    MCM.OutputExit();
+                }
+                else if (Selection == -2)
+                {
+                    MCM.OutputExit();
+                }
+                else
+                {
+                    ParseTokenList PT = new ParseTokenList();
+
+                    if (MCM.FindID(Selection)!.Text!.Substring(0, 5) == loca.OrderFeedback_LoadSelection_14020)
+                    {
+                        int tSelection = Convert.ToInt32(MCM.FindID(Selection)!.Text!.Substring(5, 2));
+
+                        Prep SlotID = CB!.Prep_Slot1!;
+                        switch (tSelection)
+                        {
+                            case 1: SlotID = CB!.Prep_Slot1!; break;
+                            case 2: SlotID = CB!.Prep_Slot2!; break;
+                            case 3: SlotID = CB!.Prep_Slot3!; break;
+                            case 4: SlotID = CB!.Prep_Slot4!; break;
+                            case 5: SlotID = CB!.Prep_Slot5!; break;
+                            case 6: SlotID = CB!.Prep_Slot6!; break;
+                            case 7: SlotID = CB!.Prep_Slot7!; break;
+                            case 8: SlotID = CB!.Prep_Slot8!; break;
+                            case 9: SlotID = CB!.Prep_Slot9!; break;
+                            case 10: SlotID = CB!.Prep_Slot10!; break;
+                        }
+
+                        PT.AddNothing(0);
+                        PT.AddPrep(SlotID);
+
+                        Load(Persons!.Find(A!.ActPerson)!, PT);
+                        AdvGame!.DoUIUpdate();
+                        AdvGame!.SetScoreOutput();
+                        MCM.OutputExit();
+                    }
+                    else
+                    {
+                        MCM.OutputExit();
+                    }
+
+                }
+                of.Handled = true;
+                of.Success = false;
+                of.Action = false;
+
+                return (false);
+            }
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.LoadSelection: " + ex.Message, IGlobalData.protMode.crisp);
+                return false;
+            }
+
         }
 
         public virtual bool LoadMC(Person PersonID, ParseTokenList PTL)
         {
-            if (AdvGame!.GD!.SilentMode)
+            try
             {
-                AdvGame!.StoryOutput(loca.OrderFeedback_LoadMC_14021);
+                if (AdvGame!.GD!.SilentMode)
+                {
+                    AdvGame!.StoryOutput(loca.OrderFeedback_LoadMC_14021);
+                    return false;
+                }
+
+                OrderFeedback of = new OrderFeedback();
+                int idCt = 1;
+                // char Key = '1';
+
+                MCMenu mcM = AdvGame!.AdvMCMenu(A!.Adventure!.CA!.Person_I!, false, 1 + CB!.MCE_Choice_Off);
+                List<int> follower;
+
+
+                follower = new List<int>();
+                follower.Add(-1);
+                mcM.Add(new MCMenuEntry(CB!.MCE_Text, null, loca.OrderFeedback_LoadMC_Person_I_14022, idCt++, follower, null, 0, false, false, false, null, null));
+
+                for (int i = 0; i < 10; i++)
+                {
+                    int Val = i + 1;
+                    // string? pathName = GlobalData.CurrentPath();
+                    // Ignores: 002
+                    // string? fileName = Phoney_MAUI.Core.GlobalData.CurrentPath() + loca.OrderFeedback_LoadMC_Person_I_14025 + Val + loca.OrderFeedback_LoadMC_Person_I_14026;
+                    string? fileName = loca.OrderFeedback_LoadMC_Person_I_14025 + Val + loca.OrderFeedback_LoadMC_Person_I_14026;
+
+                    if (AdvGame.UIS!.ExistFile(fileName))
+                    {
+                        // Ignores: 003
+                        mcM.Add(new MCMenuEntry(CB!.MCE_Text, CA!.Person_I, "Slot " + $"{Val:00}" + ": " + $"{AdvGame!.GD!.SlotDescriptions!.SlotDescriptions![Val]}", idCt++, follower, null, 0, false, false, false, null, "lade " + $"{Val:00}"));
+                        // mcM.Add(new MCMenuEntry(CB!.MCE_Text, CA!.Person_I, loca.OrderFeedback_LoadMC_Person_I_14027 + loca.OrderFeedback_LoadMC_Person_I_14028+ loca.OrderFeedback_LoadMC_Person_I_14029 + loca.OrderFeedback_LoadMC_Person_I_14030, idCt++, follower, null, 0, false, false, false, null, loca.OrderFeedback_LoadMC_Person_I_14031 + loca.OrderFeedback_LoadMC_Person_I_14032));
+                        // IDCt++;
+                    }
+                }
+
+
+                mcM.Add(new MCMenuEntry(CB!.MCE_Text, CA!.Person_I, loca.OrderFeedback_LoadMC_Person_I_14033, idCt++, follower, null, 0, false, false, false, null, null));
+
+                follower = new List<int>();
+                for (int j = 1; j < idCt; j++)
+                {
+                    follower.Add(j);
+
+                }
+                mcM.Add(new MCMenuEntry(CB!.MCE_Choice, null, " ", CB!.MCE_Choice_Off + 1, follower, null, 0, false, false, false, null, null));
+
+                mcM.MCS = mcM.MenuShow(); ;
+                mcM.Set(0);
+                // MCM.AddCurrent(1);
+                this.temporaryMCMenu = mcM;
+                this.persistentMCMenu = null;
+                mcM.MCS.MCOutput(mcM, LoadSelection, false);
+                of.Handled = true;
+                of.Success = false;
+                of.Action = false;
+                return (false);
+            }
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.LoadMC: " + ex.Message, IGlobalData.protMode.crisp);
                 return false;
             }
-
-            OrderFeedback of = new OrderFeedback();
-            int idCt = 1;
-            // char Key = '1';
-
-            MCMenu mcM = AdvGame!.AdvMCMenu(A!.Adventure!.CA!.Person_I!, false, 1 + CB!.MCE_Choice_Off);
-            List<int> follower;
-
-
-            follower = new List<int>();
-            follower.Add(-1);
-            mcM.Add(new MCMenuEntry(CB!.MCE_Text, null, loca.OrderFeedback_LoadMC_Person_I_14022, idCt++, follower, null, 0, false, false, false, null, null));
-
-            for (int i = 0; i < 10; i++)
-            {
-                int Val = i + 1;
-                // string? pathName = GlobalData.CurrentPath();
-                // Ignores: 002
-                // string? fileName = Phoney_MAUI.Core.GlobalData.CurrentPath() + loca.OrderFeedback_LoadMC_Person_I_14025 + Val + loca.OrderFeedback_LoadMC_Person_I_14026;
-                string? fileName = loca.OrderFeedback_LoadMC_Person_I_14025 + Val + loca.OrderFeedback_LoadMC_Person_I_14026;
-
-                if (AdvGame.UIS!.ExistFile(fileName))
-                {
-                    // Ignores: 003
-                    mcM.Add(new MCMenuEntry(CB!.MCE_Text, CA!.Person_I, "Slot " + $"{Val:00}" + ": " + $"{AdvGame!.GD!.SlotDescriptions!.SlotDescriptions![Val]}", idCt++, follower, null, 0, false, false, false, null, "lade " + $"{Val:00}"));
-                    // mcM.Add(new MCMenuEntry(CB!.MCE_Text, CA!.Person_I, loca.OrderFeedback_LoadMC_Person_I_14027 + loca.OrderFeedback_LoadMC_Person_I_14028+ loca.OrderFeedback_LoadMC_Person_I_14029 + loca.OrderFeedback_LoadMC_Person_I_14030, idCt++, follower, null, 0, false, false, false, null, loca.OrderFeedback_LoadMC_Person_I_14031 + loca.OrderFeedback_LoadMC_Person_I_14032));
-                    // IDCt++;
-                }
-            }
-
-
-            mcM.Add(new MCMenuEntry(CB!.MCE_Text, CA!.Person_I, loca.OrderFeedback_LoadMC_Person_I_14033, idCt++, follower, null, 0, false, false, false, null, null));
-
-            follower = new List<int>();
-            for (int j = 1; j < idCt; j++)
-            {
-                follower.Add(j);
-
-            }
-            mcM.Add(new MCMenuEntry(CB!.MCE_Choice, null, " ", CB!.MCE_Choice_Off + 1, follower, null, 0, false, false, false, null, null));
-
-            mcM.MCS = mcM.MenuShow(); ;
-            mcM.Set(0);
-            // MCM.AddCurrent(1);
-            this.temporaryMCMenu = mcM;
-            this.persistentMCMenu = null;
-            mcM.MCS.MCOutput(mcM, LoadSelection, false);
-            of.Handled = true;
-            of.Success = false;
-            of.Action = false;
-            return (false);
 
         }
 
@@ -2960,1640 +3412,1954 @@ namespace GameCore
 
         public void SavePersons(ref string output)
         {
-            int ix = 0;
-
-            foreach (var dict in Persons!.List!)
+            try
             {
-                Person pe = dict.Value;
-                Person pe2 = AdvGame!.GD!.StartStatus!.jsonPersons!.List![dict.Key]!;
+                int ix = 0;
 
-                bool changedIx = false;
-                string changes = "";
+                foreach (var dict in Persons!.List!)
+                {
+                    Person pe = dict.Value;
+                    Person pe2 = AdvGame!.GD!.StartStatus!.jsonPersons!.List![dict.Key]!;
 
-                if (pe.locationType != pe2.locationType)
-                {
-                    changes += string.Format("locationType: {0}\n", pe.locationType.ToString());
-                    changedIx = true;
-                }
-                if (pe.locationID != pe2.locationID)
-                {
-                    changes += string.Format("locationID: {0}\n", pe.locationID.ToString());
-                    changedIx = true;
-                }
-                if (pe.CanCarryItems != pe2.CanCarryItems)
-                {
-                    changes += string.Format("CanCarryItems: {0}\n", pe.CanCarryItems!.ToString());
-                    changedIx = true;
-                }
-                if (pe.Size != pe2.Size)
-                {
-                    changes += string.Format("Size: {0}\n", pe.Size.ToString());
-                    changedIx = true;
-                }
-                if (pe.Storage != pe2.Storage)
-                {
-                    changes += string.Format("Storage: {0}\n", pe.Storage.ToString());
-                    changedIx = true;
-                }
-                if (pe.StorageIn != pe2.StorageIn)
-                {
-                    changes += string.Format("StorageIn: {0}\n", pe.StorageIn.ToString());
-                    changedIx = true;
-                }
-                if (pe.CanBeClosed != pe2.CanBeClosed)
-                {
-                    changes += string.Format("CanBeClosed: {0}\n", pe.CanBeClosed.ToString());
-                    changedIx = true;
-                }
-                if (pe.CanBeLocked != pe2.CanBeLocked)
-                {
-                    changes += string.Format("CanBeLocked: {0}\n", pe.CanBeLocked.ToString());
-                    changedIx = true;
-                }
-                if (pe.IsClosed != pe2.IsClosed)
-                {
-                    changes += string.Format("IsClosed: {0}\n", pe.IsClosed.ToString());
-                    changedIx = true;
-                }
-                if (pe.IsLocked != pe2.IsLocked)
-                {
-                    changes += string.Format("IsLocked: {0}\n", pe.IsLocked.ToString());
-                    changedIx = true;
-                }
-                if (pe.CanBeTaken != pe2.CanBeTaken)
-                {
-                    changes += string.Format("CanBeTaken: {0}\n", pe.CanBeTaken.ToString());
-                    changedIx = true;
-                }
-                if (pe.HereTextLoca != pe2.HereTextLoca)
-                {
-                    changes += string.Format("HereTextLoca: {0}\n", pe.HereTextLoca!.ToString()!);
-                    changedIx = true;
-                }
-                if (pe.ActivityBlocked != pe2.ActivityBlocked)
-                {
-                    changes += string.Format("ActivityBlocked: {0}\n", pe.ActivityBlocked.ToString());
-                    changedIx = true;
-                }
-                if (pe.IsRegular != pe2.IsRegular)
-                {
-                    changes += string.Format("IsRegular: {0}\n", pe.IsRegular.ToString());
-                    changedIx = true;
-                }
-                if (pe.IsBackground != pe2.IsBackground)
-                {
-                    changes += string.Format("IsBackground: {0}\n", pe.IsBackground.ToString());
-                    changedIx = true;
-                }
-                if (pe.IsHidden != pe2.IsHidden)
-                {
-                    changes += string.Format("IsHidden: {0}\n", pe.IsHidden.ToString());
-                    changedIx = true;
-                }
-                if (pe.IsWanderer != pe2.IsWanderer)
-                {
-                    changes += string.Format("IsWanderer: {0}\n", pe.IsWanderer.ToString());
-                    changedIx = true;
-                }
+                    bool changedIx = false;
+                    string changes = "";
 
-
-                bool listUnlockItems = false;
-                // 
-                if (pe.UnlockItems!.Count != pe2.UnlockItems!.Count)
-                    listUnlockItems = true;
-                else if (pe.UnlockItems!.Count > 0)
-                {
-                    int ix2;
-                    for (ix2 = 0; ix2 < pe.UnlockItems!.Count; ix2++)
+                    if (pe.locationType != pe2.locationType)
                     {
-                        if (pe.UnlockItems[ix2] != pe.UnlockItems[ix2])
-                            listUnlockItems = true;
+                        changes += string.Format("locationType: {0}\n", pe.locationType.ToString());
+                        changedIx = true;
                     }
-                }
-                if (listUnlockItems)
-                {
-                    changes += string.Format("UnlockItems: {0}\n", pe.UnlockItems!.Count.ToString());
-
-                    int ix2;
-
-                    for (ix2 = 0; ix2 < pe.UnlockItems!.Count; ix2++)
+                    if (pe.locationID != pe2.locationID)
                     {
-                        changes += string.Format("{0}\n", pe.UnlockItems[ix2]);
+                        changes += string.Format("locationID: {0}\n", pe.locationID.ToString());
+                        changedIx = true;
                     }
-                    changedIx = true;
-                }
-
-                bool listWanderer = false;
-                // 
-                if (pe2.WandererList == null)
-                {
-
-                }
-                else if (pe.WandererList == null)
-                    listWanderer = true;
-                else if (pe.WandererList.Count != pe2.WandererList.Count)
-                    listWanderer = true;
-                else if (pe.WandererList.Count > 0)
-                {
-                    int ix2;
-                    for (ix2 = 0; ix2 < pe.WandererList.Count; ix2++)
+                    if (pe.CanCarryItems != pe2.CanCarryItems)
                     {
-                        if (pe.WandererList[ix2] != pe2.WandererList[ix2])
-                            listWanderer = true;
+                        changes += string.Format("CanCarryItems: {0}\n", pe.CanCarryItems!.ToString());
+                        changedIx = true;
                     }
-                }
-                if (listWanderer)
-                {
-                    changes += string.Format("WandererList: {0}\n", pe.WandererList!.Count.ToString());
-
-                    int ix2;
-
-                    for (ix2 = 0; ix2 < pe.WandererList.Count; ix2++)
+                    if (pe.Size != pe2.Size)
                     {
-                        changes += string.Format("{0}\n", pe.WandererList[ix2]);
+                        changes += string.Format("Size: {0}\n", pe.Size.ToString());
+                        changedIx = true;
                     }
-                    changedIx = true;
-                }
-
-                if (pe!.ID != pe2!.ID)
-                {
-                    changes += string.Format("ID: {0}\n", pe!.ID.ToString());
-                    changedIx = true;
-                }
-                if (pe.Active != pe2.Active)
-                {
-                    changes += string.Format("Active: {0}\n", pe.Active.ToString());
-                    changedIx = true;
-                }
-                if (pe._sexGer != pe2._sexGer)
-                {
-                    changes += string.Format("_sexGer: {0}\n", pe._sexGer.ToString());
-                    changedIx = true;
-                }
-                if (pe._sexEng != pe2._sexEng)
-                {
-                    changes += string.Format("_sexEng: {0}\n", pe._sexEng.ToString());
-                    changedIx = true;
-                }
-
-                if (pe.LocaDescription != pe2.LocaDescription)
-                {
-                    changes += string.Format("LocaDescription: {0}\n", pe.LocaDescription!.ToString());
-                    changedIx = true;
-                }
-                if (pe.Picture != pe2.Picture)
-                {
-                    changes += string.Format("Picture: {0}\n", pe.Picture!.ToString());
-                    changedIx = true;
-                }
-                if (pe.controllerName != pe2.controllerName)
-                {
-                    changes += string.Format("controllerName: {0}\n", pe.controllerName!.ToString());
-                    changedIx = true;
-                }
-                if (pe._appendix != pe2._appendix)
-                {
-                    changes += string.Format("_appendix: {0}\n", pe._appendix!.ToString());
-                    changedIx = true;
-                }
-                if (pe.Known != pe2.Known)
-                {
-                    changes += string.Format("Known: {0}\n", pe.Known.ToString());
-                    changedIx = true;
-                }
-                if (pe.Relevance != pe2.Relevance)
-                {
-                    changes += string.Format("Relevance: {0}\n", pe.Relevance.ToString());
-                    changedIx = true;
-                }
-
-
-                bool listNames = false;
-                // 
-                if (pe._names!.Count != pe2._names!.Count)
-                    listNames = true;
-                else if (pe._names.Count > 0)
-                {
-                    int ix2;
-                    for (ix2 = 0; ix2 < pe._names.Count; ix2++)
+                    if (pe.Storage != pe2.Storage)
                     {
-                        if (pe._names[ix2]!.ID != pe2._names[ix2]!.ID)
-                            listNames = true;
+                        changes += string.Format("Storage: {0}\n", pe.Storage.ToString());
+                        changedIx = true;
                     }
-                }
-                if (listNames)
-                {
-                    changes += string.Format("Names: {0}\n", pe._names.Count.ToString());
-
-                    int ix2;
-
-                    for (ix2 = 0; ix2 < pe._names.Count; ix2++)
+                    if (pe.StorageIn != pe2.StorageIn)
                     {
-                        changes += string.Format("{0}\n", pe._names[ix2]!.ID);
+                        changes += string.Format("StorageIn: {0}\n", pe.StorageIn.ToString());
+                        changedIx = true;
                     }
-                    changedIx = true;
-                }
-
-                bool listSynNames = false;
-                // 
-                if (pe!._synNames!.Count != pe2!._synNames!.Count)
-                    listSynNames = true;
-                else if (pe._synNames.Count > 0)
-                {
-                    int ix2;
-                    for (ix2 = 0; ix2 < pe2._synNames.Count; ix2++)
+                    if (pe.CanBeClosed != pe2.CanBeClosed)
                     {
-                        if (pe._synNames[ix2]!.ID != pe2._synNames[ix2]!.ID)
-                            listSynNames = true;
+                        changes += string.Format("CanBeClosed: {0}\n", pe.CanBeClosed.ToString());
+                        changedIx = true;
                     }
-                }
-                if (listSynNames)
-                {
-                    changes += string.Format("SynNames: {0}\n", pe._synNames.Count.ToString());
-
-                    int ix2;
-
-                    for (ix2 = 0; ix2 < pe._synNames.Count; ix2++)
+                    if (pe.CanBeLocked != pe2.CanBeLocked)
                     {
-                        changes += string.Format("{0}\n", pe._synNames[ix2]!.ID);
+                        changes += string.Format("CanBeLocked: {0}\n", pe.CanBeLocked.ToString());
+                        changedIx = true;
                     }
-                    changedIx = true;
-                }
-
-                bool listNamesEng = false;
-                // 
-                if (pe2._namesEng == null)
-                {
-
-                }
-                else if (pe._namesEng!.Count != pe2._namesEng!.Count)
-                    listNamesEng = true;
-                else if (pe._namesEng.Count > 0)
-                {
-                    int ix2;
-                    for (ix2 = 0; ix2 < pe2._namesEng.Count; ix2++)
+                    if (pe.IsClosed != pe2.IsClosed)
                     {
-                        if (pe._namesEng[ix2]!.ID != pe2._namesEng[ix2]!.ID)
-                            listNamesEng = true;
+                        changes += string.Format("IsClosed: {0}\n", pe.IsClosed.ToString());
+                        changedIx = true;
                     }
-                }
-                if (listNamesEng)
-                {
-                    changes += string.Format("NamesEng: {0}\n", pe._namesEng!.Count.ToString()!);
-
-                    int ix2;
-
-                    for (ix2 = 0; ix2 < pe._namesEng.Count; ix2++)
+                    if (pe.IsLocked != pe2.IsLocked)
                     {
-                        changes += string.Format("{0}\n", pe._namesEng[ix2]!.ID);
+                        changes += string.Format("IsLocked: {0}\n", pe.IsLocked.ToString());
+                        changedIx = true;
                     }
-                    changedIx = true;
-                }
-
-                bool listSynNamesEng = false;
-                // 
-                if (pe2._synNamesEng == null)
-                {
-
-                }
-                else if (pe._synNamesEng!.Count != pe2._synNamesEng!.Count)
-                    listSynNamesEng = true;
-                else if (pe._synNames.Count > 0)
-                {
-                    int ix2;
-                    for (ix2 = 0; ix2 < pe2._synNamesEng.Count; ix2++)
+                    if (pe.CanBeTaken != pe2.CanBeTaken)
                     {
-                        if (pe._synNamesEng[ix2]!.ID != pe2._synNamesEng[ix2]!.ID)
-                            listSynNamesEng = true;
+                        changes += string.Format("CanBeTaken: {0}\n", pe.CanBeTaken.ToString());
+                        changedIx = true;
                     }
-                }
-                if (listSynNamesEng)
-                {
-                    changes += string.Format("SynNamesEng: {0}\n", pe._synNamesEng!.Count.ToString()!);
-
-                    int ix2;
-
-                    for (ix2 = 0; ix2 < pe._synNamesEng.Count; ix2++)
+                    if (pe.HereTextLoca != pe2.HereTextLoca)
                     {
-                        changes += string.Format("{0}\n", pe._synNamesEng[ix2]!.ID);
+                        changes += string.Format("HereTextLoca: {0}\n", pe.HereTextLoca!.ToString()!);
+                        changedIx = true;
                     }
-                    changedIx = true;
-                }
-
-
-                bool listAdjectives = false;
-                // 
-                if (pe!._adjectives!.Count != pe2!._adjectives!.Count)
-                    listAdjectives = true;
-                else if (pe._adjectives.Count > 0)
-                {
-                    int ix2;
-                    for (ix2 = 0; ix2 < pe2._adjectives.Count; ix2++)
+                    if (pe.ActivityBlocked != pe2.ActivityBlocked)
                     {
-                        if (pe._adjectives[ix2]!.ID != pe2._adjectives[ix2]!.ID)
-                            listAdjectives = true;
+                        changes += string.Format("ActivityBlocked: {0}\n", pe.ActivityBlocked.ToString());
+                        changedIx = true;
                     }
-                }
-                if (listAdjectives)
-                {
-                    changes += string.Format("Adjectives: {0}\n", pe._adjectives.Count.ToString());
-
-                    int ix2;
-
-                    for (ix2 = 0; ix2 < pe._adjectives.Count; ix2++)
+                    if (pe.IsRegular != pe2.IsRegular)
                     {
-                        changes += string.Format("{0}\n", pe._adjectives[ix2]!.ID);
+                        changes += string.Format("IsRegular: {0}\n", pe.IsRegular.ToString());
+                        changedIx = true;
                     }
-                    changedIx = true;
-                }
-
-                bool listSynAdjectives = false;
-                // 
-                if (pe._synAdjectives!.Count != pe2._synAdjectives!.Count)
-                    listSynAdjectives = true;
-                else if (pe._synAdjectives.Count > 0)
-                {
-                    int ix2;
-                    for (ix2 = 0; ix2 < pe2._synAdjectives.Count; ix2++)
+                    if (pe.IsBackground != pe2.IsBackground)
                     {
-                        if (pe._synAdjectives[ix2]!.ID != pe2._synAdjectives[ix2]!.ID)
-                            listSynAdjectives = true;
+                        changes += string.Format("IsBackground: {0}\n", pe.IsBackground.ToString());
+                        changedIx = true;
                     }
-                }
-                if (listSynAdjectives)
-                {
-                    changes += string.Format("SynAdjectives: {0}\n", pe._synAdjectives.Count.ToString());
-
-                    int ix2;
-
-                    for (ix2 = 0; ix2 < pe._synAdjectives.Count; ix2++)
+                    if (pe.IsHidden != pe2.IsHidden)
                     {
-                        changes += string.Format("{0}\n", pe._synAdjectives[ix2]!.ID);
+                        changes += string.Format("IsHidden: {0}\n", pe.IsHidden.ToString());
+                        changedIx = true;
                     }
-                    changedIx = true;
-                }
-
-
-                bool listAdjectivesEng = false;
-                // 
-                if (pe2._adjectivesEng == null)
-                {
-
-                }
-                else if (pe!._adjectivesEng!.Count != pe2!._adjectivesEng!.Count)
-                    listAdjectivesEng = true;
-                else if (pe._adjectivesEng.Count > 0)
-                {
-                    int ix2;
-                    for (ix2 = 0; ix2 < pe2._adjectivesEng.Count; ix2++)
+                    if (pe.IsWanderer != pe2.IsWanderer)
                     {
-                        if (pe._adjectivesEng[ix2]!.ID != pe2._adjectivesEng[ix2]!.ID)
-                            listAdjectivesEng = true;
+                        changes += string.Format("IsWanderer: {0}\n", pe.IsWanderer.ToString());
+                        changedIx = true;
                     }
-                }
-                if (listAdjectivesEng)
-                {
-                    changes += string.Format("AdjectivesEng: {0}\n", pe!._adjectivesEng!.Count.ToString()!);
 
-                    int ix2;
 
-                    for (ix2 = 0; ix2 < pe._adjectivesEng.Count; ix2++)
+                    bool listUnlockItems = false;
+                    // 
+                    if (pe.UnlockItems!.Count != pe2.UnlockItems!.Count)
+                        listUnlockItems = true;
+                    else if (pe.UnlockItems!.Count > 0)
                     {
-                        changes += string.Format("{0}\n", pe._adjectivesEng[ix2]!.ID);
-                    }
-                    changedIx = true;
-                }
-
-                bool listSynAdjectivesEng = false;
-                // 
-                if (pe2._synAdjectivesEng == null)
-                {
-
-                }
-                else if (pe!._synAdjectivesEng!.Count != pe2!._synAdjectivesEng!.Count)
-                    listSynAdjectivesEng = true;
-                else if (pe._synAdjectivesEng.Count > 0)
-                {
-                    int ix2;
-                    for (ix2 = 0; ix2 < pe2._synAdjectivesEng.Count; ix2++)
-                    {
-                        if (pe._synAdjectivesEng[ix2]!.ID != pe2._synAdjectivesEng[ix2]!.ID)
-                            listSynAdjectivesEng = true;
-                    }
-                }
-                if (listSynAdjectivesEng)
-                {
-                    changes += string.Format("SynAdjectivesEng: {0}\n", pe._synAdjectivesEng!.Count.ToString());
-
-                    int ix2;
-
-                    for (ix2 = 0; ix2 < pe._synAdjectivesEng.Count; ix2++)
-                    {
-                        changes += string.Format("{0}\n", pe._synAdjectivesEng[ix2]!.ID);
-                    }
-                    changedIx = true;
-                }
-
-                bool listCategoryRel = false;
-
-                if (pe.Categories!.List!.Count != pe2.Categories!.List!.Count)
-                    listCategoryRel = true;
-                else if (pe.Categories!.List.Count > 0)
-                {
-                    // int ix2;
-
-
-                    var pe2CatList = pe2.Categories!.List.GetEnumerator();
-                    pe2CatList.MoveNext();
-
-                    foreach (CategoryRel cr in pe.Categories!.List.Values)
-                    {
-                        if (pe2CatList.Current.Value != null)
+                        int ix2;
+                        for (ix2 = 0; ix2 < pe.UnlockItems!.Count; ix2++)
                         {
-                            if ((cr.CategoryID != pe2CatList.Current.Value.CategoryID)
-                                    || (cr.CounterCategoryID != pe2CatList.Current.Value.CounterCategoryID)
+                            if (pe.UnlockItems[ix2] != pe.UnlockItems[ix2])
+                                listUnlockItems = true;
+                        }
+                    }
+                    if (listUnlockItems)
+                    {
+                        changes += string.Format("UnlockItems: {0}\n", pe.UnlockItems!.Count.ToString());
+
+                        int ix2;
+
+                        for (ix2 = 0; ix2 < pe.UnlockItems!.Count; ix2++)
+                        {
+                            changes += string.Format("{0}\n", pe.UnlockItems[ix2]);
+                        }
+                        changedIx = true;
+                    }
+
+                    bool listWanderer = false;
+                    // 
+                    if (pe2.WandererList == null)
+                    {
+
+                    }
+                    else if (pe.WandererList == null)
+                        listWanderer = true;
+                    else if (pe.WandererList.Count != pe2.WandererList.Count)
+                        listWanderer = true;
+                    else if (pe.WandererList.Count > 0)
+                    {
+                        int ix2;
+                        for (ix2 = 0; ix2 < pe.WandererList.Count; ix2++)
+                        {
+                            if (pe.WandererList[ix2] != pe2.WandererList[ix2])
+                                listWanderer = true;
+                        }
+                    }
+                    if (listWanderer)
+                    {
+                        changes += string.Format("WandererList: {0}\n", pe.WandererList!.Count.ToString());
+
+                        int ix2;
+
+                        for (ix2 = 0; ix2 < pe.WandererList.Count; ix2++)
+                        {
+                            changes += string.Format("{0}\n", pe.WandererList[ix2]);
+                        }
+                        changedIx = true;
+                    }
+
+                    if (pe!.ID != pe2!.ID)
+                    {
+                        changes += string.Format("ID: {0}\n", pe!.ID.ToString());
+                        changedIx = true;
+                    }
+                    if (pe.Active != pe2.Active)
+                    {
+                        changes += string.Format("Active: {0}\n", pe.Active.ToString());
+                        changedIx = true;
+                    }
+                    if (pe._sexGer != pe2._sexGer)
+                    {
+                        changes += string.Format("_sexGer: {0}\n", pe._sexGer.ToString());
+                        changedIx = true;
+                    }
+                    if (pe._sexEng != pe2._sexEng)
+                    {
+                        changes += string.Format("_sexEng: {0}\n", pe._sexEng.ToString());
+                        changedIx = true;
+                    }
+
+                    if (pe.LocaDescription != pe2.LocaDescription)
+                    {
+                        changes += string.Format("LocaDescription: {0}\n", pe.LocaDescription!.ToString());
+                        changedIx = true;
+                    }
+                    if (pe.Picture != pe2.Picture)
+                    {
+                        changes += string.Format("Picture: {0}\n", pe.Picture!.ToString());
+                        changedIx = true;
+                    }
+                    if (pe.controllerName != pe2.controllerName)
+                    {
+                        changes += string.Format("controllerName: {0}\n", pe.controllerName!.ToString());
+                        changedIx = true;
+                    }
+                    if (pe._appendix != pe2._appendix)
+                    {
+                        changes += string.Format("_appendix: {0}\n", pe._appendix!.ToString());
+                        changedIx = true;
+                    }
+                    if (pe.Known != pe2.Known)
+                    {
+                        changes += string.Format("Known: {0}\n", pe.Known.ToString());
+                        changedIx = true;
+                    }
+                    if (pe.Relevance != pe2.Relevance)
+                    {
+                        changes += string.Format("Relevance: {0}\n", pe.Relevance.ToString());
+                        changedIx = true;
+                    }
+
+
+                    bool listNames = false;
+                    // 
+                    if (pe._names!.Count != pe2._names!.Count)
+                        listNames = true;
+                    else if (pe._names.Count > 0)
+                    {
+                        int ix2;
+                        for (ix2 = 0; ix2 < pe._names.Count; ix2++)
+                        {
+                            if (pe._names[ix2]!.ID != pe2._names[ix2]!.ID)
+                                listNames = true;
+                        }
+                    }
+                    if (listNames)
+                    {
+                        changes += string.Format("Names: {0}\n", pe._names.Count.ToString());
+
+                        int ix2;
+
+                        for (ix2 = 0; ix2 < pe._names.Count; ix2++)
+                        {
+                            changes += string.Format("{0}\n", pe._names[ix2]!.ID);
+                        }
+                        changedIx = true;
+                    }
+
+                    bool listSynNames = false;
+                    // 
+                    if (pe!._synNames!.Count != pe2!._synNames!.Count)
+                        listSynNames = true;
+                    else if (pe._synNames.Count > 0)
+                    {
+                        int ix2;
+                        for (ix2 = 0; ix2 < pe2._synNames.Count; ix2++)
+                        {
+                            if (pe._synNames[ix2]!.ID != pe2._synNames[ix2]!.ID)
+                                listSynNames = true;
+                        }
+                    }
+                    if (listSynNames)
+                    {
+                        changes += string.Format("SynNames: {0}\n", pe._synNames.Count.ToString());
+
+                        int ix2;
+
+                        for (ix2 = 0; ix2 < pe._synNames.Count; ix2++)
+                        {
+                            changes += string.Format("{0}\n", pe._synNames[ix2]!.ID);
+                        }
+                        changedIx = true;
+                    }
+
+                    bool listNamesEng = false;
+                    // 
+                    if (pe2._namesEng == null)
+                    {
+
+                    }
+                    else if (pe._namesEng!.Count != pe2._namesEng!.Count)
+                        listNamesEng = true;
+                    else if (pe._namesEng.Count > 0)
+                    {
+                        int ix2;
+                        for (ix2 = 0; ix2 < pe2._namesEng.Count; ix2++)
+                        {
+                            if (pe._namesEng[ix2]!.ID != pe2._namesEng[ix2]!.ID)
+                                listNamesEng = true;
+                        }
+                    }
+                    if (listNamesEng)
+                    {
+                        changes += string.Format("NamesEng: {0}\n", pe._namesEng!.Count.ToString()!);
+
+                        int ix2;
+
+                        for (ix2 = 0; ix2 < pe._namesEng.Count; ix2++)
+                        {
+                            changes += string.Format("{0}\n", pe._namesEng[ix2]!.ID);
+                        }
+                        changedIx = true;
+                    }
+
+                    bool listSynNamesEng = false;
+                    // 
+                    if (pe2._synNamesEng == null)
+                    {
+
+                    }
+                    else if (pe._synNamesEng!.Count != pe2._synNamesEng!.Count)
+                        listSynNamesEng = true;
+                    else if (pe._synNames.Count > 0)
+                    {
+                        int ix2;
+                        for (ix2 = 0; ix2 < pe2._synNamesEng.Count; ix2++)
+                        {
+                            if (pe._synNamesEng[ix2]!.ID != pe2._synNamesEng[ix2]!.ID)
+                                listSynNamesEng = true;
+                        }
+                    }
+                    if (listSynNamesEng)
+                    {
+                        changes += string.Format("SynNamesEng: {0}\n", pe._synNamesEng!.Count.ToString()!);
+
+                        int ix2;
+
+                        for (ix2 = 0; ix2 < pe._synNamesEng.Count; ix2++)
+                        {
+                            changes += string.Format("{0}\n", pe._synNamesEng[ix2]!.ID);
+                        }
+                        changedIx = true;
+                    }
+
+
+                    bool listAdjectives = false;
+                    // 
+                    if (pe!._adjectives!.Count != pe2!._adjectives!.Count)
+                        listAdjectives = true;
+                    else if (pe._adjectives.Count > 0)
+                    {
+                        int ix2;
+                        for (ix2 = 0; ix2 < pe2._adjectives.Count; ix2++)
+                        {
+                            if (pe._adjectives[ix2]!.ID != pe2._adjectives[ix2]!.ID)
+                                listAdjectives = true;
+                        }
+                    }
+                    if (listAdjectives)
+                    {
+                        changes += string.Format("Adjectives: {0}\n", pe._adjectives.Count.ToString());
+
+                        int ix2;
+
+                        for (ix2 = 0; ix2 < pe._adjectives.Count; ix2++)
+                        {
+                            changes += string.Format("{0}\n", pe._adjectives[ix2]!.ID);
+                        }
+                        changedIx = true;
+                    }
+
+                    bool listSynAdjectives = false;
+                    // 
+                    if (pe._synAdjectives!.Count != pe2._synAdjectives!.Count)
+                        listSynAdjectives = true;
+                    else if (pe._synAdjectives.Count > 0)
+                    {
+                        int ix2;
+                        for (ix2 = 0; ix2 < pe2._synAdjectives.Count; ix2++)
+                        {
+                            if (pe._synAdjectives[ix2]!.ID != pe2._synAdjectives[ix2]!.ID)
+                                listSynAdjectives = true;
+                        }
+                    }
+                    if (listSynAdjectives)
+                    {
+                        changes += string.Format("SynAdjectives: {0}\n", pe._synAdjectives.Count.ToString());
+
+                        int ix2;
+
+                        for (ix2 = 0; ix2 < pe._synAdjectives.Count; ix2++)
+                        {
+                            changes += string.Format("{0}\n", pe._synAdjectives[ix2]!.ID);
+                        }
+                        changedIx = true;
+                    }
+
+
+                    bool listAdjectivesEng = false;
+                    // 
+                    if (pe2._adjectivesEng == null)
+                    {
+
+                    }
+                    else if (pe!._adjectivesEng!.Count != pe2!._adjectivesEng!.Count)
+                        listAdjectivesEng = true;
+                    else if (pe._adjectivesEng.Count > 0)
+                    {
+                        int ix2;
+                        for (ix2 = 0; ix2 < pe2._adjectivesEng.Count; ix2++)
+                        {
+                            if (pe._adjectivesEng[ix2]!.ID != pe2._adjectivesEng[ix2]!.ID)
+                                listAdjectivesEng = true;
+                        }
+                    }
+                    if (listAdjectivesEng)
+                    {
+                        changes += string.Format("AdjectivesEng: {0}\n", pe!._adjectivesEng!.Count.ToString()!);
+
+                        int ix2;
+
+                        for (ix2 = 0; ix2 < pe._adjectivesEng.Count; ix2++)
+                        {
+                            changes += string.Format("{0}\n", pe._adjectivesEng[ix2]!.ID);
+                        }
+                        changedIx = true;
+                    }
+
+                    bool listSynAdjectivesEng = false;
+                    // 
+                    if (pe2._synAdjectivesEng == null)
+                    {
+
+                    }
+                    else if (pe!._synAdjectivesEng!.Count != pe2!._synAdjectivesEng!.Count)
+                        listSynAdjectivesEng = true;
+                    else if (pe._synAdjectivesEng.Count > 0)
+                    {
+                        int ix2;
+                        for (ix2 = 0; ix2 < pe2._synAdjectivesEng.Count; ix2++)
+                        {
+                            if (pe._synAdjectivesEng[ix2]!.ID != pe2._synAdjectivesEng[ix2]!.ID)
+                                listSynAdjectivesEng = true;
+                        }
+                    }
+                    if (listSynAdjectivesEng)
+                    {
+                        changes += string.Format("SynAdjectivesEng: {0}\n", pe._synAdjectivesEng!.Count.ToString());
+
+                        int ix2;
+
+                        for (ix2 = 0; ix2 < pe._synAdjectivesEng.Count; ix2++)
+                        {
+                            changes += string.Format("{0}\n", pe._synAdjectivesEng[ix2]!.ID);
+                        }
+                        changedIx = true;
+                    }
+
+                    bool listCategoryRel = false;
+
+                    if (pe.Categories!.List!.Count != pe2.Categories!.List!.Count)
+                        listCategoryRel = true;
+                    else if (pe.Categories!.List.Count > 0)
+                    {
+                        // int ix2;
+
+
+                        var pe2CatList = pe2.Categories!.List.GetEnumerator();
+                        pe2CatList.MoveNext();
+
+                        foreach (CategoryRel cr in pe.Categories!.List.Values)
+                        {
+                            if (pe2CatList.Current.Value != null)
+                            {
+                                if ((cr.CategoryID != pe2CatList.Current.Value.CategoryID)
+                                        || (cr.CounterCategoryID != pe2CatList.Current.Value.CounterCategoryID)
+                                  )
+                                    listCategoryRel = true;
+                            }
+                            pe2CatList.MoveNext();
+                        }
+                    }
+                    if (listCategoryRel)
+                    {
+                        changes += string.Format("Categories: {0}\n", pe.Categories!.List.Count.ToString());
+
+                        // int ix2;
+
+                        foreach (CategoryRel cr in pe.Categories!.List.Values)
+                        {
+                            changes += string.Format("{0} {1} {2}\n", cr.CategoryID, cr.CounterCategoryID, cr.Relevance);
+                        }
+
+                        changedIx = true;
+                    }
+
+                    /*
+
+                    else if (pe.Categories!.List.Count > 0)
+                    {
+                        int ix2;
+                        for (ix2 = 0; ix2 < pe2.Categories!.List.Count; ix2++)
+                        {
+                            if ((pe.Categories!.List[ix2].CategoryID != pe2.Categories!.List[ix2].CategoryID)
+                                    || (pe.Categories!.List[ix2].CounterCategoryID != pe2.Categories!.List[ix2].CounterCategoryID)
                               )
                                 listCategoryRel = true;
                         }
-                        pe2CatList.MoveNext();
                     }
-                }
-                if (listCategoryRel)
-                {
-                    changes += string.Format("Categories: {0}\n", pe.Categories!.List.Count.ToString());
-
-                    // int ix2;
-
-                    foreach (CategoryRel cr in pe.Categories!.List.Values)
+                    if (listCategoryRel)
                     {
-                        changes += string.Format("{0} {1} {2}\n", cr.CategoryID, cr.CounterCategoryID, cr.Relevance );
+                        changes += string.Format("Categories: {0}\n", pe.Categories!.List.Count.ToString());
+
+                        int ix2;
+
+                        for (ix2 = 0; ix2 < pe.Categories!.List.Count; ix2++)
+                        {
+                            changes += string.Format("{0} {1}\n", pe.Categories!.List[ix2].CategoryID, pe.Categories!.List[ix2].CounterCategoryID);
+                        }
+                        changedIx = true;
                     }
-
-                    changedIx = true;
-                }
-
-                /*
-
-                else if (pe.Categories!.List.Count > 0)
-                {
-                    int ix2;
-                    for (ix2 = 0; ix2 < pe2.Categories!.List.Count; ix2++)
-                    {
-                        if ((pe.Categories!.List[ix2].CategoryID != pe2.Categories!.List[ix2].CategoryID)
-                                || (pe.Categories!.List[ix2].CounterCategoryID != pe2.Categories!.List[ix2].CounterCategoryID)
-                          )
-                            listCategoryRel = true;
-                    }
-                }
-                if (listCategoryRel)
-                {
-                    changes += string.Format("Categories: {0}\n", pe.Categories!.List.Count.ToString());
-
-                    int ix2;
-
-                    for (ix2 = 0; ix2 < pe.Categories!.List.Count; ix2++)
-                    {
-                        changes += string.Format("{0} {1}\n", pe.Categories!.List[ix2].CategoryID, pe.Categories!.List[ix2].CounterCategoryID);
-                    }
-                    changedIx = true;
-                }
-                */
-
-                bool listStatus = false;
-
-                if (pe.SL!.Count != pe2.SL!.Count)
-                    listStatus = true;
-                else if (pe.SL.List.Count > 0)
-                {
-                    int ix2;
-                    for (ix2 = 0; ix2 < pe2.SL.List.Count; ix2++)
-                    {
-                        if ((pe.SL.List[ix2]!.ID != pe2.SL.List[ix2]!.ID)
-                                || (pe.SL.List[ix2].Val != pe2.SL.List[ix2].Val)
-                          )
-                            listStatus = true;
-                    }
-                }
-                if (listStatus)
-                {
-                    changes += string.Format("Status: {0}\n", pe.SL.List.Count.ToString());
-
-                    int ix2;
-
-                    for (ix2 = 0; ix2 < pe.SL.List.Count; ix2++)
-                    {
-                        changes += string.Format("{0} {1}\n", pe.SL.List[ix2]!.ID, pe.SL.List[ix2].Val);
-                    }
-                    changedIx = true;
-                }
-
-                // DialogLists
-                bool dialogLists = false;
-
-                if (pe.DialogList!.Count > 0 )
-                    dialogLists = true;
-
-                if (dialogLists)
-                {
-                    string zw1 = string.Format("DialogList: {0}\n", pe.DialogList.Count);
-                    changes += zw1;
-
-                    foreach (DialogList dl in pe.DialogList)
-                    {
-
-                        string zw = JsonConvert.SerializeObject(dl.LatestDialog);
-                        changes += string.Format("Name: {0} {1}\n", dl.FuncName, zw.Length);
-                        changes += zw + "\n";
-                    }
-                    /*
-                    changes += string.Format("Status: {0}\n", pe.SL.List.Count.ToString());
-
-                    int ix2;
-
-                    for (ix2 = 0; ix2 < pe.SL.List.Count; ix2++)
-                    {
-                        changes += string.Format("{0} {1}\n", pe.SL.List[ix2]!.ID, pe.SL.List[ix2].Val);
-                    }
-                    changedIx = true;
                     */
+
+                    bool listStatus = false;
+
+                    if (pe.SL!.Count != pe2.SL!.Count)
+                        listStatus = true;
+                    else if (pe.SL.List.Count > 0)
+                    {
+                        int ix2;
+                        for (ix2 = 0; ix2 < pe2.SL.List.Count; ix2++)
+                        {
+                            if ((pe.SL.List[ix2]!.ID != pe2.SL.List[ix2]!.ID)
+                                    || (pe.SL.List[ix2].Val != pe2.SL.List[ix2].Val)
+                              )
+                                listStatus = true;
+                        }
+                    }
+                    if (listStatus)
+                    {
+                        changes += string.Format("Status: {0}\n", pe.SL.List.Count.ToString());
+
+                        int ix2;
+
+                        for (ix2 = 0; ix2 < pe.SL.List.Count; ix2++)
+                        {
+                            changes += string.Format("{0} {1}\n", pe.SL.List[ix2]!.ID, pe.SL.List[ix2].Val);
+                        }
+                        changedIx = true;
+                    }
+
+                    // DialogLists
+                    bool dialogLists = false;
+
+                    if (pe.DialogList!.Count > 0)
+                        dialogLists = true;
+
+                    if (dialogLists)
+                    {
+                        string zw1 = string.Format("DialogList: {0}\n", pe.DialogList.Count);
+                        changes += zw1;
+
+                        foreach (DialogList dl in pe.DialogList)
+                        {
+
+                            string zw = JsonConvert.SerializeObject(dl.LatestDialog);
+                            changes += string.Format("Name: {0} {1}\n", dl.FuncName, zw.Length);
+                            changes += zw + "\n";
+                        }
+                        /*
+                        changes += string.Format("Status: {0}\n", pe.SL.List.Count.ToString());
+
+                        int ix2;
+
+                        for (ix2 = 0; ix2 < pe.SL.List.Count; ix2++)
+                        {
+                            changes += string.Format("{0} {1}\n", pe.SL.List[ix2]!.ID, pe.SL.List[ix2].Val);
+                        }
+                        changedIx = true;
+                        */
+                    }
+
+
+                    // SL
+
+
+                    // Alles durch?
+                    if (changedIx)
+                    {
+                        output += string.Format("Person: {0}\n", dict.Key);
+                        output += changes;
+                    }
+
+                    ix++;
                 }
-
-
-                // SL
-
-
-                // Alles durch?
-                if (changedIx)
-                {
-                    output += string.Format("Person: {0}\n", dict.Key );
-                    output += changes;
-                }
-
-                ix++;
+            }
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.SavePersons: " + ex.Message, IGlobalData.protMode.crisp);
             }
 
         }
         public void SaveTopics(string output)
         {
-            int ix = 0;
-
-            foreach (var dict in Topics!.List!)
+            try
             {
-                Topic tp = dict;
-                Topic tp2  = AdvGame!.GD!.StartStatus!.jsonTopics!.List![ix];
+                int ix = 0;
 
-                bool changedIx = false;
-                string changes = "";
+                foreach (var dict in Topics!.List!)
+                {
+                    Topic tp = dict;
+                    Topic tp2 = AdvGame!.GD!.StartStatus!.jsonTopics!.List![ix];
 
-
-                if (tp!.ID != tp2!.ID)
-                {
-                    changes += string.Format("ID: {0}\n", tp2!.ID.ToString());
-                    changedIx = true;
-                }
-                if (tp.Active != tp2.Active)
-                {
-                    changes += string.Format("Active: {0}\n", tp2.Active.ToString());
-                    changedIx = true;
-                }
-                if (tp._sexGer != tp2._sexGer)
-                {
-                    changes += string.Format("_sexGer: {0}\n", tp2._sexGer.ToString());
-                    changedIx = true;
-                }
-                if (tp._sexEng != tp2._sexEng)
-                {
-                    changes += string.Format("_sexEng: {0}\n", tp2._sexEng.ToString());
-                    changedIx = true;
-                }
-
-                if (tp.LocaDescription != tp2.LocaDescription)
-                {
-                    changes += string.Format("LocaDescription: {0}\n", tp2.LocaDescription!.ToString());
-                    changedIx = true;
-                }
-                if (tp.Picture != tp2.Picture)
-                {
-                    changes += string.Format("Picture: {0}\n", tp2.Picture!.ToString());
-                    changedIx = true;
-                }
-                if (tp.controllerName != tp2.controllerName)
-                {
-                    changes += string.Format("controllerName: {0}\n", tp2.controllerName!.ToString());
-                    changedIx = true;
-                }
-                if (tp._appendix != tp2._appendix)
-                {
-                    changes += string.Format("_appendix: {0}\n", tp2._appendix!.ToString());
-                    changedIx = true;
-                }
-                if (tp.Known != tp2.Known)
-                {
-                    changes += string.Format("Known: {0}\n", tp2.Known.ToString());
-                    changedIx = true;
-                }
-                if (tp.Relevance != tp2.Relevance)
-                {
-                    changes += string.Format("Relevance: {0}\n", tp2.Relevance.ToString());
-                    changedIx = true;
-                }
+                    bool changedIx = false;
+                    string changes = "";
 
 
-                bool listNames = false;
-                // 
-                if (tp._names!.Count != tp2._names!.Count)
-                    listNames = true;
-                else if (tp._names.Count > 0)
-                {
-                    int ix2;
-                    for (ix2 = 0; ix2 < tp2._names.Count; ix2++)
+                    if (tp!.ID != tp2!.ID)
                     {
-                        if (tp._names[ix2]!.ID != tp2._names[ix2]!.ID)
-                            listNames = true;
+                        changes += string.Format("ID: {0}\n", tp2!.ID.ToString());
+                        changedIx = true;
                     }
-                }
-                if (listNames)
-                {
-                    changes += string.Format("Names: {0}\n", tp2._names.Count.ToString());
-
-                    int ix2;
-
-                    for (ix2 = 0; ix2 < tp2._names.Count; ix2++)
+                    if (tp.Active != tp2.Active)
                     {
-                        changes += string.Format("{0}\n", tp2._names[ix2]!.ID);
+                        changes += string.Format("Active: {0}\n", tp2.Active.ToString());
+                        changedIx = true;
                     }
-                    changedIx = true;
-                }
-
-                bool listSynNames = false;
-                // 
-                if (tp._synNames!.Count != tp2._synNames!.Count)
-                    listSynNames = true;
-                else if (tp._synNames.Count > 0)
-                {
-                    int ix2;
-                    for (ix2 = 0; ix2 < tp2._synNames.Count; ix2++)
+                    if (tp._sexGer != tp2._sexGer)
                     {
-                        if (tp._synNames[ix2]!.ID != tp2._synNames[ix2]!.ID)
-                            listSynNames = true;
+                        changes += string.Format("_sexGer: {0}\n", tp2._sexGer.ToString());
+                        changedIx = true;
                     }
-                }
-                if (listSynNames)
-                {
-                    changes += string.Format("Names: {0}\n", tp2._synNames.Count.ToString());
-
-                    int ix2;
-
-                    for (ix2 = 0; ix2 < tp2._synNames.Count; ix2++)
+                    if (tp._sexEng != tp2._sexEng)
                     {
-                        changes += string.Format("{0}\n", tp2._synNames[ix2]!.ID);
+                        changes += string.Format("_sexEng: {0}\n", tp2._sexEng.ToString());
+                        changedIx = true;
                     }
-                    changedIx = true;
-                }
 
-                bool listNamesEng = false;
-                // 
-                if (tp2._namesEng == null)
-                {
-
-                }
-                else if (tp._namesEng!.Count != tp2._namesEng!.Count)
-                    listNamesEng = true;
-                else if (tp._namesEng.Count > 0)
-                {
-                    int ix2;
-                    for (ix2 = 0; ix2 < tp2._namesEng.Count; ix2++)
+                    if (tp.LocaDescription != tp2.LocaDescription)
                     {
-                        if (tp._namesEng[ix2]!.ID != tp2._namesEng[ix2]!.ID)
-                            listNamesEng = true;
+                        changes += string.Format("LocaDescription: {0}\n", tp2.LocaDescription!.ToString());
+                        changedIx = true;
                     }
-                }
-                if (listNamesEng)
-                {
-                    changes += string.Format("Names: {0}\n", tp2._namesEng!.Count.ToString());
-
-                    int ix2;
-
-                    for (ix2 = 0; ix2 < tp2._namesEng.Count; ix2++)
+                    if (tp.Picture != tp2.Picture)
                     {
-                        changes += string.Format("{0}\n", tp2._namesEng[ix2]!.ID);
+                        changes += string.Format("Picture: {0}\n", tp2.Picture!.ToString());
+                        changedIx = true;
                     }
-                    changedIx = true;
-                }
-
-                bool listSynNamesEng = false;
-                // 
-                if (tp2._synNamesEng == null)
-                {
-
-                }
-                else if (tp._synNamesEng!.Count != tp2._synNamesEng!.Count)
-                    listSynNamesEng = true;
-                else if (tp._synNames.Count > 0)
-                {
-                    int ix2;
-                    for (ix2 = 0; ix2 < tp2._synNamesEng.Count; ix2++)
+                    if (tp.controllerName != tp2.controllerName)
                     {
-                        if (tp._synNamesEng[ix2]!.ID != tp2._synNamesEng[ix2]!.ID)
-                            listSynNamesEng = true;
+                        changes += string.Format("controllerName: {0}\n", tp2.controllerName!.ToString());
+                        changedIx = true;
                     }
-                }
-                if (listSynNamesEng)
-                {
-                    changes += string.Format("Names: {0}\n", tp2._synNamesEng!.Count.ToString());
-
-                    int ix2;
-
-                    for (ix2 = 0; ix2 < tp2._synNamesEng.Count; ix2++)
+                    if (tp._appendix != tp2._appendix)
                     {
-                        changes += string.Format("{0}\n", tp2._synNamesEng[ix2]!.ID);
+                        changes += string.Format("_appendix: {0}\n", tp2._appendix!.ToString());
+                        changedIx = true;
                     }
-                    changedIx = true;
-                }
-
-
-                bool listAdjectives = false;
-                // 
-                if (tp._adjectives!.Count != tp2._adjectives!.Count)
-                    listAdjectives = true;
-                else if (tp._adjectives.Count > 0)
-                {
-                    int ix2;
-                    for (ix2 = 0; ix2 < tp2._adjectives.Count; ix2++)
+                    if (tp.Known != tp2.Known)
                     {
-                        if (tp._adjectives[ix2]!.ID != tp2._adjectives[ix2]!.ID)
-                            listAdjectives = true;
+                        changes += string.Format("Known: {0}\n", tp2.Known.ToString());
+                        changedIx = true;
                     }
-                }
-                if (listAdjectives)
-                {
-                    changes += string.Format("Names: {0}\n", tp2._adjectives.Count.ToString());
-
-                    int ix2;
-
-                    for (ix2 = 0; ix2 < tp2._adjectives.Count; ix2++)
+                    if (tp.Relevance != tp2.Relevance)
                     {
-                        changes += string.Format("{0}\n", tp2._adjectives[ix2]!.ID);
+                        changes += string.Format("Relevance: {0}\n", tp2.Relevance.ToString());
+                        changedIx = true;
                     }
-                    changedIx = true;
-                }
 
-                bool listSynAdjectives = false;
-                // 
-                if (tp._synAdjectives!.Count != tp2._synAdjectives!.Count)
-                    listSynAdjectives = true;
-                else if (tp._synAdjectives.Count > 0)
-                {
-                    int ix2;
-                    for (ix2 = 0; ix2 < tp2._synAdjectives.Count; ix2++)
+
+                    bool listNames = false;
+                    // 
+                    if (tp._names!.Count != tp2._names!.Count)
+                        listNames = true;
+                    else if (tp._names.Count > 0)
                     {
-                        if (tp._synAdjectives[ix2]!.ID != tp2._synAdjectives[ix2]!.ID)
-                            listSynAdjectives = true;
+                        int ix2;
+                        for (ix2 = 0; ix2 < tp2._names.Count; ix2++)
+                        {
+                            if (tp._names[ix2]!.ID != tp2._names[ix2]!.ID)
+                                listNames = true;
+                        }
                     }
-                }
-                if (listSynAdjectives)
-                {
-                    changes += string.Format("Names: {0}\n", tp2._synAdjectives.Count.ToString());
-
-                    int ix2;
-
-                    for (ix2 = 0; ix2 < tp2._synAdjectives.Count; ix2++)
+                    if (listNames)
                     {
-                        changes += string.Format("{0}\n", tp2._synAdjectives[ix2]!.ID);
+                        changes += string.Format("Names: {0}\n", tp2._names.Count.ToString());
+
+                        int ix2;
+
+                        for (ix2 = 0; ix2 < tp2._names.Count; ix2++)
+                        {
+                            changes += string.Format("{0}\n", tp2._names[ix2]!.ID);
+                        }
+                        changedIx = true;
                     }
-                    changedIx = true;
-                }
 
-
-                bool listAdjectivesEng = false;
-                // 
-                if (tp2._adjectivesEng == null)
-                {
-
-                }
-                else if (tp._adjectivesEng!.Count != tp2._adjectivesEng!.Count)
-                    listAdjectivesEng = true;
-                else if (tp._adjectivesEng.Count > 0)
-                {
-                    int ix2;
-                    for (ix2 = 0; ix2 < tp2._adjectivesEng!.Count; ix2++)
+                    bool listSynNames = false;
+                    // 
+                    if (tp._synNames!.Count != tp2._synNames!.Count)
+                        listSynNames = true;
+                    else if (tp._synNames.Count > 0)
                     {
-                        if (tp._adjectivesEng[ix2]!.ID != tp2._adjectivesEng[ix2]!.ID)
-                            listAdjectivesEng = true;
+                        int ix2;
+                        for (ix2 = 0; ix2 < tp2._synNames.Count; ix2++)
+                        {
+                            if (tp._synNames[ix2]!.ID != tp2._synNames[ix2]!.ID)
+                                listSynNames = true;
+                        }
                     }
-                }
-                if (listAdjectivesEng)
-                {
-                    changes += string.Format("Names: {0}\n", tp2._adjectivesEng!.Count.ToString());
-
-                    int ix2;
-
-                    for (ix2 = 0; ix2 < tp2._adjectivesEng.Count; ix2++)
+                    if (listSynNames)
                     {
-                        changes += string.Format("{0}\n", tp2._adjectivesEng[ix2]!.ID);
+                        changes += string.Format("Names: {0}\n", tp2._synNames.Count.ToString());
+
+                        int ix2;
+
+                        for (ix2 = 0; ix2 < tp2._synNames.Count; ix2++)
+                        {
+                            changes += string.Format("{0}\n", tp2._synNames[ix2]!.ID);
+                        }
+                        changedIx = true;
                     }
-                    changedIx = true;
-                }
 
-                bool listSynAdjectivesEng = false;
-                // 
-                if (tp2._synAdjectivesEng == null)
-                {
-
-                }
-                else if (tp._synAdjectivesEng!.Count != tp2._synAdjectivesEng!.Count)
-                    listSynAdjectivesEng = true;
-                else if (tp._synAdjectivesEng.Count > 0)
-                {
-                    int ix2;
-                    for (ix2 = 0; ix2 < tp2._synAdjectivesEng.Count; ix2++)
+                    bool listNamesEng = false;
+                    // 
+                    if (tp2._namesEng == null)
                     {
-                        if (tp._synAdjectivesEng[ix2]!.ID != tp2._synAdjectivesEng[ix2]!.ID)
-                            listSynAdjectivesEng = true;
+
                     }
-                }
-                if (listSynAdjectivesEng)
-                {
-                    changes += string.Format("Names: {0}\n", tp2._synAdjectivesEng!.Count.ToString());
-
-                    int ix2;
-
-                    for (ix2 = 0; ix2 < tp2._synAdjectivesEng.Count; ix2++)
+                    else if (tp._namesEng!.Count != tp2._namesEng!.Count)
+                        listNamesEng = true;
+                    else if (tp._namesEng.Count > 0)
                     {
-                        changes += string.Format("{0}\n", tp2._synAdjectivesEng[ix2]!.ID);
+                        int ix2;
+                        for (ix2 = 0; ix2 < tp2._namesEng.Count; ix2++)
+                        {
+                            if (tp._namesEng[ix2]!.ID != tp2._namesEng[ix2]!.ID)
+                                listNamesEng = true;
+                        }
                     }
-                    changedIx = true;
-                }
-
-                bool listCategoryRel = false;
-
-                if (tp.Categories!.List!.Count != tp2.Categories!.List!.Count)
-                    listCategoryRel = true;
-                else if (tp.Categories!.List.Count > 0)
-                {
-                    int ix2;
-                    for (ix2 = 0; ix2 < tp2.Categories!.List.Count; ix2++)
+                    if (listNamesEng)
                     {
-                        if ((tp.Categories!.List[ix2].CategoryID != tp2.Categories!.List[ix2].CategoryID)
-                                || (tp.Categories!.List[ix2].CounterCategoryID != tp2.Categories!.List[ix2].CounterCategoryID)
-                          )
-                            listCategoryRel = true;
+                        changes += string.Format("Names: {0}\n", tp2._namesEng!.Count.ToString());
+
+                        int ix2;
+
+                        for (ix2 = 0; ix2 < tp2._namesEng.Count; ix2++)
+                        {
+                            changes += string.Format("{0}\n", tp2._namesEng[ix2]!.ID);
+                        }
+                        changedIx = true;
                     }
-                }
-                if (listCategoryRel)
-                {
-                    changes += string.Format("Categories: {0}\n", tp2.Categories!.List.Count.ToString());
 
-                    int ix2;
-
-                    for (ix2 = 0; ix2 < tp2.Categories!.List.Count; ix2++)
+                    bool listSynNamesEng = false;
+                    // 
+                    if (tp2._synNamesEng == null)
                     {
-                        changes += string.Format("{0} {1}\n", tp2.Categories!.List[ix2].CategoryID, tp2.Categories!.List[ix2].CounterCategoryID);
+
                     }
-                    changedIx = true;
-                }
-
-
-                bool listStatus = false;
-
-                if (tp.SL!.Count != tp2.SL!.Count)
-                    listStatus = true;
-                else if (tp.SL.List.Count > 0)
-                {
-                    int ix2;
-                    for (ix2 = 0; ix2 < tp2.SL.List.Count; ix2++)
+                    else if (tp._synNamesEng!.Count != tp2._synNamesEng!.Count)
+                        listSynNamesEng = true;
+                    else if (tp._synNames.Count > 0)
                     {
-                        if ((tp.SL.List[ix2]!.ID != tp2.SL.List[ix2]!.ID)
-                                || (tp.SL.List[ix2].Val != tp2.SL.List[ix2].Val)
-                          )
-                            listStatus = true;
+                        int ix2;
+                        for (ix2 = 0; ix2 < tp2._synNamesEng.Count; ix2++)
+                        {
+                            if (tp._synNamesEng[ix2]!.ID != tp2._synNamesEng[ix2]!.ID)
+                                listSynNamesEng = true;
+                        }
                     }
-                }
-                if (listStatus)
-                {
-                    changes += string.Format("Status: {0}\n", tp2.SL.List.Count.ToString());
-
-                    int ix2;
-
-                    for (ix2 = 0; ix2 < tp2.SL.List.Count; ix2++)
+                    if (listSynNamesEng)
                     {
-                        changes += string.Format("{0} {1}\n", tp2.SL.List[ix2]!.ID, tp2.SL.List[ix2].Val);
+                        changes += string.Format("Names: {0}\n", tp2._synNamesEng!.Count.ToString());
+
+                        int ix2;
+
+                        for (ix2 = 0; ix2 < tp2._synNamesEng.Count; ix2++)
+                        {
+                            changes += string.Format("{0}\n", tp2._synNamesEng[ix2]!.ID);
+                        }
+                        changedIx = true;
                     }
-                    changedIx = true;
+
+
+                    bool listAdjectives = false;
+                    // 
+                    if (tp._adjectives!.Count != tp2._adjectives!.Count)
+                        listAdjectives = true;
+                    else if (tp._adjectives.Count > 0)
+                    {
+                        int ix2;
+                        for (ix2 = 0; ix2 < tp2._adjectives.Count; ix2++)
+                        {
+                            if (tp._adjectives[ix2]!.ID != tp2._adjectives[ix2]!.ID)
+                                listAdjectives = true;
+                        }
+                    }
+                    if (listAdjectives)
+                    {
+                        changes += string.Format("Names: {0}\n", tp2._adjectives.Count.ToString());
+
+                        int ix2;
+
+                        for (ix2 = 0; ix2 < tp2._adjectives.Count; ix2++)
+                        {
+                            changes += string.Format("{0}\n", tp2._adjectives[ix2]!.ID);
+                        }
+                        changedIx = true;
+                    }
+
+                    bool listSynAdjectives = false;
+                    // 
+                    if (tp._synAdjectives!.Count != tp2._synAdjectives!.Count)
+                        listSynAdjectives = true;
+                    else if (tp._synAdjectives.Count > 0)
+                    {
+                        int ix2;
+                        for (ix2 = 0; ix2 < tp2._synAdjectives.Count; ix2++)
+                        {
+                            if (tp._synAdjectives[ix2]!.ID != tp2._synAdjectives[ix2]!.ID)
+                                listSynAdjectives = true;
+                        }
+                    }
+                    if (listSynAdjectives)
+                    {
+                        changes += string.Format("Names: {0}\n", tp2._synAdjectives.Count.ToString());
+
+                        int ix2;
+
+                        for (ix2 = 0; ix2 < tp2._synAdjectives.Count; ix2++)
+                        {
+                            changes += string.Format("{0}\n", tp2._synAdjectives[ix2]!.ID);
+                        }
+                        changedIx = true;
+                    }
+
+
+                    bool listAdjectivesEng = false;
+                    // 
+                    if (tp2._adjectivesEng == null)
+                    {
+
+                    }
+                    else if (tp._adjectivesEng!.Count != tp2._adjectivesEng!.Count)
+                        listAdjectivesEng = true;
+                    else if (tp._adjectivesEng.Count > 0)
+                    {
+                        int ix2;
+                        for (ix2 = 0; ix2 < tp2._adjectivesEng!.Count; ix2++)
+                        {
+                            if (tp._adjectivesEng[ix2]!.ID != tp2._adjectivesEng[ix2]!.ID)
+                                listAdjectivesEng = true;
+                        }
+                    }
+                    if (listAdjectivesEng)
+                    {
+                        changes += string.Format("Names: {0}\n", tp2._adjectivesEng!.Count.ToString());
+
+                        int ix2;
+
+                        for (ix2 = 0; ix2 < tp2._adjectivesEng.Count; ix2++)
+                        {
+                            changes += string.Format("{0}\n", tp2._adjectivesEng[ix2]!.ID);
+                        }
+                        changedIx = true;
+                    }
+
+                    bool listSynAdjectivesEng = false;
+                    // 
+                    if (tp2._synAdjectivesEng == null)
+                    {
+
+                    }
+                    else if (tp._synAdjectivesEng!.Count != tp2._synAdjectivesEng!.Count)
+                        listSynAdjectivesEng = true;
+                    else if (tp._synAdjectivesEng.Count > 0)
+                    {
+                        int ix2;
+                        for (ix2 = 0; ix2 < tp2._synAdjectivesEng.Count; ix2++)
+                        {
+                            if (tp._synAdjectivesEng[ix2]!.ID != tp2._synAdjectivesEng[ix2]!.ID)
+                                listSynAdjectivesEng = true;
+                        }
+                    }
+                    if (listSynAdjectivesEng)
+                    {
+                        changes += string.Format("Names: {0}\n", tp2._synAdjectivesEng!.Count.ToString());
+
+                        int ix2;
+
+                        for (ix2 = 0; ix2 < tp2._synAdjectivesEng.Count; ix2++)
+                        {
+                            changes += string.Format("{0}\n", tp2._synAdjectivesEng[ix2]!.ID);
+                        }
+                        changedIx = true;
+                    }
+
+                    bool listCategoryRel = false;
+
+                    if (tp.Categories!.List!.Count != tp2.Categories!.List!.Count)
+                        listCategoryRel = true;
+                    else if (tp.Categories!.List.Count > 0)
+                    {
+                        int ix2;
+                        for (ix2 = 0; ix2 < tp2.Categories!.List.Count; ix2++)
+                        {
+                            if ((tp.Categories!.List[ix2].CategoryID != tp2.Categories!.List[ix2].CategoryID)
+                                    || (tp.Categories!.List[ix2].CounterCategoryID != tp2.Categories!.List[ix2].CounterCategoryID)
+                              )
+                                listCategoryRel = true;
+                        }
+                    }
+                    if (listCategoryRel)
+                    {
+                        changes += string.Format("Categories: {0}\n", tp2.Categories!.List.Count.ToString());
+
+                        int ix2;
+
+                        for (ix2 = 0; ix2 < tp2.Categories!.List.Count; ix2++)
+                        {
+                            changes += string.Format("{0} {1}\n", tp2.Categories!.List[ix2].CategoryID, tp2.Categories!.List[ix2].CounterCategoryID);
+                        }
+                        changedIx = true;
+                    }
+
+
+                    bool listStatus = false;
+
+                    if (tp.SL!.Count != tp2.SL!.Count)
+                        listStatus = true;
+                    else if (tp.SL.List.Count > 0)
+                    {
+                        int ix2;
+                        for (ix2 = 0; ix2 < tp2.SL.List.Count; ix2++)
+                        {
+                            if ((tp.SL.List[ix2]!.ID != tp2.SL.List[ix2]!.ID)
+                                    || (tp.SL.List[ix2].Val != tp2.SL.List[ix2].Val)
+                              )
+                                listStatus = true;
+                        }
+                    }
+                    if (listStatus)
+                    {
+                        changes += string.Format("Status: {0}\n", tp2.SL.List.Count.ToString());
+
+                        int ix2;
+
+                        for (ix2 = 0; ix2 < tp2.SL.List.Count; ix2++)
+                        {
+                            changes += string.Format("{0} {1}\n", tp2.SL.List[ix2]!.ID, tp2.SL.List[ix2].Val);
+                        }
+                        changedIx = true;
+                    }
+
+                    // SL
+
+
+                    // Alles durch?
+                    if (changedIx)
+                    {
+                        output += string.Format("Item: {0}\n", ix);
+                        output += changes;
+                    }
+
+                    ix++;
                 }
-
-                // SL
-
-
-                // Alles durch?
-                if (changedIx)
-                {
-                    output += string.Format("Item: {0}\n", ix);
-                    output += changes;
-                }
-
-                ix++;
+            }
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.SaveTopics: " + ex.Message, IGlobalData.protMode.crisp);
             }
 
         }
 
         public void SaveLocations(ref string output)
         {
-            int ix = 0;
-
-            foreach (var dict in locations!.List)
+            try
             {
-                location lc = dict.Value;
-                location lc2 = AdvGame!.GD!.StartStatus!.jsonlocations!.List[dict.Key];
+                int ix = 0;
 
-                bool changedIx = false;
-                string changes = "";
+                foreach (var dict in locations!.List)
+                {
+                    location lc = dict.Value;
+                    location lc2 = AdvGame!.GD!.StartStatus!.jsonlocations!.List[dict.Key];
 
-                if (lc.LocaLocName != lc2.LocaLocName)
-                {
-                    changes += string.Format("LocaLocName: {0}\n", lc.LocaLocName!.ToString());
-                    changedIx = true;
-                }
-                if (lc.LocaLocDesc != lc2.LocaLocDesc)
-                {
-                    if (lc2.LocaLocDesc == null)
-                        changes += string.Format("LocaLocDesc: null\n");
-                    else
-                        changes += string.Format("LocaLocDesc: {0}\n", lc.LocaLocDesc!.ToString());
-                    changedIx = true;
-                }
-                if (lc.LocaLocDescRaw != lc2.LocaLocDescRaw)
-                {
-                    if (lc2.LocaLocDescRaw == null)
-                        changes += string.Format("LocaLocDescRaw: null\n");
-                    else
-                        changes += string.Format("LocaLocDescRaw: {0}\n", lc!.LocaLocDescRaw!.ToString());
-                    changedIx = true;
-                }
-                if (lc.LocPicture != lc2.LocPicture && lc2.LocPicture != null )
-                {
-                    changes += string.Format("LocPicture: {0}\n", lc.LocPicture!.ToString());
-                    changedIx = true;
-                }
-                if (lc!.ID != lc2!.ID)
-                {
-                    changes += string.Format("ID: {0}\n", lc!.ID.ToString());
-                    changedIx = true;
-                }
-                if (lc.Visited != lc2.Visited)
-                {
-                    changes += string.Format("Visited: {0}\n", lc.Visited.ToString());
-                    changedIx = true;
-                }
-                if (lc.controllerName != lc2.controllerName)
-                {
-                    changes += string.Format("controllerName: {0}\n", lc.controllerName!.ToString());
-                    changedIx = true;
-                }
-                if (lc.ActivityBlocked != lc2.ActivityBlocked)
-                {
-                    changes += string.Format("ActivityBlocked: {0}\n", lc.ActivityBlocked.ToString());
-                    changedIx = true;
-                }
+                    bool changedIx = false;
+                    string changes = "";
 
-                for (int ix2 = 0; ix2 < 10; ix2++)
-                {
-                    if (lc.LocExit[ix2] != lc2.LocExit[ix2])
+                    if (lc.LocaLocName != lc2.LocaLocName)
                     {
-                        changes += string.Format("LocExit: {0} {1}\n", ix2.ToString(), lc.LocExit[ix2].ToString());
+                        changes += string.Format("LocaLocName: {0}\n", lc.LocaLocName!.ToString());
                         changedIx = true;
-
                     }
-                }
-                for (int ix2 = 0; ix2 < 10; ix2++)
-                {
-                    if (lc.LocExitBlocker[ix2] != lc2.LocExitBlocker[ix2])
+                    if (lc.LocaLocDesc != lc2.LocaLocDesc)
                     {
-                        changes += string.Format("LocExitBlocker: {0} {1}\n", ix2.ToString(), lc.LocExitBlocker[ix2].ToString());
+                        if (lc2.LocaLocDesc == null)
+                            changes += string.Format("LocaLocDesc: null\n");
+                        else
+                            changes += string.Format("LocaLocDesc: {0}\n", lc.LocaLocDesc!.ToString());
                         changedIx = true;
-
                     }
-                }
-
-                bool listLocAdds = false;
-
-                if (lc.locadd.Count != lc2.locadd.Count)
-                    listLocAdds = true;
-                else if (lc2.locadd.Count > 0)
-                {
-                    int ix2;
-                    for (ix2 = 0; ix2 < lc2.locadd.Count; ix2++)
+                    if (lc.LocaLocDescRaw != lc2.LocaLocDescRaw)
                     {
-                        if ((lc.locadd[ix2].Stat != lc2.locadd[ix2].Stat)
-                                || (lc.locadd[ix2].Val != lc2.locadd[ix2].Val)
-                                || (lc.locadd[ix2].Loca != lc2.locadd[ix2].Loca)
-                            )
-                            listLocAdds = true;
+                        if (lc2.LocaLocDescRaw == null)
+                            changes += string.Format("LocaLocDescRaw: null\n");
+                        else
+                            changes += string.Format("LocaLocDescRaw: {0}\n", lc!.LocaLocDescRaw!.ToString());
+                        changedIx = true;
                     }
-                }
-                if (listLocAdds)
-                {
-                    changes += string.Format("locadd: {0}\n", lc.locadd.Count.ToString());
-
-                    int ix2;
-
-                    for (ix2 = 0; ix2 < lc.locadd.Count; ix2++)
+                    if (lc.LocPicture != lc2.LocPicture && lc2.LocPicture != null)
                     {
-                        changes += string.Format("{0} {1} {2}\n", lc.locadd[ix2].Stat, lc.locadd[ix2].Val, lc.locadd[ix2].Loca);
+                        changes += string.Format("LocPicture: {0}\n", lc.LocPicture!.ToString());
+                        changedIx = true;
                     }
-                    changedIx = true;
+                    if (lc!.ID != lc2!.ID)
+                    {
+                        changes += string.Format("ID: {0}\n", lc!.ID.ToString());
+                        changedIx = true;
+                    }
+                    if (lc.Visited != lc2.Visited)
+                    {
+                        changes += string.Format("Visited: {0}\n", lc.Visited.ToString());
+                        changedIx = true;
+                    }
+                    if (lc.controllerName != lc2.controllerName)
+                    {
+                        changes += string.Format("controllerName: {0}\n", lc.controllerName!.ToString());
+                        changedIx = true;
+                    }
+                    if (lc.ActivityBlocked != lc2.ActivityBlocked)
+                    {
+                        changes += string.Format("ActivityBlocked: {0}\n", lc.ActivityBlocked.ToString());
+                        changedIx = true;
+                    }
+
+                    for (int ix2 = 0; ix2 < 10; ix2++)
+                    {
+                        if (lc.LocExit[ix2] != lc2.LocExit[ix2])
+                        {
+                            changes += string.Format("LocExit: {0} {1}\n", ix2.ToString(), lc.LocExit[ix2].ToString());
+                            changedIx = true;
+
+                        }
+                    }
+                    for (int ix2 = 0; ix2 < 10; ix2++)
+                    {
+                        if (lc.LocExitBlocker[ix2] != lc2.LocExitBlocker[ix2])
+                        {
+                            changes += string.Format("LocExitBlocker: {0} {1}\n", ix2.ToString(), lc.LocExitBlocker[ix2].ToString());
+                            changedIx = true;
+
+                        }
+                    }
+
+                    bool listLocAdds = false;
+
+                    if (lc.locadd.Count != lc2.locadd.Count)
+                        listLocAdds = true;
+                    else if (lc2.locadd.Count > 0)
+                    {
+                        int ix2;
+                        for (ix2 = 0; ix2 < lc2.locadd.Count; ix2++)
+                        {
+                            if ((lc.locadd[ix2].Stat != lc2.locadd[ix2].Stat)
+                                    || (lc.locadd[ix2].Val != lc2.locadd[ix2].Val)
+                                    || (lc.locadd[ix2].Loca != lc2.locadd[ix2].Loca)
+                                )
+                                listLocAdds = true;
+                        }
+                    }
+                    if (listLocAdds)
+                    {
+                        changes += string.Format("locadd: {0}\n", lc.locadd.Count.ToString());
+
+                        int ix2;
+
+                        for (ix2 = 0; ix2 < lc.locadd.Count; ix2++)
+                        {
+                            changes += string.Format("{0} {1} {2}\n", lc.locadd[ix2].Stat, lc.locadd[ix2].Val, lc.locadd[ix2].Loca);
+                        }
+                        changedIx = true;
+                    }
+
+
+
+                    if (changedIx)
+                    {
+                        output += string.Format("Location: {0}\n", dict.Key);
+                        output += changes;
+                    }
+
+                    ix++;
                 }
-
-
-
-                if (changedIx)
-                {
-                    output += string.Format("Location: {0}\n", dict.Key);
-                    output += changes;
-                }
-
-                ix++;
             }
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.SaveLocations: " + ex.Message, IGlobalData.protMode.crisp);
+            }
+
+
         }
 
         public void SaveStats(ref string output)
         {
-            int ix = 0;
-
-            foreach (var dict in Stats!.List!)
+            try
             {
-                Status st = dict;
-                Status st2 = AdvGame!.GD!.StartStatus!.jsonStats!.List[ix];
+                int ix = 0;
 
-                bool changedIx = false;
-                string changes = "";
-
-                if (st!.ID != st2!.ID)
+                foreach (var dict in Stats!.List!)
                 {
-                    changes += string.Format("ID: {0}\n", st!.ID.ToString());
-                    changedIx = true;
+                    Status st = dict;
+                    Status st2 = AdvGame!.GD!.StartStatus!.jsonStats!.List[ix];
+
+                    bool changedIx = false;
+                    string changes = "";
+
+                    if (st!.ID != st2!.ID)
+                    {
+                        changes += string.Format("ID: {0}\n", st!.ID.ToString());
+                        changedIx = true;
+
+                    }
+                    if (st.Val != st2.Val)
+                    {
+                        changes += string.Format("Val: {0}\n", st.Val.ToString());
+                        changedIx = true;
+
+                    }
+
+
+                    if (changedIx)
+                    {
+                        output += string.Format("Stat: {0}\n", ix);
+                        output += changes;
+                    }
+
+                    ix++;
 
                 }
-                if (st.Val != st2.Val)
-                {
-                    changes += string.Format("Val: {0}\n", st.Val.ToString());
-                    changedIx = true;
-
-                }
-
-
-                if (changedIx)
-                {
-                    output += string.Format("Stat: {0}\n", ix);
-                    output += changes;
-                }
-
-                ix++;
-
             }
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.SaveStats: " + ex.Message, IGlobalData.protMode.crisp);
+            }
+
         }
         public void SaveScores(ref string output)
         {
-            int ix = 0;
-
-            foreach (var dict in Scores!.Scores!)
+            try
             {
-                Score sc = dict;
-                Score sc2 = AdvGame!.GD!.StartStatus!.jsonScores!.Scores![ix!]!;
+                int ix = 0;
 
-                bool changedIx = false;
-                string changes = "";
-
-                if (sc!.ID != sc2!.ID)
+                foreach (var dict in Scores!.Scores!)
                 {
-                    changes += string.Format("ID: {0}\n", sc!.ID.ToString());
-                    changedIx = true;
+                    Score sc = dict;
+                    Score sc2 = AdvGame!.GD!.StartStatus!.jsonScores!.Scores![ix!]!;
 
-                }
-                if (sc.SpoilerState != sc2.SpoilerState)
-                {
-                    changes += string.Format("SpoilerState: {0}\n", sc.SpoilerState.ToString());
-                    changedIx = true;
+                    bool changedIx = false;
+                    string changes = "";
 
-                }
-                if (sc.Val != sc2.Val)
-                {
-                    changes += string.Format("Val: {0}\n", sc.Val.ToString());
-                    changedIx = true;
-
-                }
-
-                if (sc.Active != sc2.Active)
-                {
-                    changes += string.Format("Active: {0}\n", sc.Active.ToString());
-                    changedIx = true;
-
-                }
-                if (sc.Chapter!= sc2.Chapter)
-                {
-                    changes += string.Format("Chapter: {0}\n", sc.Chapter.ToString());
-                    changedIx = true;
-
-                }
-                if (sc.Comment != sc2.Comment )
-                {
-                    if (sc2.Comment != null)
+                    if (sc!.ID != sc2!.ID)
                     {
-                        changes += string.Format("Comment: {0}\n", sc.LocaComment!.ToString());
+                        changes += string.Format("ID: {0}\n", sc!.ID.ToString());
                         changedIx = true;
+
                     }
+                    if (sc.SpoilerState != sc2.SpoilerState)
+                    {
+                        changes += string.Format("SpoilerState: {0}\n", sc.SpoilerState.ToString());
+                        changedIx = true;
+
+                    }
+                    if (sc.Val != sc2.Val)
+                    {
+                        changes += string.Format("Val: {0}\n", sc.Val.ToString());
+                        changedIx = true;
+
+                    }
+
+                    if (sc.Active != sc2.Active)
+                    {
+                        changes += string.Format("Active: {0}\n", sc.Active.ToString());
+                        changedIx = true;
+
+                    }
+                    if (sc.Chapter != sc2.Chapter)
+                    {
+                        changes += string.Format("Chapter: {0}\n", sc.Chapter.ToString());
+                        changedIx = true;
+
+                    }
+                    if (sc.Comment != sc2.Comment)
+                    {
+                        if (sc2.Comment != null)
+                        {
+                            changes += string.Format("Comment: {0}\n", sc.LocaComment!.ToString());
+                            changedIx = true;
+                        }
+                    }
+
+
+                    if (changedIx)
+                    {
+                        output += string.Format("Score: {0}\n", ix);
+                        output += changes;
+                    }
+
+                    ix++;
                 }
-
-
-                if (changedIx)
-                {
-                    output += string.Format("Score: {0}\n", ix);
-                    output += changes;
-                }
-
-                ix++;
             }
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.SaveScores: " + ex.Message, IGlobalData.protMode.crisp);
+            }
+
         }
 
         public void SaveLanguages( ref string output )
         {
-            bool changedIx = false;
-            string changes = "";
-
-            IGlobalData.language? language = AdvGame!.GD!.Language;
-            IGlobalData.language? language2 = AdvGame!.GD!.StartStatus!.jsonLanguage;
-
-            // if (language != language2 )
+            try
             {
-                changes += string.Format("{0}\n", language );
-                changedIx = true;
+                bool changedIx = false;
+                string changes = "";
 
+                IGlobalData.language? language = AdvGame!.GD!.Language;
+                IGlobalData.language? language2 = AdvGame!.GD!.StartStatus!.jsonLanguage;
+
+                // if (language != language2 )
+                {
+                    changes += string.Format("{0}\n", language);
+                    changedIx = true;
+
+                }
+                if (changedIx)
+                {
+                    output += string.Format("Language Info:\n");
+                    output += changes;
+                }
             }
-            if (changedIx)
+            catch (Exception ex)
             {
-                output += string.Format("Language Info:\n" );
-                output += changes;
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.SaveLanguages: " + ex.Message, IGlobalData.protMode.crisp);
             }
+
 
         }
 
         // Hier wird nicht verglichen, sondern auf die Platte geschrieben, fertig
         public void SaveLI( ref string output )
         {
-            // GlobalData.language? language2 = AdvGame!.GD!.StartStatus!.jsonLanguage;
-
-            for ( int ix = 0; ix < LI!.Count; ix++)
+            try
             {
-                output += string.Format("LatestInput:\n{0}\n", LI![ix]!.Text!);
+                // GlobalData.language? language2 = AdvGame!.GD!.StartStatus!.jsonLanguage;
+
+                for (int ix = 0; ix < LI!.Count; ix++)
+                {
+                    output += string.Format("LatestInput:\n{0}\n", LI![ix]!.Text!);
+                }
             }
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.SaveLI: " + ex.Message, IGlobalData.protMode.crisp);
+            }
+
         }
 
         // Hier wird nicht verglichen, sondern auf die Platte geschrieben, fertig
         public void SaveItemQueue(ref string output)
         {
-            for (int ix = 0; ix < AdvGame!.GD!.StartStatus!.jsonItemQueue!._itemQueue!.Count; ix++)
+            try
             {
-                output += string.Format("ItemQueue ID: {0}\n", AdvGame!.GD!.StartStatus!.jsonItemQueue!._itemQueue![ix]!.ID)!;
+                for (int ix = 0; ix < AdvGame!.GD!.StartStatus!.jsonItemQueue!._itemQueue!.Count; ix++)
+                {
+                    output += string.Format("ItemQueue ID: {0}\n", AdvGame!.GD!.StartStatus!.jsonItemQueue!._itemQueue![ix]!.ID)!;
+                }
             }
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.SaveItemQueue: " + ex.Message, IGlobalData.protMode.crisp);
+            }
+
         }
 
         public void SaveSTE(ref string output)
         {
-            StringBuilder changes = new();
-
-            IStoryText STE = AdvGame!.STE;
-            IStoryText STE2 = AdvGame!.GD!.StartStatus!.jsonStoryText!;
-
-            changes.Append( "STE:\n" );
-
-            // changes += string.Format("latestHtmlOutput:\n{0}@vv@\n", StoryText.latestHtmlOutput);
-            // changes += string.Format("latestHtmlOutputReget:\n{0}@vv@\n", StoryText.latestHtmlOutputReget);
-            changes.Append(  string.Format("_currentLinesPerTurn: {0}\n", STE!.CurrentLinesPerTurn!) );
-            changes.Append(  string.Format("FullRefresh: {0}\n", STE!.FullRefresh) );
-            changes.Append(string.Format("HTMLLoaded: {0}\n", STE!.HTMLLoaded) );
-
-            if (STE.OldDividingLine != null)
-                changes.Append(string.Format("oldDividingLine:\n{0}@vv@\n", STE.OldDividingLine) );
-            if (STE.OldMoreLine != null)
-                changes.Append(string.Format("oldMoreLine:\n{0}@vv@\n", STE.OldMoreLine) );
-            if (STE.BufferedInput != null)
-                changes.Append(string.Format("BufferedInput:\n{0}@vv@\n", STE.BufferedInput) );
-
-            changes.Append(  string.Format("STELines: {0} \n", STE.Slines!.Count) );
-
-            for (int ix = 0; ix < STE.Slines!.Count!; ix++)
+            try
             {
-                changes.Append(  string.Format("{0}\n", STE.Slines[ix]!.Length) ) ;
+                StringBuilder changes = new();
 
-                changes.Append( string.Format("{0}\n", STE.Slines[ix]) ) ;
+                IStoryText STE = AdvGame!.STE;
+                IStoryText STE2 = AdvGame!.GD!.StartStatus!.jsonStoryText!;
 
+                changes.Append("STE:\n");
+
+                // changes += string.Format("latestHtmlOutput:\n{0}@vv@\n", StoryText.latestHtmlOutput);
+                // changes += string.Format("latestHtmlOutputReget:\n{0}@vv@\n", StoryText.latestHtmlOutputReget);
+                changes.Append(string.Format("_currentLinesPerTurn: {0}\n", STE!.CurrentLinesPerTurn!));
+                changes.Append(string.Format("FullRefresh: {0}\n", STE!.FullRefresh));
+                changes.Append(string.Format("HTMLLoaded: {0}\n", STE!.HTMLLoaded));
+
+                if (STE.OldDividingLine != null)
+                    changes.Append(string.Format("oldDividingLine:\n{0}@vv@\n", STE.OldDividingLine));
+                if (STE.OldMoreLine != null)
+                    changes.Append(string.Format("oldMoreLine:\n{0}@vv@\n", STE.OldMoreLine));
+                if (STE.BufferedInput != null)
+                    changes.Append(string.Format("BufferedInput:\n{0}@vv@\n", STE.BufferedInput));
+
+                changes.Append(string.Format("STELines: {0} \n", STE.Slines!.Count));
+
+                for (int ix = 0; ix < STE.Slines!.Count!; ix++)
+                {
+                    changes.Append(string.Format("{0}\n", STE.Slines[ix]!.Length));
+
+                    changes.Append(string.Format("{0}\n", STE.Slines[ix]));
+
+                }
+
+                output += changes.ToString();
+
+                /*
+                // bool changedIx = false;
+                string changes = "";
+
+                IStoryText STE = AdvGame!.STE;
+                IStoryText STE2 = AdvGame!.GD!.StartStatus!.jsonStoryText!;
+
+                changes += "STE:\n";
+
+                // changes += string.Format("latestHtmlOutput:\n{0}@vv@\n", StoryText.latestHtmlOutput);
+                // changes += string.Format("latestHtmlOutputReget:\n{0}@vv@\n", StoryText.latestHtmlOutputReget);
+                changes += string.Format("_currentLinesPerTurn: {0}\n", STE!.CurrentLinesPerTurn!);
+                changes += string.Format("FullRefresh: {0}\n", STE!.FullRefresh);
+                changes += string.Format("HTMLLoaded: {0}\n", STE!.HTMLLoaded);
+
+                if ( STE.OldDividingLine != null)
+                    changes += string.Format("oldDividingLine:\n{0}@vv@\n", STE.OldDividingLine);
+                if (STE.OldMoreLine != null)
+                    changes += string.Format("oldMoreLine:\n{0}@vv@\n", STE.OldMoreLine);
+                if (STE.BufferedInput != null)
+                    changes += string.Format("BufferedInput:\n{0}@vv@\n", STE.BufferedInput);
+
+
+                changes += string.Format("STELines: {0} \n", STE.Slines.Count);
+
+                for( int ix = 0; ix < STE.Slines!.Count!; ix++)
+                {
+                    changes += string.Format("{0}\n", STE.Slines[ix].Length);
+
+                    changes += string.Format("{0}\n", STE.Slines[ix] );
+                }
+
+                // changes += sb;
+
+
+                output += changes;
+                */
+                // SLinesBuffer
+            }
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.SaveSTE: " + ex.Message, IGlobalData.protMode.crisp);
             }
 
-            output += changes.ToString() ;
-
-            /*
-            // bool changedIx = false;
-            string changes = "";
-
-            IStoryText STE = AdvGame!.STE;
-            IStoryText STE2 = AdvGame!.GD!.StartStatus!.jsonStoryText!;
-
-            changes += "STE:\n";
-
-            // changes += string.Format("latestHtmlOutput:\n{0}@vv@\n", StoryText.latestHtmlOutput);
-            // changes += string.Format("latestHtmlOutputReget:\n{0}@vv@\n", StoryText.latestHtmlOutputReget);
-            changes += string.Format("_currentLinesPerTurn: {0}\n", STE!.CurrentLinesPerTurn!);
-            changes += string.Format("FullRefresh: {0}\n", STE!.FullRefresh);
-            changes += string.Format("HTMLLoaded: {0}\n", STE!.HTMLLoaded);
-
-            if ( STE.OldDividingLine != null)
-                changes += string.Format("oldDividingLine:\n{0}@vv@\n", STE.OldDividingLine);
-            if (STE.OldMoreLine != null)
-                changes += string.Format("oldMoreLine:\n{0}@vv@\n", STE.OldMoreLine);
-            if (STE.BufferedInput != null)
-                changes += string.Format("BufferedInput:\n{0}@vv@\n", STE.BufferedInput);
-
-
-            changes += string.Format("STELines: {0} \n", STE.Slines.Count);
-
-            for( int ix = 0; ix < STE.Slines!.Count!; ix++)
-            {
-                changes += string.Format("{0}\n", STE.Slines[ix].Length);
-
-                changes += string.Format("{0}\n", STE.Slines[ix] );
-            }
-
-            // changes += sb;
-
-
-            output += changes;
-            */
-            // SLinesBuffer
 
         }
         public void SaveFBE(ref string output)
         {
-            // bool changedIx = false;
-            string changes = "";
-
-            Phoney_MAUI.Core.FeedbackText FBE= AdvGame!.FBE;
-            Phoney_MAUI.Core.FeedbackText FBE2 = AdvGame!.GD!.StartStatus!.jsonFeedbackText!;
-
-            changes += "FBE:\n";
-
-            if (FBE != null)
+            try
             {
-                changes += string.Format("FeedbackOffMC: {0}\n", FBE.FeedbackOffMC!);
-                changes += string.Format("FeedbackSizeMC: {0}\n", Phoney_MAUI.Core.FeedbackText.FeedbackSizeMC!);
-                changes += string.Format("FeedbackCountMC: {0}\n", FBE.FeedbackCountMC!);
-                changes += string.Format("FeedbackModeMC: {0}\n", FBE.FeedbackModeMC)!;
-            }
+                // bool changedIx = false;
+                string changes = "";
 
-            if (FBE2 != null)
-            {
-                if (FBE2.FeedbackWindowText != null)
+                Phoney_MAUI.Core.FeedbackText FBE = AdvGame!.FBE;
+                Phoney_MAUI.Core.FeedbackText FBE2 = AdvGame!.GD!.StartStatus!.jsonFeedbackText!;
+
+                changes += "FBE:\n";
+
+                if (FBE != null)
                 {
-                    for (int ix = 0; ix < FBE2.FeedbackWindowText.Count; ix++)
-                    {
-                        changes += string.Format("FeedbackWindowText: {0} {1}\n", ix, FBE!.FeedbackWindowText![ix]!);
+                    changes += string.Format("FeedbackOffMC: {0}\n", FBE.FeedbackOffMC!);
+                    changes += string.Format("FeedbackSizeMC: {0}\n", Phoney_MAUI.Core.FeedbackText.FeedbackSizeMC!);
+                    changes += string.Format("FeedbackCountMC: {0}\n", FBE.FeedbackCountMC!);
+                    changes += string.Format("FeedbackModeMC: {0}\n", FBE.FeedbackModeMC)!;
+                }
 
+                if (FBE2 != null)
+                {
+                    if (FBE2.FeedbackWindowText != null)
+                    {
+                        for (int ix = 0; ix < FBE2.FeedbackWindowText.Count; ix++)
+                        {
+                            changes += string.Format("FeedbackWindowText: {0} {1}\n", ix, FBE!.FeedbackWindowText![ix]!);
+
+                        }
+                    }
+                    if (FBE2.FeedbackWindowTextMC != null)
+                    {
+                        for (int ix = 0; ix < FBE2.FeedbackWindowTextMC.Count; ix++)
+                        {
+                            changes += string.Format("FeedbackWindowTextMC: {0} {1}\n", ix, FBE!.FeedbackWindowTextMC![ix]!);
+
+                        }
                     }
                 }
-                if (FBE2.FeedbackWindowTextMC != null)
-                {
-                    for (int ix = 0; ix < FBE2.FeedbackWindowTextMC.Count; ix++)
-                    {
-                        changes += string.Format("FeedbackWindowTextMC: {0} {1}\n", ix, FBE!.FeedbackWindowTextMC![ix]!);
 
-                    }
-                }
+                output += changes;
             }
-
-            output += changes;
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.SaveFBE: " + ex.Message, IGlobalData.protMode.crisp);
+            }
 
         }
 
         public void SaveA(ref string output)
         {
-            // bool changedIx = false;
-            string changes = "";
+            try
+            {
+                // bool changedIx = false;
+                string changes = "";
 
-            //  FeedbackText FBE = AdvGame!.FBE;
-            AdvData A2 = AdvGame!.GD!.StartStatus!.jsonA!;
+                //  FeedbackText FBE = AdvGame!.FBE;
+                AdvData A2 = AdvGame!.GD!.StartStatus!.jsonA!;
 
-            changes += "A:\n";
+                changes += "A:\n";
 
-            changes += string.Format("ActLoc: {0}\n", A!.ActLoc! );
-            changes += string.Format("ActPerson: {0}\n", A!.ActPerson!);
-            changes += string.Format("ActScore: {0}\n", A!.ActScore!);
-            changes += string.Format("MaxScore: {0}\n", A!.MaxScore!);
-            changes += string.Format("StartLoc: {0}\n", A!.StartLoc!);
-            changes += string.Format("Finish: {0}\n", A!.Finish!);
-            changes += string.Format("Tense: {0}\n", A!.Tense!);
-            changes += string.Format("difficulty: {0}\n", A!.Difficulty!);
+                changes += string.Format("ActLoc: {0}\n", A!.ActLoc!);
+                changes += string.Format("ActPerson: {0}\n", A!.ActPerson!);
+                changes += string.Format("ActScore: {0}\n", A!.ActScore!);
+                changes += string.Format("MaxScore: {0}\n", A!.MaxScore!);
+                changes += string.Format("StartLoc: {0}\n", A!.StartLoc!);
+                changes += string.Format("Finish: {0}\n", A!.Finish!);
+                changes += string.Format("Tense: {0}\n", A!.Tense!);
+                changes += string.Format("difficulty: {0}\n", A!.Difficulty!);
 
-            output += changes;
+                output += changes;
+            }
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.SaveA: " + ex.Message, IGlobalData.protMode.crisp);
+            }
 
         }
 
         public void SaveVersion( ref string output )
         {
-            // bool changedIx = false;
-            string changes = "";
+            try
+            {
+                // bool changedIx = false;
+                string changes = "";
 
-            //  FeedbackText FBE = AdvGame!.FBE;
-            Phoney_MAUI.Core.Version v = AdvGame!.GD!.Version;
+                //  FeedbackText FBE = AdvGame!.FBE;
+                Phoney_MAUI.Core.Version v = AdvGame!.GD!.Version;
 
-            changes += "Version:\n";
+                changes += "Version:\n";
 
-            changes += string.Format("{0} {1} {2} {3} {4} {5}\n", v.Version1, v.Version2, v.Version3, v.VersionDate.Day, v.VersionDate.Month, v.VersionDate.Year);
+                changes += string.Format("{0} {1} {2} {3} {4} {5}\n", v.Version1, v.Version2, v.Version3, v.VersionDate.Day, v.VersionDate.Month, v.VersionDate.Year);
 
-            output += changes;
+                output += changes;
 
+            }
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.SaveVersion: " + ex.Message, IGlobalData.protMode.crisp);
+            }
 
         }
 
         public void SavePV(ref string output)
         {
-            int ix = 0;
-
-            if (AdvGame!.PV == null)
-                return;
-            if (AdvGame.PV.PVList == null)
-                return;
-
-
-            foreach (var pv0 in AdvGame!.PV!.PVList! )
+            try
             {
+                int ix = 0;
 
-                int ix2 = 0;
-                foreach ( var pvLoc0 in pv0.PVLoc )
+                if (AdvGame!.PV == null)
+                    return;
+                if (AdvGame.PV.PVList == null)
+                    return;
+
+
+                foreach (var pv0 in AdvGame!.PV!.PVList!)
                 {
-                    bool changedIx = false;
-                    string changes = "";
 
-                    PVLoc pvl = pvLoc0;
-                    PVLoc pvl2 = AdvGame!.GD!.StartStatus!.jsonPV!.PVList![ix]!.PVLoc![ix2]!;
-
-                    if (pvl.locationID != pvl2.locationID)
+                    int ix2 = 0;
+                    foreach (var pvLoc0 in pv0.PVLoc)
                     {
-                        changes += string.Format("locationID: {0] {1} {2}\n", ix, ix2, pvl.locationID.ToString());
-                        changedIx = true;
+                        bool changedIx = false;
+                        string changes = "";
+
+                        PVLoc pvl = pvLoc0;
+                        PVLoc pvl2 = AdvGame!.GD!.StartStatus!.jsonPV!.PVList![ix]!.PVLoc![ix2]!;
+
+                        if (pvl.locationID != pvl2.locationID)
+                        {
+                            changes += string.Format("locationID: {0] {1} {2}\n", ix, ix2, pvl.locationID.ToString());
+                            changedIx = true;
+
+                        }
+                        if (pvl.PVSubLevel != pvl2.PVSubLevel)
+                        {
+                            changes += string.Format("PVSubLevel: {0] {1} {2}\n", ix, ix2, pvl.PVSubLevel.ToString());
+                            changedIx = true;
+
+                        }
+                        if (pvl.replacement != pvl2.replacement)
+                        {
+                            changes += string.Format("replacement: {0} {1} {2}\n", ix, ix2, pvl.replacement.ToString());
+                            changedIx = true;
+
+                        }
+
+                        if (changedIx)
+                        {
+                            output += string.Format("PV:\n");
+                            output += changes;
+                        }
+
+                        ix2++;
 
                     }
-                    if (pvl.PVSubLevel != pvl2.PVSubLevel)
-                    {
-                        changes += string.Format("PVSubLevel: {0] {1} {2}\n", ix, ix2, pvl.PVSubLevel.ToString());
-                        changedIx = true;
 
-                    }
-                    if (pvl.replacement!= pvl2.replacement)
-                    {
-                        changes += string.Format("replacement: {0} {1} {2}\n", ix, ix2, pvl.replacement.ToString());
-                        changedIx = true;
 
-                    }
-
-                    if (changedIx)
-                    {
-                        output += string.Format("PV:\n");
-                        output += changes;
-                    }
-
-                    ix2++;
-
+                    ix++;
                 }
- 
-
-                ix++;
             }
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.SavePV: " + ex.Message, IGlobalData.protMode.crisp);
+            }
+
         }
 
         public void SaveSlines(ref string output)
         {
-            string changes = "";
-
-            output += string.Format("SLines: {0}\n", AdvGame!.UIS!.StoryTextObj!.Slines!.Count);
-
-            for( int ix = 0; ix < AdvGame.UIS.StoryTextObj.Slines.Count; ix++)
+            try
             {
-                changes = string.Format("{0}\n", AdvGame!.UIS.StoryTextObj.Slines[ix]!.Length);
-                changes += AdvGame.UIS.StoryTextObj.Slines[ix];
-                changes += "\n";
-                output += changes;
+                string changes = "";
+
+                output += string.Format("SLines: {0}\n", AdvGame!.UIS!.StoryTextObj!.Slines!.Count);
+
+                for (int ix = 0; ix < AdvGame.UIS.StoryTextObj.Slines.Count; ix++)
+                {
+                    changes = string.Format("{0}\n", AdvGame!.UIS.StoryTextObj.Slines[ix]!.Length);
+                    changes += AdvGame.UIS.StoryTextObj.Slines[ix];
+                    changes += "\n";
+                    output += changes;
+                }
+            }
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.SaveSlines: " + ex.Message, IGlobalData.protMode.crisp);
             }
 
         }
 
-        public GameDefinitions GenerateGameDefinitions( bool forceSave )
+        public GameDefinitions? GenerateGameDefinitions( bool forceSave )
         {
-            GameDefinitions gdi = new();
-
-            if (forceSave)
+            try
             {
-                if (AdvGame!.UIS!.MCMVVisible)
-                {
-                    if (AdvGame!.Orders!.persistentMCMenu != null)
-                    {
-                        gdi.MCVisible = IGameDefinitions.mcvMode.persistent;
-                        if (AdvGame.LastSpeaker != null)
-                            gdi.MCVLastSpeaker = AdvGame.LastSpeaker.ID;
-                        else
-                            gdi.MCVLastSpeaker = 0;
+                GameDefinitions gdi = new();
 
-                        gdi.MCMenuTemp = null;
-                    }
-                    else if (AdvGame!.Orders!.temporaryMCMenu != null)
+                if (forceSave)
+                {
+                    if (AdvGame!.UIS!.MCMVVisible)
                     {
-                        gdi.MCVisible = IGameDefinitions.mcvMode.temporary;
-                        gdi.MCMenuTemp = AdvGame!.Orders!.temporaryMCMenu;
+                        if (AdvGame!.Orders!.persistentMCMenu != null)
+                        {
+                            gdi.MCVisible = IGameDefinitions.mcvMode.persistent;
+                            if (AdvGame.LastSpeaker != null)
+                                gdi.MCVLastSpeaker = AdvGame.LastSpeaker.ID;
+                            else
+                                gdi.MCVLastSpeaker = 0;
+
+                            gdi.MCMenuTemp = null;
+                        }
+                        else if (AdvGame!.Orders!.temporaryMCMenu != null)
+                        {
+                            gdi.MCVisible = IGameDefinitions.mcvMode.temporary;
+                            gdi.MCMenuTemp = AdvGame!.Orders!.temporaryMCMenu;
+                        }
+                        else
+                        {
+                            gdi.MCVisible = IGameDefinitions.mcvMode.none;
+                            gdi.MCMenuTemp = null;
+                        }
                     }
                     else
                     {
                         gdi.MCVisible = IGameDefinitions.mcvMode.none;
                         gdi.MCMenuTemp = null;
+
                     }
+
                 }
                 else
                 {
                     gdi.MCVisible = IGameDefinitions.mcvMode.none;
-                    gdi.MCMenuTemp = null;
 
+                    gdi.MCMenuTemp = null;
                 }
 
+                if (gdi.MCVisible == IGameDefinitions.mcvMode.temporary)
+                {
+                    gdi.MCCallbackName = AdvGame!.Orders!.MCCallbackName;
+                }
+                else
+                {
+                    gdi.MCVFuncName = MCMenuFunc;
+                }
+
+                // gdi.MCCallbackName = MCCallbackName;
+                gdi.MCID = MCID;
+                gdi.MCPersonID = MCPersonID;
+
+                gdi.PicMode = AdvGame!.GD!.LayoutDescription.PicMode;
+
+                gdi.CurrentEventName = AdvGame._currentEventName;
+                gdi.IxCurrent = AdvGame._ixCurrent;
+                gdi.ActLocEvent = AdvGame._actLocEvent;
+                gdi.ActLocEventSeqStart = AdvGame._actLocEventSeqStart;
+                gdi.ActLocEventStartPoint = AdvGame._actLocEventStartPoint;
+                gdi.LastLocEventStartPoint = AdvGame._lastLocEventStartPoint;
+                gdi.ActLocCollecting = AdvGame._actLocCollecting;
+                gdi.LastLoc = AdvGame._lastLoc;
+                gdi.ActLoc = AdvGame._actLoc;
+
+
+                return gdi;
             }
-            else
+            catch (Exception ex)
             {
-                gdi.MCVisible = IGameDefinitions.mcvMode.none;
-
-                gdi.MCMenuTemp = null;
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.GenerateGameDefinitions: " + ex.Message, IGlobalData.protMode.crisp);
+                return null;
             }
 
-            if (gdi.MCVisible == IGameDefinitions.mcvMode.temporary)
-            {
-                gdi.MCCallbackName = AdvGame!.Orders!.MCCallbackName;
-            }
-            else
-            {
-                gdi.MCVFuncName = MCMenuFunc;
-            }
-
-            // gdi.MCCallbackName = MCCallbackName;
-            gdi.MCID = MCID;
-            gdi.MCPersonID = MCPersonID;
-
-            gdi.PicMode = AdvGame!.GD!.LayoutDescription.PicMode;
-
-            gdi.CurrentEventName = AdvGame._currentEventName;
-            gdi.IxCurrent = AdvGame._ixCurrent;
-            gdi.ActLocEvent = AdvGame._actLocEvent;
-            gdi.ActLocEventSeqStart = AdvGame._actLocEventSeqStart;
-            gdi.ActLocEventStartPoint = AdvGame._actLocEventStartPoint;
-            gdi.LastLocEventStartPoint = AdvGame._lastLocEventStartPoint;
-            gdi.ActLocCollecting = AdvGame._actLocCollecting;
-            gdi.LastLoc = AdvGame._lastLoc;
-            gdi.ActLoc = AdvGame._actLoc;
-
-
-            return gdi;
         }
         public void SaveGameDefinitions(ref string output, bool forceSave)
         {
-            GameDefinitions gdi = GenerateGameDefinitions(forceSave);
+            try
+            {
+                GameDefinitions gdi = GenerateGameDefinitions(forceSave);
 
-            string zw = JsonConvert.SerializeObject(gdi);
+                string zw = JsonConvert.SerializeObject(gdi);
 
-            output += string.Format("GameDefinitions: {0}\n", zw.Length );
-            output += zw;
-            output += "\n";
+                output += string.Format("GameDefinitions: {0}\n", zw.Length);
+                output += zw;
+                output += "\n";
+            }
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.SaveGameDefinitions: " + ex.Message, IGlobalData.protMode.crisp);
+            }
+
         }
 
         public void SaveOrderTable(ref string output)
         {
-            int ix = 0;
-
-            output += string.Format("OrderTable:\n");
-
-            if( GD!.OrderList!.OTL![AdvGame!.GD!.OrderList!.CurrentOrderListIx].Zipped == true )
+            try
             {
-                GD.OrderList.ReadZipOrderTable(AdvGame!.GD!.OrderList!.CurrentOrderListIx, GD!.OrderList!.OTL![AdvGame!.GD!.OrderList!.CurrentOrderListIx].Name!);
+                int ix = 0;
+
+                output += string.Format("OrderTable:\n");
+
+                if (GD!.OrderList!.OTL![AdvGame!.GD!.OrderList!.CurrentOrderListIx].Zipped == true)
+                {
+                    GD.OrderList.ReadZipOrderTable(AdvGame!.GD!.OrderList!.CurrentOrderListIx, GD!.OrderList!.OTL![AdvGame!.GD!.OrderList!.CurrentOrderListIx].Name!);
+                }
+
+
+                StringBuilder sb = new(64000);
+                foreach (var ot0 in AdvGame!.GD!.OrderList!.OTL![AdvGame!.GD!.OrderList!.CurrentOrderListIx].OT!)
+                {
+                    OrderTable ot = ot0;
+                    OrderTable ot2 = ot;//  AdvGame!.MW.GD!.StartStatus.jsonOrderListTable.OT![ix];
+
+                    string path = "";
+                    if (ot2.OrderPath != null)
+                        path = ot2.OrderPath;
+                    else
+                    {
+
+                    }
+
+                    if (ot2.OrderType == orderType.mcChoice)
+                    {
+                        sb.Append(string.Format("{0} {3} {4} {5} {2} '{1}'\n", ot2.OrderActive, ot2.OrderText, ot2.OrderChoice, ot2.OrderType, path.Length, ot2.OrderResult!.Length));
+
+                        sb.Append(path + "\n");
+                        sb.Append(ot2.OrderResult + "\n");
+                    }
+                    else
+                    {
+                        sb.Append(string.Format("{0} {3} {4} {5} '{1}'\n", ot2.OrderActive, ot2.OrderText, ot2.OrderChoice, ot2.OrderType, path.Length, ot2.OrderResult!.Length));
+
+                        sb.Append(path + "\n");
+                        sb.Append(ot2.OrderResult + "\n");
+                    }
+
+                    ix++;
+                }
+                output += string.Format("OrderTable: {0} {1}\n", AdvGame!.GD!.OrderList!.CurrentOrderListIx, AdvGame!.GD!.OrderList!.OTL![AdvGame!.GD!.OrderList!.CurrentOrderListIx]!.OT!.Count);
+
+
+                output += sb.ToString();
+            }
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.SaveOrderTable: " + ex.Message, IGlobalData.protMode.crisp);
             }
 
-
-            StringBuilder sb = new(64000);
-            foreach (var ot0 in AdvGame!.GD!.OrderList!.OTL![AdvGame!.GD!.OrderList!.CurrentOrderListIx].OT! )
-            {
-                OrderTable ot = ot0;
-                OrderTable ot2 = ot;//  AdvGame!.MW.GD!.StartStatus.jsonOrderListTable.OT![ix];
-
-                string path = "";
-                if (ot2.OrderPath != null)
-                    path = ot2.OrderPath;
-                else
-                {
-
-                }
-
-                if(ot2.OrderType == orderType.mcChoice)
-                {
-                    sb.Append( string.Format("{0} {3} {4} {5} {2} '{1}'\n", ot2.OrderActive, ot2.OrderText, ot2.OrderChoice, ot2.OrderType, path.Length, ot2.OrderResult!.Length) );
-
-                    sb.Append(path + "\n");
-                    sb.Append(ot2.OrderResult + "\n");
-                }
-                else
-                {
-                    sb.Append( string.Format("{0} {3} {4} {5} '{1}'\n", ot2.OrderActive, ot2.OrderText, ot2.OrderChoice, ot2.OrderType, path.Length, ot2.OrderResult!.Length) );
-
-                    sb.Append(path + "\n");
-                    sb.Append(ot2.OrderResult + "\n");
-                }
-
-                ix++;
-            }
-            output += string.Format("OrderTable: {0} {1}\n", AdvGame!.GD!.OrderList!.CurrentOrderListIx, AdvGame!.GD!.OrderList!.OTL![AdvGame!.GD!.OrderList!.CurrentOrderListIx]!.OT!.Count );
-
-
-            output += sb.ToString();
         }
 
         public void SaveGame( string fileName, bool forceSave = false )
         {
-            string output = "";
-            // int ix = 0;
+            try
+            {
+                string output = "";
+                // int ix = 0;
 
-            SaveItems(ref output);
-            SavePersons(ref output);
-            SaveLocations(ref output);
-            SaveStats(ref output);
-            SaveScores(ref output);
-            SaveLanguages(ref output);
-            SaveLI(ref output);
-            SaveItemQueue(ref output);
-            SaveSTE(ref output);
-            SaveFBE(ref output);
-            SaveA(ref output);
-            SavePV(ref output);
-            SaveVersion(ref output);
-            SaveOrderTable(ref output);
-            // SaveSlines(ref output);
-            SaveGameDefinitions(ref output, forceSave );
+                SaveItems(ref output);
+                SavePersons(ref output);
+                SaveLocations(ref output);
+                SaveStats(ref output);
+                SaveScores(ref output);
+                SaveLanguages(ref output);
+                SaveLI(ref output);
+                SaveItemQueue(ref output);
+                SaveSTE(ref output);
+                SaveFBE(ref output);
+                SaveA(ref output);
+                SavePV(ref output);
+                SaveVersion(ref output);
+                SaveOrderTable(ref output);
+                // SaveSlines(ref output);
+                SaveGameDefinitions(ref output, forceSave);
 
-            AdvGame!.UIS!.CoreSaveToFile(output, fileName);
-            /*
-            string pathName = GlobalData.CurrentPath();
-            // Ignores: 002
-            string pathfileName = pathName + "\\" + "newsave.txt";
-            File.WriteAllText(pathfileName, output);
-            */
+                AdvGame!.UIS!.CoreSaveToFile(output, fileName);
+                /*
+                string pathName = GlobalData.CurrentPath();
+                // Ignores: 002
+                string pathfileName = pathName + "\\" + "newsave.txt";
+                File.WriteAllText(pathfileName, output);
+                */
+            }
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.SaveGame: " + ex.Message, IGlobalData.protMode.crisp);
+            }
+
         }
 
 
         public void RestoreReflection( SaveObj so ) 
         {
-            CoAdv CA = so!.jsonCA!;
-
-            System.Reflection.PropertyInfo[] pi = CA!.GetType().GetProperties();
-
-          
-            foreach( PropertyInfo pix in pi )
+            try
             {
-                try
-                {
+                CoAdv CA = so!.jsonCA!;
 
+                System.Reflection.PropertyInfo[] pi = CA!.GetType().GetProperties();
+
+
+                foreach (PropertyInfo pix in pi)
+                {
+                    try
+                    {
+
+                        // Hier passiert nix, das hat alles so seine Richtigkeit
+                        if (pix.PropertyType.Name == "Int32")
+                        {
+                        }
+                        else if (pix.PropertyType.Name == "Item")
+                        {
+                            Item item = (pix.GetValue(CA) as Item)!;
+                            if (item != null)
+                            {
+                                if (item.ID == 3788)
+                                {
+
+                                }
+                                Item item2 = so!.jsonItems!.List![item!.ID!]!;
+                                pix.SetValue(CA, item2);
+                            }
+                        }
+                        else if (pix.PropertyType.Name == "Person")
+                        {
+                            Person person = (pix.GetValue(CA) as Person)!;
+                            if (person != null)
+                            {
+                                Person? person2 = so!.jsonPersons!.List![person!.ID!]!;
+                                pix.SetValue(CA, person2);
+                            }
+                        }
+                        else if (pix.PropertyType.Name == "Topic")
+                        {
+                            Topic topic = (pix.GetValue(CA) as Topic)!;
+                            if (topic != null)
+                            {
+                                Topic topic2 = so!.jsonTopics!.List[topic!.ID];
+                                pix.SetValue(CA, topic2);
+                            }
+                        }
+                        else
+                        {
+                            // int a = 5;
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        GlobalData.AddLog("SavePersons: " + e.Message, IGlobalData.protMode.crisp);
+
+                    }
+                }
+                System.Reflection.FieldInfo[] fi = CA.GetType().GetFields();
+
+                foreach (FieldInfo fix in fi)
+                {
+                    try
+                    {
+
+                        if (fix.FieldType.Name == "Int32")
+                        {
+                        }
+                        else if (fix.FieldType.Name == "Item")
+                        {
+                            Item item = (fix.GetValue(CA) as Item)!;
+                            if (item != null)
+                            {
+
+                                Item item2 = so!.jsonItems!.List![item!.ID!]!;
+                                fix.SetValue(CA, item2);
+                            }
+                        }
+                        else if (fix.FieldType.Name == "Person")
+                        {
+                            Person person = (fix.GetValue(CA) as Person)!;
+                            if (person != null)
+                            {
+                                Person person2 = so!.jsonPersons!.List![person!.ID!]!;
+                                fix.SetValue(CA, person2);
+                            }
+                        }
+                        else if (fix.FieldType.Name == "Topic")
+                        {
+                            Topic topic = (fix.GetValue(CA) as Topic)!;
+                            if (topic != null)
+                            {
+                                Topic topic2 = so!.jsonTopics!.Find(topic!.ID)!;
+                                fix.SetValue(CA, topic2);
+                            }
+                        }
+                        else if (fix.FieldType.Name == "Verb")
+                        {
+                            Verb verb = (fix.GetValue(CA) as Verb)!;
+                            if (verb != null)
+                            {
+                                Verb verb2 = so!.jsonVerbs!.Find(verb!.ID!)!;
+                                fix.SetValue(CA, verb2);
+                            }
+                        }
+                        else if (fix.FieldType.Name == "Noun")
+                        {
+                            Noun noun = (fix.GetValue(CA) as Noun)!;
+                            if (noun != null)
+                            {
+                                Noun noun2 = so!.jsonNouns!.Find(noun!.ID!)!;
+                                fix.SetValue(CA, noun2);
+                            }
+                        }
+                        else if (fix.FieldType.Name == "Adj")
+                        {
+                            Adj adj = (fix.GetValue(CA) as Adj)!;
+                            if (adj != null)
+                            {
+                                Adj adj2 = so!.jsonAdjs!.Find(adj!.ID)!;
+                                fix.SetValue(CA, adj2);
+                            }
+                        }
+                        else if (fix.FieldType.Name == "Fill")
+                        {
+                            Fill fill = (fix.GetValue(CA) as Fill)!;
+                            if (fill != null)
+                            {
+                                Fill fill2 = so!.jsonFills!.Find(fill!.ID!)!;
+                                fix.SetValue(CA, fill2);
+                            }
+                        }
+                        else if (fix.FieldType.Name == "Prep")
+                        {
+                            Prep prep = (fix.GetValue(CA) as Prep)!;
+                            if (prep != null)
+                            {
+                                Prep prep2 = so!.jsonPreps!.Find(prep!.ID!);
+                                fix.SetValue(CA, prep2);
+                            }
+                        }
+                        else if (fix.FieldType.Name == "Pronoun")
+                        {
+                            Pronoun pronoun = (fix.GetValue(CA) as Pronoun)!;
+                            if (pronoun != null)
+                            {
+                                Pronoun pronoun2 = so!.jsonPronouns!.Find(pronoun!.ID!);
+                                fix.SetValue(CA, pronoun2);
+                            }
+                        }
+                        else if (fix.FieldType.Name == "Status")
+                        {
+                            Status status = (fix.GetValue(CA) as Status)!;
+                            if (status != null)
+                            {
+                                Status status2 = so!.jsonStats!.Find(status!.ID!)!;
+                                fix.SetValue(CA, status2);
+                            }
+                        }
+                        else if (fix.FieldType.Name == "Score")
+                        {
+                            Score score = (fix.GetValue(CA) as Score)!;
+                            if (score != null)
+                            {
+                                Score score2 = so!.jsonScores!.Find(score!.ID!)!;
+                                fix.SetValue(CA, score2);
+                            }
+                        }
+                        else
+                        {
+                            // int a = 5;
+                        }
+
+                    }
+                    catch (Exception e)
+                    {
+                        GlobalData.AddLog("RestoreReflection: " + e.Message, IGlobalData.protMode.crisp);
+
+                    }
+                }
+                CoBase CB = so.jsonCB!;
+
+                pi = CB.GetType().GetProperties();
+
+
+                foreach (PropertyInfo pix in pi)
+                {
                     // Hier passiert nix, das hat alles so seine Richtigkeit
                     if (pix.PropertyType.Name == "Int32")
                     {
                     }
                     else if (pix.PropertyType.Name == "Item")
                     {
-                        Item item = (pix.GetValue(CA) as Item)!;
+                        Item item = (pix.GetValue(CB) as Item)!;
                         if (item != null)
                         {
-                            if( item.ID == 3788)
-                            {
 
-                            }
                             Item item2 = so!.jsonItems!.List![item!.ID!]!;
-                            pix.SetValue(CA, item2);
+                            pix.SetValue(CB, item2);
                         }
                     }
                     else if (pix.PropertyType.Name == "Person")
                     {
-                        Person person = (pix.GetValue(CA) as Person)!;
+                        Person person = (pix.GetValue(CB) as Person)!;
                         if (person != null)
                         {
-                            Person? person2 = so!.jsonPersons!.List![person!.ID!]!;
-                            pix.SetValue(CA, person2);
+                            Person person2 = so!.jsonPersons!.List![person!.ID!]!;
+                            pix.SetValue(CB, person2);
                         }
                     }
                     else if (pix.PropertyType.Name == "Topic")
                     {
-                        Topic topic = (pix.GetValue(CA) as Topic)!;
+                        Topic topic = (pix.GetValue(CB) as Topic)!;
                         if (topic != null)
                         {
                             Topic topic2 = so!.jsonTopics!.List[topic!.ID];
-                            pix.SetValue(CA, topic2);
+                            pix.SetValue(CB, topic2);
                         }
                     }
                     else
@@ -4601,120 +5367,111 @@ namespace GameCore
                         // int a = 5;
                     }
                 }
-                catch (Exception e)
+                fi = CB.GetType().GetFields();
+
+                foreach (FieldInfo fix in fi)
                 {
-                    GlobalData.AddLog("SavePersons: " + e.Message, IGlobalData.protMode.crisp);
-
-                }
-            }
-            System.Reflection.FieldInfo[] fi = CA.GetType().GetFields();
-
-            foreach ( FieldInfo fix in fi)
-            {
-                try
-                {
-
                     if (fix.FieldType.Name == "Int32")
                     {
                     }
                     else if (fix.FieldType.Name == "Item")
                     {
-                        Item item = (fix.GetValue(CA) as Item)!;
+                        Item item = (fix.GetValue(CB) as Item)!;
                         if (item != null)
                         {
 
                             Item item2 = so!.jsonItems!.List![item!.ID!]!;
-                            fix.SetValue(CA, item2);
+                            fix.SetValue(CB, item2);
                         }
                     }
                     else if (fix.FieldType.Name == "Person")
                     {
-                        Person person = (fix.GetValue(CA) as Person)!;
+                        Person person = (fix.GetValue(CB) as Person)!;
                         if (person != null)
                         {
                             Person person2 = so!.jsonPersons!.List![person!.ID!]!;
-                            fix.SetValue(CA, person2);
+                            fix.SetValue(CB, person2);
                         }
                     }
                     else if (fix.FieldType.Name == "Topic")
                     {
-                        Topic topic = (fix.GetValue(CA) as Topic)!;
+                        Topic topic = (fix.GetValue(CB) as Topic)!;
                         if (topic != null)
                         {
-                            Topic topic2 = so!.jsonTopics!.Find(topic!.ID)!;
-                            fix.SetValue(CA, topic2);
+                            Topic topic2 = so!.jsonTopics!.Find(topic!.ID!)!;
+                            fix.SetValue(CB, topic2);
                         }
                     }
                     else if (fix.FieldType.Name == "Verb")
                     {
-                        Verb verb = (fix.GetValue(CA) as Verb)!;
+                        Verb verb = (fix.GetValue(CB) as Verb)!;
                         if (verb != null)
                         {
                             Verb verb2 = so!.jsonVerbs!.Find(verb!.ID!)!;
-                            fix.SetValue(CA, verb2);
+                            fix.SetValue(CB, verb2);
                         }
                     }
                     else if (fix.FieldType.Name == "Noun")
                     {
-                        Noun noun = (fix.GetValue(CA) as Noun)!;
+                        Noun noun = (fix.GetValue(CB) as Noun)!;
                         if (noun != null)
                         {
-                            Noun noun2 = so!.jsonNouns!.Find(noun!.ID!)!;
-                            fix.SetValue(CA, noun2);
+                            Noun noun2 = so!.jsonNouns!.Find(noun!.ID)!;
+                            fix.SetValue(CB, noun2);
                         }
                     }
                     else if (fix.FieldType.Name == "Adj")
                     {
-                        Adj adj = (fix.GetValue(CA) as Adj)!;
+                        Adj adj = (fix.GetValue(CB) as Adj)!;
                         if (adj != null)
                         {
                             Adj adj2 = so!.jsonAdjs!.Find(adj!.ID)!;
-                            fix.SetValue(CA, adj2);
+                            fix.SetValue(CB, adj2);
                         }
                     }
                     else if (fix.FieldType.Name == "Fill")
                     {
-                        Fill fill = (fix.GetValue(CA) as Fill)!;
+                        Fill fill = (fix.GetValue(CB) as Fill)!;
                         if (fill != null)
                         {
-                            Fill fill2 = so!.jsonFills!.Find(fill!.ID!)!;
-                            fix.SetValue(CA, fill2);
+                            Fill fill2 = so!.jsonFills!.Find(fill!.ID)!;
+                            fix.SetValue(CB, fill2);
                         }
                     }
                     else if (fix.FieldType.Name == "Prep")
                     {
-                        Prep prep = (fix.GetValue(CA) as Prep)!;
+                        Prep prep = (fix.GetValue(CB) as Prep)!;
                         if (prep != null)
                         {
-                            Prep prep2 = so!.jsonPreps!.Find(prep!.ID!);
-                            fix.SetValue(CA, prep2);
+                            Prep prep2 = so!.jsonPreps!.Find(prep!.ID)!;
+                            fix.SetValue(CB, prep2);
                         }
                     }
                     else if (fix.FieldType.Name == "Pronoun")
                     {
-                        Pronoun pronoun = (fix.GetValue(CA) as Pronoun)!;
+                        Pronoun pronoun = (fix.GetValue(CB) as Pronoun)!;
                         if (pronoun != null)
                         {
-                            Pronoun pronoun2 = so!.jsonPronouns!.Find(pronoun!.ID!);
-                            fix.SetValue(CA, pronoun2);
+                            Pronoun pronoun2 = so!.jsonPronouns!.Find(pronoun!.ID!)!;
+                            fix.SetValue(CB, pronoun2);
                         }
                     }
                     else if (fix.FieldType.Name == "Status")
                     {
-                        Status status = (fix.GetValue(CA) as Status)!;
+                        Status status = (fix.GetValue(CB) as Status)!;
                         if (status != null)
                         {
                             Status status2 = so!.jsonStats!.Find(status!.ID!)!;
-                            fix.SetValue(CA, status2);
+                            fix.SetValue(CB, status2);
                         }
                     }
                     else if (fix.FieldType.Name == "Score")
                     {
-                        Score score = (fix.GetValue(CA) as Score)!;
+                        Score score = (fix.GetValue(CB) as Score)!;
                         if (score != null)
                         {
                             Score score2 = so!.jsonScores!.Find(score!.ID!)!;
-                            fix.SetValue(CA, score2);
+                            fix.SetValue(CB, score2);
                         }
                     }
                     else
@@ -4723,214 +5480,66 @@ namespace GameCore
                     }
 
                 }
-                catch (Exception e)
-                {
-                    GlobalData.AddLog("RestoreReflection: " + e.Message, IGlobalData.protMode.crisp);
-
-                }
             }
-            CoBase CB = so.jsonCB!;
-
-            pi = CB.GetType().GetProperties();
-
-
-            foreach (PropertyInfo pix in pi)
+            catch (Exception ex)
             {
-                // Hier passiert nix, das hat alles so seine Richtigkeit
-                if (pix.PropertyType.Name == "Int32")
-                {
-                }
-                else if (pix.PropertyType.Name == "Item")
-                {
-                    Item item = (pix.GetValue(CB) as Item)!;
-                    if (item != null)
-                    {
-
-                        Item item2 = so!.jsonItems!.List![item!.ID!]!;
-                        pix.SetValue(CB, item2);
-                    }
-                }
-                else if (pix.PropertyType.Name == "Person")
-                {
-                    Person person = (pix.GetValue(CB) as Person)!;
-                    if (person != null)
-                    {
-                        Person person2 = so!.jsonPersons!.List![person!.ID!]!;
-                        pix.SetValue(CB, person2);
-                    }
-                }
-                else if (pix.PropertyType.Name == "Topic")
-                {
-                    Topic topic = (pix.GetValue(CB) as Topic)!;
-                    if (topic != null)
-                    {
-                        Topic topic2 = so!.jsonTopics!.List[topic!.ID];
-                        pix.SetValue(CB, topic2);
-                    }
-                }
-                else
-                {
-                    // int a = 5;
-                }
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.RestoreReflection: " + ex.Message, IGlobalData.protMode.crisp);
             }
-            fi = CB.GetType().GetFields();
 
-            foreach (FieldInfo fix in fi)
-            {
-                if (fix.FieldType.Name == "Int32")
-                {
-                }
-                else if (fix.FieldType.Name == "Item")
-                {
-                    Item item = (fix.GetValue(CB) as Item)!;
-                    if (item != null)
-                    {
-
-                        Item item2 = so!.jsonItems!.List![item!.ID!]!;
-                        fix.SetValue(CB, item2);
-                    }
-                }
-                else if (fix.FieldType.Name == "Person")
-                {
-                    Person person = (fix.GetValue(CB) as Person)!;
-                    if (person != null)
-                    {
-                        Person person2 = so!.jsonPersons!.List![person!.ID!]!;
-                        fix.SetValue(CB, person2);
-                    }
-                }
-                else if (fix.FieldType.Name == "Topic")
-                {
-                    Topic topic = (fix.GetValue(CB) as Topic)!;
-                    if (topic != null)
-                    {
-                        Topic topic2 = so!.jsonTopics!.Find(topic!.ID!)!;
-                        fix.SetValue(CB, topic2);
-                    }
-                }
-                else if (fix.FieldType.Name == "Verb")
-                {
-                    Verb verb = (fix.GetValue(CB) as Verb)!;
-                    if (verb != null)
-                    {
-                        Verb verb2 = so!.jsonVerbs!.Find(verb!.ID!)!;
-                        fix.SetValue(CB, verb2);
-                    }
-                }
-                else if (fix.FieldType.Name == "Noun")
-                {
-                    Noun noun = (fix.GetValue(CB) as Noun)!;
-                    if (noun != null)
-                    {
-                        Noun noun2 = so!.jsonNouns!.Find(noun!.ID)!;
-                        fix.SetValue(CB, noun2);
-                    }
-                }
-                else if (fix.FieldType.Name == "Adj")
-                {
-                    Adj adj = (fix.GetValue(CB) as Adj)!;
-                    if (adj != null)
-                    {
-                        Adj adj2 = so!.jsonAdjs!.Find(adj!.ID)!;
-                        fix.SetValue(CB, adj2);
-                    }
-                }
-                else if (fix.FieldType.Name == "Fill")
-                {
-                    Fill fill = (fix.GetValue(CB) as Fill)!;
-                    if (fill != null)
-                    {
-                        Fill fill2 = so!.jsonFills!.Find(fill!.ID)!;
-                        fix.SetValue(CB, fill2);
-                    }
-                }
-                else if (fix.FieldType.Name == "Prep")
-                {
-                    Prep prep = (fix.GetValue(CB) as Prep)!;
-                    if (prep != null)
-                    {
-                        Prep prep2 = so!.jsonPreps!.Find(prep!.ID)!;
-                        fix.SetValue(CB, prep2);
-                    }
-                }
-                else if (fix.FieldType.Name == "Pronoun")
-                {
-                    Pronoun pronoun = (fix.GetValue(CB) as Pronoun)!;
-                    if (pronoun != null)
-                    {
-                        Pronoun pronoun2 = so!.jsonPronouns!.Find(pronoun!.ID!)!;
-                        fix.SetValue(CB, pronoun2);
-                    }
-                }
-                else if (fix.FieldType.Name == "Status")
-                {
-                    Status status = (fix.GetValue(CB) as Status)!;
-                    if (status != null)
-                    {
-                        Status status2 = so!.jsonStats!.Find(status!.ID!)!;
-                        fix.SetValue(CB, status2);
-                    }
-                }
-                else if (fix.FieldType.Name == "Score")
-                {
-                    Score score = (fix.GetValue(CB) as Score)!;
-                    if (score != null)
-                    {
-                        Score score2 = so!.jsonScores!.Find(score!.ID!)!;
-                        fix.SetValue(CB, score2);
-                    }
-                }
-                else
-                {
-                    // int a = 5;
-                }
-
-            }
         }
 
-        public SaveObj SetupSaveObject()
+        public SaveObj? SetupSaveObject()
         {
-            Adv advTemp = new Adv(false, false, true);
-            GD!.AskForPlayLevel = false;
-            // SaveObj so_source = AdvGame!.GD!.StartStatus!;
-            SaveObj so = new();
-
-
-            so.jsonItems = advTemp.Items;
-            so.jsonPersons = advTemp.Persons;
-            so.jsonlocations = advTemp.locations;
-            so.jsonStats = advTemp.Stats;
-            so.jsonScores = advTemp.Scores;
-            so.jsonLanguage = advTemp.GD!.Language;
-            so.jsonLI = advTemp.LI;
-            so.jsonItemQueue = advTemp.ItemQueue;
-            so.jsonStoryText = advTemp.UIS!.StoryTextObj;
-            so.jsonFeedbackText = advTemp.UIS.FeedbackTextObj;
-            so.jsonA = advTemp.A;
-            so.jsonPV = advTemp.PV;
-
-
-            if (advTemp!.GD!.OrderList!.OTL![advTemp!.GD!.OrderList!.CurrentOrderListIx].Zipped == true)
+            try
             {
-                GD.OrderList!.ReadZipOrderTable(advTemp.GD!.OrderList!.CurrentOrderListIx, GD!.OrderList!.OTL![advTemp!.GD!.OrderList!.CurrentOrderListIx].Name!);
+                Adv advTemp = new Adv(false, false, true);
+                GD!.AskForPlayLevel = false;
+                // SaveObj so_source = AdvGame!.GD!.StartStatus!;
+                SaveObj so = new();
+
+
+                so.jsonItems = advTemp.Items;
+                so.jsonPersons = advTemp.Persons;
+                so.jsonlocations = advTemp.locations;
+                so.jsonStats = advTemp.Stats;
+                so.jsonScores = advTemp.Scores;
+                so.jsonLanguage = advTemp.GD!.Language;
+                so.jsonLI = advTemp.LI;
+                so.jsonItemQueue = advTemp.ItemQueue;
+                so.jsonStoryText = advTemp.UIS!.StoryTextObj;
+                so.jsonFeedbackText = advTemp.UIS.FeedbackTextObj;
+                so.jsonA = advTemp.A;
+                so.jsonPV = advTemp.PV;
+
+
+                if (advTemp!.GD!.OrderList!.OTL![advTemp!.GD!.OrderList!.CurrentOrderListIx].Zipped == true)
+                {
+                    GD.OrderList!.ReadZipOrderTable(advTemp.GD!.OrderList!.CurrentOrderListIx, GD!.OrderList!.OTL![advTemp!.GD!.OrderList!.CurrentOrderListIx].Name!);
+                }
+                so.jsonOrderListTable = advTemp!.GD!.OrderList!.OTL![advTemp!.GD!.OrderList!.CurrentOrderListIx];
+
+                so.jsonAdjs = advTemp.Adjs;
+                so.jsonNouns = advTemp.Nouns;
+                so.jsonVerbs = advTemp.Verbs;
+                so.jsonPreps = advTemp.Preps;
+                so.jsonPronouns = advTemp.Pronouns;
+                so.jsonFills = advTemp.Fills;
+                so.jsonTopics = advTemp.Topics;
+                so.jsonCA = advTemp.CA;
+                so.jsonCB = advTemp.CB;
+                so.jsonVerbTenses = advTemp.VerbTenses;
+                so.jsonParser = advTemp.Parser;
+                so.jsonVersion = advTemp.GD.Version;
+                so.JsonGameDefinitions = advTemp.Orders!.GenerateGameDefinitions(false);
+
+                return so;
             }
-            so.jsonOrderListTable = advTemp!.GD!.OrderList!.OTL![advTemp!.GD!.OrderList!.CurrentOrderListIx];
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.SetupSaveObject: " + ex.Message, IGlobalData.protMode.crisp);
+                return null;
+            }
 
-            so.jsonAdjs = advTemp.Adjs;
-            so.jsonNouns = advTemp.Nouns;
-            so.jsonVerbs = advTemp.Verbs;
-            so.jsonPreps = advTemp.Preps;
-            so.jsonPronouns = advTemp.Pronouns;
-            so.jsonFills = advTemp.Fills;
-            so.jsonTopics = advTemp.Topics;
-            so.jsonCA = advTemp.CA;
-            so.jsonCB = advTemp.CB;
-            so.jsonVerbTenses = advTemp.VerbTenses;
-            so.jsonParser = advTemp.Parser;
-            so.jsonVersion = advTemp.GD.Version;
-            so.JsonGameDefinitions = advTemp.Orders!.GenerateGameDefinitions(false);
-
-            return so;
         }
         public SaveObj? LoadGame( string fileName, ref IGlobalData.language lang )
         {
@@ -4998,107 +5607,106 @@ namespace GameCore
             // SaveOrderTable(ref output);
         }
 
-        public string ExtractLine( string s1, ref int off )
+        public string? ExtractLine( string s1, ref int off )
         {
-           
-            string newString = "";
-            int ctLF = 0;
-
-            int oldOff = off;
-            while (s1[off] != 13 && s1[off] != 10 )
+            try
             {
-                if (s1[off] == 13 || s1[off] == 10)
-                    ctLF++;
-                if (ctLF >= 2)
-                    break;
-                off++;
+                string newString = "";
+                int ctLF = 0;
 
- 
-                if (off >= s1.Length)
-                    break;
-            }
-            newString = s1.Substring(oldOff, off - oldOff);
-            if (off < s1.Length)
-            {
-
-                ctLF = 0; 
-                while ( s1[off] == 13 || s1[off] == 10 )
+                int oldOff = off;
+                while (s1[off] != 13 && s1[off] != 10)
                 {
                     if (s1[off] == 13 || s1[off] == 10)
                         ctLF++;
                     if (ctLF >= 2)
                         break;
-
                     off++;
+
+
                     if (off >= s1.Length)
                         break;
                 }
-            }
-
-            return newString;
-        }
-        public string ExtractTextBlock(string s1, ref int off)
-        {
-            bool doBreak = false;
-            string newString = "";
-
-            int oldOff = off;
-            while (off < s1.Length && doBreak == false)
-            {
-                off++;
-
-                if (s1[off] == '@')
+                newString = s1.Substring(oldOff, off - oldOff);
+                if (off < s1.Length)
                 {
-                    if (s1[off + 1] == 'v' && s1[off + 2] == 'v' && s1[off + 3] == '@')
+
+                    ctLF = 0;
+                    while (s1[off] == 13 || s1[off] == 10)
                     {
-                        doBreak = true;
+                        if (s1[off] == 13 || s1[off] == 10)
+                            ctLF++;
+                        if (ctLF >= 2)
+                            break;
+
+                        off++;
+                        if (off >= s1.Length)
+                            break;
                     }
                 }
 
-                if (off >= s1.Length)
-                    break;
+                return newString;
             }
-            newString = s1.Substring(oldOff, off - oldOff);
-            off += 4;
-            if (off < s1.Length)
+            catch (Exception ex)
             {
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.ExtractLine: " + ex.Message, IGlobalData.protMode.crisp);
+                return null;
+            }
 
-                while (s1[off] == 13 || s1[off] == 10)
+        }
+        public string? ExtractTextBlock(string s1, ref int off)
+        {
+            try
+            {
+                bool doBreak = false;
+                string newString = "";
+
+                int oldOff = off;
+                while (off < s1.Length && doBreak == false)
                 {
                     off++;
+
+                    if (s1[off] == '@')
+                    {
+                        if (s1[off + 1] == 'v' && s1[off + 2] == 'v' && s1[off + 3] == '@')
+                        {
+                            doBreak = true;
+                        }
+                    }
+
                     if (off >= s1.Length)
                         break;
                 }
+                newString = s1.Substring(oldOff, off - oldOff);
+                off += 4;
+                if (off < s1.Length)
+                {
+
+                    while (s1[off] == 13 || s1[off] == 10)
+                    {
+                        off++;
+                        if (off >= s1.Length)
+                            break;
+                    }
+                }
+
+                return newString;
+            }
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.ExtractTextBlock: " + ex.Message, IGlobalData.protMode.crisp);
+                return null;
             }
 
-            return newString;
         }
         public string S1ExtractInput(string s1)
         {
-            bool doBreak = false;
-            string newString = "";
-            int off = 0;
-            int startOff = -1;
-
-            while (off < s1.Length && doBreak == false)
+            try
             {
- 
-                if (s1[off] == '\'')
-                {
-                    doBreak = true;
-                    break;
-                }
-
-                off++;
-                if (off >= s1.Length)
-                    break;
-            }
-
-            if( doBreak )
-            {
-                startOff = off + 1;
-                off++;
-                doBreak = false;
+                bool doBreak = false;
+                string newString = "";
+                int off = 0;
+                int startOff = -1;
 
                 while (off < s1.Length && doBreak == false)
                 {
@@ -5106,19 +5714,46 @@ namespace GameCore
                     if (s1[off] == '\'')
                     {
                         doBreak = true;
+                        break;
                     }
 
                     off++;
                     if (off >= s1.Length)
                         break;
                 }
+
+                if (doBreak)
+                {
+                    startOff = off + 1;
+                    off++;
+                    doBreak = false;
+
+                    while (off < s1.Length && doBreak == false)
+                    {
+
+                        if (s1[off] == '\'')
+                        {
+                            doBreak = true;
+                        }
+
+                        off++;
+                        if (off >= s1.Length)
+                            break;
+                    }
+                }
+
+
+                if (startOff > 0)
+                    newString = s1.Substring(startOff, off - startOff);
+
+                return newString;
+            }
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.S1ExtractInput: " + ex.Message, IGlobalData.protMode.crisp);
+                return null;
             }
 
-            
-            if( startOff > 0 )
-                newString = s1.Substring(startOff, off - startOff);
-
-            return newString;
         }
         enum sgTypes { unclear, item, person, location, stats, score, languages, ki, itemqueue, ste, fbe, a, pv, ordertable, version }
 
@@ -6396,23 +7031,32 @@ namespace GameCore
 
         public  Object? GetPropValue( Object obj, String name)
         {
-            foreach (String part in name.Split('.'))
+            try
             {
-                if (obj == null)
+                foreach (String part in name.Split('.'))
                 {
-                    return null;
-                }
+                    if (obj == null)
+                    {
+                        return null;
+                    }
 
-                Type type = obj.GetType();
-                PropertyInfo? info = type.GetProperty(part);
-                if (info == null)
-                {
-                    return null;
-                }
+                    Type type = obj.GetType();
+                    PropertyInfo? info = type.GetProperty(part);
+                    if (info == null)
+                    {
+                        return null;
+                    }
 
-                obj = info.GetValue(obj, null)!;
+                    obj = info.GetValue(obj, null)!;
+                }
+                return obj;
             }
-            return obj;
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.GetPropValue: " + ex.Message, IGlobalData.protMode.crisp);
+                return null;
+            }
+
         }
 
         public  T GetPropValue<T>( Object obj, String name)
@@ -6430,19 +7074,28 @@ namespace GameCore
 
         public bool ReadSlotDescription()
         {
-            // Ignores: 001
-            string? pathName = Phoney_MAUI.Core.GlobalData.CurrentPath(); 
-            // Ignores: 001
-            string? pathfileName = pathName + loca.OrderFeedback_ReadSlotDescription_14040;
-
-            string? jsonSource = AdvGame!.UIS!.LoadString(loca.OrderFeedback_ReadSlotDescription_14040!);
-            if ( jsonSource != null )
+            try
             {
-                AdvGame!.GD!.SlotDescriptions.SlotDescriptions = null;
-                Phoney_MAUI.Core.SlotDescription sd = JsonConvert.DeserializeObject<Phoney_MAUI.Core.SlotDescription>(jsonSource)!;
-                AdvGame!.GD!.SlotDescriptions = sd!;
+                // Ignores: 001
+                string? pathName = Phoney_MAUI.Core.GlobalData.CurrentPath();
+                // Ignores: 001
+                string? pathfileName = pathName + loca.OrderFeedback_ReadSlotDescription_14040;
+
+                string? jsonSource = AdvGame!.UIS!.LoadString(loca.OrderFeedback_ReadSlotDescription_14040!);
+                if (jsonSource != null)
+                {
+                    AdvGame!.GD!.SlotDescriptions.SlotDescriptions = null;
+                    Phoney_MAUI.Core.SlotDescription sd = JsonConvert.DeserializeObject<Phoney_MAUI.Core.SlotDescription>(jsonSource)!;
+                    AdvGame!.GD!.SlotDescriptions = sd!;
+                }
+                return true;
             }
-            return true;
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("base_order.ReadSlotDescription: " + ex.Message, IGlobalData.protMode.crisp);
+                return false;
+            }
+
         }
 
 
@@ -6481,77 +7134,86 @@ namespace GameCore
       
         public virtual bool  Save(Person PersonID, ParseTokenList PTL)
         {
-            OrderFeedback of = new OrderFeedback();
-            Prep slotID = ((Prep)PTL!.Index(1)!.O!)!;
-            int slotNr;
-
-            if (slotID == CB!.Prep_Slot1) slotNr = 1;
-            else if (slotID == CB!.Prep_Slot2) slotNr = 2;
-            else if (slotID == CB!.Prep_Slot3) slotNr = 3;
-            else if (slotID == CB!.Prep_Slot4) slotNr = 4;
-            else if (slotID == CB!.Prep_Slot5) slotNr = 5;
-            else if (slotID == CB!.Prep_Slot6) slotNr = 6;
-            else if (slotID == CB!.Prep_Slot7) slotNr = 7;
-            else if (slotID == CB!.Prep_Slot8) slotNr = 8;
-            else if (slotID == CB!.Prep_Slot9) slotNr = 9;
-            else if (slotID == CB!.Prep_Slot10) slotNr = 10;
-            else slotNr = 1;
-
-            // Ignores: 002
-            CoreSave( loca.OrderFeedback_Save_14044 +slotNr + loca.OrderFeedback_Save_14045);
-            AdvGame!.GD!.SlotDescriptions!.SlotDescriptions![slotNr] = AdvGame!.StateDescription();
-
-            WriteSlotDescription();
-            /*
-            string up = System.Environment.GetEnvironmentVariable( "USERPROFILE");
-            string pathName = up + "\\documents\\My Games\\Phoney Island";
-            string fileName = pathName + "\\slot" +slotNr + ".sav";
-
-            if (!System.IO.Directory.Exists(pathName))
+            try
             {
-                string p1 = up + "\\documents\\My Games\\Phoney Island";
-                System.IO.Directory.CreateDirectory(p1);
-                FileInfo filePath = new FileInfo(p1);
+                OrderFeedback of = new OrderFeedback();
+                Prep slotID = ((Prep)PTL!.Index(1)!.O!)!;
+                int slotNr;
+
+                if (slotID == CB!.Prep_Slot1) slotNr = 1;
+                else if (slotID == CB!.Prep_Slot2) slotNr = 2;
+                else if (slotID == CB!.Prep_Slot3) slotNr = 3;
+                else if (slotID == CB!.Prep_Slot4) slotNr = 4;
+                else if (slotID == CB!.Prep_Slot5) slotNr = 5;
+                else if (slotID == CB!.Prep_Slot6) slotNr = 6;
+                else if (slotID == CB!.Prep_Slot7) slotNr = 7;
+                else if (slotID == CB!.Prep_Slot8) slotNr = 8;
+                else if (slotID == CB!.Prep_Slot9) slotNr = 9;
+                else if (slotID == CB!.Prep_Slot10) slotNr = 10;
+                else slotNr = 1;
+
+                // Ignores: 002
+                CoreSave(loca.OrderFeedback_Save_14044 + slotNr + loca.OrderFeedback_Save_14045);
+                AdvGame!.GD!.SlotDescriptions!.SlotDescriptions![slotNr] = AdvGame!.StateDescription();
+
+                WriteSlotDescription();
+                /*
+                string up = System.Environment.GetEnvironmentVariable( "USERPROFILE");
+                string pathName = up + "\\documents\\My Games\\Phoney Island";
+                string fileName = pathName + "\\slot" +slotNr + ".sav";
+
+                if (!System.IO.Directory.Exists(pathName))
+                {
+                    string p1 = up + "\\documents\\My Games\\Phoney Island";
+                    System.IO.Directory.CreateDirectory(p1);
+                    FileInfo filePath = new FileInfo(p1);
+                }
+
+
+                SaveObj SO = new SaveObj();
+
+                SO.jsonItems = Items;
+                SO.jsonlocations = locations;
+                SO.jsonPersons = Persons;
+                SO.jsonTopics = Topics;
+                SO.jsonAdjs = Adjs;
+                SO.jsonA = A;
+                SO.jsonNouns = Nouns;
+                SO.jsonVerbs = Verbs;
+                SO.jsonPreps = Preps;
+                SO.jsonFills = Fills;
+                SO.jsonStats = Stats;
+                SO.jsonLI = LI;
+                SO.jsonCA = CA;
+                SO.jsonCB = CB;
+                // SO.jsonParser = AdvGame!.Parser;
+
+
+
+                // SO.jsonMCE = MCE;
+                // SO.jsonMCV = MCV;
+
+
+                IFormatter formatter = new BinaryFormatter();
+
+                Stream stream = new FileStream(fileName, FileMode.Create, FileAccess.Write, FileShare.None);
+                formatter.Serialize(stream, SO);
+                stream.Close();
+
+                // jsonString = JsonSerializer.Serialize(SO);
+                // File.WriteAllText(fileName, jsonString);
+                */
+
+                // Ignores: 002
+                AdvGame!.FeedbackOutput(PersonID, loca.OrderFeedback_Save_14046 + slotNr + loca.OrderFeedback_Save_14047, true);
+                return (false);
+            }
+            catch (Exception e)
+            {
+                GlobalData.AddLog("base_order.save: " + e.Message.ToString(), IGlobalData.protMode.crisp);
+                return false;
             }
 
-
-            SaveObj SO = new SaveObj();
-
-            SO.jsonItems = Items;
-            SO.jsonlocations = locations;
-            SO.jsonPersons = Persons;
-            SO.jsonTopics = Topics;
-            SO.jsonAdjs = Adjs;
-            SO.jsonA = A;
-            SO.jsonNouns = Nouns;
-            SO.jsonVerbs = Verbs;
-            SO.jsonPreps = Preps;
-            SO.jsonFills = Fills;
-            SO.jsonStats = Stats;
-            SO.jsonLI = LI;
-            SO.jsonCA = CA;
-            SO.jsonCB = CB;
-            // SO.jsonParser = AdvGame!.Parser;
-
-
-
-            // SO.jsonMCE = MCE;
-            // SO.jsonMCV = MCV;
-
-
-            IFormatter formatter = new BinaryFormatter();
-
-            Stream stream = new FileStream(fileName, FileMode.Create, FileAccess.Write, FileShare.None);
-            formatter.Serialize(stream, SO);
-            stream.Close();
-
-            // jsonString = JsonSerializer.Serialize(SO);
-            // File.WriteAllText(fileName, jsonString);
-            */
-
-            // Ignores: 002
-            AdvGame!.FeedbackOutput(PersonID, loca.OrderFeedback_Save_14046 +slotNr + loca.OrderFeedback_Save_14047, true);
-            return (false);
         }
 
 
@@ -6579,92 +7241,110 @@ namespace GameCore
 
         private bool FindOrderlistName(string name)
         {
-            bool found = false;
-
-            foreach (OrderListTable otl in AdvGame!.GD!.OrderList!.OTL!)
+            try
             {
-                if (otl.Name == name)
-                {
-                    found = true;
-                    break;
-                }
-            }
-            return found;
-        }
+                bool found = false;
 
-        public bool FindOrAddOrderList(OrderListTable tempOTL)
-        {
-            bool found = false;
-            int index = 0;
-
-            if (AdvGame != null && tempOTL != null )
-            {
                 foreach (OrderListTable otl in AdvGame!.GD!.OrderList!.OTL!)
                 {
-                    if (index > 0 && AdvGame!.GD!.OrderList.CompareRuns(otl, tempOTL, index) == true)
+                    if (otl.Name == name)
                     {
                         found = true;
                         break;
                     }
-
-                    index++;
                 }
+                return found;
+            }
+            catch (Exception e)
+            {
+                GlobalData.AddLog("base_order.FindOrderlistName: " + e.Message.ToString(), IGlobalData.protMode.crisp);
+                return false;
             }
 
-            if (!found)
+        }
+
+        public bool FindOrAddOrderList(OrderListTable tempOTL)
+        {
+            try
             {
-                if (tempOTL == null)
+                bool found = false;
+                int index = 0;
+
+                if (AdvGame != null && tempOTL != null)
                 {
-
-                }
-
-                string newName = tempOTL!.Name! + loca.OrderFeedback_FindOrAddOrderList_14055;
-
-                while ( FindOrderlistName( newName) == true )
-                {
-                    newName += loca.OrderFeedback_FindOrAddOrderList_14056;
-                }
-
-                AdvGame!.GD!.OrderList!.AddOrderList(tempOTL!.Name! + loca.OrderFeedback_FindOrAddOrderList_14057);
-                AdvGame!.GD!.OrderList!.CurrentOrderListIx = AdvGame!.GD!.OrderList!.OTL!.Count - 1;
-                AdvGame!.GD!.OrderList!.OTL![AdvGame!.GD!.OrderList!.CurrentOrderListIx] = tempOTL;
-                AdvGame!.GD!.OrderList!.OTL![AdvGame!.GD!.OrderList!.CurrentOrderListIx].Name += loca.OrderFeedback_FindOrAddOrderList_14058;
-                AdvGame!.GD!.OrderList!.OTL![AdvGame!.GD!.OrderList!.CurrentOrderListIx].Point = tempOTL.Point; //  AdvGame!.GD!.OrderList.OTL![AdvGame!.GD!.OrderList.CurrentOrderListIx].OT.Count - 1; 
-                /*
-                if(AdvGame!.GD!.OrderList.OTL![AdvGame!.GD!.OrderList.CurrentOrderListIx].Point < AdvGame!.GD!.OrderList.OTL![AdvGame!.GD!.OrderList.CurrentOrderListIx].OT.Count)
-                {
-                    for (int ix = AdvGame!.GD!.OrderList.OTL![AdvGame!.GD!.OrderList.CurrentOrderListIx].Point + 1; ix < AdvGame!.GD!.OrderList.OTL![AdvGame!.GD!.OrderList.CurrentOrderListIx].OT.Count; ix++)
+                    foreach (OrderListTable otl in AdvGame!.GD!.OrderList!.OTL!)
                     {
-                        AdvGame!.GD!.OrderList.OTL![AdvGame!.GD!.OrderList.CurrentOrderListIx].OT![ix].OrderResult = "";
-                        AdvGame!.GD!.OrderList.OTL![AdvGame!.GD!.OrderList.CurrentOrderListIx].OT![ix].OrderFeedback = "";
+                        if (index > 0 && AdvGame!.GD!.OrderList.CompareRuns(otl, tempOTL, index) == true)
+                        {
+                            found = true;
+                            break;
+                        }
+
+                        index++;
+                    }
+                }
+
+                if (!found)
+                {
+                    if (tempOTL == null)
+                    {
 
                     }
 
-                }
-                */
+                    string newName = tempOTL!.Name! + loca.OrderFeedback_FindOrAddOrderList_14055;
 
-                index = AdvGame!.GD!.OrderList.CurrentOrderListIx;
-            }
-            else
-            {
-                
-                AdvGame!.GD!.OrderList!.CurrentOLIndex = index;
-                AdvGame!.GD!.OrderList!.CurrentOrderListIx = index;
-                AdvGame!.GD!.OrderList!.OTL![AdvGame!.GD!.OrderList.CurrentOrderListIx].Point = tempOTL!.Point!; //  AdvGame!.GD!.OrderList.OTL![AdvGame!.GD!.OrderList.CurrentOrderListIx].OT.Count - 1; 
-
-                /*
-                if (AdvGame!.GD!.OrderList.OTL![AdvGame!.GD!.OrderList.CurrentOrderListIx].Point < AdvGame!.GD!.OrderList.OTL![AdvGame!.GD!.OrderList.CurrentOrderListIx].OT.Count)
-                {
-                    for (int ix = AdvGame!.GD!.OrderList.OTL![AdvGame!.GD!.OrderList.CurrentOrderListIx].Point + 1; ix < AdvGame!.GD!.OrderList.OTL![AdvGame!.GD!.OrderList.CurrentOrderListIx].OT.Count; ix++)
+                    while (FindOrderlistName(newName) == true)
                     {
-                        AdvGame!.GD!.OrderList.OTL![AdvGame!.GD!.OrderList.CurrentOrderListIx].OT![ix].OrderResult = "";
-                        AdvGame!.GD!.OrderList.OTL![AdvGame!.GD!.OrderList.CurrentOrderListIx].OT![ix].OrderFeedback = "";
+                        newName += loca.OrderFeedback_FindOrAddOrderList_14056;
                     }
+
+                    AdvGame!.GD!.OrderList!.AddOrderList(tempOTL!.Name! + loca.OrderFeedback_FindOrAddOrderList_14057);
+                    AdvGame!.GD!.OrderList!.CurrentOrderListIx = AdvGame!.GD!.OrderList!.OTL!.Count - 1;
+                    AdvGame!.GD!.OrderList!.OTL![AdvGame!.GD!.OrderList!.CurrentOrderListIx] = tempOTL;
+                    AdvGame!.GD!.OrderList!.OTL![AdvGame!.GD!.OrderList!.CurrentOrderListIx].Name += loca.OrderFeedback_FindOrAddOrderList_14058;
+                    AdvGame!.GD!.OrderList!.OTL![AdvGame!.GD!.OrderList!.CurrentOrderListIx].Point = tempOTL.Point; //  AdvGame!.GD!.OrderList.OTL![AdvGame!.GD!.OrderList.CurrentOrderListIx].OT.Count - 1; 
+                    /*
+                    if(AdvGame!.GD!.OrderList.OTL![AdvGame!.GD!.OrderList.CurrentOrderListIx].Point < AdvGame!.GD!.OrderList.OTL![AdvGame!.GD!.OrderList.CurrentOrderListIx].OT.Count)
+                    {
+                        for (int ix = AdvGame!.GD!.OrderList.OTL![AdvGame!.GD!.OrderList.CurrentOrderListIx].Point + 1; ix < AdvGame!.GD!.OrderList.OTL![AdvGame!.GD!.OrderList.CurrentOrderListIx].OT.Count; ix++)
+                        {
+                            AdvGame!.GD!.OrderList.OTL![AdvGame!.GD!.OrderList.CurrentOrderListIx].OT![ix].OrderResult = "";
+                            AdvGame!.GD!.OrderList.OTL![AdvGame!.GD!.OrderList.CurrentOrderListIx].OT![ix].OrderFeedback = "";
+
+                        }
+
+                    }
+                    */
+
+                    index = AdvGame!.GD!.OrderList.CurrentOrderListIx;
                 }
-                */
+                else
+                {
+
+                    AdvGame!.GD!.OrderList!.CurrentOLIndex = index;
+                    AdvGame!.GD!.OrderList!.CurrentOrderListIx = index;
+                    AdvGame!.GD!.OrderList!.OTL![AdvGame!.GD!.OrderList.CurrentOrderListIx].Point = tempOTL!.Point!; //  AdvGame!.GD!.OrderList.OTL![AdvGame!.GD!.OrderList.CurrentOrderListIx].OT.Count - 1; 
+
+                    /*
+                    if (AdvGame!.GD!.OrderList.OTL![AdvGame!.GD!.OrderList.CurrentOrderListIx].Point < AdvGame!.GD!.OrderList.OTL![AdvGame!.GD!.OrderList.CurrentOrderListIx].OT.Count)
+                    {
+                        for (int ix = AdvGame!.GD!.OrderList.OTL![AdvGame!.GD!.OrderList.CurrentOrderListIx].Point + 1; ix < AdvGame!.GD!.OrderList.OTL![AdvGame!.GD!.OrderList.CurrentOrderListIx].OT.Count; ix++)
+                        {
+                            AdvGame!.GD!.OrderList.OTL![AdvGame!.GD!.OrderList.CurrentOrderListIx].OT![ix].OrderResult = "";
+                            AdvGame!.GD!.OrderList.OTL![AdvGame!.GD!.OrderList.CurrentOrderListIx].OT![ix].OrderFeedback = "";
+                        }
+                    }
+                    */
+                }
+                AdvGame!.UIS!.RefreshOrderList();
+                return (found);
             }
-            AdvGame!.UIS!.RefreshOrderList();
-            return (found);
+            catch (Exception e)
+            {
+                GlobalData.AddLog("base_order.FindOrAddOrderList: " + e.Message.ToString(), IGlobalData.protMode.crisp);
+                return false;
+            }
+
         }
 
         /* 21.8.2023 ausgelagert
@@ -6932,54 +7612,63 @@ namespace GameCore
 
         public virtual bool  Load(Person PersonID, ParseTokenList PTL )
         {
-            OrderFeedback of = new OrderFeedback();
-            Prep slotID = ((Prep)PTL!.Index(1)!.O!)!;
-            int slotNr;
-
-            if (slotID == CB!.Prep_Slot1) slotNr = 1;
-            else if (slotID == CB!.Prep_Slot2) slotNr = 2;
-            else if (slotID == CB!.Prep_Slot3) slotNr = 3;
-            else if (slotID == CB!.Prep_Slot4) slotNr = 4;
-            else if (slotID == CB!.Prep_Slot5) slotNr = 5;
-            else if (slotID == CB!.Prep_Slot6) slotNr = 6;
-            else if (slotID == CB!.Prep_Slot7) slotNr = 7;
-            else if (slotID == CB!.Prep_Slot8) slotNr = 8;
-            else if (slotID == CB!.Prep_Slot9) slotNr = 9;
-            else if (slotID == CB!.Prep_Slot10) slotNr = 10;
-            else slotNr = 1;
-
-            if (AdvGame!.UIS!.ExistFile(PathFileNameFromSlot( slotNr )))
+            try
             {
-                AdvGame!.FeedbackOutput(PersonID, String.Format( loca.OrderFeedback_Load_14063, slotNr) , true);
+                OrderFeedback of = new OrderFeedback();
+                Prep slotID = ((Prep)PTL!.Index(1)!.O!)!;
+                int slotNr;
+
+                if (slotID == CB!.Prep_Slot1) slotNr = 1;
+                else if (slotID == CB!.Prep_Slot2) slotNr = 2;
+                else if (slotID == CB!.Prep_Slot3) slotNr = 3;
+                else if (slotID == CB!.Prep_Slot4) slotNr = 4;
+                else if (slotID == CB!.Prep_Slot5) slotNr = 5;
+                else if (slotID == CB!.Prep_Slot6) slotNr = 6;
+                else if (slotID == CB!.Prep_Slot7) slotNr = 7;
+                else if (slotID == CB!.Prep_Slot8) slotNr = 8;
+                else if (slotID == CB!.Prep_Slot9) slotNr = 9;
+                else if (slotID == CB!.Prep_Slot10) slotNr = 10;
+                else slotNr = 1;
+
+                if (AdvGame!.UIS!.ExistFile(PathFileNameFromSlot(slotNr)))
+                {
+                    AdvGame!.FeedbackOutput(PersonID, String.Format(loca.OrderFeedback_Load_14063, slotNr), true);
+                    return (false);
+                }
+
+                // Ignores: 002
+                CoreLoad(loca.OrderFeedback_Load_14064 + slotNr + loca.OrderFeedback_Load_14065);
+
+                /*
+                SaveObj SO = new SaveObj();
+
+                SO.jsonIT = IT;
+                SO.jsonLOC = Loc;
+                SO.jsonADJ = ADJ;
+                SO.jsonA = A;
+                SO.jsonNN = NN;
+                SO.jsonOrd = Ord;
+                SO.jsonPR = PR;
+                SO.jsonFL = FL;
+
+                jsonString = File.ReadAllText(fileName);
+                SO = JsonSerializer.
+                SaveObj>(jsonString);
+                */
+
+                if (GD!.SavegameFailed == false)
+                    AdvGame!.FeedbackOutput(PersonID, String.Format(loca.OrderFeedback_Load_14066, slotNr), true);
+
+                // locations!.ShowlocationFull(A!.ActLoc);
+                AdvGame!.SetScoreOutput();
                 return (false);
             }
+            catch (Exception e)
+            {
+                GlobalData.AddLog("base_order.Load: " + e.Message.ToString(), IGlobalData.protMode.crisp);
+                return false;
+            }
 
-            // Ignores: 002
-            CoreLoad( loca.OrderFeedback_Load_14064 +slotNr + loca.OrderFeedback_Load_14065);
-
-            /*
-            SaveObj SO = new SaveObj();
-
-            SO.jsonIT = IT;
-            SO.jsonLOC = Loc;
-            SO.jsonADJ = ADJ;
-            SO.jsonA = A;
-            SO.jsonNN = NN;
-            SO.jsonOrd = Ord;
-            SO.jsonPR = PR;
-            SO.jsonFL = FL;
-
-            jsonString = File.ReadAllText(fileName);
-            SO = JsonSerializer.
-            SaveObj>(jsonString);
-            */
-
-            if( GD!.SavegameFailed == false)
-                AdvGame!.FeedbackOutput(PersonID, String.Format( loca.OrderFeedback_Load_14066, slotNr ) , true);
-
-            // locations!.ShowlocationFull(A!.ActLoc);
-            AdvGame!.SetScoreOutput();
-            return (false);
         }
 
 
@@ -7195,202 +7884,228 @@ namespace GameCore
 
         public bool ListItemsPersons(string InitText, Person PersonID, int LocType, int LocID, bool ShowHidden, bool SuppressComment, int caseObject, OrderFeedback? of = null)
         {
-            int i = 0;
-
-            foreach (Item tItem in Items!.List!.Values)
+            try
             {
-                if ((tItem.locationType == LocType) && (tItem.locationID == LocID) && (tItem.IsBackground == false) && ((tItem.IsHidden == false) || (ShowHidden == true)))
-                    i++;
-            }
-            foreach (Person tPerson in Persons!.List!.Values)
-            {
-                if ((tPerson.locationType == LocType) && (tPerson.locationID == LocID) && (tPerson.IsBackground == false) && ((tPerson.IsHidden == false) || (ShowHidden == true)))
-                    i++;
-            }
-            if (i > 0)
-            {
-                int Found = 0;
+                int i = 0;
 
-                AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, InitText);
-
-                if (of != null) of.StoryOutput = true;
-                foreach (Item item in Items!.List.Values)
+                foreach (Item tItem in Items!.List!.Values)
                 {
-                    if ((item.locationType == LocType) && (item.locationID == LocID) && (item.IsBackground == false) && ((item.IsHidden == false) || (ShowHidden == true)))
-                    {
-                        // MW.TextOutput( "- <a href=\"https:www.spiegel.de\" onclick=\"var myMenu = new Menu(); myMenu.addMenuItem(\"my menu item A\"); myMenu.addMenuItem(\"my menu item B\"); myMenu.addMenuItem(\"my menu item C\"); myMenu.addMenuItem(\"my menu item D\"); myMenu.writeMenus();\">"+ Items!.GetItemNameLink(IT[j]!.ID, Co.CASE_NOM_UNDEF)+"</a>");
-                        AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone,  Helper.Insert(loca.OrderFeedback_ListItemsPersons_Person_Everyone_14069_App, item!.ID ));
-                        // Items!.List[j].IsHidden = false;
-                        Found++;
-                        if (item.IsHidden == true) item.IsHidden = false;
-
-                    }
+                    if ((tItem.locationType == LocType) && (tItem.locationID == LocID) && (tItem.IsBackground == false) && ((tItem.IsHidden == false) || (ShowHidden == true)))
+                        i++;
                 }
-                if (of != null) of.StoryOutput = true;
-                foreach (Person person in Persons!.List.Values)
+                foreach (Person tPerson in Persons!.List!.Values)
                 {
-                    if ((person.locationType == LocType) && (person.locationID == LocID) && (person.IsBackground == false) && ((person.IsHidden == false) || (ShowHidden == true)))
-                    {
-                        // MW.TextOutput( "- <a href=\"https:www.spiegel.de\" onclick=\"var myMenu = new Menu(); myMenu.addMenuItem(\"my menu item A\"); myMenu.addMenuItem(\"my menu item B\"); myMenu.addMenuItem(\"my menu item C\"); myMenu.addMenuItem(\"my menu item D\"); myMenu.writeMenus();\">"+ Items!.GetItemNameLink(IT[j]!.ID, Co.CASE_NOM_UNDEF)+"</a>");
-                        AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone,  Helper.Insert(loca.OrderFeedback_ListItemsPersons_Person_Everyone_14070, person ));
-                        // Items!.List[j].IsHidden = false;
-                        Found++;
-                        if (person.IsHidden == true) person.IsHidden = false;
-
-                    }
+                    if ((tPerson.locationType == LocType) && (tPerson.locationID == LocID) && (tPerson.IsBackground == false) && ((tPerson.IsHidden == false) || (ShowHidden == true)))
+                        i++;
                 }
+                if (i > 0)
+                {
+                    int Found = 0;
 
+                    AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, InitText);
+
+                    if (of != null) of.StoryOutput = true;
+                    foreach (Item item in Items!.List.Values)
+                    {
+                        if ((item.locationType == LocType) && (item.locationID == LocID) && (item.IsBackground == false) && ((item.IsHidden == false) || (ShowHidden == true)))
+                        {
+                            // MW.TextOutput( "- <a href=\"https:www.spiegel.de\" onclick=\"var myMenu = new Menu(); myMenu.addMenuItem(\"my menu item A\"); myMenu.addMenuItem(\"my menu item B\"); myMenu.addMenuItem(\"my menu item C\"); myMenu.addMenuItem(\"my menu item D\"); myMenu.writeMenus();\">"+ Items!.GetItemNameLink(IT[j]!.ID, Co.CASE_NOM_UNDEF)+"</a>");
+                            AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_ListItemsPersons_Person_Everyone_14069_App, item!.ID));
+                            // Items!.List[j].IsHidden = false;
+                            Found++;
+                            if (item.IsHidden == true) item.IsHidden = false;
+
+                        }
+                    }
+                    if (of != null) of.StoryOutput = true;
+                    foreach (Person person in Persons!.List.Values)
+                    {
+                        if ((person.locationType == LocType) && (person.locationID == LocID) && (person.IsBackground == false) && ((person.IsHidden == false) || (ShowHidden == true)))
+                        {
+                            // MW.TextOutput( "- <a href=\"https:www.spiegel.de\" onclick=\"var myMenu = new Menu(); myMenu.addMenuItem(\"my menu item A\"); myMenu.addMenuItem(\"my menu item B\"); myMenu.addMenuItem(\"my menu item C\"); myMenu.addMenuItem(\"my menu item D\"); myMenu.writeMenus();\">"+ Items!.GetItemNameLink(IT[j]!.ID, Co.CASE_NOM_UNDEF)+"</a>");
+                            AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_ListItemsPersons_Person_Everyone_14070, person));
+                            // Items!.List[j].IsHidden = false;
+                            Found++;
+                            if (person.IsHidden == true) person.IsHidden = false;
+
+                        }
+                    }
+
+                }
+                else if (!SuppressComment)
+                {
+                    AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, loca.OrderFeedback_ListItemsPersons_Person_Everyone_14071);
+                    if (of != null) of.StoryOutput = true;
+                }
+                return (true);
             }
-            else if (!SuppressComment)
+            catch (Exception e)
             {
-                AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, loca.OrderFeedback_ListItemsPersons_Person_Everyone_14071);
-                if (of != null) of.StoryOutput = true;
+                GlobalData.AddLog("base_order.Load: " + e.Message.ToString(), IGlobalData.protMode.crisp);
+                return false;
             }
-            return (true);
+
         }
 
         public bool ListPersons(string InitText, Person PersonID, int LocType, int LocID, bool ShowHidden, bool SuppressComment, OrderFeedback? of = null)
         {
-            int i = 0;
-
-            foreach (Person tPerson in Persons!.List!.Values!)
+            try
             {
-                if ((tPerson.locationType == LocType) && (tPerson.locationID == LocID) && (tPerson.IsBackground == false) && ((tPerson.IsHidden == false) || (ShowHidden == true)))
-                    i++;
-            }
-            if (i > 0)
-            {
-                int Found = 0;
+                int i = 0;
 
-                AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, InitText);
-
-                if (of != null) of.StoryOutput = true;
-                foreach (Person person in Persons!.List.Values)
+                foreach (Person tPerson in Persons!.List!.Values!)
                 {
-                    if ((person.locationType == LocType) && (person.locationID == LocID) && (person.IsBackground == false) && ((person.IsHidden == false) || (ShowHidden == true)))
-                    {
-                        // MW.TextOutput( "- <a href=\"https:www.spiegel.de\" onclick=\"var myMenu = new Menu(); myMenu.addMenuItem(\"my menu item A\"); myMenu.addMenuItem(\"my menu item B\"); myMenu.addMenuItem(\"my menu item C\"); myMenu.addMenuItem(\"my menu item D\"); myMenu.writeMenus();\">"+ Items!.GetItemNameLink(IT[j]!.ID, Co.CASE_NOM_UNDEF)+"</a>");
-                        AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone,  Helper.Insert(loca.OrderFeedback_ListPersons_Person_Everyone_14072,  person ));
-                        // Items!.List[j].IsHidden = false;
-                        Found++;
-                        if (person.IsHidden == true) person.IsHidden = false;
+                    if ((tPerson.locationType == LocType) && (tPerson.locationID == LocID) && (tPerson.IsBackground == false) && ((tPerson.IsHidden == false) || (ShowHidden == true)))
+                        i++;
+                }
+                if (i > 0)
+                {
+                    int Found = 0;
 
-                    }
-                    /*
-                    for (int j = 0; j < Items!.List.Count; j++)
+                    AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, InitText);
+
+                    if (of != null) of.StoryOutput = true;
+                    foreach (Person person in Persons!.List.Values)
                     {
-                        if ((Items!.List[j].locationType == LocType) && (Items!.List[j].locationID == LocID) && (Items!.List[j].IsBackground == false) && ((Items!.List[j].IsHidden == false) || (ShowHidden == true)))
+                        if ((person.locationType == LocType) && (person.locationID == LocID) && (person.IsBackground == false) && ((person.IsHidden == false) || (ShowHidden == true)))
                         {
                             // MW.TextOutput( "- <a href=\"https:www.spiegel.de\" onclick=\"var myMenu = new Menu(); myMenu.addMenuItem(\"my menu item A\"); myMenu.addMenuItem(\"my menu item B\"); myMenu.addMenuItem(\"my menu item C\"); myMenu.addMenuItem(\"my menu item D\"); myMenu.writeMenus();\">"+ Items!.GetItemNameLink(IT[j]!.ID, Co.CASE_NOM_UNDEF)+"</a>");
-                            AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone,  Helper.Insert("- [Il1,Akk]", Items!.List[j]!.ID ));
+                            AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_ListPersons_Person_Everyone_14072, person));
                             // Items!.List[j].IsHidden = false;
                             Found++;
-                            if (Items!.List[j].IsHidden == true) Items!.List[j].IsHidden = false;
+                            if (person.IsHidden == true) person.IsHidden = false;
 
                         }
+                        /*
+                        for (int j = 0; j < Items!.List.Count; j++)
+                        {
+                            if ((Items!.List[j].locationType == LocType) && (Items!.List[j].locationID == LocID) && (Items!.List[j].IsBackground == false) && ((Items!.List[j].IsHidden == false) || (ShowHidden == true)))
+                            {
+                                // MW.TextOutput( "- <a href=\"https:www.spiegel.de\" onclick=\"var myMenu = new Menu(); myMenu.addMenuItem(\"my menu item A\"); myMenu.addMenuItem(\"my menu item B\"); myMenu.addMenuItem(\"my menu item C\"); myMenu.addMenuItem(\"my menu item D\"); myMenu.writeMenus();\">"+ Items!.GetItemNameLink(IT[j]!.ID, Co.CASE_NOM_UNDEF)+"</a>");
+                                AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone,  Helper.Insert("- [Il1,Akk]", Items!.List[j]!.ID ));
+                                // Items!.List[j].IsHidden = false;
+                                Found++;
+                                if (Items!.List[j].IsHidden == true) Items!.List[j].IsHidden = false;
+
+                            }
+                        }
+                        */
                     }
-                    */
                 }
+                else if (!SuppressComment)
+                {
+                    AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, loca.OrderFeedback_ListPersons_Person_Everyone_14073);
+                    if (of != null) of.StoryOutput = true;
+                }
+                return (true);
             }
-            else if (!SuppressComment)
+            catch (Exception e)
             {
-                AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, loca.OrderFeedback_ListPersons_Person_Everyone_14073);
-                if (of != null) of.StoryOutput = true;
+                GlobalData.AddLog("base_order.ListPersons: " + e.Message.ToString(), IGlobalData.protMode.crisp);
+                return false;
             }
-            return (true);
+
         }
 
         public virtual bool  ProcessTake(Item I, Person PersonID, OrderFeedback of, bool silent = false )
         {
-            bool success = false;
-
-            if (Items!.IsItemHere(I, Co.Range_Here))
+            try
             {
-                if (I.CanBeTaken == false)
-                {
-                   AdvGame!.StoryOutput(  Helper.Insert(loca.OrderFeedback_ProcessTake_14074, PersonID, I!.ID ));
-                    success = true;
-                    of.FeedbackOutput = true;
-                }
-                else if ((I.locationType == CB!.LocType_Person) && (I.locationID == PersonID!.ID))
-                {
-                   AdvGame!.StoryOutput(  Helper.Insert(loca.OrderFeedback_ProcessTake_14075, PersonID, I!.ID ));
-                    success = true;
-                    of.FeedbackOutput = true;
-                }
-                else
-                {
-                    if (I.locationType == CB!.LocType_In_Item)
-                    {
-                        Item item2 = Items!.Find(I.locationID)!;
-                        if (!silent)
-                        {
-                            AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone,  Helper.Insert(loca.OrderFeedback_ProcessTake_Person_Everyone_14076, PersonID, I!.ID, item2!.ID ));
-                            of.StoryOutput = true;
+                bool success = false;
 
-                        }
-                    }
-                    else if (I.locationType == CB!.LocType_On_Item)
+                if (Items!.IsItemHere(I, Co.Range_Here))
+                {
+                    if (I.CanBeTaken == false)
                     {
-                        Item item2 = Items!.Find(I!.locationID!)!;
-                        if (!silent)
-                        {
-                            AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone,  Helper.Insert(loca.OrderFeedback_ProcessTake_Person_Everyone_14077, PersonID, I!.ID, item2!.ID ));
-                            of.StoryOutput = true;
-                        }
+                        AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_ProcessTake_14074, PersonID, I!.ID));
+                        success = true;
+                        of.FeedbackOutput = true;
                     }
-                    else if (I.locationType == CB!.LocType_Behind_Item)
+                    else if ((I.locationType == CB!.LocType_Person) && (I.locationID == PersonID!.ID))
                     {
-                        Item item2 = Items!.Find(I!.locationID)!;
-                        if (!silent)
-                        {
-                            AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone,  Helper.Insert(loca.OrderFeedback_ProcessTake_Person_Everyone_14078, PersonID, I!.ID, item2!.ID ));
-                            of.StoryOutput = true;
-                        }
-                    }
-                    else if (I.locationType == CB!.LocType_Below_Item)
-                    {
-                        Item item2 = Items!.Find(I.locationID)!;
-                        if (!silent)
-                        {
-                            AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone,  Helper.Insert(loca.OrderFeedback_ProcessTake_Person_Everyone_14079, PersonID, I!.ID, item2!.ID ));
-                            of.StoryOutput = true;
-                        }
-                    }
-                    else if (I.locationType == CB!.LocType_Beside_Item)
-                    {
-                        Item item2 = Items!.Find(I.locationID)!;
-                        if (!silent)
-                        {
-                            AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone,  Helper.Insert(loca.OrderFeedback_ProcessTake_Person_Everyone_14080, PersonID, I!.ID, item2!.ID ));
-                            of.StoryOutput = true;
-                        }
+                        AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_ProcessTake_14075, PersonID, I!.ID));
+                        success = true;
+                        of.FeedbackOutput = true;
                     }
                     else
                     {
-                        if (!silent)
+                        if (I.locationType == CB!.LocType_In_Item)
                         {
-                            AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone,  Helper.Insert(loca.OrderFeedback_ProcessTake_Person_Everyone_14081, PersonID, I!.ID ));
-                            of.StoryOutput = true;
+                            Item item2 = Items!.Find(I.locationID)!;
+                            if (!silent)
+                            {
+                                AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_ProcessTake_Person_Everyone_14076, PersonID, I!.ID, item2!.ID));
+                                of.StoryOutput = true;
+
+                            }
                         }
+                        else if (I.locationType == CB!.LocType_On_Item)
+                        {
+                            Item item2 = Items!.Find(I!.locationID!)!;
+                            if (!silent)
+                            {
+                                AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_ProcessTake_Person_Everyone_14077, PersonID, I!.ID, item2!.ID));
+                                of.StoryOutput = true;
+                            }
+                        }
+                        else if (I.locationType == CB!.LocType_Behind_Item)
+                        {
+                            Item item2 = Items!.Find(I!.locationID)!;
+                            if (!silent)
+                            {
+                                AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_ProcessTake_Person_Everyone_14078, PersonID, I!.ID, item2!.ID));
+                                of.StoryOutput = true;
+                            }
+                        }
+                        else if (I.locationType == CB!.LocType_Below_Item)
+                        {
+                            Item item2 = Items!.Find(I.locationID)!;
+                            if (!silent)
+                            {
+                                AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_ProcessTake_Person_Everyone_14079, PersonID, I!.ID, item2!.ID));
+                                of.StoryOutput = true;
+                            }
+                        }
+                        else if (I.locationType == CB!.LocType_Beside_Item)
+                        {
+                            Item item2 = Items!.Find(I.locationID)!;
+                            if (!silent)
+                            {
+                                AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_ProcessTake_Person_Everyone_14080, PersonID, I!.ID, item2!.ID));
+                                of.StoryOutput = true;
+                            }
+                        }
+                        else
+                        {
+                            if (!silent)
+                            {
+                                AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_ProcessTake_Person_Everyone_14081, PersonID, I!.ID));
+                                of.StoryOutput = true;
+                            }
+                        }
+                        Items!.TransferItem(I!.ID, CB!.LocType_Person, PersonID!.ID);
+                        I.IsBackground = false;
+                        I.IsHidden = false;
+                        success = true;
+                        of.Success = true;
+                        of.Action = true;
+                        of.Handled = true;
+                        // I.IsHidden = false;
                     }
-                    Items!.TransferItem(I!.ID, CB!.LocType_Person, PersonID!.ID);
-                    I.IsBackground = false;
-                    I.IsHidden = false;
-                    success = true;
-                    of.Success = true;
-                    of.Action = true;
-                    of.Handled = true;
-                    // I.IsHidden = false;
                 }
+                else
+                {
+                    if (!silent)
+                        AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_ProcessTake_Person_Everyone_14082, PersonID, PersonID, PersonID));
+                    of.Success = true;
+                }
+                return (success);
             }
-            else
+            catch (Exception e)
             {
-                if (!silent)
-                    AdvGame!.StoryOutput(Persons!.Find(PersonID)!.locationID, CA!.Person_Everyone,  Helper.Insert(loca.OrderFeedback_ProcessTake_Person_Everyone_14082, PersonID, PersonID, PersonID ));
-                of.Success = true;
+                GlobalData.AddLog("base_order.ProcessTake: " + e.Message.ToString(), IGlobalData.protMode.crisp);
+                return false;
             }
-            return (success);
 
         }
 
@@ -7408,73 +8123,81 @@ namespace GameCore
 
         public virtual bool  ProcessTakeP(Person? P, Person? PersonID, OrderFeedback of )
         {
-            bool success = false;
-            if (Persons!.IsPersonHere(P, Co.Range_Here))
+            try
             {
-                if (P!.CanBeTaken == false)
+                bool success = false;
+                if (Persons!.IsPersonHere(P, Co.Range_Here))
                 {
-                    AdvGame!.StoryOutput( Helper.Insert(loca.OrderFeedback_ProcessTakeP_14083, PersonID!, P ));
-                    of.FeedbackOutput = true;
+                    if (P!.CanBeTaken == false)
+                    {
+                        AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_ProcessTakeP_14083, PersonID!, P));
+                        of.FeedbackOutput = true;
 
-                    success = true;
-                }
-                else if ((P.locationType == CB!.LocType_Person) && (P.locationID == PersonID!.ID))
-                {
-                    AdvGame!.StoryOutput(  Helper.Insert(loca.OrderFeedback_ProcessTakeP_14084, PersonID!, P ));
-                    of.FeedbackOutput = true;
-                    success = true;
-                }
-                else
-                {
-                    if (P.locationType == CB!.LocType_In_Item)
-                    {
-                        Item item2 = Items!.Find(P.locationID)!;
-                        AdvGame!.StoryOutput(Persons!.Find(PersonID!)!.locationID, CA!.Person_Everyone,  Helper.Insert(loca.OrderFeedback_ProcessTakeP_Person_Everyone_14085, PersonID!, P, item2!.ID ));
-                        of.StoryOutput = true;
+                        success = true;
                     }
-                    else if (P.locationType == CB!.LocType_On_Item)
+                    else if ((P.locationType == CB!.LocType_Person) && (P.locationID == PersonID!.ID))
                     {
-                        Item item2 = Items!.Find(P.locationID)!;
-                        AdvGame!.StoryOutput(Persons!.Find(PersonID!)!.locationID, CA!.Person_Everyone,  Helper.Insert(loca.OrderFeedback_ProcessTakeP_Person_Everyone_14086, PersonID!, P, item2!.ID ));
-                        of.StoryOutput = true;
-                    }
-                    else if (P.locationType == CB!.LocType_Behind_Item)
-                    {
-                        Item item2 = Items!.Find(P.locationID)!;
-                        AdvGame!.StoryOutput(Persons!.Find(PersonID!)!.locationID, CA!.Person_Everyone,  Helper.Insert(loca.OrderFeedback_ProcessTakeP_Person_Everyone_14087, PersonID!, P, item2!.ID ));
-                        of.StoryOutput = true;
-                    }
-                    else if (P.locationType == CB!.LocType_Below_Item)
-                    {
-                        Item item2 = Items!.Find(P.locationID)!;
-                        AdvGame!.StoryOutput(Persons!.Find(PersonID!)!.locationID, CA!.Person_Everyone,  Helper.Insert(loca.OrderFeedback_ProcessTakeP_Person_Everyone_14088, PersonID!, P, item2!.ID ));
-                        of.StoryOutput = true;
-                    }
-                    else if (P.locationType == CB!.LocType_Beside_Item)
-                    {
-                        Item item2 = Items!.Find(P.locationID)!;
-                        AdvGame!.StoryOutput(Persons!.Find(PersonID!)!.locationID, CA!.Person_Everyone,  Helper.Insert(loca.OrderFeedback_ProcessTakeP_Person_Everyone_14089, PersonID!, P, item2!.ID ));
-                        of.StoryOutput = true;
+                        AdvGame!.StoryOutput(Helper.Insert(loca.OrderFeedback_ProcessTakeP_14084, PersonID!, P));
+                        of.FeedbackOutput = true;
+                        success = true;
                     }
                     else
                     {
-                        AdvGame!.StoryOutput(Persons!.Find(PersonID!)!.locationID, CA!.Person_Everyone,  Helper.Insert(loca.OrderFeedback_ProcessTakeP_Person_Everyone_14090, PersonID!, P ));
-                        of.StoryOutput = true;
+                        if (P.locationType == CB!.LocType_In_Item)
+                        {
+                            Item item2 = Items!.Find(P.locationID)!;
+                            AdvGame!.StoryOutput(Persons!.Find(PersonID!)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_ProcessTakeP_Person_Everyone_14085, PersonID!, P, item2!.ID));
+                            of.StoryOutput = true;
+                        }
+                        else if (P.locationType == CB!.LocType_On_Item)
+                        {
+                            Item item2 = Items!.Find(P.locationID)!;
+                            AdvGame!.StoryOutput(Persons!.Find(PersonID!)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_ProcessTakeP_Person_Everyone_14086, PersonID!, P, item2!.ID));
+                            of.StoryOutput = true;
+                        }
+                        else if (P.locationType == CB!.LocType_Behind_Item)
+                        {
+                            Item item2 = Items!.Find(P.locationID)!;
+                            AdvGame!.StoryOutput(Persons!.Find(PersonID!)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_ProcessTakeP_Person_Everyone_14087, PersonID!, P, item2!.ID));
+                            of.StoryOutput = true;
+                        }
+                        else if (P.locationType == CB!.LocType_Below_Item)
+                        {
+                            Item item2 = Items!.Find(P.locationID)!;
+                            AdvGame!.StoryOutput(Persons!.Find(PersonID!)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_ProcessTakeP_Person_Everyone_14088, PersonID!, P, item2!.ID));
+                            of.StoryOutput = true;
+                        }
+                        else if (P.locationType == CB!.LocType_Beside_Item)
+                        {
+                            Item item2 = Items!.Find(P.locationID)!;
+                            AdvGame!.StoryOutput(Persons!.Find(PersonID!)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_ProcessTakeP_Person_Everyone_14089, PersonID!, P, item2!.ID));
+                            of.StoryOutput = true;
+                        }
+                        else
+                        {
+                            AdvGame!.StoryOutput(Persons!.Find(PersonID!)!.locationID, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_ProcessTakeP_Person_Everyone_14090, PersonID!, P));
+                            of.StoryOutput = true;
+                        }
+                        Persons!.TransferPerson(P!.ID, CB!.LocType_Person, PersonID!.ID);
+                        success = true;
+                        of.Success = true;
+                        of.Action = true;
+                        of.Handled = true;
                     }
-                    Persons!.TransferPerson(P!.ID, CB!.LocType_Person, PersonID!.ID);
-                    success = true;
-                    of.Success = true;
-                    of.Action = true;
-                    of.Handled = true;
                 }
+                else
+                {
+                    AdvGame!.StoryOutput(Persons!.Find(PersonID!)!.locationID!, CA!.Person_Everyone, Helper.Insert(loca.OrderFeedback_ProcessTakeP_Person_Everyone_14091, PersonID!, PersonID!));
+                    success = true;
+                    of.StoryOutput = true;
+                }
+                return (success);
             }
-            else
+            catch (Exception e)
             {
-                AdvGame!.StoryOutput(Persons!.Find(PersonID!)!.locationID!, CA!.Person_Everyone,  Helper.Insert(loca.OrderFeedback_ProcessTakeP_Person_Everyone_14091, PersonID!, PersonID! ));
-                success = true;
-                of.StoryOutput = true;
+                GlobalData.AddLog("base_order.ProcessTakeP: " + e.Message.ToString(), IGlobalData.protMode.crisp);
+                return false;
             }
-            return (success);
 
         }
 

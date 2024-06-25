@@ -24,28 +24,37 @@ namespace GameCore
         {
             get
             {
-                if (LocaHandle != null)
+                try
                 {
-                    return LocaHandle;
-                }
-                else if(Loca != null)
-                {
-                    if (!string.IsNullOrEmpty(Loca))
+                    if (LocaHandle != null)
                     {
-                        Type t = typeof(loca);
+                        return LocaHandle;
+                    }
+                    else if (Loca != null)
+                    {
+                        if (!string.IsNullOrEmpty(Loca))
+                        {
+                            Type t = typeof(loca);
 
-                        PropertyInfo pi = t.GetProperty(Loca)!;
+                            PropertyInfo pi = t.GetProperty(Loca)!;
 
-                        // var prop = loca.GetType().GetProperty(Loca);
-                        var s = pi.GetValue(null) as string;
+                            // var prop = loca.GetType().GetProperty(Loca);
+                            var s = pi.GetValue(null) as string;
 
-                        return s!;
+                            return s!;
+                        }
+                        else
+                            return _name!;
                     }
                     else
                         return _name!;
                 }
-                else
-                    return _name!;
+                catch (Exception ex)
+                {
+                    Phoney_MAUI.Core.GlobalData.AddLog("Prep.Name Getter: " + ex.Message, Phoney_MAUI.Model.IGlobalData.protMode.crisp);
+                    return null;
+                }
+
             }
             set
             {
@@ -115,10 +124,19 @@ namespace GameCore
 
         public virtual Prep? Find(string? name)
         {
-            // string? name = name2;
-            if (TList!.ContainsKey(name!))
-                return (TList[name!]);
-            return null!;
+            try
+            {
+                // string? name = name2;
+                if (TList!.ContainsKey(name!))
+                    return (TList[name!]);
+                return null!;
+            }
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("Prep.Find: " + ex.Message, Phoney_MAUI.Model.IGlobalData.protMode.crisp);
+                return null;
+            }
+
             /*
             Prep? Ret = null;
 
@@ -136,31 +154,48 @@ namespace GameCore
         }
         public Prep Find(int ID)
         {
-            Prep? Ret = null;
-
-            foreach (Prep ele in TList!.Values)
+            try
             {
-                if (ele.ID == ID)
+                Prep? Ret = null;
+
+                foreach (Prep ele in TList!.Values)
                 {
-                    Ret = ele;
+                    if (ele.ID == ID)
+                    {
+                        Ret = ele;
+                    }
+                    if (Ret != null) break;
                 }
-                if (Ret != null) break;
+                return Ret!;
             }
-            return Ret!;
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("Prep.Find: " + ex.Message, Phoney_MAUI.Model.IGlobalData.protMode.crisp);
+                return null;
+            }
 
         }
 
-        public Prep AddLoca(int ID, string locaName)
+        public Prep? AddLoca(int ID, string locaName)
         {
-            if (TList == null)
+            try
             {
-                TList = new Dictionary<string, Prep>();
-            }
-            Prep p = new(ID, null!);
-            p.Loca = locaName;
+                if (TList == null)
+                {
+                    TList = new Dictionary<string, Prep>();
+                }
+                Prep p = new(ID, null!);
+                p.Loca = locaName;
 
-            TList.Add(p.Name!, p);
-            return p;
+                TList.Add(p.Name!, p);
+                return p;
+            }
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("Prep.AddLoca: " + ex.Message, Phoney_MAUI.Model.IGlobalData.protMode.crisp);
+                return null;
+            }
+
         }
         public Prep AddLoca(string locaName)
         {
@@ -170,31 +205,40 @@ namespace GameCore
 
         public bool RestorePrep()
         {
-            IDictionary<string, Prep>? TList2 = new Dictionary<string, Prep>();
-
-            foreach (var ele in TList!.Values)
+            try
             {
-                Prep ele2 = (Prep)ele;
+                IDictionary<string, Prep>? TList2 = new Dictionary<string, Prep>();
 
-                TypeInfo x = typeof(loca).GetTypeInfo();
-                PropertyInfo? pi = x.GetProperty(ele.Loca!);
+                foreach (var ele in TList!.Values)
+                {
+                    Prep ele2 = (Prep)ele;
 
-                string? s = (string?)pi!.GetValue(null);
+                    TypeInfo x = typeof(loca).GetTypeInfo();
+                    PropertyInfo? pi = x.GetProperty(ele.Loca!);
 
-                ele2.LocaHandle = s;
+                    string? s = (string?)pi!.GetValue(null);
 
-                TList2.Add(key: ele2.Name!, value: ele2);
+                    ele2.LocaHandle = s;
 
-                /*
-                Prep ele2 = (Prep)ele;
+                    TList2.Add(key: ele2.Name!, value: ele2);
 
-                TList2.Add(ele2.Name, ele2);
-                */
+                    /*
+                    Prep ele2 = (Prep)ele;
+
+                    TList2.Add(ele2.Name, ele2);
+                    */
+                }
+                TList = TList2;
+                TList2 = null;
+
+                return true;
             }
-            TList = TList2;
-            TList2 = null;
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("Prep.RestorePrep: " + ex.Message, Phoney_MAUI.Model.IGlobalData.protMode.crisp);
+                return false;
+            }
 
-            return true;
         }
     }
 }

@@ -19,24 +19,34 @@ namespace GameCore
         {
             get
             {
-                if (Loca != null)
+                try
                 {
-                    if (!string.IsNullOrEmpty(Loca))
+                    if (Loca != null)
                     {
-                        Type? t = typeof(loca);
+                        if (!string.IsNullOrEmpty(Loca))
+                        {
+                            Type? t = typeof(loca);
 
-                        PropertyInfo? pi = t!.GetProperty(Loca);
+                            PropertyInfo? pi = t!.GetProperty(Loca);
 
-                        // var prop = loca.GetType().GetProperty(Loca);
-                        var s = pi!.GetValue(null) as string;
+                            // var prop = loca.GetType().GetProperty(Loca);
+                            var s = pi!.GetValue(null) as string;
 
-                        return s;
+                            return s;
+                        }
+                        else
+                            return _name;
                     }
                     else
                         return _name;
                 }
-                else
-                    return _name;
+                catch (Exception ex)
+                {
+                    Phoney_MAUI.Core.GlobalData.AddLog("Fill.Name: " + ex.Message, Phoney_MAUI.Model.IGlobalData.protMode.crisp);
+                    return null;
+
+                }
+
             }
             set
             {
@@ -114,49 +124,77 @@ namespace GameCore
 
         public virtual Fill?  Find(string? name)
         {
-            Fill? Ret = null;
-
-            foreach (Fill ele in TList)
+            try
             {
-                // Noloca: 002
+                Fill? Ret = null;
 
-                if (String.Compare(ele.Name!.ToLower(new CultureInfo( "de-DE", false)), name!.ToLower(new CultureInfo( "de-DE", false))) == 0)
+                foreach (Fill ele in TList)
                 {
-                    Ret = ele;
+                    // Noloca: 002
+
+                    if (String.Compare(ele.Name!.ToLower(new CultureInfo("de-DE", false)), name!.ToLower(new CultureInfo("de-DE", false))) == 0)
+                    {
+                        Ret = ele;
+                    }
+                    if (Ret != null) break;
                 }
-                if (Ret != null) break;
+                return Ret;
             }
-            return Ret;
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("Fill.Find: " + ex.Message, Phoney_MAUI.Model.IGlobalData.protMode.crisp);
+                return null;
+
+            }
 
         }
 
         public Fill? Find(int ID)
         {
-            Fill? Ret = null;
-
-            foreach (Fill ele in TList)
+            try
             {
-                if (ele.ID == ID)
+                Fill? Ret = null;
+
+                foreach (Fill ele in TList)
                 {
-                    Ret = ele;
+                    if (ele.ID == ID)
+                    {
+                        Ret = ele;
+                    }
+                    if (Ret != null) break;
                 }
-                if (Ret != null) break;
+                return Ret;
             }
-            return Ret;
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("Fill.Find: " + ex.Message, Phoney_MAUI.Model.IGlobalData.protMode.crisp);
+                return null;
+
+            }
 
         }
 
-        public Fill AddLoca(int ID, string locaName)
+        public Fill? AddLoca(int ID, string locaName)
         {
-            if (TList == null)
+            try
             {
-                TList = new List<Fill>();
-            }
-            Fill f = new(ID, null);
-            f.Loca = locaName;
+                if (TList == null)
+                {
+                    TList = new List<Fill>();
+                }
+                Fill f = new(ID, null);
+                f.Loca = locaName;
 
-            TList.Add(f);
-            return f;
+                TList.Add(f);
+                return f;
+            }
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("Fill.AddLoca: " + ex.Message, Phoney_MAUI.Model.IGlobalData.protMode.crisp);
+                return null;
+
+            }
+
         }
         public Fill AddLoca(string locaName)
         {
@@ -166,18 +204,28 @@ namespace GameCore
 
         public bool RestoreFill()
         {
-            IList<Fill>? TList2 = new List<Fill>();
-
-            foreach (var ele in TList)
+            try
             {
-                Fill ele2 = (Fill)ele;
+                IList<Fill>? TList2 = new List<Fill>();
 
-                TList2.Add(ele2);
+                foreach (var ele in TList)
+                {
+                    Fill ele2 = (Fill)ele;
+
+                    TList2.Add(ele2);
+                }
+                TList = TList2;
+                TList2 = null;
+
+                return true;
             }
-            TList = TList2;
-            TList2 = null;
+            catch (Exception ex)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("Fill.RestoreFill: " + ex.Message, Phoney_MAUI.Model.IGlobalData.protMode.crisp);
+                return false;
 
-            return true;
+            }
+
         }
     }
 }

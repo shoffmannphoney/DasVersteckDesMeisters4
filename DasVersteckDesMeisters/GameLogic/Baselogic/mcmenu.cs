@@ -81,24 +81,33 @@ namespace GameCore
         {
             get
             {
-                if (Loca != null)
+                try
                 {
-                    if (!string.IsNullOrEmpty(Loca))
+                    if (Loca != null)
                     {
-                        Type t = typeof(loca);
+                        if (!string.IsNullOrEmpty(Loca))
+                        {
+                            Type t = typeof(loca);
 
-                        PropertyInfo? pi = t.GetProperty(Loca);
+                            PropertyInfo? pi = t.GetProperty(Loca);
 
-                        // var prop = loca.GetType().GetProperty(Loca);
-                        var s = pi!.GetValue(null) as string;
+                            // var prop = loca.GetType().GetProperty(Loca);
+                            var s = pi!.GetValue(null) as string;
 
-                        return s;
+                            return s;
+                        }
+                        else
+                            return _text;
                     }
                     else
                         return _text;
                 }
-                else
-                    return _text;
+                catch (Exception e)
+                {
+                    GlobalData.AddLog("MCMenu.Text Getter: " + e.Message.ToString(), IGlobalData.protMode.crisp);
+                    return null;
+                }
+
             }
             set
             {
@@ -726,63 +735,80 @@ namespace GameCore
 
         public bool MCSelection( MCMenu MCM, int Selection)
         {
-            if ( Selection >= 0 )
+            try
             {
-                MCMenuEntry? MCME = FindID(Selection);
-
-                if (MCM.DoRecording)
+                if (Selection >= 0)
                 {
-                    int val = 0;
-                    // Ignores: 001
-                    AdvGame!.GD!.OrderList!.AddOrder(orderType.mcChoice, loca.MCMenu_MCSelection_16161 +MCME!.Text, Selection, loca.GD!.Language, null, null, ref val);
-                    if (AdvGame!.GD!.OrderList!.CurrentOrderListIx > 0)
+                    MCMenuEntry? MCME = FindID(Selection);
+
+                    if (MCM.DoRecording)
                     {
+                        int val = 0;
                         // Ignores: 001
-                        AdvGame!.GD!.OrderList!.AddOrderCurrentRun(orderType.mcChoice, loca.MCMenu_MCSelection_16162 +MCME!.Text, Selection, loca.GD!.Language, null, null);
-                        // AdvGame!.MW.UpdateOrderList(AdvGame!.GD!.OrderList);
+                        AdvGame!.GD!.OrderList!.AddOrder(orderType.mcChoice, loca.MCMenu_MCSelection_16161 + MCME!.Text, Selection, loca.GD!.Language, null, null, ref val);
+                        if (AdvGame!.GD!.OrderList!.CurrentOrderListIx > 0)
+                        {
+                            // Ignores: 001
+                            AdvGame!.GD!.OrderList!.AddOrderCurrentRun(orderType.mcChoice, loca.MCMenu_MCSelection_16162 + MCME!.Text, Selection, loca.GD!.Language, null, null);
+                            // AdvGame!.MW.UpdateOrderList(AdvGame!.GD!.OrderList);
+                        }
                     }
-                }
-                // Hier wird nur noch die eigentliche Selection behandelt, den Rest übernimmt Set()
-                if (MCME!.DeactivateAfterSelect) 
-                    MCME!.Hidden = MCMenuEntry.HiddenType.outdated;
+                    // Hier wird nur noch die eigentliche Selection behandelt, den Rest übernimmt Set()
+                    if (MCME!.DeactivateAfterSelect)
+                        MCME!.Hidden = MCMenuEntry.HiddenType.outdated;
 
-                if( MCME!.Speaker == 0 )
-                {
-                    // int a = 5;
-                }
-                else
-                {
-                    if (Persons == null)
+                    if (MCME!.Speaker == 0)
                     {
+                        // int a = 5;
                     }
-                    else if (Persons!.Find(MCME.Speaker) != null)
+                    else
                     {
-                        _addEmptyLine = true;
-                        // AdvGame!.StoryOutput(Persons!.Find(MCME.Speaker)!.locationID, A!.Adventure!.CA!.Person_Everyone, "");
+                        if (Persons == null)
+                        {
+                        }
+                        else if (Persons!.Find(MCME.Speaker) != null)
+                        {
+                            _addEmptyLine = true;
+                            // AdvGame!.StoryOutput(Persons!.Find(MCME.Speaker)!.locationID, A!.Adventure!.CA!.Person_Everyone, "");
+                        }
                     }
+
+                    Set(MCME.ID);
                 }
 
-                Set(MCME.ID);
+                return (true);
+            }
+            catch (Exception e)
+            {
+                GlobalData.AddLog("MCMenu.MCSelection: " + e.Message.ToString(), IGlobalData.protMode.crisp);
+                return false;
             }
 
-            return (true);
         }
 
         public void SetCallBack(MCMenuEntry? tMCME )
         {
-            if (tMCME != null)
+            try
             {
-                if (tMCME.GetDel(AdvGame!) != null)
+                if (tMCME != null)
                 {
-                    List<MCMenuEntry> tMCME2 = new List<MCMenuEntry>() { tMCME };
-                    tMCME!.GetDel(AdvGame!)!(tMCME2!);
+                    if (tMCME.GetDel(AdvGame!) != null)
+                    {
+                        List<MCMenuEntry> tMCME2 = new List<MCMenuEntry>() { tMCME };
+                        tMCME!.GetDel(AdvGame!)!(tMCME2!);
+                    }
+                }
+                if (DialogGlobalDel != null)
+                {
+                    List<MCMenuEntry> tMCME2 = new List<MCMenuEntry>() { tMCME! };
+                    DialogGlobalDel(tMCME2);
                 }
             }
-            if (DialogGlobalDel != null)
+            catch (Exception e)
             {
-                List<MCMenuEntry> tMCME2 = new List<MCMenuEntry>() { tMCME! };
-                DialogGlobalDel(tMCME2);
+                GlobalData.AddLog("MCMenu.SetCallBack: " + e.Message.ToString(), IGlobalData.protMode.crisp);
             }
+
         }
 
         public bool Set( int pID)

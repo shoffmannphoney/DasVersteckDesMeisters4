@@ -158,18 +158,27 @@ namespace GameCore
 
         public bool RestorePronouns()
         {
-            IList<Pronoun>? TList2 = new List<Pronoun>();
-
-            foreach (var ele in TList)
+            try
             {
-                Pronoun ele2 = (Pronoun)ele;
+                IList<Pronoun>? TList2 = new List<Pronoun>();
 
-                TList2.Add(ele2);
+                foreach (var ele in TList)
+                {
+                    Pronoun ele2 = (Pronoun)ele;
+
+                    TList2.Add(ele2);
+                }
+                TList = TList2;
+                TList2 = null;
+
+                return true;
             }
-            TList = TList2;
-            TList2 = null;
+            catch (Exception e)
+            {
+                Phoney_MAUI.Core.GlobalData.AddLog("Pronoun.RestorePronouns: " + e.Message.ToString(), Phoney_MAUI.Model.IGlobalData.protMode.crisp);
+                return false;
+            }
 
-            return true;
         }
     }
 }

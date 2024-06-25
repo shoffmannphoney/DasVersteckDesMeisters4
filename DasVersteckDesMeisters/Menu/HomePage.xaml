@@ -73,17 +73,21 @@
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="*"/>
+                                <!--
                                 <RowDefinition Height="*"/>
+                                -->
                             </Grid.RowDefinitions>
                             <!--
                             <Button StyleClass="Button_BGBG_Large" Grid.Row="0" HorizontalOptions="Center" Margin="10" WidthRequest="300" x:Name="B_Continue" Text="Spiel fortsetzen" />
                             -->
-                            <Button StyleClass="Button_BGBG_Large" Grid.Row="0" HorizontalOptions="Center" Margin="10" WidthRequest="300" MaximumHeightRequest="100" MinimumHeightRequest="20" x:Name="B_Game" Text="Neues Spiel starten" />
-                            <Button StyleClass="Button_BGBG_Large" Grid.Row="1" HorizontalOptions="Center" Margin="10" WidthRequest="300" MaximumHeightRequest="100" x:Name="B_Settings" Text="Settings" />
-                            <Button StyleClass="Button_BGBG_Large" Grid.Row="2" HorizontalOptions="Center" Margin="10" WidthRequest="300" MaximumHeightRequest="100" x:Name="B_Replay" Text="Replay" />
-                            <Button StyleClass="Button_BGBG_Large" Grid.Row="3" HorizontalOptions="Center" Margin="10" WidthRequest="300" MaximumHeightRequest="100" x:Name="B_Credits" Text="Credits" />
-                            <Button StyleClass="Button_BGBG_Large" Grid.Row="4" HorizontalOptions="Center" Margin="10" WidthRequest="300" MaximumHeightRequest="100" x:Name="B_End" Text="Spiel beenden" />
-                            <Button StyleClass="Button_BGBG_Large" Grid.Row="5" HorizontalOptions="Center" Margin="10" WidthRequest="300" MaximumHeightRequest="100" x:Name="B_Test" Clicked="DoTest" Text="Memtest" />
+                            <Button StyleClass="Button_BGBG_Large" Grid.Row="0" HorizontalOptions="Center" Margin="8" WidthRequest="300" MaximumHeightRequest="100" MinimumHeightRequest="20" x:Name="B_Game" Text="Neues Spiel starten" />
+                            <Button StyleClass="Button_BGBG_Large" Grid.Row="1" HorizontalOptions="Center" Margin="8" WidthRequest="300" MaximumHeightRequest="100" x:Name="B_Settings" Text="Settings" />
+                            <Button StyleClass="Button_BGBG_Large" Grid.Row="2" HorizontalOptions="Center" Margin="8" WidthRequest="300" MaximumHeightRequest="100" x:Name="B_Replay" Text="Replay" />
+                            <Button StyleClass="Button_BGBG_Large" Grid.Row="3" HorizontalOptions="Center" Margin="8" WidthRequest="300" MaximumHeightRequest="100" x:Name="B_Credits" Text="Credits" />
+                            <Button StyleClass="Button_BGBG_Large" Grid.Row="4" HorizontalOptions="Center" Margin="8" WidthRequest="300" MaximumHeightRequest="100" x:Name="B_End" Text="Spiel beenden" />
+                            <!--
+                            <Button StyleClass="Button_BGBG_Large" Grid.Row="5" HorizontalOptions="Center" Margin="8" WidthRequest="300" MaximumHeightRequest="100" x:Name="B_Test" Clicked="DoTest" Text="Memtest" />
+                            -->
                         </Grid>
                     </Grid>
                     <Grid Grid.Row="4" Margin="0,0,0,0" StyleClass="Grid_Normal">

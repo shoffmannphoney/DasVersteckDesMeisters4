@@ -15,7 +15,7 @@ public class DeviceData : IDeviceData
 
         var docsDirectory = Android.App.Application.Context.GetExternalFilesDir(Android.OS.Environment.DirectoryDocuments);
 
-        string path = docsDirectory + "/Das Versteck des Meisters";
+        string path = docsDirectory + "/The Masters Lair";
         return path;
     }
     public static string GetSavePathStatic()
@@ -24,7 +24,7 @@ public class DeviceData : IDeviceData
 
         var docsDirectory = Android.App.Application.Context.GetExternalFilesDir(Android.OS.Environment.DirectoryDocuments);
 
-        string path = docsDirectory + "/Das Versteck des Meisters";
+        string path = docsDirectory + "/The Masters Lair";
         return path;
     }
     public static DeviceData? _deviceData;

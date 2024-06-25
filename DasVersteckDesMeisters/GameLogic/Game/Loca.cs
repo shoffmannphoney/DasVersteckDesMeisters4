@@ -28622,7 +28622,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "Tasche";
             else
-                return "bag";
+                return "__bag";
         }
     }
     public static string Noun_Dealer
@@ -32272,7 +32272,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "Umschlag";
             else
-                return "cover";
+                return "__cover";
         }
     }
     public static string Adv_InitializeGame_Person_I_3637
@@ -35372,7 +35372,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "Flämmchen";
             else
-                return "flame";
+                return "_flame";
         }
     }
     public static string Adv_InitializeGame_Person_I_3943
@@ -35893,7 +35893,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "Spülbecken";
             else
-                return "sink";
+                return "_sink";
         }
     }
     public static string Adv_InitializeGame_Person_I_3994
@@ -39663,7 +39663,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "Bezug";
             else
-                return "__cover";
+                return "___cover";
         }
     }
     public static string Adv_InitializeGame_Person_I_4363
@@ -40043,7 +40043,7 @@ public static partial class loca
             if (_gd!.Language == IGlobalData.language.german)
                 return "Tüte";
             else
-                return "_bag";
+                return "___bag";
         }
     }
     public static string Adv_InitializeGame_Person_I_4401

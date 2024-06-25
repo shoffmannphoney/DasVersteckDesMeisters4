@@ -175,28 +175,34 @@ public class OrderListTable : IOrderListTable
 
     public void RefreshCurrent()
     {
-        if (_pt >= this.OT!.Count!)
+        try
         {
-            _pt = this.OT!.Count! - 1;
-        }
-        foreach (OrderTable ot in this.OT)
-        {
-            if (ot.No - 1 == _pt)
+            if (_pt >= this.OT!.Count!)
             {
-                ot.Current = loca.OrderListTable_RefreshCurrent_16189;
-                this.NotifyPropertyChanged(loca.OrderListTable_RefreshCurrent_16190);
-                // Debug.WriteLine( ">>> ist jetzt bei " + _pt +"." );
+                _pt = this.OT!.Count! - 1;
             }
-            else
+            foreach (OrderTable ot in this.OT)
             {
-                if (ot.Current != null)
+                if (ot.No - 1 == _pt)
                 {
-                    this.NotifyPropertyChanged(loca.OrderListTable_RefreshCurrent_16191);
-                    ot.Current = null;
+                    ot.Current = loca.OrderListTable_RefreshCurrent_16189;
+                    this.NotifyPropertyChanged(loca.OrderListTable_RefreshCurrent_16190);
+                    // Debug.WriteLine( ">>> ist jetzt bei " + _pt +"." );
+                }
+                else
+                {
+                    if (ot.Current != null)
+                    {
+                        this.NotifyPropertyChanged(loca.OrderListTable_RefreshCurrent_16191);
+                        ot.Current = null;
+                    }
                 }
             }
         }
-
+        catch (Exception e)
+        {
+            GlobalData.AddLog("RefreshCurrent: " + e.Message, IGlobalData.protMode.crisp);
+        }
     }
 
 }
@@ -550,26 +556,33 @@ public class OrderList : IOrderList
         get { return _currentViewOrderListIx; }
         set
         {
-            int oldVal = _currentViewOrderListIx;
-            if (value >= 0 && value < OTL!.Count)
+            try
             {
-                // Wurde der Index verändert? Und entspricht der neue Index auch nicht CurrentOrderListIx?
-                if (oldVal != value && oldVal != 0 && value != CurrentOrderListIx)
+                int oldVal = _currentViewOrderListIx;
+                if (value >= 0 && value < OTL!.Count)
                 {
+                    // Wurde der Index verändert? Und entspricht der neue Index auch nicht CurrentOrderListIx?
+                    if (oldVal != value && oldVal != 0 && value != CurrentOrderListIx)
+                    {
 
-                    // Dann wird der alte Index archiviert
+                        // Dann wird der alte Index archiviert
 
-                    //   ... und der aktuelle Status entfernt, weil der ja schon gezippt ist
-                    // _OTL![oldVal].Zipped = true;
-                    // _OTL![oldVal].OT = null;
+                        //   ... und der aktuelle Status entfernt, weil der ja schon gezippt ist
+                        // _OTL![oldVal].Zipped = true;
+                        // _OTL![oldVal].OT = null;
+                    }
+                    _currentViewOrderListIx = value;
+
+                    if (this.OTL![value].Zipped)
+                    {
+                        ReadZipOrderTable(value, this.OTL![value].Name!);
+
+                    }
                 }
-                _currentViewOrderListIx = value;
-
-                if (this.OTL![value].Zipped)
-                {
-                    ReadZipOrderTable(value, this.OTL![value].Name!);
-
-                }
+            }
+            catch (Exception e)
+            {
+                GlobalData.AddLog("CurrentViewOrderListIx Setter: " + e.Message, IGlobalData.protMode.crisp);
             }
         }
     }
@@ -579,28 +592,36 @@ public class OrderList : IOrderList
         get { return currentOrderListIx; }
         set
         {
-            int oldVal = currentOrderListIx;
-
-            if (value >= 0 && value < OTL!.Count)
+            try
             {
-                // Wurde der Index verändert?
-                if (oldVal != value && oldVal != 0 && value != CurrentViewOrderListIx )
+                int oldVal = currentOrderListIx;
+
+                if (value >= 0 && value < OTL!.Count)
                 {
+                    // Wurde der Index verändert?
+                    if (oldVal != value && oldVal != 0 && value != CurrentViewOrderListIx)
+                    {
 
-                    // Dann wird der alte Index archiviert
+                        // Dann wird der alte Index archiviert
 
-                  //   ... und der aktuelle Status entfernt, weil der ja schon gezippt ist
-                    // _OTL![oldVal].Zipped = true; 
-                    // _OTL![oldVal].OT = null;
-                }
-                currentOrderListIx = value;
+                        //   ... und der aktuelle Status entfernt, weil der ja schon gezippt ist
+                        // _OTL![oldVal].Zipped = true; 
+                        // _OTL![oldVal].OT = null;
+                    }
+                    currentOrderListIx = value;
 
-                if (this.OTL![value].Zipped)
-                {
-                    ReadZipOrderTable(value, this.OTL![value].Name!);
+                    if (this.OTL![value].Zipped)
+                    {
+                        ReadZipOrderTable(value, this.OTL![value].Name!);
 
+                    }
                 }
             }
+            catch (Exception e)
+            {
+                GlobalData.AddLog("CurrentOrderListIx Setter: " + e.Message, IGlobalData.protMode.crisp);
+            }
+
         }
     }
     [JsonIgnore]
@@ -714,71 +735,78 @@ public class OrderList : IOrderList
 
     public OrderList(DelVoid SaveOrderListExtern, DelInt ZipOrderListExtern, DelIntString ReadZipOrderListExtern, ref OrderListInfo oli, IGlobalData gd, IUIServices uis, bool ReadData = true)
     {
-        // int jsonIndex = 0;
-
-        // _gd = gd;
-        // UIS = (Phoney_MAUI.Core.UIServices) uis;
-        _otl = new List<OrderListTable>();
-        SetSaveOrderList = SaveOrderListExtern;
-        SetZipOrderList = ZipOrderListExtern;
-        SetReadZipOrderList = ReadZipOrderListExtern;
-        CurrentOrderListIx = 0;
-
-        if (ReadData)
+        try
         {
-            UIS!.InitPath();
- 
-            string? jsonSource = UIS!.LoadString(loca.OrderList_OrderList_16197)!;
-            // Laden der Indexer-Datei (und Wert wird dann um eins erhöht)
-            if (jsonSource != null)
+            // int jsonIndex = 0;
+
+            // _gd = gd;
+            // UIS = (Phoney_MAUI.Core.UIServices) uis;
+            _otl = new List<OrderListTable>();
+            SetSaveOrderList = SaveOrderListExtern;
+            SetZipOrderList = ZipOrderListExtern;
+            SetReadZipOrderList = ReadZipOrderListExtern;
+            CurrentOrderListIx = 0;
+
+            if (ReadData)
             {
-                SetOrderListInfo = JsonConvert.DeserializeObject<OrderListInfo>(jsonSource);
-                SetOrderListInfo!.jsonIndex++;
-            }
-            else
-            {
-                SetOrderListInfo = new OrderListInfo();
-                SetOrderListInfo!.jsonIndex = 0;
-                SetOrderListInfo!.listNr = 1;
-            }
-            oli = SetOrderListInfo;
+                UIS!.InitPath();
 
-            // Indexer-Datei wird gespeichert
-            WriteJsonIndex();
-
-            GD!.OrderList = this;
-            // Die aktuelle OrderTable wird gesichert über den Indexerwert im Dateinamen
-            UIS!.BackupOrdertable();
-
-  
-            // Und jetzt laden wir die OrderTable ein
-            jsonSource = UIS!.LoadString(loca.OrderList_OrderList_16198);
-            if (jsonSource != null)
-            {
-                // ToDo: Wofür zum Teufel ist diese Zeile gut??
-                OrderList? ol2;
-                ol2 = JsonConvert.DeserializeObject<OrderList>(jsonSource);
-
-
-                if (ol2 != null)
+                string? jsonSource = UIS!.LoadString(loca.OrderList_OrderList_16197)!;
+                // Laden der Indexer-Datei (und Wert wird dann um eins erhöht)
+                if (jsonSource != null)
                 {
-                    this.currentOrderListIx = ol2.CurrentOrderListIx;
-                    this._otl = ol2._otl;
-                    StripOrderList();
-
+                    SetOrderListInfo = JsonConvert.DeserializeObject<OrderListInfo>(jsonSource);
+                    SetOrderListInfo!.jsonIndex++;
                 }
                 else
                 {
-                    AddOrderList(loca.OrderList_OrderList_16205, true);
-                    CurrentOrderListIx = OTL!.Count - 1;
+                    SetOrderListInfo = new OrderListInfo();
+                    SetOrderListInfo!.jsonIndex = 0;
+                    SetOrderListInfo!.listNr = 1;
+                }
+                oli = SetOrderListInfo;
 
+                // Indexer-Datei wird gespeichert
+                WriteJsonIndex();
+
+                GD!.OrderList = this;
+                // Die aktuelle OrderTable wird gesichert über den Indexerwert im Dateinamen
+                UIS!.BackupOrdertable();
+
+
+                // Und jetzt laden wir die OrderTable ein
+                jsonSource = UIS!.LoadString(loca.OrderList_OrderList_16198);
+                if (jsonSource != null)
+                {
+                    // ToDo: Wofür zum Teufel ist diese Zeile gut??
+                    OrderList? ol2;
+                    ol2 = JsonConvert.DeserializeObject<OrderList>(jsonSource);
+
+
+                    if (ol2 != null)
+                    {
+                        this.currentOrderListIx = ol2.CurrentOrderListIx;
+                        this._otl = ol2._otl;
+                        StripOrderList();
+
+                    }
+                    else
+                    {
+                        AddOrderList(loca.OrderList_OrderList_16205, true);
+                        CurrentOrderListIx = OTL!.Count - 1;
+
+                    }
+                }
+                else
+                {
+                    AddOrderList(loca.OrderList_OrderList_16206, true);
+                    CurrentOrderListIx = OTL!.Count - 1;
                 }
             }
-            else
-            {
-                AddOrderList(loca.OrderList_OrderList_16206, true);
-                CurrentOrderListIx = OTL!.Count - 1;
-            }
+        }
+        catch (Exception e)
+        {
+            GlobalData.AddLog("OrderList: " + e.Message, IGlobalData.protMode.crisp);
         }
 
     }
@@ -807,26 +835,34 @@ public class OrderList : IOrderList
 
     public void StripOrderList()
     {
-        foreach (OrderListTable otl in OTL!)
+        try
         {
-            if (otl.OT != null)
+            foreach (OrderListTable otl in OTL!)
             {
-                foreach (OrderTable ot in otl.OT)
+                if (otl.OT != null)
                 {
-                    if (ot.OrderText != null)
+                    foreach (OrderTable ot in otl.OT)
                     {
-                        string s = ot.OrderText;
-                        // Noloca: 001
+                        if (ot.OrderText != null)
+                        {
+                            string s = ot.OrderText;
+                            // Noloca: 001
 
-                        if (s.StartsWith("--> "))
-                            s = s.Substring(4);
+                            if (s.StartsWith("--> "))
+                                s = s.Substring(4);
+
+                        }
 
                     }
-
+                    // otl.Point = otl.OT.Count - 1;
                 }
-                // otl.Point = otl.OT.Count - 1;
             }
         }
+        catch (Exception e)
+        {
+            GlobalData.AddLog("StripOrderList: " + e.Message, IGlobalData.protMode.crisp);
+        }
+
     }
 
     public OrderList()
@@ -1203,48 +1239,57 @@ public class OrderList : IOrderList
             Collector = null;
         */
     }
-    public OrderTable GetNextOrderTable()
+    public OrderTable? GetNextOrderTable()
     {
-        OrderTable ot1;
-
-        if (OTL![CurrentOrderListIx].TempPoint < OTL![CurrentOrderListIx]!.OT!.Count)
+        try
         {
-            bool success = false;
-            ot1 = OTL![CurrentOrderListIx]!.OT![OTL![CurrentOrderListIx]!.TempPoint]!;
+            OrderTable ot1;
 
-            while (!success)
+            if (OTL![CurrentOrderListIx].TempPoint < OTL![CurrentOrderListIx]!.OT!.Count)
             {
-                ot1 = OTL![CurrentOrderListIx].OT![OTL![CurrentOrderListIx]!.TempPoint]!;
-                OTL![CurrentOrderListIx].TempPoint++;
+                bool success = false;
+                ot1 = OTL![CurrentOrderListIx]!.OT![OTL![CurrentOrderListIx]!.TempPoint]!;
 
-                // Dieser Wert wird nirgends auf true gesetzt - wozu gibt es ihn dann?
+                while (!success)
+                {
+                    ot1 = OTL![CurrentOrderListIx].OT![OTL![CurrentOrderListIx]!.TempPoint]!;
+                    OTL![CurrentOrderListIx].TempPoint++;
+
+                    // Dieser Wert wird nirgends auf true gesetzt - wozu gibt es ihn dann?
+                    if (this._actualGame == true)
+                    {
+                        if (CurrentOrderListIx > 0)
+                            OTL![0].TempPoint++;
+                    }
+                    // Wenn kein aktiver Eintrag gefunden wurde, dann ist das kein Erfolg - und wir machen mit dem nächsten Eintrag weiter.
+                    if (ot1.OrderActive == true)
+                        success = true;
+                    else
+                    {
+                        // int a = 5;
+                    }
+                }
+            }
+            else
+            {
+                // Das hier dürfte ziemlich sicher in einen Fehler führen.
+                ot1 = new OrderTable(orderType.noText, loca.OrderList_GetNextOrderTable_16221, null, IGlobalData.language.german, null, null);
+                OTL![CurrentOrderListIx].TempPoint++;
                 if (this._actualGame == true)
                 {
+
                     if (CurrentOrderListIx > 0)
                         OTL![0].TempPoint++;
                 }
-                // Wenn kein aktiver Eintrag gefunden wurde, dann ist das kein Erfolg - und wir machen mit dem nächsten Eintrag weiter.
-                if (ot1.OrderActive == true)
-                    success = true;
-                else
-                {
-                    // int a = 5;
-                }
             }
+            return ot1;
         }
-        else
+        catch (Exception e)
         {
-            // Das hier dürfte ziemlich sicher in einen Fehler führen.
-            ot1 = new OrderTable(orderType.noText, loca.OrderList_GetNextOrderTable_16221, null, IGlobalData.language.german, null, null);
-            OTL![CurrentOrderListIx].TempPoint++;
-            if (this._actualGame == true)
-            {
-
-                if (CurrentOrderListIx > 0)
-                    OTL![0].TempPoint++;
-            }
+            GlobalData.AddLog("GetNextOrderTable: " + e.Message, IGlobalData.protMode.crisp);
+            return null;
         }
-        return ot1;
+
     }
     public OrderTable GetCurrentOrderTable()
     {
@@ -1292,34 +1337,43 @@ public class OrderList : IOrderList
     }
     public bool CompareRuns(OrderListTable otl1, OrderListTable otl2, int otl1ix)
     {
-        bool identical = true;
-
-        // if (otl1.Name != otl2.Name) identical = false;
-
-        if (otl1.Zipped)
-            ReadZipOrderTable(otl1ix, otl1!.Name!);
-
-        if (otl1.OT == null || otl2.OT == null) 
-            identical = false;
-        else if (otl1.OT!.Count != otl2.OT!.Count) 
-            identical = false;
-
-        int x = 0;
-
-        if (identical == true)
+        try
         {
-            for (x = 0; x < otl1.OT!.Count; x++)
+            bool identical = true;
+
+            // if (otl1.Name != otl2.Name) identical = false;
+
+            if (otl1.Zipped)
+                ReadZipOrderTable(otl1ix, otl1!.Name!);
+
+            if (otl1.OT == null || otl2.OT == null)
+                identical = false;
+            else if (otl1.OT!.Count != otl2.OT!.Count)
+                identical = false;
+
+            int x = 0;
+
+            if (identical == true)
             {
-                if (CompareOrderTables(otl1.OT![x], otl2.OT![x]!) == false)
+                for (x = 0; x < otl1.OT!.Count; x++)
                 {
-                    identical = false;
-                    break;
+                    if (CompareOrderTables(otl1.OT![x], otl2.OT![x]!) == false)
+                    {
+                        identical = false;
+                        break;
+                    }
                 }
+
             }
 
+            return identical;
+        }
+        catch (Exception e)
+        {
+            GlobalData.AddLog("CompareRuns: " + e.Message, IGlobalData.protMode.crisp);
+            return false;
         }
 
-        return identical;
     }
     public bool CheckIndexStillValid(int val)
     {
@@ -1330,86 +1384,92 @@ public class OrderList : IOrderList
     }
     public void AddOrderText(string text)
     {
-
-        if (text == null || text == "" || OTL == null ) return;
-        
-        if( text.Length >= 2 && text.Substring( 0, 2 ) == "> ")
+        try
         {
-            return;
-        }
-        if (text.Length >= 1 && text.Substring(0, 1) == "n")
-        {
+            if (text == null || text == "" || OTL == null) return;
 
-        }
-
-        text = Helper.FirstUpper(text)!;
-
-        if (Collector != null)
-            Collector += text + loca.OrderList_AddOrderText_16211;
-        else
-        {
-            if (OTL![CurrentOrderListIx].Zipped == true)
+            if (text.Length >= 2 && text.Substring(0, 2) == "> ")
             {
-                ReadZipOrderTable(CurrentOrderListIx, OTL![CurrentOrderListIx].Name!);
+                return;
+            }
+            if (text.Length >= 1 && text.Substring(0, 1) == "n")
+            {
+
             }
 
-            if (OTL![CurrentOrderListIx].TempPoint >= 0)
+            text = Helper.FirstUpper(text)!;
+
+            if (Collector != null)
+                Collector += text + loca.OrderList_AddOrderText_16211;
+            else
             {
-                /*
-                OTL![CurrentOrderListIx].OT![OTL![CurrentOrderListIx].TempPoint].OrderResult += text + loca.OrderList_AddOrderText_16213;
-                if (_cbCreateOrderPath != null)
-                    _cbCreateOrderPath(OTL![CurrentOrderListIx].OT!, OTL![CurrentOrderListIx].TempPoint);
-                */
-                if (OTL![CurrentOrderListIx].TempPoint > 0)
+                if (OTL![CurrentOrderListIx].Zipped == true)
                 {
-                     if (OTL![CurrentOrderListIx].TempPoint > OTL![CurrentOrderListIx]!.OT!.Count)
-                         OTL![CurrentOrderListIx].TempPoint = OTL![CurrentOrderListIx]!.OT!.Count;
-                     OTL![CurrentOrderListIx].OT![OTL![CurrentOrderListIx].TempPoint - 1].OrderResult += text + loca.OrderList_AddOrderText_16212;
-
-                    if (_cbCreateOrderPath != null)
-                        // OTL![CurrentOrderListIx]!.OT![OTL![CurrentOrderListIx].TempPoint - 1].OrderPath = _cbCreateOrderPath(OTL![CurrentOrderListIx].OT, OTL![CurrentOrderListIx].TempPoint - 1);
-                        _cbCreateOrderPath(OTL![CurrentOrderListIx].OT!, OTL![CurrentOrderListIx].TempPoint - 1);
-
+                    ReadZipOrderTable(CurrentOrderListIx, OTL![CurrentOrderListIx].Name!);
                 }
-            }
-            else if (OTL![CurrentOrderListIx]!.Point >= 0 && OTL![CurrentOrderListIx]!.Point < OTL![CurrentOrderListIx]!.OT!.Count)
-            {
-                OTL![CurrentOrderListIx].OT![OTL![CurrentOrderListIx].Point].OrderResult += text + loca.OrderList_AddOrderText_16213;
-                if (_cbCreateOrderPath != null)
-                    // OTL![CurrentOrderListIx]!.OT![OTL![CurrentOrderListIx].Point].OrderPath = _cbCreateOrderPath(OTL![CurrentOrderListIx].OT, OTL![CurrentOrderListIx].Point);
-                    _cbCreateOrderPath(OTL![CurrentOrderListIx].OT!, OTL![CurrentOrderListIx].Point);
-            }
-            if (CurrentOrderListIx != 0)
-            {
-                if (this._actualGame == true)
+
+                if (OTL![CurrentOrderListIx].TempPoint >= 0)
                 {
-
-                    if (OTL![CurrentOrderListIx].TempPoint >= 0)
+                    /*
+                    OTL![CurrentOrderListIx].OT![OTL![CurrentOrderListIx].TempPoint].OrderResult += text + loca.OrderList_AddOrderText_16213;
+                    if (_cbCreateOrderPath != null)
+                        _cbCreateOrderPath(OTL![CurrentOrderListIx].OT!, OTL![CurrentOrderListIx].TempPoint);
+                    */
+                    if (OTL![CurrentOrderListIx].TempPoint > 0)
                     {
-                        if (OTL![CurrentOrderListIx].TempPoint > 0)
+                        if (OTL![CurrentOrderListIx].TempPoint > OTL![CurrentOrderListIx]!.OT!.Count)
+                            OTL![CurrentOrderListIx].TempPoint = OTL![CurrentOrderListIx]!.OT!.Count;
+                        OTL![CurrentOrderListIx].OT![OTL![CurrentOrderListIx].TempPoint - 1].OrderResult += text + loca.OrderList_AddOrderText_16212;
+
+                        if (_cbCreateOrderPath != null)
+                            // OTL![CurrentOrderListIx]!.OT![OTL![CurrentOrderListIx].TempPoint - 1].OrderPath = _cbCreateOrderPath(OTL![CurrentOrderListIx].OT, OTL![CurrentOrderListIx].TempPoint - 1);
+                            _cbCreateOrderPath(OTL![CurrentOrderListIx].OT!, OTL![CurrentOrderListIx].TempPoint - 1);
+
+                    }
+                }
+                else if (OTL![CurrentOrderListIx]!.Point >= 0 && OTL![CurrentOrderListIx]!.Point < OTL![CurrentOrderListIx]!.OT!.Count)
+                {
+                    OTL![CurrentOrderListIx].OT![OTL![CurrentOrderListIx].Point].OrderResult += text + loca.OrderList_AddOrderText_16213;
+                    if (_cbCreateOrderPath != null)
+                        // OTL![CurrentOrderListIx]!.OT![OTL![CurrentOrderListIx].Point].OrderPath = _cbCreateOrderPath(OTL![CurrentOrderListIx].OT, OTL![CurrentOrderListIx].Point);
+                        _cbCreateOrderPath(OTL![CurrentOrderListIx].OT!, OTL![CurrentOrderListIx].Point);
+                }
+                if (CurrentOrderListIx != 0)
+                {
+                    if (this._actualGame == true)
+                    {
+
+                        if (OTL![CurrentOrderListIx].TempPoint >= 0)
                         {
-                            int val = OTL![CurrentOrderListIx].TempPoint - 1;
-
-
-                            if (val >= OTL![0].OT!.Count)
+                            if (OTL![CurrentOrderListIx].TempPoint > 0)
                             {
-                                val = OTL![0].OT!.Count - 1;
+                                int val = OTL![CurrentOrderListIx].TempPoint - 1;
+
+
+                                if (val >= OTL![0].OT!.Count)
+                                {
+                                    val = OTL![0].OT!.Count - 1;
+                                }
+                                OTL![0]!.OT![val].OrderResult += text + loca.OrderList_AddOrderText_16214;
+                                if (_cbCreateOrderPath != null)
+                                    // OTL![0]!.OT![val].OrderPath = _cbCreateOrderPath(OTL![0]!.OT!, val);
+                                    _cbCreateOrderPath(OTL![0]!.OT!, val);
                             }
-                            OTL![0]!.OT![val].OrderResult += text + loca.OrderList_AddOrderText_16214;
+                        }
+                        else if (OTL![CurrentOrderListIx].Point >= 0 && OTL![CurrentOrderListIx].Point < OTL![0]!.OT!.Count)
+                        {
+                            OTL![0].OT![OTL![CurrentOrderListIx].Point]!.OrderResult += text + loca.OrderList_AddOrderText_16215;
                             if (_cbCreateOrderPath != null)
-                                // OTL![0]!.OT![val].OrderPath = _cbCreateOrderPath(OTL![0]!.OT!, val);
-                                _cbCreateOrderPath(OTL![0]!.OT!, val);
+                                // OTL![0]!.OT![OTL![CurrentOrderListIx].Point].OrderPath = _cbCreateOrderPath(OTL![0]!.OT!, OTL![CurrentOrderListIx].Point);
+                                _cbCreateOrderPath(OTL![0]!.OT!, OTL![CurrentOrderListIx].Point);
                         }
                     }
-                    else if (OTL![CurrentOrderListIx].Point >= 0 && OTL![CurrentOrderListIx].Point < OTL![0]!.OT!.Count)
-                    {
-                        OTL![0].OT![OTL![CurrentOrderListIx].Point]!.OrderResult += text + loca.OrderList_AddOrderText_16215;
-                        if (_cbCreateOrderPath != null)
-                            // OTL![0]!.OT![OTL![CurrentOrderListIx].Point].OrderPath = _cbCreateOrderPath(OTL![0]!.OT!, OTL![CurrentOrderListIx].Point);
-                            _cbCreateOrderPath(OTL![0]!.OT!, OTL![CurrentOrderListIx].Point);
-                    }
                 }
             }
+        }
+        catch (Exception e)
+        {
+            GlobalData.AddLog("AddOrderText: " + e.Message, IGlobalData.protMode.crisp);
         }
 
     }
@@ -1464,57 +1524,63 @@ public class OrderList : IOrderList
     }
     public void AddOrderFeedback(string? context, string? text, int Index, bool sysComment = false)
     {
-        if (text == null || text == "") return;
-
-        
-
-        if (OTL![Index].TempPoint >= 0)
+        try
         {
-            if (OTL![Index].TempPoint > 0)
-            {
-                if (OTL![Index].OT![OTL![Index]!.TempPoint - 1].OrderText == context)
-                {
-                    if (OTL![Index].OT![OTL![Index].TempPoint - 1].OrderFeedback != "")
-                    {
-                        // int a = 5;
-                    }
+            if (text == null || text == "") return;
 
-                    OTL![Index].OT![OTL![Index].TempPoint - 1].OrderFeedback += text + loca.OrderList_AddOrderFeedback_16216;
-                    if (_cbCreateOrderPath != null)
-                        // OTL![Index]!.OT![OTL![Index].TempPoint - 1].OrderPath = _cbCreateOrderPath(OTL![Index].OT, Index);
-                        _cbCreateOrderPath(OTL![Index].OT!, OTL![Index].TempPoint - 1);
-                    // OTL![CurrentOrderListIx].TempPoint++;
+
+
+            if (OTL![Index].TempPoint >= 0)
+            {
+                if (OTL![Index].TempPoint > 0)
+                {
+                    if (OTL![Index].OT![OTL![Index]!.TempPoint - 1].OrderText == context)
+                    {
+                        if (OTL![Index].OT![OTL![Index].TempPoint - 1].OrderFeedback != "")
+                        {
+                            // int a = 5;
+                        }
+
+                        OTL![Index].OT![OTL![Index].TempPoint - 1].OrderFeedback += text + loca.OrderList_AddOrderFeedback_16216;
+                        if (_cbCreateOrderPath != null)
+                            // OTL![Index]!.OT![OTL![Index].TempPoint - 1].OrderPath = _cbCreateOrderPath(OTL![Index].OT, Index);
+                            _cbCreateOrderPath(OTL![Index].OT!, OTL![Index].TempPoint - 1);
+                        // OTL![CurrentOrderListIx].TempPoint++;
+                    }
                 }
             }
+            else if (OTL![Index]!.Point >= 0 && OTL![Index]!.Point < OTL![Index]!.OT!.Count)
+            {
+                if (OTL![Index]!.OT![OTL![Index].Point]!.OrderText != context && !sysComment)
+                {
+                    int val = -1;
+                    AddOrder(orderType.noText, context!, null, Index, loca.GD!.Language, null, null, ref val, true);
+                    if (val >= 0)
+                        Index = val;
+                }
+                else if (!sysComment)
+                {
+                    // OTL![Index]!.OT![OTL![Index].Point]!.OrderType = orderType.noText;
+                }
+
+                if (OTL![Index].OT![OTL![Index].Point].OrderFeedback != "")
+                {
+                    // int a = 5;
+                }
+
+                OTL![Index].OT![OTL![Index].Point].OrderFeedback += text + loca.OrderList_AddOrderFeedback_16217;
+
+                if (_cbCreateOrderPath != null)
+                    // OTL![Index]!.OT![OTL![Index].Point - 1].OrderPath = _cbCreateOrderPath(OTL![Index].OT, Index);
+                    _cbCreateOrderPath(OTL![Index].OT!, OTL![Index].Point);
+            }
         }
-        else if (OTL![Index]!.Point >= 0 && OTL![Index]!.Point < OTL![Index]!.OT!.Count)
+        catch (Exception e)
         {
-            if (OTL![Index]!.OT![OTL![Index].Point]!.OrderText != context && !sysComment)
-            {
-                int val = -1;
-                AddOrder(orderType.noText, context!, null, Index, loca.GD!.Language, null, null, ref val, true);
-                if (val >= 0)
-                    Index = val;
-            }
-            else if (!sysComment)
-            {
-                // OTL![Index]!.OT![OTL![Index].Point]!.OrderType = orderType.noText;
-            }
+            GlobalData.AddLog("AddOrderFeedback: " + e.Message, IGlobalData.protMode.crisp);
 
-            if (OTL![Index].OT![OTL![Index].Point].OrderFeedback != "")
-            {
-                // int a = 5;
-            }
-
-            OTL![Index].OT![OTL![Index].Point].OrderFeedback += text + loca.OrderList_AddOrderFeedback_16217;
-
-            if (_cbCreateOrderPath != null)
-                // OTL![Index]!.OT![OTL![Index].Point - 1].OrderPath = _cbCreateOrderPath(OTL![Index].OT, Index);
-                _cbCreateOrderPath(OTL![Index].OT!, OTL![Index].Point);
         }
-
     }
-
     public void AddOrderFeedback(string? context, string? text, bool sysComment = false)
     {
         AddOrderFeedback(context, text, CurrentOrderListIx, sysComment);
@@ -1522,46 +1588,66 @@ public class OrderList : IOrderList
 
     public bool DoCreateOrderPath(ObservableCollection<OrderTable> otl, int Index)
     {
-        bool done = false;
-
-        if (_cbCreateOrderPath != null)
+        try
         {
-            _cbCreateOrderPath(otl, Index);
-            done = true;
+            bool done = false;
+
+            if (_cbCreateOrderPath != null)
+            {
+                _cbCreateOrderPath(otl, Index);
+                done = true;
+            }
+            return done;
         }
-        return done;
+        catch (Exception e)
+        {
+            GlobalData.AddLog("DoCreateOrderPath: " + e.Message, IGlobalData.protMode.crisp);
+            return false;
+
+        }
+
     }
 
     public string? UniqueOrderListName(string? Name)
     {
-        var splitName = GetNameNumber(Name!);
-
-        bool unique = true;
-        // bool found = false;
-        int highestNumber = 0;
-        string? destName = null;
-
-        for (int ix = 0; ix < OTL!.Count; ix++)
+        try
         {
-            var splitNameCurrent = GetNameNumber(OTL![ix].Name!);
-            if (splitNameCurrent.Item2 == splitName.Item2)
+            var splitName = GetNameNumber(Name!);
+
+            bool unique = true;
+            // bool found = false;
+            int highestNumber = 0;
+            string? destName = null;
+
+            for (int ix = 0; ix < OTL!.Count; ix++)
             {
-                unique = false;
-                if (splitNameCurrent.Item3 > highestNumber)
-                    highestNumber = splitNameCurrent.Item3;
+                var splitNameCurrent = GetNameNumber(OTL![ix].Name!);
+                if (splitNameCurrent.Item2 == splitName.Item2)
+                {
+                    unique = false;
+                    if (splitNameCurrent.Item3 > highestNumber)
+                        highestNumber = splitNameCurrent.Item3;
+                }
             }
+
+            if (unique)
+            {
+                destName = Name;
+            }
+            else
+            {
+                destName = String.Format(loca.OrderList_UniqueOrderListName_16218, splitName.Item2, highestNumber + 1);
+            }
+
+            return destName;
+        }
+        catch (Exception e)
+        {
+            GlobalData.AddLog("UniqueOrderListName: " + e.Message, IGlobalData.protMode.crisp);
+            return null;
+
         }
 
-        if (unique)
-        {
-            destName = Name;
-        }
-        else
-        {
-            destName = String.Format(loca.OrderList_UniqueOrderListName_16218, splitName.Item2, highestNumber + 1);
-        }
-
-        return destName;
     }
     public bool SyncOrderList()
     {
@@ -1577,28 +1663,37 @@ public class OrderList : IOrderList
     }
     public (string?, string?, int) GetNameNumber(string s)
     {
+        
         string? sWithoutNumber = null;
         // int position = 1;
         int number = 0;
 
-        if (s[s.Length - 1] == ')')
+        try
         {
-            int ix = s.Length - 2;
+            if (s[s.Length - 1] == ')')
+            {
+                int ix = s.Length - 2;
 
-            while (ix >= 0 && s[ix] != '(' && Char.IsNumber(s[ix]))
-            {
-                ix--;
+                while (ix >= 0 && s[ix] != '(' && Char.IsNumber(s[ix]))
+                {
+                    ix--;
+                }
+                if (ix >= 0 && s[ix] == '(')
+                {
+                    number = Int32.Parse(s.Substring(ix + 1, s.Length - ix - 2));
+                    sWithoutNumber = s.Substring(0, ix);
+                }
             }
-            if (ix >= 0 && s[ix] == '(')
+            else
             {
-                number = Int32.Parse(s.Substring(ix + 1, s.Length - ix - 2));
-                sWithoutNumber = s.Substring(0, ix);
+                sWithoutNumber = s;
+                number = 0;
             }
         }
-        else
+        catch (Exception e)
         {
-            sWithoutNumber = s;
-            number = 0;
+            GlobalData.AddLog("GetNameNumber: " + e.Message, IGlobalData.protMode.crisp);
+
         }
 
         return (s, sWithoutNumber, number);
@@ -1617,102 +1712,119 @@ public class OrderList : IOrderList
 
     public bool AddOrderAllTabs(orderType? ot, string? orderText, int? orderChoice, int Index, IGlobalData.language lang, ParseTokenList? ptl, ParseLineList? ptlSignature, ref int newIndex, bool silent = false)
     {
-
-        // Split des aktuellen Runs, wenn mitten im Run ein neuer Befehl auftaucht. Ausnahme: Index == 0. Dieser Fall wird nicht auftreten, also muss auch
-        // der Run nicht gesplittet werden.
-        // Der Split ist nur noch möglich im Debug-Modus
-        if (OTL![Index].OT == null )
+        try
         {
-            
-        }
-        else if ((OTL![Index].Point < (OTL![Index].OT!.Count - 1)) && Index != 0)
-        {
-
-            // Ignores: 001
-            string newName = OTL![Index].Name + loca.OrderList_AddOrderAllTabs_16210 + (OTL![Index].Point + 1);
-            int lastOrderListIx = Index;
-
-            AddOrderList(newName, false);
-            if (CBAddTable != null)
-                CBAddTable(Index);
-            // OTL![CurrentOrderListIx].DG.DataGrid_SetTabItem(CurrentOrderListIx);
-
-            for (int ix = 0; ix <= OTL![lastOrderListIx].Point; ix++)
+            // Split des aktuellen Runs, wenn mitten im Run ein neuer Befehl auftaucht. Ausnahme: Index == 0. Dieser Fall wird nicht auftreten, also muss auch
+            // der Run nicht gesplittet werden.
+            // Der Split ist nur noch möglich im Debug-Modus
+            if (OTL![Index].OT == null)
             {
-                OTL![OTL!.Count - 1]!.OT!.Add(new OrderTable(OTL![lastOrderListIx]!.OT![ix]!.OrderType!, OTL![lastOrderListIx]!.OT![ix]!.OrderText!, OTL![lastOrderListIx]!.OT![ix]!.OrderChoice!, OTL![lastOrderListIx]!.OT![ix]!.oLG!, OTL![lastOrderListIx]!.OT![ix]!.ptl!, OTL![lastOrderListIx]!.OT![ix]!.ptlSignatures!));
-                OTL![OTL!.Count - 1]!.OT![ix]!.OrderResult = OTL![lastOrderListIx]!.OT![ix]!.OrderResult!;
-                OTL![OTL!.Count - 1]!.OT![ix]!.OrderFeedback = OTL![lastOrderListIx]!.OT![ix]!.OrderFeedback!;
-                OTL![OTL!.Count - 1]!.OT![ix]!.OrderActive = OTL![lastOrderListIx].OT![ix].OrderActive;
 
-                /* ToDo DataGrid weg
-                if (OTL![OTL!.Count - 1].DG != null)
-                    OTL![OTL!.Count - 1]!.OT![ix]!.DetailsWidth = OTL![OTL!.Count - 1]!.DG!.Width - 50;
+            }
+            else if ((OTL![Index].Point < (OTL![Index].OT!.Count - 1)) && Index != 0)
+            {
+
+                // Ignores: 001
+                string newName = OTL![Index].Name + loca.OrderList_AddOrderAllTabs_16210 + (OTL![Index].Point + 1);
+                int lastOrderListIx = Index;
+
+                AddOrderList(newName, false);
+                if (CBAddTable != null)
+                    CBAddTable(Index);
+                // OTL![CurrentOrderListIx].DG.DataGrid_SetTabItem(CurrentOrderListIx);
+
+                for (int ix = 0; ix <= OTL![lastOrderListIx].Point; ix++)
+                {
+                    OTL![OTL!.Count - 1]!.OT!.Add(new OrderTable(OTL![lastOrderListIx]!.OT![ix]!.OrderType!, OTL![lastOrderListIx]!.OT![ix]!.OrderText!, OTL![lastOrderListIx]!.OT![ix]!.OrderChoice!, OTL![lastOrderListIx]!.OT![ix]!.oLG!, OTL![lastOrderListIx]!.OT![ix]!.ptl!, OTL![lastOrderListIx]!.OT![ix]!.ptlSignatures!));
+                    OTL![OTL!.Count - 1]!.OT![ix]!.OrderResult = OTL![lastOrderListIx]!.OT![ix]!.OrderResult!;
+                    OTL![OTL!.Count - 1]!.OT![ix]!.OrderFeedback = OTL![lastOrderListIx]!.OT![ix]!.OrderFeedback!;
+                    OTL![OTL!.Count - 1]!.OT![ix]!.OrderActive = OTL![lastOrderListIx].OT![ix].OrderActive;
+
+                    /* ToDo DataGrid weg
+                    if (OTL![OTL!.Count - 1].DG != null)
+                        OTL![OTL!.Count - 1]!.OT![ix]!.DetailsWidth = OTL![OTL!.Count - 1]!.DG!.Width - 50;
+                    */
+                }
+                Index = OTL!.Count - 1;
+
+                newIndex = Index;
+                /*
+                if( newIndex != null)
+                {
+                    newIndex = Index;
+                }
                 */
             }
-            Index = OTL!.Count - 1;
-
-            newIndex = Index;
-            /*
-            if( newIndex != null)
+            OrderTable otx = new OrderTable(ot, orderText!, orderChoice, lang, ptl, ptlSignature);
+            OTL![Index]!.OT!.Add(otx);
+            if (_cbCreateOrderPath != null)
+                //  OTL![Index]!.OT![OTL![Index]!.OT!.Count - 1 ].OrderPath = _cbCreateOrderPath(OTL![Index].OT, Index);
+                _cbCreateOrderPath(OTL![Index].OT!, OTL![Index]!.OT!.Count - 1);
+            /* ToDo: DataGrid weg
+            if (OTL![OTL!.Count - 1].DG != null)
             {
-                newIndex = Index;
+                if (OTL![OTL!.Count - 1]!.DG!.IsVisible)
+                {
+                    OTL![Index]!.OT![OTL![Index]!.OT!.Count - 1]!.DetailsWidth = OTL![Index]!.DG!.Width - 50;
+
+
+                }
+
             }
             */
-        }
-        OrderTable otx = new OrderTable(ot, orderText!, orderChoice, lang, ptl, ptlSignature);
-        OTL![Index]!.OT!.Add(otx);
-        if (_cbCreateOrderPath != null)
-            //  OTL![Index]!.OT![OTL![Index]!.OT!.Count - 1 ].OrderPath = _cbCreateOrderPath(OTL![Index].OT, Index);
-            _cbCreateOrderPath(OTL![Index].OT!, OTL![Index]!.OT!.Count - 1);
-        /* ToDo: DataGrid weg
-        if (OTL![OTL!.Count - 1].DG != null)
-        {
-            if (OTL![OTL!.Count - 1]!.DG!.IsVisible)
+
+            otx.No = OTL![Index]!.OT!.Count!;
+            OTL![Index].Point = OTL![Index]!.OT!.Count - 1;
+
+            if (!silent)
             {
-                OTL![Index]!.OT![OTL![Index]!.OT!.Count - 1]!.DetailsWidth = OTL![Index]!.DG!.Width - 50;
-
+                SyncOrderList();
+                if (Collector != null)
+                {
+                    FlushCollection();
+                    StartCollection();
+                }
+                SaveOrderTable();
 
             }
 
+
+            return (true);
         }
-        */
-
-        otx.No = OTL![Index]!.OT!.Count!;
-        OTL![Index].Point = OTL![Index]!.OT!.Count - 1;
-
-        if (!silent)
+        catch (Exception e)
         {
-            SyncOrderList();
-            if( Collector != null )
-            { 
-                FlushCollection();
-                StartCollection();
-            }
-            SaveOrderTable();
-
+            GlobalData.AddLog("AddOrderAllTabs: " + e.Message, IGlobalData.protMode.crisp);
+            return false;
         }
 
-
-        return (true);
     }
     public bool AddOrderCurrentRun(orderType? ot, string? orderText, int? orderChoice, IGlobalData.language lang, ParseTokenList? ptl, ParseLineList? ptlSignature)
     {
-        if (this._actualGame == true)
+        try
         {
+            if (this._actualGame == true)
+            {
 
-            OrderTable otx = new OrderTable(ot, orderText!, orderChoice, lang, ptl, ptlSignature);
-            OTL![0].OT!.Add(otx);
-            otx.No = OTL![0].OT!.Count!;
-            // OTL![0].Point = OTL![CurrentOrderListIx].OT.Count - 1;
-            OTL![0].Point = OTL![0]!.OT!.Count - 1;
-            /* DataGrid, go home!
-            if (OTL![0].DG != null)
-                OTL![0].OT![OTL![0].Point]!.DetailsWidth = OTL![0]!.DG!.Width - 50;
-            */
-            SaveOrderTable();
-            // OTL![0].Point = OTL![0].OT.Count - 1;
+                OrderTable otx = new OrderTable(ot, orderText!, orderChoice, lang, ptl, ptlSignature);
+                OTL![0].OT!.Add(otx);
+                otx.No = OTL![0].OT!.Count!;
+                // OTL![0].Point = OTL![CurrentOrderListIx].OT.Count - 1;
+                OTL![0].Point = OTL![0]!.OT!.Count - 1;
+                /* DataGrid, go home!
+                if (OTL![0].DG != null)
+                    OTL![0].OT![OTL![0].Point]!.DetailsWidth = OTL![0]!.DG!.Width - 50;
+                */
+                SaveOrderTable();
+                // OTL![0].Point = OTL![0].OT.Count - 1;
+            }
+            return true;
         }
-        return true;
+        catch (Exception e)
+        {
+            GlobalData.AddLog("AddOrderCurrentRun: " + e.Message, IGlobalData.protMode.crisp);
+            return false;
+        }
+
     }
     public bool ResetCurrentRun()
     {
